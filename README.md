@@ -59,4 +59,11 @@ Move the header files (found in ./include/) to /usr/local/include
 * Enter your MySQL connection settings here.
 * The messaging section contains RabbitMQ related connection settings
 * Enter your RabbitMQ details here
-* The site section is currently unused 
+* The site section is currently unused
+* Copy ./conf.ini to /etc/SOLAS-Match/conf.ini
+
+## Compiling and installing
+
+* To edit the source code open the project file ./SOLASMatchWorkerDaemon.pro
+in QtCreator.
+* Run the project to compile and start it. 
