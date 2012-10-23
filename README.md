@@ -52,6 +52,17 @@ Once compiled move the library file (.a) to /usr/local/lib
 
 Move the header files (found in ./include/) to /usr/local/include
 
+To install QCTemplate do the following:
+* Download the source code at http://code.google.com/p/qctemplate/source/checkout
+* Add the following to src/ctemplate-0.95/src/ctemplate/template_dictionary.h:
+```C++
+    #include <stddef.h>
+```
+* In the src directory run qmake
+* Run make
+* copy the resulting libqctemplate.a to /usr/local/lib
+* Copy the file src/QCTemplate.h to /usr/local/include
+
 ## Configuration File
 
 * Edit ./conf.ini with your details.
