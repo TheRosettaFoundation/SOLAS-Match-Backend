@@ -17,7 +17,8 @@ CONFIG += plugin
 DEFINES += USERTASKSCORECALCULATOR_LIBRARY
 
 LIBS += -L../Common -lCommon \
-    -L/usr/local/lib -lamqpcpp -lrabbitmq
+    -L/usr/local/lib -lamqpcpp -lrabbitmq \
+    -lqctemplate
 
 DESTDIR = ../plugins
 
