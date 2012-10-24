@@ -20,6 +20,7 @@ public:
 
 public slots:
     void messageReceived(AMQPMessage *message);
+    void calculateScoreForAllUsers();
 
 private:
     QThreadPool *mThreadPool;

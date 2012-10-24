@@ -8,8 +8,17 @@
 #include <QThread>
 #include <QUuid>
 
+#include <QCTemplate.h>
+
 #include "Common/Models/Tag.h"
 #include "Common/Models/User.h"
+
+#define TEMPLATE_DIRECTORY "/etc/SOLAS-Match/templates/"
+
+CalculateTaskScore::CalculateTaskScore()
+{
+    this->message = new AMQPMessage(NULL);
+}
 
 CalculateTaskScore::CalculateTaskScore(AMQPMessage *mess)
 {
@@ -19,62 +28,89 @@ CalculateTaskScore::CalculateTaskScore(AMQPMessage *mess)
 void CalculateTaskScore::run()
 {
     qDebug() << "Starting new thread " << this->thread()->currentThreadId();
+    QDateTime started = QDateTime::currentDateTime();
+    QCTemplate mTemplate;
     db = new MySQLHandler(QUuid::createUuid().toString());
-    db->init();
-    QList<User> *users = User::getUsers(db);
-    QList<Task> *tasks = this->getTasks();  //Must use custom function to check message for task id
-    if(users != NULL && users->length() > 0) {
-        foreach(User user, *users) {
-            qDebug() << "Processing User " << user.getUserId();
-            QList<Tag> *userTags = Tag::getUserTags(db, user.getUserId());
-            if(tasks != NULL && tasks->length() > 0) {
-                foreach(Task task, *tasks) {
-                    qDebug() << "\tProcessing task " << task.getTaskId();
-                    int score = 0;
+    if(db->init()) {
+        QList<User> *users = User::getUsers(db);
+        QList<Task> *tasks = this->getTasks();  //Must use custom function to check message for task id
+        if(users != NULL && users->length() > 0) {
+            foreach(User user, *users) {
+                qDebug() << "Processing User " << user.getUserId();
+                QList<Tag> *userTags = Tag::getUserTags(db, user.getUserId());
+                if(tasks != NULL && tasks->length() > 0) {
+                    foreach(Task task, *tasks) {
+                        qDebug() << "\tProcessing task " << task.getTaskId();
+                        int score = 0;
 
-                    if(user.getNativeLangId() == task.getSourceLangId()) {
-                        score += 300;
-                        if(user.getRegionId() == task.getSourceRegionId()) {
-                            score += 100;
-                        }
-                    }
-
-                    if(user.getNativeLangId() == task.getTargetLangId()) {
-                        score += 150;
-                        if(user.getRegionId() == task.getTargetRegionId()) {
-                            score += 75;
-                        }
-                    }
-
-                    QList<Tag> *taskTags = Tag::getTaskTags(db, task.getTaskId());
-                    int increment_value = 100;
-                    foreach(Tag user_tag, *userTags) {
-                        foreach(Tag task_tag, *taskTags) {
-                            if(user_tag.getTagId() == task_tag.getTagId()) {
-                                score += increment_value;
-                                increment_value *= 0.75;
+                        if(user.getNativeLangId() == task.getSourceLangId()) {
+                            score += 300;
+                            if(user.getRegionId() == task.getSourceRegionId()) {
+                                score += 100;
                             }
                         }
+
+                        if(user.getNativeLangId() == task.getTargetLangId()) {
+                            score += 150;
+                            if(user.getRegionId() == task.getTargetRegionId()) {
+                                score += 75;
+                            }
+                        }
+
+                        QList<Tag> *taskTags = Tag::getTaskTags(db, task.getTaskId());
+                        int increment_value = 100;
+                        foreach(Tag user_tag, *userTags) {
+                            foreach(Tag task_tag, *taskTags) {
+                                if(user_tag.getTagId() == task_tag.getTagId()) {
+                                    score += increment_value;
+                                    increment_value *= 0.75;
+                                }
+                            }
+                        }
+
+                        QDateTime created_time = QDateTime::fromString(task.getCreatedTime(), "yyyy-MM-ddTHH:mm:ss");
+                        //increase score by one per day since created time
+                        score += created_time.daysTo(QDateTime::currentDateTime());
+
+                        mTemplate.enterSection("SCORE");
+                        mTemplate["USER_ID"] = QString::number(user.getUserId());
+                        mTemplate["TASK_ID"] = QString::number(task.getTaskId());
+                        mTemplate["SCORE"] = QString::number(score);
+                        mTemplate.exitSection();
+                        this->saveUserTaskScore(user.getUserId(), task.getTaskId(), score);
                     }
-
-                    QDateTime created_time = QDateTime::fromString(task.getCreatedTime(), "yyyy-MM-ddTHH:mm:ss");
-                    //increase score by one per day since created time
-                    score += created_time.daysTo(QDateTime::currentDateTime());
-
-                    this->saveUserTaskScore(user.getUserId(), task.getTaskId(), score);
+                } else {
+                    qDebug() << "No tasks found";
                 }
-            } else {
-                qDebug() << "No tasks found";
             }
+        } else {
+            qDebug() << "No users found";
+            mTemplate.enterSection("ERROR");
+            mTemplate["ERROR_MESSAGE"] = "No users found";
+            mTemplate.exitSection();
         }
+
+        AMQPQueue *messageQueue = message->getQueue();
+        if(messageQueue != NULL)
+        {
+            messageQueue->Ack(message->getDeliveryTag());
+        }
+
+        db->close();
     } else {
-        qDebug() << "No users found";
+        qDebug() << "Unable to Connect to SQL Server. Check conf.ini and try again.";
+        mTemplate.enterSection("ERROR");
+        mTemplate["ERROR_MESSAGE"] = "Unable to Connect to SQL Server. Check conf.ini and try again.";
+        mTemplate.exitSection();
     }
-
-    AMQPQueue *messageQueue = message->getQueue();
-    messageQueue->Ack(message->getDeliveryTag());
-
-    db->close();
+    int time_msecs = started.msecsTo(QDateTime::currentDateTime());
+    int time_secs = time_msecs / 1000;
+    time_msecs %= 1000;
+    mTemplate.enterSection("TIMING");
+    mTemplate["TIME"] = QString::number(time_secs) + "." +
+            QString("%1 seconds").arg(time_msecs, 3, 10, QChar('0'));
+    mTemplate.exitSection();
+    qDebug() << mTemplate.expandFile(QString(TEMPLATE_DIRECTORY) + "score_results.tpl");
 }
 
 QList<Task> *CalculateTaskScore::getTasks()
