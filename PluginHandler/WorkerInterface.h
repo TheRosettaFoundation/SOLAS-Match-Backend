@@ -8,8 +8,10 @@ class WorkerInterface : public QObject
 {
 public:
     virtual ~WorkerInterface() {}
-    virtual void run() = 0;
     virtual void setThreadPool(QThreadPool *) = 0;
+
+public slots:
+    virtual void run() = 0;
 
 };
 

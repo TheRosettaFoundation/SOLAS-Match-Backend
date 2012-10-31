@@ -25,7 +25,7 @@ void UserTaskScoreCalculator::run()
     connect(client, SIGNAL(AMQPMessageReceived(AMQPMessage *)), this, SLOT(messageReceived(AMQPMessage *)));
 
     try {
-        qDebug() << "Now consuming from " << exchange << " exchange";
+        qDebug() << "UserTaskScoreCalculator::Now consuming from " << exchange << " exchange";
         client->declareQueue(exchange, "task.score", queue);
 
         QTimer *message_queue_read_timer = new QTimer();

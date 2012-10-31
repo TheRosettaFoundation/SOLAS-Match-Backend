@@ -15,12 +15,12 @@ class UserTaskScoreCalculator : public WorkerInterface
 
 public:
     UserTaskScoreCalculator();
-    void run();
     void setThreadPool(QThreadPool *);
 
 public slots:
     void messageReceived(AMQPMessage *message);
     void calculateScoreForAllUsers();
+    void run();
 
 private:
     QThreadPool *mThreadPool;
