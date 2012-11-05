@@ -5,22 +5,11 @@
 
 #include "../Common/ConfigParser.h"
 
-Smtp::Smtp(QObject *parent, Email *email)
+Smtp::Smtp(Email *email)
 {
     qDebug() << "SMTP::Initialising Object";
 
-    this->setParent(parent);
-
-    /*QxtMailMessage *mail_message = new QxtMailMessage(email->getSender(),
-                                             email->getRecipient());
-    mail_message->setBody(email->getBody());
-    mail_message->setSubject(email->getSubject());
-    mail_message->setExtraHeader("Content-Type", "text/html");
-    QxtSmtp *smtp = new QxtSmtp();
-    smtp->connectToHost("solas-match.co.cc", 25);
-    smtp->send(*mail_message);*/
-
-    this->smtp = new QxtSmtp();
+    smtp = new QxtSmtp();
     this->message = new QxtMailMessage(email->getSender(), email->getRecipient());
     this->message->setSubject(email->getSubject());
     this->message->setExtraHeader("Content-Type", "text/html");
@@ -90,6 +79,7 @@ void Smtp::disconnected()
 
 void Smtp::finished()
 {
+    emit complete();
     qDebug() << "SMTP::finished";
 }
 

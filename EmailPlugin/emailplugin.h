@@ -4,6 +4,7 @@
 #include <AMQPcpp.h>
 #include <QtPlugin>
 
+#include "Smtp.h"
 #include "../PluginHandler/WorkerInterface.h"
 
 class EmailPlugin : public WorkerInterface
@@ -17,10 +18,12 @@ public:
 
 public slots:
     void messageReveived(AMQPMessage *message);
+    void deleteSmtp();
     void run();
 
 private:
     QThreadPool *mThreadPool;
+    Smtp *smtp;
 
 };
 

@@ -15,10 +15,13 @@ class Smtp : public QObject
     Q_OBJECT
 
 public:
-    Smtp(QObject *parent, Email *email);
+    Smtp(Email *email);
     void init();
     void send();
     ~Smtp();
+
+signals:
+    void complete();
 
 private slots:
     void connected();
