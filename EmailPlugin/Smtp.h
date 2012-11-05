@@ -4,8 +4,9 @@
 #include <QtDebug>
 #include <QString>
 #include <QObject>
-#include <QtNetwork/QTcpSocket>
-#include <QTextStream>
+
+#include <qxt/QxtNetwork/qxtsmtp.h>
+#include <qxt/QxtNetwork/qxtmailmessage.h>
 
 #include "Email.h"
 
@@ -14,42 +15,27 @@ class Smtp : public QObject
     Q_OBJECT
 
 public:
-    Smtp( const QString &from, const QString &to,  const QString
-&subject, const QString &body );
-    Smtp(Email *email);
+    Smtp(QObject *parent, Email *email);
+    void init();
+    void send();
     ~Smtp();
 
-signals:
-    void status( const QString & );
-
 private slots:
-    void readyRead();
     void connected();
-
-    void stateChanged( QAbstractSocket::SocketState socketState );
-    void errorReceived( QAbstractSocket::SocketError socketError );
+    void connectionFailed();
+    void authenticated();
+    void authenticationFailed();
     void disconnected();
+    void mailFailed(int mailID, int errorCode);
+    void mailSent(int mailID);
+    void senderRejected(int mailID, QString address);
+    void recipientRejected(int mailID, QString address);
+    void finished();
 
 private:
-    void init(const QString &from, const QString &to, const QString &subject, const QString &body);
+    QxtSmtp *smtp;
+    QxtMailMessage *message;
 
-    enum State {
-    Init,
-    Mail,
-    Rcpt,
-    Data,
-    Body,
-    Quit,
-    Close
-    };
-
-    QString message;
-    QString from;
-    QString rcpt;
-    QTcpSocket * socket;
-    QTextStream * t;
-    int state;
-    QString response;
 };
 
 #endif // SMTP_H

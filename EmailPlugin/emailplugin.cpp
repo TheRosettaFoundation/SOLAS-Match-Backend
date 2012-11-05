@@ -3,6 +3,9 @@
 #include <QDebug>
 #include <QTimer>
 
+#include <qxt/QxtNetwork/qxtmailmessage.h>
+#include <qxt/QxtNetwork/qxtsmtp.h>
+
 #include "Smtp.h"
 #include "EmailGenerator.h"
 #include "Common/protobufs/emails/TaskScoreEmail.pb.h"
@@ -71,9 +74,20 @@ void EmailPlugin::messageReveived(AMQPMessage *message)
 
     if(email) {
         //Send Email
-        Smtp *smtp = new Smtp(email);
-        delete smtp;
+        Smtp *smtp = new Smtp(this, email);
+        //smtp->init();
+        //smtp->send();
+        //delete smtp;
+        smtp->deleteLater();
         delete email;
+        /*QxtMailMessage *mail_message = new QxtMailMessage(email->getSender(),
+                                                 email->getRecipient());
+        mail_message->setBody(email->getBody());
+        mail_message->setSubject(email->getSubject());
+        mail_message->setExtraHeader("Content-Type", "text/html");
+        QxtSmtp *smtp = new QxtSmtp();
+        smtp->connectToHost("solas-match.co.cc", 25);
+        smtp->send(*mail_message);*/
 
         //Ack message
         AMQPQueue *messageQueue = message->getQueue();

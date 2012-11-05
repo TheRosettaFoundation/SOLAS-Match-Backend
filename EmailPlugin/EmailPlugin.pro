@@ -15,7 +15,9 @@ QT       -= gui
 TARGET = EmailPlugin
 TEMPLATE = lib
 
-CONFIG += plugin
+CONFIG += plugin qxt
+
+QXT    += network
 
 DESTDIR = ../plugins
 
