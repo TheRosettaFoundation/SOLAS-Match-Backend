@@ -1,0 +1,13 @@
+message EmailMessage
+{
+    extensions 100 to max;
+
+    enum Type
+    {
+        TaskScoreEmail = 1;
+        SampleEmail = 2;
+        TestingEmail = 3;
+    }
+
+    required Type email_type = 1;
+}

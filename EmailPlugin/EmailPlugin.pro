@@ -21,13 +21,16 @@ DESTDIR = ../plugins
 
 LIBS += -L../Common -lCommon \
     -L/usr/local/lib -lamqpcpp -lrabbitmq \
-    -lqctemplate
+    -lqctemplate -lprotobuf
 
 DEFINES += EMAILPLUGIN_LIBRARY
 
 SOURCES += emailplugin.cpp \
-    Smtp.cpp
+    Smtp.cpp \
+    EmailGenerator.cpp \
+    Email.cpp
 
 HEADERS += emailplugin.h\
-        EmailPlugin_global.h \
-    Smtp.h
+        Smtp.h \
+    EmailGenerator.h \
+    Email.h

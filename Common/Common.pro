@@ -14,6 +14,8 @@ QT       -= gui
 
 TARGET = Common
 
+LIBS += -lprotobuf
+
 DEFINES += COMMON_LIBRARY
 
 SOURCES += \
@@ -22,7 +24,9 @@ SOURCES += \
     MessagingClient.cpp \
     Models/User.cpp \
     Models/Task.cpp \
-    Models/Tag.cpp
+    Models/Tag.cpp \
+    protobufs/emails/EmailMessage.pb.cc \
+    protobufs/emails/TaskScoreEmail.pb.cc
 
 HEADERS +=\
     MySQLHandler.h \
@@ -30,7 +34,9 @@ HEADERS +=\
     MessagingClient.h \
     Models/User.h \
     Models/Task.h \
-    Models/Tag.h
+    Models/Tag.h \
+    protobufs/emails/EmailMessage.pb.h \
+    protobufs/emails/TaskScoreEmail.pb.h \
 
 symbian {
     MMP_RULES += EXPORTUNFROZEN

@@ -17,6 +17,5 @@ QString ConfigParser::get(QString key)
     mSettings->beginGroup(keys[0]);
     ret = mSettings->value(keys[1]).toString();
     mSettings->endGroup();
-    qDebug() << "ConfigParser::getting " << key;
     return ret;
 }

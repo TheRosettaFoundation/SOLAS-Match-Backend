@@ -8,6 +8,24 @@
 Smtp::Smtp( const QString &from, const QString &to, const QString
 &subject, const QString &body )
 {
+    this->init(from, to, subject, body);
+}
+
+Smtp::Smtp(Email *email)
+{
+    this->init(email->getSender(), email->getRecipient(),
+               email->getSubject(), email->getBody());
+}
+
+Smtp::~Smtp()
+{
+    delete t;
+    delete socket;
+}
+
+void Smtp::init(const QString &from, const QString &to, const QString
+                &subject, const QString &body )
+{
     socket = new QTcpSocket( this );
     connect( socket, SIGNAL( readyRead() ), this, SLOT( readyRead() ) );
     connect( socket, SIGNAL( connected() ), this, SLOT( connected() ) );
@@ -15,7 +33,7 @@ Smtp::Smtp( const QString &from, const QString &to, const QString
              this, SLOT( errorReceived( QAbstractSocket::SocketError ) ) );
     connect( socket, SIGNAL( stateChanged( QAbstractSocket::SocketState)),
              this, SLOT( stateChanged( QAbstractSocket::SocketState ) ) );
-    connect( socket, SIGNAL( disconnectedFromHost()), this,
+    connect( socket, SIGNAL( disconnected()), this,
              SLOT(disconnected() ) );
     message = QString::fromLatin1( "From: " ) +
             from+QString::fromLatin1( "\nTo: " ) +to +QString::fromLatin1( "\nSubject: "
@@ -38,11 +56,6 @@ Smtp::Smtp( const QString &from, const QString &to, const QString
     t = new QTextStream( socket );
 }
 
-Smtp::~Smtp()
-{
-    delete t;
-    delete socket;
-}
 void Smtp::stateChanged( QAbstractSocket::SocketState socketState)
 {
     qDebug() <<"stateChanged " << socketState;

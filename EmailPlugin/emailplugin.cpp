@@ -4,8 +4,10 @@
 #include <QTimer>
 
 #include "Smtp.h"
+#include "EmailGenerator.h"
+#include "Common/protobufs/emails/TaskScoreEmail.pb.h"
 
-#include "../Common/MessagingClient.h"
+#include "Common/MessagingClient.h"
 
 Q_EXPORT_PLUGIN2(EmailPlugin, EmailPlugin)
 
@@ -32,10 +34,6 @@ void EmailPlugin::run()
         QTimer *message_queue_read_timer = new QTimer();
         connect(message_queue_read_timer, SIGNAL(timeout()), client, SLOT(consumeFromQueue()));
         message_queue_read_timer->start(50);
-
-        Smtp *email = new Smtp("david.ocarroll@ul.ie", "spaceindaver0@gmail.com",
-                               "Test Email", "A sample email to test");
-        delete email;
     } catch(AMQPException e) {
         qDebug() << "ERROR: " << QString::fromStdString(e.getMessage());
     }
@@ -43,8 +41,47 @@ void EmailPlugin::run()
 
 void EmailPlugin::messageReveived(AMQPMessage *message)
 {
+    qDebug() << "Received Message";
+
     uint32_t length = 0;
-    qDebug() << "Received Message: " << message->getMessage(&length);
+    QString message_body = message->getMessage(&length);
+
+    EmailMessage email_message;
+    email_message.ParseFromString(message_body.toStdString());
+
+    EmailGenerator emailGen;
+    Email *email =  NULL;
+
+    switch (email_message.email_type()) {
+        case (EmailMessage::TaskScoreEmail) :
+        {
+            TaskScoreEmail *email_type = new TaskScoreEmail();
+            email_type->ParseFromString(message_body.toStdString());
+
+            email = emailGen.generateEmail(email_type);
+            delete email_type;
+            break;
+        }
+        default:
+        {
+            qDebug() << "Invalid email type";
+            break;
+        }
+    }
+
+    if(email) {
+        //Send Email
+        Smtp *smtp = new Smtp(email);
+        delete smtp;
+        delete email;
+
+        //Ack message
+        AMQPQueue *messageQueue = message->getQueue();
+        if(messageQueue != NULL)
+        {
+            messageQueue->Ack(message->getDeliveryTag());
+        }
+    }
 }
 
 void EmailPlugin::setThreadPool(QThreadPool *tp)

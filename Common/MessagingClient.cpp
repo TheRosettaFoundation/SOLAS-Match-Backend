@@ -5,7 +5,6 @@
 
 MessagingClient::MessagingClient()
 {
-    qDebug() << "MessagingClient:;Creating Configuration Parser";
     ConfigParser mParser;
     this->hostname = mParser.get("messaging.host");
     this->port = mParser.get("messaging.port").toInt();
@@ -25,16 +24,17 @@ bool MessagingClient::init()
 
 bool MessagingClient::openConnection()
 {
-    qDebug() << "MessagingClient::Connecting to RabbitMQ";
+    //qDebug() << "MessagingClient::Connecting to RabbitMQ";
     bool ret = false;
     try {
         QString connectionString = this->pass+ ":" +
                 this->user + "@" + this->hostname + ":" + QString::number(this->port) + "/";
-        qDebug() << "Attempting connection string: " << connectionString;
         this->conn = new AMQP(connectionString.toStdString());
     } catch(AMQPException error) {
         qDebug() << "Error " << error.getReplyCode() << ": "
                  << QString::fromStdString(error.getMessage());
+    } catch (exception e) {
+        qDebug() << "Unable to connect to rabbitMQ " << e.what();
     }
 
     return ret;
@@ -46,6 +46,19 @@ void MessagingClient::declareQueue(QString exchange, QString topic, QString queu
 
     mQueue->Declare();
     mQueue->Bind(exchange.toStdString(), topic.toStdString());
+}
+
+void MessagingClient::publish(QString exchange, QString topic, QString message)
+{
+    try {
+        AMQPExchange *mExchange = this->conn->createExchange(exchange.toStdString());
+        mExchange->Publish(message.toStdString(), topic.toStdString());
+        delete mExchange;
+    } catch (AMQPException e) {
+        qDebug() << "Publish error";
+    } catch (exception e) {
+        qDebug() << "Unable to Publish message: " << e.what();
+    }
 }
 
 void MessagingClient::consumeFromQueue()

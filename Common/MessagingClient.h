@@ -12,6 +12,7 @@ public:
     MessagingClient();
     bool init();
     void declareQueue(QString exchange, QString topic, QString queue);
+    void publish(QString exchange, QString topic, QString message);
 
 public slots:
     void consumeFromQueue();

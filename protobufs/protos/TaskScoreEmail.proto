@@ -1,0 +1,7 @@
+import "EmailMessage.proto";
+
+message TaskScoreEmail
+{
+    required EmailMessage.Type email_type = 1 [default = TaskScoreEmail];
+    required string body = 2;
+}

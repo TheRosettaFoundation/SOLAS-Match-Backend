@@ -10,8 +10,13 @@
 
 #include <QCTemplate.h>
 
+#include "Common/MessagingClient.h"
+
 #include "Common/Models/Tag.h"
 #include "Common/Models/User.h"
+
+#include "Common/protobufs/emails/EmailMessage.pb.h"
+#include "Common/protobufs/emails/TaskScoreEmail.pb.h"
 
 #define TEMPLATE_DIRECTORY "/etc/SOLAS-Match/templates/"
 
@@ -36,11 +41,9 @@ void CalculateTaskScore::run()
         QList<Task> *tasks = this->getTasks();  //Must use custom function to check message for task id
         if(users != NULL && users->length() > 0) {
             foreach(User user, *users) {
-                qDebug() << "Processing User " << user.getUserId();
                 QList<Tag> *userTags = Tag::getUserTags(db, user.getUserId());
                 if(tasks != NULL && tasks->length() > 0) {
                     foreach(Task task, *tasks) {
-                        qDebug() << "\tProcessing task " << task.getTaskId();
                         int score = 0;
 
                         if(user.getNativeLangId() == task.getSourceLangId()) {
@@ -103,6 +106,7 @@ void CalculateTaskScore::run()
         mTemplate["ERROR_MESSAGE"] = "Unable to Connect to SQL Server. Check conf.ini and try again.";
         mTemplate.exitSection();
     }
+
     int time_msecs = started.msecsTo(QDateTime::currentDateTime());
     int time_secs = time_msecs / 1000;
     time_msecs %= 1000;
@@ -110,7 +114,24 @@ void CalculateTaskScore::run()
     mTemplate["TIME"] = QString::number(time_secs) + "." +
             QString("%1 seconds").arg(time_msecs, 3, 10, QChar('0'));
     mTemplate.exitSection();
-    qDebug() << mTemplate.expandFile(QString(TEMPLATE_DIRECTORY) + "score_results.tpl");
+
+    QString email_body = mTemplate.expandFile(QString(TEMPLATE_DIRECTORY) + "score_results.tpl");
+    TaskScoreEmail *message_body = new TaskScoreEmail();
+    message_body->set_email_type(EmailMessage::TaskScoreEmail);
+    message_body->set_body(email_body.toStdString());
+
+    qDebug() << "CalcUserTaskScore::Publishing to SOLAS_Match Exchange";
+    try {
+        MessagingClient *publisher = new MessagingClient();
+        publisher->init();
+        publisher->publish("SOLAS_MATCH", "email.task.score", QString::fromStdString(message_body->SerializeAsString()));
+        delete publisher;
+    } catch (AMQPException e) {
+        qDebug() << "Failed to publish email task score: " << QString::fromStdString(e.getMessage());
+    } catch (exception e) {
+        qDebug() << "Failed to publish message" << QString::fromStdString(e.what());
+    }
+    qDebug() << "CalcUserTaskScore::Finished publishing";
 }
 
 QList<Task> *CalculateTaskScore::getTasks()
@@ -152,9 +173,6 @@ void CalculateTaskScore::saveUserTaskScore(int user_id, int task_id, int score)
 {
     int old_score = this->getCurrentScore(user_id, task_id);
     if(old_score != score) {
-        qDebug() << "CalculateTaskScore::updating score (" << QString::number(score)
-                 << ") for user " << QString::number(user_id)
-                 << ", task " << QString::number(task_id);
         QString args = QString::number(user_id) + ", " + QString::number(task_id)
                 + ", " + QString::number(score);
         db->call("saveUserTaskScore", args);

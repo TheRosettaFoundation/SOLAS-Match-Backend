@@ -1,8 +1,6 @@
 #ifndef EMAILPLUGIN_H
 #define EMAILPLUGIN_H
 
-#include "EmailPlugin_global.h"
-
 #include <AMQPcpp.h>
 #include <QtPlugin>
 

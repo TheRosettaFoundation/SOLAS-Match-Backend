@@ -7,6 +7,8 @@
 #include <QtNetwork/QTcpSocket>
 #include <QTextStream>
 
+#include "Email.h"
+
 class Smtp : public QObject
 {
     Q_OBJECT
@@ -14,6 +16,7 @@ class Smtp : public QObject
 public:
     Smtp( const QString &from, const QString &to,  const QString
 &subject, const QString &body );
+    Smtp(Email *email);
     ~Smtp();
 
 signals:
@@ -28,6 +31,8 @@ private slots:
     void disconnected();
 
 private:
+    void init(const QString &from, const QString &to, const QString &subject, const QString &body);
+
     enum State {
     Init,
     Mail,
