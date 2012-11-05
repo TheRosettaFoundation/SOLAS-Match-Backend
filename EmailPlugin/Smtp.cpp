@@ -26,7 +26,11 @@ Smtp::Smtp(Email *email)
     connect(smtp, SIGNAL(recipientRejected(int,QString)), this, SLOT(recipientRejected(int,QString)));
     connect(smtp, SIGNAL(senderRejected(int,QString)), this, SLOT(connected()));
 
-    this->smtp->connectToHost("solas-match.co.cc", 25);
+    ConfigParser settings;
+    QString host = settings.get("mail.server");
+    int port = settings.get("mail.port").toInt();
+
+    this->smtp->connectToHost(host, port);
     this->smtp->send(*message);
 }
 
@@ -34,22 +38,6 @@ Smtp::~Smtp()
 {
     delete message;
     delete smtp;
-}
-
-void Smtp::init()
-{    
-    /*qDebug() << "SMTP::Parsing mail options";
-    ConfigParser settings;
-    QString host = settings.get("mail.server");
-    int port = settings.get("mail.port").toInt();*/
-
-    this->smtp->connectToHost("solas-match.co.cc", 25);
-}
-
-void Smtp::send()
-{
-    int status = this->smtp->send(*message);
-    qDebug() << "Send returned with status " << status;
 }
 
 void Smtp::connected()

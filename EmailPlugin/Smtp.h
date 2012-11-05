@@ -16,8 +16,6 @@ class Smtp : public QObject
 
 public:
     Smtp(Email *email);
-    void init();
-    void send();
     ~Smtp();
 
 signals:
