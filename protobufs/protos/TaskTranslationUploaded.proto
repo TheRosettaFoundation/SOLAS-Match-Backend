@@ -1,0 +1,9 @@
+import "EmailMessage.proto";
+
+message TaskTranslationUploaded
+{
+    required EmailMessage.Type email_type = 1 [default = TaskTranslationUploaded];
+    required int32 user_id = 2;
+    required int32 translatior_id = 3;
+    required int32 task_id = 4;
+}
