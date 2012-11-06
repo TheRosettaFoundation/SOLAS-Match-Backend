@@ -106,6 +106,15 @@ QList<Task> *Task::getTasks(MySQLHandler *db, int id, int org_id, QString title,
     return ret;
 }
 
+Task Task::getTask(MySQLHandler *db, int id, int org_id,
+                   QString title, QString imp, QString ref_page,
+                   int wc, int s_lang_id, int t_lang_id,
+                   QString time, int s_reg_id, int t_reg_id)
+{
+    return Task::getTasks(db, id, org_id, title, imp, ref_page, wc,
+                          s_lang_id, t_lang_id, time, s_reg_id, t_reg_id)->at(0);
+}
+
 void Task::setTaskId(int task_id)
 {
     this->id = task_id;

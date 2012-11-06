@@ -91,6 +91,13 @@ QList<User> *User::getUsers(MySQLHandler *db, int id, QString name, QString emai
     return users;
 }
 
+User User::getUser(MySQLHandler *db, int id, QString name,
+                   QString email, QString pass, QString bio,
+                   QString non, QString date, int lang_id, int reg_id)
+{
+    return User::getUsers(db, id, name, email, pass, bio, non, date, lang_id, reg_id)->at(0);
+}
+
 void User::setUserId(int user_id)
 {
     this->id = user_id;
