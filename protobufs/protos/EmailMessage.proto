@@ -5,8 +5,13 @@ message EmailMessage
     enum Type
     {
         TaskScoreEmail = 1;
-        SampleEmail = 2;
-        TestingEmail = 3;
+        UserTaskClaim = 2;
+        OrgMembershipAccepted = 3;
+        OrgMembershipRefused = 4;
+        PasswordReset = 5;
+        TaskArchived = 6;
+        TaskClaimed = 7;
+        TaskTranslationUploaded = 8;
     }
 
     required Type email_type = 1;

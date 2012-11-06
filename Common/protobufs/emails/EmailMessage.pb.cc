@@ -75,10 +75,13 @@ void protobuf_AddDesc_EmailMessage_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\022EmailMessage.proto\"\177\n\014EmailMessage\022&\n\n"
-    "email_type\030\001 \002(\0162\022.EmailMessage.Type\"=\n\004"
-    "Type\022\022\n\016TaskScoreEmail\020\001\022\017\n\013SampleEmail\020"
-    "\002\022\020\n\014TestingEmail\020\003*\010\010d\020\200\200\200\200\002", 149);
+    "\n\022EmailMessage.proto\"\370\001\n\014EmailMessage\022&\n"
+    "\nemail_type\030\001 \002(\0162\022.EmailMessage.Type\"\265\001"
+    "\n\004Type\022\022\n\016TaskScoreEmail\020\001\022\021\n\rUserTaskCl"
+    "aim\020\002\022\031\n\025OrgMembershipAccepted\020\003\022\030\n\024OrgM"
+    "embershipRefused\020\004\022\021\n\rPasswordReset\020\005\022\020\n"
+    "\014TaskArchived\020\006\022\017\n\013TaskClaimed\020\007\022\033\n\027Task"
+    "TranslationUploaded\020\010*\010\010d\020\200\200\200\200\002", 271);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "EmailMessage.proto", &protobuf_RegisterTypes);
   EmailMessage::default_instance_ = new EmailMessage();
@@ -105,6 +108,11 @@ bool EmailMessage_Type_IsValid(int value) {
     case 1:
     case 2:
     case 3:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+    case 8:
       return true;
     default:
       return false;
@@ -113,8 +121,13 @@ bool EmailMessage_Type_IsValid(int value) {
 
 #ifndef _MSC_VER
 const EmailMessage_Type EmailMessage::TaskScoreEmail;
-const EmailMessage_Type EmailMessage::SampleEmail;
-const EmailMessage_Type EmailMessage::TestingEmail;
+const EmailMessage_Type EmailMessage::UserTaskClaim;
+const EmailMessage_Type EmailMessage::OrgMembershipAccepted;
+const EmailMessage_Type EmailMessage::OrgMembershipRefused;
+const EmailMessage_Type EmailMessage::PasswordReset;
+const EmailMessage_Type EmailMessage::TaskArchived;
+const EmailMessage_Type EmailMessage::TaskClaimed;
+const EmailMessage_Type EmailMessage::TaskTranslationUploaded;
 const EmailMessage_Type EmailMessage::Type_MIN;
 const EmailMessage_Type EmailMessage::Type_MAX;
 const int EmailMessage::Type_ARRAYSIZE;

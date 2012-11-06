@@ -34,12 +34,17 @@ class EmailMessage;
 
 enum EmailMessage_Type {
   EmailMessage_Type_TaskScoreEmail = 1,
-  EmailMessage_Type_SampleEmail = 2,
-  EmailMessage_Type_TestingEmail = 3
+  EmailMessage_Type_UserTaskClaim = 2,
+  EmailMessage_Type_OrgMembershipAccepted = 3,
+  EmailMessage_Type_OrgMembershipRefused = 4,
+  EmailMessage_Type_PasswordReset = 5,
+  EmailMessage_Type_TaskArchived = 6,
+  EmailMessage_Type_TaskClaimed = 7,
+  EmailMessage_Type_TaskTranslationUploaded = 8
 };
 bool EmailMessage_Type_IsValid(int value);
 const EmailMessage_Type EmailMessage_Type_Type_MIN = EmailMessage_Type_TaskScoreEmail;
-const EmailMessage_Type EmailMessage_Type_Type_MAX = EmailMessage_Type_TestingEmail;
+const EmailMessage_Type EmailMessage_Type_Type_MAX = EmailMessage_Type_TaskTranslationUploaded;
 const int EmailMessage_Type_Type_ARRAYSIZE = EmailMessage_Type_Type_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* EmailMessage_Type_descriptor();
@@ -108,8 +113,13 @@ class EmailMessage : public ::google::protobuf::Message {
   
   typedef EmailMessage_Type Type;
   static const Type TaskScoreEmail = EmailMessage_Type_TaskScoreEmail;
-  static const Type SampleEmail = EmailMessage_Type_SampleEmail;
-  static const Type TestingEmail = EmailMessage_Type_TestingEmail;
+  static const Type UserTaskClaim = EmailMessage_Type_UserTaskClaim;
+  static const Type OrgMembershipAccepted = EmailMessage_Type_OrgMembershipAccepted;
+  static const Type OrgMembershipRefused = EmailMessage_Type_OrgMembershipRefused;
+  static const Type PasswordReset = EmailMessage_Type_PasswordReset;
+  static const Type TaskArchived = EmailMessage_Type_TaskArchived;
+  static const Type TaskClaimed = EmailMessage_Type_TaskClaimed;
+  static const Type TaskTranslationUploaded = EmailMessage_Type_TaskTranslationUploaded;
   static inline bool Type_IsValid(int value) {
     return EmailMessage_Type_IsValid(value);
   }

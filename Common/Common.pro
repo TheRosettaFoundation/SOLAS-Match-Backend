@@ -26,7 +26,14 @@ SOURCES += \
     Models/Task.cpp \
     Models/Tag.cpp \
     protobufs/emails/EmailMessage.pb.cc \
-    protobufs/emails/TaskScoreEmail.pb.cc
+    protobufs/emails/TaskScoreEmail.pb.cc \
+    protobufs/emails/OrgMembershipAccepted.pb.cc \
+    protobufs/emails/OrgMembershipRefused.pb.cc \
+    protobufs/emails/PasswordReset.pb.cc \
+    protobufs/emails/TaskArchived.pb.cc \
+    protobufs/emails/TaskClaimed.pb.cc \
+    protobufs/emails/TaskTranslationUploaded.pb.cc \
+    protobufs/emails/UserTaskClaim.pb.cc
 
 HEADERS +=\
     MySQLHandler.h \
@@ -37,6 +44,13 @@ HEADERS +=\
     Models/Tag.h \
     protobufs/emails/EmailMessage.pb.h \
     protobufs/emails/TaskScoreEmail.pb.h \
+    protobufs/emails/OrgMembershipAccepted.pb.h \
+    protobufs/emails/OrgMembershipRefused.pb.h \
+    protobufs/emails/PasswordReset.pb.h \
+    protobufs/emails/TaskArchived.pb.h \
+    protobufs/emails/TaskClaimed.pb.h \
+    protobufs/emails/TaskTranslationUploaded.pb.h \
+    protobufs/emails/UserTaskClaim.pb.h
 
 symbian {
     MMP_RULES += EXPORTUNFROZEN
