@@ -9,6 +9,13 @@
 #include "Smtp.h"
 #include "EmailGenerator.h"
 #include "Common/protobufs/emails/TaskScoreEmail.pb.h"
+#include "Common/protobufs/emails/OrgMembershipAccepted.pb.h"
+#include "Common/protobufs/emails/OrgMembershipRefused.pb.h"
+#include "Common/protobufs/emails/PasswordReset.pb.h"
+#include "Common/protobufs/emails/TaskArchived.pb.h"
+#include "Common/protobufs/emails/TaskClaimed.pb.h"
+#include "Common/protobufs/emails/TaskTranslationUploaded.pb.h"
+#include "Common/protobufs/emails/UserTaskClaim.pb.h"
 
 #include "Common/MessagingClient.h"
 
@@ -58,11 +65,66 @@ void EmailPlugin::messageReveived(AMQPMessage *message)
     switch (email_message.email_type()) {
         case (EmailMessage::TaskScoreEmail) :
         {
-            TaskScoreEmail *email_type = new TaskScoreEmail();
-            email_type->ParseFromString(message_body.toStdString());
+            TaskScoreEmail email_type;
+            email_type.ParseFromString(message_body.toStdString());
 
             email = emailGen.generateEmail(email_type);
-            delete email_type;
+            break;
+        }
+        case (EmailMessage::OrgMembershipAccepted):
+        {
+            OrgMembershipAccepted email_type;
+            email_type.ParseFromString(message_body.toStdString());
+
+            email = emailGen.generateEmail(email_type);
+            break;
+        }
+        case (EmailMessage::OrgMembershipRefused):
+        {
+            OrgMembershipRefused email_type;
+            email_type.ParseFromString(message_body.toStdString());
+
+            email = emailGen.generateEmail(email_type);
+            break;
+        }
+        case (EmailMessage::PasswordReset):
+        {
+            PasswordReset email_type;
+            email_type.ParseFromString(message_body.toStdString());
+
+            email = emailGen.generateEmail(email_type);
+            break;
+        }
+        case (EmailMessage::TaskArchived):
+        {
+            TaskArchived email_type;
+            email_type.ParseFromString(message_body.toStdString());
+
+            email = emailGen.generateEmail(email_type);
+            break;
+        }
+        case (EmailMessage::TaskClaimed):
+        {
+            TaskClaimed email_type;
+            email_type.ParseFromString(message_body.toStdString());
+
+            email = emailGen.generateEmail(email_type);
+            break;
+        }
+        case (EmailMessage::TaskTranslationUploaded):
+        {
+            TaskTranslationUploaded email_type;
+            email_type.ParseFromString(message_body.toStdString());
+
+            email = emailGen.generateEmail(email_type);
+            break;
+        }
+        case (EmailMessage::UserTaskClaim):
+        {
+            UserTaskClaim email_type;
+            email_type.ParseFromString(message_body.toStdString());
+
+            email = emailGen.generateEmail(email_type);
             break;
         }
         default:

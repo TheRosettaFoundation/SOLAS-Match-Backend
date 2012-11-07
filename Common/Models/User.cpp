@@ -95,7 +95,24 @@ User User::getUser(MySQLHandler *db, int id, QString name,
                    QString email, QString pass, QString bio,
                    QString non, QString date, int lang_id, int reg_id)
 {
-    return User::getUsers(db, id, name, email, pass, bio, non, date, lang_id, reg_id)->at(0);
+    User user;
+    QList<User> *user_list = User::getUsers(db, id, name, email, pass, bio, non, date, lang_id, reg_id);
+    if(user_list->count() > 0) {
+        user = user_list->at(0);
+    }
+    return user;
+}
+
+QString User::getPasswordResetUuid(MySQLHandler *db, int id)
+{
+    QString ret;
+    QString args = "null, " + QString::number(id);
+    QSqlQuery *mQuery = db->call("getPasswordResetRequests", args);
+    if(mQuery->first()) {
+        ret = MySQLHandler::getValueFromQuery("uid", mQuery).toString();
+    }
+
+    return ret;
 }
 
 void User::setUserId(int user_id)

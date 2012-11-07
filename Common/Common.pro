@@ -34,7 +34,8 @@ SOURCES += \
     protobufs/emails/TaskClaimed.pb.cc \
     protobufs/emails/TaskTranslationUploaded.pb.cc \
     protobufs/emails/UserTaskClaim.pb.cc \
-    Models/Org.cpp
+    Models/Org.cpp \
+    Models/ArchivedTask.cpp
 
 HEADERS +=\
     MySQLHandler.h \
@@ -52,7 +53,8 @@ HEADERS +=\
     protobufs/emails/TaskClaimed.pb.h \
     protobufs/emails/TaskTranslationUploaded.pb.h \
     protobufs/emails/UserTaskClaim.pb.h \
-    Models/Org.h
+    Models/Org.h \
+    Models/ArchivedTask.h
 
 symbian {
     MMP_RULES += EXPORTUNFROZEN

@@ -122,10 +122,9 @@ void CalculateTaskScore::run()
 
     qDebug() << "CalcUserTaskScore::Publishing to SOLAS_Match Exchange";
     try {
-        MessagingClient *publisher = new MessagingClient();
-        publisher->init();
-        publisher->publish("SOLAS_MATCH", "email.task.score", QString::fromStdString(message_body->SerializeAsString()));
-        delete publisher;
+        MessagingClient publisher;
+        publisher.init();
+        publisher.publish("SOLAS_MATCH", "email.task.score", QString::fromStdString(message_body->SerializeAsString()));
     } catch (AMQPException e) {
         qDebug() << "Failed to publish email task score: " << QString::fromStdString(e.getMessage());
     } catch (exception e) {

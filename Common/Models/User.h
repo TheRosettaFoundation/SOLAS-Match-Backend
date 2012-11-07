@@ -34,6 +34,7 @@ public:
                                  QString date = "",
                                  int lang_id = -1,
                                  int reg_id = -1);
+    static QString getPasswordResetUuid(MySQLHandler *db, int id);
     void setUserId(int user_id);
     void setDisplayName(QString name);
     void setEmail(QString email);
