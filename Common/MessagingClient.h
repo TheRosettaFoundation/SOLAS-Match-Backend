@@ -10,6 +10,7 @@ class MessagingClient : public QObject
     Q_OBJECT
 public:
     MessagingClient();
+    ~MessagingClient();
     bool init();
     void declareQueue(QString exchange, QString topic, QString queue);
     void publish(QString exchange, QString topic, QString message);
@@ -31,6 +32,7 @@ private:
     QString vhost;
     AMQP *conn;
     AMQPQueue *mQueue;
+    AMQPExchange *mExchange;
 
 };
 

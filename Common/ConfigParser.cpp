@@ -10,6 +10,11 @@ ConfigParser::ConfigParser()
     mSettings = new QSettings(INI_FILE_LOCATION, QSettings::IniFormat);
 }
 
+ConfigParser::~ConfigParser()
+{
+    delete mSettings;
+}
+
 QString ConfigParser::get(QString key)
 {
     QString ret = "";

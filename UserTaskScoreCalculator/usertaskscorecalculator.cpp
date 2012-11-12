@@ -35,7 +35,6 @@ void UserTaskScoreCalculator::run()
         QTimer *full_run_timer = new QTimer();
         connect(full_run_timer, SIGNAL(timeout()), this, SLOT(calculateScoreForAllUsers()));
         full_run_timer->start(3600000);     //Run every hour
-        //full_run_timer->start(5000);
 
         QTimer::singleShot(100, this, SLOT(calculateScoreForAllUsers()));   //Run on startup
     } catch(AMQPException e) {

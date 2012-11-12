@@ -30,6 +30,8 @@ Smtp::Smtp(Email *email)
     QString host = settings.get("mail.server");
     int port = settings.get("mail.port").toInt();
 
+    qDebug() << "SMTP::sending to " << email->getRecipient();
+
     this->smtp->connectToHost(host, port);
     this->smtp->send(*message);
 }

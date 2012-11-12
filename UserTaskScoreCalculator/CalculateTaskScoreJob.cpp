@@ -30,6 +30,12 @@ CalculateTaskScore::CalculateTaskScore(AMQPMessage *mess)
     this->message = mess;
 }
 
+CalculateTaskScore::~CalculateTaskScore()
+{
+    delete db;
+    delete message;
+}
+
 void CalculateTaskScore::run()
 {
     qDebug() << "Starting new thread " << this->thread()->currentThreadId();
@@ -70,6 +76,7 @@ void CalculateTaskScore::run()
                                 }
                             }
                         }
+                        delete taskTags;
 
                         QDateTime created_time = QDateTime::fromString(task.getCreatedTime(), "yyyy-MM-ddTHH:mm:ss");
                         //increase score by one per day since created time
@@ -85,6 +92,7 @@ void CalculateTaskScore::run()
                 } else {
                     qDebug() << "No tasks found";
                 }
+                delete userTags;
             }
         } else {
             qDebug() << "No users found";
@@ -98,6 +106,9 @@ void CalculateTaskScore::run()
         {
             messageQueue->Ack(message->getDeliveryTag());
         }
+
+        delete users;
+        delete tasks;
 
         db->close();
     } else {
@@ -119,17 +130,20 @@ void CalculateTaskScore::run()
     TaskScoreEmail *message_body = new TaskScoreEmail();
     message_body->set_email_type(EmailMessage::TaskScoreEmail);
     message_body->set_body(email_body.toStdString());
-
-    qDebug() << "CalcUserTaskScore::Publishing to SOLAS_Match Exchange";
     try {
+        QString exchange_name = "SOLAS_MATCH";
+        QString exchange_topic = "email.task.score";
+        QString body = QString::fromStdString(message_body->SerializeAsString());
+
         MessagingClient publisher;
         publisher.init();
-        publisher.publish("SOLAS_MATCH", "email.task.score", QString::fromStdString(message_body->SerializeAsString()));
+        publisher.publish(exchange_name, exchange_topic, body);
     } catch (AMQPException e) {
         qDebug() << "Failed to publish email task score: " << QString::fromStdString(e.getMessage());
     } catch (exception e) {
         qDebug() << "Failed to publish message" << QString::fromStdString(e.what());
     }
+    delete message_body;
     qDebug() << "CalcUserTaskScore::Finished publishing";
 }
 
@@ -150,6 +164,7 @@ int CalculateTaskScore::getCurrentScore(int user_id, int task_id)
     if(q->first()) {
         ret = db->getValueFromQuery("score", q).toInt();
     }
+    delete q;
 
     return ret;
 }
@@ -164,6 +179,8 @@ int CalculateTaskScore::getTaskIdFromMessage()
     if(length > 0) {
         ret = atoi(body);
     }
+
+    delete body;
 
     return ret;
 }

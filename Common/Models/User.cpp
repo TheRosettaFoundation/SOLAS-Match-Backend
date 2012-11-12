@@ -88,6 +88,8 @@ QList<User> *User::getUsers(MySQLHandler *db, int id, QString name, QString emai
         } while(mQuery->next());
     }
 
+    delete mQuery;
+
     return users;
 }
 

@@ -26,6 +26,8 @@ QList<Tag> *Tag::getUserTags(MySQLHandler *db, int user_id)
         } while(q->next());
     }
 
+    delete q;
+
     return tags;
 }
 
@@ -39,6 +41,8 @@ QList<Tag> *Tag::getTaskTags(MySQLHandler *db, int task_id)
             tags->append(tag);
         } while(q->next());
     }
+
+    delete q;
 
     return tags;
 }

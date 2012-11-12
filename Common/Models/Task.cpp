@@ -103,6 +103,8 @@ QList<Task> *Task::getTasks(MySQLHandler *db, int id, int org_id, QString title,
         } while(mQuery->next());
     }
 
+    delete mQuery;
+
     return ret;
 }
 

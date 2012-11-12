@@ -12,6 +12,14 @@ MessagingClient::MessagingClient()
     this->pass = mParser.get("messaging.mess_pass");
     this->vhost = mParser.get("messaging.virtualhost");
     this->finished = false;
+    this->conn = NULL;
+    this->mQueue = NULL;
+    this->mExchange = NULL;
+}
+
+MessagingClient::~MessagingClient()
+{
+    delete conn;
 }
 
 bool MessagingClient::init()
@@ -50,14 +58,16 @@ void MessagingClient::declareQueue(QString exchange, QString topic, QString queu
 
 void MessagingClient::publish(QString exchange, QString topic, QString message)
 {
-    try {
-        AMQPExchange *mExchange = this->conn->createExchange(exchange.toStdString());
-        mExchange->Publish(message.toStdString(), topic.toStdString());
-        delete mExchange;
-    } catch (AMQPException e) {
-        qDebug() << "Publish error";
-    } catch (exception e) {
-        qDebug() << "Unable to Publish message: " << e.what();
+    if(this->conn) {
+        try {
+            mExchange = this->conn->createExchange(exchange.toStdString());
+            mExchange->Declare(exchange.toStdString(), "topic", AMQP_DURABLE);
+            mExchange->Publish(message.toStdString(), topic.toStdString());
+        } catch (AMQPException e) {
+            qDebug() << "Caught exception";
+        }
+    } else {
+        qDebug() << "Connection not initialized";
     }
 }
 

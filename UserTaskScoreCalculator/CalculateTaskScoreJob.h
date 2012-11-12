@@ -16,6 +16,7 @@ class CalculateTaskScore : public QObject, public JobInterface
 public:
     CalculateTaskScore();
     CalculateTaskScore(AMQPMessage *);
+    ~CalculateTaskScore();
     void run();
 
 private:

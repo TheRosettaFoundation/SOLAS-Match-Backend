@@ -10,6 +10,7 @@ class ConfigParser
 {
 public:
     ConfigParser();
+    ~ConfigParser();
     QString get(QString key);
 
 private:

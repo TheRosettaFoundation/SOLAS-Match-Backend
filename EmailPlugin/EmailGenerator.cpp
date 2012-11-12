@@ -20,6 +20,7 @@ EmailGenerator::EmailGenerator()
 
 Email *EmailGenerator::generateEmail(TaskScoreEmail email_message)
 {
+    qDebug() << "EmailGenerator - Generating TaskScoreEmail";
     Email *email = new Email();
     email->setRecipient("spaceindaver0@gmail.com");
     email->setSender("admin@solas.match");
@@ -30,6 +31,7 @@ Email *EmailGenerator::generateEmail(TaskScoreEmail email_message)
 
 Email *EmailGenerator::generateEmail(OrgMembershipAccepted email_message)
 {
+    qDebug() << "EmailGenerator - Generating OrgMembershipAccepted";
     Email *email = new Email();
     MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
     if(db->init()) {
@@ -68,6 +70,7 @@ Email *EmailGenerator::generateEmail(OrgMembershipAccepted email_message)
 
 Email *EmailGenerator::generateEmail(OrgMembershipRefused email_message)
 {
+    qDebug() << "EmailGenerator - Generating OrgMembershipRefused";
     Email * email = new Email();
     MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
     if(db->init()) {
@@ -106,6 +109,7 @@ Email *EmailGenerator::generateEmail(OrgMembershipRefused email_message)
 
 Email *EmailGenerator::generateEmail(PasswordReset email_message)
 {
+    qDebug() << "EmailGenerator - Generating PasswordReset";
     Email *email = new Email();
     MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
     if(db->init()) {
@@ -149,6 +153,7 @@ Email *EmailGenerator::generateEmail(PasswordReset email_message)
 
 Email *EmailGenerator::generateEmail(TaskArchived email_message)
 {
+    qDebug() << "EmailGenerator - Generating TaskArchived";
     Email *email = new Email();
     MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
     if(db->init()) {
@@ -191,6 +196,7 @@ Email *EmailGenerator::generateEmail(TaskArchived email_message)
 
 Email *EmailGenerator::generateEmail(TaskClaimed email_message)
 {
+    qDebug() << "EmailGenerator - Generating TaskClaimed";
     Email *email = new Email();
     MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
     if(db->init()) {
@@ -240,6 +246,7 @@ Email *EmailGenerator::generateEmail(TaskClaimed email_message)
 
 Email *EmailGenerator::generateEmail(TaskTranslationUploaded email_message)
 {
+    qDebug() << "EmailGenerator - Generating TaskTranslationUploaded";
     Email *email = new Email();
     MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
     if(db->init()) {
@@ -285,6 +292,7 @@ Email *EmailGenerator::generateEmail(TaskTranslationUploaded email_message)
 
 Email *EmailGenerator::generateEmail(UserTaskClaim email_message)
 {
+    qDebug() << "EmailGenerator - Generating UserTaskClaim";
     Email *email = new Email();
     MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
     if(db->init()) {
