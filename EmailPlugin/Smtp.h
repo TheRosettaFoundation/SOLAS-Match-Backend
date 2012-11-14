@@ -15,8 +15,10 @@ class Smtp : public QObject
     Q_OBJECT
 
 public:
-    Smtp(Email *email);
+    Smtp();
     ~Smtp();
+    void init();
+    void send(Email *email);
 
 signals:
     void complete();
@@ -35,7 +37,9 @@ private slots:
 
 private:
     QxtSmtp *smtp;
-    QxtMailMessage *message;
+    QString host;
+    int port;
+    bool isConnected;
 
 };
 

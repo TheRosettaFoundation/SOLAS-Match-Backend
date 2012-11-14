@@ -18,20 +18,16 @@ Org::Org(QSqlQuery *q)
 
 Org Org::getOrg(MySQLHandler *db, int org_id)
 {
-    Org *org = NULL;
+    Org org;
     QString args = QString::number(org_id);
     args += ", null, null, null";
     QSqlQuery *result = db->call("getOrg", args);
     if(result->first())
     {
-        org = new Org(result);
+        org = Org(result);
     }
 
-    if(org) {
-        return *org;
-    } else {
-        return NULL;
-    }
+    return org;
 }
 
 int Org::getId()

@@ -7,6 +7,7 @@
 
 Tag::Tag()
 {
+    this->id = -1;
 }
 
 Tag::Tag(QSqlQuery *q)

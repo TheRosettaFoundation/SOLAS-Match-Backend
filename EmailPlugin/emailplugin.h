@@ -18,7 +18,6 @@ public:
 
 public slots:
     void messageReveived(AMQPMessage *message);
-    void deleteSmtp();
     void run();
 
 private:

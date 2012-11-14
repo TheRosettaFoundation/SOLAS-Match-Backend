@@ -5,6 +5,7 @@
 
 Task::Task()
 {
+    this->id = -1;
 }
 
 Task::Task(QSqlQuery *q)

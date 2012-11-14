@@ -5,15 +5,10 @@
 
 #include "../Common/ConfigParser.h"
 
-Smtp::Smtp(Email *email)
+Smtp::Smtp()
 {
-    qDebug() << "SMTP::Initialising Object";
-
     smtp = new QxtSmtp();
-    this->message = new QxtMailMessage(email->getSender(), email->getRecipient());
-    this->message->setSubject(email->getSubject());
-    this->message->setExtraHeader("Content-Type", "text/html");
-    this->message->setBody(email->getBody());
+    isConnected = false;
 
     connect(smtp, SIGNAL(connected()), this, SLOT(connected()));
     connect(smtp, SIGNAL(connectionFailed()), this, SLOT(connectionFailed()));
@@ -27,24 +22,39 @@ Smtp::Smtp(Email *email)
     connect(smtp, SIGNAL(senderRejected(int,QString)), this, SLOT(connected()));
 
     ConfigParser settings;
-    QString host = settings.get("mail.server");
-    int port = settings.get("mail.port").toInt();
-
-    qDebug() << "SMTP::sending to " << email->getRecipient();
-
-    this->smtp->connectToHost(host, port);
-    this->smtp->send(*message);
+    host = settings.get("mail.server");
+    port = settings.get("mail.port").toInt();
 }
 
 Smtp::~Smtp()
 {
-    delete message;
     delete smtp;
+}
+
+void Smtp::init()
+{
+    this->smtp->connectToHost(host, port);
+}
+
+void Smtp::send(Email *email)
+{
+    QxtMailMessage mail_message;
+    mail_message.setSender(email->getSender());
+    mail_message.addRecipient(email->getRecipient());
+    mail_message.setSubject(email->getSubject());
+    mail_message.setExtraHeader("Content-Type", "text/html");
+    mail_message.setBody(email->getBody());
+
+    if(!isConnected) {
+        this->init();
+    }
+    smtp->send(mail_message);
 }
 
 void Smtp::connected()
 {
     qDebug() << "SMTP::Connected to host successfully";
+    this->isConnected = true;
 }
 
 void Smtp::connectionFailed()
@@ -65,6 +75,7 @@ void Smtp::authenticationFailed()
 void Smtp::disconnected()
 {
     qDebug() << "SMTP::Disconnected";
+    this->isConnected = false;
 }
 
 void Smtp::finished()

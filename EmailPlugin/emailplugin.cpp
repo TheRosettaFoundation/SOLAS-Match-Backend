@@ -33,6 +33,9 @@ void EmailPlugin::run()
     QString queue = "email_queue";
     MessagingClient *client;
 
+    smtp = new Smtp();
+    smtp->init();
+
     client = new MessagingClient();
     client->init();
     connect(client, SIGNAL(AMQPMessageReceived(AMQPMessage*)), this, SLOT(messageReveived(AMQPMessage*)));
@@ -136,8 +139,7 @@ void EmailPlugin::messageReveived(AMQPMessage *message)
 
     if(email) {
         //Send Email
-        smtp = new Smtp(email);
-        connect(smtp, SIGNAL(complete()), this, SLOT(deleteSmtp()));
+        smtp->send(email);
         delete email;
 
         //Ack message
@@ -147,12 +149,6 @@ void EmailPlugin::messageReveived(AMQPMessage *message)
             messageQueue->Ack(message->getDeliveryTag());
         }
     }
-}
-
-void EmailPlugin::deleteSmtp()
-{
-    qDebug() << "Deleting SMTP";
-    delete smtp;
 }
 
 void EmailPlugin::setThreadPool(QThreadPool *tp)

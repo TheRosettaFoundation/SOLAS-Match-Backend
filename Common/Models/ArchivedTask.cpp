@@ -2,7 +2,8 @@
 
 ArchivedTask::ArchivedTask()
 {
-    //Default Constructor
+    this->archive_id = -1;
+    this->task_id = -1;
 }
 
 ArchivedTask::ArchivedTask(QSqlQuery *q)

@@ -4,6 +4,7 @@
 
 User::User()
 {
+    this->id = -1;
 }
 
 User::User(QSqlQuery *q)
