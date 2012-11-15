@@ -8,7 +8,7 @@
 #include <QThread>
 #include <QUuid>
 
-#include <QCTemplate.h>
+#include <ctemplate/template.h>
 
 #include "Common/MessagingClient.h"
 
@@ -40,7 +40,7 @@ void CalculateTaskScore::run()
 {
     qDebug() << "Starting new thread " << this->thread()->currentThreadId();
     QDateTime started = QDateTime::currentDateTime();
-    QCTemplate mTemplate;
+    ctemplate::TemplateDictionary dict("user_task_score");
     db = new MySQLHandler(QUuid::createUuid().toString());
     if(db->init()) {
         QList<User> *users = User::getUsers(db);
@@ -82,11 +82,10 @@ void CalculateTaskScore::run()
                         //increase score by one per day since created time
                         score += created_time.daysTo(QDateTime::currentDateTime());
 
-                        mTemplate.enterSection("SCORE");
-                        mTemplate["USER_ID"] = QString::number(user.getUserId());
-                        mTemplate["TASK_ID"] = QString::number(task.getTaskId());
-                        mTemplate["SCORE"] = QString::number(score);
-                        mTemplate.exitSection();
+                        dict.ShowSection("SCORE");
+                        dict["USER_ID"] = QString::number(user.getUserId()).toStdString();
+                        dict["TASK_ID"] = QString::number(task.getTaskId()).toStdString();
+                        dict["SCORE"] = QString::number(score).toStdString();
                         this->saveUserTaskScore(user.getUserId(), task.getTaskId(), score);
                     }
                 } else {
@@ -96,9 +95,8 @@ void CalculateTaskScore::run()
             }
         } else {
             qDebug() << "No users found";
-            mTemplate.enterSection("ERROR");
-            mTemplate["ERROR_MESSAGE"] = "No users found";
-            mTemplate.exitSection();
+            dict.ShowSection("ERROR");
+            dict["ERROR_MESSAGE"] = "No users found";
         }
 
         AMQPQueue *messageQueue = message->getQueue();
@@ -113,23 +111,25 @@ void CalculateTaskScore::run()
         db->close();
     } else {
         qDebug() << "Unable to Connect to SQL Server. Check conf.ini and try again.";
-        mTemplate.enterSection("ERROR");
-        mTemplate["ERROR_MESSAGE"] = "Unable to Connect to SQL Server. Check conf.ini and try again.";
-        mTemplate.exitSection();
+        dict.ShowSection("ERROR");
+        dict.SetValue("ERROR_MESSAGE", "Unable to Connect to SQL Server. Check conf.ini and try again.");
     }
 
     int time_msecs = started.msecsTo(QDateTime::currentDateTime());
     int time_secs = time_msecs / 1000;
     time_msecs %= 1000;
-    mTemplate.enterSection("TIMING");
-    mTemplate["TIME"] = QString::number(time_secs) + "." +
+    dict.ShowSection("TIMING");
+    QString time_value = QString::number(time_secs) + "." +
             QString("%1 seconds").arg(time_msecs, 3, 10, QChar('0'));
-    mTemplate.exitSection();
+    dict["TIME"] = time_value.toStdString();
 
-    QString email_body = mTemplate.expandFile(QString(TEMPLATE_DIRECTORY) + "score_results.tpl");
+    QString template_location = QString(TEMPLATE_DIRECTORY) + "score_results.tpl";
+    std::string email_body;
+    ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
+
     TaskScoreEmail *message_body = new TaskScoreEmail();
     message_body->set_email_type(EmailMessage::TaskScoreEmail);
-    message_body->set_body(email_body.toStdString());
+    message_body->set_body(email_body);
     try {
         QString exchange_name = "SOLAS_MATCH";
         QString exchange_topic = "email.task.score";
@@ -178,9 +178,9 @@ int CalculateTaskScore::getTaskIdFromMessage()
 
     if(length > 0) {
         ret = atoi(body);
-    }
 
-    delete body;
+        delete body;
+    }
 
     return ret;
 }

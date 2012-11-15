@@ -18,7 +18,7 @@ DEFINES += USERTASKSCORECALCULATOR_LIBRARY
 
 LIBS += -L../Common -lCommon \
     -L/usr/local/lib -lamqpcpp -lrabbitmq \
-    -lqctemplate
+    -lctemplate
 
 DESTDIR = ../plugins
 

@@ -2,7 +2,7 @@
 
 #include <QDebug>
 #include <QUuid>
-#include <QCTemplate.h>
+#include <ctemplate/template.h>
 
 #include "Common/MySQLHandler.h"
 #include "Common/ConfigParser.h"
@@ -38,22 +38,22 @@ Email *EmailGenerator::generateEmail(OrgMembershipAccepted email_message)
         User user = User::getUser(db, email_message.user_id());
         Org org = Org::getOrg(db, email_message.org_id());
 
-        QCTemplate mTemplate;
+        ctemplate::TemplateDictionary dict("org_membership_accepted");
         if(user.getDisplayName() != "") {
-            mTemplate.enterSection("USER_HAS_NAME");
-            mTemplate["USERNAME"] = user.getDisplayName();
-            mTemplate.exitSection();
+            dict.ShowSection("USER_HAS_NAME");
+            dict["USERNAME"] = user.getDisplayName().toStdString();
         } else {
-            mTemplate.enterSection("NO_USER_NAME");
-            mTemplate.exitSection();
+            dict.ShowSection("NO_USER_NAME");
         }
-        mTemplate["ORG_NAME"] = org.getName();
-        QString email_body = mTemplate.expandFile(
-                    QString(TEMPLATE_DIRECTORY) + "emails/org-membership-accepted.tpl");
+        dict["ORG_NAME"] = org.getName().toStdString();
+        std::string email_body;
+        QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/org-membership-accepted.tpl";
+        ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
+
         email->setSender("admin@solas.match");
         email->setRecipient(user.getEmail());
         email->setSubject("SOLAS Match: Organisation Membership Update");
-        email->setBody(email_body);
+        email->setBody(QString::fromStdString(email_body));
     } else {
         email->setSender("error@solas.match");
         email->setRecipient("spaceindaver0@gmail.com");
@@ -77,22 +77,22 @@ Email *EmailGenerator::generateEmail(OrgMembershipRefused email_message)
         User user = User::getUser(db, email_message.user_id());
         Org org = Org::getOrg(db, email_message.org_id());
 
-        QCTemplate mTemplate;
+        ctemplate::TemplateDictionary dict("org_membershipt_refused");
         if(user.getDisplayName() != "") {
-            mTemplate.enterSection("USER_HAS_NAME");
-            mTemplate["USERNAME"] = user.getDisplayName();
-            mTemplate.exitSection();
+            dict.ShowSection("USER_HAS_NAME");
+            dict["USERNAME"] = user.getDisplayName().toStdString();
         } else {
-            mTemplate.enterSection("NO_USER_NAME");
-            mTemplate.exitSection();
+            dict.ShowSection("NO_USER_NAME");
         }
-        mTemplate["ORG_NAME"] = org.getName();
-        QString email_body = mTemplate.expandFile(
-                    QString(TEMPLATE_DIRECTORY) + "emails/org-membership-refused.tpl");
+        dict["ORG_NAME"] = org.getName().toStdString();
+        std::string email_body;
+        QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/org-membership-refused.tpl";
+        ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
+
         email->setSender("admin@solas.match");
         email->setRecipient(user.getEmail());
         email->setSubject("SOLAS Match: Organisation Membership Update");
-        email->setBody(email_body);
+        email->setBody(QString::fromStdString(email_body));
     } else {
         email->setSender("error@solas.match");
         email->setRecipient("spaceindaver0@gmail.com");
@@ -121,22 +121,22 @@ Email *EmailGenerator::generateEmail(PasswordReset email_message)
         page_url += uuid;
         page_url += "/password/reset";
 
-        QCTemplate mTemplate;
+        ctemplate::TemplateDictionary dict("password_reset");
         if(user.getDisplayName() != "") {
-            mTemplate.enterSection("USER_HAS_NAME");
-            mTemplate["USERNAME"] = user.getDisplayName();
-            mTemplate.exitSection();
+            dict.ShowSection("USER_HAS_NAME");
+            dict["USERNAME"] = user.getDisplayName().toStdString();
         } else {
-            mTemplate.enterSection("NO_USER_NAME");
-            mTemplate.exitSection();
+            dict.ShowSection("NO_USER_NAME");
         }
-        mTemplate["URL"] = page_url;
-        QString email_body = mTemplate.expandFile(
-                    QString(TEMPLATE_DIRECTORY) + "emails/password-reset.tpl");
+        dict["URL"] = page_url.toStdString();
+        std::string email_body;
+        QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/password-reset.tpl";
+        ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
+
         email->setSender("admin@solas.match");
         email->setRecipient(user.getEmail());
         email->setSubject("SOLAS Match: Organisation Membership Update");
-        email->setBody(email_body);
+        email->setBody(QString::fromStdString(email_body));
     } else {
         email->setSender("error@solas.match");
         email->setRecipient("spaceindaver0@gmail.com");
@@ -161,25 +161,24 @@ Email *EmailGenerator::generateEmail(TaskArchived email_message)
         ArchivedTask task = ArchivedTask::getArchivedTask(db, -1, email_message.task_id());
         Org org = Org::getOrg(db, task.getOrgId());
 
-        QCTemplate mTemplate;
+        ctemplate::TemplateDictionary dict("task_archived");
         if(user.getDisplayName() != "") {
-            mTemplate.enterSection("USER_HAS_NAME");
-            mTemplate["USERNAME"] = user.getDisplayName();
-            mTemplate.exitSection();
+            dict.ShowSection("USER_HAS_NAME");
+            dict["USERNAME"] = user.getDisplayName().toStdString();
         } else {
-            mTemplate.enterSection("NO_USER_NAME");
-            mTemplate.exitSection();
+            dict.ShowSection("NO_USER_NAME");
         }
-        mTemplate["TASK_TITLE"] = task.getTitle();
-        mTemplate["ORG_NAME"] = org.getName();
+        dict["TASK_TITLE"] = task.getTitle().toStdString();
+        dict["ORG_NAME"] = org.getName().toStdString();
 
-        QString email_body = mTemplate.expandFile(
-                    QString(TEMPLATE_DIRECTORY) + "emails/task-archived.tpl");
+        std::string email_body;
+        QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/task-archived.tpl";
+        ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
         email->setSender("admin@solas.match");
         email->setRecipient(user.getEmail());
         email->setSubject("SOLAS Match: Task Updated");
-        email->setBody(email_body);
+        email->setBody(QString::fromStdString(email_body));
     } else {
         email->setSender("error@solas.match");
         email->setRecipient("spaceindaver0@gmail.com");
@@ -207,29 +206,29 @@ Email *EmailGenerator::generateEmail(TaskClaimed email_message)
         qDebug() << "Getting Task";
         Task task = Task::getTask(db, email_message.task_id());
 
-        QCTemplate mTemplate;
+        ctemplate::TemplateDictionary dict("task_claimed");
         if(user.getDisplayName() != "") {
-            mTemplate.enterSection("USER_HAS_NAME");
-            mTemplate["USERNAME"] = user.getDisplayName();
-            mTemplate.exitSection();
+            dict.ShowSection("USER_HAS_NAME");
+            dict["USERNAME"] = user.getDisplayName().toStdString();
         } else {
-            mTemplate.enterSection("NO_USER_NAME");
-            mTemplate.exitSection();
+            dict.ShowSection("NO_USER_NAME");
         }
-        mTemplate["TASK_TITLE"] = task.getTitle();
-        mTemplate["TRANSLATOR_NAME"] = translator.getDisplayName();
+        dict["TASK_TITLE"] = task.getTitle().toStdString();
+        dict["TRANSLATOR_NAME"] = translator.getDisplayName().toStdString();
 
         ConfigParser settings;
         QString user_profile_url = settings.get("site.url");
         user_profile_url += "profile/" + QString::number(translator.getUserId());
-        mTemplate["USER_PROFILE_URL"] = user_profile_url;
+        dict["USER_PROFILE_URL"] = user_profile_url.toStdString();
 
-        QString email_body = mTemplate.expandFile(QString(TEMPLATE_DIRECTORY) + "emails/task-claimed.tpl");
+        std::string email_body;
+        QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/task-claimed.tpl";
+        ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
         email->setSender("admin@solas.match");;
         email->setRecipient(user.getEmail());
         email->setSubject("Task Claim Notification");
-        email->setBody(email_body);
+        email->setBody(QString::fromStdString(email_body));
     } else {
         email->setSender("error@solas.match");
         email->setRecipient("spaceindaver0@gmail.com");
@@ -255,30 +254,30 @@ Email *EmailGenerator::generateEmail(TaskTranslationUploaded email_message)
         Task task = Task::getTask(db, email_message.task_id());
         Org org = Org::getOrg(db, task.getOrganisationId());
 
-        QCTemplate mTemplate;
+        ctemplate::TemplateDictionary dict("task_translation_uploaded");
         if(user.getDisplayName() != "") {
-            mTemplate.enterSection("USER_HAS_NAME");
-            mTemplate["USERNAME"] = user.getDisplayName();
-            mTemplate.exitSection();
+            dict.ShowSection("USER_HAS_NAME");
+            dict["USERNAME"] = user.getDisplayName().toStdString();
         } else {
-            mTemplate.enterSection("NO_USER_NAME");
-            mTemplate.exitSection();
+            dict.ShowSection("NO_USER_NAME");
         }
-        mTemplate["TRANSLATOR_NAME"] = translator.getDisplayName();
-        mTemplate["TASK_TITLE"] = task.getTitle();
-        mTemplate["ORG_NAME"] = org.getName();
+        dict["TRANSLATOR_NAME"] = translator.getDisplayName().toStdString();
+        dict["TASK_TITLE"] = task.getTitle().toStdString();
+        dict["ORG_NAME"] = org.getName().toStdString();
 
         ConfigParser settings;
         QString dash_url = settings.get("site.url");
         dash_url += "client/dashboard";
-        mTemplate["DASHBOARD_URL"] = dash_url;
+        dict["DASHBOARD_URL"] = dash_url.toStdString();
 
-        QString message_body = mTemplate.expandFile(QString(TEMPLATE_DIRECTORY) + "emails/task-translation-uploaded.tpl");
+        std::string email_body;
+        QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/task-translation-uploaded.tpl";
+        ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
         email->setSender("admin@solas.match");;
         email->setRecipient(user.getEmail());
         email->setSubject("Task Translation Uploaded Notification");
-        email->setBody(message_body);
+        email->setBody(QString::fromStdString(email_body));
     } else {
         email->setSender("error@solas.match");
         email->setRecipient("spaceindaver0@gmail.com");
@@ -299,27 +298,27 @@ Email *EmailGenerator::generateEmail(UserTaskClaim email_message)
         User user = User::getUser(db, email_message.user_id());
         Task task = Task::getTask(db, email_message.task_id());
 
-        QCTemplate mTemplate;
+        ctemplate::TemplateDictionary dict("user_task_claim");
         if(user.getDisplayName() != "") {
-            mTemplate.enterSection("USER_HAS_NAME");
-            mTemplate["USERNAME"] = user.getDisplayName();
-            mTemplate.exitSection();
+            dict.ShowSection("USER_HAS_NAME");
+            dict["USERNAME"] = user.getDisplayName().toStdString();
         } else {
-            mTemplate.enterSection("NO_USER_NAME");
-            mTemplate.exitSection();
+            dict.ShowSection("NO_USER_NAME");
         }
 
         ConfigParser settings;
         QString task_url = settings.get("site.url");
         task_url += "task/id/" + QString::number(task.getTaskId());
-        mTemplate["TASK_PAGE"] = task_url;
+        dict["TASK_PAGE"] = task_url.toStdString();
 
-        QString email_body = mTemplate.expandFile(QString(TEMPLATE_DIRECTORY) + "emails/user-task-claim.tpl");
+        std::string email_body;
+        QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/user-task-claim.tpl";
+        ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
         email->setSender("admin@solas.match");;
         email->setRecipient(user.getEmail());
         email->setSubject("Task Claim Notification");
-        email->setBody(email_body);
+        email->setBody(QString::fromStdString(email_body));
     } else {
         email->setSender("error@solas.match");
         email->setRecipient("spaceindaver0@gmail.com");

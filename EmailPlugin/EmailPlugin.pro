@@ -23,7 +23,7 @@ DESTDIR = ../plugins
 
 LIBS += -L../Common -lCommon \
     -L/usr/local/lib -lamqpcpp -lrabbitmq \
-    -lqctemplate -lprotobuf
+    -lprotobuf -lctemplate
 
 DEFINES += EMAILPLUGIN_LIBRARY
 
