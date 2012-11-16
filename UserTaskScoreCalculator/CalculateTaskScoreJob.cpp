@@ -151,7 +151,11 @@ QList<Task> *CalculateTaskScore::getTasks()
 {
     QList<Task> *ret = NULL;
     int message_task = this->getTaskIdFromMessage();
-    ret = Task::getTasks(db, message_task);
+    if(message_task > 0) {
+        ret = Task::getTasks(db, message_task);
+    } else {
+        ret = Task::getActiveTasks(db);
+    }
 
     return ret;
 }

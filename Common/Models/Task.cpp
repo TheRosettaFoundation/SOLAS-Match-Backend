@@ -123,6 +123,25 @@ Task Task::getTask(MySQLHandler *db, int id, int org_id,
     return task;
 }
 
+QList<Task> *Task::getActiveTasks(MySQLHandler *db, int limit)
+{
+    QList<Task> *ret = new QList<Task>();
+    QString args = "null";
+    if(limit > 0) {
+        args = QString::number(limit);
+    }
+
+    QSqlQuery *mQuery = db->call("getLatestAvailableTasks", args);
+    if(mQuery->first()) {
+        do {
+            Task task = Task::getTask(db, MySQLHandler::getValueFromQuery("id", mQuery).toInt());
+            ret->append(task);
+        } while(mQuery->next());
+    }
+
+    return ret;
+}
+
 void Task::setTaskId(int task_id)
 {
     this->id = task_id;
