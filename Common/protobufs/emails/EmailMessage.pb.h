@@ -37,7 +37,7 @@ enum EmailMessage_Type {
   EmailMessage_Type_UserTaskClaim = 2,
   EmailMessage_Type_OrgMembershipAccepted = 3,
   EmailMessage_Type_OrgMembershipRefused = 4,
-  EmailMessage_Type_PasswordReset = 5,
+  EmailMessage_Type_PasswordResetEmail = 5,
   EmailMessage_Type_TaskArchived = 6,
   EmailMessage_Type_TaskClaimed = 7,
   EmailMessage_Type_TaskTranslationUploaded = 8
@@ -116,7 +116,7 @@ class EmailMessage : public ::google::protobuf::Message {
   static const Type UserTaskClaim = EmailMessage_Type_UserTaskClaim;
   static const Type OrgMembershipAccepted = EmailMessage_Type_OrgMembershipAccepted;
   static const Type OrgMembershipRefused = EmailMessage_Type_OrgMembershipRefused;
-  static const Type PasswordReset = EmailMessage_Type_PasswordReset;
+  static const Type PasswordResetEmail = EmailMessage_Type_PasswordResetEmail;
   static const Type TaskArchived = EmailMessage_Type_TaskArchived;
   static const Type TaskClaimed = EmailMessage_Type_TaskClaimed;
   static const Type TaskTranslationUploaded = EmailMessage_Type_TaskTranslationUploaded;

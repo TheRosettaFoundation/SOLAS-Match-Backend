@@ -29,7 +29,7 @@ SOURCES += \
     protobufs/emails/TaskScoreEmail.pb.cc \
     protobufs/emails/OrgMembershipAccepted.pb.cc \
     protobufs/emails/OrgMembershipRefused.pb.cc \
-    protobufs/emails/PasswordReset.pb.cc \
+    protobufs/emails/PasswordResetEmail.pb.cc \
     protobufs/emails/TaskArchived.pb.cc \
     protobufs/emails/TaskClaimed.pb.cc \
     protobufs/emails/TaskTranslationUploaded.pb.cc \
@@ -48,7 +48,7 @@ HEADERS +=\
     protobufs/emails/TaskScoreEmail.pb.h \
     protobufs/emails/OrgMembershipAccepted.pb.h \
     protobufs/emails/OrgMembershipRefused.pb.h \
-    protobufs/emails/PasswordReset.pb.h \
+    protobufs/emails/PasswordResetEmail.pb.h \
     protobufs/emails/TaskArchived.pb.h \
     protobufs/emails/TaskClaimed.pb.h \
     protobufs/emails/TaskTranslationUploaded.pb.h \

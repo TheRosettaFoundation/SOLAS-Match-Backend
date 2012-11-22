@@ -32,7 +32,7 @@ void protobuf_AssignDesc_TaskTranslationUploaded_2eproto() {
   static const int TaskTranslationUploaded_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TaskTranslationUploaded, email_type_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TaskTranslationUploaded, user_id_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TaskTranslationUploaded, translatior_id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TaskTranslationUploaded, translator_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TaskTranslationUploaded, task_id_),
   };
   TaskTranslationUploaded_reflection_ =
@@ -78,11 +78,11 @@ void protobuf_AddDesc_TaskTranslationUploaded_2eproto() {
   ::protobuf_AddDesc_EmailMessage_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\035TaskTranslationUploaded.proto\032\022EmailMe"
-    "ssage.proto\"\224\001\n\027TaskTranslationUploaded\022"
+    "ssage.proto\"\223\001\n\027TaskTranslationUploaded\022"
     "\?\n\nemail_type\030\001 \002(\0162\022.EmailMessage.Type:"
     "\027TaskTranslationUploaded\022\017\n\007user_id\030\002 \002("
-    "\005\022\026\n\016translatior_id\030\003 \002(\005\022\017\n\007task_id\030\004 \002"
-    "(\005", 202);
+    "\005\022\025\n\rtranslator_id\030\003 \002(\005\022\017\n\007task_id\030\004 \002("
+    "\005", 201);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "TaskTranslationUploaded.proto", &protobuf_RegisterTypes);
   TaskTranslationUploaded::default_instance_ = new TaskTranslationUploaded();
@@ -103,7 +103,7 @@ struct StaticDescriptorInitializer_TaskTranslationUploaded_2eproto {
 #ifndef _MSC_VER
 const int TaskTranslationUploaded::kEmailTypeFieldNumber;
 const int TaskTranslationUploaded::kUserIdFieldNumber;
-const int TaskTranslationUploaded::kTranslatiorIdFieldNumber;
+const int TaskTranslationUploaded::kTranslatorIdFieldNumber;
 const int TaskTranslationUploaded::kTaskIdFieldNumber;
 #endif  // !_MSC_VER
 
@@ -125,7 +125,7 @@ void TaskTranslationUploaded::SharedCtor() {
   _cached_size_ = 0;
   email_type_ = 8;
   user_id_ = 0;
-  translatior_id_ = 0;
+  translator_id_ = 0;
   task_id_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
@@ -163,7 +163,7 @@ void TaskTranslationUploaded::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     email_type_ = 8;
     user_id_ = 0;
-    translatior_id_ = 0;
+    translator_id_ = 0;
     task_id_ = 0;
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -208,19 +208,19 @@ bool TaskTranslationUploaded::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(24)) goto parse_translatior_id;
+        if (input->ExpectTag(24)) goto parse_translator_id;
         break;
       }
       
-      // required int32 translatior_id = 3;
+      // required int32 translator_id = 3;
       case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_translatior_id:
+         parse_translator_id:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &translatior_id_)));
-          set_has_translatior_id();
+                 input, &translator_id_)));
+          set_has_translator_id();
         } else {
           goto handle_uninterpreted;
         }
@@ -273,9 +273,9 @@ void TaskTranslationUploaded::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->user_id(), output);
   }
   
-  // required int32 translatior_id = 3;
-  if (has_translatior_id()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->translatior_id(), output);
+  // required int32 translator_id = 3;
+  if (has_translator_id()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->translator_id(), output);
   }
   
   // required int32 task_id = 4;
@@ -302,9 +302,9 @@ void TaskTranslationUploaded::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->user_id(), target);
   }
   
-  // required int32 translatior_id = 3;
-  if (has_translatior_id()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->translatior_id(), target);
+  // required int32 translator_id = 3;
+  if (has_translator_id()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->translator_id(), target);
   }
   
   // required int32 task_id = 4;
@@ -336,11 +336,11 @@ int TaskTranslationUploaded::ByteSize() const {
           this->user_id());
     }
     
-    // required int32 translatior_id = 3;
-    if (has_translatior_id()) {
+    // required int32 translator_id = 3;
+    if (has_translator_id()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->translatior_id());
+          this->translator_id());
     }
     
     // required int32 task_id = 4;
@@ -383,8 +383,8 @@ void TaskTranslationUploaded::MergeFrom(const TaskTranslationUploaded& from) {
     if (from.has_user_id()) {
       set_user_id(from.user_id());
     }
-    if (from.has_translatior_id()) {
-      set_translatior_id(from.translatior_id());
+    if (from.has_translator_id()) {
+      set_translator_id(from.translator_id());
     }
     if (from.has_task_id()) {
       set_task_id(from.task_id());
@@ -415,7 +415,7 @@ void TaskTranslationUploaded::Swap(TaskTranslationUploaded* other) {
   if (other != this) {
     std::swap(email_type_, other->email_type_);
     std::swap(user_id_, other->user_id_);
-    std::swap(translatior_id_, other->translatior_id_);
+    std::swap(translator_id_, other->translator_id_);
     std::swap(task_id_, other->task_id_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);

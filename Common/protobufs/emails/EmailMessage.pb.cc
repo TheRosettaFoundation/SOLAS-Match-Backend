@@ -75,13 +75,13 @@ void protobuf_AddDesc_EmailMessage_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\022EmailMessage.proto\"\370\001\n\014EmailMessage\022&\n"
-    "\nemail_type\030\001 \002(\0162\022.EmailMessage.Type\"\265\001"
+    "\n\022EmailMessage.proto\"\375\001\n\014EmailMessage\022&\n"
+    "\nemail_type\030\001 \002(\0162\022.EmailMessage.Type\"\272\001"
     "\n\004Type\022\022\n\016TaskScoreEmail\020\001\022\021\n\rUserTaskCl"
     "aim\020\002\022\031\n\025OrgMembershipAccepted\020\003\022\030\n\024OrgM"
-    "embershipRefused\020\004\022\021\n\rPasswordReset\020\005\022\020\n"
-    "\014TaskArchived\020\006\022\017\n\013TaskClaimed\020\007\022\033\n\027Task"
-    "TranslationUploaded\020\010*\010\010d\020\200\200\200\200\002", 271);
+    "embershipRefused\020\004\022\026\n\022PasswordResetEmail"
+    "\020\005\022\020\n\014TaskArchived\020\006\022\017\n\013TaskClaimed\020\007\022\033\n"
+    "\027TaskTranslationUploaded\020\010*\010\010d\020\200\200\200\200\002", 276);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "EmailMessage.proto", &protobuf_RegisterTypes);
   EmailMessage::default_instance_ = new EmailMessage();
@@ -124,7 +124,7 @@ const EmailMessage_Type EmailMessage::TaskScoreEmail;
 const EmailMessage_Type EmailMessage::UserTaskClaim;
 const EmailMessage_Type EmailMessage::OrgMembershipAccepted;
 const EmailMessage_Type EmailMessage::OrgMembershipRefused;
-const EmailMessage_Type EmailMessage::PasswordReset;
+const EmailMessage_Type EmailMessage::PasswordResetEmail;
 const EmailMessage_Type EmailMessage::TaskArchived;
 const EmailMessage_Type EmailMessage::TaskClaimed;
 const EmailMessage_Type EmailMessage::TaskTranslationUploaded;

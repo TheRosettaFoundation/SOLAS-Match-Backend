@@ -103,12 +103,12 @@ class TaskTranslationUploaded : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 user_id() const;
   inline void set_user_id(::google::protobuf::int32 value);
   
-  // required int32 translatior_id = 3;
-  inline bool has_translatior_id() const;
-  inline void clear_translatior_id();
-  static const int kTranslatiorIdFieldNumber = 3;
-  inline ::google::protobuf::int32 translatior_id() const;
-  inline void set_translatior_id(::google::protobuf::int32 value);
+  // required int32 translator_id = 3;
+  inline bool has_translator_id() const;
+  inline void clear_translator_id();
+  static const int kTranslatorIdFieldNumber = 3;
+  inline ::google::protobuf::int32 translator_id() const;
+  inline void set_translator_id(::google::protobuf::int32 value);
   
   // required int32 task_id = 4;
   inline bool has_task_id() const;
@@ -123,8 +123,8 @@ class TaskTranslationUploaded : public ::google::protobuf::Message {
   inline void clear_has_email_type();
   inline void set_has_user_id();
   inline void clear_has_user_id();
-  inline void set_has_translatior_id();
-  inline void clear_has_translatior_id();
+  inline void set_has_translator_id();
+  inline void clear_has_translator_id();
   inline void set_has_task_id();
   inline void clear_has_task_id();
   
@@ -132,7 +132,7 @@ class TaskTranslationUploaded : public ::google::protobuf::Message {
   
   int email_type_;
   ::google::protobuf::int32 user_id_;
-  ::google::protobuf::int32 translatior_id_;
+  ::google::protobuf::int32 translator_id_;
   ::google::protobuf::int32 task_id_;
   
   mutable int _cached_size_;
@@ -197,26 +197,26 @@ inline void TaskTranslationUploaded::set_user_id(::google::protobuf::int32 value
   user_id_ = value;
 }
 
-// required int32 translatior_id = 3;
-inline bool TaskTranslationUploaded::has_translatior_id() const {
+// required int32 translator_id = 3;
+inline bool TaskTranslationUploaded::has_translator_id() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void TaskTranslationUploaded::set_has_translatior_id() {
+inline void TaskTranslationUploaded::set_has_translator_id() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void TaskTranslationUploaded::clear_has_translatior_id() {
+inline void TaskTranslationUploaded::clear_has_translator_id() {
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void TaskTranslationUploaded::clear_translatior_id() {
-  translatior_id_ = 0;
-  clear_has_translatior_id();
+inline void TaskTranslationUploaded::clear_translator_id() {
+  translator_id_ = 0;
+  clear_has_translator_id();
 }
-inline ::google::protobuf::int32 TaskTranslationUploaded::translatior_id() const {
-  return translatior_id_;
+inline ::google::protobuf::int32 TaskTranslationUploaded::translator_id() const {
+  return translator_id_;
 }
-inline void TaskTranslationUploaded::set_translatior_id(::google::protobuf::int32 value) {
-  set_has_translatior_id();
-  translatior_id_ = value;
+inline void TaskTranslationUploaded::set_translator_id(::google::protobuf::int32 value) {
+  set_has_translator_id();
+  translator_id_ = value;
 }
 
 // required int32 task_id = 4;

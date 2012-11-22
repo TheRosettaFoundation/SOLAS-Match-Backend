@@ -11,7 +11,7 @@
 #include "Common/protobufs/emails/TaskScoreEmail.pb.h"
 #include "Common/protobufs/emails/OrgMembershipAccepted.pb.h"
 #include "Common/protobufs/emails/OrgMembershipRefused.pb.h"
-#include "Common/protobufs/emails/PasswordReset.pb.h"
+#include "Common/protobufs/emails/PasswordResetEmail.pb.h"
 #include "Common/protobufs/emails/TaskArchived.pb.h"
 #include "Common/protobufs/emails/TaskClaimed.pb.h"
 #include "Common/protobufs/emails/TaskTranslationUploaded.pb.h"
@@ -90,9 +90,9 @@ void EmailPlugin::messageReveived(AMQPMessage *message)
             email = emailGen.generateEmail(email_type);
             break;
         }
-        case (EmailMessage::PasswordReset):
+        case (EmailMessage::PasswordResetEmail):
         {
-            PasswordReset email_type;
+            PasswordResetEmail email_type;
             email_type.ParseFromString(message_body.toStdString());
 
             email = emailGen.generateEmail(email_type);

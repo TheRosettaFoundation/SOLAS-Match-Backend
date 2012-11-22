@@ -107,9 +107,9 @@ Email *EmailGenerator::generateEmail(OrgMembershipRefused email_message)
     return email;
 }
 
-Email *EmailGenerator::generateEmail(PasswordReset email_message)
+Email *EmailGenerator::generateEmail(PasswordResetEmail email_message)
 {
-    qDebug() << "EmailGenerator - Generating PasswordReset";
+    qDebug() << "EmailGenerator - Generating PasswordResetEmail";
     Email *email = new Email();
     MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
     if(db->init()) {
@@ -250,7 +250,7 @@ Email *EmailGenerator::generateEmail(TaskTranslationUploaded email_message)
     MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
     if(db->init()) {
         User user = User::getUser(db, email_message.user_id());
-        User translator = User::getUser(db, email_message.translatior_id());
+        User translator = User::getUser(db, email_message.translator_id());
         Task task = Task::getTask(db, email_message.task_id());
         Org org = Org::getOrg(db, task.getOrganisationId());
 

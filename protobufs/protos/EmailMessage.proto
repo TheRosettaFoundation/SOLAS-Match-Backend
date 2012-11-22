@@ -8,7 +8,7 @@ message EmailMessage
         UserTaskClaim = 2;
         OrgMembershipAccepted = 3;
         OrgMembershipRefused = 4;
-        PasswordReset = 5;
+        PasswordResetEmail = 5;
         TaskArchived = 6;
         TaskClaimed = 7;
         TaskTranslationUploaded = 8;
