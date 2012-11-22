@@ -8,6 +8,7 @@
 
 #include "Smtp.h"
 #include "EmailGenerator.h"
+#include "Common/ConfigParser.h"
 #include "Common/protobufs/emails/TaskScoreEmail.pb.h"
 #include "Common/protobufs/emails/OrgMembershipAccepted.pb.h"
 #include "Common/protobufs/emails/OrgMembershipRefused.pb.h"
@@ -23,6 +24,8 @@ Q_EXPORT_PLUGIN2(EmailPlugin, EmailPlugin)
 
 EmailPlugin::EmailPlugin()
 {
+    ConfigParser settings;
+    enabled = (QString::compare("y", settings.get("mail.enabled")) == 0);
 }
 
 void EmailPlugin::run()
@@ -154,4 +157,9 @@ void EmailPlugin::messageReveived(AMQPMessage *message)
 void EmailPlugin::setThreadPool(QThreadPool *tp)
 {
     this->mThreadPool = tp;
+}
+
+bool EmailPlugin::isEnabled()
+{
+    return enabled;
 }

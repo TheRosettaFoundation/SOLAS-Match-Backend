@@ -16,6 +16,7 @@ class UserTaskScoreCalculator : public WorkerInterface
 public:
     UserTaskScoreCalculator();
     void setThreadPool(QThreadPool *);
+    bool isEnabled();
 
 public slots:
     void messageReceived(AMQPMessage *message);
@@ -24,6 +25,7 @@ public slots:
 
 private:
     QThreadPool *mThreadPool;
+    bool enabled;
 
 };
 

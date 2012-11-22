@@ -21,10 +21,14 @@ int main(int argc, char *argv[])
 
     qDebug() << "Plugins Loaded: starting workers...";
     foreach(WorkerInterface * worker, *workers) {
-        thread = new QThread();
-        worker->connect(thread, SIGNAL(started()), SLOT(run()));
-        worker->moveToThread(thread);
-        thread->start();
+        if(worker->isEnabled()) {
+            thread = new QThread();
+            worker->connect(thread, SIGNAL(started()), SLOT(run()));
+            worker->moveToThread(thread);
+            thread->start();
+        } else {
+            qDebug() << "Worker is not enabled";
+        }
     }
 
     return a.exec();

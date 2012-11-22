@@ -5,12 +5,15 @@
 #include <QTimer>
 
 #include "Common/MessagingClient.h"
+#include "Common/ConfigParser.h"
 #include "CalculateTaskScoreJob.h"
 
 Q_EXPORT_PLUGIN2(UserTaskScoreCalculator, UserTaskScoreCalculator)
 
 UserTaskScoreCalculator::UserTaskScoreCalculator()
 {
+    ConfigParser settings;
+    enabled = (QString::compare("y", settings.get("TaskScoreCalculator.enabled")) == 0);
 }
 
 void UserTaskScoreCalculator::run()
@@ -59,4 +62,9 @@ void UserTaskScoreCalculator::calculateScoreForAllUsers()
 void UserTaskScoreCalculator::setThreadPool(QThreadPool *tp)
 {
     this->mThreadPool = tp;
+}
+
+bool UserTaskScoreCalculator::isEnabled()
+{
+    return enabled;
 }
