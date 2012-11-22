@@ -33,7 +33,9 @@ CalculateTaskScore::CalculateTaskScore(AMQPMessage *mess)
 CalculateTaskScore::~CalculateTaskScore()
 {
     delete db;
-    delete message;
+    if(message) {
+        delete message;
+    }
 }
 
 void CalculateTaskScore::run()

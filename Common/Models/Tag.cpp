@@ -19,7 +19,7 @@ Tag::Tag(QSqlQuery *q)
 QList<Tag> *Tag::getUserTags(MySQLHandler *db, int user_id)
 {
     QList<Tag> *tags = new QList<Tag>();
-    QSqlQuery *q = db->call("getUserTags", QString::number(user_id));
+    QSqlQuery *q = db->call("getUserTags", QString::number(user_id) + ", null");
     if(q->first()) {
         do {
             Tag tag(q);
