@@ -33,9 +33,6 @@ CalculateTaskScore::CalculateTaskScore(AMQPMessage *mess)
 CalculateTaskScore::~CalculateTaskScore()
 {
     delete db;
-    if(message) {
-        delete message;
-    }
 }
 
 void CalculateTaskScore::run()
@@ -184,8 +181,6 @@ int CalculateTaskScore::getTaskIdFromMessage()
 
     if(length > 0) {
         ret = atoi(body);
-
-        delete body;
     }
 
     return ret;
