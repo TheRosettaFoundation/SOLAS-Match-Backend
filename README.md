@@ -71,6 +71,7 @@ To install protobufs:
 * Enter your RabbitMQ details here
 * The site section is currently unused
 * Copy ./conf.ini to /etc/SOLAS-Match/conf.ini
+* Also symbolically link the templates directory to /etc/SOLAS-Match/templates
 
 ## Compiling and installing
 
