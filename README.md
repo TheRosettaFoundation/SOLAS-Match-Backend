@@ -54,9 +54,7 @@ Once compiled move the library file (.a) to /usr/local/lib
 
 Move the header files (found in ./include/) to /usr/local/include
 
-Download the latest version of Qxt from: http://dev.libqxt.org/libqxt/downloads
-
-Follow the README to install: http://dev.libqxt.org/libqxt/wiki/user_guide
+To install Qxt run: sudo apt-get install libqxt-dev
 
 To install ctemplate run:
 * sudo apt-get install libctemplate-dev libctemplate0
