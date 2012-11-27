@@ -52,16 +52,8 @@ Once compiled move the library file (.a) to /usr/local/lib
 
 Move the header files (found in ./include/) to /usr/local/include
 
-To install QCTemplate do the following:
-* Download the source code at http://code.google.com/p/qctemplate/source/checkout
-* Add the following to "src/ctemplate-0.95/src/ctemplate/template dictionary.h":
-```
-    #include <stddef.h>
-```
-* In the src directory run qmake
-* Run make
-* copy the resulting libqctemplate.a to /usr/local/lib
-* Copy the file src/QCTemplate.h to /usr/local/include
+To install ctemplate run:
+* sudo apt-get install libctemplate-dev libctemplate0
 
 To install protobufs:
 * Run sudo apt-get install libprotobuf7 protobuf-compiler protobuf-c-compiler libprotobuf-dev
