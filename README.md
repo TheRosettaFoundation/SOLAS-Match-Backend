@@ -46,6 +46,8 @@ A wrapper for the RabbitMQ C library can be found at:
 
     https://github.com/akalend/amqpcpp
 
+The tested version is at commit b5d00628c80e3c4c0c8d6d0e8b272510138a42fd
+
 Follow the instructions in the README to compile.
 
 Once compiled move the library file (.a) to /usr/local/lib
