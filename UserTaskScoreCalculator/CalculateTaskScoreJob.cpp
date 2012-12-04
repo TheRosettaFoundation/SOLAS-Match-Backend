@@ -1,5 +1,6 @@
 #include "CalculateTaskScoreJob.h"
 
+#include <ctemplate/template.h>
 #include <QtSql/QSqlQuery>
 #include <QtSql/QSqlRecord>
 #include <QDateTime>
@@ -8,14 +9,13 @@
 #include <QThread>
 #include <QUuid>
 
-#include <ctemplate/template.h>
-
 #include "Common/MessagingClient.h"
-#include "Common/DataAccessObjects/UserDao.h"
 
-#include "Common/Models/Tag.h"
+#include "Common/DataAccessObjects/UserDao.h"
+#include "Common/DataAccessObjects/TagDao.h"
 
 #include "Common/protobufs/models/User.pb.h"
+#include "Common/protobufs/models/Tag.pb.h"
 
 #include "Common/protobufs/emails/EmailMessage.pb.h"
 #include "Common/protobufs/emails/TaskScoreEmail.pb.h"
@@ -51,7 +51,7 @@ void CalculateTaskScore::run()
         QList<Task> *tasks = this->getTasks();  //Must use custom function to check message for task id
         if(users != NULL && users->length() > 0) {
             foreach(User *user, *users) {
-                QList<Tag> *userTags = Tag::getUserTags(db, user->user_id());
+                QList<Tag *> *userTags = TagDao::getUserTags(db, user->user_id());
                 if(tasks != NULL && tasks->length() > 0) {
                     foreach(Task task, *tasks) {
                         int score = 0;
@@ -70,11 +70,11 @@ void CalculateTaskScore::run()
                             }
                         }
 
-                        QList<Tag> *taskTags = Tag::getTaskTags(db, task.getTaskId());
+                        QList<Tag*> *taskTags = TagDao::getTaskTags(db, task.getTaskId());
                         int increment_value = 100;
-                        foreach(Tag user_tag, *userTags) {
-                            foreach(Tag task_tag, *taskTags) {
-                                if(user_tag.getTagId() == task_tag.getTagId()) {
+                        foreach(Tag *user_tag, *userTags) {
+                            foreach(Tag *task_tag, *taskTags) {
+                                if(user_tag->id() == task_tag->id()) {
                                     score += increment_value;
                                     increment_value *= 0.75;
                                 }

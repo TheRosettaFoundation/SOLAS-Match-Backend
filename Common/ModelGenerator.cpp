@@ -18,3 +18,13 @@ User *ModelGenerator::GenerateUser(QSqlQuery *q)
 
     return user;
 }
+
+Tag *ModelGenerator::GenerateTag(QSqlQuery *q)
+{
+    Tag *tag = new Tag();
+
+    tag->set_id(MySQLHandler::getValueFromQuery("tag_id", q).toInt());
+    tag->set_label(MySQLHandler::getValueFromQuery("label", q).toString().toStdString());
+
+    return tag;
+}
