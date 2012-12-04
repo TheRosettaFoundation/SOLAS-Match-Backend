@@ -11,9 +11,11 @@
 #include <ctemplate/template.h>
 
 #include "Common/MessagingClient.h"
+#include "Common/DataAccessObjects/UserDao.h"
 
 #include "Common/Models/Tag.h"
-#include "Common/Models/User.h"
+
+#include "Common/protobufs/models/User.pb.h"
 
 #include "Common/protobufs/emails/EmailMessage.pb.h"
 #include "Common/protobufs/emails/TaskScoreEmail.pb.h"
@@ -39,31 +41,31 @@ CalculateTaskScore::~CalculateTaskScore()
 }
 
 void CalculateTaskScore::run()
-{
+{    
     qDebug() << "Starting new thread " << this->thread()->currentThreadId();
     QDateTime started = QDateTime::currentDateTime();
     ctemplate::TemplateDictionary dict("user_task_score");
     db = new MySQLHandler(QUuid::createUuid().toString());
     if(db->init()) {
-        QList<User> *users = User::getUsers(db);
+        QList<User*> *users = UserDao::getUsers(db);
         QList<Task> *tasks = this->getTasks();  //Must use custom function to check message for task id
         if(users != NULL && users->length() > 0) {
-            foreach(User user, *users) {
-                QList<Tag> *userTags = Tag::getUserTags(db, user.getUserId());
+            foreach(User *user, *users) {
+                QList<Tag> *userTags = Tag::getUserTags(db, user->user_id());
                 if(tasks != NULL && tasks->length() > 0) {
                     foreach(Task task, *tasks) {
                         int score = 0;
 
-                        if(user.getNativeLangId() == task.getSourceLangId()) {
+                        if(user->native_lang_id() == task.getSourceLangId()) {
                             score += 300;
-                            if(user.getRegionId() == task.getSourceRegionId()) {
+                            if(user->native_region_id() == task.getSourceRegionId()) {
                                 score += 100;
                             }
                         }
 
-                        if(user.getNativeLangId() == task.getTargetLangId()) {
+                        if(user->native_lang_id() == task.getTargetLangId()) {
                             score += 150;
-                            if(user.getRegionId() == task.getTargetRegionId()) {
+                            if(user->native_region_id() == task.getTargetRegionId()) {
                                 score += 75;
                             }
                         }
@@ -85,10 +87,10 @@ void CalculateTaskScore::run()
                         score += created_time.daysTo(QDateTime::currentDateTime());
 
                         dict.ShowSection("SCORE");
-                        dict["USER_ID"] = QString::number(user.getUserId()).toStdString();
+                        dict["USER_ID"] = QString::number(user->user_id()).toStdString();
                         dict["TASK_ID"] = QString::number(task.getTaskId()).toStdString();
                         dict["SCORE"] = QString::number(score).toStdString();
-                        this->saveUserTaskScore(user.getUserId(), task.getTaskId(), score);
+                        this->saveUserTaskScore(user->user_id(), task.getTaskId(), score);
                     }
                 } else {
                     qDebug() << "No tasks found";

@@ -6,7 +6,11 @@
 
 #include "Common/MySQLHandler.h"
 #include "Common/ConfigParser.h"
-#include "Common/Models/User.h"
+
+#include "Common/DataAccessObjects/UserDao.h"
+
+#include "Common/protobufs/models/User.pb.h"
+
 #include "Common/Models/Task.h"
 #include "Common/Models/ArchivedTask.h"
 #include "Common/Models/Org.h"
@@ -35,13 +39,13 @@ Email *EmailGenerator::generateEmail(OrgMembershipAccepted email_message)
     Email *email = new Email();
     MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
     if(db->init()) {
-        User user = User::getUser(db, email_message.user_id());
+        User *user = UserDao::getUser(db, email_message.user_id());
         Org org = Org::getOrg(db, email_message.org_id());
 
         ctemplate::TemplateDictionary dict("org_membership_accepted");
-        if(user.getDisplayName() != "") {
+        if(user->display_name() != "") {
             dict.ShowSection("USER_HAS_NAME");
-            dict["USERNAME"] = user.getDisplayName().toStdString();
+            dict["USERNAME"] = user->display_name();
         } else {
             dict.ShowSection("NO_USER_NAME");
         }
@@ -51,7 +55,7 @@ Email *EmailGenerator::generateEmail(OrgMembershipAccepted email_message)
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
         email->setSender("admin@solas.match");
-        email->setRecipient(user.getEmail());
+        email->setRecipient(QString::fromStdString(user->email()));
         email->setSubject("SOLAS Match: Organisation Membership Update");
         email->setBody(QString::fromStdString(email_body));
     } else {
@@ -74,13 +78,13 @@ Email *EmailGenerator::generateEmail(OrgMembershipRefused email_message)
     Email * email = new Email();
     MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
     if(db->init()) {
-        User user = User::getUser(db, email_message.user_id());
+        User *user = UserDao::getUser(db, email_message.user_id());
         Org org = Org::getOrg(db, email_message.org_id());
 
         ctemplate::TemplateDictionary dict("org_membershipt_refused");
-        if(user.getDisplayName() != "") {
+        if(user->display_name() != "") {
             dict.ShowSection("USER_HAS_NAME");
-            dict["USERNAME"] = user.getDisplayName().toStdString();
+            dict["USERNAME"] = user->display_name();
         } else {
             dict.ShowSection("NO_USER_NAME");
         }
@@ -90,7 +94,7 @@ Email *EmailGenerator::generateEmail(OrgMembershipRefused email_message)
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
         email->setSender("admin@solas.match");
-        email->setRecipient(user.getEmail());
+        email->setRecipient(QString::fromStdString(user->email()));
         email->setSubject("SOLAS Match: Organisation Membership Update");
         email->setBody(QString::fromStdString(email_body));
     } else {
@@ -113,8 +117,8 @@ Email *EmailGenerator::generateEmail(PasswordResetEmail email_message)
     Email *email = new Email();
     MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
     if(db->init()) {
-        User user = User::getUser(db, email_message.user_id());
-        QString uuid = User::getPasswordResetUuid(db, email_message.user_id());
+        User *user = UserDao::getUser(db, email_message.user_id());
+        QString uuid = UserDao::getPasswordResetUuid(db, email_message.user_id());
 
         ConfigParser settings;
         QString page_url = settings.get("site.url");
@@ -122,9 +126,9 @@ Email *EmailGenerator::generateEmail(PasswordResetEmail email_message)
         page_url += "/password/reset";
 
         ctemplate::TemplateDictionary dict("password_reset");
-        if(user.getDisplayName() != "") {
+        if(user->display_name() != "") {
             dict.ShowSection("USER_HAS_NAME");
-            dict["USERNAME"] = user.getDisplayName().toStdString();
+            dict["USERNAME"] = user->display_name();
         } else {
             dict.ShowSection("NO_USER_NAME");
         }
@@ -134,7 +138,7 @@ Email *EmailGenerator::generateEmail(PasswordResetEmail email_message)
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
         email->setSender("admin@solas.match");
-        email->setRecipient(user.getEmail());
+        email->setRecipient(QString::fromStdString(user->email()));
         email->setSubject("SOLAS Match: Organisation Membership Update");
         email->setBody(QString::fromStdString(email_body));
     } else {
@@ -157,14 +161,14 @@ Email *EmailGenerator::generateEmail(TaskArchived email_message)
     Email *email = new Email();
     MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
     if(db->init()) {
-        User user = User::getUser(db, email_message.user_id());
+        User *user = UserDao::getUser(db, email_message.user_id());
         ArchivedTask task = ArchivedTask::getArchivedTask(db, -1, email_message.task_id());
         Org org = Org::getOrg(db, task.getOrgId());
 
         ctemplate::TemplateDictionary dict("task_archived");
-        if(user.getDisplayName() != "") {
+        if(user->display_name() != "") {
             dict.ShowSection("USER_HAS_NAME");
-            dict["USERNAME"] = user.getDisplayName().toStdString();
+            dict["USERNAME"] = user->display_name();
         } else {
             dict.ShowSection("NO_USER_NAME");
         }
@@ -176,7 +180,7 @@ Email *EmailGenerator::generateEmail(TaskArchived email_message)
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
         email->setSender("admin@solas.match");
-        email->setRecipient(user.getEmail());
+        email->setRecipient(QString::fromStdString(user->display_name()));
         email->setSubject("SOLAS Match: Task Updated");
         email->setBody(QString::fromStdString(email_body));
     } else {
@@ -200,25 +204,25 @@ Email *EmailGenerator::generateEmail(TaskClaimed email_message)
     MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
     if(db->init()) {
         qDebug() << "Getting user";
-        User user = User::getUser(db, email_message.user_id());
+        User *user = UserDao::getUser(db, email_message.user_id());
         qDebug() << "Getting translator";
-        User translator = User::getUser(db, email_message.translator_id());
+        User *translator = UserDao::getUser(db, email_message.translator_id());
         qDebug() << "Getting Task";
         Task task = Task::getTask(db, email_message.task_id());
 
         ctemplate::TemplateDictionary dict("task_claimed");
-        if(user.getDisplayName() != "") {
+        if(user->display_name() != "") {
             dict.ShowSection("USER_HAS_NAME");
-            dict["USERNAME"] = user.getDisplayName().toStdString();
+            dict["USERNAME"] = user->display_name();
         } else {
             dict.ShowSection("NO_USER_NAME");
         }
         dict["TASK_TITLE"] = task.getTitle().toStdString();
-        dict["TRANSLATOR_NAME"] = translator.getDisplayName().toStdString();
+        dict["TRANSLATOR_NAME"] = translator->display_name();
 
         ConfigParser settings;
         QString user_profile_url = settings.get("site.url");
-        user_profile_url += "profile/" + QString::number(translator.getUserId());
+        user_profile_url += "profile/" + QString::number(translator->user_id());
         dict["USER_PROFILE_URL"] = user_profile_url.toStdString();
 
         std::string email_body;
@@ -226,7 +230,7 @@ Email *EmailGenerator::generateEmail(TaskClaimed email_message)
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
         email->setSender("admin@solas.match");;
-        email->setRecipient(user.getEmail());
+        email->setRecipient(QString::fromStdString(user->email()));
         email->setSubject("Task Claim Notification");
         email->setBody(QString::fromStdString(email_body));
     } else {
@@ -249,19 +253,19 @@ Email *EmailGenerator::generateEmail(TaskTranslationUploaded email_message)
     Email *email = new Email();
     MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
     if(db->init()) {
-        User user = User::getUser(db, email_message.user_id());
-        User translator = User::getUser(db, email_message.translator_id());
+        User *user = UserDao::getUser(db, email_message.user_id());
+        User *translator = UserDao::getUser(db, email_message.translator_id());
         Task task = Task::getTask(db, email_message.task_id());
         Org org = Org::getOrg(db, task.getOrganisationId());
 
         ctemplate::TemplateDictionary dict("task_translation_uploaded");
-        if(user.getDisplayName() != "") {
+        if(user->display_name() != "") {
             dict.ShowSection("USER_HAS_NAME");
-            dict["USERNAME"] = user.getDisplayName().toStdString();
+            dict["USERNAME"] = user->display_name();
         } else {
             dict.ShowSection("NO_USER_NAME");
         }
-        dict["TRANSLATOR_NAME"] = translator.getDisplayName().toStdString();
+        dict["TRANSLATOR_NAME"] = translator->display_name();
         dict["TASK_TITLE"] = task.getTitle().toStdString();
         dict["ORG_NAME"] = org.getName().toStdString();
 
@@ -275,7 +279,7 @@ Email *EmailGenerator::generateEmail(TaskTranslationUploaded email_message)
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
         email->setSender("admin@solas.match");;
-        email->setRecipient(user.getEmail());
+        email->setRecipient(QString::fromStdString(user->email()));
         email->setSubject("Task Translation Uploaded Notification");
         email->setBody(QString::fromStdString(email_body));
     } else {
@@ -295,13 +299,13 @@ Email *EmailGenerator::generateEmail(UserTaskClaim email_message)
     Email *email = new Email();
     MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
     if(db->init()) {
-        User user = User::getUser(db, email_message.user_id());
+        User *user = UserDao::getUser(db, email_message.user_id());
         Task task = Task::getTask(db, email_message.task_id());
 
         ctemplate::TemplateDictionary dict("user_task_claim");
-        if(user.getDisplayName() != "") {
+        if(user->display_name() != "") {
             dict.ShowSection("USER_HAS_NAME");
-            dict["USERNAME"] = user.getDisplayName().toStdString();
+            dict["USERNAME"] = user->display_name();
         } else {
             dict.ShowSection("NO_USER_NAME");
         }
@@ -316,7 +320,7 @@ Email *EmailGenerator::generateEmail(UserTaskClaim email_message)
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
         email->setSender("admin@solas.match");;
-        email->setRecipient(user.getEmail());
+        email->setRecipient(QString::fromStdString(user->email()));
         email->setSubject("Task Claim Notification");
         email->setBody(QString::fromStdString(email_body));
     } else {

@@ -22,7 +22,6 @@ SOURCES += \
     ConfigParser.cpp \
     MySQLHandler.cpp \
     MessagingClient.cpp \
-    Models/User.cpp \
     Models/Task.cpp \
     Models/Tag.cpp \
     protobufs/emails/EmailMessage.pb.cc \
@@ -35,13 +34,15 @@ SOURCES += \
     protobufs/emails/TaskTranslationUploaded.pb.cc \
     protobufs/emails/UserTaskClaim.pb.cc \
     Models/Org.cpp \
-    Models/ArchivedTask.cpp
+    Models/ArchivedTask.cpp \
+    ModelGenerator.cpp \
+    protobufs/models/User.pb.cc \
+    DataAccessObjects/UserDao.cpp
 
 HEADERS +=\
     MySQLHandler.h \
     ConfigParser.h \
     MessagingClient.h \
-    Models/User.h \
     Models/Task.h \
     Models/Tag.h \
     protobufs/emails/EmailMessage.pb.h \
@@ -54,7 +55,10 @@ HEADERS +=\
     protobufs/emails/TaskTranslationUploaded.pb.h \
     protobufs/emails/UserTaskClaim.pb.h \
     Models/Org.h \
-    Models/ArchivedTask.h
+    Models/ArchivedTask.h \
+    ModelGenerator.h \
+    protobufs/models/User.pb.h \
+    DataAccessObjects/UserDao.h
 
 symbian {
     MMP_RULES += EXPORTUNFROZEN
