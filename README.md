@@ -62,6 +62,11 @@ To install ctemplate run:
 To install protobufs:
 * Run sudo apt-get install libprotobuf7 protobuf-compiler protobuf-c-compiler libprotobuf-dev
 
+To install QMySQL driver:
+sudo apt-get install libqt4-sql-mysql
+
+
+
 ## Configuration File
 
 * Edit ./conf.ini with your details.

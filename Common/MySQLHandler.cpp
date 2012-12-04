@@ -71,7 +71,7 @@ QSqlQuery *MySQLHandler::call(QString proc_name, QString args)
 
 QVariant MySQLHandler::getValueFromQuery(QString field_name, QSqlQuery *mQuery)
 {
-    QVariant ret = NULL;
+    QVariant ret = 0;
     int field_pos = mQuery->record().indexOf(field_name);
     if(field_pos != -1) {
         ret = mQuery->value(field_pos);
