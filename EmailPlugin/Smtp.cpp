@@ -24,6 +24,8 @@ Smtp::Smtp()
     ConfigParser settings;
     host = settings.get("mail.server");
     port = settings.get("mail.port").toInt();
+    smtp->setUsername(settings.get("mail.user").toLatin1());
+    smtp->setPassword(settings.get("mail.password").toLatin1());
 }
 
 Smtp::~Smtp()
