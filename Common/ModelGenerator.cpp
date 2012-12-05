@@ -59,3 +59,22 @@ ArchivedTask *ModelGenerator::GenerateArchivedTask(QSqlQuery *q)
 
     return task;
 }
+
+Task *ModelGenerator::GenerateTask(QSqlQuery *q)
+{
+    Task *task = new Task();
+
+    task->set_created_time(MySQLHandler::getValueFromQuery("created_time", q).toString().toStdString());
+    task->set_impact(MySQLHandler::getValueFromQuery("impact", q).toString().toStdString());
+    task->set_org_id(MySQLHandler::getValueFromQuery("organisation_id", q).toInt());
+    task->set_reference_page(MySQLHandler::getValueFromQuery("reference_page", q).toString().toStdString());
+    task->set_source_lang_id(MySQLHandler::getValueFromQuery("source_id", q).toInt());
+    task->set_source_region_id(MySQLHandler::getValueFromQuery("sourceCountry", q).toInt());
+    task->set_target_lang_id(MySQLHandler::getValueFromQuery("target_id", q).toInt());
+    task->set_target_region_id(MySQLHandler::getValueFromQuery("targetCountry", q).toInt());
+    task->set_id(MySQLHandler::getValueFromQuery("id", q).toInt());
+    task->set_title(MySQLHandler::getValueFromQuery("title", q).toString().toStdString());
+    task->set_word_count(MySQLHandler::getValueFromQuery("word_count", q).toInt());
+
+    return task;
+}

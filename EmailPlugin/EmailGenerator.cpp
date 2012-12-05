@@ -12,10 +12,9 @@
 #include "Common/DataAccessObjects/TaskDao.h"
 
 #include "Common/protobufs/models/User.pb.h"
+#include "Common/protobufs/models/Task.pb.h"
 #include "Common/protobufs/models/ArchivedTask.pb.h"
 #include "Common/protobufs/models/Organisation.pb.h"
-
-#include "Common/Models/Task.h"
 
 #define TEMPLATE_DIRECTORY "/etc/SOLAS-Match/templates/"
 
@@ -210,7 +209,7 @@ Email *EmailGenerator::generateEmail(TaskClaimed email_message)
         qDebug() << "Getting translator";
         User *translator = UserDao::getUser(db, email_message.translator_id());
         qDebug() << "Getting Task";
-        Task task = Task::getTask(db, email_message.task_id());
+        Task *task = TaskDao::getTask(db, email_message.task_id());
 
         ctemplate::TemplateDictionary dict("task_claimed");
         if(user->display_name() != "") {
@@ -219,7 +218,7 @@ Email *EmailGenerator::generateEmail(TaskClaimed email_message)
         } else {
             dict.ShowSection("NO_USER_NAME");
         }
-        dict["TASK_TITLE"] = task.getTitle().toStdString();
+        dict["TASK_TITLE"] = task->title();
         dict["TRANSLATOR_NAME"] = translator->display_name();
 
         ConfigParser settings;
@@ -257,8 +256,8 @@ Email *EmailGenerator::generateEmail(TaskTranslationUploaded email_message)
     if(db->init()) {
         User *user = UserDao::getUser(db, email_message.user_id());
         User *translator = UserDao::getUser(db, email_message.translator_id());
-        Task task = Task::getTask(db, email_message.task_id());
-        Organisation *org = OrganisationDao::getOrg(db, task.getOrganisationId());
+        Task *task = TaskDao::getTask(db, email_message.task_id());
+        Organisation *org = OrganisationDao::getOrg(db, task->org_id());
 
         ctemplate::TemplateDictionary dict("task_translation_uploaded");
         if(user->display_name() != "") {
@@ -268,7 +267,7 @@ Email *EmailGenerator::generateEmail(TaskTranslationUploaded email_message)
             dict.ShowSection("NO_USER_NAME");
         }
         dict["TRANSLATOR_NAME"] = translator->display_name();
-        dict["TASK_TITLE"] = task.getTitle().toStdString();
+        dict["TASK_TITLE"] = task->title();
         dict["ORG_NAME"] = org->name();
 
         ConfigParser settings;
@@ -302,7 +301,7 @@ Email *EmailGenerator::generateEmail(UserTaskClaim email_message)
     MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
     if(db->init()) {
         User *user = UserDao::getUser(db, email_message.user_id());
-        Task task = Task::getTask(db, email_message.task_id());
+        Task *task = TaskDao::getTask(db, email_message.task_id());
 
         ctemplate::TemplateDictionary dict("user_task_claim");
         if(user->display_name() != "") {
@@ -314,7 +313,7 @@ Email *EmailGenerator::generateEmail(UserTaskClaim email_message)
 
         ConfigParser settings;
         QString task_url = settings.get("site.url");
-        task_url += "task/id/" + QString::number(task.getTaskId());
+        task_url += "task/id/" + QString::number(task->id());
         dict["TASK_PAGE"] = task_url.toStdString();
 
         std::string email_body;

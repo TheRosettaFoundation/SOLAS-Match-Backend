@@ -6,8 +6,8 @@
 #include <QList>
 
 #include "PluginHandler/JobInterface.h"
+#include "Common/protobufs/models/Task.pb.h"
 #include "Common/MySQLHandler.h"
-#include "Common/Models/Task.h"
 
 class CalculateTaskScore : public QObject, public JobInterface
 {
@@ -20,7 +20,7 @@ public:
     void run();
 
 private:
-    QList<Task> *getTasks();
+    QList<Task*> *getTasks();
     int getTaskIdFromMessage();
     int getCurrentScore(int user_id, int task_id);
     void saveUserTaskScore(int user_id, int task_id, int score);
