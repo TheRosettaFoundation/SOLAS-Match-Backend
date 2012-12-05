@@ -65,8 +65,6 @@ To install protobufs:
 To install QMySQL driver:
 sudo apt-get install libqt4-sql-mysql
 
-
-
 ## Configuration File
 
 * Edit ./conf.ini with your details.
