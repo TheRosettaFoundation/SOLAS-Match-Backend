@@ -40,3 +40,22 @@ Organisation *ModelGenerator::GenerateOrg(QSqlQuery *q)
 
     return org;
 }
+
+ArchivedTask *ModelGenerator::GenerateArchivedTask(QSqlQuery *q)
+{
+    ArchivedTask *task = new ArchivedTask();
+
+    task->set_archive_id(MySQLHandler::getValueFromQuery("archived_task_id", q).toInt());
+    task->set_task_id(MySQLHandler::getValueFromQuery("task_id", q).toInt());
+    task->set_org_id(MySQLHandler::getValueFromQuery("organisation_id", q).toInt());
+    task->set_title(MySQLHandler::getValueFromQuery("title", q).toString().toStdString());
+    task->set_word_count(MySQLHandler::getValueFromQuery("word_count", q).toInt());
+    task->set_source_id(MySQLHandler::getValueFromQuery("source_id", q).toInt());
+    task->set_target_id(MySQLHandler::getValueFromQuery("target_id", q).toInt());
+    task->set_created_time(MySQLHandler::getValueFromQuery("created_time", q).toString().toStdString());
+    task->set_archived_time(MySQLHandler::getValueFromQuery("archived_time", q).toString().toStdString());
+    task->set_impact(MySQLHandler::getValueFromQuery("impact", q).toString().toStdString());
+    task->set_reference_page(MySQLHandler::getValueFromQuery("reference_page", q).toString().toStdString());
+
+    return task;
+}

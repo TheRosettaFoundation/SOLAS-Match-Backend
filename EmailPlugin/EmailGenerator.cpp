@@ -9,11 +9,13 @@
 
 #include "Common/DataAccessObjects/UserDao.h"
 #include "Common/DataAccessObjects/OrganisationDao.h"
+#include "Common/DataAccessObjects/TaskDao.h"
 
 #include "Common/protobufs/models/User.pb.h"
+#include "Common/protobufs/models/ArchivedTask.pb.h"
+#include "Common/protobufs/models/Organisation.pb.h"
 
 #include "Common/Models/Task.h"
-#include "Common/Models/ArchivedTask.h"
 
 #define TEMPLATE_DIRECTORY "/etc/SOLAS-Match/templates/"
 
@@ -162,8 +164,8 @@ Email *EmailGenerator::generateEmail(TaskArchived email_message)
     MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
     if(db->init()) {
         User *user = UserDao::getUser(db, email_message.user_id());
-        ArchivedTask task = ArchivedTask::getArchivedTask(db, -1, email_message.task_id());
-        Organisation *org = OrganisationDao::getOrg(db, task.getOrgId());
+        ArchivedTask *task = TaskDao::getArchivedTask(db, -1, email_message.task_id());
+        Organisation *org = OrganisationDao::getOrg(db, task->org_id());
 
         ctemplate::TemplateDictionary dict("task_archived");
         if(user->display_name() != "") {
@@ -172,7 +174,7 @@ Email *EmailGenerator::generateEmail(TaskArchived email_message)
         } else {
             dict.ShowSection("NO_USER_NAME");
         }
-        dict["TASK_TITLE"] = task.getTitle().toStdString();
+        dict["TASK_TITLE"] = task->title();
         dict["ORG_NAME"] = org->name();
 
         std::string email_body;

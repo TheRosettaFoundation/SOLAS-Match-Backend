@@ -32,14 +32,15 @@ SOURCES += \
     protobufs/emails/TaskClaimed.pb.cc \
     protobufs/emails/TaskTranslationUploaded.pb.cc \
     protobufs/emails/UserTaskClaim.pb.cc \
-    Models/ArchivedTask.cpp \
     ModelGenerator.cpp \
     protobufs/models/User.pb.cc \
     DataAccessObjects/UserDao.cpp \
     DataAccessObjects/TagDao.cpp \
     protobufs/models/Tag.pb.cc \
     protobufs/models/Organisation.pb.cc \
-    DataAccessObjects/OrganisationDao.cpp
+    DataAccessObjects/OrganisationDao.cpp \
+    protobufs/models/ArchivedTask.pb.cc \
+    DataAccessObjects/TaskDao.cpp
 
 HEADERS +=\
     MySQLHandler.h \
@@ -55,14 +56,15 @@ HEADERS +=\
     protobufs/emails/TaskClaimed.pb.h \
     protobufs/emails/TaskTranslationUploaded.pb.h \
     protobufs/emails/UserTaskClaim.pb.h \
-    Models/ArchivedTask.h \
     ModelGenerator.h \
     protobufs/models/User.pb.h \
     DataAccessObjects/UserDao.h \
     DataAccessObjects/TagDao.h \
     protobufs/models/Tag.pb.h \
     protobufs/models/Organisation.pb.h \
-    DataAccessObjects/OrganisationDao.h
+    DataAccessObjects/OrganisationDao.h \
+    protobufs/models/ArchivedTask.pb.h \
+    DataAccessObjects/TaskDao.h
 
 symbian {
     MMP_RULES += EXPORTUNFROZEN
