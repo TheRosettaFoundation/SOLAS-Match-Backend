@@ -8,12 +8,12 @@
 #include "Common/ConfigParser.h"
 
 #include "Common/DataAccessObjects/UserDao.h"
+#include "Common/DataAccessObjects/OrganisationDao.h"
 
 #include "Common/protobufs/models/User.pb.h"
 
 #include "Common/Models/Task.h"
 #include "Common/Models/ArchivedTask.h"
-#include "Common/Models/Org.h"
 
 #define TEMPLATE_DIRECTORY "/etc/SOLAS-Match/templates/"
 
@@ -40,7 +40,7 @@ Email *EmailGenerator::generateEmail(OrgMembershipAccepted email_message)
     MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
     if(db->init()) {
         User *user = UserDao::getUser(db, email_message.user_id());
-        Org org = Org::getOrg(db, email_message.org_id());
+        Organisation *org = OrganisationDao::getOrg(db, email_message.org_id());
 
         ctemplate::TemplateDictionary dict("org_membership_accepted");
         if(user->display_name() != "") {
@@ -49,7 +49,7 @@ Email *EmailGenerator::generateEmail(OrgMembershipAccepted email_message)
         } else {
             dict.ShowSection("NO_USER_NAME");
         }
-        dict["ORG_NAME"] = org.getName().toStdString();
+        dict["ORG_NAME"] = org->name();
         std::string email_body;
         QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/org-membership-accepted.tpl";
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
@@ -79,7 +79,7 @@ Email *EmailGenerator::generateEmail(OrgMembershipRefused email_message)
     MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
     if(db->init()) {
         User *user = UserDao::getUser(db, email_message.user_id());
-        Org org = Org::getOrg(db, email_message.org_id());
+        Organisation *org = OrganisationDao::getOrg(db, email_message.org_id());
 
         ctemplate::TemplateDictionary dict("org_membershipt_refused");
         if(user->display_name() != "") {
@@ -88,7 +88,7 @@ Email *EmailGenerator::generateEmail(OrgMembershipRefused email_message)
         } else {
             dict.ShowSection("NO_USER_NAME");
         }
-        dict["ORG_NAME"] = org.getName().toStdString();
+        dict["ORG_NAME"] = org->name();
         std::string email_body;
         QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/org-membership-refused.tpl";
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
@@ -163,7 +163,7 @@ Email *EmailGenerator::generateEmail(TaskArchived email_message)
     if(db->init()) {
         User *user = UserDao::getUser(db, email_message.user_id());
         ArchivedTask task = ArchivedTask::getArchivedTask(db, -1, email_message.task_id());
-        Org org = Org::getOrg(db, task.getOrgId());
+        Organisation *org = OrganisationDao::getOrg(db, task.getOrgId());
 
         ctemplate::TemplateDictionary dict("task_archived");
         if(user->display_name() != "") {
@@ -173,7 +173,7 @@ Email *EmailGenerator::generateEmail(TaskArchived email_message)
             dict.ShowSection("NO_USER_NAME");
         }
         dict["TASK_TITLE"] = task.getTitle().toStdString();
-        dict["ORG_NAME"] = org.getName().toStdString();
+        dict["ORG_NAME"] = org->name();
 
         std::string email_body;
         QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/task-archived.tpl";
@@ -256,7 +256,7 @@ Email *EmailGenerator::generateEmail(TaskTranslationUploaded email_message)
         User *user = UserDao::getUser(db, email_message.user_id());
         User *translator = UserDao::getUser(db, email_message.translator_id());
         Task task = Task::getTask(db, email_message.task_id());
-        Org org = Org::getOrg(db, task.getOrganisationId());
+        Organisation *org = OrganisationDao::getOrg(db, task.getOrganisationId());
 
         ctemplate::TemplateDictionary dict("task_translation_uploaded");
         if(user->display_name() != "") {
@@ -267,7 +267,7 @@ Email *EmailGenerator::generateEmail(TaskTranslationUploaded email_message)
         }
         dict["TRANSLATOR_NAME"] = translator->display_name();
         dict["TASK_TITLE"] = task.getTitle().toStdString();
-        dict["ORG_NAME"] = org.getName().toStdString();
+        dict["ORG_NAME"] = org->name();
 
         ConfigParser settings;
         QString dash_url = settings.get("site.url");

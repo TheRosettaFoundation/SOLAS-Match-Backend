@@ -28,3 +28,15 @@ Tag *ModelGenerator::GenerateTag(QSqlQuery *q)
 
     return tag;
 }
+
+Organisation *ModelGenerator::GenerateOrg(QSqlQuery *q)
+{
+    Organisation *org = new Organisation();
+
+    org->set_id(MySQLHandler::getValueFromQuery("id", q).toInt());
+    org->set_name(MySQLHandler::getValueFromQuery("name", q).toString().toStdString());
+    org->set_biography(MySQLHandler::getValueFromQuery("biography", q).toString().toStdString());
+    org->set_home_page(MySQLHandler::getValueFromQuery("home_page", q).toString().toStdString());
+
+    return org;
+}
