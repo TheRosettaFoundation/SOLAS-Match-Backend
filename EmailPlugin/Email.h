@@ -2,22 +2,24 @@
 #define EMAIL_H
 
 #include <QString>
+#include <QStringList>
 
 class Email
 {
 public:
     Email(QString to = "", QString from = "", QString subject = "", QString body = "");
-    QString getRecipient();
+    QStringList getRecipients();
     QString getSender();
     QString getSubject();
     QString getBody();
-    void setRecipient(QString to);
+    void addRecipient(QString to);
     void setSender(QString from);
     void setSubject(QString sub);
     void setBody(QString body);
+    void printEmail();
 
 private:
-    QString recipient;
+    QStringList recipient;
     QString sender;
     QString subject;
     QString body;

@@ -33,7 +33,7 @@ Email *EmailGenerator::generateEmail(TaskScoreEmail email_message)
 
     QStringList admins = settings.get("mail.admin_emails").split(",");
     foreach(QString admin, admins) {
-        email->setRecipient(admin.trimmed());
+        email->addRecipient(admin.trimmed());
     }
 
     email->setSender(settings.get("site.system_email_address"));
@@ -45,6 +45,7 @@ Email *EmailGenerator::generateEmail(TaskScoreEmail email_message)
 Email *EmailGenerator::generateEmail(OrgMembershipAccepted email_message)
 {
     qDebug() << "EmailGenerator - Generating OrgMembershipAccepted";
+    ConfigParser settings;
     Email *email = new Email();
     MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
     if(db->init()) {
@@ -63,13 +64,16 @@ Email *EmailGenerator::generateEmail(OrgMembershipAccepted email_message)
         QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/org-membership-accepted.tpl";
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
-        email->setSender("admin@solas.match");
-        email->setRecipient(QString::fromStdString(user->email()));
+        email->setSender(settings.get("site.system_email_address"));
+        email->addRecipient(QString::fromStdString(user->email()));
         email->setSubject("SOLAS Match: Organisation Membership Update");
         email->setBody(QString::fromStdString(email_body));
     } else {
-        email->setSender("error@solas.match");
-        email->setRecipient("spaceindaver0@gmail.com");
+        email->setSender(settings.get("site.system_email_address"));
+        QStringList admins = settings.get("mail.admin_emails").split(",");
+        foreach(QString admin, admins) {
+            email->addRecipient(admin.trimmed());
+        }
         email->setSubject("Org Membership Accepted Error");
         email->setBody("Unable to Connect to SQL Server.");
         qDebug() << "Unable to Connect to SQL Server. Check conf.ini and try again.";
@@ -84,6 +88,7 @@ Email *EmailGenerator::generateEmail(OrgMembershipAccepted email_message)
 Email *EmailGenerator::generateEmail(OrgMembershipRefused email_message)
 {
     qDebug() << "EmailGenerator - Generating OrgMembershipRefused";
+    ConfigParser settings;
     Email * email = new Email();
     MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
     if(db->init()) {
@@ -102,13 +107,16 @@ Email *EmailGenerator::generateEmail(OrgMembershipRefused email_message)
         QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/org-membership-refused.tpl";
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
-        email->setSender("admin@solas.match");
-        email->setRecipient(QString::fromStdString(user->email()));
+        email->setSender(settings.get("site.system_email_address"));
+        email->addRecipient(QString::fromStdString(user->email()));
         email->setSubject("SOLAS Match: Organisation Membership Update");
         email->setBody(QString::fromStdString(email_body));
     } else {
-        email->setSender("error@solas.match");
-        email->setRecipient("spaceindaver0@gmail.com");
+        email->setSender(settings.get("site.system_email_address"));
+        QStringList admins = settings.get("mail.admin_emails").split(",");
+        foreach(QString admin, admins) {
+            email->addRecipient(admin.trimmed());
+        }
         email->setSubject("Org Membership Accepted Error");
         email->setBody("Unable to Connect to SQL Server.");
         qDebug() << "Unable to Connect to SQL Server. Check conf.ini and try again.";
@@ -123,6 +131,7 @@ Email *EmailGenerator::generateEmail(OrgMembershipRefused email_message)
 Email *EmailGenerator::generateEmail(PasswordResetEmail email_message)
 {
     qDebug() << "EmailGenerator - Generating PasswordResetEmail";
+    ConfigParser settings;
     Email *email = new Email();
     MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
     if(db->init()) {
@@ -146,13 +155,16 @@ Email *EmailGenerator::generateEmail(PasswordResetEmail email_message)
         QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/password-reset.tpl";
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
-        email->setSender("admin@solas.match");
-        email->setRecipient(QString::fromStdString(user->email()));
+        email->setSender(settings.get("site.system_email_address"));
+        email->addRecipient(QString::fromStdString(user->email()));
         email->setSubject("SOLAS Match: Organisation Membership Update");
         email->setBody(QString::fromStdString(email_body));
     } else {
-        email->setSender("error@solas.match");
-        email->setRecipient("spaceindaver0@gmail.com");
+        email->setSender(settings.get("site.system_email_address"));
+        QStringList admins = settings.get("mail.admin_emails").split(",");
+        foreach(QString admin, admins) {
+            email->addRecipient(admin.trimmed());
+        }
         email->setSubject("Password Reset Error");
         email->setBody("Unable to Connect to SQL Server.");
         qDebug() << "Unable to Connect to SQL Server. Check conf.ini and try again.";
@@ -167,6 +179,7 @@ Email *EmailGenerator::generateEmail(PasswordResetEmail email_message)
 Email *EmailGenerator::generateEmail(TaskArchived email_message)
 {
     qDebug() << "EmailGenerator - Generating TaskArchived";
+    ConfigParser settings;
     Email *email = new Email();
     MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
     if(db->init()) {
@@ -188,13 +201,16 @@ Email *EmailGenerator::generateEmail(TaskArchived email_message)
         QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/task-archived.tpl";
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
-        email->setSender("admin@solas.match");
-        email->setRecipient(QString::fromStdString(user->display_name()));
+        email->setSender(settings.get("site.system_email_address"));
+        email->addRecipient(QString::fromStdString(user->display_name()));
         email->setSubject("SOLAS Match: Task Updated");
         email->setBody(QString::fromStdString(email_body));
     } else {
-        email->setSender("error@solas.match");
-        email->setRecipient("spaceindaver0@gmail.com");
+        email->setSender(settings.get("site.system_email_address"));
+        QStringList admins = settings.get("mail.admin_emails").split(",");
+        foreach(QString admin, admins) {
+            email->addRecipient(admin.trimmed());
+        }
         email->setSubject("Password Reset Error");
         email->setBody("Unable to Connect to SQL Server.");
         qDebug() << "Unable to Connect to SQL Server. Check conf.ini and try again.";
@@ -209,6 +225,7 @@ Email *EmailGenerator::generateEmail(TaskArchived email_message)
 Email *EmailGenerator::generateEmail(TaskClaimed email_message)
 {
     qDebug() << "EmailGenerator - Generating TaskClaimed";
+    ConfigParser settings;
     Email *email = new Email();
     MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
     if(db->init()) {
@@ -238,13 +255,16 @@ Email *EmailGenerator::generateEmail(TaskClaimed email_message)
         QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/task-claimed.tpl";
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
-        email->setSender("admin@solas.match");;
-        email->setRecipient(QString::fromStdString(user->email()));
+        email->setSender(settings.get("site.system_email_address"));;
+        email->addRecipient(QString::fromStdString(user->email()));
         email->setSubject("Task Claim Notification");
         email->setBody(QString::fromStdString(email_body));
     } else {
-        email->setSender("error@solas.match");
-        email->setRecipient("spaceindaver0@gmail.com");
+        email->setSender(settings.get("site.system_email_address"));
+        QStringList admins = settings.get("mail.admin_emails").split(",");
+        foreach(QString admin, admins) {
+            email->addRecipient(admin.trimmed());
+        }
         email->setSubject("Password Reset Error");
         email->setBody("Unable to Connect to SQL Server.");
         qDebug() << "Unable to Connect to SQL Server. Check conf.ini and try again.";
@@ -259,6 +279,7 @@ Email *EmailGenerator::generateEmail(TaskClaimed email_message)
 Email *EmailGenerator::generateEmail(TaskTranslationUploaded email_message)
 {
     qDebug() << "EmailGenerator - Generating TaskTranslationUploaded";
+    ConfigParser settings;
     Email *email = new Email();
     MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
     if(db->init()) {
@@ -287,13 +308,16 @@ Email *EmailGenerator::generateEmail(TaskTranslationUploaded email_message)
         QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/task-translation-uploaded.tpl";
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
-        email->setSender("admin@solas.match");;
-        email->setRecipient(QString::fromStdString(user->email()));
+        email->setSender(settings.get("site.system_email_address"));;
+        email->addRecipient(QString::fromStdString(user->email()));
         email->setSubject("Task Translation Uploaded Notification");
         email->setBody(QString::fromStdString(email_body));
     } else {
-        email->setSender("error@solas.match");
-        email->setRecipient("spaceindaver0@gmail.com");
+        email->setSender(settings.get("site.system_email_address"));
+        QStringList admins = settings.get("mail.admin_emails").split(",");
+        foreach(QString admin, admins) {
+            email->addRecipient(admin.trimmed());
+        }
         email->setSubject("Task Translation Uploaded Email Error");
         email->setBody("Unable to Connect to SQL Server.");
         qDebug() << "Unable to Connect to SQL Server. Check conf.ini and try again.";
@@ -305,6 +329,7 @@ Email *EmailGenerator::generateEmail(TaskTranslationUploaded email_message)
 Email *EmailGenerator::generateEmail(UserTaskClaim email_message)
 {
     qDebug() << "EmailGenerator - Generating UserTaskClaim";
+    ConfigParser settings;
     Email *email = new Email();
     MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
     if(db->init()) {
@@ -328,13 +353,16 @@ Email *EmailGenerator::generateEmail(UserTaskClaim email_message)
         QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/user-task-claim.tpl";
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
-        email->setSender("admin@solas.match");;
-        email->setRecipient(QString::fromStdString(user->email()));
+        email->setSender(settings.get("site.system_email_address"));;
+        email->addRecipient(QString::fromStdString(user->email()));
         email->setSubject("Task Claim Notification");
         email->setBody(QString::fromStdString(email_body));
     } else {
-        email->setSender("error@solas.match");
-        email->setRecipient("spaceindaver0@gmail.com");
+        email->setSender(settings.get("site.system_email_address"));
+        QStringList admins = settings.get("mail.admin_emails").split(",");
+        foreach(QString admin, admins) {
+            email->addRecipient(admin.trimmed());
+        }
         email->setSubject("User Task Claim Email Error");
         email->setBody("Unable to Connect to SQL Server.");
         qDebug() << "Unable to Connect to SQL Server. Check conf.ini and try again.";

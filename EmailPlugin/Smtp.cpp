@@ -42,7 +42,10 @@ void Smtp::send(Email *email)
 {
     QxtMailMessage mail_message;
     mail_message.setSender(email->getSender());
-    mail_message.addRecipient(email->getRecipient());
+    foreach(QString recipient, email->getRecipients())
+    {
+        mail_message.addRecipient(recipient);
+    }
     mail_message.setSubject(email->getSubject());
     mail_message.setExtraHeader("Content-Type", "text/html");
     mail_message.setBody(email->getBody());
