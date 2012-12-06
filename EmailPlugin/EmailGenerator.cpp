@@ -1,6 +1,7 @@
 #include "EmailGenerator.h"
 
 #include <QDebug>
+#include <QStringList>
 #include <QUuid>
 #include <ctemplate/template.h>
 
@@ -26,9 +27,16 @@ EmailGenerator::EmailGenerator()
 Email *EmailGenerator::generateEmail(TaskScoreEmail email_message)
 {
     qDebug() << "EmailGenerator - Generating TaskScoreEmail";
+
     Email *email = new Email();
-    email->setRecipient("spaceindaver0@gmail.com");
-    email->setSender("admin@solas.match");
+    ConfigParser settings;
+
+    QStringList admins = settings.get("mail.admin_emails").split(",");
+    foreach(QString admin, admins) {
+        email->setRecipient(admin.trimmed());
+    }
+
+    email->setSender(settings.get("site.system_email_address"));
     email->setSubject("User Task Score Results");
     email->setBody(QString::fromStdString(email_message.body()));
     return email;
