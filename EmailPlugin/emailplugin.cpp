@@ -142,6 +142,7 @@ void EmailPlugin::messageReveived(AMQPMessage *message)
 
     if(email) {
         //Send Email
+        email->printEmail();
         smtp->send(email);
         delete email;
 

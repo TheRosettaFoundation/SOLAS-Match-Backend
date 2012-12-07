@@ -212,14 +212,38 @@ Email *EmailGenerator::generateEmail(PasswordResetEmail email_message)
 Email *EmailGenerator::generateEmail(TaskArchived email_message)
 {
     qDebug() << "EmailGenerator - Generating TaskArchived";
-    ConfigParser settings;
-    Email *email = new Email();
-    MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
-    if(db->init()) {
-        User *user = UserDao::getUser(db, email_message.user_id());
-        ArchivedTask *task = TaskDao::getArchivedTask(db, -1, email_message.task_id());
-        Organisation *org = OrganisationDao::getOrg(db, task->org_id());
 
+    ConfigParser settings;
+    QString error = "";
+    Email *email = new Email();
+    User *user = NULL;
+    Organisation *org = NULL;
+    ArchivedTask *task = NULL;
+    MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
+
+    if(db->init()) {
+        user = UserDao::getUser(db, email_message.user_id());
+        task = TaskDao::getArchivedTask(db, -1, email_message.task_id());
+
+        if(user != NULL && task != NULL) {
+            org = OrganisationDao::getOrg(db, task->org_id());
+            if(org == NULL) {
+                error = "Failed to Generate task archived email. Unable to find relevent information ";
+                error += "in the Database. Unable to locate org with id " + QString::number(task->org_id());
+                error += ".";
+            }
+        } else {
+            error = "Failed to Generate task archived email. Unable to find relevent information ";
+            error += "in the Database. Searched for user ID " + QString::number(email_message.user_id());
+            error += ", task ID " + QString::number(email_message.task_id()) + ".";
+        }
+    } else {
+        error = "Failed to generate task archived email: Unable to Connect to SQL Server. ";
+        error += "Check conf.ini for connection settings and make sure mysqld has been started.";
+        qDebug() << "Unable to Connect to SQL Server. Check conf.ini and try again.";
+    }
+
+    if(error.compare("") == 0) {
         ctemplate::TemplateDictionary dict("task_archived");
         if(user->display_name() != "") {
             dict.ShowSection("USER_HAS_NAME");
@@ -239,18 +263,13 @@ Email *EmailGenerator::generateEmail(TaskArchived email_message)
         email->setSubject("SOLAS Match: Task Updated");
         email->setBody(QString::fromStdString(email_body));
     } else {
-        email->setSender(settings.get("site.system_email_address"));
-        QStringList admins = settings.get("mail.admin_emails").split(",");
-        foreach(QString admin, admins) {
-            email->addRecipient(admin.trimmed());
-        }
-        email->setSubject("Password Reset Error");
-        email->setBody("Unable to Connect to SQL Server.");
-        qDebug() << "Unable to Connect to SQL Server. Check conf.ini and try again.";
+        email = this->generateErrorEmail(error);
     }
 
-    qDebug() << "Deleting db";
     delete db;
+    if(user) delete user;
+    if(org) delete org;
+    if(task) delete task;
 
     return email;
 }
@@ -262,11 +281,8 @@ Email *EmailGenerator::generateEmail(TaskClaimed email_message)
     Email *email = new Email();
     MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
     if(db->init()) {
-        qDebug() << "Getting user";
         User *user = UserDao::getUser(db, email_message.user_id());
-        qDebug() << "Getting translator";
         User *translator = UserDao::getUser(db, email_message.translator_id());
-        qDebug() << "Getting Task";
         Task *task = TaskDao::getTask(db, email_message.task_id());
 
         ctemplate::TemplateDictionary dict("task_claimed");
@@ -303,7 +319,6 @@ Email *EmailGenerator::generateEmail(TaskClaimed email_message)
         qDebug() << "Unable to Connect to SQL Server. Check conf.ini and try again.";
     }
 
-    qDebug() << "Deleting db";
     delete db;
 
     return email;
@@ -416,7 +431,7 @@ Email *EmailGenerator::generateErrorEmail(QString error_message)
     }
     email->setSubject("An error has occurred");
 
-    QString body = "<p>Hello,</p><p>An error has occurred in the SOLAS-Match worker Daemon.";
+    QString body = "<p>Hello,</p><p>An error has occurred in the SOLAS-Match worker Daemon. ";
     body += error_message + "</p>";
     email->setBody(body);
 
