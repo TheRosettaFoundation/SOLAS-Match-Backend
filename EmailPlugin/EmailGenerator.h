@@ -26,6 +26,9 @@ public:
     Email *generateEmail(TaskTranslationUploaded email_message);
     Email *generateEmail(UserTaskClaim email_message);
 
+private:
+    Email *generateErrorEmail(QString error_message);
+
 };
 
 #endif // EMAILGENERATOR_H

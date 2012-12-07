@@ -57,7 +57,7 @@ void EmailPlugin::run()
 
 void EmailPlugin::messageReveived(AMQPMessage *message)
 {
-    qDebug() << "Received Message";
+    qDebug() << "EmailPlugin::Received Message";
 
     uint32_t length = 0;
     QString message_body = message->getMessage(&length);

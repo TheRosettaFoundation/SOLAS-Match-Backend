@@ -45,13 +45,31 @@ Email *EmailGenerator::generateEmail(TaskScoreEmail email_message)
 Email *EmailGenerator::generateEmail(OrgMembershipAccepted email_message)
 {
     qDebug() << "EmailGenerator - Generating OrgMembershipAccepted";
+
     ConfigParser settings;
     Email *email = new Email();
     MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
-    if(db->init()) {
-        User *user = UserDao::getUser(db, email_message.user_id());
-        Organisation *org = OrganisationDao::getOrg(db, email_message.org_id());
+    Organisation *org = NULL;
+    User *user = NULL;
+    QString error = "";
 
+    if(db->init()) {
+        user = UserDao::getUser(db, email_message.user_id());
+        org = OrganisationDao::getOrg(db, email_message.org_id());
+        if(user == NULL || org == NULL) {
+            error = "Unable to generate OrgMembershipAccepted email. Unable to find objects ";
+            error += "in the DB. Searched for user ID " + QString::number(email_message.user_id());
+            error += " and org ID " + QString::number(email_message.org_id()) + ".";
+        }
+    } else {
+        error = "Unable to Connect to SQL Server. Check conf.ini for connection settings and make sure ";
+        error += "mysqld has been started.";
+        qDebug() << "Unable to Connect to SQL Server. Check conf.ini and try again.";
+    }
+
+    if(error.compare("") == 0)
+    {
+        //No error generate the email
         ctemplate::TemplateDictionary dict("org_membership_accepted");
         if(user->display_name() != "") {
             dict.ShowSection("USER_HAS_NAME");
@@ -69,18 +87,12 @@ Email *EmailGenerator::generateEmail(OrgMembershipAccepted email_message)
         email->setSubject("SOLAS Match: Organisation Membership Update");
         email->setBody(QString::fromStdString(email_body));
     } else {
-        email->setSender(settings.get("site.system_email_address"));
-        QStringList admins = settings.get("mail.admin_emails").split(",");
-        foreach(QString admin, admins) {
-            email->addRecipient(admin.trimmed());
-        }
-        email->setSubject("Org Membership Accepted Error");
-        email->setBody("Unable to Connect to SQL Server.");
-        qDebug() << "Unable to Connect to SQL Server. Check conf.ini and try again.";
+        email = this->generateErrorEmail(error);
     }
 
-    qDebug() << "Deleting db";
     delete db;
+    if(user) delete user;
+    if(org) delete org;
 
     return email;
 }
@@ -367,6 +379,25 @@ Email *EmailGenerator::generateEmail(UserTaskClaim email_message)
         email->setBody("Unable to Connect to SQL Server.");
         qDebug() << "Unable to Connect to SQL Server. Check conf.ini and try again.";
     }
+
+    return email;
+}
+
+Email *EmailGenerator::generateErrorEmail(QString error_message)
+{
+    ConfigParser settings;
+    Email *email = new Email();
+
+    email->setSender(settings.get("site.system_email_address"));
+    QStringList admins = settings.get("mail.admin_emails").split(",");
+    foreach(QString admin, admins) {
+        email->addRecipient(admin.trimmed());
+    }
+    email->setSubject("An error has occurred");
+
+    QString body = "<p>Hello,</p><p>An error has occurred in the SOLAS-Match worker Daemon.";
+    body += error_message + "</p>";
+    email->setBody(body);
 
     return email;
 }
