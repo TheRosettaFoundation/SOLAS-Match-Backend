@@ -156,14 +156,29 @@ Email *EmailGenerator::generateEmail(OrgMembershipRefused email_message)
 Email *EmailGenerator::generateEmail(PasswordResetEmail email_message)
 {
     qDebug() << "EmailGenerator - Generating PasswordResetEmail";
+
     ConfigParser settings;
     Email *email = new Email();
+    QString uuid = "";
+    QString error = "";
+    User *user = NULL;
     MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
-    if(db->init()) {
-        User *user = UserDao::getUser(db, email_message.user_id());
-        QString uuid = UserDao::getPasswordResetUuid(db, email_message.user_id());
 
-        ConfigParser settings;
+    if(db->init()) {
+        user = UserDao::getUser(db, email_message.user_id());
+        uuid = UserDao::getPasswordResetUuid(db, email_message.user_id());
+
+        if(user == NULL || uuid.compare("") == 0) {
+            error = "Password Reset email generation failed. Unable to find ";
+            error += "data in the DB. Looking for user id " + email_message.user_id();
+        }
+    } else {
+        error = "Unable to Connect to SQL Server. Check conf.ini for connection settings and make sure ";
+        error += "mysqld has been started.";
+        qDebug() << "Unable to Connect to SQL Server. Check conf.ini and try again.";
+    }
+
+    if(error.compare("") == 0) {
         QString page_url = settings.get("site.url");
         page_url += uuid;
         page_url += "/password/reset";
@@ -185,18 +200,11 @@ Email *EmailGenerator::generateEmail(PasswordResetEmail email_message)
         email->setSubject("SOLAS Match: Organisation Membership Update");
         email->setBody(QString::fromStdString(email_body));
     } else {
-        email->setSender(settings.get("site.system_email_address"));
-        QStringList admins = settings.get("mail.admin_emails").split(",");
-        foreach(QString admin, admins) {
-            email->addRecipient(admin.trimmed());
-        }
-        email->setSubject("Password Reset Error");
-        email->setBody("Unable to Connect to SQL Server.");
-        qDebug() << "Unable to Connect to SQL Server. Check conf.ini and try again.";
+        email = this->generateErrorEmail(error);
     }
 
-    qDebug() << "Deleting db";
     delete db;
+    if(user) delete user;
 
     return email;
 }
