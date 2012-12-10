@@ -329,7 +329,7 @@ Email *EmailGenerator::generateEmail(TaskClaimed email_message)
         email->setSubject("Task Claim Notification");
         email->setBody(QString::fromStdString(email_body));
     } else {
-        this->generateErrorEmail(error);
+        email = this->generateErrorEmail(error);
     }
 
     delete db;
@@ -340,15 +340,43 @@ Email *EmailGenerator::generateEmail(TaskClaimed email_message)
 Email *EmailGenerator::generateEmail(TaskTranslationUploaded email_message)
 {
     qDebug() << "EmailGenerator - Generating TaskTranslationUploaded";
-    ConfigParser settings;
-    Email *email = new Email();
-    MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
-    if(db->init()) {
-        User *user = UserDao::getUser(db, email_message.user_id());
-        User *translator = UserDao::getUser(db, email_message.translator_id());
-        Task *task = TaskDao::getTask(db, email_message.task_id());
-        Organisation *org = OrganisationDao::getOrg(db, task->org_id());
 
+    ConfigParser settings;
+    QString error = "";
+    Email *email = new Email();
+    User *user = NULL;
+    User *translator = NULL;
+    Task *task = NULL;
+    Organisation *org = NULL;
+    MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
+
+    if(db->init()) {
+        user = UserDao::getUser(db, email_message.user_id());
+        translator = UserDao::getUser(db, email_message.translator_id());
+        task = TaskDao::getTask(db, email_message.task_id());
+        org = OrganisationDao::getOrg(db, task->org_id());
+
+        if(user == NULL || translator == NULL || task == NULL) {
+            error = "Failed to generate task translation uploaded email. Unable ";
+            error += "to find relevant inforamtion in the Database. Searched for ";
+            error += "User ID " + QString::number(email_message.user_id()) + ", ";
+            error += "Translator ID " + QString::number(email_message.translator_id());
+            error += " and Task ID " + QString::number(email_message.task_id()) + ".";
+        } else {
+            if(org == NULL) {
+                error = "Failed to generate task translation uploaded email. Unable ";
+                error += "to find relevant inforamtion in the Database. Could not find ";
+                error += "Organisation with ID " + QString::number(task->org_id()) + ".";
+            }
+        }
+
+    } else {
+        error = "Failed to generate task translation uploaded email: Unable to Connect to SQL Server.";
+        error += " Check conf.ini for connection settings and make sure mysqld has been started.";
+        qDebug() << "Unable to Connect to SQL Server. Check conf.ini and try again.";
+    }
+
+    if(error.compare("") == 0) {
         ctemplate::TemplateDictionary dict("task_translation_uploaded");
         if(user->display_name() != "") {
             dict.ShowSection("USER_HAS_NAME");
@@ -360,7 +388,6 @@ Email *EmailGenerator::generateEmail(TaskTranslationUploaded email_message)
         dict["TASK_TITLE"] = task->title();
         dict["ORG_NAME"] = org->name();
 
-        ConfigParser settings;
         QString dash_url = settings.get("site.url");
         dash_url += "client/dashboard";
         dict["DASHBOARD_URL"] = dash_url.toStdString();
@@ -374,15 +401,10 @@ Email *EmailGenerator::generateEmail(TaskTranslationUploaded email_message)
         email->setSubject("Task Translation Uploaded Notification");
         email->setBody(QString::fromStdString(email_body));
     } else {
-        email->setSender(settings.get("site.system_email_address"));
-        QStringList admins = settings.get("mail.admin_emails").split(",");
-        foreach(QString admin, admins) {
-            email->addRecipient(admin.trimmed());
-        }
-        email->setSubject("Task Translation Uploaded Email Error");
-        email->setBody("Unable to Connect to SQL Server.");
-        qDebug() << "Unable to Connect to SQL Server. Check conf.ini and try again.";
+        email = this->generateErrorEmail(error);
     }
+
+    delete db;
 
     return email;
 }
