@@ -333,6 +333,9 @@ Email *EmailGenerator::generateEmail(TaskClaimed email_message)
     }
 
     delete db;
+    if(user) delete user;
+    if(task) delete task;
+    if(translator) delete translator;
 
     return email;
 }
@@ -405,6 +408,10 @@ Email *EmailGenerator::generateEmail(TaskTranslationUploaded email_message)
     }
 
     delete db;
+    if(user) delete user;
+    if(task) delete task;
+    if(translator) delete translator;
+    if(org) delete org;
 
     return email;
 }
@@ -412,13 +419,31 @@ Email *EmailGenerator::generateEmail(TaskTranslationUploaded email_message)
 Email *EmailGenerator::generateEmail(UserTaskClaim email_message)
 {
     qDebug() << "EmailGenerator - Generating UserTaskClaim";
-    ConfigParser settings;
-    Email *email = new Email();
-    MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
-    if(db->init()) {
-        User *user = UserDao::getUser(db, email_message.user_id());
-        Task *task = TaskDao::getTask(db, email_message.task_id());
 
+    ConfigParser settings;
+    QString error = "";
+    Email *email = new Email();
+    User *user = NULL;
+    Task *task = NULL;
+    MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
+
+    if(db->init()) {
+        user = UserDao::getUser(db, email_message.user_id());
+        task = TaskDao::getTask(db, email_message.task_id());
+
+        if(user == NULL || task == NULL) {
+            error = "Failed to generate UserTaskClaim email: Unable to find relevant ";
+            error += "data in the Database. Searched for User ID ";
+            error += QString::number(email_message.user_id()) + " and Task ID ";
+            error += QString::number(email_message.task_id()) + ".";
+        }
+    } else {
+        error = "Failed to generate user task claim email: Unable to Connect to SQL Server.";
+        error += " Check conf.ini for connection settings and make sure mysqld has been started.";
+        qDebug() << "Unable to Connect to SQL Server. Check conf.ini and try again.";
+    }
+
+    if(error.compare("") == 0) {
         ctemplate::TemplateDictionary dict("user_task_claim");
         if(user->display_name() != "") {
             dict.ShowSection("USER_HAS_NAME");
@@ -441,15 +466,12 @@ Email *EmailGenerator::generateEmail(UserTaskClaim email_message)
         email->setSubject("Task Claim Notification");
         email->setBody(QString::fromStdString(email_body));
     } else {
-        email->setSender(settings.get("site.system_email_address"));
-        QStringList admins = settings.get("mail.admin_emails").split(",");
-        foreach(QString admin, admins) {
-            email->addRecipient(admin.trimmed());
-        }
-        email->setSubject("User Task Claim Email Error");
-        email->setBody("Unable to Connect to SQL Server.");
-        qDebug() << "Unable to Connect to SQL Server. Check conf.ini and try again.";
+        email = this->generateErrorEmail(error);
     }
+
+    delete db;
+    if(user) delete user;
+    if(task) delete task;
 
     return email;
 }
