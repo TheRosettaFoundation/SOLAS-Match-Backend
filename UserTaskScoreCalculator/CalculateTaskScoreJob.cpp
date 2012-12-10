@@ -85,10 +85,10 @@ void CalculateTaskScore::run()
                         //increase score by one per day since created time
                         score += created_time.daysTo(QDateTime::currentDateTime());
 
-                        dict.ShowSection("SCORE");
-                        dict["USER_ID"] = QString::number(user->user_id()).toStdString();
-                        dict["TASK_ID"] = QString::number(task->id()).toStdString();
-                        dict["SCORE"] = QString::number(score).toStdString();
+                        ctemplate::TemplateDictionary *score_sect = dict.AddSectionDictionary("SCORE_SECT");
+                        score_sect->SetIntValue("USER_ID", user->user_id());
+                        score_sect->SetIntValue("TASK_ID", task->id());
+                        score_sect->SetIntValue("SCORE", score);
                         this->saveUserTaskScore(user->user_id(), task->id(), score);
                     }
                 } else {

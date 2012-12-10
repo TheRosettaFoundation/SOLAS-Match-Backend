@@ -4,9 +4,9 @@
     <p>An error occured: {{ERROR_MESSAGE}}</p>
 {{/ERROR}}
 
-{{#SCORE}}
+{{#SCORE_SECT}}
     <p>Updating user {{USER_ID}} task {{TASK_ID}} score to {{SCORE}}</p>
-{{/SCORE}}
+{{/SCORE_SECT}}
 
 <hr />
 
