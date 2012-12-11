@@ -38,7 +38,7 @@ void Smtp::init()
     this->smtp->connectToHost(host, port);
 }
 
-void Smtp::send(Email *email)
+void Smtp::send(QSharedPointer<Email> email)
 {
     QxtMailMessage mail_message;
     mail_message.setSender(email->getSender());

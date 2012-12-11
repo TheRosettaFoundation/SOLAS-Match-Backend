@@ -4,6 +4,7 @@
 #include <QtDebug>
 #include <QString>
 #include <QObject>
+#include <QSharedPointer>
 
 #include <qxt/QxtNetwork/qxtsmtp.h>
 #include <qxt/QxtNetwork/qxtmailmessage.h>
@@ -18,7 +19,7 @@ public:
     Smtp();
     ~Smtp();
     void init();
-    void send(Email *email);
+    void send(QSharedPointer<Email> email);
 
 signals:
     void complete();

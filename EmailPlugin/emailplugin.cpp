@@ -66,7 +66,7 @@ void EmailPlugin::messageReveived(AMQPMessage *message)
     email_message.ParseFromString(message_body.toStdString());
 
     EmailGenerator emailGen;
-    Email *email =  NULL;
+    QSharedPointer<Email> email = QSharedPointer<Email>();
 
     switch (email_message.email_type()) {
         case (EmailMessage::TaskScoreEmail) :
@@ -144,7 +144,6 @@ void EmailPlugin::messageReveived(AMQPMessage *message)
         //Send Email
         email->printEmail();
         smtp->send(email);
-        delete email;
 
         //Ack message
         AMQPQueue *messageQueue = message->getQueue();

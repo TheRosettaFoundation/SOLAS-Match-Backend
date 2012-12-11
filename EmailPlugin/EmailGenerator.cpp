@@ -24,11 +24,11 @@ EmailGenerator::EmailGenerator()
     //Empty constructor
 }
 
-Email *EmailGenerator::generateEmail(TaskScoreEmail email_message)
+QSharedPointer<Email> EmailGenerator::generateEmail(TaskScoreEmail email_message)
 {
     qDebug() << "EmailGenerator - Generating TaskScoreEmail";
 
-    Email *email = new Email();
+    QSharedPointer<Email> email = QSharedPointer<Email>(new Email());
     ConfigParser settings;
 
     QStringList admins = settings.get("mail.admin_emails").split(",");
@@ -42,12 +42,12 @@ Email *EmailGenerator::generateEmail(TaskScoreEmail email_message)
     return email;
 }
 
-Email *EmailGenerator::generateEmail(OrgMembershipAccepted email_message)
+QSharedPointer<Email> EmailGenerator::generateEmail(OrgMembershipAccepted email_message)
 {
     qDebug() << "EmailGenerator - Generating OrgMembershipAccepted";
 
     ConfigParser settings;
-    Email *email = new Email();
+    QSharedPointer<Email> email = QSharedPointer<Email>(new Email());
     MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
     QSharedPointer<Organisation> org = QSharedPointer<Organisation>();
     QSharedPointer<User> user = QSharedPointer<User>();
@@ -95,12 +95,12 @@ Email *EmailGenerator::generateEmail(OrgMembershipAccepted email_message)
     return email;
 }
 
-Email *EmailGenerator::generateEmail(OrgMembershipRefused email_message)
+QSharedPointer<Email> EmailGenerator::generateEmail(OrgMembershipRefused email_message)
 {
     qDebug() << "EmailGenerator - Generating OrgMembershipRefused";
 
     ConfigParser settings;
-    Email * email = new Email();
+    QSharedPointer<Email> email = QSharedPointer<Email>(new Email());
     QSharedPointer<User> user = QSharedPointer<User>();
     QSharedPointer<Organisation> org = QSharedPointer<Organisation>();
     MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
@@ -149,12 +149,12 @@ Email *EmailGenerator::generateEmail(OrgMembershipRefused email_message)
     return email;
 }
 
-Email *EmailGenerator::generateEmail(PasswordResetEmail email_message)
+QSharedPointer<Email> EmailGenerator::generateEmail(PasswordResetEmail email_message)
 {
     qDebug() << "EmailGenerator - Generating PasswordResetEmail";
 
     ConfigParser settings;
-    Email *email = new Email();
+    QSharedPointer<Email> email = QSharedPointer<Email>(new Email());
     QString uuid = "";
     QString error = "";
     QSharedPointer<User> user = QSharedPointer<User>();
@@ -204,13 +204,13 @@ Email *EmailGenerator::generateEmail(PasswordResetEmail email_message)
     return email;
 }
 
-Email *EmailGenerator::generateEmail(TaskArchived email_message)
+QSharedPointer<Email> EmailGenerator::generateEmail(TaskArchived email_message)
 {
     qDebug() << "EmailGenerator - Generating TaskArchived";
 
     ConfigParser settings;
     QString error = "";
-    Email *email = new Email();
+    QSharedPointer<Email> email = QSharedPointer<Email>(new Email());
     QSharedPointer<User> user = QSharedPointer<User>();
     QSharedPointer<Organisation> org = QSharedPointer<Organisation>();
     QSharedPointer<ArchivedTask> task = QSharedPointer<ArchivedTask>();
@@ -266,13 +266,13 @@ Email *EmailGenerator::generateEmail(TaskArchived email_message)
     return email;
 }
 
-Email *EmailGenerator::generateEmail(TaskClaimed email_message)
+QSharedPointer<Email> EmailGenerator::generateEmail(TaskClaimed email_message)
 {
     qDebug() << "EmailGenerator - Generating TaskClaimed";
 
     ConfigParser settings;
     QString error = "";
-    Email *email = new Email();
+    QSharedPointer<Email> email = QSharedPointer<Email>(new Email());
     QSharedPointer<User> user = QSharedPointer<User>();
     QSharedPointer<User> translator = QSharedPointer<User>();
     QSharedPointer<Task> task = QSharedPointer<Task>();
@@ -329,13 +329,13 @@ Email *EmailGenerator::generateEmail(TaskClaimed email_message)
     return email;
 }
 
-Email *EmailGenerator::generateEmail(TaskTranslationUploaded email_message)
+QSharedPointer<Email> EmailGenerator::generateEmail(TaskTranslationUploaded email_message)
 {
     qDebug() << "EmailGenerator - Generating TaskTranslationUploaded";
 
     ConfigParser settings;
     QString error = "";
-    Email *email = new Email();
+    QSharedPointer<Email> email = QSharedPointer<Email>(new Email());
     QSharedPointer<User> user = QSharedPointer<User>();
     QSharedPointer<User> translator = QSharedPointer<User>();
     QSharedPointer<Task> task = QSharedPointer<Task>();
@@ -401,13 +401,13 @@ Email *EmailGenerator::generateEmail(TaskTranslationUploaded email_message)
     return email;
 }
 
-Email *EmailGenerator::generateEmail(UserTaskClaim email_message)
+QSharedPointer<Email> EmailGenerator::generateEmail(UserTaskClaim email_message)
 {
     qDebug() << "EmailGenerator - Generating UserTaskClaim";
 
     ConfigParser settings;
     QString error = "";
-    Email *email = new Email();
+    QSharedPointer<Email> email = QSharedPointer<Email>(new Email());
     QSharedPointer<User> user = QSharedPointer<User>();
     QSharedPointer<Task> task = QSharedPointer<Task>();
     MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
@@ -458,10 +458,10 @@ Email *EmailGenerator::generateEmail(UserTaskClaim email_message)
     return email;
 }
 
-Email *EmailGenerator::generateErrorEmail(QString error_message)
+QSharedPointer<Email> EmailGenerator::generateErrorEmail(QString error_message)
 {
     ConfigParser settings;
-    Email *email = new Email();
+    QSharedPointer<Email> email = QSharedPointer<Email>(new Email());
 
     email->setSender(settings.get("site.system_email_address"));
     QStringList admins = settings.get("mail.admin_emails").split(",");
