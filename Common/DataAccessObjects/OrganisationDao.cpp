@@ -2,9 +2,9 @@
 
 #include "../ModelGenerator.h"
 
-Organisation *OrganisationDao::getOrg(MySQLHandler *db, int org_id)
+QSharedPointer<Organisation> OrganisationDao::getOrg(MySQLHandler *db, int org_id)
 {
-    Organisation *org;
+    QSharedPointer<Organisation> org;
     QString args = QString::number(org_id);
     args += ", null, null, null";
     QSqlQuery *result = db->call("getOrg", args);

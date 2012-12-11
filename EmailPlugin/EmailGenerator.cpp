@@ -49,8 +49,8 @@ Email *EmailGenerator::generateEmail(OrgMembershipAccepted email_message)
     ConfigParser settings;
     Email *email = new Email();
     MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
-    Organisation *org = NULL;
-    User *user = NULL;
+    QSharedPointer<Organisation> org = QSharedPointer<Organisation>();
+    QSharedPointer<User> user = QSharedPointer<User>();
     QString error = "";
 
     if(db->init()) {
@@ -91,8 +91,6 @@ Email *EmailGenerator::generateEmail(OrgMembershipAccepted email_message)
     }
 
     delete db;
-    if(user) delete user;
-    if(org) delete org;
 
     return email;
 }
@@ -103,8 +101,8 @@ Email *EmailGenerator::generateEmail(OrgMembershipRefused email_message)
 
     ConfigParser settings;
     Email * email = new Email();
-    User *user = NULL;
-    Organisation *org = NULL;
+    QSharedPointer<User> user = QSharedPointer<User>();
+    QSharedPointer<Organisation> org = QSharedPointer<Organisation>();
     MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
     QString error = "";
 
@@ -147,8 +145,6 @@ Email *EmailGenerator::generateEmail(OrgMembershipRefused email_message)
     }
 
     delete db;
-    if(user) delete user;
-    if(org) delete org;
 
     return email;
 }
@@ -161,7 +157,7 @@ Email *EmailGenerator::generateEmail(PasswordResetEmail email_message)
     Email *email = new Email();
     QString uuid = "";
     QString error = "";
-    User *user = NULL;
+    QSharedPointer<User> user = QSharedPointer<User>();
     MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
 
     if(db->init()) {
@@ -204,7 +200,6 @@ Email *EmailGenerator::generateEmail(PasswordResetEmail email_message)
     }
 
     delete db;
-    if(user) delete user;
 
     return email;
 }
@@ -216,9 +211,9 @@ Email *EmailGenerator::generateEmail(TaskArchived email_message)
     ConfigParser settings;
     QString error = "";
     Email *email = new Email();
-    User *user = NULL;
-    Organisation *org = NULL;
-    ArchivedTask *task = NULL;
+    QSharedPointer<User> user = QSharedPointer<User>();
+    QSharedPointer<Organisation> org = QSharedPointer<Organisation>();
+    QSharedPointer<ArchivedTask> task = QSharedPointer<ArchivedTask>();
     MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
 
     if(db->init()) {
@@ -267,9 +262,6 @@ Email *EmailGenerator::generateEmail(TaskArchived email_message)
     }
 
     delete db;
-    if(user) delete user;
-    if(org) delete org;
-    if(task) delete task;
 
     return email;
 }
@@ -281,9 +273,9 @@ Email *EmailGenerator::generateEmail(TaskClaimed email_message)
     ConfigParser settings;
     QString error = "";
     Email *email = new Email();
-    User *user = NULL;
-    User *translator = NULL;
-    Task *task = NULL;
+    QSharedPointer<User> user = QSharedPointer<User>();
+    QSharedPointer<User> translator = QSharedPointer<User>();
+    QSharedPointer<Task> task = QSharedPointer<Task>();
     MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
 
     if(db->init()) {
@@ -333,9 +325,6 @@ Email *EmailGenerator::generateEmail(TaskClaimed email_message)
     }
 
     delete db;
-    if(user) delete user;
-    if(task) delete task;
-    if(translator) delete translator;
 
     return email;
 }
@@ -347,10 +336,10 @@ Email *EmailGenerator::generateEmail(TaskTranslationUploaded email_message)
     ConfigParser settings;
     QString error = "";
     Email *email = new Email();
-    User *user = NULL;
-    User *translator = NULL;
-    Task *task = NULL;
-    Organisation *org = NULL;
+    QSharedPointer<User> user = QSharedPointer<User>();
+    QSharedPointer<User> translator = QSharedPointer<User>();
+    QSharedPointer<Task> task = QSharedPointer<Task>();
+    QSharedPointer<Organisation> org = QSharedPointer<Organisation>();
     MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
 
     if(db->init()) {
@@ -408,10 +397,6 @@ Email *EmailGenerator::generateEmail(TaskTranslationUploaded email_message)
     }
 
     delete db;
-    if(user) delete user;
-    if(task) delete task;
-    if(translator) delete translator;
-    if(org) delete org;
 
     return email;
 }
@@ -423,8 +408,8 @@ Email *EmailGenerator::generateEmail(UserTaskClaim email_message)
     ConfigParser settings;
     QString error = "";
     Email *email = new Email();
-    User *user = NULL;
-    Task *task = NULL;
+    QSharedPointer<User> user = QSharedPointer<User>();
+    QSharedPointer<Task> task = QSharedPointer<Task>();
     MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
 
     if(db->init()) {
@@ -452,7 +437,6 @@ Email *EmailGenerator::generateEmail(UserTaskClaim email_message)
             dict.ShowSection("NO_USER_NAME");
         }
 
-        ConfigParser settings;
         QString task_url = settings.get("site.url");
         task_url += "task/id/" + QString::number(task->id());
         dict["TASK_PAGE"] = task_url.toStdString();
@@ -470,8 +454,6 @@ Email *EmailGenerator::generateEmail(UserTaskClaim email_message)
     }
 
     delete db;
-    if(user) delete user;
-    if(task) delete task;
 
     return email;
 }

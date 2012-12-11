@@ -2,11 +2,11 @@
 
 #include "../ModelGenerator.h"
 
-QList<Task*> *TaskDao::getTasks(MySQLHandler *db, int id, int org_id, QString title, QString imp,
+QList<QSharedPointer<Task> > TaskDao::getTasks(MySQLHandler *db, int id, int org_id, QString title, QString imp,
                             QString ref_page, int wc, int s_lang_id, int t_lang_id, QString time,
                             int s_reg_id, int t_reg_id)
 {
-    QList<Task*> *ret = new QList<Task*>();
+    QList<QSharedPointer<Task> > ret = QList<QSharedPointer<Task> >();
     QString args = "";
 
     if(id != -1) {
@@ -78,8 +78,8 @@ QList<Task*> *TaskDao::getTasks(MySQLHandler *db, int id, int org_id, QString ti
     QSqlQuery *mQuery = db->call("getTask", args);
     if(mQuery->first()) {
         do {
-            Task *task = ModelGenerator::GenerateTask(mQuery);
-            ret->append(task);
+            QSharedPointer<Task> task = ModelGenerator::GenerateTask(mQuery);
+            ret.append(task);
         } while(mQuery->next());
     }
 
@@ -88,23 +88,23 @@ QList<Task*> *TaskDao::getTasks(MySQLHandler *db, int id, int org_id, QString ti
     return ret;
 }
 
-Task *TaskDao::getTask(MySQLHandler *db, int id, int org_id,
+QSharedPointer<Task> TaskDao::getTask(MySQLHandler *db, int id, int org_id,
                    QString title, QString imp, QString ref_page,
                    int wc, int s_lang_id, int t_lang_id,
                    QString time, int s_reg_id, int t_reg_id)
 {
-    Task *task;
-    QList<Task*> *task_list = TaskDao::getTasks(db, id, org_id, title, imp, ref_page, wc,
+    QSharedPointer<Task> task;
+    QList<QSharedPointer<Task> > task_list = TaskDao::getTasks(db, id, org_id, title, imp, ref_page, wc,
                           s_lang_id, t_lang_id, time, s_reg_id, t_reg_id);
-    if(task_list->count() > 0) {
-        task = task_list->at(0);
+    if(task_list.count() > 0) {
+        task = task_list.at(0);
     }
     return task;
 }
 
-QList<Task *> *TaskDao::getActiveTasks(MySQLHandler *db, int limit)
+QList<QSharedPointer<Task> > TaskDao::getActiveTasks(MySQLHandler *db, int limit)
 {
-    QList<Task *> *ret = new QList<Task *>();
+    QList<QSharedPointer<Task> > ret = QList<QSharedPointer<Task> >();
     QString args = "null";
     if(limit > 0) {
         args = QString::number(limit);
@@ -113,8 +113,8 @@ QList<Task *> *TaskDao::getActiveTasks(MySQLHandler *db, int limit)
     QSqlQuery *mQuery = db->call("getLatestAvailableTasks", args);
     if(mQuery->first()) {
         do {
-            Task *task = TaskDao::getTask(db, MySQLHandler::getValueFromQuery("id", mQuery).toInt());
-            ret->append(task);
+            QSharedPointer<Task> task = TaskDao::getTask(db, MySQLHandler::getValueFromQuery("id", mQuery).toInt());
+            ret.append(task);
         } while(mQuery->next());
     }
 
@@ -122,9 +122,9 @@ QList<Task *> *TaskDao::getActiveTasks(MySQLHandler *db, int limit)
 }
 
 
-QList<ArchivedTask *> *TaskDao::getArchivedTasks(MySQLHandler *db, int arc_id, int t_id, int o_id)
+QList<QSharedPointer<ArchivedTask> > TaskDao::getArchivedTasks(MySQLHandler *db, int arc_id, int t_id, int o_id)
 {
-    QList<ArchivedTask *> *ret = new QList<ArchivedTask *>();
+    QList<QSharedPointer<ArchivedTask> > ret = QList<QSharedPointer<ArchivedTask> >();
     QString args = "";
 
     if(arc_id != -1) {
@@ -148,20 +148,20 @@ QList<ArchivedTask *> *TaskDao::getArchivedTasks(MySQLHandler *db, int arc_id, i
     QSqlQuery *mQuery = db->call("getArchivedTasks", args);
     if(mQuery->first()) {
         do {
-            ArchivedTask *task = ModelGenerator::GenerateArchivedTask(mQuery);
-            ret->append(task);
+            QSharedPointer<ArchivedTask> task = ModelGenerator::GenerateArchivedTask(mQuery);
+            ret.append(task);
         } while(mQuery->next());
     }
 
     return ret;
 }
 
-ArchivedTask *TaskDao::getArchivedTask(MySQLHandler *db, int arc_id, int t_id, int o_id)
+QSharedPointer<ArchivedTask> TaskDao::getArchivedTask(MySQLHandler *db, int arc_id, int t_id, int o_id)
 {
-    ArchivedTask *task = NULL;
-    QList<ArchivedTask*> *arc_tasks = TaskDao::getArchivedTasks(db, arc_id, t_id, o_id);
-    if(arc_tasks->count() > 0) {
-        task = arc_tasks->at(0);
+    QSharedPointer<ArchivedTask> task = QSharedPointer<ArchivedTask>();
+    QList<QSharedPointer<ArchivedTask> > arc_tasks = TaskDao::getArchivedTasks(db, arc_id, t_id, o_id);
+    if(arc_tasks.count() > 0) {
+        task = arc_tasks.at(0);
     }
     return task;
 }

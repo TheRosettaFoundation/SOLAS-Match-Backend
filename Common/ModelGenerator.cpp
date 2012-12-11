@@ -2,9 +2,9 @@
 
 #include "Common/MySQLHandler.h"
 
-User *ModelGenerator::GenerateUser(QSqlQuery *q)
+QSharedPointer<User> ModelGenerator::GenerateUser(QSqlQuery *q)
 {
-    User *user = new User();
+    QSharedPointer<User> user = QSharedPointer<User>(new User());
 
     user->set_user_id(MySQLHandler::getValueFromQuery("user_id", q).toInt());
     user->set_biography(MySQLHandler::getValueFromQuery("biography", q).toString().toStdString());
@@ -19,9 +19,9 @@ User *ModelGenerator::GenerateUser(QSqlQuery *q)
     return user;
 }
 
-Tag *ModelGenerator::GenerateTag(QSqlQuery *q)
+QSharedPointer<Tag> ModelGenerator::GenerateTag(QSqlQuery *q)
 {
-    Tag *tag = new Tag();
+    QSharedPointer<Tag> tag = QSharedPointer<Tag>(new Tag());
 
     tag->set_id(MySQLHandler::getValueFromQuery("tag_id", q).toInt());
     tag->set_label(MySQLHandler::getValueFromQuery("label", q).toString().toStdString());
@@ -29,9 +29,9 @@ Tag *ModelGenerator::GenerateTag(QSqlQuery *q)
     return tag;
 }
 
-Organisation *ModelGenerator::GenerateOrg(QSqlQuery *q)
+QSharedPointer<Organisation> ModelGenerator::GenerateOrg(QSqlQuery *q)
 {
-    Organisation *org = new Organisation();
+    QSharedPointer<Organisation> org = QSharedPointer<Organisation>(new Organisation);
 
     org->set_id(MySQLHandler::getValueFromQuery("id", q).toInt());
     org->set_name(MySQLHandler::getValueFromQuery("name", q).toString().toStdString());
@@ -41,9 +41,9 @@ Organisation *ModelGenerator::GenerateOrg(QSqlQuery *q)
     return org;
 }
 
-ArchivedTask *ModelGenerator::GenerateArchivedTask(QSqlQuery *q)
+QSharedPointer<ArchivedTask> ModelGenerator::GenerateArchivedTask(QSqlQuery *q)
 {
-    ArchivedTask *task = new ArchivedTask();
+    QSharedPointer<ArchivedTask> task = QSharedPointer<ArchivedTask>(new ArchivedTask());
 
     task->set_archive_id(MySQLHandler::getValueFromQuery("archived_task_id", q).toInt());
     task->set_task_id(MySQLHandler::getValueFromQuery("task_id", q).toInt());
@@ -60,9 +60,9 @@ ArchivedTask *ModelGenerator::GenerateArchivedTask(QSqlQuery *q)
     return task;
 }
 
-Task *ModelGenerator::GenerateTask(QSqlQuery *q)
+QSharedPointer<Task> ModelGenerator::GenerateTask(QSqlQuery *q)
 {
-    Task *task = new Task();
+    QSharedPointer<Task> task = QSharedPointer<Task>(new Task());
 
     task->set_created_time(MySQLHandler::getValueFromQuery("created_time", q).toString().toStdString());
     task->set_impact(MySQLHandler::getValueFromQuery("impact", q).toString().toStdString());

@@ -4,6 +4,7 @@
 #include <QtSql/QSqlQuery>
 #include <QList>
 #include <QString>
+#include <QSharedPointer>
 
 #include "Common/MySQLHandler.h"
 #include "Common/protobufs/models/User.pb.h"
@@ -12,7 +13,7 @@ class UserDao
 {
 public:
     //return a list of users
-    static QList<User*> *getUsers(MySQLHandler *db,
+    static QList<QSharedPointer<User> > getUsers(MySQLHandler *db,
                                  int id = -1,
                                  QString name = "",
                                  QString email = "",
@@ -23,7 +24,7 @@ public:
                                  int lang_id = -1,
                                  int reg_id = -1);
     //return a single user
-    static User *getUser(MySQLHandler *db,
+    static QSharedPointer<User> getUser(MySQLHandler *db,
                          int id = -1,
                          QString name = "",
                          QString email = "",

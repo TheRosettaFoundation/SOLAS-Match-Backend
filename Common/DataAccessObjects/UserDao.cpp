@@ -2,10 +2,10 @@
 
 #include "../ModelGenerator.h"
 
-QList<User*> *UserDao::getUsers(MySQLHandler *db, int id, QString name, QString email, QString pass,
+QList<QSharedPointer<User> > UserDao::getUsers(MySQLHandler *db, int id, QString name, QString email, QString pass,
                             QString bio, QString non, QString date, int lang_id, int reg_id)
 {
-    QList<User*> *users = NULL;
+    QList<QSharedPointer<User> > users = QList<QSharedPointer<User> >();
     QString args = "";
 
     if(id != -1) {
@@ -64,10 +64,9 @@ QList<User*> *UserDao::getUsers(MySQLHandler *db, int id, QString name, QString 
 
     QSqlQuery *mQuery = db->call("getUser", args);
     if(mQuery->first()) {
-        users = new QList<User*>();
         do {
-            User *user = ModelGenerator::GenerateUser(mQuery);
-            users->append(user);
+            QSharedPointer<User> user = ModelGenerator::GenerateUser(mQuery);
+            users.append(user);
         } while(mQuery->next());
     }
 
@@ -76,14 +75,14 @@ QList<User*> *UserDao::getUsers(MySQLHandler *db, int id, QString name, QString 
     return users;
 }
 
-User *UserDao::getUser(MySQLHandler *db, int id, QString name,
+QSharedPointer<User> UserDao::getUser(MySQLHandler *db, int id, QString name,
                    QString email, QString pass, QString bio,
                    QString non, QString date, int lang_id, int reg_id)
 {
-    User *user = NULL;
-    QList<User*> *user_list = UserDao::getUsers(db, id, name, email, pass, bio, non, date, lang_id, reg_id);
-    if(user_list->count() > 0) {
-        user = user_list->at(0);
+    QSharedPointer<User> user = QSharedPointer<User>();
+    QList<QSharedPointer<User> > user_list = UserDao::getUsers(db, id, name, email, pass, bio, non, date, lang_id, reg_id);
+    if(user_list.count() > 0) {
+        user = user_list.at(0);
     }
     return user;
 }

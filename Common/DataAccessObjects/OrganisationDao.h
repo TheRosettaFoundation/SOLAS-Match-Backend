@@ -4,6 +4,7 @@
 #include <QtSql/QSqlQuery>
 #include <QList>
 #include <QString>
+#include <QSharedPointer>
 
 #include "Common/protobufs/models/Organisation.pb.h"
 #include "Common/MySQLHandler.h"
@@ -11,7 +12,7 @@
 class OrganisationDao
 {
 public:
-    static Organisation *getOrg(MySQLHandler *db, int org_id);
+    static QSharedPointer<Organisation> getOrg(MySQLHandler *db, int org_id);
 
 };
 

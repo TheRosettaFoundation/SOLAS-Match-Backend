@@ -45,13 +45,13 @@ void CalculateTaskScore::run()
     ctemplate::TemplateDictionary dict("user_task_score");
     db = new MySQLHandler(QUuid::createUuid().toString());
     if(db->init()) {
-        QList<User*> *users = UserDao::getUsers(db);
-        QList<Task *> *tasks = this->getTasks();  //Must use custom function to check message for task id
-        if(users != NULL && users->length() > 0) {
-            foreach(User *user, *users) {
-                QList<Tag *> *userTags = TagDao::getUserTags(db, user->user_id());
-                if(tasks != NULL && tasks->length() > 0) {
-                    foreach(Task *task, *tasks) {
+        QList<QSharedPointer<User> > users = UserDao::getUsers(db);
+        QList<QSharedPointer<Task> > tasks = this->getTasks();  //Must use custom function to check message for task id
+        if(users.length() > 0) {
+            foreach(QSharedPointer<User> user, users) {
+                QList<QSharedPointer<Tag> > userTags = TagDao::getUserTags(db, user->user_id());
+                if(tasks.length() > 0) {
+                    foreach(QSharedPointer<Task> task, tasks) {
                         int score = 0;
 
                         if(user->native_lang_id() == task->source_lang_id()) {
@@ -68,17 +68,16 @@ void CalculateTaskScore::run()
                             }
                         }
 
-                        QList<Tag*> *taskTags = TagDao::getTaskTags(db, task->id());
+                        QList<QSharedPointer<Tag> > taskTags = TagDao::getTaskTags(db, task->id());
                         int increment_value = 100;
-                        foreach(Tag *user_tag, *userTags) {
-                            foreach(Tag *task_tag, *taskTags) {
+                        foreach(QSharedPointer<Tag> user_tag, userTags) {
+                            foreach(QSharedPointer<Tag> task_tag, taskTags) {
                                 if(user_tag->id() == task_tag->id()) {
                                     score += increment_value;
                                     increment_value *= 0.75;
                                 }
                             }
                         }
-                        delete taskTags;
 
                         QDateTime created_time = QDateTime::fromString(
                                     QString::fromStdString(task->created_time()), "yyyy-MM-ddTHH:mm:ss");
@@ -93,8 +92,9 @@ void CalculateTaskScore::run()
                     }
                 } else {
                     qDebug() << "No tasks found";
+                    dict.ShowSection("ERROR");
+                    dict["ERROR_MESSAGE"] = "No tasks found";
                 }
-                delete userTags;
             }
         } else {
             qDebug() << "No users found";
@@ -107,9 +107,6 @@ void CalculateTaskScore::run()
         {
             messageQueue->Ack(message->getDeliveryTag());
         }
-
-        delete users;
-        delete tasks;
 
         db->close();
     } else {
@@ -150,9 +147,9 @@ void CalculateTaskScore::run()
     qDebug() << "CalcUserTaskScore::Finished publishing";
 }
 
-QList<Task *> *CalculateTaskScore::getTasks()
+QList<QSharedPointer<Task> > CalculateTaskScore::getTasks()
 {
-    QList<Task*> *ret = NULL;
+    QList<QSharedPointer<Task> > ret = QList<QSharedPointer<Task> >();
     int message_task = this->getTaskIdFromMessage();
     if(message_task > 0) {
         ret = TaskDao::getTasks(db, message_task);

@@ -2,6 +2,7 @@
 #define MODELGENERATOR_H
 
 #include <QtSql/QSqlQuery>
+#include <QSharedPointer>
 
 #include "protobufs/models/Tag.pb.h"
 #include "protobufs/models/User.pb.h"
@@ -12,11 +13,11 @@
 class ModelGenerator
 {
 public:
-    static Tag *GenerateTag(QSqlQuery *q);
-    static User *GenerateUser(QSqlQuery *q);
-    static Task *GenerateTask(QSqlQuery *q);
-    static Organisation *GenerateOrg(QSqlQuery *q);
-    static ArchivedTask *GenerateArchivedTask(QSqlQuery *q);
+    static QSharedPointer<Tag> GenerateTag(QSqlQuery *q);
+    static QSharedPointer<User> GenerateUser(QSqlQuery *q);
+    static QSharedPointer<Task> GenerateTask(QSqlQuery *q);
+    static QSharedPointer<Organisation> GenerateOrg(QSqlQuery *q);
+    static QSharedPointer<ArchivedTask> GenerateArchivedTask(QSqlQuery *q);
 
 };
 
