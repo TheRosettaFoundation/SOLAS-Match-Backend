@@ -8,8 +8,12 @@
 #include <QDebug>
 
 #include "TimedTask.h"
+#include "RequestGenerator.h"
+
+#include "Common/protobufs/requests/UserTaskScoreRequest.pb.h"
 
 #include "Common/ConfigParser.h"
+#include "Common/MessagingClient.h"
 
 Q_EXPORT_PLUGIN2(PluginScheduler, PluginScheduler)
 
@@ -79,6 +83,8 @@ void PluginScheduler::run()
                 if(atts.hasAttribute("topic")) {
                     task->setTopic(atts.value("topic").toString());
                 }
+
+                task->setMessage(xmlReader.readElementText().trimmed());
             }
         }
         if(xmlReader.hasError()) {
@@ -108,13 +114,22 @@ void PluginScheduler::run()
             }
             QTimer::singleShot(msecs, taskItem, SLOT(processAndStartTimer()));
         }
-
     }
 }
 
 void PluginScheduler::processTask(QPointer<TimedTask> task)
 {
-    qDebug() << "Processing task";
+    qDebug() << "PluginScheduler::Processing task";
+    RequestGenerator generator = RequestGenerator();
+    if(task->getMessage() == "UserTaskScoreRequest") {
+        QSharedPointer<UserTaskScoreRequest> request =
+                generator.GenerateTask(QSharedPointer<UserTaskScoreRequest>(new UserTaskScoreRequest));
+
+        MessagingClient client;
+        client.init();
+        client.publish(task->getExchange(), task->getTopic(),
+                       QString::fromStdString(request->SerializeAsString()));
+    }
 }
 
 void PluginScheduler::setThreadPool(QThreadPool *tp)

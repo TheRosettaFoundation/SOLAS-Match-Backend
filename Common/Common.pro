@@ -40,7 +40,8 @@ SOURCES += \
     DataAccessObjects/OrganisationDao.cpp \
     protobufs/models/ArchivedTask.pb.cc \
     DataAccessObjects/TaskDao.cpp \
-    protobufs/models/Task.pb.cc
+    protobufs/models/Task.pb.cc \
+    protobufs/requests/UserTaskScoreRequest.pb.cc
 
 HEADERS +=\
     MySQLHandler.h \
@@ -64,7 +65,8 @@ HEADERS +=\
     DataAccessObjects/OrganisationDao.h \
     protobufs/models/ArchivedTask.pb.h \
     DataAccessObjects/TaskDao.h \
-    protobufs/models/Task.pb.h
+    protobufs/models/Task.pb.h \
+    protobufs/requests/UserTaskScoreRequest.pb.h
 
 symbian {
     MMP_RULES += EXPORTUNFROZEN

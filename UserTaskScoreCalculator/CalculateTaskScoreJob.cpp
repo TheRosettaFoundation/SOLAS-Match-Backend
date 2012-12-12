@@ -15,6 +15,8 @@
 #include "Common/DataAccessObjects/UserDao.h"
 #include "Common/DataAccessObjects/TagDao.h"
 
+#include "Common/protobufs/requests/UserTaskScoreRequest.pb.h"
+
 #include "Common/protobufs/models/User.pb.h"
 #include "Common/protobufs/models/Tag.pb.h"
 
@@ -181,7 +183,11 @@ int CalculateTaskScore::getTaskIdFromMessage()
     char *body = this->message->getMessage(&length);
 
     if(length > 0) {
-        ret = atoi(body);
+        UserTaskScoreRequest request;
+        request.ParseFromString(body);
+        if(request.has_task_id()) {
+            ret = request.task_id();
+        }
     }
 
     return ret;

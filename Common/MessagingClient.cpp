@@ -76,7 +76,7 @@ void MessagingClient::consumeFromQueue()
     mQueue->Get();
 
     AMQPMessage *message = mQueue->getMessage();
-    if(message->getMessageCount() > -1) {
+    if(message && message->getMessageCount() > -1) {
         emit AMQPMessageReceived(message);
     }
 }

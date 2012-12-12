@@ -35,10 +35,6 @@ void UserTaskScoreCalculator::run()
         connect(message_queue_read_timer, SIGNAL(timeout()), client, SLOT(consumeFromQueue()));
         message_queue_read_timer->start(50);
 
-        QTimer *full_run_timer = new QTimer();
-        connect(full_run_timer, SIGNAL(timeout()), this, SLOT(calculateScoreForAllUsers()));
-        full_run_timer->start(3600000);     //Run every hour
-
         QTimer::singleShot(100, this, SLOT(calculateScoreForAllUsers()));   //Run on startup
     } catch(AMQPException e) {
         qDebug() << "ERROR: " << QString::fromStdString(e.getMessage());
