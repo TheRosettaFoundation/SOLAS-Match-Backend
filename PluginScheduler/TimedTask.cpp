@@ -4,7 +4,12 @@
 
 TimedTask::TimedTask()
 {
-    //Default Constructor
+
+}
+
+TimedTask::~TimedTask()
+{
+    //delete mTimer;
 }
 
 QTime TimedTask::getStartTime()
@@ -55,6 +60,24 @@ void TimedTask::setTopic(QString name)
 void TimedTask::setMessage(QString mess)
 {
     message = mess;
+}
+
+void TimedTask::processAndStartTimer()
+{
+    qDebug() << "TimedTask::Process and Start";
+    emit processTask(QPointer<TimedTask>(this));
+
+    int msecs = (interval.hour() * 60 * 60 * 1000);
+    msecs += (interval.minute() * 60 * 1000);
+    msecs += (interval.second() * 1000);
+    mTimer = new QTimer();
+    connect(mTimer, SIGNAL(timeout()), this, SLOT(triggerProcess()));
+    mTimer->start(msecs);
+}
+
+void TimedTask::triggerProcess()
+{
+    emit processTask(QPointer<TimedTask>(this));
 }
 
 void TimedTask::printTask()

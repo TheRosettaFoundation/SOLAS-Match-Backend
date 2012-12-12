@@ -1,6 +1,7 @@
 #include "PluginScheduler.h"
 
 #include <QXmlStreamReader>
+#include <QTimer>
 #include <QList>
 #include <QFile>
 
@@ -27,8 +28,8 @@ void PluginScheduler::run()
     if(!xmlFile.open(QFile::ReadOnly | QFile::Text)) {
         qDebug() << "PluginScheduler::ERROR: File " << SCHEDULE_LOCATION << " does not exist.";
     } else {
-        QList<QSharedPointer<TimedTask> > taskList = QList<QSharedPointer<TimedTask> >();
-        QSharedPointer<TimedTask> task = QSharedPointer<TimedTask>();
+        QList<QPointer<TimedTask> > taskList = QList<QPointer<TimedTask> >();
+        QPointer<TimedTask> task = QPointer<TimedTask>();
         QXmlStreamReader xmlReader;
         xmlReader.setDevice(&xmlFile);
         while(!xmlReader.atEnd()) {
@@ -36,7 +37,7 @@ void PluginScheduler::run()
 
             if(xmlReader.name() == "task") {
                 if(!xmlReader.isEndElement()) {
-                    task = QSharedPointer<TimedTask>(new TimedTask());
+                    task = QPointer<TimedTask>(new TimedTask());
                     QXmlStreamAttributes atts = xmlReader.attributes();
 
                     if(atts.hasAttribute("startTime")) {
@@ -84,11 +85,36 @@ void PluginScheduler::run()
             qDebug() << "XML Reader Error: " << xmlReader.errorString();
         }
 
-        foreach(QSharedPointer<TimedTask> taskItem, taskList) {
+        foreach(QPointer<TimedTask> taskItem, taskList) {
             taskItem->printTask();
+
+            connect(taskItem, SIGNAL(processTask(QPointer<TimedTask>)), this, SLOT(processTask(QPointer<TimedTask>)));
+
+            QTime currentTime = QTime::currentTime();
+            QTime startTime = taskItem->getStartTime();
+            QTime interval = taskItem->getInterval();
+            int msecs;
+            if(startTime > currentTime) {
+                while(startTime > currentTime) {
+                    startTime = startTime.addMSecs(-(this->timeInMSecs(interval)));
+                }
+                startTime = startTime.addMSecs(this->timeInMSecs(interval));
+                msecs = currentTime.msecsTo(startTime);
+            } else {
+                while(currentTime > startTime) {
+                    startTime = startTime.addMSecs(this->timeInMSecs(interval));
+                }
+                msecs = currentTime.msecsTo(startTime);
+            }
+            QTimer::singleShot(msecs, taskItem, SLOT(processAndStartTimer()));
         }
 
     }
+}
+
+void PluginScheduler::processTask(QPointer<TimedTask> task)
+{
+    qDebug() << "Processing task";
 }
 
 void PluginScheduler::setThreadPool(QThreadPool *tp)
@@ -99,4 +125,12 @@ void PluginScheduler::setThreadPool(QThreadPool *tp)
 bool PluginScheduler::isEnabled()
 {
     return this->enabled;
+}
+
+int PluginScheduler::timeInMSecs(QTime time)
+{
+    int msecs = (time.hour() * 60 * 60 * 1000);
+    msecs += (time.minute() * 60 * 1000);
+    msecs += (time.second() * 1000);
+    return msecs;
 }

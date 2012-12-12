@@ -1,11 +1,11 @@
 <tasks>
-    <task startTime="13:00">
+    <task startTime="12:15">
         <interval days="0" hours="1" mins="0" secs="0"></interval>
         <message exchange="SOLAS_MATCH" topic="task.score">
         </message>
     </task>
     <task startTime="13:05">
-        <interval days="0" hours="0" mins="30" secs="0"></interval>
+        <interval days="0" hours="0" mins="00" secs="15"></interval>
         <message exchange="SOLAS_MATCH" topic="task.score">
         </message>
     </task>
