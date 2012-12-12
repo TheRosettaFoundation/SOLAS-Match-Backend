@@ -4,4 +4,5 @@ SUBDIRS += \
     PluginHandler \
     Common \
     UserTaskScoreCalculator \
-    EmailPlugin
+    EmailPlugin \
+    PluginScheduler
