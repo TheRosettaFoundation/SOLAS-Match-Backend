@@ -121,15 +121,15 @@ void PluginScheduler::processTask(QPointer<TimedTask> task)
 {
     qDebug() << "PluginScheduler::Processing task";
     RequestGenerator generator = RequestGenerator();
+    QSharedPointer< ::google::protobuf::Message> request = QSharedPointer< ::google::protobuf::Message>();
     if(task->getMessage() == "UserTaskScoreRequest") {
-        QSharedPointer<UserTaskScoreRequest> request =
-                generator.GenerateTask(QSharedPointer<UserTaskScoreRequest>(new UserTaskScoreRequest));
-
-        MessagingClient client;
-        client.init();
-        client.publish(task->getExchange(), task->getTopic(),
-                       QString::fromStdString(request->SerializeAsString()));
+        request = generator.GenerateTask(QSharedPointer<UserTaskScoreRequest>(new UserTaskScoreRequest));
     }
+
+    MessagingClient client;
+    client.init();
+    client.publish(task->getExchange(), task->getTopic(),
+                   QString::fromStdString(request->SerializeAsString()));
 }
 
 void PluginScheduler::setThreadPool(QThreadPool *tp)
