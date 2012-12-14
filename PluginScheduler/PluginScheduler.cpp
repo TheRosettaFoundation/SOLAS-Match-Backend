@@ -56,20 +56,20 @@ void PluginScheduler::run()
             }
 
             if(xmlReader.name() == "interval" && !xmlReader.isEndElement()) {
-                QTime interval = QTime(0, 0, 0);
                 QXmlStreamAttributes atts = xmlReader.attributes();
+                TimeInterval interval;
 
                 if(atts.hasAttribute("days")) {
-                    qDebug() << "Days not supported";
+                    interval.days = atts.value("days").toString().toInt();
                 }
                 if(atts.hasAttribute("hours")) {
-                    interval = interval.addSecs(atts.value("hours").toString().toInt() * 60 * 60);
+                    interval.hours = atts.value("hours").toString().toInt();
                 }
                 if(atts.hasAttribute("mins")) {
-                    interval = interval.addSecs(atts.value("mins").toString().toInt() * 60);
+                    interval.mins = atts.value("mins").toString().toInt();
                 }
                 if(atts.hasAttribute("secs")) {
-                    interval = interval.addSecs(atts.value("secs").toString().toInt());
+                    interval.secs = atts.value("secs").toString().toInt();
                 }
 
                 task->setInterval(interval);
@@ -98,17 +98,16 @@ void PluginScheduler::run()
 
             QTime currentTime = QTime::currentTime();
             QTime startTime = taskItem->getStartTime();
-            QTime interval = taskItem->getInterval();
             int msecs;
             if(startTime > currentTime) {
                 while(startTime > currentTime) {
-                    startTime = startTime.addMSecs(-(this->timeInMSecs(interval)));
+                    startTime = startTime.addMSecs(-(taskItem->getIntervalInMSecs()));
                 }
-                startTime = startTime.addMSecs(this->timeInMSecs(interval));
+                startTime = startTime.addMSecs(taskItem->getIntervalInMSecs());
                 msecs = currentTime.msecsTo(startTime);
             } else {
                 while(currentTime > startTime) {
-                    startTime = startTime.addMSecs(this->timeInMSecs(interval));
+                    startTime = startTime.addMSecs(taskItem->getIntervalInMSecs());
                 }
                 msecs = currentTime.msecsTo(startTime);
             }
@@ -140,12 +139,4 @@ void PluginScheduler::setThreadPool(QThreadPool *tp)
 bool PluginScheduler::isEnabled()
 {
     return this->enabled;
-}
-
-int PluginScheduler::timeInMSecs(QTime time)
-{
-    int msecs = (time.hour() * 60 * 60 * 1000);
-    msecs += (time.minute() * 60 * 1000);
-    msecs += (time.second() * 1000);
-    return msecs;
 }

@@ -17,9 +17,13 @@ QTime TimedTask::getStartTime()
     return startTime;
 }
 
-QTime TimedTask::getInterval()
+int TimedTask::getIntervalInMSecs()
 {
-    return interval;
+    int msecs = interval.days * 24 * 60 * 60 * 1000;
+    msecs += interval.hours * 60 * 60 * 1000;
+    msecs += interval.mins * 60 * 1000;
+    msecs += interval.secs * 1000;
+    return msecs;
 }
 
 QString TimedTask::getExchange()
@@ -42,7 +46,7 @@ void TimedTask::setStartTime(QTime time)
     startTime = time;
 }
 
-void TimedTask::setInterval(QTime time)
+void TimedTask::setInterval(TimeInterval time)
 {
     interval = time;
 }
@@ -67,12 +71,9 @@ void TimedTask::processAndStartTimer()
     qDebug() << "TimedTask::Process and Start";
     emit processTask(QPointer<TimedTask>(this));
 
-    int msecs = (interval.hour() * 60 * 60 * 1000);
-    msecs += (interval.minute() * 60 * 1000);
-    msecs += (interval.second() * 1000);
     mTimer = new QTimer();
     connect(mTimer, SIGNAL(timeout()), this, SLOT(triggerProcess()));
-    mTimer->start(msecs);
+    mTimer->start(this->getIntervalInMSecs());
 }
 
 void TimedTask::triggerProcess()
@@ -84,6 +85,8 @@ void TimedTask::printTask()
 {
     qDebug() << "========== Printing Task ===========";
     qDebug() << "Sending " << message << " to " << exchange << " on topic " << topic
-             << " every " << interval.toString() << " starting at " << startTime.toString();
+             << " every " << interval.days << " day(s), " << interval.hours << " hour(s), "
+             << interval.mins << " minute(s) and " << interval.secs << " second(s)"
+             << " starting at " << startTime.toString();
     qDebug() << "====================================";
 }

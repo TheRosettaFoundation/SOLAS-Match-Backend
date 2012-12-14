@@ -6,6 +6,13 @@
 #include <QPointer>
 #include <QTimer>
 
+struct TimeInterval {
+    int days;
+    int hours;
+    int mins;
+    int secs;
+};
+
 class TimedTask : public QObject
 {
     Q_OBJECT
@@ -13,12 +20,12 @@ public:
     TimedTask();
     ~TimedTask();
     QTime getStartTime();
-    QTime getInterval();
+    int getIntervalInMSecs();
     QString getExchange();
     QString getTopic();
     QString getMessage();
     void setStartTime(QTime time);
-    void setInterval(QTime time);
+    void setInterval(TimeInterval time);
     void setExchange(QString name);
     void setTopic(QString name);
     void setMessage(QString mess);
@@ -33,7 +40,7 @@ signals:
 
 private:
     QTime startTime;
-    QTime interval;
+    TimeInterval interval;
     QString exchange;
     QString topic;
     QString message;

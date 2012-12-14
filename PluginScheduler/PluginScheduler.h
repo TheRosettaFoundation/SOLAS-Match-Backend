@@ -20,7 +20,6 @@ public:
     PluginScheduler();
     void setThreadPool(QThreadPool *);
     bool isEnabled();
-    int timeInMSecs(QTime);
 
 public slots:
     void run();
