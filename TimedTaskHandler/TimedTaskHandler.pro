@@ -22,10 +22,10 @@ LIBS += -L../Common -lCommon \
 
 DESTDIR = ../plugins
 
-SOURCES += usertaskscorecalculator.cpp \
+SOURCES += TimedTaskHandler.cpp \
     CalculateTaskScoreJob.cpp
 
-HEADERS += usertaskscorecalculator.h \
+HEADERS += TimedTaskHandler.h \
     CalculateTaskScoreJob.h
 
 symbian {

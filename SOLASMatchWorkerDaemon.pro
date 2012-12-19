@@ -3,6 +3,6 @@ TEMPLATE = subdirs
 SUBDIRS += \
     PluginHandler \
     Common \
-    UserTaskScoreCalculator \
+    TimedTaskHandler \
     EmailPlugin \
     PluginScheduler

@@ -1,5 +1,5 @@
-#ifndef USERTASKSCORECALCULATOR_H
-#define USERTASKSCORECALCULATOR_H
+#ifndef TIMEDTASKHANDLER_H
+#define TIMEDTASKHANDLER_H
 
 #include <QObject>
 #include <AMQPcpp.h>
@@ -8,13 +8,13 @@
 
 #include "PluginHandler/WorkerInterface.h"
 
-class UserTaskScoreCalculator : public WorkerInterface
+class TimedTaskHandler : public WorkerInterface
 {
     Q_OBJECT
     Q_INTERFACES(WorkerInterface)
 
 public:
-    UserTaskScoreCalculator();
+    TimedTaskHandler();
     void setThreadPool(QThreadPool *);
     bool isEnabled();
 
@@ -29,4 +29,4 @@ private:
 
 };
 
-#endif // USERTASKSCORECALCULATOR_H
+#endif // TIMEDTASKHANDLER_H

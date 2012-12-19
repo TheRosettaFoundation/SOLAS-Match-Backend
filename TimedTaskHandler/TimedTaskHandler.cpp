@@ -1,4 +1,4 @@
-#include "usertaskscorecalculator.h"
+#include "TimedTaskHandler.h"
 
 #include <QDebug>
 #include <QThreadPool>
@@ -8,17 +8,17 @@
 #include "Common/ConfigParser.h"
 #include "CalculateTaskScoreJob.h"
 
-Q_EXPORT_PLUGIN2(UserTaskScoreCalculator, UserTaskScoreCalculator)
+Q_EXPORT_PLUGIN2(TimedTaskHandler, TimedTaskHandler)
 
-UserTaskScoreCalculator::UserTaskScoreCalculator()
+TimedTaskHandler::TimedTaskHandler()
 {
     ConfigParser settings;
     enabled = (QString::compare("y", settings.get("TaskScoreCalculator.enabled")) == 0);
 }
 
-void UserTaskScoreCalculator::run()
+void TimedTaskHandler::run()
 {
-    qDebug() << "UserTaskScoreCalculator::Starting new Thread " << this->thread()->currentThreadId();
+    qDebug() << "TimedTaskHandler::Starting new Thread " << this->thread()->currentThreadId();
     QString exchange = "SOLAS_MATCH";
     QString queue = "task_score_queue";
     MessagingClient *client;
@@ -28,7 +28,7 @@ void UserTaskScoreCalculator::run()
     connect(client, SIGNAL(AMQPMessageReceived(AMQPMessage *)), this, SLOT(messageReceived(AMQPMessage *)));
 
     try {
-        qDebug() << "UserTaskScoreCalculator::Now consuming from " << exchange << " exchange";
+        qDebug() << "TimedTaskHandler::Now consuming from " << exchange << " exchange";
         client->declareQueue(exchange, "task.score", queue);
 
         QTimer *message_queue_read_timer = new QTimer();
@@ -41,26 +41,26 @@ void UserTaskScoreCalculator::run()
     }
 }
 
-void UserTaskScoreCalculator::messageReceived(AMQPMessage *message)
+void TimedTaskHandler::messageReceived(AMQPMessage *message)
 {
     qDebug() << "UserTaskScoreCalc::Starting new thread to handle task";
     QRunnable *job = new CalculateTaskScore(message);
     this->mThreadPool->start(job);
 }
 
-void UserTaskScoreCalculator::calculateScoreForAllUsers()
+void TimedTaskHandler::calculateScoreForAllUsers()
 {
     qDebug() << "UserTaskScoreCalc::Running hourly run through";
     QRunnable *job = new CalculateTaskScore();
     this->mThreadPool->start(job);
 }
 
-void UserTaskScoreCalculator::setThreadPool(QThreadPool *tp)
+void TimedTaskHandler::setThreadPool(QThreadPool *tp)
 {
     this->mThreadPool = tp;
 }
 
-bool UserTaskScoreCalculator::isEnabled()
+bool TimedTaskHandler::isEnabled()
 {
     return enabled;
 }
