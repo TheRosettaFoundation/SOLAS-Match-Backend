@@ -29,7 +29,7 @@ void protobuf_AssignDesc_Task_2eproto() {
       "Task.proto");
   GOOGLE_CHECK(file != NULL);
   Task_descriptor_ = file->message_type(0);
-  static const int Task_offsets_[11] = {
+  static const int Task_offsets_[14] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Task, id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Task, org_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Task, title_),
@@ -41,6 +41,9 @@ void protobuf_AssignDesc_Task_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Task, created_time_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Task, source_region_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Task, target_region_id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Task, status_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Task, tags_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Task, deadline_),
   };
   Task_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -83,13 +86,14 @@ void protobuf_AddDesc_Task_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\nTask.proto\"\347\001\n\004Task\022\n\n\002id\030\001 \002(\005\022\016\n\006org"
+    "\n\nTask.proto\"\227\002\n\004Task\022\n\n\002id\030\001 \002(\005\022\016\n\006org"
     "_id\030\002 \001(\005\022\r\n\005title\030\003 \001(\t\022\016\n\006impact\030\004 \001(\t"
     "\022\026\n\016reference_page\030\005 \001(\t\022\022\n\nword_count\030\006"
     " \001(\005\022\026\n\016source_lang_id\030\007 \001(\005\022\026\n\016target_l"
     "ang_id\030\010 \001(\005\022\024\n\014created_time\030\t \001(\t\022\030\n\020so"
     "urce_region_id\030\n \001(\005\022\030\n\020target_region_id"
-    "\030\013 \001(\005", 246);
+    "\030\013 \001(\005\022\016\n\006status\030\014 \001(\t\022\014\n\004tags\030\r \003(\t\022\020\n\010"
+    "deadline\030\016 \002(\t", 294);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "Task.proto", &protobuf_RegisterTypes);
   Task::default_instance_ = new Task();
@@ -119,6 +123,9 @@ const int Task::kTargetLangIdFieldNumber;
 const int Task::kCreatedTimeFieldNumber;
 const int Task::kSourceRegionIdFieldNumber;
 const int Task::kTargetRegionIdFieldNumber;
+const int Task::kStatusFieldNumber;
+const int Task::kTagsFieldNumber;
+const int Task::kDeadlineFieldNumber;
 #endif  // !_MSC_VER
 
 Task::Task()
@@ -148,6 +155,8 @@ void Task::SharedCtor() {
   created_time_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   source_region_id_ = 0;
   target_region_id_ = 0;
+  status_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  deadline_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -167,6 +176,12 @@ void Task::SharedDtor() {
   }
   if (created_time_ != &::google::protobuf::internal::kEmptyString) {
     delete created_time_;
+  }
+  if (status_ != &::google::protobuf::internal::kEmptyString) {
+    delete status_;
+  }
+  if (deadline_ != &::google::protobuf::internal::kEmptyString) {
+    delete deadline_;
   }
   if (this != default_instance_) {
   }
@@ -223,7 +238,18 @@ void Task::Clear() {
     }
     source_region_id_ = 0;
     target_region_id_ = 0;
+    if (has_status()) {
+      if (status_ != &::google::protobuf::internal::kEmptyString) {
+        status_->clear();
+      }
+    }
+    if (has_deadline()) {
+      if (deadline_ != &::google::protobuf::internal::kEmptyString) {
+        deadline_->clear();
+      }
+    }
   }
+  tags_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
@@ -409,6 +435,58 @@ bool Task::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
+        if (input->ExpectTag(98)) goto parse_status;
+        break;
+      }
+      
+      // optional string status = 12;
+      case 12: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_status:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_status()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->status().data(), this->status().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(106)) goto parse_tags;
+        break;
+      }
+      
+      // repeated string tags = 13;
+      case 13: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_tags:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->add_tags()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->tags(0).data(), this->tags(0).length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(106)) goto parse_tags;
+        if (input->ExpectTag(114)) goto parse_deadline;
+        break;
+      }
+      
+      // required string deadline = 14;
+      case 14: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_deadline:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_deadline()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->deadline().data(), this->deadline().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
+        } else {
+          goto handle_uninterpreted;
+        }
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -502,6 +580,33 @@ void Task::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(11, this->target_region_id(), output);
   }
   
+  // optional string status = 12;
+  if (has_status()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->status().data(), this->status().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      12, this->status(), output);
+  }
+  
+  // repeated string tags = 13;
+  for (int i = 0; i < this->tags_size(); i++) {
+  ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    this->tags(i).data(), this->tags(i).length(),
+    ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      13, this->tags(i), output);
+  }
+  
+  // required string deadline = 14;
+  if (has_deadline()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->deadline().data(), this->deadline().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      14, this->deadline(), output);
+  }
+  
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -583,6 +688,35 @@ void Task::SerializeWithCachedSizes(
   // optional int32 target_region_id = 11;
   if (has_target_region_id()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(11, this->target_region_id(), target);
+  }
+  
+  // optional string status = 12;
+  if (has_status()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->status().data(), this->status().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        12, this->status(), target);
+  }
+  
+  // repeated string tags = 13;
+  for (int i = 0; i < this->tags_size(); i++) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->tags(i).data(), this->tags(i).length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteStringToArray(13, this->tags(i), target);
+  }
+  
+  // required string deadline = 14;
+  if (has_deadline()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->deadline().data(), this->deadline().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        14, this->deadline(), target);
   }
   
   if (!unknown_fields().empty()) {
@@ -675,7 +809,28 @@ int Task::ByteSize() const {
           this->target_region_id());
     }
     
+    // optional string status = 12;
+    if (has_status()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->status());
+    }
+    
+    // required string deadline = 14;
+    if (has_deadline()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->deadline());
+    }
+    
   }
+  // repeated string tags = 13;
+  total_size += 1 * this->tags_size();
+  for (int i = 0; i < this->tags_size(); i++) {
+    total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
+      this->tags(i));
+  }
+  
   if (!unknown_fields().empty()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
@@ -701,6 +856,7 @@ void Task::MergeFrom(const ::google::protobuf::Message& from) {
 
 void Task::MergeFrom(const Task& from) {
   GOOGLE_CHECK_NE(&from, this);
+  tags_.MergeFrom(from.tags_);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_id()) {
       set_id(from.id());
@@ -737,6 +893,12 @@ void Task::MergeFrom(const Task& from) {
     if (from.has_target_region_id()) {
       set_target_region_id(from.target_region_id());
     }
+    if (from.has_status()) {
+      set_status(from.status());
+    }
+    if (from.has_deadline()) {
+      set_deadline(from.deadline());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -754,7 +916,7 @@ void Task::CopyFrom(const Task& from) {
 }
 
 bool Task::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+  if ((_has_bits_[0] & 0x00002001) != 0x00002001) return false;
   
   return true;
 }
@@ -772,6 +934,9 @@ void Task::Swap(Task* other) {
     std::swap(created_time_, other->created_time_);
     std::swap(source_region_id_, other->source_region_id_);
     std::swap(target_region_id_, other->target_region_id_);
+    std::swap(status_, other->status_);
+    tags_.Swap(&other->tags_);
+    std::swap(deadline_, other->deadline_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

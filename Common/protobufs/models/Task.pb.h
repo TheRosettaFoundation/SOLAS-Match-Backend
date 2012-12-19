@@ -181,6 +181,44 @@ class Task : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 target_region_id() const;
   inline void set_target_region_id(::google::protobuf::int32 value);
   
+  // optional string status = 12;
+  inline bool has_status() const;
+  inline void clear_status();
+  static const int kStatusFieldNumber = 12;
+  inline const ::std::string& status() const;
+  inline void set_status(const ::std::string& value);
+  inline void set_status(const char* value);
+  inline void set_status(const char* value, size_t size);
+  inline ::std::string* mutable_status();
+  inline ::std::string* release_status();
+  
+  // repeated string tags = 13;
+  inline int tags_size() const;
+  inline void clear_tags();
+  static const int kTagsFieldNumber = 13;
+  inline const ::std::string& tags(int index) const;
+  inline ::std::string* mutable_tags(int index);
+  inline void set_tags(int index, const ::std::string& value);
+  inline void set_tags(int index, const char* value);
+  inline void set_tags(int index, const char* value, size_t size);
+  inline ::std::string* add_tags();
+  inline void add_tags(const ::std::string& value);
+  inline void add_tags(const char* value);
+  inline void add_tags(const char* value, size_t size);
+  inline const ::google::protobuf::RepeatedPtrField< ::std::string>& tags() const;
+  inline ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_tags();
+  
+  // required string deadline = 14;
+  inline bool has_deadline() const;
+  inline void clear_deadline();
+  static const int kDeadlineFieldNumber = 14;
+  inline const ::std::string& deadline() const;
+  inline void set_deadline(const ::std::string& value);
+  inline void set_deadline(const char* value);
+  inline void set_deadline(const char* value, size_t size);
+  inline ::std::string* mutable_deadline();
+  inline ::std::string* release_deadline();
+  
   // @@protoc_insertion_point(class_scope:Task)
  private:
   inline void set_has_id();
@@ -205,6 +243,10 @@ class Task : public ::google::protobuf::Message {
   inline void clear_has_source_region_id();
   inline void set_has_target_region_id();
   inline void clear_has_target_region_id();
+  inline void set_has_status();
+  inline void clear_has_status();
+  inline void set_has_deadline();
+  inline void clear_has_deadline();
   
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
   
@@ -218,10 +260,13 @@ class Task : public ::google::protobuf::Message {
   ::std::string* created_time_;
   ::google::protobuf::int32 target_lang_id_;
   ::google::protobuf::int32 source_region_id_;
+  ::std::string* status_;
+  ::google::protobuf::RepeatedPtrField< ::std::string> tags_;
+  ::std::string* deadline_;
   ::google::protobuf::int32 target_region_id_;
   
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(11 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(14 + 31) / 32];
   
   friend void  protobuf_AddDesc_Task_2eproto();
   friend void protobuf_AssignDesc_Task_2eproto();
@@ -621,6 +666,166 @@ inline ::google::protobuf::int32 Task::target_region_id() const {
 inline void Task::set_target_region_id(::google::protobuf::int32 value) {
   set_has_target_region_id();
   target_region_id_ = value;
+}
+
+// optional string status = 12;
+inline bool Task::has_status() const {
+  return (_has_bits_[0] & 0x00000800u) != 0;
+}
+inline void Task::set_has_status() {
+  _has_bits_[0] |= 0x00000800u;
+}
+inline void Task::clear_has_status() {
+  _has_bits_[0] &= ~0x00000800u;
+}
+inline void Task::clear_status() {
+  if (status_ != &::google::protobuf::internal::kEmptyString) {
+    status_->clear();
+  }
+  clear_has_status();
+}
+inline const ::std::string& Task::status() const {
+  return *status_;
+}
+inline void Task::set_status(const ::std::string& value) {
+  set_has_status();
+  if (status_ == &::google::protobuf::internal::kEmptyString) {
+    status_ = new ::std::string;
+  }
+  status_->assign(value);
+}
+inline void Task::set_status(const char* value) {
+  set_has_status();
+  if (status_ == &::google::protobuf::internal::kEmptyString) {
+    status_ = new ::std::string;
+  }
+  status_->assign(value);
+}
+inline void Task::set_status(const char* value, size_t size) {
+  set_has_status();
+  if (status_ == &::google::protobuf::internal::kEmptyString) {
+    status_ = new ::std::string;
+  }
+  status_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* Task::mutable_status() {
+  set_has_status();
+  if (status_ == &::google::protobuf::internal::kEmptyString) {
+    status_ = new ::std::string;
+  }
+  return status_;
+}
+inline ::std::string* Task::release_status() {
+  clear_has_status();
+  if (status_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = status_;
+    status_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+
+// repeated string tags = 13;
+inline int Task::tags_size() const {
+  return tags_.size();
+}
+inline void Task::clear_tags() {
+  tags_.Clear();
+}
+inline const ::std::string& Task::tags(int index) const {
+  return tags_.Get(index);
+}
+inline ::std::string* Task::mutable_tags(int index) {
+  return tags_.Mutable(index);
+}
+inline void Task::set_tags(int index, const ::std::string& value) {
+  tags_.Mutable(index)->assign(value);
+}
+inline void Task::set_tags(int index, const char* value) {
+  tags_.Mutable(index)->assign(value);
+}
+inline void Task::set_tags(int index, const char* value, size_t size) {
+  tags_.Mutable(index)->assign(
+    reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* Task::add_tags() {
+  return tags_.Add();
+}
+inline void Task::add_tags(const ::std::string& value) {
+  tags_.Add()->assign(value);
+}
+inline void Task::add_tags(const char* value) {
+  tags_.Add()->assign(value);
+}
+inline void Task::add_tags(const char* value, size_t size) {
+  tags_.Add()->assign(reinterpret_cast<const char*>(value), size);
+}
+inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
+Task::tags() const {
+  return tags_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::std::string>*
+Task::mutable_tags() {
+  return &tags_;
+}
+
+// required string deadline = 14;
+inline bool Task::has_deadline() const {
+  return (_has_bits_[0] & 0x00002000u) != 0;
+}
+inline void Task::set_has_deadline() {
+  _has_bits_[0] |= 0x00002000u;
+}
+inline void Task::clear_has_deadline() {
+  _has_bits_[0] &= ~0x00002000u;
+}
+inline void Task::clear_deadline() {
+  if (deadline_ != &::google::protobuf::internal::kEmptyString) {
+    deadline_->clear();
+  }
+  clear_has_deadline();
+}
+inline const ::std::string& Task::deadline() const {
+  return *deadline_;
+}
+inline void Task::set_deadline(const ::std::string& value) {
+  set_has_deadline();
+  if (deadline_ == &::google::protobuf::internal::kEmptyString) {
+    deadline_ = new ::std::string;
+  }
+  deadline_->assign(value);
+}
+inline void Task::set_deadline(const char* value) {
+  set_has_deadline();
+  if (deadline_ == &::google::protobuf::internal::kEmptyString) {
+    deadline_ = new ::std::string;
+  }
+  deadline_->assign(value);
+}
+inline void Task::set_deadline(const char* value, size_t size) {
+  set_has_deadline();
+  if (deadline_ == &::google::protobuf::internal::kEmptyString) {
+    deadline_ = new ::std::string;
+  }
+  deadline_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* Task::mutable_deadline() {
+  set_has_deadline();
+  if (deadline_ == &::google::protobuf::internal::kEmptyString) {
+    deadline_ = new ::std::string;
+  }
+  return deadline_;
+}
+inline ::std::string* Task::release_deadline() {
+  clear_has_deadline();
+  if (deadline_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = deadline_;
+    deadline_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
 }
 
 

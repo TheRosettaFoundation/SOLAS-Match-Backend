@@ -3,7 +3,7 @@
 #include "../ModelGenerator.h"
 
 QList<QSharedPointer<Task> > TaskDao::getTasks(MySQLHandler *db, int id, int org_id, QString title, QString imp,
-                            QString ref_page, int wc, int s_lang_id, int t_lang_id, QString time,
+                            QString ref_page, int wc, int s_lang_id, int t_lang_id, QString deadlineTime, QString time,
                             int s_reg_id, int t_reg_id)
 {
     QList<QSharedPointer<Task> > ret = QList<QSharedPointer<Task> >();
@@ -57,6 +57,12 @@ QList<QSharedPointer<Task> > TaskDao::getTasks(MySQLHandler *db, int id, int org
         args += "null, ";
     }
 
+    if(deadlineTime != "") {
+        args += deadlineTime + ", ";
+    } else {
+        args += "null, ";
+    }
+
     if(time != "") {
         args += time + ", ";
     } else {
@@ -90,12 +96,12 @@ QList<QSharedPointer<Task> > TaskDao::getTasks(MySQLHandler *db, int id, int org
 
 QSharedPointer<Task> TaskDao::getTask(MySQLHandler *db, int id, int org_id,
                    QString title, QString imp, QString ref_page,
-                   int wc, int s_lang_id, int t_lang_id,
+                   int wc, int s_lang_id, int t_lang_id, QString deadlineTime,
                    QString time, int s_reg_id, int t_reg_id)
 {
     QSharedPointer<Task> task;
     QList<QSharedPointer<Task> > task_list = TaskDao::getTasks(db, id, org_id, title, imp, ref_page, wc,
-                          s_lang_id, t_lang_id, time, s_reg_id, t_reg_id);
+                          s_lang_id, t_lang_id, deadlineTime, time, s_reg_id, t_reg_id);
     if(task_list.count() > 0) {
         task = task_list.at(0);
     }
