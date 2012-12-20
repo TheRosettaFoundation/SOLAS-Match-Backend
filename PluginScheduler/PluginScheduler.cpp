@@ -32,7 +32,7 @@ void PluginScheduler::run()
     if(!xmlFile.open(QFile::ReadOnly | QFile::Text)) {
         qDebug() << "PluginScheduler::ERROR: File " << SCHEDULE_LOCATION << " does not exist.";
     } else {
-        QList<QPointer<TimedTask> > taskList = QList<QPointer<TimedTask> >();
+        taskList = QList<QPointer<TimedTask> >();
         QPointer<TimedTask> task = QPointer<TimedTask>();
         QXmlStreamReader xmlReader;
         xmlReader.setDevice(&xmlFile);
@@ -99,17 +99,21 @@ void PluginScheduler::run()
             QTime currentTime = QTime::currentTime();
             QTime startTime = taskItem->getStartTime();
             int msecs;
-            if(startTime > currentTime) {
+            if(startTime == startTime.addMSecs(taskItem->getIntervalInMSecs())) {
+                qDebug() << "Run every day at same time";
+            } else if(startTime > currentTime) {
                 while(startTime > currentTime) {
                     startTime = startTime.addMSecs(-(taskItem->getIntervalInMSecs()));
                 }
                 startTime = startTime.addMSecs(taskItem->getIntervalInMSecs());
-                msecs = currentTime.msecsTo(startTime);
             } else {
                 while(currentTime > startTime) {
                     startTime = startTime.addMSecs(taskItem->getIntervalInMSecs());
                 }
-                msecs = currentTime.msecsTo(startTime);
+            }
+            msecs = currentTime.msecsTo(startTime);
+            if(msecs < 0) {
+                msecs += 86400000; //one day in msecs
             }
             QTimer::singleShot(msecs, taskItem, SLOT(processAndStartTimer()));
         }
@@ -123,12 +127,18 @@ void PluginScheduler::processTask(QPointer<TimedTask> task)
     QSharedPointer< ::google::protobuf::Message> request = QSharedPointer< ::google::protobuf::Message>();
     if(task->getMessage() == "UserTaskScoreRequest") {
         request = generator.GenerateTask(QSharedPointer<UserTaskScoreRequest>(new UserTaskScoreRequest));
+    } else if(task->getMessage() == "DeadlineCheckRequest") {
+        request = generator.GenerateTask(QSharedPointer<DeadlineCheckRequest>(new DeadlineCheckRequest));
     }
 
-    MessagingClient client;
-    client.init();
-    client.publish(task->getExchange(), task->getTopic(),
-                   QString::fromStdString(request->SerializeAsString()));
+    if(request) {
+        MessagingClient client;
+        client.init();
+        client.publish(task->getExchange(), task->getTopic(),
+                       QString::fromStdString(request->SerializeAsString()));
+    } else {
+        qDebug() << "PluginScheduler: Invalid request type";
+    }
 }
 
 void PluginScheduler::setThreadPool(QThreadPool *tp)

@@ -58,6 +58,7 @@ void MessagingClient::declareQueue(QString exchange, QString topic, QString queu
 
 void MessagingClient::publish(QString exchange, QString topic, QString message)
 {
+    qDebug() << "Publishing to exchnage " << exchange << " on " << topic;
     if(this->conn) {
         try {
             mExchange = this->conn->createExchange(exchange.toStdString());

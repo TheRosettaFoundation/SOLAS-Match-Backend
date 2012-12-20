@@ -27,6 +27,7 @@ public slots:
 
 private:
     QThreadPool *mThreadPool;
+    QList<QPointer<TimedTask> > taskList;
     bool enabled;
 
 };

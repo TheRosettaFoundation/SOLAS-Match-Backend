@@ -10,6 +10,7 @@ class MySQLHandler
 {
 public:
     MySQLHandler(QString name);
+    ~MySQLHandler();
     bool init();
     void close();
     QSqlQuery *query(QString query);

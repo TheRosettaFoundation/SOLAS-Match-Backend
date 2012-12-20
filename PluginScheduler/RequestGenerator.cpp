@@ -9,3 +9,9 @@ QSharedPointer<UserTaskScoreRequest> RequestGenerator::GenerateTask(QSharedPoint
     task->set_task_id(-1);
     return task;
 }
+
+QSharedPointer<DeadlineCheckRequest> RequestGenerator::GenerateTask(QSharedPointer<DeadlineCheckRequest> task)
+{
+    task->set_task_id(-1);
+    return task;
+}

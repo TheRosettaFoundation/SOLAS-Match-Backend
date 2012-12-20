@@ -7,6 +7,7 @@
 #include "Common/MessagingClient.h"
 #include "Common/ConfigParser.h"
 #include "CalculateTaskScoreJob.h"
+#include "DeadlineChecker.h"
 
 Q_EXPORT_PLUGIN2(TimedTaskHandler, TimedTaskHandler)
 
@@ -20,7 +21,7 @@ void TimedTaskHandler::run()
 {
     qDebug() << "TimedTaskHandler::Starting new Thread " << this->thread()->currentThreadId();
     QString exchange = "SOLAS_MATCH";
-    QString queue = "task_score_queue";
+    QString queue = "timed_task_queue";
     MessagingClient *client;
 
     client = new MessagingClient();
@@ -29,7 +30,7 @@ void TimedTaskHandler::run()
 
     try {
         qDebug() << "TimedTaskHandler::Now consuming from " << exchange << " exchange";
-        client->declareQueue(exchange, "task.score", queue);
+        client->declareQueue(exchange, "timed.#", queue);
 
         QTimer *message_queue_read_timer = new QTimer();
         connect(message_queue_read_timer, SIGNAL(timeout()), client, SLOT(consumeFromQueue()));
@@ -44,8 +45,19 @@ void TimedTaskHandler::run()
 void TimedTaskHandler::messageReceived(AMQPMessage *message)
 {
     qDebug() << "UserTaskScoreCalc::Starting new thread to handle task";
-    QRunnable *job = new CalculateTaskScore(message);
-    this->mThreadPool->start(job);
+    QRunnable *job = NULL;
+
+    if(message->getRoutingKey() == "timed.task.score") {
+        job = new CalculateTaskScore(message);
+    } else if(message->getRoutingKey() == "timed.task.deadline.check") {
+        job = new DeadlineChecker(message);
+    }
+
+    if(job) {
+        this->mThreadPool->start(job);
+    } else {
+        qDebug() << "Invalid routing key";
+    }
 }
 
 void TimedTaskHandler::calculateScoreForAllUsers()

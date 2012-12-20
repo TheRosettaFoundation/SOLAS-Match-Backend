@@ -65,6 +65,7 @@ QSharedPointer<Task> ModelGenerator::GenerateTask(QSqlQuery *q)
     QSharedPointer<Task> task = QSharedPointer<Task>(new Task());
 
     task->set_created_time(MySQLHandler::getValueFromQuery("created_time", q).toString().toStdString());
+    task->set_deadline(MySQLHandler::getValueFromQuery("deadline", q).toString().toStdString());
     task->set_impact(MySQLHandler::getValueFromQuery("impact", q).toString().toStdString());
     task->set_org_id(MySQLHandler::getValueFromQuery("organisation_id", q).toInt());
     task->set_reference_page(MySQLHandler::getValueFromQuery("reference_page", q).toString().toStdString());

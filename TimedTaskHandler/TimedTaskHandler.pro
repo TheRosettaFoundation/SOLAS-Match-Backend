@@ -23,10 +23,12 @@ LIBS += -L../Common -lCommon \
 DESTDIR = ../plugins
 
 SOURCES += TimedTaskHandler.cpp \
-    CalculateTaskScoreJob.cpp
+    CalculateTaskScoreJob.cpp \
+    DeadlineChecker.cpp
 
 HEADERS += TimedTaskHandler.h \
-    CalculateTaskScoreJob.h
+    CalculateTaskScoreJob.h \
+    DeadlineChecker.h
 
 symbian {
     MMP_RULES += EXPORTUNFROZEN

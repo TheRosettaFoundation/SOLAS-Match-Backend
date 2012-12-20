@@ -17,6 +17,11 @@ MySQLHandler::MySQLHandler(QString name)
     this->connName = name;
 }
 
+MySQLHandler::~MySQLHandler()
+{
+    qDebug() << "Deleting MySQLHandler " << this->connName;
+}
+
 bool MySQLHandler::init()
 {
     bool ret = this->openConnection();
