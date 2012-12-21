@@ -62,15 +62,13 @@ QList<QSharedPointer<User> > UserDao::getUsers(MySQLHandler *db, int id, QString
         args += "null";
     }
 
-    QSqlQuery *mQuery = db->call("getUser", args);
+    QSharedPointer<QSqlQuery> mQuery = db->call("getUser", args);
     if(mQuery->first()) {
         do {
             QSharedPointer<User> user = ModelGenerator::GenerateUser(mQuery);
             users.append(user);
         } while(mQuery->next());
     }
-
-    delete mQuery;
 
     return users;
 }
@@ -91,7 +89,7 @@ QString UserDao::getPasswordResetUuid(MySQLHandler *db, int id)
 {
     QString ret;
     QString args = "null, " + QString::number(id);
-    QSqlQuery *mQuery = db->call("getPasswordResetRequests", args);
+    QSharedPointer<QSqlQuery> mQuery = db->call("getPasswordResetRequests", args);
     if(mQuery->first()) {
         ret = MySQLHandler::getValueFromQuery("uid", mQuery).toString();
     }

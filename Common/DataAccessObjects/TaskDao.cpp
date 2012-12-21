@@ -81,15 +81,13 @@ QList<QSharedPointer<Task> > TaskDao::getTasks(MySQLHandler *db, int id, int org
         args += "null";
     }
 
-    QSqlQuery *mQuery = db->call("getTask", args);
+    QSharedPointer<QSqlQuery> mQuery = db->call("getTask", args);
     if(mQuery->first()) {
         do {
             QSharedPointer<Task> task = ModelGenerator::GenerateTask(mQuery);
             ret.append(task);
         } while(mQuery->next());
     }
-
-    delete mQuery;
 
     return ret;
 }
@@ -116,7 +114,7 @@ QList<QSharedPointer<Task> > TaskDao::getActiveTasks(MySQLHandler *db, int limit
         args = QString::number(limit);
     }
 
-    QSqlQuery *mQuery = db->call("getLatestAvailableTasks", args);
+    QSharedPointer<QSqlQuery> mQuery = db->call("getLatestAvailableTasks", args);
     if(mQuery->first()) {
         do {
             QSharedPointer<Task> task = TaskDao::getTask(db, MySQLHandler::getValueFromQuery("id", mQuery).toInt());
@@ -130,12 +128,10 @@ QList<QSharedPointer<Task> > TaskDao::getActiveTasks(MySQLHandler *db, int limit
 int TaskDao::getTaskTranslator(MySQLHandler *db, int task_id)
 {
     int user_id = -1;
-    QSqlQuery *mQuery = db->call("getTaskTranslator", QString::number(task_id));
+    QSharedPointer<QSqlQuery> mQuery = db->call("getTaskTranslator", QString::number(task_id));
     if(mQuery->first()) {
         user_id = MySQLHandler::getValueFromQuery("user_id", mQuery).toInt();
     }
-
-    delete mQuery;
 
     return user_id;
 }
@@ -144,14 +140,12 @@ QList<QSharedPointer<User> > TaskDao::getSubscribedUsers(MySQLHandler *db, int t
 {
     QList<QSharedPointer<User> > users = QList<QSharedPointer<User> >();
 
-    QSqlQuery *mQuery = db->call("getSubscribedUsers", QString::number(task_id));
+    QSharedPointer<QSqlQuery> mQuery = db->call("getSubscribedUsers", QString::number(task_id));
     if(mQuery->first()) {
         do {
             users.append(ModelGenerator::GenerateUser(mQuery));
         } while(mQuery->next());
     }
-
-    delete mQuery;
 
     return users;
 }
@@ -179,7 +173,7 @@ QList<QSharedPointer<ArchivedTask> > TaskDao::getArchivedTasks(MySQLHandler *db,
         args += "null";
     }
 
-    QSqlQuery *mQuery = db->call("getArchivedTasks", args);
+    QSharedPointer<QSqlQuery> mQuery = db->call("getArchivedTasks", args);
     if(mQuery->first()) {
         do {
             QSharedPointer<ArchivedTask> task = ModelGenerator::GenerateArchivedTask(mQuery);

@@ -2,7 +2,7 @@
 
 #include "Common/MySQLHandler.h"
 
-QSharedPointer<User> ModelGenerator::GenerateUser(QSqlQuery *q)
+QSharedPointer<User> ModelGenerator::GenerateUser(QSharedPointer<QSqlQuery> q)
 {
     QSharedPointer<User> user = QSharedPointer<User>(new User());
 
@@ -19,7 +19,7 @@ QSharedPointer<User> ModelGenerator::GenerateUser(QSqlQuery *q)
     return user;
 }
 
-QSharedPointer<Tag> ModelGenerator::GenerateTag(QSqlQuery *q)
+QSharedPointer<Tag> ModelGenerator::GenerateTag(QSharedPointer<QSqlQuery> q)
 {
     QSharedPointer<Tag> tag = QSharedPointer<Tag>(new Tag());
 
@@ -29,7 +29,7 @@ QSharedPointer<Tag> ModelGenerator::GenerateTag(QSqlQuery *q)
     return tag;
 }
 
-QSharedPointer<Organisation> ModelGenerator::GenerateOrg(QSqlQuery *q)
+QSharedPointer<Organisation> ModelGenerator::GenerateOrg(QSharedPointer<QSqlQuery> q)
 {
     QSharedPointer<Organisation> org = QSharedPointer<Organisation>(new Organisation);
 
@@ -41,7 +41,7 @@ QSharedPointer<Organisation> ModelGenerator::GenerateOrg(QSqlQuery *q)
     return org;
 }
 
-QSharedPointer<ArchivedTask> ModelGenerator::GenerateArchivedTask(QSqlQuery *q)
+QSharedPointer<ArchivedTask> ModelGenerator::GenerateArchivedTask(QSharedPointer<QSqlQuery> q)
 {
     QSharedPointer<ArchivedTask> task = QSharedPointer<ArchivedTask>(new ArchivedTask());
 
@@ -60,7 +60,7 @@ QSharedPointer<ArchivedTask> ModelGenerator::GenerateArchivedTask(QSqlQuery *q)
     return task;
 }
 
-QSharedPointer<Task> ModelGenerator::GenerateTask(QSqlQuery *q)
+QSharedPointer<Task> ModelGenerator::GenerateTask(QSharedPointer<QSqlQuery> q)
 {
     QSharedPointer<Task> task = QSharedPointer<Task>(new Task());
 

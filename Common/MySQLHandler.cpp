@@ -59,22 +59,22 @@ void MySQLHandler::close()
     this->conn->close();
 }
 
-QSqlQuery *MySQLHandler::query(QString query)
+QSharedPointer<QSqlQuery> MySQLHandler::query(QString query)
 {
-    QSqlQuery *mQuery = new QSqlQuery(query, *(this->conn));
+    QSharedPointer<QSqlQuery> mQuery = QSharedPointer<QSqlQuery>(new QSqlQuery(query, *(this->conn)));
 
     return mQuery;
 }
 
-QSqlQuery *MySQLHandler::call(QString proc_name, QString args)
+QSharedPointer<QSqlQuery> MySQLHandler::call(QString proc_name, QString args)
 {
     QString query = "Call " + proc_name + " (" + args + ")";
-    QSqlQuery *q = new QSqlQuery(query, *(this->conn));
+    QSharedPointer<QSqlQuery> q = QSharedPointer<QSqlQuery>(new QSqlQuery(query, *(this->conn)));
 
     return q;
 }
 
-QVariant MySQLHandler::getValueFromQuery(QString field_name, QSqlQuery *mQuery)
+QVariant MySQLHandler::getValueFromQuery(QString field_name, QSharedPointer<QSqlQuery> mQuery)
 {
     QVariant ret = 0;
     int field_pos = mQuery->record().indexOf(field_name);

@@ -166,11 +166,10 @@ int CalculateTaskScore::getCurrentScore(int user_id, int task_id)
 {
     int ret = -1;
     QString args = QString::number(user_id) + ", " + QString::number(task_id);
-    QSqlQuery *q = db->call("getUserTaskScore", args);
+    QSharedPointer<QSqlQuery> q = db->call("getUserTaskScore", args);
     if(q->first()) {
         ret = db->getValueFromQuery("score", q).toInt();
     }
-    delete q;
 
     return ret;
 }

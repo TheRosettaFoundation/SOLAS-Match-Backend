@@ -3,6 +3,7 @@
 
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
+#include <QSharedPointer>
 #include <QVariant>
 #include <QString>
 
@@ -13,9 +14,9 @@ public:
     ~MySQLHandler();
     bool init();
     void close();
-    QSqlQuery *query(QString query);
-    QSqlQuery *call(QString proc_name, QString args);
-    static QVariant getValueFromQuery(QString field_name, QSqlQuery *mQuery);
+    QSharedPointer<QSqlQuery> query(QString query);
+    QSharedPointer<QSqlQuery> call(QString proc_name, QString args);
+    static QVariant getValueFromQuery(QString field_name, QSharedPointer<QSqlQuery> mQuery);
 
 private:
     QSqlDatabase *conn;

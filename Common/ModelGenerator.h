@@ -13,11 +13,11 @@
 class ModelGenerator
 {
 public:
-    static QSharedPointer<Tag> GenerateTag(QSqlQuery *q);
-    static QSharedPointer<User> GenerateUser(QSqlQuery *q);
-    static QSharedPointer<Task> GenerateTask(QSqlQuery *q);
-    static QSharedPointer<Organisation> GenerateOrg(QSqlQuery *q);
-    static QSharedPointer<ArchivedTask> GenerateArchivedTask(QSqlQuery *q);
+    static QSharedPointer<Tag> GenerateTag(QSharedPointer<QSqlQuery> q);
+    static QSharedPointer<User> GenerateUser(QSharedPointer<QSqlQuery> q);
+    static QSharedPointer<Task> GenerateTask(QSharedPointer<QSqlQuery> q);
+    static QSharedPointer<Organisation> GenerateOrg(QSharedPointer<QSqlQuery> q);
+    static QSharedPointer<ArchivedTask> GenerateArchivedTask(QSharedPointer<QSqlQuery> q);
 
 };
 
