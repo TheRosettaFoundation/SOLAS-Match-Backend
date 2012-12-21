@@ -38,6 +38,7 @@ bool MessagingClient::openConnection()
         QString connectionString = this->pass+ ":" +
                 this->user + "@" + this->hostname + ":" + QString::number(this->port) + "/";
         this->conn = new AMQP(connectionString.toStdString());
+        ret = true;
     } catch(AMQPException error) {
         qDebug() << "Error " << error.getReplyCode() << ": "
                  << QString::fromStdString(error.getMessage());

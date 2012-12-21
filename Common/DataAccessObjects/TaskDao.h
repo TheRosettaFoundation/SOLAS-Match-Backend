@@ -8,6 +8,7 @@
 
 #include "Common/MySQLHandler.h"
 #include "../protobufs/models/ArchivedTask.pb.h"
+#include "../protobufs/models/User.pb.h"
 #include "../protobufs/models/Task.pb.h"
 
 class TaskDao
@@ -22,6 +23,8 @@ public:
                                         int t_lang_id = -1, QString deadlineTime = "", QString time = "",
                                         int s_reg_id = -1, int t_reg_id = -1);
     static QList<QSharedPointer<Task> > getActiveTasks(MySQLHandler *db, int limit = -1);
+    static int getTaskTranslator(MySQLHandler *db, int task_id);
+    static QList<QSharedPointer<User> > getSubscribedUsers(MySQLHandler *db, int task_id);
     static QList<QSharedPointer<ArchivedTask> > getArchivedTasks(MySQLHandler *db, int arc_id = -1, int t_id = -1, int o_id = -1);
     static QSharedPointer<ArchivedTask> getArchivedTask(MySQLHandler *db, int arc_id = -1, int t_id = -1, int o_id = -1);
 

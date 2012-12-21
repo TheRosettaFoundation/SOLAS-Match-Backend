@@ -133,6 +133,22 @@ void EmailPlugin::messageReveived(AMQPMessage *message)
             email = emailGen.generateEmail(email_type);
             break;
         }
+        case (EmailMessage::OrgTaskDeadlinePassed):
+        {
+            OrgTaskDeadlinePassed email_type;
+            email_type.ParseFromString(message_body.toStdString());
+
+            email = emailGen.generateEmail(email_type);
+            break;
+        }
+        case (EmailMessage::UserClaimedTaskDeadlinePassed):
+        {
+            UserClaimedTaskDeadlinePassed email_type;
+            email_type.ParseFromString(message_body.toStdString());
+
+            email = emailGen.generateEmail(email_type);
+            break;
+        }
         default:
         {
             qDebug() << "Invalid email type";

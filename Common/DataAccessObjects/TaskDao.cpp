@@ -127,6 +127,34 @@ QList<QSharedPointer<Task> > TaskDao::getActiveTasks(MySQLHandler *db, int limit
     return ret;
 }
 
+int TaskDao::getTaskTranslator(MySQLHandler *db, int task_id)
+{
+    int user_id = -1;
+    QSqlQuery *mQuery = db->call("getTaskTranslator", QString::number(task_id));
+    if(mQuery->first()) {
+        user_id = MySQLHandler::getValueFromQuery("user_id", mQuery).toInt();
+    }
+
+    delete mQuery;
+
+    return user_id;
+}
+
+QList<QSharedPointer<User> > TaskDao::getSubscribedUsers(MySQLHandler *db, int task_id)
+{
+    QList<QSharedPointer<User> > users = QList<QSharedPointer<User> >();
+
+    QSqlQuery *mQuery = db->call("getSubscribedUsers", QString::number(task_id));
+    if(mQuery->first()) {
+        do {
+            users.append(ModelGenerator::GenerateUser(mQuery));
+        } while(mQuery->next());
+    }
+
+    delete mQuery;
+
+    return users;
+}
 
 QList<QSharedPointer<ArchivedTask> > TaskDao::getArchivedTasks(MySQLHandler *db, int arc_id, int t_id, int o_id)
 {
