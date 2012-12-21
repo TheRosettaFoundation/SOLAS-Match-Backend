@@ -75,10 +75,15 @@ void MessagingClient::publish(QString exchange, QString topic, QString message)
 
 void MessagingClient::consumeFromQueue()
 {
-    mQueue->Get();
+    try {
+        mQueue->Get();
 
-    AMQPMessage *message = mQueue->getMessage();
-    if(message && message->getMessageCount() > -1) {
-        emit AMQPMessageReceived(message);
+        AMQPMessage *message = mQueue->getMessage();
+        if(message && message->getMessageCount() > -1) {
+            emit AMQPMessageReceived(message);
+        }
+    } catch (AMQPException e) {
+        qDebug() << "ERROR: Consuming from Queue";
+        qDebug() << QString::fromStdString(e.getMessage());
     }
 }
