@@ -166,11 +166,11 @@ QSharedPointer<Email> EmailGenerator::generateEmail(OrgTaskDeadlinePassed email_
         task = TaskDao::getTask(db, email_message.task_id());
         user = UserDao::getUser(db, email_message.user_id());
 
-        if(!user || !task || !translator) {
+        if(!user || !task) {
             error = "OrgTaskDeadlinePassed generation failed. Data missing from the DB.";
             error += "Searched for user ID " + QString::number(email_message.translator_id());
             error += " and " + QString::number(email_message.user_id());
-            error += " and task ID " + email_message.task_id();
+            error += " and task ID " + QString::number(email_message.task_id());
         }
     } else {
         error = "Unable to Connect to SQL Server. Check conf.ini for connection settings and make sure ";
@@ -179,7 +179,7 @@ QSharedPointer<Email> EmailGenerator::generateEmail(OrgTaskDeadlinePassed email_
     }
 
     if(error.compare("") == 0) {
-        ctemplate::TemplateDictionary dict("password_reset");
+        ctemplate::TemplateDictionary dict("OrgTaskDeadlinePassed");
         if(user->display_name() != "") {
             dict.ShowSection("USER_HAS_NAME");
             dict["USERNAME"] = user->display_name();

@@ -65,6 +65,7 @@ void DeadlineChecker::run()
                         userEmail.set_email_type(EmailMessage::UserClaimedTaskDeadlinePassed);
                         userEmail.set_task_id(task->id());
                         userEmail.set_translator_id(translator_id);
+
                         client.publish(exchange, "email.user.deadline.passed",
                                        QString::fromStdString(userEmail.SerializeAsString()));
                     }

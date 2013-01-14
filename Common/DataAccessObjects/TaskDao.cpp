@@ -1,6 +1,7 @@
 #include "TaskDao.h"
 
 #include "../ModelGenerator.h"
+#include "UserDao.h"
 
 QList<QSharedPointer<Task> > TaskDao::getTasks(MySQLHandler *db, int id, int org_id, QString title, QString imp,
                             QString ref_page, int wc, int s_lang_id, int t_lang_id, QString deadlineTime, QString time,
@@ -23,18 +24,6 @@ QList<QSharedPointer<Task> > TaskDao::getTasks(MySQLHandler *db, int id, int org
 
     if(title != "") {
         args += title + ", ";
-    } else {
-        args += "null, ";
-    }
-
-    if(imp != "") {
-        args += imp + ", ";
-    } else {
-        args += "null, ";
-    }
-
-    if(ref_page != "") {
-        args += ref_page + ", ";
     } else {
         args += "null, ";
     }
@@ -65,6 +54,18 @@ QList<QSharedPointer<Task> > TaskDao::getTasks(MySQLHandler *db, int id, int org
 
     if(time != "") {
         args += time + ", ";
+    } else {
+        args += "null, ";
+    }
+
+    if(imp != "") {
+        args += imp + ", ";
+    } else {
+        args += "null, ";
+    }
+
+    if(ref_page != "") {
+        args += ref_page + ", ";
     } else {
         args += "null, ";
     }
@@ -143,7 +144,7 @@ QList<QSharedPointer<User> > TaskDao::getSubscribedUsers(MySQLHandler *db, int t
     QSharedPointer<QSqlQuery> mQuery = db->call("getSubscribedUsers", QString::number(task_id));
     if(mQuery->first()) {
         do {
-            users.append(ModelGenerator::GenerateUser(mQuery));
+            users.append(UserDao::getUser(db, MySQLHandler::getValueFromQuery("user_id", mQuery).toInt()));
         } while(mQuery->next());
     }
 
