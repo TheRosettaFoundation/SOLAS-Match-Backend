@@ -9,6 +9,8 @@
 #include "protobufs/models/Task.pb.h"
 #include "protobufs/models/Organisation.pb.h"
 #include "protobufs/models/ArchivedTask.pb.h"
+#include "protobufs/models/Project.pb.h"
+#include "protobufs/models/ArchivedProject.pb.h"
 
 class ModelGenerator
 {
@@ -18,6 +20,8 @@ public:
     static QSharedPointer<Task> GenerateTask(QSharedPointer<QSqlQuery> q);
     static QSharedPointer<Organisation> GenerateOrg(QSharedPointer<QSqlQuery> q);
     static QSharedPointer<ArchivedTask> GenerateArchivedTask(QSharedPointer<QSqlQuery> q);
+    static QSharedPointer<Project> GenerateProject(QSharedPointer<QSqlQuery> q);
+    static QSharedPointer<ArchivedProject> GenerateArchivedProject(QSharedPointer<QSqlQuery> q);
 
 };
 

@@ -45,17 +45,24 @@ QSharedPointer<ArchivedTask> ModelGenerator::GenerateArchivedTask(QSharedPointer
 {
     QSharedPointer<ArchivedTask> task = QSharedPointer<ArchivedTask>(new ArchivedTask());
 
-    task->set_archive_id(MySQLHandler::getValueFromQuery("id", q).toInt());
-    task->set_task_id(MySQLHandler::getValueFromQuery("task_id", q).toInt());
-    task->set_org_id(MySQLHandler::getValueFromQuery("organisation_id", q).toInt());
+    task->set_id(MySQLHandler::getValueFromQuery("id", q).toInt());
+    task->set_projectid(MySQLHandler::getValueFromQuery("project_id", q).toInt());
     task->set_title(MySQLHandler::getValueFromQuery("title", q).toString().toStdString());
-    task->set_word_count(MySQLHandler::getValueFromQuery("word-count", q).toInt());
-    task->set_source_id(MySQLHandler::getValueFromQuery("source_id", q).toInt());
-    task->set_target_id(MySQLHandler::getValueFromQuery("target_id", q).toInt());
-    task->set_created_time(MySQLHandler::getValueFromQuery("created-time", q).toString().toStdString());
-    task->set_archived_time(MySQLHandler::getValueFromQuery("archived-time", q).toString().toStdString());
-    task->set_impact(MySQLHandler::getValueFromQuery("impact", q).toString().toStdString());
-    task->set_reference_page(MySQLHandler::getValueFromQuery("reference-page", q).toString().toStdString());
+    task->set_comment(MySQLHandler::getValueFromQuery("comment", q).toString().toStdString());
+    task->set_deadline(MySQLHandler::getValueFromQuery("deadline", q).toString().toStdString());
+    task->set_wordcount(MySQLHandler::getValueFromQuery("word-count", q).toInt());
+    task->set_createdtime(MySQLHandler::getValueFromQuery("created-time", q).toString().toStdString());
+    task->set_sourcelanguageid(MySQLHandler::getValueFromQuery("language_id-source", q).toInt());
+    task->set_targetlanguageid(MySQLHandler::getValueFromQuery("language_id-target", q).toInt());
+    task->set_sourcecountryid(MySQLHandler::getValueFromQuery("Country_id-source", q).toInt());
+    task->set_targetcountryid(MySQLHandler::getValueFromQuery("Country_id-target", q).toInt());
+    task->set_tasktype(MySQLHandler::getValueFromQuery("taskType", q).toString().toStdString());
+    task->set_taskstatus(MySQLHandler::getValueFromQuery("taskStatus", q).toString().toStdString());
+    task->set_published(MySQLHandler::getValueFromQuery("published", q).toBool());
+    task->set_translatorid(MySQLHandler::getValueFromQuery("user_id-claimed", q).toInt());
+    task->set_archiveuserid(MySQLHandler::getValueFromQuery("user_id-archived", q).toInt());
+    task->set_archivedate(MySQLHandler::getValueFromQuery("archived-date", q).toString().toStdString());
+    //tags are not retrieved here
 
     return task;
 }
@@ -64,18 +71,59 @@ QSharedPointer<Task> ModelGenerator::GenerateTask(QSharedPointer<QSqlQuery> q)
 {
     QSharedPointer<Task> task = QSharedPointer<Task>(new Task());
 
-    task->set_created_time(MySQLHandler::getValueFromQuery("created-time", q).toString().toStdString());
-    task->set_deadline(MySQLHandler::getValueFromQuery("deadline", q).toString().toStdString());
-    task->set_impact(MySQLHandler::getValueFromQuery("impact", q).toString().toStdString());
-    task->set_org_id(MySQLHandler::getValueFromQuery("organisation_id", q).toInt());
-    task->set_reference_page(MySQLHandler::getValueFromQuery("reference-page", q).toString().toStdString());
-    task->set_source_lang_id(MySQLHandler::getValueFromQuery("source_id", q).toInt());
-    task->set_source_region_id(MySQLHandler::getValueFromQuery("country_id-source", q).toInt());
-    task->set_target_lang_id(MySQLHandler::getValueFromQuery("target_id", q).toInt());
-    task->set_target_region_id(MySQLHandler::getValueFromQuery("country_id-target", q).toInt());
     task->set_id(MySQLHandler::getValueFromQuery("id", q).toInt());
+    task->set_projectid(MySQLHandler::getValueFromQuery("project_id", q).toInt());
     task->set_title(MySQLHandler::getValueFromQuery("title", q).toString().toStdString());
-    task->set_word_count(MySQLHandler::getValueFromQuery("word-count", q).toInt());
+    task->set_comment(MySQLHandler::getValueFromQuery("comment", q).toString().toStdString());
+    task->set_deadline(MySQLHandler::getValueFromQuery("deadline", q).toString().toStdString());
+    task->set_wordcount(MySQLHandler::getValueFromQuery("word-count", q).toInt());
+    task->set_createdtime(MySQLHandler::getValueFromQuery("created-time", q).toString().toStdString());
+    task->set_sourcelanguageid(MySQLHandler::getValueFromQuery("language_id-source", q).toInt());
+    task->set_targetlanguageid(MySQLHandler::getValueFromQuery("language_id-target", q).toInt());
+    task->set_sourcecountryid(MySQLHandler::getValueFromQuery("Country_id-source", q).toInt());
+    task->set_targetcountryid(MySQLHandler::getValueFromQuery("Country_id-target", q).toInt());
+    task->set_tasktype(MySQLHandler::getValueFromQuery("taskType", q).toString().toStdString());
+    task->set_taskstatus(MySQLHandler::getValueFromQuery("taskStatus", q).toString().toStdString());
+    task->set_published(MySQLHandler::getValueFromQuery("published", q).toBool());
+
+    //tags not currently used, retrieved from DB as a string list in another function
+    //task->set_tags(MySQLHandler::getValueFromQuery("", q));
 
     return task;
+}
+
+QSharedPointer<Project> ModelGenerator::GenerateProject(QSharedPointer<QSqlQuery> q)
+{
+    QSharedPointer<Project> project = QSharedPointer<Project>(new Project());
+
+    project->set_id(MySQLHandler::getValueFromQuery("id", q).toInt());
+    project->set_title(MySQLHandler::getValueFromQuery("title", q).toString().toStdString());
+    project->set_description(MySQLHandler::getValueFromQuery("description", q).toString().toStdString());
+    project->set_deadline(MySQLHandler::getValueFromQuery("deadline", q).toString().toStdString());
+    project->set_organisationid(MySQLHandler::getValueFromQuery("organisation_id", q).toInt());
+    project->set_reference(MySQLHandler::getValueFromQuery("reference", q).toString().toStdString());
+    project->set_wordcount(MySQLHandler::getValueFromQuery("word-count", q).toInt());
+    project->set_createdtime(MySQLHandler::getValueFromQuery("created", q).toString().toStdString());
+    //Check stored proc output for below
+    //project->set_status(MySQLHandler::getValueFromQuery("status", q).toString().toStdString());
+
+    return project;
+}
+
+QSharedPointer<ArchivedProject> ModelGenerator::GenerateArchivedProject(QSharedPointer<QSqlQuery> q)
+{
+    QSharedPointer<ArchivedProject> project = QSharedPointer<ArchivedProject>(new ArchivedProject());
+
+    project->set_id(MySQLHandler::getValueFromQuery("id", q).toInt());
+    project->set_title(MySQLHandler::getValueFromQuery("title", q).toString().toStdString());
+    project->set_description(MySQLHandler::getValueFromQuery("description", q).toString().toStdString());
+    project->set_deadline(MySQLHandler::getValueFromQuery("deadline", q).toString().toStdString());
+    project->set_organisationid(MySQLHandler::getValueFromQuery("organisation_id", q).toInt());
+    project->set_reference(MySQLHandler::getValueFromQuery("reference", q).toString().toStdString());
+    project->set_wordcount(MySQLHandler::getValueFromQuery("word-count", q).toInt());
+    project->set_createdtime(MySQLHandler::getValueFromQuery("created", q).toString().toStdString());
+    project->set_archiveddate(MySQLHandler::getValueFromQuery("archived-date", q).toString().toStdString());
+    project->set_translatorid(MySQLHandler::getValueFromQuery("user_id-archived", q).toInt());
+
+    return project;
 }

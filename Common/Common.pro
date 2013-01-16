@@ -44,7 +44,9 @@ SOURCES += \
     protobufs/requests/UserTaskScoreRequest.pb.cc \
     protobufs/requests/DeadlineCheckRequest.pb.cc \
     protobufs/emails/OrgTaskDeadlinePassed.pb.cc \
-    protobufs/emails/UserClaimedTaskDeadlinePassed.pb.cc
+    protobufs/emails/UserClaimedTaskDeadlinePassed.pb.cc \
+    protobufs/models/ArchivedProject.pb.cc \
+    protobufs/models/Project.pb.cc
 
 HEADERS +=\
     MySQLHandler.h \
@@ -72,7 +74,9 @@ HEADERS +=\
     protobufs/requests/UserTaskScoreRequest.pb.h \
     protobufs/requests/DeadlineCheckRequest.pb.h \
     protobufs/emails/OrgTaskDeadlinePassed.pb.h \
-    protobufs/emails/UserClaimedTaskDeadlinePassed.pb.h
+    protobufs/emails/UserClaimedTaskDeadlinePassed.pb.h \
+    protobufs/models/ArchivedProject.pb.h \
+    protobufs/models/Project.pb.h
 
 symbian {
     MMP_RULES += EXPORTUNFROZEN
