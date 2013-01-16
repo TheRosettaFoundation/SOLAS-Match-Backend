@@ -50,7 +50,7 @@ void DeadlineChecker::run()
                         OrgTaskDeadlinePassed orgEmail;
                         orgEmail.set_email_type(EmailMessage::OrgTaskDeadlinePassed);
                         orgEmail.set_user_id(user->user_id());
-                        orgEmail.set_org_id(task->org_id());
+                        //orgEmail.set_org_id(task->org()); Get org ID from project
                         orgEmail.set_task_id(task->id());
                         if(translator_id != -1) {
                             orgEmail.set_translator_id(translator_id);

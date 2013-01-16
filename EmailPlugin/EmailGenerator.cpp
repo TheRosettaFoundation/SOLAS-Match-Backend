@@ -277,10 +277,10 @@ QSharedPointer<Email> EmailGenerator::generateEmail(TaskArchived email_message)
         task = TaskDao::getArchivedTask(db, -1, email_message.task_id());
 
         if(user != NULL && task != NULL) {
-            org = OrganisationDao::getOrg(db, task->org_id());
+            //org = OrganisationDao::getOrg(db, task->org_id());    Get org id from project
             if(org == NULL) {
                 error = "Failed to Generate task archived email. Unable to find relevent information ";
-                error += "in the Database. Unable to locate org with id " + QString::number(task->org_id());
+                //error += "in the Database. Unable to locate org with id " + QString::number(task->org_id());
                 error += ".";
             }
         } else {
@@ -402,7 +402,7 @@ QSharedPointer<Email> EmailGenerator::generateEmail(TaskTranslationUploaded emai
         user = UserDao::getUser(db, email_message.user_id());
         translator = UserDao::getUser(db, email_message.translator_id());
         task = TaskDao::getTask(db, email_message.task_id());
-        org = OrganisationDao::getOrg(db, task->org_id());
+        //org = OrganisationDao::getOrg(db, task->org_id());    Get org id from project
 
         if(user == NULL || translator == NULL || task == NULL) {
             error = "Failed to generate task translation uploaded email. Unable ";
@@ -414,7 +414,7 @@ QSharedPointer<Email> EmailGenerator::generateEmail(TaskTranslationUploaded emai
             if(org == NULL) {
                 error = "Failed to generate task translation uploaded email. Unable ";
                 error += "to find relevant inforamtion in the Database. Could not find ";
-                error += "Organisation with ID " + QString::number(task->org_id()) + ".";
+                //error += "Organisation with ID " + QString::number(task->org_id()) + ".";
             }
         }
 

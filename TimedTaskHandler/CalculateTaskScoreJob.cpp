@@ -56,16 +56,16 @@ void CalculateTaskScore::run()
                     foreach(QSharedPointer<Task> task, tasks) {
                         int score = 0;
 
-                        if(user->native_lang_id() == task->source_lang_id()) {
+                        if(user->native_lang_id() == task->sourcelanguageid()) {
                             score += 300;
-                            if(user->native_region_id() == task->source_region_id()) {
+                            if(user->native_region_id() == task->sourcecountryid()) {
                                 score += 100;
                             }
                         }
 
-                        if(user->native_lang_id() == task->target_lang_id()) {
+                        if(user->native_lang_id() == task->targetlanguageid()) {
                             score += 150;
-                            if(user->native_region_id() == task->target_region_id()) {
+                            if(user->native_region_id() == task->targetcountryid()) {
                                 score += 75;
                             }
                         }
@@ -82,7 +82,7 @@ void CalculateTaskScore::run()
                         }
 
                         QDateTime created_time = QDateTime::fromString(
-                                    QString::fromStdString(task->created_time()), "yyyy-MM-ddTHH:mm:ss");
+                                    QString::fromStdString(task->createdtime()), "yyyy-MM-ddTHH:mm:ss");
                         //increase score by one per day since created time
                         score += created_time.daysTo(QDateTime::currentDateTime());
 
