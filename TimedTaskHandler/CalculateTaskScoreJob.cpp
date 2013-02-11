@@ -56,19 +56,21 @@ void CalculateTaskScore::run()
                     foreach(QSharedPointer<Task> task, tasks) {
                         int score = 0;
 
-                        if(user->native_lang_id() == task->sourcelanguageid()) {
+                        //Broken until Users get Codes instead of ids
+                        //TODO: fix when stored proc updated
+                        /*if(user->native_lang_id() == task->sourcelanguagecode()) {
                             score += 300;
-                            if(user->native_region_id() == task->sourcecountryid()) {
+                            if(user->native_region_id() == task->sourcecountrycode()) {
                                 score += 100;
                             }
                         }
 
-                        if(user->native_lang_id() == task->targetlanguageid()) {
+                        if(user->native_lang_id() == task->targetlanguagecode()) {
                             score += 150;
-                            if(user->native_region_id() == task->targetcountryid()) {
+                            if(user->native_region_id() == task->targetcountrycode()) {
                                 score += 75;
                             }
-                        }
+                        }*/
 
                         QList<QSharedPointer<Tag> > taskTags = TagDao::getTaskTags(db, task->id());
                         int increment_value = 100;
@@ -162,18 +164,6 @@ QList<QSharedPointer<Task> > CalculateTaskScore::getTasks()
     return ret;
 }
 
-int CalculateTaskScore::getCurrentScore(int user_id, int task_id)
-{
-    int ret = -1;
-    QString args = QString::number(user_id) + ", " + QString::number(task_id);
-    QSharedPointer<QSqlQuery> q = db->call("getUserTaskScore", args);
-    if(q->first()) {
-        ret = db->getValueFromQuery("score", q).toInt();
-    }
-
-    return ret;
-}
-
 int CalculateTaskScore::getTaskIdFromMessage()
 {
     int ret = -1;
@@ -200,4 +190,16 @@ void CalculateTaskScore::saveUserTaskScore(int user_id, int task_id, int score)
                 + ", " + QString::number(score);
         db->call("saveUserTaskScore", args);
     }
+}
+
+int CalculateTaskScore::getCurrentScore(int user_id, int task_id)
+{
+    int ret = -1;
+    QString args = QString::number(user_id) + ", " + QString::number(task_id);
+    QSharedPointer<QSqlQuery> q = db->call("getUserTaskScore", args);
+    if(q->first()) {
+        ret = db->getValueFromQuery("score", q).toInt();
+    }
+
+    return ret;
 }

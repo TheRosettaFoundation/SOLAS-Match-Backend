@@ -46,7 +46,8 @@ SOURCES += \
     protobufs/emails/OrgTaskDeadlinePassed.pb.cc \
     protobufs/emails/UserClaimedTaskDeadlinePassed.pb.cc \
     protobufs/models/ArchivedProject.pb.cc \
-    protobufs/models/Project.pb.cc
+    protobufs/models/Project.pb.cc \
+    DataAccessObjects/ProjectDao.cpp
 
 HEADERS +=\
     MySQLHandler.h \
@@ -76,7 +77,8 @@ HEADERS +=\
     protobufs/emails/OrgTaskDeadlinePassed.pb.h \
     protobufs/emails/UserClaimedTaskDeadlinePassed.pb.h \
     protobufs/models/ArchivedProject.pb.h \
-    protobufs/models/Project.pb.h
+    protobufs/models/Project.pb.h \
+    DataAccessObjects/ProjectDao.h
 
 symbian {
     MMP_RULES += EXPORTUNFROZEN

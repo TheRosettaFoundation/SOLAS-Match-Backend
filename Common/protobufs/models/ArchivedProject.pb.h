@@ -153,10 +153,32 @@ class ArchivedProject : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 wordcount() const;
   inline void set_wordcount(::google::protobuf::int32 value);
   
-  // optional string createdTime = 8;
+  // optional string languageCode = 8;
+  inline bool has_languagecode() const;
+  inline void clear_languagecode();
+  static const int kLanguageCodeFieldNumber = 8;
+  inline const ::std::string& languagecode() const;
+  inline void set_languagecode(const ::std::string& value);
+  inline void set_languagecode(const char* value);
+  inline void set_languagecode(const char* value, size_t size);
+  inline ::std::string* mutable_languagecode();
+  inline ::std::string* release_languagecode();
+  
+  // optional string countryCode = 9;
+  inline bool has_countrycode() const;
+  inline void clear_countrycode();
+  static const int kCountryCodeFieldNumber = 9;
+  inline const ::std::string& countrycode() const;
+  inline void set_countrycode(const ::std::string& value);
+  inline void set_countrycode(const char* value);
+  inline void set_countrycode(const char* value, size_t size);
+  inline ::std::string* mutable_countrycode();
+  inline ::std::string* release_countrycode();
+  
+  // optional string createdTime = 10;
   inline bool has_createdtime() const;
   inline void clear_createdtime();
-  static const int kCreatedTimeFieldNumber = 8;
+  static const int kCreatedTimeFieldNumber = 10;
   inline const ::std::string& createdtime() const;
   inline void set_createdtime(const ::std::string& value);
   inline void set_createdtime(const char* value);
@@ -164,10 +186,10 @@ class ArchivedProject : public ::google::protobuf::Message {
   inline ::std::string* mutable_createdtime();
   inline ::std::string* release_createdtime();
   
-  // optional string archivedDate = 9;
+  // optional string archivedDate = 11;
   inline bool has_archiveddate() const;
   inline void clear_archiveddate();
-  static const int kArchivedDateFieldNumber = 9;
+  static const int kArchivedDateFieldNumber = 11;
   inline const ::std::string& archiveddate() const;
   inline void set_archiveddate(const ::std::string& value);
   inline void set_archiveddate(const char* value);
@@ -175,10 +197,10 @@ class ArchivedProject : public ::google::protobuf::Message {
   inline ::std::string* mutable_archiveddate();
   inline ::std::string* release_archiveddate();
   
-  // optional int32 translatorId = 10;
+  // optional int32 translatorId = 12;
   inline bool has_translatorid() const;
   inline void clear_translatorid();
-  static const int kTranslatorIdFieldNumber = 10;
+  static const int kTranslatorIdFieldNumber = 12;
   inline ::google::protobuf::int32 translatorid() const;
   inline void set_translatorid(::google::protobuf::int32 value);
   
@@ -198,6 +220,10 @@ class ArchivedProject : public ::google::protobuf::Message {
   inline void clear_has_reference();
   inline void set_has_wordcount();
   inline void clear_has_wordcount();
+  inline void set_has_languagecode();
+  inline void clear_has_languagecode();
+  inline void set_has_countrycode();
+  inline void clear_has_countrycode();
   inline void set_has_createdtime();
   inline void clear_has_createdtime();
   inline void set_has_archiveddate();
@@ -213,13 +239,15 @@ class ArchivedProject : public ::google::protobuf::Message {
   ::google::protobuf::int32 organisationid_;
   ::std::string* deadline_;
   ::std::string* reference_;
-  ::std::string* createdtime_;
+  ::std::string* languagecode_;
+  ::std::string* countrycode_;
   ::google::protobuf::int32 wordcount_;
   ::google::protobuf::int32 translatorid_;
+  ::std::string* createdtime_;
   ::std::string* archiveddate_;
   
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(10 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(12 + 31) / 32];
   
   friend void  protobuf_AddDesc_ArchivedProject_2eproto();
   friend void protobuf_AssignDesc_ArchivedProject_2eproto();
@@ -533,15 +561,131 @@ inline void ArchivedProject::set_wordcount(::google::protobuf::int32 value) {
   wordcount_ = value;
 }
 
-// optional string createdTime = 8;
-inline bool ArchivedProject::has_createdtime() const {
+// optional string languageCode = 8;
+inline bool ArchivedProject::has_languagecode() const {
   return (_has_bits_[0] & 0x00000080u) != 0;
 }
-inline void ArchivedProject::set_has_createdtime() {
+inline void ArchivedProject::set_has_languagecode() {
   _has_bits_[0] |= 0x00000080u;
 }
-inline void ArchivedProject::clear_has_createdtime() {
+inline void ArchivedProject::clear_has_languagecode() {
   _has_bits_[0] &= ~0x00000080u;
+}
+inline void ArchivedProject::clear_languagecode() {
+  if (languagecode_ != &::google::protobuf::internal::kEmptyString) {
+    languagecode_->clear();
+  }
+  clear_has_languagecode();
+}
+inline const ::std::string& ArchivedProject::languagecode() const {
+  return *languagecode_;
+}
+inline void ArchivedProject::set_languagecode(const ::std::string& value) {
+  set_has_languagecode();
+  if (languagecode_ == &::google::protobuf::internal::kEmptyString) {
+    languagecode_ = new ::std::string;
+  }
+  languagecode_->assign(value);
+}
+inline void ArchivedProject::set_languagecode(const char* value) {
+  set_has_languagecode();
+  if (languagecode_ == &::google::protobuf::internal::kEmptyString) {
+    languagecode_ = new ::std::string;
+  }
+  languagecode_->assign(value);
+}
+inline void ArchivedProject::set_languagecode(const char* value, size_t size) {
+  set_has_languagecode();
+  if (languagecode_ == &::google::protobuf::internal::kEmptyString) {
+    languagecode_ = new ::std::string;
+  }
+  languagecode_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ArchivedProject::mutable_languagecode() {
+  set_has_languagecode();
+  if (languagecode_ == &::google::protobuf::internal::kEmptyString) {
+    languagecode_ = new ::std::string;
+  }
+  return languagecode_;
+}
+inline ::std::string* ArchivedProject::release_languagecode() {
+  clear_has_languagecode();
+  if (languagecode_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = languagecode_;
+    languagecode_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+
+// optional string countryCode = 9;
+inline bool ArchivedProject::has_countrycode() const {
+  return (_has_bits_[0] & 0x00000100u) != 0;
+}
+inline void ArchivedProject::set_has_countrycode() {
+  _has_bits_[0] |= 0x00000100u;
+}
+inline void ArchivedProject::clear_has_countrycode() {
+  _has_bits_[0] &= ~0x00000100u;
+}
+inline void ArchivedProject::clear_countrycode() {
+  if (countrycode_ != &::google::protobuf::internal::kEmptyString) {
+    countrycode_->clear();
+  }
+  clear_has_countrycode();
+}
+inline const ::std::string& ArchivedProject::countrycode() const {
+  return *countrycode_;
+}
+inline void ArchivedProject::set_countrycode(const ::std::string& value) {
+  set_has_countrycode();
+  if (countrycode_ == &::google::protobuf::internal::kEmptyString) {
+    countrycode_ = new ::std::string;
+  }
+  countrycode_->assign(value);
+}
+inline void ArchivedProject::set_countrycode(const char* value) {
+  set_has_countrycode();
+  if (countrycode_ == &::google::protobuf::internal::kEmptyString) {
+    countrycode_ = new ::std::string;
+  }
+  countrycode_->assign(value);
+}
+inline void ArchivedProject::set_countrycode(const char* value, size_t size) {
+  set_has_countrycode();
+  if (countrycode_ == &::google::protobuf::internal::kEmptyString) {
+    countrycode_ = new ::std::string;
+  }
+  countrycode_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ArchivedProject::mutable_countrycode() {
+  set_has_countrycode();
+  if (countrycode_ == &::google::protobuf::internal::kEmptyString) {
+    countrycode_ = new ::std::string;
+  }
+  return countrycode_;
+}
+inline ::std::string* ArchivedProject::release_countrycode() {
+  clear_has_countrycode();
+  if (countrycode_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = countrycode_;
+    countrycode_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+
+// optional string createdTime = 10;
+inline bool ArchivedProject::has_createdtime() const {
+  return (_has_bits_[0] & 0x00000200u) != 0;
+}
+inline void ArchivedProject::set_has_createdtime() {
+  _has_bits_[0] |= 0x00000200u;
+}
+inline void ArchivedProject::clear_has_createdtime() {
+  _has_bits_[0] &= ~0x00000200u;
 }
 inline void ArchivedProject::clear_createdtime() {
   if (createdtime_ != &::google::protobuf::internal::kEmptyString) {
@@ -591,15 +735,15 @@ inline ::std::string* ArchivedProject::release_createdtime() {
   }
 }
 
-// optional string archivedDate = 9;
+// optional string archivedDate = 11;
 inline bool ArchivedProject::has_archiveddate() const {
-  return (_has_bits_[0] & 0x00000100u) != 0;
+  return (_has_bits_[0] & 0x00000400u) != 0;
 }
 inline void ArchivedProject::set_has_archiveddate() {
-  _has_bits_[0] |= 0x00000100u;
+  _has_bits_[0] |= 0x00000400u;
 }
 inline void ArchivedProject::clear_has_archiveddate() {
-  _has_bits_[0] &= ~0x00000100u;
+  _has_bits_[0] &= ~0x00000400u;
 }
 inline void ArchivedProject::clear_archiveddate() {
   if (archiveddate_ != &::google::protobuf::internal::kEmptyString) {
@@ -649,15 +793,15 @@ inline ::std::string* ArchivedProject::release_archiveddate() {
   }
 }
 
-// optional int32 translatorId = 10;
+// optional int32 translatorId = 12;
 inline bool ArchivedProject::has_translatorid() const {
-  return (_has_bits_[0] & 0x00000200u) != 0;
+  return (_has_bits_[0] & 0x00000800u) != 0;
 }
 inline void ArchivedProject::set_has_translatorid() {
-  _has_bits_[0] |= 0x00000200u;
+  _has_bits_[0] |= 0x00000800u;
 }
 inline void ArchivedProject::clear_has_translatorid() {
-  _has_bits_[0] &= ~0x00000200u;
+  _has_bits_[0] &= ~0x00000800u;
 }
 inline void ArchivedProject::clear_translatorid() {
   translatorid_ = 0;

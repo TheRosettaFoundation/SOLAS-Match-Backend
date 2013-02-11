@@ -42,7 +42,7 @@ void DeadlineChecker::run()
                 QDateTime deadlineTime = QDateTime::fromString(QString::fromStdString(task->deadline()), "yyyy-MM-ddTHH:mm:ss");
                 if(currentTime > deadlineTime) {
                     qDebug() << "Task " << task->id() << " is pass its deadline of " << QString::fromStdString(task->deadline());
-                    int translator_id = TaskDao::getTaskTranslator(db, task->id());
+                    QSharedPointer<User> translator = TaskDao::getTaskTranslator(db, task->id());
 
                     QList<QSharedPointer<User> > users = TaskDao::getSubscribedUsers(db, task->id());
                     foreach(QSharedPointer<User> user, users) {
@@ -52,19 +52,19 @@ void DeadlineChecker::run()
                         orgEmail.set_user_id(user->user_id());
                         //orgEmail.set_org_id(task->org()); Get org ID from project
                         orgEmail.set_task_id(task->id());
-                        if(translator_id != -1) {
-                            orgEmail.set_translator_id(translator_id);
+                        if(translator != NULL) {
+                            orgEmail.set_translator_id(translator->user_id());
                         }
 
                         client.publish(exchange, "email.org.task.deadline",
                                        QString::fromStdString(orgEmail.SerializeAsString()));
                     }
 
-                    if(translator_id != -1) {
+                    if(translator != NULL) {
                         UserClaimedTaskDeadlinePassed userEmail;
                         userEmail.set_email_type(EmailMessage::UserClaimedTaskDeadlinePassed);
                         userEmail.set_task_id(task->id());
-                        userEmail.set_translator_id(translator_id);
+                        userEmail.set_translator_id(translator->user_id());
 
                         client.publish(exchange, "email.user.deadline.passed",
                                        QString::fromStdString(userEmail.SerializeAsString()));

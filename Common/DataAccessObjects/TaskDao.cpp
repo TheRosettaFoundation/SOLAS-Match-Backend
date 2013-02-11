@@ -3,9 +3,10 @@
 #include "../ModelGenerator.h"
 #include "UserDao.h"
 
-QList<QSharedPointer<Task> > TaskDao::getTasks(MySQLHandler *db, int id, int org_id, QString title, QString imp,
-                            QString ref_page, int wc, int s_lang_id, int t_lang_id, QString deadlineTime, QString time,
-                            int s_reg_id, int t_reg_id)
+QList<QSharedPointer<Task> > TaskDao::getTasks(MySQLHandler *db, int id, int projectId, QString title,
+                             int wc, QString sourceLang, QString targetLangId, QString createdTime,
+                             QString sourceCountry, QString targetCountry, QString comment,
+                             int type, int status, int published, QString deadlineTime)
 {
     QList<QSharedPointer<Task> > ret = QList<QSharedPointer<Task> >();
     QString args = "";
@@ -16,8 +17,8 @@ QList<QSharedPointer<Task> > TaskDao::getTasks(MySQLHandler *db, int id, int org
         args += "null, ";
     }
 
-    if(org_id != -1) {
-        args += QString::number(org_id) + ", ";
+    if(projectId != -1) {
+        args += QString::number(projectId) + ", ";
     } else {
         args += "null, ";
     }
@@ -34,50 +35,62 @@ QList<QSharedPointer<Task> > TaskDao::getTasks(MySQLHandler *db, int id, int org
         args += "null, ";
     }
 
-    if(s_lang_id != -1) {
-        args += QString::number(s_lang_id) + ", ";
+    if(sourceLang != "") {
+        args += sourceLang + ", ";
     } else {
         args += "null, ";
     }
 
-    if(t_lang_id != -1) {
-        args += QString::number(t_lang_id) + ", ";
+    if(targetLangId != "") {
+        args += targetLangId + ", ";
+    } else {
+        args += "null, ";
+    }
+
+    if (createdTime != "") {
+        args += createdTime + ", ";
+    } else {
+        args += "null, ";
+    }
+
+    if(sourceCountry != "") {
+        args += sourceCountry + ", ";
+    } else {
+        args += "null, ";
+    }
+
+    if(targetCountry != "") {
+        args += targetCountry + ", ";
+    } else {
+        args += "null, ";
+    }
+
+    if (comment != "") {
+        args += comment + ", ";
+    } else {
+        args += "null, ";
+    }
+
+    if(type != -1) {
+        args += QString::number(type) + ", ";
+    } else {
+        args += "null, ";
+    }
+
+    if (status != -1) {
+        args += QString::number(status) + ", ";
+    } else {
+        args += "null, ";
+    }
+
+    if (published != -1) {
+        args += QString::number(published) + ", ";
     } else {
         args += "null, ";
     }
 
     if(deadlineTime != "") {
-        args += deadlineTime + ", ";
-    } else {
-        args += "null, ";
-    }
-
-    if(time != "") {
-        args += time + ", ";
-    } else {
-        args += "null, ";
-    }
-
-    if(imp != "") {
-        args += imp + ", ";
-    } else {
-        args += "null, ";
-    }
-
-    if(ref_page != "") {
-        args += ref_page + ", ";
-    } else {
-        args += "null, ";
-    }
-
-    if(s_reg_id != -1) {
-        args += QString::number(s_reg_id) + ", ";
-    } else {
-        args += "null, ";
-    }
-
-    if(t_reg_id != -1) {
-        args += QString::number(t_reg_id);
+        args += deadlineTime;
     } else {
         args += "null";
     }
@@ -93,14 +106,15 @@ QList<QSharedPointer<Task> > TaskDao::getTasks(MySQLHandler *db, int id, int org
     return ret;
 }
 
-QSharedPointer<Task> TaskDao::getTask(MySQLHandler *db, int id, int org_id,
-                   QString title, QString imp, QString ref_page,
-                   int wc, int s_lang_id, int t_lang_id, QString deadlineTime,
-                   QString time, int s_reg_id, int t_reg_id)
+QSharedPointer<Task> TaskDao::getTask(MySQLHandler *db, int id, int projectId, QString title,
+                                      int wc, QString sourceLang, QString targetLangId, QString createdTime,
+                                      QString sourceCountry, QString targetCountry, QString comment,
+                                      int type, int status, int published, QString deadlineTime)
 {
     QSharedPointer<Task> task;
-    QList<QSharedPointer<Task> > task_list = TaskDao::getTasks(db, id, org_id, title, imp, ref_page, wc,
-                          s_lang_id, t_lang_id, deadlineTime, time, s_reg_id, t_reg_id);
+    QList<QSharedPointer<Task> > task_list = TaskDao::getTasks(db, id, projectId, title, wc, sourceLang,
+                                      targetLangId, createdTime, sourceCountry, targetCountry, comment,
+                                      type, status, published, deadlineTime);
     if(task_list.count() > 0) {
         task = task_list.at(0);
     }
@@ -126,15 +140,14 @@ QList<QSharedPointer<Task> > TaskDao::getActiveTasks(MySQLHandler *db, int limit
     return ret;
 }
 
-int TaskDao::getTaskTranslator(MySQLHandler *db, int task_id)
+QSharedPointer<User> TaskDao::getTaskTranslator(MySQLHandler *db, int task_id)
 {
-    int user_id = -1;
-    QSharedPointer<QSqlQuery> mQuery = db->call("getTaskTranslator", QString::number(task_id));
+    QSharedPointer<User> user;
+    QSharedPointer<QSqlQuery> mQuery = db->call("getUserClaimedTask", QString::number(task_id));
     if(mQuery->first()) {
-        user_id = MySQLHandler::getValueFromQuery("user_id", mQuery).toInt();
+        user = ModelGenerator::GenerateUser(mQuery);
     }
-
-    return user_id;
+    return user;
 }
 
 QList<QSharedPointer<User> > TaskDao::getSubscribedUsers(MySQLHandler *db, int task_id)

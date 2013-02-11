@@ -303,7 +303,7 @@ QSharedPointer<Email> EmailGenerator::generateEmail(TaskArchived email_message)
             dict.ShowSection("NO_USER_NAME");
         }
         dict["TASK_TITLE"] = task->title();
-        dict["ORG_NAME"] = org->name();
+        //dict["ORG_NAME"] = org->name();
 
         std::string email_body;
         QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/task-archived.tpl";

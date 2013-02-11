@@ -14,16 +14,16 @@
 class TaskDao
 {
 public:
-    static QList<QSharedPointer<Task> > getTasks(MySQLHandler *db, int id = -1, int org_id = -1, QString title = "",
-                          QString imp = "", QString ref_page = "", int wc = -1, int s_lang_id = -1,
-                          int t_lang_id = -1, QString deadlineTime = "", QString time = "",
-                          int s_reg_id = -1, int t_reg_id = -1);
-    static QSharedPointer<Task> getTask(MySQLHandler *db, int id = -1, int org_id = -1, QString title = "",
-                          QString imp = "", QString ref_page = "", int wc = -1, int s_lang_id = -1,
-                                        int t_lang_id = -1, QString deadlineTime = "", QString time = "",
-                                        int s_reg_id = -1, int t_reg_id = -1);
+    static QList<QSharedPointer<Task> > getTasks(MySQLHandler *db, int id = -1, int projectId = -1, QString title = "",
+                          int wc = -1, QString sourceLang = "", QString targetLangId = "", QString createdTime = "",
+                          QString sourceCountry = "", QString targetCountry = "", QString comment = "",
+                          int type = -1, int status = -1, int published = -1, QString deadlineTime = "");
+    static QSharedPointer<Task> getTask(MySQLHandler *db, int id = -1, int projectId = -1, QString title = "",
+                          int wc = -1, QString sourceLang = "", QString targetLangId = "", QString createdTime = "",
+                          QString sourceCountry = "", QString targetCountry = "", QString comment = "",
+                          int type = -1, int status = -1, int published = -1, QString deadlineTime = "");
     static QList<QSharedPointer<Task> > getActiveTasks(MySQLHandler *db, int limit = -1);
-    static int getTaskTranslator(MySQLHandler *db, int task_id);
+    static QSharedPointer<User> getTaskTranslator(MySQLHandler *db, int task_id);
     static QList<QSharedPointer<User> > getSubscribedUsers(MySQLHandler *db, int task_id);
     static QList<QSharedPointer<ArchivedTask> > getArchivedTasks(MySQLHandler *db, int arc_id = -1, int t_id = -1, int o_id = -1);
     static QSharedPointer<ArchivedTask> getArchivedTask(MySQLHandler *db, int arc_id = -1, int t_id = -1, int o_id = -1);

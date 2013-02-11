@@ -175,6 +175,44 @@ class Project : public ::google::protobuf::Message {
   inline ::std::string* mutable_status();
   inline ::std::string* release_status();
   
+  // optional string sourceLanguageCode = 10;
+  inline bool has_sourcelanguagecode() const;
+  inline void clear_sourcelanguagecode();
+  static const int kSourceLanguageCodeFieldNumber = 10;
+  inline const ::std::string& sourcelanguagecode() const;
+  inline void set_sourcelanguagecode(const ::std::string& value);
+  inline void set_sourcelanguagecode(const char* value);
+  inline void set_sourcelanguagecode(const char* value, size_t size);
+  inline ::std::string* mutable_sourcelanguagecode();
+  inline ::std::string* release_sourcelanguagecode();
+  
+  // optional string sourceCountryCode = 11;
+  inline bool has_sourcecountrycode() const;
+  inline void clear_sourcecountrycode();
+  static const int kSourceCountryCodeFieldNumber = 11;
+  inline const ::std::string& sourcecountrycode() const;
+  inline void set_sourcecountrycode(const ::std::string& value);
+  inline void set_sourcecountrycode(const char* value);
+  inline void set_sourcecountrycode(const char* value, size_t size);
+  inline ::std::string* mutable_sourcecountrycode();
+  inline ::std::string* release_sourcecountrycode();
+  
+  // repeated string tag = 12;
+  inline int tag_size() const;
+  inline void clear_tag();
+  static const int kTagFieldNumber = 12;
+  inline const ::std::string& tag(int index) const;
+  inline ::std::string* mutable_tag(int index);
+  inline void set_tag(int index, const ::std::string& value);
+  inline void set_tag(int index, const char* value);
+  inline void set_tag(int index, const char* value, size_t size);
+  inline ::std::string* add_tag();
+  inline void add_tag(const ::std::string& value);
+  inline void add_tag(const char* value);
+  inline void add_tag(const char* value, size_t size);
+  inline const ::google::protobuf::RepeatedPtrField< ::std::string>& tag() const;
+  inline ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_tag();
+  
   // @@protoc_insertion_point(class_scope:Project)
  private:
   inline void set_has_id();
@@ -195,6 +233,10 @@ class Project : public ::google::protobuf::Message {
   inline void clear_has_createdtime();
   inline void set_has_status();
   inline void clear_has_status();
+  inline void set_has_sourcelanguagecode();
+  inline void clear_has_sourcelanguagecode();
+  inline void set_has_sourcecountrycode();
+  inline void clear_has_sourcecountrycode();
   
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
   
@@ -206,10 +248,13 @@ class Project : public ::google::protobuf::Message {
   ::std::string* reference_;
   ::std::string* createdtime_;
   ::std::string* status_;
+  ::std::string* sourcelanguagecode_;
+  ::std::string* sourcecountrycode_;
+  ::google::protobuf::RepeatedPtrField< ::std::string> tag_;
   ::google::protobuf::int32 wordcount_;
   
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(9 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(12 + 31) / 32];
   
   friend void  protobuf_AddDesc_Project_2eproto();
   friend void protobuf_AssignDesc_Project_2eproto();
@@ -637,6 +682,166 @@ inline ::std::string* Project::release_status() {
     status_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
     return temp;
   }
+}
+
+// optional string sourceLanguageCode = 10;
+inline bool Project::has_sourcelanguagecode() const {
+  return (_has_bits_[0] & 0x00000200u) != 0;
+}
+inline void Project::set_has_sourcelanguagecode() {
+  _has_bits_[0] |= 0x00000200u;
+}
+inline void Project::clear_has_sourcelanguagecode() {
+  _has_bits_[0] &= ~0x00000200u;
+}
+inline void Project::clear_sourcelanguagecode() {
+  if (sourcelanguagecode_ != &::google::protobuf::internal::kEmptyString) {
+    sourcelanguagecode_->clear();
+  }
+  clear_has_sourcelanguagecode();
+}
+inline const ::std::string& Project::sourcelanguagecode() const {
+  return *sourcelanguagecode_;
+}
+inline void Project::set_sourcelanguagecode(const ::std::string& value) {
+  set_has_sourcelanguagecode();
+  if (sourcelanguagecode_ == &::google::protobuf::internal::kEmptyString) {
+    sourcelanguagecode_ = new ::std::string;
+  }
+  sourcelanguagecode_->assign(value);
+}
+inline void Project::set_sourcelanguagecode(const char* value) {
+  set_has_sourcelanguagecode();
+  if (sourcelanguagecode_ == &::google::protobuf::internal::kEmptyString) {
+    sourcelanguagecode_ = new ::std::string;
+  }
+  sourcelanguagecode_->assign(value);
+}
+inline void Project::set_sourcelanguagecode(const char* value, size_t size) {
+  set_has_sourcelanguagecode();
+  if (sourcelanguagecode_ == &::google::protobuf::internal::kEmptyString) {
+    sourcelanguagecode_ = new ::std::string;
+  }
+  sourcelanguagecode_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* Project::mutable_sourcelanguagecode() {
+  set_has_sourcelanguagecode();
+  if (sourcelanguagecode_ == &::google::protobuf::internal::kEmptyString) {
+    sourcelanguagecode_ = new ::std::string;
+  }
+  return sourcelanguagecode_;
+}
+inline ::std::string* Project::release_sourcelanguagecode() {
+  clear_has_sourcelanguagecode();
+  if (sourcelanguagecode_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = sourcelanguagecode_;
+    sourcelanguagecode_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+
+// optional string sourceCountryCode = 11;
+inline bool Project::has_sourcecountrycode() const {
+  return (_has_bits_[0] & 0x00000400u) != 0;
+}
+inline void Project::set_has_sourcecountrycode() {
+  _has_bits_[0] |= 0x00000400u;
+}
+inline void Project::clear_has_sourcecountrycode() {
+  _has_bits_[0] &= ~0x00000400u;
+}
+inline void Project::clear_sourcecountrycode() {
+  if (sourcecountrycode_ != &::google::protobuf::internal::kEmptyString) {
+    sourcecountrycode_->clear();
+  }
+  clear_has_sourcecountrycode();
+}
+inline const ::std::string& Project::sourcecountrycode() const {
+  return *sourcecountrycode_;
+}
+inline void Project::set_sourcecountrycode(const ::std::string& value) {
+  set_has_sourcecountrycode();
+  if (sourcecountrycode_ == &::google::protobuf::internal::kEmptyString) {
+    sourcecountrycode_ = new ::std::string;
+  }
+  sourcecountrycode_->assign(value);
+}
+inline void Project::set_sourcecountrycode(const char* value) {
+  set_has_sourcecountrycode();
+  if (sourcecountrycode_ == &::google::protobuf::internal::kEmptyString) {
+    sourcecountrycode_ = new ::std::string;
+  }
+  sourcecountrycode_->assign(value);
+}
+inline void Project::set_sourcecountrycode(const char* value, size_t size) {
+  set_has_sourcecountrycode();
+  if (sourcecountrycode_ == &::google::protobuf::internal::kEmptyString) {
+    sourcecountrycode_ = new ::std::string;
+  }
+  sourcecountrycode_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* Project::mutable_sourcecountrycode() {
+  set_has_sourcecountrycode();
+  if (sourcecountrycode_ == &::google::protobuf::internal::kEmptyString) {
+    sourcecountrycode_ = new ::std::string;
+  }
+  return sourcecountrycode_;
+}
+inline ::std::string* Project::release_sourcecountrycode() {
+  clear_has_sourcecountrycode();
+  if (sourcecountrycode_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = sourcecountrycode_;
+    sourcecountrycode_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+
+// repeated string tag = 12;
+inline int Project::tag_size() const {
+  return tag_.size();
+}
+inline void Project::clear_tag() {
+  tag_.Clear();
+}
+inline const ::std::string& Project::tag(int index) const {
+  return tag_.Get(index);
+}
+inline ::std::string* Project::mutable_tag(int index) {
+  return tag_.Mutable(index);
+}
+inline void Project::set_tag(int index, const ::std::string& value) {
+  tag_.Mutable(index)->assign(value);
+}
+inline void Project::set_tag(int index, const char* value) {
+  tag_.Mutable(index)->assign(value);
+}
+inline void Project::set_tag(int index, const char* value, size_t size) {
+  tag_.Mutable(index)->assign(
+    reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* Project::add_tag() {
+  return tag_.Add();
+}
+inline void Project::add_tag(const ::std::string& value) {
+  tag_.Add()->assign(value);
+}
+inline void Project::add_tag(const char* value) {
+  tag_.Add()->assign(value);
+}
+inline void Project::add_tag(const char* value, size_t size) {
+  tag_.Add()->assign(reinterpret_cast<const char*>(value), size);
+}
+inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
+Project::tag() const {
+  return tag_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::std::string>*
+Project::mutable_tag() {
+  return &tag_;
 }
 
 
