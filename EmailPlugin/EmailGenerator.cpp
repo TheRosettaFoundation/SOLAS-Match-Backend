@@ -11,9 +11,11 @@
 #include "Common/DataAccessObjects/UserDao.h"
 #include "Common/DataAccessObjects/OrganisationDao.h"
 #include "Common/DataAccessObjects/TaskDao.h"
+#include "Common/DataAccessObjects/ProjectDao.h"
 
 #include "Common/protobufs/models/User.pb.h"
 #include "Common/protobufs/models/Task.pb.h"
+#include "Common/protobufs/models/Project.pb.h"
 #include "Common/protobufs/models/ArchivedTask.pb.h"
 #include "Common/protobufs/models/Organisation.pb.h"
 
@@ -56,7 +58,7 @@ QSharedPointer<Email> EmailGenerator::generateEmail(OrgMembershipAccepted email_
     if(db->init()) {
         user = UserDao::getUser(db, email_message.user_id());
         org = OrganisationDao::getOrg(db, email_message.org_id());
-        if(user == NULL || org == NULL) {
+        if(user.isNull() || org.isNull()) {
             error = "Unable to generate OrgMembershipAccepted email. Unable to find objects ";
             error += "in the DB. Searched for user ID " + QString::number(email_message.user_id());
             error += " and org ID " + QString::number(email_message.org_id()) + ".";
@@ -110,7 +112,7 @@ QSharedPointer<Email> EmailGenerator::generateEmail(OrgMembershipRefused email_m
         user = UserDao::getUser(db, email_message.user_id());
         org = OrganisationDao::getOrg(db, email_message.org_id());
 
-        if(user == NULL || org == NULL)
+        if(user.isNull() || org.isNull())
         {
             error = "Unable to generate OrgMembershipRefused email. Unable to find objects ";
             error += "in the DB. Searched for user ID " + QString::number(email_message.user_id());
@@ -166,7 +168,7 @@ QSharedPointer<Email> EmailGenerator::generateEmail(OrgTaskDeadlinePassed email_
         task = TaskDao::getTask(db, email_message.task_id());
         user = UserDao::getUser(db, email_message.user_id());
 
-        if(!user || !task) {
+        if(user.isNull() || task.isNull() || translator.isNull()) {
             error = "OrgTaskDeadlinePassed generation failed. Data missing from the DB.";
             error += "Searched for user ID " + QString::number(email_message.translator_id());
             error += " and " + QString::number(email_message.user_id());
@@ -220,7 +222,7 @@ QSharedPointer<Email> EmailGenerator::generateEmail(PasswordResetEmail email_mes
         user = UserDao::getUser(db, email_message.user_id());
         uuid = UserDao::getPasswordResetUuid(db, email_message.user_id());
 
-        if(user == NULL || uuid.compare("") == 0) {
+        if(user.isNull() || uuid.compare("") == 0) {
             error = "Password Reset email generation failed. Unable to find ";
             error += "data in the DB. Looking for user id " + email_message.user_id();
         }
@@ -270,17 +272,19 @@ QSharedPointer<Email> EmailGenerator::generateEmail(TaskArchived email_message)
     QSharedPointer<User> user = QSharedPointer<User>();
     QSharedPointer<Organisation> org = QSharedPointer<Organisation>();
     QSharedPointer<ArchivedTask> task = QSharedPointer<ArchivedTask>();
+    QSharedPointer<Project> project = QSharedPointer<Project>();
     MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
 
     if(db->init()) {
         user = UserDao::getUser(db, email_message.user_id());
         task = TaskDao::getArchivedTask(db, -1, email_message.task_id());
 
-        if(user != NULL && task != NULL) {
-            //org = OrganisationDao::getOrg(db, task->org_id());    Get org id from project
-            if(org == NULL) {
+        if(!user.isNull() && !task.isNull()) {
+            project = ProjectDao::getProject(db, task->projectid());
+            org = OrganisationDao::getOrg(db, project->organisationid());
+            if(org.isNull()) {
                 error = "Failed to Generate task archived email. Unable to find relevent information ";
-                //error += "in the Database. Unable to locate org with id " + QString::number(task->org_id());
+                error += "in the Database. Unable to locate org with id " + QString::number(org->id());
                 error += ".";
             }
         } else {
@@ -303,7 +307,7 @@ QSharedPointer<Email> EmailGenerator::generateEmail(TaskArchived email_message)
             dict.ShowSection("NO_USER_NAME");
         }
         dict["TASK_TITLE"] = task->title();
-        //dict["ORG_NAME"] = org->name();
+        dict["ORG_NAME"] = org->name();
 
         std::string email_body;
         QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/task-archived.tpl";
@@ -339,7 +343,7 @@ QSharedPointer<Email> EmailGenerator::generateEmail(TaskClaimed email_message)
         translator = UserDao::getUser(db, email_message.translator_id());
         task = TaskDao::getTask(db, email_message.task_id());
 
-        if(user == NULL || translator == NULL || task == NULL) {
+        if(user.isNull() || translator.isNull() || task.isNull()) {
             error = "Failed to generate task claimed email: Unable to find relevant ";
             error += "information in the database. Searched for user ID ";
             error += QString::number(email_message.user_id()) + ", translator ID ";
@@ -395,6 +399,7 @@ QSharedPointer<Email> EmailGenerator::generateEmail(TaskTranslationUploaded emai
     QSharedPointer<User> user = QSharedPointer<User>();
     QSharedPointer<User> translator = QSharedPointer<User>();
     QSharedPointer<Task> task = QSharedPointer<Task>();
+    QSharedPointer<Project> project = QSharedPointer<Project>();
     QSharedPointer<Organisation> org = QSharedPointer<Organisation>();
     MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
 
@@ -402,19 +407,21 @@ QSharedPointer<Email> EmailGenerator::generateEmail(TaskTranslationUploaded emai
         user = UserDao::getUser(db, email_message.user_id());
         translator = UserDao::getUser(db, email_message.translator_id());
         task = TaskDao::getTask(db, email_message.task_id());
-        //org = OrganisationDao::getOrg(db, task->org_id());    Get org id from project
 
-        if(user == NULL || translator == NULL || task == NULL) {
+        if(user.isNull() || translator.isNull() || task.isNull()) {
             error = "Failed to generate task translation uploaded email. Unable ";
             error += "to find relevant inforamtion in the Database. Searched for ";
             error += "User ID " + QString::number(email_message.user_id()) + ", ";
             error += "Translator ID " + QString::number(email_message.translator_id());
             error += " and Task ID " + QString::number(email_message.task_id()) + ".";
         } else {
-            if(org == NULL) {
+            project = ProjectDao::getProject(db, email_message.task_id());
+            org = OrganisationDao::getOrg(db, project->organisationid());
+
+            if(org.isNull()) {
                 error = "Failed to generate task translation uploaded email. Unable ";
                 error += "to find relevant inforamtion in the Database. Could not find ";
-                //error += "Organisation with ID " + QString::number(task->org_id()) + ".";
+                error += "Organisation with ID " + QString::number(project->organisationid()) + ".";
             }
         }
 
@@ -472,7 +479,7 @@ QSharedPointer<Email> EmailGenerator::generateEmail(UserTaskClaim email_message)
         user = UserDao::getUser(db, email_message.user_id());
         task = TaskDao::getTask(db, email_message.task_id());
 
-        if(user == NULL || task == NULL) {
+        if(user.isNull() || task.isNull()) {
             error = "Failed to generate UserTaskClaim email: Unable to find relevant ";
             error += "data in the Database. Searched for User ID ";
             error += QString::number(email_message.user_id()) + " and Task ID ";

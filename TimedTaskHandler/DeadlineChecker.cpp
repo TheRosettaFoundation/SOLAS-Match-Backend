@@ -7,7 +7,9 @@
 
 #include "Common/MessagingClient.h"
 #include "Common/DataAccessObjects/TaskDao.h"
+#include "Common/DataAccessObjects/ProjectDao.h"
 #include "Common/protobufs/models/Task.pb.h"
+#include "Common/protobufs/models/Project.pb.h"
 #include "Common/protobufs/requests/DeadlineCheckRequest.pb.h"
 #include "Common/protobufs/emails/EmailMessage.pb.h"
 #include "Common/protobufs/emails/OrgTaskDeadlinePassed.pb.h"
@@ -47,12 +49,14 @@ void DeadlineChecker::run()
                     QList<QSharedPointer<User> > users = TaskDao::getSubscribedUsers(db, task->id());
                     foreach(QSharedPointer<User> user, users) {
 
+                        QSharedPointer<Project> project = ProjectDao::getProject(db, task->projectid());
+
                         OrgTaskDeadlinePassed orgEmail;
                         orgEmail.set_email_type(EmailMessage::OrgTaskDeadlinePassed);
                         orgEmail.set_user_id(user->user_id());
-                        //orgEmail.set_org_id(task->org()); Get org ID from project
+                        orgEmail.set_org_id(project->organisationid());
                         orgEmail.set_task_id(task->id());
-                        if(translator != NULL) {
+                        if(!translator.isNull()) {
                             orgEmail.set_translator_id(translator->user_id());
                         }
 
@@ -60,7 +64,7 @@ void DeadlineChecker::run()
                                        QString::fromStdString(orgEmail.SerializeAsString()));
                     }
 
-                    if(translator != NULL) {
+                    if(!translator.isNull()) {
                         UserClaimedTaskDeadlinePassed userEmail;
                         userEmail.set_email_type(EmailMessage::UserClaimedTaskDeadlinePassed);
                         userEmail.set_task_id(task->id());
