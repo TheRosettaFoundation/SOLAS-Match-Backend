@@ -42,11 +42,12 @@ enum EmailMessage_Type {
   EmailMessage_Type_TaskClaimed = 7,
   EmailMessage_Type_TaskTranslationUploaded = 8,
   EmailMessage_Type_OrgTaskDeadlinePassed = 9,
-  EmailMessage_Type_UserClaimedTaskDeadlinePassed = 10
+  EmailMessage_Type_UserClaimedTaskDeadlinePassed = 10,
+  EmailMessage_Type_FeedbackEmail = 11
 };
 bool EmailMessage_Type_IsValid(int value);
 const EmailMessage_Type EmailMessage_Type_Type_MIN = EmailMessage_Type_TaskScoreEmail;
-const EmailMessage_Type EmailMessage_Type_Type_MAX = EmailMessage_Type_UserClaimedTaskDeadlinePassed;
+const EmailMessage_Type EmailMessage_Type_Type_MAX = EmailMessage_Type_FeedbackEmail;
 const int EmailMessage_Type_Type_ARRAYSIZE = EmailMessage_Type_Type_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* EmailMessage_Type_descriptor();
@@ -124,6 +125,7 @@ class EmailMessage : public ::google::protobuf::Message {
   static const Type TaskTranslationUploaded = EmailMessage_Type_TaskTranslationUploaded;
   static const Type OrgTaskDeadlinePassed = EmailMessage_Type_OrgTaskDeadlinePassed;
   static const Type UserClaimedTaskDeadlinePassed = EmailMessage_Type_UserClaimedTaskDeadlinePassed;
+  static const Type FeedbackEmail = EmailMessage_Type_FeedbackEmail;
   static inline bool Type_IsValid(int value) {
     return EmailMessage_Type_IsValid(value);
   }

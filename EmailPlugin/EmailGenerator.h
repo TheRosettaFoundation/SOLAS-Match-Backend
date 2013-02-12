@@ -15,6 +15,7 @@
 #include "Common/protobufs/emails/TaskTranslationUploaded.pb.h"
 #include "Common/protobufs/emails/UserTaskClaim.pb.h"
 #include "Common/protobufs/emails/UserClaimedTaskDeadlinePassed.pb.h"
+#include "Common/protobufs/emails/FeedbackEmail.pb.h"
 
 class EmailGenerator
 {
@@ -30,6 +31,7 @@ public:
     QSharedPointer<Email> generateEmail(TaskTranslationUploaded email_message);
     QSharedPointer<Email> generateEmail(UserTaskClaim email_message);
     QSharedPointer<Email> generateEmail(UserClaimedTaskDeadlinePassed email_message);
+    QSharedPointer<Email> generateEmail(FeedbackEmail email_message);
 
 private:
     QSharedPointer<Email> generateErrorEmail(QString error_message);

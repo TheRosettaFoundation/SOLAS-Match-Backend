@@ -17,6 +17,7 @@
 #include "Common/protobufs/emails/TaskClaimed.pb.h"
 #include "Common/protobufs/emails/TaskTranslationUploaded.pb.h"
 #include "Common/protobufs/emails/UserTaskClaim.pb.h"
+#include "Common/protobufs/emails/FeedbackEmail.pb.h"
 
 #include "Common/MessagingClient.h"
 
@@ -144,6 +145,14 @@ void EmailPlugin::messageReveived(AMQPMessage *message)
         case (EmailMessage::UserClaimedTaskDeadlinePassed):
         {
             UserClaimedTaskDeadlinePassed email_type;
+            email_type.ParseFromString(message_body.toStdString());
+
+            email = emailGen.generateEmail(email_type);
+            break;
+        }
+        case (EmailMessage::FeedbackEmail):
+        {
+            FeedbackEmail email_type;
             email_type.ParseFromString(message_body.toStdString());
 
             email = emailGen.generateEmail(email_type);
