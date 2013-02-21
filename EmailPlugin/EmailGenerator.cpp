@@ -586,7 +586,7 @@ QSharedPointer<Email> EmailGenerator::generateEmail(FeedbackEmail email_message)
     if (db->init()) {
         user = UserDao::getUser(db, email_message.userid().Get(0));
         task = TaskDao::getTask(db, email_message.taskid());
-        feedback = email_message.feedback().c_str();
+        feedback = email_message.feedback().data();
 
         if (user.isNull() || task.isNull()) {
             error = "Failed to generate UserClaimedTaskDeadlinePassed email: Unable to find relevant ";
@@ -609,6 +609,7 @@ QSharedPointer<Email> EmailGenerator::generateEmail(FeedbackEmail email_message)
             dict.ShowSection("NO_USER_NAME");
         }
         dict["TASKTITLE"] = task->title();
+        dict["FEEDBACK"] = feedback.toStdString();
 
         std::string email_body;
         QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/feedback.tpl";
