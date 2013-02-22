@@ -29,12 +29,13 @@ void protobuf_AssignDesc_Project_2eproto() {
       "Project.proto");
   GOOGLE_CHECK(file != NULL);
   Project_descriptor_ = file->message_type(0);
-  static const int Project_offsets_[12] = {
+  static const int Project_offsets_[13] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Project, id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Project, title_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Project, description_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Project, deadline_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Project, organisationid_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Project, impact_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Project, reference_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Project, wordcount_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Project, createdtime_),
@@ -84,13 +85,13 @@ void protobuf_AddDesc_Project_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\rProject.proto\"\362\001\n\007Project\022\n\n\002id\030\001 \002(\005\022"
+    "\n\rProject.proto\"\202\002\n\007Project\022\n\n\002id\030\001 \002(\005\022"
     "\r\n\005title\030\002 \001(\t\022\023\n\013description\030\003 \001(\t\022\020\n\010d"
-    "eadline\030\004 \001(\t\022\026\n\016organisationId\030\005 \001(\005\022\021\n"
-    "\treference\030\006 \001(\t\022\021\n\twordCount\030\007 \001(\005\022\023\n\013c"
-    "reatedTime\030\010 \001(\t\022\016\n\006status\030\t \001(\t\022\032\n\022sour"
-    "ceLanguageCode\030\n \001(\t\022\031\n\021sourceCountryCod"
-    "e\030\013 \001(\t\022\013\n\003tag\030\014 \003(\t", 260);
+    "eadline\030\004 \001(\t\022\026\n\016organisationId\030\005 \001(\005\022\016\n"
+    "\006impact\030\006 \001(\t\022\021\n\treference\030\007 \001(\t\022\021\n\tword"
+    "Count\030\010 \001(\005\022\023\n\013createdTime\030\t \001(\t\022\016\n\006stat"
+    "us\030\n \001(\t\022\032\n\022sourceLanguageCode\030\013 \001(\t\022\031\n\021"
+    "sourceCountryCode\030\014 \001(\t\022\013\n\003tag\030\r \003(\t", 276);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "Project.proto", &protobuf_RegisterTypes);
   Project::default_instance_ = new Project();
@@ -114,6 +115,7 @@ const int Project::kTitleFieldNumber;
 const int Project::kDescriptionFieldNumber;
 const int Project::kDeadlineFieldNumber;
 const int Project::kOrganisationIdFieldNumber;
+const int Project::kImpactFieldNumber;
 const int Project::kReferenceFieldNumber;
 const int Project::kWordCountFieldNumber;
 const int Project::kCreatedTimeFieldNumber;
@@ -144,6 +146,7 @@ void Project::SharedCtor() {
   description_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   deadline_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   organisationid_ = 0;
+  impact_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   reference_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   wordcount_ = 0;
   createdtime_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
@@ -166,6 +169,9 @@ void Project::SharedDtor() {
   }
   if (deadline_ != &::google::protobuf::internal::kEmptyString) {
     delete deadline_;
+  }
+  if (impact_ != &::google::protobuf::internal::kEmptyString) {
+    delete impact_;
   }
   if (reference_ != &::google::protobuf::internal::kEmptyString) {
     delete reference_;
@@ -225,19 +231,24 @@ void Project::Clear() {
       }
     }
     organisationid_ = 0;
+    if (has_impact()) {
+      if (impact_ != &::google::protobuf::internal::kEmptyString) {
+        impact_->clear();
+      }
+    }
     if (has_reference()) {
       if (reference_ != &::google::protobuf::internal::kEmptyString) {
         reference_->clear();
       }
     }
     wordcount_ = 0;
+  }
+  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
     if (has_createdtime()) {
       if (createdtime_ != &::google::protobuf::internal::kEmptyString) {
         createdtime_->clear();
       }
     }
-  }
-  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
     if (has_status()) {
       if (status_ != &::google::protobuf::internal::kEmptyString) {
         status_->clear();
@@ -343,12 +354,29 @@ bool Project::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(50)) goto parse_reference;
+        if (input->ExpectTag(50)) goto parse_impact;
         break;
       }
       
-      // optional string reference = 6;
+      // optional string impact = 6;
       case 6: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_impact:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_impact()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->impact().data(), this->impact().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(58)) goto parse_reference;
+        break;
+      }
+      
+      // optional string reference = 7;
+      case 7: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_reference:
@@ -360,12 +388,12 @@ bool Project::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(56)) goto parse_wordCount;
+        if (input->ExpectTag(64)) goto parse_wordCount;
         break;
       }
       
-      // optional int32 wordCount = 7;
-      case 7: {
+      // optional int32 wordCount = 8;
+      case 8: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_wordCount:
@@ -376,12 +404,12 @@ bool Project::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(66)) goto parse_createdTime;
+        if (input->ExpectTag(74)) goto parse_createdTime;
         break;
       }
       
-      // optional string createdTime = 8;
-      case 8: {
+      // optional string createdTime = 9;
+      case 9: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_createdTime:
@@ -393,12 +421,12 @@ bool Project::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(74)) goto parse_status;
+        if (input->ExpectTag(82)) goto parse_status;
         break;
       }
       
-      // optional string status = 9;
-      case 9: {
+      // optional string status = 10;
+      case 10: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_status:
@@ -410,12 +438,12 @@ bool Project::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(82)) goto parse_sourceLanguageCode;
+        if (input->ExpectTag(90)) goto parse_sourceLanguageCode;
         break;
       }
       
-      // optional string sourceLanguageCode = 10;
-      case 10: {
+      // optional string sourceLanguageCode = 11;
+      case 11: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_sourceLanguageCode:
@@ -427,12 +455,12 @@ bool Project::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(90)) goto parse_sourceCountryCode;
+        if (input->ExpectTag(98)) goto parse_sourceCountryCode;
         break;
       }
       
-      // optional string sourceCountryCode = 11;
-      case 11: {
+      // optional string sourceCountryCode = 12;
+      case 12: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_sourceCountryCode:
@@ -444,12 +472,12 @@ bool Project::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(98)) goto parse_tag;
+        if (input->ExpectTag(106)) goto parse_tag;
         break;
       }
       
-      // repeated string tag = 12;
-      case 12: {
+      // repeated string tag = 13;
+      case 13: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_tag:
@@ -461,7 +489,7 @@ bool Project::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(98)) goto parse_tag;
+        if (input->ExpectTag(106)) goto parse_tag;
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -521,63 +549,72 @@ void Project::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(5, this->organisationid(), output);
   }
   
-  // optional string reference = 6;
+  // optional string impact = 6;
+  if (has_impact()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->impact().data(), this->impact().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      6, this->impact(), output);
+  }
+  
+  // optional string reference = 7;
   if (has_reference()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->reference().data(), this->reference().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     ::google::protobuf::internal::WireFormatLite::WriteString(
-      6, this->reference(), output);
+      7, this->reference(), output);
   }
   
-  // optional int32 wordCount = 7;
+  // optional int32 wordCount = 8;
   if (has_wordcount()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(7, this->wordcount(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(8, this->wordcount(), output);
   }
   
-  // optional string createdTime = 8;
+  // optional string createdTime = 9;
   if (has_createdtime()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->createdtime().data(), this->createdtime().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     ::google::protobuf::internal::WireFormatLite::WriteString(
-      8, this->createdtime(), output);
+      9, this->createdtime(), output);
   }
   
-  // optional string status = 9;
+  // optional string status = 10;
   if (has_status()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->status().data(), this->status().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     ::google::protobuf::internal::WireFormatLite::WriteString(
-      9, this->status(), output);
+      10, this->status(), output);
   }
   
-  // optional string sourceLanguageCode = 10;
+  // optional string sourceLanguageCode = 11;
   if (has_sourcelanguagecode()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->sourcelanguagecode().data(), this->sourcelanguagecode().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     ::google::protobuf::internal::WireFormatLite::WriteString(
-      10, this->sourcelanguagecode(), output);
+      11, this->sourcelanguagecode(), output);
   }
   
-  // optional string sourceCountryCode = 11;
+  // optional string sourceCountryCode = 12;
   if (has_sourcecountrycode()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->sourcecountrycode().data(), this->sourcecountrycode().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     ::google::protobuf::internal::WireFormatLite::WriteString(
-      11, this->sourcecountrycode(), output);
+      12, this->sourcecountrycode(), output);
   }
   
-  // repeated string tag = 12;
+  // repeated string tag = 13;
   for (int i = 0; i < this->tag_size(); i++) {
   ::google::protobuf::internal::WireFormat::VerifyUTF8String(
     this->tag(i).data(), this->tag(i).length(),
     ::google::protobuf::internal::WireFormat::SERIALIZE);
     ::google::protobuf::internal::WireFormatLite::WriteString(
-      12, this->tag(i), output);
+      13, this->tag(i), output);
   }
   
   if (!unknown_fields().empty()) {
@@ -628,68 +665,78 @@ void Project::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(5, this->organisationid(), target);
   }
   
-  // optional string reference = 6;
+  // optional string impact = 6;
+  if (has_impact()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->impact().data(), this->impact().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        6, this->impact(), target);
+  }
+  
+  // optional string reference = 7;
   if (has_reference()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->reference().data(), this->reference().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        6, this->reference(), target);
+        7, this->reference(), target);
   }
   
-  // optional int32 wordCount = 7;
+  // optional int32 wordCount = 8;
   if (has_wordcount()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(7, this->wordcount(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(8, this->wordcount(), target);
   }
   
-  // optional string createdTime = 8;
+  // optional string createdTime = 9;
   if (has_createdtime()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->createdtime().data(), this->createdtime().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        8, this->createdtime(), target);
+        9, this->createdtime(), target);
   }
   
-  // optional string status = 9;
+  // optional string status = 10;
   if (has_status()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->status().data(), this->status().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        9, this->status(), target);
+        10, this->status(), target);
   }
   
-  // optional string sourceLanguageCode = 10;
+  // optional string sourceLanguageCode = 11;
   if (has_sourcelanguagecode()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->sourcelanguagecode().data(), this->sourcelanguagecode().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        10, this->sourcelanguagecode(), target);
+        11, this->sourcelanguagecode(), target);
   }
   
-  // optional string sourceCountryCode = 11;
+  // optional string sourceCountryCode = 12;
   if (has_sourcecountrycode()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->sourcecountrycode().data(), this->sourcecountrycode().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        11, this->sourcecountrycode(), target);
+        12, this->sourcecountrycode(), target);
   }
   
-  // repeated string tag = 12;
+  // repeated string tag = 13;
   for (int i = 0; i < this->tag_size(); i++) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->tag(i).data(), this->tag(i).length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     target = ::google::protobuf::internal::WireFormatLite::
-      WriteStringToArray(12, this->tag(i), target);
+      WriteStringToArray(13, this->tag(i), target);
   }
   
   if (!unknown_fields().empty()) {
@@ -738,44 +785,51 @@ int Project::ByteSize() const {
           this->organisationid());
     }
     
-    // optional string reference = 6;
+    // optional string impact = 6;
+    if (has_impact()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->impact());
+    }
+    
+    // optional string reference = 7;
     if (has_reference()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
           this->reference());
     }
     
-    // optional int32 wordCount = 7;
+    // optional int32 wordCount = 8;
     if (has_wordcount()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->wordcount());
     }
     
-    // optional string createdTime = 8;
+  }
+  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
+    // optional string createdTime = 9;
     if (has_createdtime()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
           this->createdtime());
     }
     
-  }
-  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
-    // optional string status = 9;
+    // optional string status = 10;
     if (has_status()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
           this->status());
     }
     
-    // optional string sourceLanguageCode = 10;
+    // optional string sourceLanguageCode = 11;
     if (has_sourcelanguagecode()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
           this->sourcelanguagecode());
     }
     
-    // optional string sourceCountryCode = 11;
+    // optional string sourceCountryCode = 12;
     if (has_sourcecountrycode()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
@@ -783,7 +837,7 @@ int Project::ByteSize() const {
     }
     
   }
-  // repeated string tag = 12;
+  // repeated string tag = 13;
   total_size += 1 * this->tag_size();
   for (int i = 0; i < this->tag_size(); i++) {
     total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
@@ -832,17 +886,20 @@ void Project::MergeFrom(const Project& from) {
     if (from.has_organisationid()) {
       set_organisationid(from.organisationid());
     }
+    if (from.has_impact()) {
+      set_impact(from.impact());
+    }
     if (from.has_reference()) {
       set_reference(from.reference());
     }
     if (from.has_wordcount()) {
       set_wordcount(from.wordcount());
     }
+  }
+  if (from._has_bits_[8 / 32] & (0xffu << (8 % 32))) {
     if (from.has_createdtime()) {
       set_createdtime(from.createdtime());
     }
-  }
-  if (from._has_bits_[8 / 32] & (0xffu << (8 % 32))) {
     if (from.has_status()) {
       set_status(from.status());
     }
@@ -881,6 +938,7 @@ void Project::Swap(Project* other) {
     std::swap(description_, other->description_);
     std::swap(deadline_, other->deadline_);
     std::swap(organisationid_, other->organisationid_);
+    std::swap(impact_, other->impact_);
     std::swap(reference_, other->reference_);
     std::swap(wordcount_, other->wordcount_);
     std::swap(createdtime_, other->createdtime_);

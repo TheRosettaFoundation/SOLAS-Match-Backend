@@ -135,10 +135,21 @@ class Project : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 organisationid() const;
   inline void set_organisationid(::google::protobuf::int32 value);
   
-  // optional string reference = 6;
+  // optional string impact = 6;
+  inline bool has_impact() const;
+  inline void clear_impact();
+  static const int kImpactFieldNumber = 6;
+  inline const ::std::string& impact() const;
+  inline void set_impact(const ::std::string& value);
+  inline void set_impact(const char* value);
+  inline void set_impact(const char* value, size_t size);
+  inline ::std::string* mutable_impact();
+  inline ::std::string* release_impact();
+  
+  // optional string reference = 7;
   inline bool has_reference() const;
   inline void clear_reference();
-  static const int kReferenceFieldNumber = 6;
+  static const int kReferenceFieldNumber = 7;
   inline const ::std::string& reference() const;
   inline void set_reference(const ::std::string& value);
   inline void set_reference(const char* value);
@@ -146,17 +157,17 @@ class Project : public ::google::protobuf::Message {
   inline ::std::string* mutable_reference();
   inline ::std::string* release_reference();
   
-  // optional int32 wordCount = 7;
+  // optional int32 wordCount = 8;
   inline bool has_wordcount() const;
   inline void clear_wordcount();
-  static const int kWordCountFieldNumber = 7;
+  static const int kWordCountFieldNumber = 8;
   inline ::google::protobuf::int32 wordcount() const;
   inline void set_wordcount(::google::protobuf::int32 value);
   
-  // optional string createdTime = 8;
+  // optional string createdTime = 9;
   inline bool has_createdtime() const;
   inline void clear_createdtime();
-  static const int kCreatedTimeFieldNumber = 8;
+  static const int kCreatedTimeFieldNumber = 9;
   inline const ::std::string& createdtime() const;
   inline void set_createdtime(const ::std::string& value);
   inline void set_createdtime(const char* value);
@@ -164,10 +175,10 @@ class Project : public ::google::protobuf::Message {
   inline ::std::string* mutable_createdtime();
   inline ::std::string* release_createdtime();
   
-  // optional string status = 9;
+  // optional string status = 10;
   inline bool has_status() const;
   inline void clear_status();
-  static const int kStatusFieldNumber = 9;
+  static const int kStatusFieldNumber = 10;
   inline const ::std::string& status() const;
   inline void set_status(const ::std::string& value);
   inline void set_status(const char* value);
@@ -175,10 +186,10 @@ class Project : public ::google::protobuf::Message {
   inline ::std::string* mutable_status();
   inline ::std::string* release_status();
   
-  // optional string sourceLanguageCode = 10;
+  // optional string sourceLanguageCode = 11;
   inline bool has_sourcelanguagecode() const;
   inline void clear_sourcelanguagecode();
-  static const int kSourceLanguageCodeFieldNumber = 10;
+  static const int kSourceLanguageCodeFieldNumber = 11;
   inline const ::std::string& sourcelanguagecode() const;
   inline void set_sourcelanguagecode(const ::std::string& value);
   inline void set_sourcelanguagecode(const char* value);
@@ -186,10 +197,10 @@ class Project : public ::google::protobuf::Message {
   inline ::std::string* mutable_sourcelanguagecode();
   inline ::std::string* release_sourcelanguagecode();
   
-  // optional string sourceCountryCode = 11;
+  // optional string sourceCountryCode = 12;
   inline bool has_sourcecountrycode() const;
   inline void clear_sourcecountrycode();
-  static const int kSourceCountryCodeFieldNumber = 11;
+  static const int kSourceCountryCodeFieldNumber = 12;
   inline const ::std::string& sourcecountrycode() const;
   inline void set_sourcecountrycode(const ::std::string& value);
   inline void set_sourcecountrycode(const char* value);
@@ -197,10 +208,10 @@ class Project : public ::google::protobuf::Message {
   inline ::std::string* mutable_sourcecountrycode();
   inline ::std::string* release_sourcecountrycode();
   
-  // repeated string tag = 12;
+  // repeated string tag = 13;
   inline int tag_size() const;
   inline void clear_tag();
-  static const int kTagFieldNumber = 12;
+  static const int kTagFieldNumber = 13;
   inline const ::std::string& tag(int index) const;
   inline ::std::string* mutable_tag(int index);
   inline void set_tag(int index, const ::std::string& value);
@@ -225,6 +236,8 @@ class Project : public ::google::protobuf::Message {
   inline void clear_has_deadline();
   inline void set_has_organisationid();
   inline void clear_has_organisationid();
+  inline void set_has_impact();
+  inline void clear_has_impact();
   inline void set_has_reference();
   inline void clear_has_reference();
   inline void set_has_wordcount();
@@ -245,6 +258,7 @@ class Project : public ::google::protobuf::Message {
   ::google::protobuf::int32 id_;
   ::google::protobuf::int32 organisationid_;
   ::std::string* deadline_;
+  ::std::string* impact_;
   ::std::string* reference_;
   ::std::string* createdtime_;
   ::std::string* status_;
@@ -254,7 +268,7 @@ class Project : public ::google::protobuf::Message {
   ::google::protobuf::int32 wordcount_;
   
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(12 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(13 + 31) / 32];
   
   friend void  protobuf_AddDesc_Project_2eproto();
   friend void protobuf_AssignDesc_Project_2eproto();
@@ -488,15 +502,73 @@ inline void Project::set_organisationid(::google::protobuf::int32 value) {
   organisationid_ = value;
 }
 
-// optional string reference = 6;
-inline bool Project::has_reference() const {
+// optional string impact = 6;
+inline bool Project::has_impact() const {
   return (_has_bits_[0] & 0x00000020u) != 0;
 }
-inline void Project::set_has_reference() {
+inline void Project::set_has_impact() {
   _has_bits_[0] |= 0x00000020u;
 }
-inline void Project::clear_has_reference() {
+inline void Project::clear_has_impact() {
   _has_bits_[0] &= ~0x00000020u;
+}
+inline void Project::clear_impact() {
+  if (impact_ != &::google::protobuf::internal::kEmptyString) {
+    impact_->clear();
+  }
+  clear_has_impact();
+}
+inline const ::std::string& Project::impact() const {
+  return *impact_;
+}
+inline void Project::set_impact(const ::std::string& value) {
+  set_has_impact();
+  if (impact_ == &::google::protobuf::internal::kEmptyString) {
+    impact_ = new ::std::string;
+  }
+  impact_->assign(value);
+}
+inline void Project::set_impact(const char* value) {
+  set_has_impact();
+  if (impact_ == &::google::protobuf::internal::kEmptyString) {
+    impact_ = new ::std::string;
+  }
+  impact_->assign(value);
+}
+inline void Project::set_impact(const char* value, size_t size) {
+  set_has_impact();
+  if (impact_ == &::google::protobuf::internal::kEmptyString) {
+    impact_ = new ::std::string;
+  }
+  impact_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* Project::mutable_impact() {
+  set_has_impact();
+  if (impact_ == &::google::protobuf::internal::kEmptyString) {
+    impact_ = new ::std::string;
+  }
+  return impact_;
+}
+inline ::std::string* Project::release_impact() {
+  clear_has_impact();
+  if (impact_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = impact_;
+    impact_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+
+// optional string reference = 7;
+inline bool Project::has_reference() const {
+  return (_has_bits_[0] & 0x00000040u) != 0;
+}
+inline void Project::set_has_reference() {
+  _has_bits_[0] |= 0x00000040u;
+}
+inline void Project::clear_has_reference() {
+  _has_bits_[0] &= ~0x00000040u;
 }
 inline void Project::clear_reference() {
   if (reference_ != &::google::protobuf::internal::kEmptyString) {
@@ -546,15 +618,15 @@ inline ::std::string* Project::release_reference() {
   }
 }
 
-// optional int32 wordCount = 7;
+// optional int32 wordCount = 8;
 inline bool Project::has_wordcount() const {
-  return (_has_bits_[0] & 0x00000040u) != 0;
+  return (_has_bits_[0] & 0x00000080u) != 0;
 }
 inline void Project::set_has_wordcount() {
-  _has_bits_[0] |= 0x00000040u;
+  _has_bits_[0] |= 0x00000080u;
 }
 inline void Project::clear_has_wordcount() {
-  _has_bits_[0] &= ~0x00000040u;
+  _has_bits_[0] &= ~0x00000080u;
 }
 inline void Project::clear_wordcount() {
   wordcount_ = 0;
@@ -568,15 +640,15 @@ inline void Project::set_wordcount(::google::protobuf::int32 value) {
   wordcount_ = value;
 }
 
-// optional string createdTime = 8;
+// optional string createdTime = 9;
 inline bool Project::has_createdtime() const {
-  return (_has_bits_[0] & 0x00000080u) != 0;
+  return (_has_bits_[0] & 0x00000100u) != 0;
 }
 inline void Project::set_has_createdtime() {
-  _has_bits_[0] |= 0x00000080u;
+  _has_bits_[0] |= 0x00000100u;
 }
 inline void Project::clear_has_createdtime() {
-  _has_bits_[0] &= ~0x00000080u;
+  _has_bits_[0] &= ~0x00000100u;
 }
 inline void Project::clear_createdtime() {
   if (createdtime_ != &::google::protobuf::internal::kEmptyString) {
@@ -626,15 +698,15 @@ inline ::std::string* Project::release_createdtime() {
   }
 }
 
-// optional string status = 9;
+// optional string status = 10;
 inline bool Project::has_status() const {
-  return (_has_bits_[0] & 0x00000100u) != 0;
+  return (_has_bits_[0] & 0x00000200u) != 0;
 }
 inline void Project::set_has_status() {
-  _has_bits_[0] |= 0x00000100u;
+  _has_bits_[0] |= 0x00000200u;
 }
 inline void Project::clear_has_status() {
-  _has_bits_[0] &= ~0x00000100u;
+  _has_bits_[0] &= ~0x00000200u;
 }
 inline void Project::clear_status() {
   if (status_ != &::google::protobuf::internal::kEmptyString) {
@@ -684,15 +756,15 @@ inline ::std::string* Project::release_status() {
   }
 }
 
-// optional string sourceLanguageCode = 10;
+// optional string sourceLanguageCode = 11;
 inline bool Project::has_sourcelanguagecode() const {
-  return (_has_bits_[0] & 0x00000200u) != 0;
+  return (_has_bits_[0] & 0x00000400u) != 0;
 }
 inline void Project::set_has_sourcelanguagecode() {
-  _has_bits_[0] |= 0x00000200u;
+  _has_bits_[0] |= 0x00000400u;
 }
 inline void Project::clear_has_sourcelanguagecode() {
-  _has_bits_[0] &= ~0x00000200u;
+  _has_bits_[0] &= ~0x00000400u;
 }
 inline void Project::clear_sourcelanguagecode() {
   if (sourcelanguagecode_ != &::google::protobuf::internal::kEmptyString) {
@@ -742,15 +814,15 @@ inline ::std::string* Project::release_sourcelanguagecode() {
   }
 }
 
-// optional string sourceCountryCode = 11;
+// optional string sourceCountryCode = 12;
 inline bool Project::has_sourcecountrycode() const {
-  return (_has_bits_[0] & 0x00000400u) != 0;
+  return (_has_bits_[0] & 0x00000800u) != 0;
 }
 inline void Project::set_has_sourcecountrycode() {
-  _has_bits_[0] |= 0x00000400u;
+  _has_bits_[0] |= 0x00000800u;
 }
 inline void Project::clear_has_sourcecountrycode() {
-  _has_bits_[0] &= ~0x00000400u;
+  _has_bits_[0] &= ~0x00000800u;
 }
 inline void Project::clear_sourcecountrycode() {
   if (sourcecountrycode_ != &::google::protobuf::internal::kEmptyString) {
@@ -800,7 +872,7 @@ inline ::std::string* Project::release_sourcecountrycode() {
   }
 }
 
-// repeated string tag = 12;
+// repeated string tag = 13;
 inline int Project::tag_size() const {
   return tag_.size();
 }
