@@ -11,4 +11,10 @@
             DeadlineCheckRequest
         </message>
     </task>
+    <task startTime="09:00">
+        <interval days="0" hours="1" mins="0" secs="0"></interval>
+        <message exchange="SOLAS_MATCH" topic="timed.task.statistics.update">
+            StatisticsUpdateRequest
+        </message>
+    </task>
 </tasks>

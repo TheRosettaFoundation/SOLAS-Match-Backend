@@ -8,6 +8,7 @@
 #include "Common/ConfigParser.h"
 #include "CalculateTaskScoreJob.h"
 #include "DeadlineChecker.h"
+#include "StatisticsUpdate.h"
 
 Q_EXPORT_PLUGIN2(TimedTaskHandler, TimedTaskHandler)
 
@@ -44,13 +45,15 @@ void TimedTaskHandler::run()
 
 void TimedTaskHandler::messageReceived(AMQPMessage *message)
 {
-    qDebug() << "UserTaskScoreCalc::Starting new thread to handle task";
+    qDebug() << "TimedTaskHandler::Starting new thread to handle task";
     QRunnable *job = NULL;
 
     if(message->getRoutingKey() == "timed.task.score") {
         job = new CalculateTaskScore(message);
     } else if(message->getRoutingKey() == "timed.task.deadline.check") {
         job = new DeadlineChecker(message);
+    } else if(message->getRoutingKey() == "timed.task.statistics.update") {
+        job = new StatisticsUpdate(message);
     }
 
     if(job) {

@@ -24,11 +24,13 @@ DESTDIR = ../plugins
 
 SOURCES += TimedTaskHandler.cpp \
     CalculateTaskScoreJob.cpp \
-    DeadlineChecker.cpp
+    DeadlineChecker.cpp \
+    StatisticsUpdate.cpp
 
 HEADERS += TimedTaskHandler.h \
     CalculateTaskScoreJob.h \
-    DeadlineChecker.h
+    DeadlineChecker.h \
+    StatisticsUpdate.h
 
 symbian {
     MMP_RULES += EXPORTUNFROZEN

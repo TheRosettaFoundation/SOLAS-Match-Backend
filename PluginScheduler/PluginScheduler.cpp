@@ -11,6 +11,8 @@
 #include "RequestGenerator.h"
 
 #include "Common/protobufs/requests/UserTaskScoreRequest.pb.h"
+#include "Common/protobufs/requests/DeadlineCheckRequest.pb.h"
+#include "Common/protobufs/requests/StatisticsUpdateRequest.pb.h"
 
 #include "Common/ConfigParser.h"
 #include "Common/MessagingClient.h"
@@ -129,6 +131,8 @@ void PluginScheduler::processTask(QPointer<TimedTask> task)
         request = generator.GenerateTask(QSharedPointer<UserTaskScoreRequest>(new UserTaskScoreRequest));
     } else if(task->getMessage() == "DeadlineCheckRequest") {
         request = generator.GenerateTask(QSharedPointer<DeadlineCheckRequest>(new DeadlineCheckRequest));
+    } else if (task->getMessage() == "StatisticsUpdateRequest") {
+        request = generator.GenerateTask(QSharedPointer<StatisticsUpdateRequest>(new StatisticsUpdateRequest));
     }
 
     if(request) {
