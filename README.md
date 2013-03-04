@@ -76,6 +76,12 @@ sudo apt-get install libqt4-sql-mysql
 * Copy ./conf.ini to /etc/SOLAS-Match/conf.ini
 * Also symbolically link the templates directory to /etc/SOLAS-Match/templates
 
+## Logs
+
+By default the output will be sent to stdout. It is possible to specify a file in conf.ini 
+where all output will be written. Specify the path to the file under site.log. Make sure 
+the file specified is writable, otherwise output will continue to be printed to stdout.
+
 ## Compiling and installing
 
 * To edit the source code open the project file ./SOLASMatchWorkerDaemon.pro
