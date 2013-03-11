@@ -57,16 +57,20 @@ void CalculateTaskScore::run()
                         int score = 0;
 
                         if(user->native_lang_id() == task->sourcelanguagecode()) {
-                            score += 300;
+                            score += 200;
                             if(user->native_region_id() == task->sourcecountrycode()) {
-                                score += 100;
+                                score += 75;
                             }
                         }
 
+                        qDebug() << "Task: " << task->title();
+                        qDebug() << "ID: " << task->id();
+                        qDebug() << "Native lang id: " << QString::fromStdString(user->native_lang_id());
+                        qDebug() << "Target lang id: " << QString::fromStdString(task->targetlanguagecode());
                         if(user->native_lang_id() == task->targetlanguagecode()) {
-                            score += 150;
+                            score += 300;
                             if(user->native_region_id() == task->targetcountrycode()) {
-                                score += 75;
+                                score += 100;
                             }
                         }
 
