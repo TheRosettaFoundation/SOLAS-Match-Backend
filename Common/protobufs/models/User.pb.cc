@@ -85,7 +85,7 @@ void protobuf_AddDesc_User_2eproto() {
     "\n\014display_name\030\002 \001(\t\022\r\n\005email\030\003 \001(\t\022\020\n\010p"
     "assword\030\004 \001(\t\022\021\n\tbiography\030\005 \001(\t\022\r\n\005nonc"
     "e\030\006 \001(\t\022\024\n\014created_time\030\007 \001(\t\022\026\n\016native_"
-    "lang_id\030\010 \001(\005\022\030\n\020native_region_id\030\t \001(\005", 199);
+    "lang_id\030\010 \001(\t\022\030\n\020native_region_id\030\t \001(\t", 199);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "User.proto", &protobuf_RegisterTypes);
   User::default_instance_ = new User();
@@ -138,8 +138,8 @@ void User::SharedCtor() {
   biography_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   nonce_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   created_time_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  native_lang_id_ = 0;
-  native_region_id_ = 0;
+  native_lang_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  native_region_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -165,6 +165,12 @@ void User::SharedDtor() {
   }
   if (created_time_ != &::google::protobuf::internal::kEmptyString) {
     delete created_time_;
+  }
+  if (native_lang_id_ != &::google::protobuf::internal::kEmptyString) {
+    delete native_lang_id_;
+  }
+  if (native_region_id_ != &::google::protobuf::internal::kEmptyString) {
+    delete native_region_id_;
   }
   if (this != default_instance_) {
   }
@@ -223,10 +229,18 @@ void User::Clear() {
         created_time_->clear();
       }
     }
-    native_lang_id_ = 0;
+    if (has_native_lang_id()) {
+      if (native_lang_id_ != &::google::protobuf::internal::kEmptyString) {
+        native_lang_id_->clear();
+      }
+    }
   }
   if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
-    native_region_id_ = 0;
+    if (has_native_region_id()) {
+      if (native_region_id_ != &::google::protobuf::internal::kEmptyString) {
+        native_region_id_->clear();
+      }
+    }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -351,35 +365,37 @@ bool User::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(64)) goto parse_native_lang_id;
+        if (input->ExpectTag(66)) goto parse_native_lang_id;
         break;
       }
       
-      // optional int32 native_lang_id = 8;
+      // optional string native_lang_id = 8;
       case 8: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_native_lang_id:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &native_lang_id_)));
-          set_has_native_lang_id();
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_native_lang_id()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->native_lang_id().data(), this->native_lang_id().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(72)) goto parse_native_region_id;
+        if (input->ExpectTag(74)) goto parse_native_region_id;
         break;
       }
       
-      // optional int32 native_region_id = 9;
+      // optional string native_region_id = 9;
       case 9: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_native_region_id:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &native_region_id_)));
-          set_has_native_region_id();
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_native_region_id()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->native_region_id().data(), this->native_region_id().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
         }
@@ -464,14 +480,22 @@ void User::SerializeWithCachedSizes(
       7, this->created_time(), output);
   }
   
-  // optional int32 native_lang_id = 8;
+  // optional string native_lang_id = 8;
   if (has_native_lang_id()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(8, this->native_lang_id(), output);
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->native_lang_id().data(), this->native_lang_id().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      8, this->native_lang_id(), output);
   }
   
-  // optional int32 native_region_id = 9;
+  // optional string native_region_id = 9;
   if (has_native_region_id()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(9, this->native_region_id(), output);
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->native_region_id().data(), this->native_region_id().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      9, this->native_region_id(), output);
   }
   
   if (!unknown_fields().empty()) {
@@ -547,14 +571,24 @@ void User::SerializeWithCachedSizes(
         7, this->created_time(), target);
   }
   
-  // optional int32 native_lang_id = 8;
+  // optional string native_lang_id = 8;
   if (has_native_lang_id()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(8, this->native_lang_id(), target);
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->native_lang_id().data(), this->native_lang_id().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        8, this->native_lang_id(), target);
   }
   
-  // optional int32 native_region_id = 9;
+  // optional string native_region_id = 9;
   if (has_native_region_id()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(9, this->native_region_id(), target);
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->native_region_id().data(), this->native_region_id().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        9, this->native_region_id(), target);
   }
   
   if (!unknown_fields().empty()) {
@@ -617,19 +651,19 @@ int User::ByteSize() const {
           this->created_time());
     }
     
-    // optional int32 native_lang_id = 8;
+    // optional string native_lang_id = 8;
     if (has_native_lang_id()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
+        ::google::protobuf::internal::WireFormatLite::StringSize(
           this->native_lang_id());
     }
     
   }
   if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
-    // optional int32 native_region_id = 9;
+    // optional string native_region_id = 9;
     if (has_native_region_id()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
+        ::google::protobuf::internal::WireFormatLite::StringSize(
           this->native_region_id());
     }
     

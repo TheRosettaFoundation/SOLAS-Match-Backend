@@ -56,9 +56,7 @@ void CalculateTaskScore::run()
                     foreach(QSharedPointer<Task> task, tasks) {
                         int score = 0;
 
-                        //Broken until Users get Codes instead of ids
-                        //TODO: fix when stored proc updated
-                        /*if(user->native_lang_id() == task->sourcelanguagecode()) {
+                        if(user->native_lang_id() == task->sourcelanguagecode()) {
                             score += 300;
                             if(user->native_region_id() == task->sourcecountrycode()) {
                                 score += 100;
@@ -70,7 +68,7 @@ void CalculateTaskScore::run()
                             if(user->native_region_id() == task->targetcountrycode()) {
                                 score += 75;
                             }
-                        }*/
+                        }
 
                         QList<QSharedPointer<Tag> > taskTags = TagDao::getTaskTags(db, task->id());
                         int increment_value = 100;

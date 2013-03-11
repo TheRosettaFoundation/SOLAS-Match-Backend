@@ -11,10 +11,10 @@ QSharedPointer<User> ModelGenerator::GenerateUser(QSharedPointer<QSqlQuery> q)
     user->set_created_time(MySQLHandler::getValueFromQuery("created-time", q).toString().toStdString());
     user->set_display_name(MySQLHandler::getValueFromQuery("display-name", q).toString().toStdString());
     user->set_email(MySQLHandler::getValueFromQuery("email", q).toString().toStdString());
-    user->set_native_lang_id(MySQLHandler::getValueFromQuery("language_id", q).toInt());
+    user->set_native_lang_id(MySQLHandler::getValueFromQuery("language_id", q).toString().toStdString());
     user->set_nonce(MySQLHandler::getValueFromQuery("nonce", q).toString().toStdString());
     user->set_password(MySQLHandler::getValueFromQuery("password", q).toString().toStdString());
-    user->set_native_region_id(MySQLHandler::getValueFromQuery("country_id", q).toInt());
+    user->set_native_region_id(MySQLHandler::getValueFromQuery("country_id", q).toString().toStdString());
 
     return user;
 }

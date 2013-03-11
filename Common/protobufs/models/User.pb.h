@@ -161,19 +161,27 @@ class User : public ::google::protobuf::Message {
   inline ::std::string* mutable_created_time();
   inline ::std::string* release_created_time();
   
-  // optional int32 native_lang_id = 8;
+  // optional string native_lang_id = 8;
   inline bool has_native_lang_id() const;
   inline void clear_native_lang_id();
   static const int kNativeLangIdFieldNumber = 8;
-  inline ::google::protobuf::int32 native_lang_id() const;
-  inline void set_native_lang_id(::google::protobuf::int32 value);
+  inline const ::std::string& native_lang_id() const;
+  inline void set_native_lang_id(const ::std::string& value);
+  inline void set_native_lang_id(const char* value);
+  inline void set_native_lang_id(const char* value, size_t size);
+  inline ::std::string* mutable_native_lang_id();
+  inline ::std::string* release_native_lang_id();
   
-  // optional int32 native_region_id = 9;
+  // optional string native_region_id = 9;
   inline bool has_native_region_id() const;
   inline void clear_native_region_id();
   static const int kNativeRegionIdFieldNumber = 9;
-  inline ::google::protobuf::int32 native_region_id() const;
-  inline void set_native_region_id(::google::protobuf::int32 value);
+  inline const ::std::string& native_region_id() const;
+  inline void set_native_region_id(const ::std::string& value);
+  inline void set_native_region_id(const char* value);
+  inline void set_native_region_id(const char* value, size_t size);
+  inline ::std::string* mutable_native_region_id();
+  inline ::std::string* release_native_region_id();
   
   // @@protoc_insertion_point(class_scope:User)
  private:
@@ -201,12 +209,12 @@ class User : public ::google::protobuf::Message {
   ::std::string* display_name_;
   ::std::string* email_;
   ::std::string* password_;
-  ::google::protobuf::int32 user_id_;
-  ::google::protobuf::int32 native_lang_id_;
   ::std::string* biography_;
   ::std::string* nonce_;
   ::std::string* created_time_;
-  ::google::protobuf::int32 native_region_id_;
+  ::std::string* native_lang_id_;
+  ::std::string* native_region_id_;
+  ::google::protobuf::int32 user_id_;
   
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(9 + 31) / 32];
@@ -595,7 +603,7 @@ inline ::std::string* User::release_created_time() {
   }
 }
 
-// optional int32 native_lang_id = 8;
+// optional string native_lang_id = 8;
 inline bool User::has_native_lang_id() const {
   return (_has_bits_[0] & 0x00000080u) != 0;
 }
@@ -606,18 +614,54 @@ inline void User::clear_has_native_lang_id() {
   _has_bits_[0] &= ~0x00000080u;
 }
 inline void User::clear_native_lang_id() {
-  native_lang_id_ = 0;
+  if (native_lang_id_ != &::google::protobuf::internal::kEmptyString) {
+    native_lang_id_->clear();
+  }
   clear_has_native_lang_id();
 }
-inline ::google::protobuf::int32 User::native_lang_id() const {
+inline const ::std::string& User::native_lang_id() const {
+  return *native_lang_id_;
+}
+inline void User::set_native_lang_id(const ::std::string& value) {
+  set_has_native_lang_id();
+  if (native_lang_id_ == &::google::protobuf::internal::kEmptyString) {
+    native_lang_id_ = new ::std::string;
+  }
+  native_lang_id_->assign(value);
+}
+inline void User::set_native_lang_id(const char* value) {
+  set_has_native_lang_id();
+  if (native_lang_id_ == &::google::protobuf::internal::kEmptyString) {
+    native_lang_id_ = new ::std::string;
+  }
+  native_lang_id_->assign(value);
+}
+inline void User::set_native_lang_id(const char* value, size_t size) {
+  set_has_native_lang_id();
+  if (native_lang_id_ == &::google::protobuf::internal::kEmptyString) {
+    native_lang_id_ = new ::std::string;
+  }
+  native_lang_id_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* User::mutable_native_lang_id() {
+  set_has_native_lang_id();
+  if (native_lang_id_ == &::google::protobuf::internal::kEmptyString) {
+    native_lang_id_ = new ::std::string;
+  }
   return native_lang_id_;
 }
-inline void User::set_native_lang_id(::google::protobuf::int32 value) {
-  set_has_native_lang_id();
-  native_lang_id_ = value;
+inline ::std::string* User::release_native_lang_id() {
+  clear_has_native_lang_id();
+  if (native_lang_id_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = native_lang_id_;
+    native_lang_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
 }
 
-// optional int32 native_region_id = 9;
+// optional string native_region_id = 9;
 inline bool User::has_native_region_id() const {
   return (_has_bits_[0] & 0x00000100u) != 0;
 }
@@ -628,15 +672,51 @@ inline void User::clear_has_native_region_id() {
   _has_bits_[0] &= ~0x00000100u;
 }
 inline void User::clear_native_region_id() {
-  native_region_id_ = 0;
+  if (native_region_id_ != &::google::protobuf::internal::kEmptyString) {
+    native_region_id_->clear();
+  }
   clear_has_native_region_id();
 }
-inline ::google::protobuf::int32 User::native_region_id() const {
+inline const ::std::string& User::native_region_id() const {
+  return *native_region_id_;
+}
+inline void User::set_native_region_id(const ::std::string& value) {
+  set_has_native_region_id();
+  if (native_region_id_ == &::google::protobuf::internal::kEmptyString) {
+    native_region_id_ = new ::std::string;
+  }
+  native_region_id_->assign(value);
+}
+inline void User::set_native_region_id(const char* value) {
+  set_has_native_region_id();
+  if (native_region_id_ == &::google::protobuf::internal::kEmptyString) {
+    native_region_id_ = new ::std::string;
+  }
+  native_region_id_->assign(value);
+}
+inline void User::set_native_region_id(const char* value, size_t size) {
+  set_has_native_region_id();
+  if (native_region_id_ == &::google::protobuf::internal::kEmptyString) {
+    native_region_id_ = new ::std::string;
+  }
+  native_region_id_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* User::mutable_native_region_id() {
+  set_has_native_region_id();
+  if (native_region_id_ == &::google::protobuf::internal::kEmptyString) {
+    native_region_id_ = new ::std::string;
+  }
   return native_region_id_;
 }
-inline void User::set_native_region_id(::google::protobuf::int32 value) {
-  set_has_native_region_id();
-  native_region_id_ = value;
+inline ::std::string* User::release_native_region_id() {
+  clear_has_native_region_id();
+  if (native_region_id_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = native_region_id_;
+    native_region_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
 }
 
 
