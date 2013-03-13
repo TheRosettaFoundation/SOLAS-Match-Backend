@@ -20,6 +20,7 @@ public slots:
 
 signals:
     void AMQPMessageReceived(AMQPMessage *message);
+    void AMQPError(QString error);
     void AMQPCancel(AMQPMessage *message);
 
 private:

@@ -5,6 +5,7 @@
 #include <AMQPcpp.h>
 #include <QtPlugin>
 #include <QThreadPool>
+#include "Common/MessagingClient.h"
 
 #include "PluginHandler/WorkerInterface.h"
 
@@ -21,11 +22,14 @@ public:
 public slots:
     void messageReceived(AMQPMessage *message);
     void calculateScoreForAllUsers();
+    void handleAMQPError(QString error);
     void run();
 
 private:
+    void setupConnection();
     QThreadPool *mThreadPool;
     bool enabled;
+    MessagingClient *client;
 
 };
 

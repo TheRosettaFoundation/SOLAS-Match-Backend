@@ -21,13 +21,19 @@ TimedTaskHandler::TimedTaskHandler()
 void TimedTaskHandler::run()
 {
     qDebug() << "TimedTaskHandler::Starting new Thread " << this->thread()->currentThreadId();
+    this->setupConnection();
+}
+
+void TimedTaskHandler::setupConnection()
+{
+    qDebug() << "TimedTaskHandler::setupConnection";
     QString exchange = "SOLAS_MATCH";
     QString queue = "timed_task_queue";
-    MessagingClient *client;
 
     client = new MessagingClient();
     client->init();
     connect(client, SIGNAL(AMQPMessageReceived(AMQPMessage *)), this, SLOT(messageReceived(AMQPMessage *)));
+    connect(client, SIGNAL(AMQPError(QString)), this, SLOT(handleAMQPError(QString)));
 
     try {
         qDebug() << "TimedTaskHandler::Now consuming from " << exchange << " exchange";
@@ -40,7 +46,15 @@ void TimedTaskHandler::run()
         QTimer::singleShot(100, this, SLOT(calculateScoreForAllUsers()));   //Run on startup
     } catch(AMQPException e) {
         qDebug() << "ERROR: " << QString::fromStdString(e.getMessage());
+        qDebug() << "Deleting Client";
+        delete client;
+        this->setupConnection();
     }
+}
+
+void TimedTaskHandler::handleAMQPError(QString error)
+{
+    qDebug() << error;
 }
 
 void TimedTaskHandler::messageReceived(AMQPMessage *message)

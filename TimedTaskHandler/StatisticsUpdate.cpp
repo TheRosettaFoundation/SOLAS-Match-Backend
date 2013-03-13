@@ -30,6 +30,7 @@ void StatisticsUpdate::run()
     }
 
     if (message->getQueue()) {
+        qDebug() << "StatisticsUpdate: Acking message";
         message->getQueue()->Ack(message->getDeliveryTag());
     }
 

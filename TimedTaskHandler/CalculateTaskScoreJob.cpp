@@ -63,10 +63,6 @@ void CalculateTaskScore::run()
                             }
                         }
 
-                        qDebug() << "Task: " << task->title();
-                        qDebug() << "ID: " << task->id();
-                        qDebug() << "Native lang id: " << QString::fromStdString(user->native_lang_id());
-                        qDebug() << "Target lang id: " << QString::fromStdString(task->targetlanguagecode());
                         if(user->native_lang_id() == task->targetlanguagecode()) {
                             score += 300;
                             if(user->native_region_id() == task->targetcountrycode()) {
@@ -111,6 +107,7 @@ void CalculateTaskScore::run()
         AMQPQueue *messageQueue = message->getQueue();
         if(messageQueue != NULL)
         {
+            qDebug() << "CalcTaskScore: Acking message";
             messageQueue->Ack(message->getDeliveryTag());
         }
 

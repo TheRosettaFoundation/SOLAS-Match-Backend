@@ -32,7 +32,6 @@ bool MessagingClient::init()
 
 bool MessagingClient::openConnection()
 {
-    //qDebug() << "MessagingClient::Connecting to RabbitMQ";
     bool ret = false;
     try {
         QString connectionString = this->pass+ ":" +
@@ -84,6 +83,6 @@ void MessagingClient::consumeFromQueue()
         }
     } catch (AMQPException e) {
         qDebug() << "ERROR: Consuming from Queue";
-        qDebug() << QString::fromStdString(e.getMessage());
+        emit AMQPError(QString::fromStdString(e.getMessage()));
     }
 }

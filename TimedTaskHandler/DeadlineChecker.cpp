@@ -83,6 +83,7 @@ void DeadlineChecker::run()
     }
 
     if(message->getQueue()) {
+        qDebug() << "DeadlineChecker: Acking message";
         message->getQueue()->Ack(message->getDeliveryTag());
     }
     delete db;
