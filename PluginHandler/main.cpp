@@ -1,6 +1,7 @@
 #include <QtCore/QCoreApplication>
 
 #include <QDebug>
+#include <QDateTime>
 #include <QThreadPool>
 #include <QThread>
 #include <QFile>
@@ -15,18 +16,19 @@ QString logFile = "";
 void myMessageHandler(QtMsgType type, const char *msg)
 {
     QString txt;
+    QString time = QDateTime::currentDateTime().toString("dd/MM/yyyy hh:mm:ss:zzz");
     switch (type) {
         case QtDebugMsg:
-            txt = QString("Debug: %1").arg(msg);
+            txt = QString("[%1] Debug: %2").arg(time, msg);
             break;
         case QtWarningMsg:
-            txt = QString("Warning: %1").arg(msg);
+            txt = QString("[%1] Warning: %2").arg(time, msg);
             break;
         case QtCriticalMsg:
-            txt = QString("Critical: %1").arg(msg);
+            txt = QString("[%1] Critical: %2").arg(time, msg);
             break;
         case QtFatalMsg:
-            txt = QString("Fatal: %1").arg(msg);
+            txt = QString("[%1] Fatal: %2").arg(time, msg);
             abort();
     }
     QFile outFile(logFile);
