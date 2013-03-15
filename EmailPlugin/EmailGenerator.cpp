@@ -277,15 +277,21 @@ QSharedPointer<Email> EmailGenerator::generateEmail(TaskArchived email_message)
 
     if(db->init()) {
         user = UserDao::getUser(db, email_message.user_id());
-        task = TaskDao::getArchivedTask(db, -1, email_message.task_id());
+        task = TaskDao::getArchivedTask(db, email_message.task_id());
 
         if(!user.isNull() && !task.isNull()) {
             project = ProjectDao::getProject(db, task->projectid());
-            org = OrganisationDao::getOrg(db, project->organisationid());
-            if(org.isNull()) {
+
+            if(!project.isNull()) {
+                org = OrganisationDao::getOrg(db, project->organisationid());
+                if(org.isNull()) {
+                    error = "Failed to Generate task archived email. Unable to find relevent information ";
+                    error += "in the Database. Unable to locate org with id " + QString::number(project->organisationid());
+                    error += ".";
+                }
+            } else {
                 error = "Failed to Generate task archived email. Unable to find relevent information ";
-                error += "in the Database. Unable to locate org with id " + QString::number(org->id());
-                error += ".";
+                error += "in the Database. Searched for project ID " + QString::number(task->projectid());
             }
         } else {
             error = "Failed to Generate task archived email. Unable to find relevent information ";

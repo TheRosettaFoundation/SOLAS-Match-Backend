@@ -25,8 +25,8 @@ public:
     static QList<QSharedPointer<Task> > getActiveTasks(MySQLHandler *db, int limit = -1);
     static QSharedPointer<User> getTaskTranslator(MySQLHandler *db, int task_id);
     static QList<QSharedPointer<User> > getSubscribedUsers(MySQLHandler *db, int task_id);
-    static QList<QSharedPointer<ArchivedTask> > getArchivedTasks(MySQLHandler *db, int arc_id = -1, int t_id = -1, int o_id = -1);
-    static QSharedPointer<ArchivedTask> getArchivedTask(MySQLHandler *db, int arc_id = -1, int t_id = -1, int o_id = -1);
+    static QList<QSharedPointer<ArchivedTask> > getArchivedTasks(MySQLHandler *db, int arc_id = -1, int o_id = -1);
+    static QSharedPointer<ArchivedTask> getArchivedTask(MySQLHandler *db, int arc_id = -1, int o_id = -1);
 
 };
 

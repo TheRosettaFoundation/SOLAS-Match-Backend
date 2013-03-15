@@ -164,19 +164,13 @@ QList<QSharedPointer<User> > TaskDao::getSubscribedUsers(MySQLHandler *db, int t
     return users;
 }
 
-QList<QSharedPointer<ArchivedTask> > TaskDao::getArchivedTasks(MySQLHandler *db, int arc_id, int t_id, int o_id)
+QList<QSharedPointer<ArchivedTask> > TaskDao::getArchivedTasks(MySQLHandler *db, int arc_id, int o_id)
 {
     QList<QSharedPointer<ArchivedTask> > ret = QList<QSharedPointer<ArchivedTask> >();
     QString args = "";
 
     if(arc_id != -1) {
         args += QString::number(arc_id) + ", ";
-    } else {
-        args += "null, ";
-    }
-
-    if(t_id != -1) {
-        args += QString::number(t_id) + ", ";
     } else {
         args += "null, ";
     }
@@ -198,10 +192,10 @@ QList<QSharedPointer<ArchivedTask> > TaskDao::getArchivedTasks(MySQLHandler *db,
     return ret;
 }
 
-QSharedPointer<ArchivedTask> TaskDao::getArchivedTask(MySQLHandler *db, int arc_id, int t_id, int o_id)
+QSharedPointer<ArchivedTask> TaskDao::getArchivedTask(MySQLHandler *db, int arc_id, int o_id)
 {
     QSharedPointer<ArchivedTask> task = QSharedPointer<ArchivedTask>();
-    QList<QSharedPointer<ArchivedTask> > arc_tasks = TaskDao::getArchivedTasks(db, arc_id, t_id, o_id);
+    QList<QSharedPointer<ArchivedTask> > arc_tasks = TaskDao::getArchivedTasks(db, arc_id, o_id);
     if(arc_tasks.count() > 0) {
         task = arc_tasks.at(0);
     }
