@@ -97,6 +97,7 @@ QSharedPointer<Project> ModelGenerator::GenerateProject(QSharedPointer<QSqlQuery
     project->set_description(MySQLHandler::getValueFromQuery("description", q).toString().toStdString());
     project->set_deadline(MySQLHandler::getValueFromQuery("deadline", q).toString().toStdString());
     project->set_organisationid(MySQLHandler::getValueFromQuery("organisation_id", q).toInt());
+    project->set_impact(MySQLHandler::getValueFromQuery("impact", q).toString().toStdString());
     project->set_reference(MySQLHandler::getValueFromQuery("reference", q).toString().toStdString());
     project->set_wordcount(MySQLHandler::getValueFromQuery("word-count", q).toInt());
     project->set_createdtime(MySQLHandler::getValueFromQuery("created", q).toString().toStdString());
@@ -115,6 +116,7 @@ QSharedPointer<ArchivedProject> ModelGenerator::GenerateArchivedProject(QSharedP
     project->set_description(MySQLHandler::getValueFromQuery("description", q).toString().toStdString());
     project->set_deadline(MySQLHandler::getValueFromQuery("deadline", q).toString().toStdString());
     project->set_organisationid(MySQLHandler::getValueFromQuery("organisation_id", q).toInt());
+    project->set_impact(MySQLHandler::getValueFromQuery("impact", q).toString().toStdString());
     project->set_reference(MySQLHandler::getValueFromQuery("reference", q).toString().toStdString());
     project->set_wordcount(MySQLHandler::getValueFromQuery("word-count", q).toInt());
     project->set_createdtime(MySQLHandler::getValueFromQuery("created", q).toString().toStdString());

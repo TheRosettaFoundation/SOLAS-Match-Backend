@@ -2,7 +2,7 @@
 
 #include "../ModelGenerator.h"
 
-QList<QSharedPointer<Project> > ProjectDao::getProjects(MySQLHandler *db, int id, QString title, QString desc,
+QList<QSharedPointer<Project> > ProjectDao::getProjects(MySQLHandler *db, int id, QString title, QString desc, QString impact,
                                                         QString deadline, int orgId, QString ref, int wordCount,
                                                         QString created, QString language, QString country)
 {
@@ -23,6 +23,12 @@ QList<QSharedPointer<Project> > ProjectDao::getProjects(MySQLHandler *db, int id
 
     if (desc != "") {
         args += desc + ", ";
+    } else {
+        args += "null, ";
+    }
+
+    if (impact != "") {
+        args += impact + ", ";
     } else {
         args += "null, ";
     }
@@ -80,12 +86,12 @@ QList<QSharedPointer<Project> > ProjectDao::getProjects(MySQLHandler *db, int id
     return ret;
 }
 
-QSharedPointer<Project> ProjectDao::getProject(MySQLHandler *db, int id, QString title, QString desc,
+QSharedPointer<Project> ProjectDao::getProject(MySQLHandler *db, int id, QString title, QString desc, QString impact,
                                                QString deadline, int orgId, QString ref, int wordCount,
                                                QString created, QString language, QString country)
 {
     QSharedPointer<Project> project;
-    QList<QSharedPointer<Project> > projectList = ProjectDao::getProjects(db, id, title, desc, deadline, orgId,
+    QList<QSharedPointer<Project> > projectList = ProjectDao::getProjects(db, id, title, desc, impact, deadline, orgId,
                                                                           ref, wordCount, created, language, country);
     if (projectList.count() > 0) {
         project = projectList.at(0);

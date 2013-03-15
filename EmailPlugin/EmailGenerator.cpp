@@ -413,15 +413,23 @@ QSharedPointer<Email> EmailGenerator::generateEmail(TaskTranslationUploaded emai
             error += "to find relevant inforamtion in the Database. Searched for ";
             error += "User ID " + QString::number(email_message.user_id()) + ", ";
             error += "Translator ID " + QString::number(email_message.translator_id());
-            error += " and Task ID " + QString::number(email_message.task_id()) + ".";
+            error += " and task and project identified by task ID ";
+            error += QString::number(email_message.task_id()) + ".";
         } else {
-            project = ProjectDao::getProject(db, email_message.task_id());
-            org = OrganisationDao::getOrg(db, project->organisationid());
+            project = ProjectDao::getProject(db, task->projectid());
 
-            if(org.isNull()) {
+            if (project.isNull()) {
                 error = "Failed to generate task translation uploaded email. Unable ";
                 error += "to find relevant inforamtion in the Database. Could not find ";
-                error += "Organisation with ID " + QString::number(project->organisationid()) + ".";
+                error += "project with ID " + QString::number(task->projectid());
+            } else {
+                org = OrganisationDao::getOrg(db, project->organisationid());
+
+                if(org.isNull()) {
+                    error = "Failed to generate task translation uploaded email. Unable ";
+                    error += "to find relevant inforamtion in the Database. Could not find ";
+                    error += "Organisation with ID " + QString::number(project->organisationid()) + ".";
+                }
             }
         }
 
