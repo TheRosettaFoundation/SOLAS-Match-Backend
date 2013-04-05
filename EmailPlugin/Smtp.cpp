@@ -2,6 +2,7 @@
 #include "Smtp.h"
 
 #include <QDebug>
+#include <QTimer>
 
 #include "../Common/ConfigParser.h"
 
@@ -9,6 +10,12 @@ Smtp::Smtp()
 {
     smtp = new QxtSmtp();
     isConnected = false;
+    busy = false;
+    emailQueue = QSharedPointer<EmailQueue>(new EmailQueue());
+
+    QTimer *emailQueueReadTimer  = new QTimer();
+    connect(emailQueueReadTimer, SIGNAL(timeout()), this, SLOT(checkEmailQueue()));
+    emailQueueReadTimer->start(100);
 
     connect(smtp, SIGNAL(connected()), this, SLOT(connected()));
     connect(smtp, SIGNAL(connectionFailed()), this, SLOT(connectionFailed()));
@@ -53,7 +60,23 @@ void Smtp::send(QSharedPointer<Email> email)
     if(!isConnected) {
         this->init();
     }
+    busy = true;
     smtp->send(mail_message);
+}
+
+QSharedPointer<EmailQueue> Smtp::getEmailQueue()
+{
+    return emailQueue;
+}
+
+void Smtp::checkEmailQueue()
+{
+    if (!busy && !emailQueue->isEmpty()) {
+        qDebug() << "Getting message from queue";
+        QSharedPointer<Email> email = emailQueue->dequeue();
+        email->printEmail();
+        this->send(email);
+    }
 }
 
 void Smtp::connected()
@@ -86,6 +109,7 @@ void Smtp::disconnected()
 void Smtp::finished()
 {
     emit complete();
+    busy = false;
     qDebug() << "SMTP::finished";
 }
 

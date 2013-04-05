@@ -22,6 +22,7 @@ public slots:
     void run();
 
 private:
+    void registerEmailTypes();
     QThreadPool *mThreadPool;
     bool enabled;
     Smtp *smtp;

@@ -5,11 +5,13 @@
 #include <QString>
 #include <QObject>
 #include <QSharedPointer>
+#include <QQueue>
 
 #include <qxt/QxtNetwork/qxtsmtp.h>
 #include <qxt/QxtNetwork/qxtmailmessage.h>
 
 #include "Email.h"
+#include "Definitions.h"
 
 class Smtp : public QObject
 {
@@ -19,7 +21,7 @@ public:
     Smtp();
     ~Smtp();
     void init();
-    void send(QSharedPointer<Email> email);
+    QSharedPointer<EmailQueue> getEmailQueue();
 
 signals:
     void complete();
@@ -36,11 +38,16 @@ private slots:
     void recipientRejected(int mailID, QString address);
     void finished();
 
+    void checkEmailQueue();
+
 private:
+    void send(QSharedPointer<Email> email);
     QxtSmtp *smtp;
+    QSharedPointer<EmailQueue> emailQueue;
     QString host;
     int port;
     bool isConnected;
+    bool busy;
 
 };
 

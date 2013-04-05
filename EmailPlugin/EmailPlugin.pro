@@ -29,10 +29,33 @@ DEFINES += EMAILPLUGIN_LIBRARY
 
 SOURCES += emailplugin.cpp \
     Smtp.cpp \
-    EmailGenerator.cpp \
-    Email.cpp
+    Email.cpp \
+    IEmailGenerator.cpp \
+    Generators/OrgMembershipAcceptedGenerator.cpp \
+    Generators/OrgMembershipRefusedEmailGenerator.cpp \
+    Generators/TaskScoreEmailGenerator.cpp \
+    Generators/PasswordResetEmailGenerator.cpp \
+    Generators/TaskArchivedEmailGenerator.cpp \
+    Generators/TaskClaimedEmailGenerator.cpp \
+    Generators/TaskTranslationUploadedEmailGenerator.cpp \
+    Generators/UserTaskClaimEmailGenerator.cpp \
+    Generators/FeedbackEmailGenerator.cpp \
+    Generators/OrgDeadlinePassedEmailGenerator.cpp \
+    Generators/UserTaskDeadlineEmailGenerator.cpp
 
 HEADERS += emailplugin.h\
         Smtp.h \
-    EmailGenerator.h \
-    Email.h
+    Email.h \
+    Generators/TaskScoreEmailGenerator.h \
+    IEmailGenerator.h \
+    Generators/OrgMembershipAcceptedGenerator.h \
+    Generators/OrgMembershipRefusedEmailGenerator.h \
+    Definitions.h \
+    Generators/PasswordResetEmailGenerator.h \
+    Generators/TaskArchivedEmailGenerator.h \
+    Generators/TaskClaimedEmailGenerator.h \
+    Generators/TaskTranslationUploadedEmailGenerator.h \
+    Generators/UserTaskClaimEmailGenerator.h \
+    Generators/FeedbackEmailGenerator.h \
+    Generators/OrgDeadlinePassedEmailGenerator.h \
+    Generators/UserTaskDeadlineEmailGenerator.h

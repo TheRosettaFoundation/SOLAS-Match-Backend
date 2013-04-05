@@ -6,10 +6,22 @@
 #include <qxt/QxtNetwork/qxtmailmessage.h>
 #include <qxt/QxtNetwork/qxtsmtp.h>
 
+#include "Generators/TaskScoreEmailGenerator.h"
+#include "Generators/OrgDeadlinePassedEmailGenerator.h"
+#include "Generators/OrgMembershipAcceptedGenerator.h"
+#include "Generators/OrgMembershipRefusedEmailGenerator.h"
+#include "Generators/PasswordResetEmailGenerator.h"
+#include "Generators/TaskArchivedEmailGenerator.h"
+#include "Generators/TaskClaimedEmailGenerator.h"
+#include "Generators/UserTaskClaimEmailGenerator.h"
+#include "Generators/UserTaskDeadlineEmailGenerator.h"
+#include "Generators/FeedbackEmailGenerator.h"
+
 #include "Smtp.h"
-#include "EmailGenerator.h"
+#include "IEmailGenerator.h"
 #include "Common/ConfigParser.h"
 #include "Common/protobufs/emails/TaskScoreEmail.pb.h"
+#include "Common/protobufs/emails/OrgTaskDeadlinePassed.pb.h"
 #include "Common/protobufs/emails/OrgMembershipAccepted.pb.h"
 #include "Common/protobufs/emails/OrgMembershipRefused.pb.h"
 #include "Common/protobufs/emails/PasswordResetEmail.pb.h"
@@ -36,6 +48,8 @@ void EmailPlugin::run()
     QString topic = "email.#";
     QString queue = "email_queue";
     MessagingClient *client;
+
+    this->registerEmailTypes();
 
     smtp = new Smtp();
     smtp->init();
@@ -65,107 +79,16 @@ void EmailPlugin::messageReveived(AMQPMessage *message)
 
     EmailMessage email_message;
     email_message.ParseFromString(message_body.toStdString());
+    qDebug() << "Instantiated generic message";
 
-    EmailGenerator emailGen;
-    QSharedPointer<Email> email = QSharedPointer<Email>();
+    QString type = "EmailGenerator_" + QString::number(email_message.email_type());
+    int classId = QMetaType::type(type.toLatin1());
+    IEmailGenerator *emailGen = static_cast<IEmailGenerator *>(QMetaType::construct(classId));
+    emailGen->setEmailQueue(smtp->getEmailQueue());
+    emailGen->setProtoBody(message_body);
+    this->mThreadPool->start(emailGen);
 
-    switch (email_message.email_type()) {
-        case (EmailMessage::TaskScoreEmail) :
-        {
-            TaskScoreEmail email_type;
-            email_type.ParseFromString(message_body.toStdString());
-
-            email = emailGen.generateEmail(email_type);
-            break;
-        }
-        case (EmailMessage::OrgMembershipAccepted):
-        {
-            OrgMembershipAccepted email_type;
-            email_type.ParseFromString(message_body.toStdString());
-
-            email = emailGen.generateEmail(email_type);
-            break;
-        }
-        case (EmailMessage::OrgMembershipRefused):
-        {
-            OrgMembershipRefused email_type;
-            email_type.ParseFromString(message_body.toStdString());
-
-            email = emailGen.generateEmail(email_type);
-            break;
-        }
-        case (EmailMessage::PasswordResetEmail):
-        {
-            PasswordResetEmail email_type;
-            email_type.ParseFromString(message_body.toStdString());
-
-            email = emailGen.generateEmail(email_type);
-            break;
-        }
-        case (EmailMessage::TaskArchived):
-        {
-            TaskArchived email_type;
-            email_type.ParseFromString(message_body.toStdString());
-
-            email = emailGen.generateEmail(email_type);
-            break;
-        }
-        case (EmailMessage::TaskClaimed):
-        {
-            TaskClaimed email_type;
-            email_type.ParseFromString(message_body.toStdString());
-
-            email = emailGen.generateEmail(email_type);
-            break;
-        }
-        case (EmailMessage::TaskTranslationUploaded):
-        {
-            TaskTranslationUploaded email_type;
-            email_type.ParseFromString(message_body.toStdString());
-
-            email = emailGen.generateEmail(email_type);
-            break;
-        }
-        case (EmailMessage::UserTaskClaim):
-        {
-            UserTaskClaim email_type;
-            email_type.ParseFromString(message_body.toStdString());
-
-            email = emailGen.generateEmail(email_type);
-            break;
-        }
-        case (EmailMessage::OrgTaskDeadlinePassed):
-        {
-            OrgTaskDeadlinePassed email_type;
-            email_type.ParseFromString(message_body.toStdString());
-
-            email = emailGen.generateEmail(email_type);
-            break;
-        }
-        case (EmailMessage::UserClaimedTaskDeadlinePassed):
-        {
-            UserClaimedTaskDeadlinePassed email_type;
-            email_type.ParseFromString(message_body.toStdString());
-
-            email = emailGen.generateEmail(email_type);
-            break;
-        }
-        case (EmailMessage::FeedbackEmail):
-        {
-            FeedbackEmail email_type;
-            email_type.ParseFromString(message_body.toStdString());
-
-            email = emailGen.generateEmail(email_type);
-            break;
-        }
-        default:
-        {
-            qDebug() << "Invalid email type";
-            break;
-        }
-    }
-
-    if(email) {
+    /*if(email) {
         //Send Email
         email->printEmail();
         smtp->send(email);
@@ -176,7 +99,32 @@ void EmailPlugin::messageReveived(AMQPMessage *message)
         {
             messageQueue->Ack(message->getDeliveryTag());
         }
-    }
+    }*/
+}
+
+void EmailPlugin::registerEmailTypes()
+{
+    QString name = "";
+    name = "EmailGenerator_" + QString::number(EmailMessage::TaskScoreEmail);
+    qRegisterMetaType<TaskScoreEmailGenerator>(name.toLatin1());
+    name = "EmailGenerator_" + QString::number(EmailMessage::OrgMembershipAccepted);
+    qRegisterMetaType<OrgMembershipAcceptedGenerator>(name.toLatin1());
+    name = "EmailGenerator_" + QString::number(EmailMessage::OrgMembershipRefused);
+    qRegisterMetaType<OrgMembershipRefusedEmailGenerator>(name.toLatin1());
+    name = "EmailGenerator_" + QString::number(EmailMessage::PasswordResetEmail);
+    qRegisterMetaType<PasswordResetEmailGenerator>(name.toLatin1());
+    name = "EmailGenerator_" + QString::number(EmailMessage::TaskArchived);
+    qRegisterMetaType<TaskArchivedEmailGenerator>(name.toLatin1());
+    name = "EmailGenerator_" + QString::number(EmailMessage::TaskClaimed);
+    qRegisterMetaType<TaskClaimedEmailGenerator>(name.toLatin1());
+    name = "EmailGenerator_" + QString::number(EmailMessage::UserTaskClaim);
+    qRegisterMetaType<UserTaskClaimEmailGenerator>(name.toLatin1());
+    name = "EmailGenerator_" + QString::number(EmailMessage::FeedbackEmail);
+    qRegisterMetaType<FeedbackEmailGenerator>(name.toLatin1());
+    name = "EmailGenerator_" + QString::number(EmailMessage::OrgTaskDeadlinePassed);
+    qRegisterMetaType<OrgDeadlinePassedMailGenerator>(name.toLatin1());
+    name = "EmailGenerator_" + QString::number(EmailMessage::UserClaimedTaskDeadlinePassed);
+    qRegisterMetaType<UserTaskDeadlineEmailGenerator>(name.toLatin1());
 }
 
 void EmailPlugin::setThreadPool(QThreadPool *tp)
