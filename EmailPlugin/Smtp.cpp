@@ -104,6 +104,7 @@ void Smtp::disconnected()
 {
     qDebug() << "SMTP::Disconnected";
     this->isConnected = false;
+    this->busy = false;
 }
 
 void Smtp::finished()
