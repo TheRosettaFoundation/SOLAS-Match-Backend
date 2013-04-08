@@ -86,20 +86,8 @@ void EmailPlugin::messageReveived(AMQPMessage *message)
     IEmailGenerator *emailGen = static_cast<IEmailGenerator *>(QMetaType::construct(classId));
     emailGen->setEmailQueue(smtp->getEmailQueue());
     emailGen->setProtoBody(message_body);
+    emailGen->setAMQPMessage(message);
     this->mThreadPool->start(emailGen);
-
-    /*if(email) {
-        //Send Email
-        email->printEmail();
-        smtp->send(email);
-
-        //Ack message
-        AMQPQueue *messageQueue = message->getQueue();
-        if(messageQueue != NULL)
-        {
-            messageQueue->Ack(message->getDeliveryTag());
-        }
-    }*/
 }
 
 void EmailPlugin::registerEmailTypes()

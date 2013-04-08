@@ -44,6 +44,7 @@ private:
     void send(QSharedPointer<Email> email);
     QxtSmtp *smtp;
     QSharedPointer<EmailQueue> emailQueue;
+    AMQPMessage *currentMessage;
     QString host;
     int port;
     bool isConnected;

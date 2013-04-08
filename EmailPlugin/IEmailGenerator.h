@@ -51,6 +51,7 @@ public:
     IEmailGenerator();
     virtual void run() = 0;
     void setProtoBody(QString proto);
+    void setAMQPMessage(AMQPMessage *mess);
     void setEmailQueue(QSharedPointer<EmailQueue> emailQueue);
     QSharedPointer<Email> generateErrorEmail(QString error);
 
@@ -60,28 +61,8 @@ signals:
 protected:
     QString protoBody;
     QSharedPointer<EmailQueue> emailQueue;
+    AMQPMessage *currentMessage;
 
 };
-
-/*class EmailGenerator
-{
-public:
-    EmailGenerator();
-    QSharedPointer<Email> generateEmail(TaskScoreEmail email_message);
-    QSharedPointer<Email> generateEmail(OrgMembershipAccepted email_message);
-    QSharedPointer<Email> generateEmail(OrgMembershipRefused email_message);
-    QSharedPointer<Email> generateEmail(OrgTaskDeadlinePassed email_message);
-    QSharedPointer<Email> generateEmail(PasswordResetEmail email_message);
-    QSharedPointer<Email> generateEmail(TaskArchived email_message);
-    QSharedPointer<Email> generateEmail(TaskClaimed email_message);
-    QSharedPointer<Email> generateEmail(TaskTranslationUploaded email_message);
-    QSharedPointer<Email> generateEmail(UserTaskClaim email_message);
-    QSharedPointer<Email> generateEmail(UserClaimedTaskDeadlinePassed email_message);
-    QSharedPointer<Email> generateEmail(FeedbackEmail email_message);
-
-private:
-    QSharedPointer<Email> generateErrorEmail(QString error_message);
-
-};*/
 
 #endif // EMAILGENERATOR_H

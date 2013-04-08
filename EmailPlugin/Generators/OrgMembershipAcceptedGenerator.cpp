@@ -82,6 +82,6 @@ void OrgMembershipAcceptedGenerator::run()
     delete db;
 
     if (email) {
-        emailQueue->enqueue(email);
+        this->emailQueue->insert(email, currentMessage);
     }
 }

@@ -7,6 +7,7 @@
 
 #include "Common/MySQLHandler.h"
 #include "Common/ConfigParser.h"
+#include "Common/MessagingClient.h"
 
 #include "Common/DataAccessObjects/UserDao.h"
 #include "Common/DataAccessObjects/OrganisationDao.h"
@@ -34,6 +35,11 @@ void IEmailGenerator::setEmailQueue(QSharedPointer<EmailQueue> emailQueue)
 void IEmailGenerator::setProtoBody(QString proto)
 {
     this->protoBody = proto;
+}
+
+void IEmailGenerator::setAMQPMessage(AMQPMessage *mess)
+{
+    this->currentMessage = mess;
 }
 
 QSharedPointer<Email> IEmailGenerator::generateErrorEmail(QString error)

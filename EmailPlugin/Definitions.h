@@ -1,10 +1,11 @@
 #ifndef DEFINITIONS_H
 #define DEFINITIONS_H
 
-#include <QQueue>
+#include <QMap>
 #include <QSharedPointer>
+#include "Common/MessagingClient.h"
 #include "Email.h"
 
-typedef QQueue<QSharedPointer<Email> > EmailQueue;
+typedef QMap<QSharedPointer<Email>, AMQPMessage *> EmailQueue;
 
 #endif // DEFINITIONS_H

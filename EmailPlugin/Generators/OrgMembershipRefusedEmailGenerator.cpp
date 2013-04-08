@@ -58,5 +58,5 @@ void OrgMembershipRefusedEmailGenerator::run()
 
     delete db;
 
-    this->emailQueue->enqueue(email);
+    this->emailQueue->insert(email, currentMessage);
 }

@@ -11,6 +11,7 @@ Smtp::Smtp()
     smtp = new QxtSmtp();
     isConnected = false;
     busy = false;
+    currentMessage = NULL;
     emailQueue = QSharedPointer<EmailQueue>(new EmailQueue());
 
     QTimer *emailQueueReadTimer  = new QTimer();
@@ -73,9 +74,17 @@ void Smtp::checkEmailQueue()
 {
     if (!busy && !emailQueue->isEmpty()) {
         qDebug() << "Getting message from queue";
-        QSharedPointer<Email> email = emailQueue->dequeue();
-        email->printEmail();
-        this->send(email);
+        EmailQueue::ConstIterator i = emailQueue->constBegin();
+        if (i != emailQueue->constEnd()) {
+            this->currentMessage = i.value();
+            QSharedPointer<Email> email = i.key();
+            emailQueue->remove(i.key());
+            email->printEmail();
+            this->send(email);
+        }
+        //QSharedPointer<Email> email = emailQueue->dequeue();
+        //email->printEmail();
+        //this->send(email);
     }
 }
 
@@ -122,6 +131,13 @@ void Smtp::mailFailed(int mailID, int errorCode)
 void Smtp::mailSent(int mailID)
 {
     qDebug() << "Mail (" << mailID << ") sent successfully";
+    if (this->currentMessage) {
+        AMQPQueue *messageQueue = currentMessage->getQueue();
+        if(messageQueue != NULL)
+        {
+            messageQueue->Ack(currentMessage->getDeliveryTag());
+        }
+    }
 }
 
 void Smtp::recipientRejected(int mailID, QString address)
