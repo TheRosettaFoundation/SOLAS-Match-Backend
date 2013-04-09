@@ -69,5 +69,4 @@ void TaskClaimedEmailGenerator::run()
     delete db;
 
     this->emailQueue->insert(email, currentMessage);
-    //this->emailQueue->enqueue(email);
 }
