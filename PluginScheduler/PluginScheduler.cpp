@@ -133,6 +133,9 @@ void PluginScheduler::processTask(QPointer<TimedTask> task)
         request = generator.GenerateTask(QSharedPointer<DeadlineCheckRequest>(new DeadlineCheckRequest));
     } else if (task->getMessage() == "StatisticsUpdateRequest") {
         request = generator.GenerateTask(QSharedPointer<StatisticsUpdateRequest>(new StatisticsUpdateRequest));
+    } else if (task->getMessage() == "UserTaskStreamNotificationRequest") {
+        request = generator.GenerateTask(QSharedPointer<UserTaskStreamNotificationRequest>
+                                         (new UserTaskStreamNotificationRequest));
     }
 
     if(request) {

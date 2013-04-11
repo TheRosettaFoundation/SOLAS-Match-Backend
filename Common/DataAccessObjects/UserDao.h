@@ -38,6 +38,8 @@ public:
     static QString getPasswordResetUuid(MySQLHandler *db, int id);
     static QList<QSharedPointer<Task> > getUserTopTasks(MySQLHandler *db, int userId,
                                                         int limit = 10, QString filter = "");
+    static QList<int> getUserIdsPendingTaskStreamNotification(MySQLHandler *db);
+    static bool taskStreamNotificationSent(MySQLHandler *db, int userId, QString sentDate);
 
 };
 

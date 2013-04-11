@@ -134,7 +134,7 @@ QSharedPointer<Language> ModelGenerator::GenerateLanguage(QSharedPointer<QSqlQue
 
     language->set_id(MySQLHandler::getValueFromQuery("id", q).toInt());
     language->set_code(MySQLHandler::getValueFromQuery("code", q).toString().toStdString());
-    language->set_name(MySQLHandler::getValueFromQuery("name", q).toString().toStdString());
+    language->set_name(MySQLHandler::getValueFromQuery("language", q).toString().toStdString());
 
     return language;
 }

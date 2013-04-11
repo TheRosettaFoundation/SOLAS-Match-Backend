@@ -27,7 +27,6 @@ DeadlineChecker::DeadlineChecker(AMQPMessage *mess)
 
 DeadlineChecker::~DeadlineChecker()
 {
-    //delete message;
 }
 
 void DeadlineChecker::run()

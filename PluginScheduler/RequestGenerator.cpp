@@ -23,3 +23,10 @@ QSharedPointer<StatisticsUpdateRequest> RequestGenerator::GenerateTask(QSharedPo
     task->set_request_time(QTime::currentTime().toString().toStdString());
     return task;
 }
+
+QSharedPointer<UserTaskStreamNotificationRequest> RequestGenerator::GenerateTask(
+        QSharedPointer<UserTaskStreamNotificationRequest> task)
+{
+    task->set_name("UserTaskStreamNotificationRequest");
+    return task;
+}

@@ -28,7 +28,7 @@ QSharedPointer<Language> LanguageDao::getLanguage(MySQLHandler *db, int id, QStr
         }
 
         if (code != "") {
-            args += code + ", ";
+            args += "'" + code + "', ";
         } else {
             args +=  "null, ";
         }

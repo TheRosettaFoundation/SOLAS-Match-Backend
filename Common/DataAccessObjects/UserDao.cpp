@@ -102,7 +102,7 @@ QList<QSharedPointer<Task> > UserDao::getUserTopTasks(MySQLHandler *db, int user
     QList<QSharedPointer<Task> > taskList = QList<QSharedPointer<Task> >();
     QString args = QString::number(userId) + ", ";
     args = args + QString::number(limit) + ", ";
-    args += filter;
+    args += "'" + filter + "'";
     QSharedPointer<QSqlQuery> mQuery = db->call("getUserTopTasks", args);
     if (mQuery->first()) {
         do {
@@ -111,4 +111,27 @@ QList<QSharedPointer<Task> > UserDao::getUserTopTasks(MySQLHandler *db, int user
         } while (mQuery->next());
     }
     return taskList;
+}
+
+QList<int> UserDao::getUserIdsPendingTaskStreamNotification(MySQLHandler *db)
+{
+    QList<int> userIds = QList<int>();
+    QSharedPointer<QSqlQuery> mQuery = db->call("getUserIdsPendingTaskStreamNotification", "");
+    if (mQuery->first()) {
+        do {
+            userIds.append(MySQLHandler::getValueFromQuery("user_id", mQuery).toInt());
+        } while (mQuery->next());
+    }
+    return userIds;
+}
+
+bool UserDao::taskStreamNotificationSent(MySQLHandler *db, int userId, QString sentDate)
+{
+    bool ret = false;
+    QString args = QString::number(userId) + ", '" + sentDate + "'";
+    QSharedPointer<QSqlQuery> mQuery = db->call("taskStreamNotificationSent", args);
+    if (mQuery->first()) {
+        ret = (MySQLHandler::getValueFromQuery("result", mQuery).toInt() == 1);
+    }
+    return ret;
 }

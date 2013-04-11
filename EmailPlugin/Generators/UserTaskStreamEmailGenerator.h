@@ -6,6 +6,7 @@
 
 class UserTaskStreamEmailGenerator : public IEmailGenerator
 {
+public:
     UserTaskStreamEmailGenerator();
     void run();
 

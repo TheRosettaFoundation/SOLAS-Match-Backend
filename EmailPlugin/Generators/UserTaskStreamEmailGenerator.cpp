@@ -13,7 +13,7 @@ UserTaskStreamEmailGenerator::UserTaskStreamEmailGenerator()
 
 void UserTaskStreamEmailGenerator::run()
 {
-    qDebug() << "EmailGenerator: Generating FeedbackEmail";
+    qDebug() << "EmailGenerator: Generating UserTaskStreamEmailGenerator";
 
     UserTaskStreamEmail emailRequest;
     emailRequest.ParseFromString(this->protoBody.toStdString());
@@ -39,7 +39,7 @@ void UserTaskStreamEmailGenerator::run()
         qDebug() << "Unable to Connect to SQL Server. Check conf.ini and try again.";
     }
 
-    if (error != "") {
+    if (error == "") {
         ConfigParser settings;
         email = QSharedPointer<Email>(new Email);
 
@@ -80,9 +80,9 @@ void UserTaskStreamEmailGenerator::run()
 
             QList<QSharedPointer<Tag> > taskTags = TagDao::getTaskTags(db, task->id());
             if (taskTags.count() > 0) {
-                ctemplate::TemplateDictionary *tagsSect = taskSect->AddSectionDictionary("TAGS_SECT");
+                taskSect->ShowSection("TAGS_SECT");
                 foreach (QSharedPointer<Tag> tag, taskTags) {
-                    ctemplate::TemplateDictionary *tagsList = tagsSect->AddSectionDictionary("TAGS_LIST");
+                    ctemplate::TemplateDictionary *tagsList = taskSect->AddSectionDictionary("TAGS_LIST");
                     QString tagDetails = settings.get("site.url") + "tag/" + QString::fromStdString(tag->label());
                     tagsList->SetValue("TAG_DETAILS", tagDetails.toStdString());
                     tagsList->SetValue("TAG_LABEL", tag->label());
@@ -91,10 +91,10 @@ void UserTaskStreamEmailGenerator::run()
 
             taskSect->SetValue("WORD_COUNT", QString::number(task->wordcount()).toStdString());
             QString createdTime = QDateTime::fromString(QString::fromStdString(task->createdtime()),
-                       "yyyy-MM-dd HH:mm:ss").toString("d MMMM yyyy - hh:mm");
+                       "yyyy-MM-ddTHH:mm:ss").toString("d MMMM yyyy - hh:mm");
             taskSect->SetValue("CREATE_TIME", createdTime.toStdString());
             QString deadline = QDateTime::fromString(QString::fromStdString(task->deadline()),
-                    "yyyy-MM-dd HH:mm:ss").toString("d MMMM yyyy - hh:mm");
+                    "yyyy-MM-ddTHH:mm:ss").toString("d MMMM yyyy - hh:mm");
             taskSect->SetValue("DEADLINE_TIME", deadline.toStdString());
 
             QSharedPointer<Project> project = ProjectDao::getProject(db, task->projectid());
@@ -114,10 +114,23 @@ void UserTaskStreamEmailGenerator::run()
             }
         }
 
+        std::string email_body;
+        QString templateLocation = QString(TEMPLATE_DIRECTORY) + "emails/user-task-stream.tpl";
+        ctemplate::ExpandTemplate(templateLocation.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
+
         email->setSender(settings.get("site.system_email_address"));;
         email->addRecipient(QString::fromStdString(user->email()));
         email->setSubject("Task Stream");
-        //email->setBody(QString::fromStdString(email_body));
+        email->setBody(QString::fromStdString(email_body));
+
+        QString sentDateTime = QDateTime::currentDateTime().toString("yyyy-MM-dd HH:mm:ss");
+        if (UserDao::taskStreamNotificationSent(db, emailRequest.user_id(), sentDateTime)) {
+            qDebug() << "UserTaskStreamEmailGenerator: Sending notification request for user " <<
+                        QString::number(emailRequest.user_id());
+        } else {
+            qDebug() << "UserTaskStreamEmailGenerator: Failed to update last sent date for user id "
+                        << emailRequest.user_id();
+        }
     } else {
         email = this->generateErrorEmail(error);
     }

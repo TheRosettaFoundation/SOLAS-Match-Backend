@@ -9,6 +9,7 @@
 #include "CalculateTaskScoreJob.h"
 #include "DeadlineChecker.h"
 #include "StatisticsUpdate.h"
+#include "UserStreamNotificationHandler.h"
 
 Q_EXPORT_PLUGIN2(TimedTaskHandler, TimedTaskHandler)
 
@@ -68,6 +69,8 @@ void TimedTaskHandler::messageReceived(AMQPMessage *message)
         job = new DeadlineChecker(message);
     } else if(message->getRoutingKey() == "timed.task.statistics.update") {
         job = new StatisticsUpdate(message);
+    } else if(message->getRoutingKey() == "timed.task.user.stream.notify") {
+        job = new UserStreamNotificationHandler(message);
     }
 
     if(job) {
