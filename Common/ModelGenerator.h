@@ -11,6 +11,7 @@
 #include "protobufs/models/ArchivedTask.pb.h"
 #include "protobufs/models/Project.pb.h"
 #include "protobufs/models/ArchivedProject.pb.h"
+#include "protobufs/models/Language.pb.h"
 
 class ModelGenerator
 {
@@ -22,6 +23,7 @@ public:
     static QSharedPointer<ArchivedTask> GenerateArchivedTask(QSharedPointer<QSqlQuery> q);
     static QSharedPointer<Project> GenerateProject(QSharedPointer<QSqlQuery> q);
     static QSharedPointer<ArchivedProject> GenerateArchivedProject(QSharedPointer<QSqlQuery> q);
+    static QSharedPointer<Language> GenerateLanguage(QSharedPointer<QSqlQuery> q);
 
 };
 

@@ -2,6 +2,7 @@
 #define ORGMEMBERSHIPREFUSEDEMAILGENERATOR_H
 
 #include "../IEmailGenerator.h"
+#include "Common/protobufs/emails/OrgMembershipRefused.pb.h"
 
 class OrgMembershipRefusedEmailGenerator : public IEmailGenerator
 {

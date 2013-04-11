@@ -82,9 +82,6 @@ void Smtp::checkEmailQueue()
             email->printEmail();
             this->send(email);
         }
-        //QSharedPointer<Email> email = emailQueue->dequeue();
-        //email->printEmail();
-        //this->send(email);
     }
 }
 

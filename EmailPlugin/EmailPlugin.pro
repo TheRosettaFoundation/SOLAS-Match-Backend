@@ -41,7 +41,8 @@ SOURCES += emailplugin.cpp \
     Generators/UserTaskClaimEmailGenerator.cpp \
     Generators/FeedbackEmailGenerator.cpp \
     Generators/OrgDeadlinePassedEmailGenerator.cpp \
-    Generators/UserTaskDeadlineEmailGenerator.cpp
+    Generators/UserTaskDeadlineEmailGenerator.cpp \
+    Generators/UserTaskStreamEmailGenerator.cpp
 
 HEADERS += emailplugin.h\
         Smtp.h \
@@ -58,4 +59,5 @@ HEADERS += emailplugin.h\
     Generators/UserTaskClaimEmailGenerator.h \
     Generators/FeedbackEmailGenerator.h \
     Generators/OrgDeadlinePassedEmailGenerator.h \
-    Generators/UserTaskDeadlineEmailGenerator.h
+    Generators/UserTaskDeadlineEmailGenerator.h \
+    Generators/UserTaskStreamEmailGenerator.h

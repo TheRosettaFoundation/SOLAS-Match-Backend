@@ -88,6 +88,13 @@ void EmailPlugin::messageReveived(AMQPMessage *message)
     emailGen->setProtoBody(message_body);
     emailGen->setAMQPMessage(message);
     this->mThreadPool->start(emailGen);
+
+    // REMOVE BEFORE COMMITING
+    /*AMQPQueue *messageQueue = message->getQueue();
+    if(messageQueue != NULL)
+    {
+        messageQueue->Ack(message->getDeliveryTag());
+    }*/
 }
 
 void EmailPlugin::registerEmailTypes()

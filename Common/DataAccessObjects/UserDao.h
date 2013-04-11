@@ -8,6 +8,7 @@
 
 #include "Common/MySQLHandler.h"
 #include "Common/protobufs/models/User.pb.h"
+#include "Common/protobufs/models/Task.pb.h"
 
 class UserDao
 {
@@ -35,6 +36,8 @@ public:
                          int lang_id = -1,
                          int reg_id = -1);
     static QString getPasswordResetUuid(MySQLHandler *db, int id);
+    static QList<QSharedPointer<Task> > getUserTopTasks(MySQLHandler *db, int userId,
+                                                        int limit = 10, QString filter = "");
 
 };
 

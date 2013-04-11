@@ -2,6 +2,7 @@
 #define ORGMEMBERSHIPACCEPTEDGENERATOR_H
 
 #include "../IEmailGenerator.h"
+#include "Common/protobufs/emails/OrgMembershipAccepted.pb.h"
 
 class OrgMembershipAcceptedGenerator : public IEmailGenerator
 {

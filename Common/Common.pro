@@ -50,7 +50,10 @@ SOURCES += \
     DataAccessObjects/ProjectDao.cpp \
     protobufs/emails/FeedbackEmail.pb.cc \
     protobufs/models/Statistic.pb.cc \
-    protobufs/requests/StatisticsUpdateRequest.pb.cc
+    protobufs/requests/StatisticsUpdateRequest.pb.cc \
+    protobufs/emails/UserTaskStreamEmail.pb.cc \
+    protobufs/models/Language.pb.cc \
+    DataAccessObjects/LanguageDao.cpp
 
 HEADERS +=\
     MySQLHandler.h \
@@ -84,7 +87,10 @@ HEADERS +=\
     DataAccessObjects/ProjectDao.h \
     protobufs/emails/FeedbackEmail.pb.h \
     protobufs/models/Statistic.pb.h \
-    protobufs/requests/StatisticsUpdateRequest.pb.h
+    protobufs/requests/StatisticsUpdateRequest.pb.h \
+    protobufs/emails/UserTaskStreamEmail.pb.h \
+    DataAccessObjects/LanguageDao.h \
+    protobufs/models/Language.pb.h
 
 symbian {
     MMP_RULES += EXPORTUNFROZEN

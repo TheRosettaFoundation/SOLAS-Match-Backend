@@ -127,3 +127,14 @@ QSharedPointer<ArchivedProject> ModelGenerator::GenerateArchivedProject(QSharedP
 
     return project;
 }
+
+QSharedPointer<Language> ModelGenerator::GenerateLanguage(QSharedPointer<QSqlQuery> q)
+{
+    QSharedPointer<Language> language = QSharedPointer<Language>(new Language());
+
+    language->set_id(MySQLHandler::getValueFromQuery("id", q).toInt());
+    language->set_code(MySQLHandler::getValueFromQuery("code", q).toString().toStdString());
+    language->set_name(MySQLHandler::getValueFromQuery("name", q).toString().toStdString());
+
+    return language;
+}

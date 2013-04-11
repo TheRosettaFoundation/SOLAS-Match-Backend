@@ -8,4 +8,13 @@
 
 typedef QMap<QSharedPointer<Email>, AMQPMessage *> EmailQueue;
 
+enum TaskTypes {
+    CHUNKING = 1,
+    TRANSLATION = 2,
+    PROOFREADING = 3,
+    POSTEDITING = 4
+};
+
+#define TEMPLATE_DIRECTORY "/etc/SOLAS-Match/templates/"
+
 #endif // DEFINITIONS_H

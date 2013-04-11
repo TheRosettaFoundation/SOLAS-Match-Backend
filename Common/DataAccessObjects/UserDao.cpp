@@ -96,3 +96,19 @@ QString UserDao::getPasswordResetUuid(MySQLHandler *db, int id)
 
     return ret;
 }
+
+QList<QSharedPointer<Task> > UserDao::getUserTopTasks(MySQLHandler *db, int userId, int limit, QString filter)
+{
+    QList<QSharedPointer<Task> > taskList = QList<QSharedPointer<Task> >();
+    QString args = QString::number(userId) + ", ";
+    args = args + QString::number(limit) + ", ";
+    args += filter;
+    QSharedPointer<QSqlQuery> mQuery = db->call("getUserTopTasks", args);
+    if (mQuery->first()) {
+        do {
+            QSharedPointer<Task> task = ModelGenerator::GenerateTask(mQuery);
+            taskList.append(task);
+        } while (mQuery->next());
+    }
+    return taskList;
+}
