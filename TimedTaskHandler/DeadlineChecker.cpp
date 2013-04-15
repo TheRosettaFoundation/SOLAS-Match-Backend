@@ -52,11 +52,11 @@ void DeadlineChecker::run()
 
                         OrgTaskDeadlinePassed orgEmail;
                         orgEmail.set_email_type(EmailMessage::OrgTaskDeadlinePassed);
-                        orgEmail.set_user_id(user->user_id());
+                        orgEmail.set_user_id(user->id());
                         orgEmail.set_org_id(project->organisationid());
                         orgEmail.set_task_id(task->id());
                         if(!translator.isNull()) {
-                            orgEmail.set_translator_id(translator->user_id());
+                            orgEmail.set_translator_id(translator->id());
                         }
 
                         client.publish(exchange, "email.org.task.deadline",
@@ -67,7 +67,7 @@ void DeadlineChecker::run()
                         UserClaimedTaskDeadlinePassed userEmail;
                         userEmail.set_email_type(EmailMessage::UserClaimedTaskDeadlinePassed);
                         userEmail.set_task_id(task->id());
-                        userEmail.set_translator_id(translator->user_id());
+                        userEmail.set_translator_id(translator->id());
 
                         client.publish(exchange, "email.user.deadline.passed",
                                        QString::fromStdString(userEmail.SerializeAsString()));

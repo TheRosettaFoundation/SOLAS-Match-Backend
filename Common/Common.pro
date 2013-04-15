@@ -54,7 +54,8 @@ SOURCES += \
     protobufs/emails/UserTaskStreamEmail.pb.cc \
     protobufs/models/Language.pb.cc \
     DataAccessObjects/LanguageDao.cpp \
-    protobufs/requests/UserTaskStreamNotificationRequest.pb.cc
+    protobufs/requests/UserTaskStreamNotificationRequest.pb.cc \
+    protobufs/models/Locale.pb.cc
 
 HEADERS +=\
     MySQLHandler.h \
@@ -92,7 +93,8 @@ HEADERS +=\
     protobufs/emails/UserTaskStreamEmail.pb.h \
     DataAccessObjects/LanguageDao.h \
     protobufs/models/Language.pb.h \
-    protobufs/requests/UserTaskStreamNotificationRequest.pb.h
+    protobufs/requests/UserTaskStreamNotificationRequest.pb.h \
+    protobufs/models/Locale.pb.h
 
 symbian {
     MMP_RULES += EXPORTUNFROZEN

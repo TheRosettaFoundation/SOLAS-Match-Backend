@@ -51,7 +51,7 @@ void TaskClaimedEmailGenerator::run()
         dict["TRANSLATOR_NAME"] = translator->display_name();
 
         QString user_profile_url = settings.get("site.url");
-        user_profile_url += "profile/" + QString::number(translator->user_id());
+        user_profile_url += "profile/" + QString::number(translator->id());
         dict["USER_PROFILE_URL"] = user_profile_url.toStdString();
 
         std::string email_body;

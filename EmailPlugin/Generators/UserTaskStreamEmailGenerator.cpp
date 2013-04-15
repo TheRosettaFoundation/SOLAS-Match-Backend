@@ -70,13 +70,11 @@ void UserTaskStreamEmailGenerator::run()
             }
             taskSect->SetValue("TASK_TYPE", taskType.toStdString());
 
-            QSharedPointer<Language> sourceLang = LanguageDao::getLanguage(db, -1,
-                     QString::fromStdString(task->sourcelanguagecode()));
-            taskSect->SetValue("SOURCE_LANGUAGE", sourceLang->name());
+            Locale taskSourceLocale = task->sourcelocale();
+            taskSect->SetValue("SOURCE_LANGUAGE", taskSourceLocale.languagename());
 
-            QSharedPointer<Language> targetLang = LanguageDao::getLanguage(db, -1,
-                     QString::fromStdString(task->targetlanguagecode()));
-            taskSect->SetValue("TARGET_LANGUAGE", targetLang->name());
+            Locale taskTargetLocale = task->targetlocale();
+            taskSect->SetValue("TARGET_LANGUAGE", taskTargetLocale.languagename());
 
             QList<QSharedPointer<Tag> > taskTags = TagDao::getTaskTags(db, task->id());
             if (taskTags.count() > 0) {

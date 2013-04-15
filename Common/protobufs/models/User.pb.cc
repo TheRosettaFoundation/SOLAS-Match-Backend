@@ -30,15 +30,15 @@ void protobuf_AssignDesc_User_2eproto() {
   GOOGLE_CHECK(file != NULL);
   User_descriptor_ = file->message_type(0);
   static const int User_offsets_[9] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(User, user_id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(User, id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(User, display_name_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(User, email_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(User, password_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(User, biography_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(User, nonce_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(User, created_time_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(User, native_lang_id_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(User, native_region_id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(User, nativelocale_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(User, secondarylocales_),
   };
   User_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -80,12 +80,14 @@ void protobuf_AddDesc_User_2eproto() {
   already_here = true;
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
+  ::protobuf_AddDesc_Locale_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\nUser.proto\"\270\001\n\004User\022\017\n\007user_id\030\001 \002(\005\022\024"
-    "\n\014display_name\030\002 \001(\t\022\r\n\005email\030\003 \001(\t\022\020\n\010p"
-    "assword\030\004 \001(\t\022\021\n\tbiography\030\005 \001(\t\022\r\n\005nonc"
-    "e\030\006 \001(\t\022\024\n\014created_time\030\007 \001(\t\022\026\n\016native_"
-    "lang_id\030\010 \001(\t\022\030\n\020native_region_id\030\t \001(\t", 199);
+    "\n\nUser.proto\032\014Locale.proto\"\303\001\n\004User\022\n\n\002i"
+    "d\030\001 \001(\005\022\024\n\014display_name\030\002 \001(\t\022\r\n\005email\030\003"
+    " \001(\t\022\020\n\010password\030\004 \001(\t\022\021\n\tbiography\030\005 \001("
+    "\t\022\r\n\005nonce\030\006 \001(\t\022\024\n\014created_time\030\007 \001(\t\022\035"
+    "\n\014nativeLocale\030\010 \001(\0132\007.Locale\022!\n\020seconda"
+    "ryLocales\030\t \003(\0132\007.Locale", 224);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "User.proto", &protobuf_RegisterTypes);
   User::default_instance_ = new User();
@@ -104,15 +106,15 @@ struct StaticDescriptorInitializer_User_2eproto {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int User::kUserIdFieldNumber;
+const int User::kIdFieldNumber;
 const int User::kDisplayNameFieldNumber;
 const int User::kEmailFieldNumber;
 const int User::kPasswordFieldNumber;
 const int User::kBiographyFieldNumber;
 const int User::kNonceFieldNumber;
 const int User::kCreatedTimeFieldNumber;
-const int User::kNativeLangIdFieldNumber;
-const int User::kNativeRegionIdFieldNumber;
+const int User::kNativeLocaleFieldNumber;
+const int User::kSecondaryLocalesFieldNumber;
 #endif  // !_MSC_VER
 
 User::User()
@@ -121,6 +123,7 @@ User::User()
 }
 
 void User::InitAsDefaultInstance() {
+  nativelocale_ = const_cast< ::Locale*>(&::Locale::default_instance());
 }
 
 User::User(const User& from)
@@ -131,15 +134,14 @@ User::User(const User& from)
 
 void User::SharedCtor() {
   _cached_size_ = 0;
-  user_id_ = 0;
+  id_ = 0;
   display_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   email_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   password_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   biography_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   nonce_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   created_time_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  native_lang_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  native_region_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  nativelocale_ = NULL;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -166,13 +168,8 @@ void User::SharedDtor() {
   if (created_time_ != &::google::protobuf::internal::kEmptyString) {
     delete created_time_;
   }
-  if (native_lang_id_ != &::google::protobuf::internal::kEmptyString) {
-    delete native_lang_id_;
-  }
-  if (native_region_id_ != &::google::protobuf::internal::kEmptyString) {
-    delete native_region_id_;
-  }
   if (this != default_instance_) {
+    delete nativelocale_;
   }
 }
 
@@ -198,7 +195,7 @@ User* User::New() const {
 
 void User::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    user_id_ = 0;
+    id_ = 0;
     if (has_display_name()) {
       if (display_name_ != &::google::protobuf::internal::kEmptyString) {
         display_name_->clear();
@@ -229,19 +226,11 @@ void User::Clear() {
         created_time_->clear();
       }
     }
-    if (has_native_lang_id()) {
-      if (native_lang_id_ != &::google::protobuf::internal::kEmptyString) {
-        native_lang_id_->clear();
-      }
+    if (has_nativelocale()) {
+      if (nativelocale_ != NULL) nativelocale_->::Locale::Clear();
     }
   }
-  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
-    if (has_native_region_id()) {
-      if (native_region_id_ != &::google::protobuf::internal::kEmptyString) {
-        native_region_id_->clear();
-      }
-    }
-  }
+  secondarylocales_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
@@ -252,14 +241,14 @@ bool User::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required int32 user_id = 1;
+      // optional int32 id = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &user_id_)));
-          set_has_user_id();
+                 input, &id_)));
+          set_has_id();
         } else {
           goto handle_uninterpreted;
         }
@@ -365,40 +354,35 @@ bool User::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(66)) goto parse_native_lang_id;
+        if (input->ExpectTag(66)) goto parse_nativeLocale;
         break;
       }
       
-      // optional string native_lang_id = 8;
+      // optional .Locale nativeLocale = 8;
       case 8: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_native_lang_id:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_native_lang_id()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->native_lang_id().data(), this->native_lang_id().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+         parse_nativeLocale:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_nativelocale()));
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(74)) goto parse_native_region_id;
+        if (input->ExpectTag(74)) goto parse_secondaryLocales;
         break;
       }
       
-      // optional string native_region_id = 9;
+      // repeated .Locale secondaryLocales = 9;
       case 9: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_native_region_id:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_native_region_id()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->native_region_id().data(), this->native_region_id().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+         parse_secondaryLocales:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_secondarylocales()));
         } else {
           goto handle_uninterpreted;
         }
+        if (input->ExpectTag(74)) goto parse_secondaryLocales;
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -421,9 +405,9 @@ bool User::MergePartialFromCodedStream(
 
 void User::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required int32 user_id = 1;
-  if (has_user_id()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->user_id(), output);
+  // optional int32 id = 1;
+  if (has_id()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->id(), output);
   }
   
   // optional string display_name = 2;
@@ -480,22 +464,16 @@ void User::SerializeWithCachedSizes(
       7, this->created_time(), output);
   }
   
-  // optional string native_lang_id = 8;
-  if (has_native_lang_id()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->native_lang_id().data(), this->native_lang_id().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
-      8, this->native_lang_id(), output);
+  // optional .Locale nativeLocale = 8;
+  if (has_nativelocale()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      8, this->nativelocale(), output);
   }
   
-  // optional string native_region_id = 9;
-  if (has_native_region_id()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->native_region_id().data(), this->native_region_id().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
-      9, this->native_region_id(), output);
+  // repeated .Locale secondaryLocales = 9;
+  for (int i = 0; i < this->secondarylocales_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      9, this->secondarylocales(i), output);
   }
   
   if (!unknown_fields().empty()) {
@@ -506,9 +484,9 @@ void User::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* User::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required int32 user_id = 1;
-  if (has_user_id()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->user_id(), target);
+  // optional int32 id = 1;
+  if (has_id()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->id(), target);
   }
   
   // optional string display_name = 2;
@@ -571,24 +549,18 @@ void User::SerializeWithCachedSizes(
         7, this->created_time(), target);
   }
   
-  // optional string native_lang_id = 8;
-  if (has_native_lang_id()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->native_lang_id().data(), this->native_lang_id().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        8, this->native_lang_id(), target);
+  // optional .Locale nativeLocale = 8;
+  if (has_nativelocale()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        8, this->nativelocale(), target);
   }
   
-  // optional string native_region_id = 9;
-  if (has_native_region_id()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->native_region_id().data(), this->native_region_id().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        9, this->native_region_id(), target);
+  // repeated .Locale secondaryLocales = 9;
+  for (int i = 0; i < this->secondarylocales_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        9, this->secondarylocales(i), target);
   }
   
   if (!unknown_fields().empty()) {
@@ -602,11 +574,11 @@ int User::ByteSize() const {
   int total_size = 0;
   
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required int32 user_id = 1;
-    if (has_user_id()) {
+    // optional int32 id = 1;
+    if (has_id()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->user_id());
+          this->id());
     }
     
     // optional string display_name = 2;
@@ -651,23 +623,22 @@ int User::ByteSize() const {
           this->created_time());
     }
     
-    // optional string native_lang_id = 8;
-    if (has_native_lang_id()) {
+    // optional .Locale nativeLocale = 8;
+    if (has_nativelocale()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->native_lang_id());
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->nativelocale());
     }
     
   }
-  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
-    // optional string native_region_id = 9;
-    if (has_native_region_id()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->native_region_id());
-    }
-    
+  // repeated .Locale secondaryLocales = 9;
+  total_size += 1 * this->secondarylocales_size();
+  for (int i = 0; i < this->secondarylocales_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->secondarylocales(i));
   }
+  
   if (!unknown_fields().empty()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
@@ -693,9 +664,10 @@ void User::MergeFrom(const ::google::protobuf::Message& from) {
 
 void User::MergeFrom(const User& from) {
   GOOGLE_CHECK_NE(&from, this);
+  secondarylocales_.MergeFrom(from.secondarylocales_);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_user_id()) {
-      set_user_id(from.user_id());
+    if (from.has_id()) {
+      set_id(from.id());
     }
     if (from.has_display_name()) {
       set_display_name(from.display_name());
@@ -715,13 +687,8 @@ void User::MergeFrom(const User& from) {
     if (from.has_created_time()) {
       set_created_time(from.created_time());
     }
-    if (from.has_native_lang_id()) {
-      set_native_lang_id(from.native_lang_id());
-    }
-  }
-  if (from._has_bits_[8 / 32] & (0xffu << (8 % 32))) {
-    if (from.has_native_region_id()) {
-      set_native_region_id(from.native_region_id());
+    if (from.has_nativelocale()) {
+      mutable_nativelocale()->::Locale::MergeFrom(from.nativelocale());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -740,22 +707,21 @@ void User::CopyFrom(const User& from) {
 }
 
 bool User::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
   
   return true;
 }
 
 void User::Swap(User* other) {
   if (other != this) {
-    std::swap(user_id_, other->user_id_);
+    std::swap(id_, other->id_);
     std::swap(display_name_, other->display_name_);
     std::swap(email_, other->email_);
     std::swap(password_, other->password_);
     std::swap(biography_, other->biography_);
     std::swap(nonce_, other->nonce_);
     std::swap(created_time_, other->created_time_);
-    std::swap(native_lang_id_, other->native_lang_id_);
-    std::swap(native_region_id_, other->native_region_id_);
+    std::swap(nativelocale_, other->nativelocale_);
+    secondarylocales_.Swap(&other->secondarylocales_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

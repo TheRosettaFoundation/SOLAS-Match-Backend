@@ -88,7 +88,7 @@ class Organisation : public ::google::protobuf::Message {
   
   // accessors -------------------------------------------------------
   
-  // required int32 id = 1;
+  // optional int32 id = 1;
   inline bool has_id() const;
   inline void clear_id();
   static const int kIdFieldNumber = 1;
@@ -106,21 +106,10 @@ class Organisation : public ::google::protobuf::Message {
   inline ::std::string* mutable_name();
   inline ::std::string* release_name();
   
-  // optional string home_page = 3;
-  inline bool has_home_page() const;
-  inline void clear_home_page();
-  static const int kHomePageFieldNumber = 3;
-  inline const ::std::string& home_page() const;
-  inline void set_home_page(const ::std::string& value);
-  inline void set_home_page(const char* value);
-  inline void set_home_page(const char* value, size_t size);
-  inline ::std::string* mutable_home_page();
-  inline ::std::string* release_home_page();
-  
-  // optional string biography = 4;
+  // optional string biography = 3;
   inline bool has_biography() const;
   inline void clear_biography();
-  static const int kBiographyFieldNumber = 4;
+  static const int kBiographyFieldNumber = 3;
   inline const ::std::string& biography() const;
   inline void set_biography(const ::std::string& value);
   inline void set_biography(const char* value);
@@ -128,26 +117,107 @@ class Organisation : public ::google::protobuf::Message {
   inline ::std::string* mutable_biography();
   inline ::std::string* release_biography();
   
+  // optional string homepage = 4;
+  inline bool has_homepage() const;
+  inline void clear_homepage();
+  static const int kHomepageFieldNumber = 4;
+  inline const ::std::string& homepage() const;
+  inline void set_homepage(const ::std::string& value);
+  inline void set_homepage(const char* value);
+  inline void set_homepage(const char* value, size_t size);
+  inline ::std::string* mutable_homepage();
+  inline ::std::string* release_homepage();
+  
+  // optional string email = 5;
+  inline bool has_email() const;
+  inline void clear_email();
+  static const int kEmailFieldNumber = 5;
+  inline const ::std::string& email() const;
+  inline void set_email(const ::std::string& value);
+  inline void set_email(const char* value);
+  inline void set_email(const char* value, size_t size);
+  inline ::std::string* mutable_email();
+  inline ::std::string* release_email();
+  
+  // optional string address = 6;
+  inline bool has_address() const;
+  inline void clear_address();
+  static const int kAddressFieldNumber = 6;
+  inline const ::std::string& address() const;
+  inline void set_address(const ::std::string& value);
+  inline void set_address(const char* value);
+  inline void set_address(const char* value, size_t size);
+  inline ::std::string* mutable_address();
+  inline ::std::string* release_address();
+  
+  // optional string city = 7;
+  inline bool has_city() const;
+  inline void clear_city();
+  static const int kCityFieldNumber = 7;
+  inline const ::std::string& city() const;
+  inline void set_city(const ::std::string& value);
+  inline void set_city(const char* value);
+  inline void set_city(const char* value, size_t size);
+  inline ::std::string* mutable_city();
+  inline ::std::string* release_city();
+  
+  // optional string country = 8;
+  inline bool has_country() const;
+  inline void clear_country();
+  static const int kCountryFieldNumber = 8;
+  inline const ::std::string& country() const;
+  inline void set_country(const ::std::string& value);
+  inline void set_country(const char* value);
+  inline void set_country(const char* value, size_t size);
+  inline ::std::string* mutable_country();
+  inline ::std::string* release_country();
+  
+  // optional string regionalFocus = 9;
+  inline bool has_regionalfocus() const;
+  inline void clear_regionalfocus();
+  static const int kRegionalFocusFieldNumber = 9;
+  inline const ::std::string& regionalfocus() const;
+  inline void set_regionalfocus(const ::std::string& value);
+  inline void set_regionalfocus(const char* value);
+  inline void set_regionalfocus(const char* value, size_t size);
+  inline ::std::string* mutable_regionalfocus();
+  inline ::std::string* release_regionalfocus();
+  
   // @@protoc_insertion_point(class_scope:Organisation)
  private:
   inline void set_has_id();
   inline void clear_has_id();
   inline void set_has_name();
   inline void clear_has_name();
-  inline void set_has_home_page();
-  inline void clear_has_home_page();
   inline void set_has_biography();
   inline void clear_has_biography();
+  inline void set_has_homepage();
+  inline void clear_has_homepage();
+  inline void set_has_email();
+  inline void clear_has_email();
+  inline void set_has_address();
+  inline void clear_has_address();
+  inline void set_has_city();
+  inline void clear_has_city();
+  inline void set_has_country();
+  inline void clear_has_country();
+  inline void set_has_regionalfocus();
+  inline void clear_has_regionalfocus();
   
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
   
   ::std::string* name_;
-  ::std::string* home_page_;
   ::std::string* biography_;
+  ::std::string* homepage_;
+  ::std::string* email_;
+  ::std::string* address_;
+  ::std::string* city_;
+  ::std::string* country_;
+  ::std::string* regionalfocus_;
   ::google::protobuf::int32 id_;
   
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(9 + 31) / 32];
   
   friend void  protobuf_AddDesc_Organisation_2eproto();
   friend void protobuf_AssignDesc_Organisation_2eproto();
@@ -163,7 +233,7 @@ class Organisation : public ::google::protobuf::Message {
 
 // Organisation
 
-// required int32 id = 1;
+// optional int32 id = 1;
 inline bool Organisation::has_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -243,73 +313,15 @@ inline ::std::string* Organisation::release_name() {
   }
 }
 
-// optional string home_page = 3;
-inline bool Organisation::has_home_page() const {
+// optional string biography = 3;
+inline bool Organisation::has_biography() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void Organisation::set_has_home_page() {
+inline void Organisation::set_has_biography() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void Organisation::clear_has_home_page() {
-  _has_bits_[0] &= ~0x00000004u;
-}
-inline void Organisation::clear_home_page() {
-  if (home_page_ != &::google::protobuf::internal::kEmptyString) {
-    home_page_->clear();
-  }
-  clear_has_home_page();
-}
-inline const ::std::string& Organisation::home_page() const {
-  return *home_page_;
-}
-inline void Organisation::set_home_page(const ::std::string& value) {
-  set_has_home_page();
-  if (home_page_ == &::google::protobuf::internal::kEmptyString) {
-    home_page_ = new ::std::string;
-  }
-  home_page_->assign(value);
-}
-inline void Organisation::set_home_page(const char* value) {
-  set_has_home_page();
-  if (home_page_ == &::google::protobuf::internal::kEmptyString) {
-    home_page_ = new ::std::string;
-  }
-  home_page_->assign(value);
-}
-inline void Organisation::set_home_page(const char* value, size_t size) {
-  set_has_home_page();
-  if (home_page_ == &::google::protobuf::internal::kEmptyString) {
-    home_page_ = new ::std::string;
-  }
-  home_page_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* Organisation::mutable_home_page() {
-  set_has_home_page();
-  if (home_page_ == &::google::protobuf::internal::kEmptyString) {
-    home_page_ = new ::std::string;
-  }
-  return home_page_;
-}
-inline ::std::string* Organisation::release_home_page() {
-  clear_has_home_page();
-  if (home_page_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = home_page_;
-    home_page_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-
-// optional string biography = 4;
-inline bool Organisation::has_biography() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
-}
-inline void Organisation::set_has_biography() {
-  _has_bits_[0] |= 0x00000008u;
-}
 inline void Organisation::clear_has_biography() {
-  _has_bits_[0] &= ~0x00000008u;
+  _has_bits_[0] &= ~0x00000004u;
 }
 inline void Organisation::clear_biography() {
   if (biography_ != &::google::protobuf::internal::kEmptyString) {
@@ -355,6 +367,354 @@ inline ::std::string* Organisation::release_biography() {
   } else {
     ::std::string* temp = biography_;
     biography_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+
+// optional string homepage = 4;
+inline bool Organisation::has_homepage() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void Organisation::set_has_homepage() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void Organisation::clear_has_homepage() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void Organisation::clear_homepage() {
+  if (homepage_ != &::google::protobuf::internal::kEmptyString) {
+    homepage_->clear();
+  }
+  clear_has_homepage();
+}
+inline const ::std::string& Organisation::homepage() const {
+  return *homepage_;
+}
+inline void Organisation::set_homepage(const ::std::string& value) {
+  set_has_homepage();
+  if (homepage_ == &::google::protobuf::internal::kEmptyString) {
+    homepage_ = new ::std::string;
+  }
+  homepage_->assign(value);
+}
+inline void Organisation::set_homepage(const char* value) {
+  set_has_homepage();
+  if (homepage_ == &::google::protobuf::internal::kEmptyString) {
+    homepage_ = new ::std::string;
+  }
+  homepage_->assign(value);
+}
+inline void Organisation::set_homepage(const char* value, size_t size) {
+  set_has_homepage();
+  if (homepage_ == &::google::protobuf::internal::kEmptyString) {
+    homepage_ = new ::std::string;
+  }
+  homepage_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* Organisation::mutable_homepage() {
+  set_has_homepage();
+  if (homepage_ == &::google::protobuf::internal::kEmptyString) {
+    homepage_ = new ::std::string;
+  }
+  return homepage_;
+}
+inline ::std::string* Organisation::release_homepage() {
+  clear_has_homepage();
+  if (homepage_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = homepage_;
+    homepage_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+
+// optional string email = 5;
+inline bool Organisation::has_email() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void Organisation::set_has_email() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void Organisation::clear_has_email() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void Organisation::clear_email() {
+  if (email_ != &::google::protobuf::internal::kEmptyString) {
+    email_->clear();
+  }
+  clear_has_email();
+}
+inline const ::std::string& Organisation::email() const {
+  return *email_;
+}
+inline void Organisation::set_email(const ::std::string& value) {
+  set_has_email();
+  if (email_ == &::google::protobuf::internal::kEmptyString) {
+    email_ = new ::std::string;
+  }
+  email_->assign(value);
+}
+inline void Organisation::set_email(const char* value) {
+  set_has_email();
+  if (email_ == &::google::protobuf::internal::kEmptyString) {
+    email_ = new ::std::string;
+  }
+  email_->assign(value);
+}
+inline void Organisation::set_email(const char* value, size_t size) {
+  set_has_email();
+  if (email_ == &::google::protobuf::internal::kEmptyString) {
+    email_ = new ::std::string;
+  }
+  email_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* Organisation::mutable_email() {
+  set_has_email();
+  if (email_ == &::google::protobuf::internal::kEmptyString) {
+    email_ = new ::std::string;
+  }
+  return email_;
+}
+inline ::std::string* Organisation::release_email() {
+  clear_has_email();
+  if (email_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = email_;
+    email_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+
+// optional string address = 6;
+inline bool Organisation::has_address() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+inline void Organisation::set_has_address() {
+  _has_bits_[0] |= 0x00000020u;
+}
+inline void Organisation::clear_has_address() {
+  _has_bits_[0] &= ~0x00000020u;
+}
+inline void Organisation::clear_address() {
+  if (address_ != &::google::protobuf::internal::kEmptyString) {
+    address_->clear();
+  }
+  clear_has_address();
+}
+inline const ::std::string& Organisation::address() const {
+  return *address_;
+}
+inline void Organisation::set_address(const ::std::string& value) {
+  set_has_address();
+  if (address_ == &::google::protobuf::internal::kEmptyString) {
+    address_ = new ::std::string;
+  }
+  address_->assign(value);
+}
+inline void Organisation::set_address(const char* value) {
+  set_has_address();
+  if (address_ == &::google::protobuf::internal::kEmptyString) {
+    address_ = new ::std::string;
+  }
+  address_->assign(value);
+}
+inline void Organisation::set_address(const char* value, size_t size) {
+  set_has_address();
+  if (address_ == &::google::protobuf::internal::kEmptyString) {
+    address_ = new ::std::string;
+  }
+  address_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* Organisation::mutable_address() {
+  set_has_address();
+  if (address_ == &::google::protobuf::internal::kEmptyString) {
+    address_ = new ::std::string;
+  }
+  return address_;
+}
+inline ::std::string* Organisation::release_address() {
+  clear_has_address();
+  if (address_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = address_;
+    address_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+
+// optional string city = 7;
+inline bool Organisation::has_city() const {
+  return (_has_bits_[0] & 0x00000040u) != 0;
+}
+inline void Organisation::set_has_city() {
+  _has_bits_[0] |= 0x00000040u;
+}
+inline void Organisation::clear_has_city() {
+  _has_bits_[0] &= ~0x00000040u;
+}
+inline void Organisation::clear_city() {
+  if (city_ != &::google::protobuf::internal::kEmptyString) {
+    city_->clear();
+  }
+  clear_has_city();
+}
+inline const ::std::string& Organisation::city() const {
+  return *city_;
+}
+inline void Organisation::set_city(const ::std::string& value) {
+  set_has_city();
+  if (city_ == &::google::protobuf::internal::kEmptyString) {
+    city_ = new ::std::string;
+  }
+  city_->assign(value);
+}
+inline void Organisation::set_city(const char* value) {
+  set_has_city();
+  if (city_ == &::google::protobuf::internal::kEmptyString) {
+    city_ = new ::std::string;
+  }
+  city_->assign(value);
+}
+inline void Organisation::set_city(const char* value, size_t size) {
+  set_has_city();
+  if (city_ == &::google::protobuf::internal::kEmptyString) {
+    city_ = new ::std::string;
+  }
+  city_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* Organisation::mutable_city() {
+  set_has_city();
+  if (city_ == &::google::protobuf::internal::kEmptyString) {
+    city_ = new ::std::string;
+  }
+  return city_;
+}
+inline ::std::string* Organisation::release_city() {
+  clear_has_city();
+  if (city_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = city_;
+    city_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+
+// optional string country = 8;
+inline bool Organisation::has_country() const {
+  return (_has_bits_[0] & 0x00000080u) != 0;
+}
+inline void Organisation::set_has_country() {
+  _has_bits_[0] |= 0x00000080u;
+}
+inline void Organisation::clear_has_country() {
+  _has_bits_[0] &= ~0x00000080u;
+}
+inline void Organisation::clear_country() {
+  if (country_ != &::google::protobuf::internal::kEmptyString) {
+    country_->clear();
+  }
+  clear_has_country();
+}
+inline const ::std::string& Organisation::country() const {
+  return *country_;
+}
+inline void Organisation::set_country(const ::std::string& value) {
+  set_has_country();
+  if (country_ == &::google::protobuf::internal::kEmptyString) {
+    country_ = new ::std::string;
+  }
+  country_->assign(value);
+}
+inline void Organisation::set_country(const char* value) {
+  set_has_country();
+  if (country_ == &::google::protobuf::internal::kEmptyString) {
+    country_ = new ::std::string;
+  }
+  country_->assign(value);
+}
+inline void Organisation::set_country(const char* value, size_t size) {
+  set_has_country();
+  if (country_ == &::google::protobuf::internal::kEmptyString) {
+    country_ = new ::std::string;
+  }
+  country_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* Organisation::mutable_country() {
+  set_has_country();
+  if (country_ == &::google::protobuf::internal::kEmptyString) {
+    country_ = new ::std::string;
+  }
+  return country_;
+}
+inline ::std::string* Organisation::release_country() {
+  clear_has_country();
+  if (country_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = country_;
+    country_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+
+// optional string regionalFocus = 9;
+inline bool Organisation::has_regionalfocus() const {
+  return (_has_bits_[0] & 0x00000100u) != 0;
+}
+inline void Organisation::set_has_regionalfocus() {
+  _has_bits_[0] |= 0x00000100u;
+}
+inline void Organisation::clear_has_regionalfocus() {
+  _has_bits_[0] &= ~0x00000100u;
+}
+inline void Organisation::clear_regionalfocus() {
+  if (regionalfocus_ != &::google::protobuf::internal::kEmptyString) {
+    regionalfocus_->clear();
+  }
+  clear_has_regionalfocus();
+}
+inline const ::std::string& Organisation::regionalfocus() const {
+  return *regionalfocus_;
+}
+inline void Organisation::set_regionalfocus(const ::std::string& value) {
+  set_has_regionalfocus();
+  if (regionalfocus_ == &::google::protobuf::internal::kEmptyString) {
+    regionalfocus_ = new ::std::string;
+  }
+  regionalfocus_->assign(value);
+}
+inline void Organisation::set_regionalfocus(const char* value) {
+  set_has_regionalfocus();
+  if (regionalfocus_ == &::google::protobuf::internal::kEmptyString) {
+    regionalfocus_ = new ::std::string;
+  }
+  regionalfocus_->assign(value);
+}
+inline void Organisation::set_regionalfocus(const char* value, size_t size) {
+  set_has_regionalfocus();
+  if (regionalfocus_ == &::google::protobuf::internal::kEmptyString) {
+    regionalfocus_ = new ::std::string;
+  }
+  regionalfocus_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* Organisation::mutable_regionalfocus() {
+  set_has_regionalfocus();
+  if (regionalfocus_ == &::google::protobuf::internal::kEmptyString) {
+    regionalfocus_ = new ::std::string;
+  }
+  return regionalfocus_;
+}
+inline ::std::string* Organisation::release_regionalfocus() {
+  clear_has_regionalfocus();
+  if (regionalfocus_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = regionalfocus_;
+    regionalfocus_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
     return temp;
   }
 }
