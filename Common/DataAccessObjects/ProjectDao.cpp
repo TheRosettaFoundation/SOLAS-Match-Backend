@@ -16,25 +16,25 @@ QList<QSharedPointer<Project> > ProjectDao::getProjects(MySQLHandler *db, int id
     }
 
     if (title != "") {
-        args += title + ", ";
+        args += MySQLHandler::wrapString(title) + ", ";
     } else {
         args += "null, ";
     }
 
     if (desc != "") {
-        args += desc + ", ";
+        args += MySQLHandler::wrapString(desc) + ", ";
     } else {
         args += "null, ";
     }
 
     if (impact != "") {
-        args += impact + ", ";
+        args += MySQLHandler::wrapString(impact) + ", ";
     } else {
         args += "null, ";
     }
 
     if (deadline != "") {
-        args += deadline + ", ";
+        args += MySQLHandler::wrapString(deadline) + ", ";
     } else {
         args += "null, ";
     }
@@ -46,7 +46,7 @@ QList<QSharedPointer<Project> > ProjectDao::getProjects(MySQLHandler *db, int id
     }
 
     if (ref != "") {
-        args += ref + ", ";
+        args += MySQLHandler::wrapString(ref) + ", ";
     } else {
         args += "null, ";
     }
@@ -58,19 +58,19 @@ QList<QSharedPointer<Project> > ProjectDao::getProjects(MySQLHandler *db, int id
     }
 
     if (created != "") {
-        args += created + ", ";
+        args += MySQLHandler::wrapString(created) + ", ";
     } else {
         args += "null, ";
     }
 
     if (language != "") {
-        args += language = ", ";
+        args += MySQLHandler::wrapString(language) = ", ";
     } else {
         args += "null, ";
     }
 
     if (country != "") {
-        args += country;
+        args += MySQLHandler::wrapString(country);
     } else {
         args += "null";
     }

@@ -15,37 +15,37 @@ QList<QSharedPointer<User> > UserDao::getUsers(MySQLHandler *db, int id, QString
     }
 
     if(name != "") {
-        args += name + ", ";
+        args += MySQLHandler::wrapString(name) + ", ";
     } else {
         args += "null, ";
     }
 
     if(email != "") {
-        args += email + ", ";
+        args += MySQLHandler::wrapString(email) + ", ";
     } else {
         args += "null, ";
     }
 
     if(pass != "") {
-        args += pass + ", ";
+        args += MySQLHandler::wrapString(pass) + ", ";
     } else {
         args += "null, ";
     }
 
     if(bio != "") {
-        args += bio + ", ";
+        args += MySQLHandler::wrapString(bio) + ", ";
     } else {
         args += "null, ";
     }
 
     if(non != "") {
-        args += non + ", ";
+        args += MySQLHandler::wrapString(non) + ", ";
     } else {
         args += "null, ";
     }
 
     if(date != "") {
-        args += date + ", ";
+        args += MySQLHandler::wrapString(date) + ", ";
     } else {
         args += "null, ";
     }
@@ -102,7 +102,7 @@ QList<QSharedPointer<Task> > UserDao::getUserTopTasks(MySQLHandler *db, int user
     QList<QSharedPointer<Task> > taskList = QList<QSharedPointer<Task> >();
     QString args = QString::number(userId) + ", ";
     args = args + QString::number(limit) + ", ";
-    args += "'" + filter + "'";
+    args += MySQLHandler::wrapString(filter);
     QSharedPointer<QSqlQuery> mQuery = db->call("getUserTopTasks", args);
     if (mQuery->first()) {
         do {
@@ -128,7 +128,7 @@ QList<int> UserDao::getUserIdsPendingTaskStreamNotification(MySQLHandler *db)
 bool UserDao::taskStreamNotificationSent(MySQLHandler *db, int userId, QString sentDate)
 {
     bool ret = false;
-    QString args = QString::number(userId) + ", '" + sentDate + "'";
+    QString args = QString::number(userId) + ", " + MySQLHandler::wrapString(sentDate);
     QSharedPointer<QSqlQuery> mQuery = db->call("taskStreamNotificationSent", args);
     if (mQuery->first()) {
         ret = (MySQLHandler::getValueFromQuery("result", mQuery).toInt() == 1);

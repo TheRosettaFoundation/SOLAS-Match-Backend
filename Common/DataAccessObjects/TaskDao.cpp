@@ -24,7 +24,7 @@ QList<QSharedPointer<Task> > TaskDao::getTasks(MySQLHandler *db, int id, int pro
     }
 
     if(title != "") {
-        args += title + ", ";
+        args += MySQLHandler::wrapString(title) + ", ";
     } else {
         args += "null, ";
     }
@@ -36,31 +36,31 @@ QList<QSharedPointer<Task> > TaskDao::getTasks(MySQLHandler *db, int id, int pro
     }
 
     if(sourceLang != "") {
-        args += sourceLang + ", ";
+        args += MySQLHandler::wrapString(sourceLang) + ", ";
     } else {
         args += "null, ";
     }
 
     if(targetLangId != "") {
-        args += targetLangId + ", ";
+        args += MySQLHandler::wrapString(targetLangId) + ", ";
     } else {
         args += "null, ";
     }
 
     if (createdTime != "") {
-        args += createdTime + ", ";
+        args += MySQLHandler::wrapString(createdTime) + ", ";
     } else {
         args += "null, ";
     }
 
     if(sourceCountry != "") {
-        args += sourceCountry + ", ";
+        args += MySQLHandler::wrapString(sourceCountry) + ", ";
     } else {
         args += "null, ";
     }
 
     if(targetCountry != "") {
-        args += targetCountry + ", ";
+        args += MySQLHandler::wrapString(targetCountry) + ", ";
     } else {
         args += "null, ";
     }
@@ -90,7 +90,7 @@ QList<QSharedPointer<Task> > TaskDao::getTasks(MySQLHandler *db, int id, int pro
     }
 
     if(deadlineTime != "") {
-        args += deadlineTime;
+        args += MySQLHandler::wrapString(deadlineTime);
     } else {
         args += "null";
     }

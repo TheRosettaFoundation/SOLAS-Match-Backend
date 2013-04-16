@@ -17,6 +17,7 @@ public:
     QSharedPointer<QSqlQuery> query(QString query);
     QSharedPointer<QSqlQuery> call(QString proc_name, QString args);
     static QVariant getValueFromQuery(QString field_name, QSharedPointer<QSqlQuery> mQuery);
+    static QString wrapString(QString str);
 
 private:
     QSqlDatabase *conn;

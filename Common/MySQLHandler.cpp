@@ -84,3 +84,8 @@ QVariant MySQLHandler::getValueFromQuery(QString field_name, QSharedPointer<QSql
 
     return ret;
 }
+
+QString MySQLHandler::wrapString(QString str)
+{
+    return "'" + str + "'";
+}
