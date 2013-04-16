@@ -5,4 +5,5 @@ SUBDIRS += \
     Common \
     TimedTaskHandler \
     EmailPlugin \
-    PluginScheduler
+    PluginScheduler \
+    CorePlugin
