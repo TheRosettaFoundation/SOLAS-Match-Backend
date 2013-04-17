@@ -22,7 +22,9 @@ public:
                           int wc = -1, QString sourceLang = "", QString targetLangId = "", QString createdTime = "",
                           QString sourceCountry = "", QString targetCountry = "", QString comment = "",
                           int type = -1, int status = -1, int published = -1, QString deadlineTime = "");
+    static QSharedPointer<Task> insertAndUpdate(MySQLHandler *db, QSharedPointer<Task> task);
     static QList<QSharedPointer<Task> > getActiveTasks(MySQLHandler *db, int limit = -1);
+    static QList<QSharedPointer<Task> > getOverdueTasks(MySQLHandler *db);
     static QSharedPointer<User> getTaskTranslator(MySQLHandler *db, int task_id);
     static QList<QSharedPointer<User> > getSubscribedUsers(MySQLHandler *db, int task_id);
     static QList<QSharedPointer<ArchivedTask> > getArchivedTasks(MySQLHandler *db, int arc_id = -1, int o_id = -1);

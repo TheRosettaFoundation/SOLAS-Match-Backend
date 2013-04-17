@@ -89,3 +89,8 @@ QString MySQLHandler::wrapString(QString str)
 {
     return "'" + str + "'";
 }
+
+QString MySQLHandler::wrapStdString(const std::string str)
+{
+    return MySQLHandler::wrapString(QString::fromStdString(str));
+}

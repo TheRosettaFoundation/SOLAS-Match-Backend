@@ -6,6 +6,7 @@
 #include <QSharedPointer>
 #include <QVariant>
 #include <QString>
+#include <string>
 
 class MySQLHandler
 {
@@ -18,6 +19,7 @@ public:
     QSharedPointer<QSqlQuery> call(QString proc_name, QString args);
     static QVariant getValueFromQuery(QString field_name, QSharedPointer<QSqlQuery> mQuery);
     static QString wrapString(QString str);
+    static QString wrapStdString(const std::string str);
 
 private:
     QSqlDatabase *conn;
