@@ -52,12 +52,12 @@ void CalculateTaskScore::run()
         QList<QSharedPointer<Task> > tasks = this->getTasks();  //Must use custom function to check message for task id
         if(users.length() > 0) {
             foreach(QSharedPointer<User> user, users) {
+                Locale userNativeLocale = user->nativelocale();
                 QList<QSharedPointer<Tag> > userTags = TagDao::getUserTags(db, user->id());
                 if(tasks.length() > 0) {
                     foreach(QSharedPointer<Task> task, tasks) {
                         int score = 0;
 
-                        Locale userNativeLocale = user->nativelocale();
                         Locale taskSourceLocale = task->sourcelocale();
 
                         if(userNativeLocale.languagecode() == taskSourceLocale.languagecode()) {
