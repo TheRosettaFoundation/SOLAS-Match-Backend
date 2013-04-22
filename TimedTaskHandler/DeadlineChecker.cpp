@@ -31,7 +31,7 @@ DeadlineChecker::~DeadlineChecker()
 
 void DeadlineChecker::run()
 {
-    qDebug() << "Starting new thread " << this->thread()->currentThreadId();
+    qDebug() << "Starting new thread to check deadlines " << this->thread()->currentThreadId();
     QString exchange = "SOLAS_MATCH";
     db = new MySQLHandler(QUuid::createUuid().toString());
     MessagingClient client;
