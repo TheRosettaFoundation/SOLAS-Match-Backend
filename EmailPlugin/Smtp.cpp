@@ -128,13 +128,6 @@ void Smtp::mailFailed(int mailID, int errorCode)
 void Smtp::mailSent(int mailID)
 {
     qDebug() << "Mail (" << mailID << ") sent successfully";
-    if (this->currentMessage) {
-        AMQPQueue *messageQueue = currentMessage->getQueue();
-        if(messageQueue != NULL)
-        {
-            messageQueue->Ack(currentMessage->getDeliveryTag());
-        }
-    }
 }
 
 void Smtp::recipientRejected(int mailID, QString address)

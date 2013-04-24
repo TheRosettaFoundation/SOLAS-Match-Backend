@@ -95,12 +95,11 @@ void EmailPlugin::messageReveived(AMQPMessage *message)
         this->mThreadPool->start(emailGen);
     }
 
-    // REMOVE BEFORE COMMITING
-    /*AMQPQueue *messageQueue = message->getQueue();
+    AMQPQueue *messageQueue = message->getQueue();
     if(messageQueue != NULL)
     {
         messageQueue->Ack(message->getDeliveryTag());
-    }*/
+    }
 }
 
 void EmailPlugin::registerEmailTypes()
