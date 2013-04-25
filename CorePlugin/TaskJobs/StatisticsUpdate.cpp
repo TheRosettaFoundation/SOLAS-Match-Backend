@@ -29,10 +29,5 @@ void StatisticsUpdate::run()
         qDebug() << "Unable to connect to DB";
     }
 
-    if (message->getQueue()) {
-        qDebug() << "StatisticsUpdate: Acking message";
-        message->getQueue()->Ack(message->getDeliveryTag());
-    }
-
     delete db;
 }

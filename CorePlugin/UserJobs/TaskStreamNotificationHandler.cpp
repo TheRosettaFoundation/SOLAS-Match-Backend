@@ -1,4 +1,4 @@
-#include "UserStreamNotificationHandler.h"
+#include "TaskStreamNotificationHandler.h"
 
 #include <QDebug>
 #include <QThread>
@@ -10,21 +10,21 @@
 #include "Common/DataAccessObjects/UserDao.h"
 #include "Common/protobufs/emails/UserTaskStreamEmail.pb.h"
 
-UserStreamNotificationHandler::UserStreamNotificationHandler()
+TaskStreamNotificationHandler::TaskStreamNotificationHandler()
 {
     message = NULL;
 }
 
-UserStreamNotificationHandler::UserStreamNotificationHandler(AMQPMessage *mess)
+TaskStreamNotificationHandler::TaskStreamNotificationHandler(AMQPMessage *mess)
 {
     message = mess;
 }
 
-UserStreamNotificationHandler::~UserStreamNotificationHandler()
+TaskStreamNotificationHandler::~TaskStreamNotificationHandler()
 {
 }
 
-void UserStreamNotificationHandler::run()
+void TaskStreamNotificationHandler::run()
 {
     qDebug() << "Starting new thread to send task stream notifications " << this->thread()->currentThreadId();
     QString exchange = "SOLAS_MATCH";
@@ -49,8 +49,5 @@ void UserStreamNotificationHandler::run()
         qDebug() << "Unable to connect to MySQL server. Check conf.ini for DB settings.";
     }
 
-    if (message && message->getQueue()) {
-        message->getQueue()->Ack(message->getDeliveryTag());
-    }
     delete db;
 }

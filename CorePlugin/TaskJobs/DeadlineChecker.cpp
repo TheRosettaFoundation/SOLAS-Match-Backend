@@ -33,7 +33,7 @@ void DeadlineChecker::run()
 {
     qDebug() << "Starting new thread to check deadlines " << this->thread()->currentThreadId();
     QString exchange = "SOLAS_MATCH";
-    db = new MySQLHandler(QUuid::createUuid().toString());
+    MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
     MessagingClient client;
     if(db->init()) {
         if(client.init()) {
@@ -81,9 +81,5 @@ void DeadlineChecker::run()
         qDebug() << "Unable to connect to MySQL server. Check conf.ini for DB settings.";
     }
 
-    if(message->getQueue()) {
-        qDebug() << "DeadlineChecker: Acking message";
-        message->getQueue()->Ack(message->getDeliveryTag());
-    }
     delete db;
 }

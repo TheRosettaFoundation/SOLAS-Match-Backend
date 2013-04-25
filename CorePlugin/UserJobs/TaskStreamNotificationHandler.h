@@ -6,14 +6,14 @@
 
 #include "PluginHandler/JobInterface.h"
 
-class UserStreamNotificationHandler : public QObject, public JobInterface
+class TaskStreamNotificationHandler : public QObject, public JobInterface
 {
     Q_INTERFACES(JobInterface)
 
 public:
-    UserStreamNotificationHandler();
-    UserStreamNotificationHandler(AMQPMessage *);
-    ~UserStreamNotificationHandler();
+    TaskStreamNotificationHandler();
+    TaskStreamNotificationHandler(AMQPMessage *);
+    ~TaskStreamNotificationHandler();
     void run();
 
 private:

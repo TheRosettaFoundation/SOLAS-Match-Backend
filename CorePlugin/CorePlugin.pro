@@ -17,10 +17,22 @@ CONFIG += plugin
 DESTDIR = ../plugins
 
 LIBS += -L../Common -lCommon \
-    -L/usr/local/lib -lamqpcpp -lrabbitmq
+    -L/usr/local/lib -lamqpcpp -lrabbitmq -lctemplate
 
 DEFINES += COREPLUGIN_LIBRARY
 
-SOURCES += CorePlugin.cpp
+SOURCES += CorePlugin.cpp \
+    TaskQueueHandler.cpp \
+    TaskJobs/CalculateTaskScore.cpp \
+    TaskJobs/DeadlineChecker.cpp \
+    UserQueueHandler.cpp \
+    UserJobs/TaskStreamNotificationHandler.cpp \
+    UserJobs/StatisticsUpdate.cpp
 
-HEADERS += CorePlugin.h
+HEADERS += CorePlugin.h \
+    TaskQueueHandler.h \
+    TaskJobs/CalculateTaskScore.h \
+    TaskJobs/DeadlineChecker.h \
+    UserQueueHandler.h \
+    UserJobs/TaskStreamNotificationHandler.h \
+    UserJobs/StatisticsUpdate.h

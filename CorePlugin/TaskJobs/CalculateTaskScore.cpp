@@ -1,4 +1,4 @@
-#include "CalculateTaskScoreJob.h"
+#include "CalculateTaskScore.h"
 
 #include <ctemplate/template.h>
 #include <QtSql/QSqlQuery>
@@ -38,12 +38,12 @@ CalculateTaskScore::CalculateTaskScore(AMQPMessage *mess)
 
 CalculateTaskScore::~CalculateTaskScore()
 {
-    delete db;
+    // Default Destructor
 }
 
 void CalculateTaskScore::run()
-{    
-    qDebug() << "Starting new thread " << this->thread()->currentThreadId();
+{
+    qDebug() << "CalculateTaskScore: Starting new thread " << this->thread()->currentThreadId();
     QDateTime started = QDateTime::currentDateTime();
     ctemplate::TemplateDictionary dict("user_task_score");
     db = new MySQLHandler(QUuid::createUuid().toString());
@@ -110,19 +110,14 @@ void CalculateTaskScore::run()
             dict["ERROR_MESSAGE"] = "No users found";
         }
 
-        AMQPQueue *messageQueue = message->getQueue();
-        if(messageQueue != NULL)
-        {
-            qDebug() << "CalcTaskScore: Acking message";
-            messageQueue->Ack(message->getDeliveryTag());
-        }
-
         db->close();
     } else {
         qDebug() << "Unable to Connect to SQL Server. Check conf.ini and try again.";
         dict.ShowSection("ERROR");
         dict.SetValue("ERROR_MESSAGE", "Unable to Connect to SQL Server. Check conf.ini and try again.");
     }
+
+    delete db;
 
     int time_msecs = started.msecsTo(QDateTime::currentDateTime());
     int time_secs = time_msecs / 1000;

@@ -19,7 +19,6 @@ public:
 
 private:
     AMQPMessage *message;
-    MySQLHandler *db;
 
 };
 

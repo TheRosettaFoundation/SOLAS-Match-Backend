@@ -1,12 +1,10 @@
 #include "ConfigParser.h"
 
 #include <QStringList>
-#include <QDebug>
 #include <QDir>
 
 ConfigParser::ConfigParser()
 {
-    qDebug() << "ConfigParser::Reading configuration from " << INI_FILE_LOCATION;
     mSettings = new QSettings(INI_FILE_LOCATION, QSettings::IniFormat);
 }
 
