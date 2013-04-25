@@ -76,6 +76,12 @@ void EmailPlugin::messageReveived(AMQPMessage *message)
 {
     qDebug() << "EmailPlugin::Received Message";
 
+    AMQPQueue *messageQueue = message->getQueue();
+    if(messageQueue != NULL)
+    {
+        messageQueue->Ack(message->getDeliveryTag());
+    }
+
     uint32_t length = 0;
     QString message_body = message->getMessage(&length);
 
@@ -93,12 +99,6 @@ void EmailPlugin::messageReveived(AMQPMessage *message)
         emailGen->setProtoBody(message_body);
         emailGen->setAMQPMessage(message);
         this->mThreadPool->start(emailGen);
-    }
-
-    AMQPQueue *messageQueue = message->getQueue();
-    if(messageQueue != NULL)
-    {
-        messageQueue->Ack(message->getDeliveryTag());
     }
 }
 

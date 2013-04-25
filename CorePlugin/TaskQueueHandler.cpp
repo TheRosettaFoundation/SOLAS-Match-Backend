@@ -41,7 +41,6 @@ void TaskQueueHandler::messageReceived(AMQPMessage *message)
     AMQPQueue *messageQueue = message->getQueue();
     if(messageQueue != NULL)
     {
-        qDebug() << "CalcTaskScore: Acking message";
         messageQueue->Ack(message->getDeliveryTag());
     }
 

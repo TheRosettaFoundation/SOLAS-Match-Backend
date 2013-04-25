@@ -72,6 +72,14 @@ void MessagingClient::publish(QString exchange, QString topic, QString message)
     }
 }
 
+void MessagingClient::republish(AMQPMessage *message)
+{
+    uint32_t length = 0;
+    this->publish(QString::fromStdString(message->getExchange()),
+                  QString::fromStdString(message->getRoutingKey()),
+                  QString::fromStdString(message->getMessage(&length)));
+}
+
 void MessagingClient::consumeFromQueue()
 {
     try {

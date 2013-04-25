@@ -14,7 +14,8 @@ QT       -= gui
 
 TARGET = Common
 
-LIBS += -lprotobuf
+LIBS += -lprotobuf \
+        -L/usr/local/lib -lamqpcpp -lrabbitmq
 
 DEFINES += COMMON_LIBRARY
 

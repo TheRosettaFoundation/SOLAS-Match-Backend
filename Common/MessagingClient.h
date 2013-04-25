@@ -14,6 +14,7 @@ public:
     bool init();
     void declareQueue(QString exchange, QString topic, QString queue);
     void publish(QString exchange, QString topic, QString message);
+    void republish(AMQPMessage *);
 
 public slots:
     void consumeFromQueue();
