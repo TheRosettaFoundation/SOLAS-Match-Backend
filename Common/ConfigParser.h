@@ -1,7 +1,7 @@
 #ifndef CONFIGPARSER_H
 #define CONFIGPARSER_H
 
-#define INI_FILE_LOCATION "/etc/SOLAS-Match/conf.ini"
+#define INI_FILE_LOCATION "./conf.ini"
 
 #include <QString>
 #include <QSettings>

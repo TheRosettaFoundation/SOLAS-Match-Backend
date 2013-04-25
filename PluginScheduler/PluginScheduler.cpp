@@ -19,7 +19,7 @@
 
 Q_EXPORT_PLUGIN2(PluginScheduler, PluginScheduler)
 
-#define SCHEDULE_LOCATION "/etc/SOLAS-Match/schedule.xml"
+#define SCHEDULE_LOCATION "./schedule.xml"
 
 PluginScheduler::PluginScheduler()
 {
