@@ -23,7 +23,7 @@
 #include <google/protobuf/repeated_field.h>
 #include <google/protobuf/extension_set.h>
 #include <google/protobuf/generated_message_reflection.h>
-#include "Tag.pb.h"
+#include "Locale.pb.h"
 // @@protoc_insertion_point(includes)
 
 // Internal implementation detail -- do not call these.
@@ -89,7 +89,7 @@ class Task : public ::google::protobuf::Message {
   
   // accessors -------------------------------------------------------
   
-  // required int32 id = 1;
+  // optional int32 id = 1;
   inline bool has_id() const;
   inline void clear_id();
   static const int kIdFieldNumber = 1;
@@ -125,7 +125,7 @@ class Task : public ::google::protobuf::Message {
   inline ::std::string* mutable_comment();
   inline ::std::string* release_comment();
   
-  // required string deadline = 5;
+  // optional string deadline = 5;
   inline bool has_deadline() const;
   inline void clear_deadline();
   static const int kDeadlineFieldNumber = 5;
@@ -154,82 +154,42 @@ class Task : public ::google::protobuf::Message {
   inline ::std::string* mutable_createdtime();
   inline ::std::string* release_createdtime();
   
-  // optional string sourceLanguageCode = 8;
-  inline bool has_sourcelanguagecode() const;
-  inline void clear_sourcelanguagecode();
-  static const int kSourceLanguageCodeFieldNumber = 8;
-  inline const ::std::string& sourcelanguagecode() const;
-  inline void set_sourcelanguagecode(const ::std::string& value);
-  inline void set_sourcelanguagecode(const char* value);
-  inline void set_sourcelanguagecode(const char* value, size_t size);
-  inline ::std::string* mutable_sourcelanguagecode();
-  inline ::std::string* release_sourcelanguagecode();
+  // optional .Locale sourceLocale = 8;
+  inline bool has_sourcelocale() const;
+  inline void clear_sourcelocale();
+  static const int kSourceLocaleFieldNumber = 8;
+  inline const ::Locale& sourcelocale() const;
+  inline ::Locale* mutable_sourcelocale();
+  inline ::Locale* release_sourcelocale();
   
-  // optional string targetLanguageCode = 9;
-  inline bool has_targetlanguagecode() const;
-  inline void clear_targetlanguagecode();
-  static const int kTargetLanguageCodeFieldNumber = 9;
-  inline const ::std::string& targetlanguagecode() const;
-  inline void set_targetlanguagecode(const ::std::string& value);
-  inline void set_targetlanguagecode(const char* value);
-  inline void set_targetlanguagecode(const char* value, size_t size);
-  inline ::std::string* mutable_targetlanguagecode();
-  inline ::std::string* release_targetlanguagecode();
+  // optional .Locale targetLocale = 9;
+  inline bool has_targetlocale() const;
+  inline void clear_targetlocale();
+  static const int kTargetLocaleFieldNumber = 9;
+  inline const ::Locale& targetlocale() const;
+  inline ::Locale* mutable_targetlocale();
+  inline ::Locale* release_targetlocale();
   
-  // optional string sourceCountryCode = 10;
-  inline bool has_sourcecountrycode() const;
-  inline void clear_sourcecountrycode();
-  static const int kSourceCountryCodeFieldNumber = 10;
-  inline const ::std::string& sourcecountrycode() const;
-  inline void set_sourcecountrycode(const ::std::string& value);
-  inline void set_sourcecountrycode(const char* value);
-  inline void set_sourcecountrycode(const char* value, size_t size);
-  inline ::std::string* mutable_sourcecountrycode();
-  inline ::std::string* release_sourcecountrycode();
-  
-  // optional string targetCountryCode = 11;
-  inline bool has_targetcountrycode() const;
-  inline void clear_targetcountrycode();
-  static const int kTargetCountryCodeFieldNumber = 11;
-  inline const ::std::string& targetcountrycode() const;
-  inline void set_targetcountrycode(const ::std::string& value);
-  inline void set_targetcountrycode(const char* value);
-  inline void set_targetcountrycode(const char* value, size_t size);
-  inline ::std::string* mutable_targetcountrycode();
-  inline ::std::string* release_targetcountrycode();
-  
-  // optional int32 taskType = 12;
+  // optional int32 taskType = 10;
   inline bool has_tasktype() const;
   inline void clear_tasktype();
-  static const int kTaskTypeFieldNumber = 12;
+  static const int kTaskTypeFieldNumber = 10;
   inline ::google::protobuf::int32 tasktype() const;
   inline void set_tasktype(::google::protobuf::int32 value);
   
-  // optional int32 taskStatus = 13;
+  // optional int32 taskStatus = 11;
   inline bool has_taskstatus() const;
   inline void clear_taskstatus();
-  static const int kTaskStatusFieldNumber = 13;
+  static const int kTaskStatusFieldNumber = 11;
   inline ::google::protobuf::int32 taskstatus() const;
   inline void set_taskstatus(::google::protobuf::int32 value);
   
-  // optional bool published = 14;
+  // optional bool published = 12;
   inline bool has_published() const;
   inline void clear_published();
-  static const int kPublishedFieldNumber = 14;
+  static const int kPublishedFieldNumber = 12;
   inline bool published() const;
   inline void set_published(bool value);
-  
-  // repeated .Tag tag = 15;
-  inline int tag_size() const;
-  inline void clear_tag();
-  static const int kTagFieldNumber = 15;
-  inline const ::Tag& tag(int index) const;
-  inline ::Tag* mutable_tag(int index);
-  inline ::Tag* add_tag();
-  inline const ::google::protobuf::RepeatedPtrField< ::Tag >&
-      tag() const;
-  inline ::google::protobuf::RepeatedPtrField< ::Tag >*
-      mutable_tag();
   
   // @@protoc_insertion_point(class_scope:Task)
  private:
@@ -247,14 +207,10 @@ class Task : public ::google::protobuf::Message {
   inline void clear_has_wordcount();
   inline void set_has_createdtime();
   inline void clear_has_createdtime();
-  inline void set_has_sourcelanguagecode();
-  inline void clear_has_sourcelanguagecode();
-  inline void set_has_targetlanguagecode();
-  inline void clear_has_targetlanguagecode();
-  inline void set_has_sourcecountrycode();
-  inline void clear_has_sourcecountrycode();
-  inline void set_has_targetcountrycode();
-  inline void clear_has_targetcountrycode();
+  inline void set_has_sourcelocale();
+  inline void clear_has_sourcelocale();
+  inline void set_has_targetlocale();
+  inline void clear_has_targetlocale();
   inline void set_has_tasktype();
   inline void clear_has_tasktype();
   inline void set_has_taskstatus();
@@ -270,18 +226,15 @@ class Task : public ::google::protobuf::Message {
   ::std::string* comment_;
   ::std::string* deadline_;
   ::std::string* createdtime_;
-  ::std::string* sourcelanguagecode_;
-  ::std::string* targetlanguagecode_;
+  ::Locale* sourcelocale_;
   ::google::protobuf::int32 wordcount_;
   ::google::protobuf::int32 tasktype_;
-  ::std::string* sourcecountrycode_;
-  ::std::string* targetcountrycode_;
+  ::Locale* targetlocale_;
   ::google::protobuf::int32 taskstatus_;
   bool published_;
-  ::google::protobuf::RepeatedPtrField< ::Tag > tag_;
   
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(15 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(12 + 31) / 32];
   
   friend void  protobuf_AddDesc_Task_2eproto();
   friend void protobuf_AssignDesc_Task_2eproto();
@@ -297,7 +250,7 @@ class Task : public ::google::protobuf::Message {
 
 // Task
 
-// required int32 id = 1;
+// optional int32 id = 1;
 inline bool Task::has_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -457,7 +410,7 @@ inline ::std::string* Task::release_comment() {
   }
 }
 
-// required string deadline = 5;
+// optional string deadline = 5;
 inline bool Task::has_deadline() const {
   return (_has_bits_[0] & 0x00000010u) != 0;
 }
@@ -595,247 +548,73 @@ inline ::std::string* Task::release_createdtime() {
   }
 }
 
-// optional string sourceLanguageCode = 8;
-inline bool Task::has_sourcelanguagecode() const {
+// optional .Locale sourceLocale = 8;
+inline bool Task::has_sourcelocale() const {
   return (_has_bits_[0] & 0x00000080u) != 0;
 }
-inline void Task::set_has_sourcelanguagecode() {
+inline void Task::set_has_sourcelocale() {
   _has_bits_[0] |= 0x00000080u;
 }
-inline void Task::clear_has_sourcelanguagecode() {
+inline void Task::clear_has_sourcelocale() {
   _has_bits_[0] &= ~0x00000080u;
 }
-inline void Task::clear_sourcelanguagecode() {
-  if (sourcelanguagecode_ != &::google::protobuf::internal::kEmptyString) {
-    sourcelanguagecode_->clear();
-  }
-  clear_has_sourcelanguagecode();
+inline void Task::clear_sourcelocale() {
+  if (sourcelocale_ != NULL) sourcelocale_->::Locale::Clear();
+  clear_has_sourcelocale();
 }
-inline const ::std::string& Task::sourcelanguagecode() const {
-  return *sourcelanguagecode_;
+inline const ::Locale& Task::sourcelocale() const {
+  return sourcelocale_ != NULL ? *sourcelocale_ : *default_instance_->sourcelocale_;
 }
-inline void Task::set_sourcelanguagecode(const ::std::string& value) {
-  set_has_sourcelanguagecode();
-  if (sourcelanguagecode_ == &::google::protobuf::internal::kEmptyString) {
-    sourcelanguagecode_ = new ::std::string;
-  }
-  sourcelanguagecode_->assign(value);
+inline ::Locale* Task::mutable_sourcelocale() {
+  set_has_sourcelocale();
+  if (sourcelocale_ == NULL) sourcelocale_ = new ::Locale;
+  return sourcelocale_;
 }
-inline void Task::set_sourcelanguagecode(const char* value) {
-  set_has_sourcelanguagecode();
-  if (sourcelanguagecode_ == &::google::protobuf::internal::kEmptyString) {
-    sourcelanguagecode_ = new ::std::string;
-  }
-  sourcelanguagecode_->assign(value);
-}
-inline void Task::set_sourcelanguagecode(const char* value, size_t size) {
-  set_has_sourcelanguagecode();
-  if (sourcelanguagecode_ == &::google::protobuf::internal::kEmptyString) {
-    sourcelanguagecode_ = new ::std::string;
-  }
-  sourcelanguagecode_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* Task::mutable_sourcelanguagecode() {
-  set_has_sourcelanguagecode();
-  if (sourcelanguagecode_ == &::google::protobuf::internal::kEmptyString) {
-    sourcelanguagecode_ = new ::std::string;
-  }
-  return sourcelanguagecode_;
-}
-inline ::std::string* Task::release_sourcelanguagecode() {
-  clear_has_sourcelanguagecode();
-  if (sourcelanguagecode_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = sourcelanguagecode_;
-    sourcelanguagecode_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
+inline ::Locale* Task::release_sourcelocale() {
+  clear_has_sourcelocale();
+  ::Locale* temp = sourcelocale_;
+  sourcelocale_ = NULL;
+  return temp;
 }
 
-// optional string targetLanguageCode = 9;
-inline bool Task::has_targetlanguagecode() const {
+// optional .Locale targetLocale = 9;
+inline bool Task::has_targetlocale() const {
   return (_has_bits_[0] & 0x00000100u) != 0;
 }
-inline void Task::set_has_targetlanguagecode() {
+inline void Task::set_has_targetlocale() {
   _has_bits_[0] |= 0x00000100u;
 }
-inline void Task::clear_has_targetlanguagecode() {
+inline void Task::clear_has_targetlocale() {
   _has_bits_[0] &= ~0x00000100u;
 }
-inline void Task::clear_targetlanguagecode() {
-  if (targetlanguagecode_ != &::google::protobuf::internal::kEmptyString) {
-    targetlanguagecode_->clear();
-  }
-  clear_has_targetlanguagecode();
+inline void Task::clear_targetlocale() {
+  if (targetlocale_ != NULL) targetlocale_->::Locale::Clear();
+  clear_has_targetlocale();
 }
-inline const ::std::string& Task::targetlanguagecode() const {
-  return *targetlanguagecode_;
+inline const ::Locale& Task::targetlocale() const {
+  return targetlocale_ != NULL ? *targetlocale_ : *default_instance_->targetlocale_;
 }
-inline void Task::set_targetlanguagecode(const ::std::string& value) {
-  set_has_targetlanguagecode();
-  if (targetlanguagecode_ == &::google::protobuf::internal::kEmptyString) {
-    targetlanguagecode_ = new ::std::string;
-  }
-  targetlanguagecode_->assign(value);
+inline ::Locale* Task::mutable_targetlocale() {
+  set_has_targetlocale();
+  if (targetlocale_ == NULL) targetlocale_ = new ::Locale;
+  return targetlocale_;
 }
-inline void Task::set_targetlanguagecode(const char* value) {
-  set_has_targetlanguagecode();
-  if (targetlanguagecode_ == &::google::protobuf::internal::kEmptyString) {
-    targetlanguagecode_ = new ::std::string;
-  }
-  targetlanguagecode_->assign(value);
-}
-inline void Task::set_targetlanguagecode(const char* value, size_t size) {
-  set_has_targetlanguagecode();
-  if (targetlanguagecode_ == &::google::protobuf::internal::kEmptyString) {
-    targetlanguagecode_ = new ::std::string;
-  }
-  targetlanguagecode_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* Task::mutable_targetlanguagecode() {
-  set_has_targetlanguagecode();
-  if (targetlanguagecode_ == &::google::protobuf::internal::kEmptyString) {
-    targetlanguagecode_ = new ::std::string;
-  }
-  return targetlanguagecode_;
-}
-inline ::std::string* Task::release_targetlanguagecode() {
-  clear_has_targetlanguagecode();
-  if (targetlanguagecode_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = targetlanguagecode_;
-    targetlanguagecode_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
+inline ::Locale* Task::release_targetlocale() {
+  clear_has_targetlocale();
+  ::Locale* temp = targetlocale_;
+  targetlocale_ = NULL;
+  return temp;
 }
 
-// optional string sourceCountryCode = 10;
-inline bool Task::has_sourcecountrycode() const {
+// optional int32 taskType = 10;
+inline bool Task::has_tasktype() const {
   return (_has_bits_[0] & 0x00000200u) != 0;
 }
-inline void Task::set_has_sourcecountrycode() {
+inline void Task::set_has_tasktype() {
   _has_bits_[0] |= 0x00000200u;
 }
-inline void Task::clear_has_sourcecountrycode() {
-  _has_bits_[0] &= ~0x00000200u;
-}
-inline void Task::clear_sourcecountrycode() {
-  if (sourcecountrycode_ != &::google::protobuf::internal::kEmptyString) {
-    sourcecountrycode_->clear();
-  }
-  clear_has_sourcecountrycode();
-}
-inline const ::std::string& Task::sourcecountrycode() const {
-  return *sourcecountrycode_;
-}
-inline void Task::set_sourcecountrycode(const ::std::string& value) {
-  set_has_sourcecountrycode();
-  if (sourcecountrycode_ == &::google::protobuf::internal::kEmptyString) {
-    sourcecountrycode_ = new ::std::string;
-  }
-  sourcecountrycode_->assign(value);
-}
-inline void Task::set_sourcecountrycode(const char* value) {
-  set_has_sourcecountrycode();
-  if (sourcecountrycode_ == &::google::protobuf::internal::kEmptyString) {
-    sourcecountrycode_ = new ::std::string;
-  }
-  sourcecountrycode_->assign(value);
-}
-inline void Task::set_sourcecountrycode(const char* value, size_t size) {
-  set_has_sourcecountrycode();
-  if (sourcecountrycode_ == &::google::protobuf::internal::kEmptyString) {
-    sourcecountrycode_ = new ::std::string;
-  }
-  sourcecountrycode_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* Task::mutable_sourcecountrycode() {
-  set_has_sourcecountrycode();
-  if (sourcecountrycode_ == &::google::protobuf::internal::kEmptyString) {
-    sourcecountrycode_ = new ::std::string;
-  }
-  return sourcecountrycode_;
-}
-inline ::std::string* Task::release_sourcecountrycode() {
-  clear_has_sourcecountrycode();
-  if (sourcecountrycode_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = sourcecountrycode_;
-    sourcecountrycode_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-
-// optional string targetCountryCode = 11;
-inline bool Task::has_targetcountrycode() const {
-  return (_has_bits_[0] & 0x00000400u) != 0;
-}
-inline void Task::set_has_targetcountrycode() {
-  _has_bits_[0] |= 0x00000400u;
-}
-inline void Task::clear_has_targetcountrycode() {
-  _has_bits_[0] &= ~0x00000400u;
-}
-inline void Task::clear_targetcountrycode() {
-  if (targetcountrycode_ != &::google::protobuf::internal::kEmptyString) {
-    targetcountrycode_->clear();
-  }
-  clear_has_targetcountrycode();
-}
-inline const ::std::string& Task::targetcountrycode() const {
-  return *targetcountrycode_;
-}
-inline void Task::set_targetcountrycode(const ::std::string& value) {
-  set_has_targetcountrycode();
-  if (targetcountrycode_ == &::google::protobuf::internal::kEmptyString) {
-    targetcountrycode_ = new ::std::string;
-  }
-  targetcountrycode_->assign(value);
-}
-inline void Task::set_targetcountrycode(const char* value) {
-  set_has_targetcountrycode();
-  if (targetcountrycode_ == &::google::protobuf::internal::kEmptyString) {
-    targetcountrycode_ = new ::std::string;
-  }
-  targetcountrycode_->assign(value);
-}
-inline void Task::set_targetcountrycode(const char* value, size_t size) {
-  set_has_targetcountrycode();
-  if (targetcountrycode_ == &::google::protobuf::internal::kEmptyString) {
-    targetcountrycode_ = new ::std::string;
-  }
-  targetcountrycode_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* Task::mutable_targetcountrycode() {
-  set_has_targetcountrycode();
-  if (targetcountrycode_ == &::google::protobuf::internal::kEmptyString) {
-    targetcountrycode_ = new ::std::string;
-  }
-  return targetcountrycode_;
-}
-inline ::std::string* Task::release_targetcountrycode() {
-  clear_has_targetcountrycode();
-  if (targetcountrycode_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = targetcountrycode_;
-    targetcountrycode_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-
-// optional int32 taskType = 12;
-inline bool Task::has_tasktype() const {
-  return (_has_bits_[0] & 0x00000800u) != 0;
-}
-inline void Task::set_has_tasktype() {
-  _has_bits_[0] |= 0x00000800u;
-}
 inline void Task::clear_has_tasktype() {
-  _has_bits_[0] &= ~0x00000800u;
+  _has_bits_[0] &= ~0x00000200u;
 }
 inline void Task::clear_tasktype() {
   tasktype_ = 0;
@@ -849,15 +628,15 @@ inline void Task::set_tasktype(::google::protobuf::int32 value) {
   tasktype_ = value;
 }
 
-// optional int32 taskStatus = 13;
+// optional int32 taskStatus = 11;
 inline bool Task::has_taskstatus() const {
-  return (_has_bits_[0] & 0x00001000u) != 0;
+  return (_has_bits_[0] & 0x00000400u) != 0;
 }
 inline void Task::set_has_taskstatus() {
-  _has_bits_[0] |= 0x00001000u;
+  _has_bits_[0] |= 0x00000400u;
 }
 inline void Task::clear_has_taskstatus() {
-  _has_bits_[0] &= ~0x00001000u;
+  _has_bits_[0] &= ~0x00000400u;
 }
 inline void Task::clear_taskstatus() {
   taskstatus_ = 0;
@@ -871,15 +650,15 @@ inline void Task::set_taskstatus(::google::protobuf::int32 value) {
   taskstatus_ = value;
 }
 
-// optional bool published = 14;
+// optional bool published = 12;
 inline bool Task::has_published() const {
-  return (_has_bits_[0] & 0x00002000u) != 0;
+  return (_has_bits_[0] & 0x00000800u) != 0;
 }
 inline void Task::set_has_published() {
-  _has_bits_[0] |= 0x00002000u;
+  _has_bits_[0] |= 0x00000800u;
 }
 inline void Task::clear_has_published() {
-  _has_bits_[0] &= ~0x00002000u;
+  _has_bits_[0] &= ~0x00000800u;
 }
 inline void Task::clear_published() {
   published_ = false;
@@ -891,31 +670,6 @@ inline bool Task::published() const {
 inline void Task::set_published(bool value) {
   set_has_published();
   published_ = value;
-}
-
-// repeated .Tag tag = 15;
-inline int Task::tag_size() const {
-  return tag_.size();
-}
-inline void Task::clear_tag() {
-  tag_.Clear();
-}
-inline const ::Tag& Task::tag(int index) const {
-  return tag_.Get(index);
-}
-inline ::Tag* Task::mutable_tag(int index) {
-  return tag_.Mutable(index);
-}
-inline ::Tag* Task::add_tag() {
-  return tag_.Add();
-}
-inline const ::google::protobuf::RepeatedPtrField< ::Tag >&
-Task::tag() const {
-  return tag_;
-}
-inline ::google::protobuf::RepeatedPtrField< ::Tag >*
-Task::mutable_tag() {
-  return &tag_;
 }
 
 

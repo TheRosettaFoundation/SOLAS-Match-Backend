@@ -17,6 +17,7 @@
 #include "Generators/UserTaskDeadlineEmailGenerator.h"
 #include "Generators/FeedbackEmailGenerator.h"
 #include "Generators/UserTaskStreamEmailGenerator.h"
+#include "Generators/TaskTranslationUploadedEmailGenerator.h"
 
 #include "Smtp.h"
 #include "IEmailGenerator.h"
@@ -85,7 +86,7 @@ void EmailPlugin::messageReveived(AMQPMessage *message)
     QString type = "EmailGenerator_" + QString::number(email_message.email_type());
     int classId = QMetaType::type(type.toLatin1());
     if (classId == 0) {
-        qDebug() << "EmailGenerator: Invalid proto type";
+        qDebug() << "EmailGenerator: Invalid proto type: " << QString::number(email_message.email_type());
     } else {
         IEmailGenerator *emailGen = static_cast<IEmailGenerator *>(QMetaType::construct(classId));
         emailGen->setEmailQueue(smtp->getEmailQueue());
@@ -94,12 +95,11 @@ void EmailPlugin::messageReveived(AMQPMessage *message)
         this->mThreadPool->start(emailGen);
     }
 
-    // REMOVE BEFORE COMMITING
-    /*AMQPQueue *messageQueue = message->getQueue();
+    AMQPQueue *messageQueue = message->getQueue();
     if(messageQueue != NULL)
     {
         messageQueue->Ack(message->getDeliveryTag());
-    }*/
+    }
 }
 
 void EmailPlugin::registerEmailTypes()
@@ -115,6 +115,8 @@ void EmailPlugin::registerEmailTypes()
     qRegisterMetaType<PasswordResetEmailGenerator>(name.toLatin1());
     name = "EmailGenerator_" + QString::number(EmailMessage::TaskArchived);
     qRegisterMetaType<TaskArchivedEmailGenerator>(name.toLatin1());
+    name = "EmailGenerator_" + QString::number(EmailMessage::TaskTranslationUploaded);
+    qRegisterMetaType<TaskTranslationUploadedEmailGenerator>(name.toLatin1());
     name = "EmailGenerator_" + QString::number(EmailMessage::TaskClaimed);
     qRegisterMetaType<TaskClaimedEmailGenerator>(name.toLatin1());
     name = "EmailGenerator_" + QString::number(EmailMessage::UserTaskClaim);

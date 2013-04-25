@@ -15,6 +15,6 @@ enum TaskTypes {
     POSTEDITING = 4
 };
 
-#define TEMPLATE_DIRECTORY "/etc/SOLAS-Match/templates/"
+#define TEMPLATE_DIRECTORY "./templates/"
 
 #endif // DEFINITIONS_H

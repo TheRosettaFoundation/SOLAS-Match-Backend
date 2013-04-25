@@ -29,11 +29,16 @@ void protobuf_AssignDesc_Organisation_2eproto() {
       "Organisation.proto");
   GOOGLE_CHECK(file != NULL);
   Organisation_descriptor_ = file->message_type(0);
-  static const int Organisation_offsets_[4] = {
+  static const int Organisation_offsets_[9] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Organisation, id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Organisation, name_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Organisation, home_page_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Organisation, biography_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Organisation, homepage_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Organisation, email_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Organisation, address_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Organisation, city_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Organisation, country_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Organisation, regionalfocus_),
   };
   Organisation_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -76,9 +81,11 @@ void protobuf_AddDesc_Organisation_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\022Organisation.proto\"N\n\014Organisation\022\n\n\002"
-    "id\030\001 \002(\005\022\014\n\004name\030\002 \001(\t\022\021\n\thome_page\030\003 \001("
-    "\t\022\021\n\tbiography\030\004 \001(\t", 100);
+    "\n\022Organisation.proto\"\243\001\n\014Organisation\022\n\n"
+    "\002id\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\021\n\tbiography\030\003 \001"
+    "(\t\022\020\n\010homepage\030\004 \001(\t\022\r\n\005email\030\005 \001(\t\022\017\n\007a"
+    "ddress\030\006 \001(\t\022\014\n\004city\030\007 \001(\t\022\017\n\007country\030\010 "
+    "\001(\t\022\025\n\rregionalFocus\030\t \001(\t", 186);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "Organisation.proto", &protobuf_RegisterTypes);
   Organisation::default_instance_ = new Organisation();
@@ -99,8 +106,13 @@ struct StaticDescriptorInitializer_Organisation_2eproto {
 #ifndef _MSC_VER
 const int Organisation::kIdFieldNumber;
 const int Organisation::kNameFieldNumber;
-const int Organisation::kHomePageFieldNumber;
 const int Organisation::kBiographyFieldNumber;
+const int Organisation::kHomepageFieldNumber;
+const int Organisation::kEmailFieldNumber;
+const int Organisation::kAddressFieldNumber;
+const int Organisation::kCityFieldNumber;
+const int Organisation::kCountryFieldNumber;
+const int Organisation::kRegionalFocusFieldNumber;
 #endif  // !_MSC_VER
 
 Organisation::Organisation()
@@ -121,8 +133,13 @@ void Organisation::SharedCtor() {
   _cached_size_ = 0;
   id_ = 0;
   name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  home_page_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   biography_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  homepage_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  email_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  address_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  city_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  country_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  regionalfocus_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -134,11 +151,26 @@ void Organisation::SharedDtor() {
   if (name_ != &::google::protobuf::internal::kEmptyString) {
     delete name_;
   }
-  if (home_page_ != &::google::protobuf::internal::kEmptyString) {
-    delete home_page_;
-  }
   if (biography_ != &::google::protobuf::internal::kEmptyString) {
     delete biography_;
+  }
+  if (homepage_ != &::google::protobuf::internal::kEmptyString) {
+    delete homepage_;
+  }
+  if (email_ != &::google::protobuf::internal::kEmptyString) {
+    delete email_;
+  }
+  if (address_ != &::google::protobuf::internal::kEmptyString) {
+    delete address_;
+  }
+  if (city_ != &::google::protobuf::internal::kEmptyString) {
+    delete city_;
+  }
+  if (country_ != &::google::protobuf::internal::kEmptyString) {
+    delete country_;
+  }
+  if (regionalfocus_ != &::google::protobuf::internal::kEmptyString) {
+    delete regionalfocus_;
   }
   if (this != default_instance_) {
   }
@@ -172,14 +204,41 @@ void Organisation::Clear() {
         name_->clear();
       }
     }
-    if (has_home_page()) {
-      if (home_page_ != &::google::protobuf::internal::kEmptyString) {
-        home_page_->clear();
-      }
-    }
     if (has_biography()) {
       if (biography_ != &::google::protobuf::internal::kEmptyString) {
         biography_->clear();
+      }
+    }
+    if (has_homepage()) {
+      if (homepage_ != &::google::protobuf::internal::kEmptyString) {
+        homepage_->clear();
+      }
+    }
+    if (has_email()) {
+      if (email_ != &::google::protobuf::internal::kEmptyString) {
+        email_->clear();
+      }
+    }
+    if (has_address()) {
+      if (address_ != &::google::protobuf::internal::kEmptyString) {
+        address_->clear();
+      }
+    }
+    if (has_city()) {
+      if (city_ != &::google::protobuf::internal::kEmptyString) {
+        city_->clear();
+      }
+    }
+    if (has_country()) {
+      if (country_ != &::google::protobuf::internal::kEmptyString) {
+        country_->clear();
+      }
+    }
+  }
+  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
+    if (has_regionalfocus()) {
+      if (regionalfocus_ != &::google::protobuf::internal::kEmptyString) {
+        regionalfocus_->clear();
       }
     }
   }
@@ -193,7 +252,7 @@ bool Organisation::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required int32 id = 1;
+      // optional int32 id = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
@@ -221,29 +280,12 @@ bool Organisation::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(26)) goto parse_home_page;
+        if (input->ExpectTag(26)) goto parse_biography;
         break;
       }
       
-      // optional string home_page = 3;
+      // optional string biography = 3;
       case 3: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_home_page:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_home_page()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->home_page().data(), this->home_page().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(34)) goto parse_biography;
-        break;
-      }
-      
-      // optional string biography = 4;
-      case 4: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_biography:
@@ -251,6 +293,108 @@ bool Organisation::MergePartialFromCodedStream(
                 input, this->mutable_biography()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8String(
             this->biography().data(), this->biography().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(34)) goto parse_homepage;
+        break;
+      }
+      
+      // optional string homepage = 4;
+      case 4: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_homepage:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_homepage()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->homepage().data(), this->homepage().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(42)) goto parse_email;
+        break;
+      }
+      
+      // optional string email = 5;
+      case 5: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_email:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_email()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->email().data(), this->email().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(50)) goto parse_address;
+        break;
+      }
+      
+      // optional string address = 6;
+      case 6: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_address:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_address()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->address().data(), this->address().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(58)) goto parse_city;
+        break;
+      }
+      
+      // optional string city = 7;
+      case 7: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_city:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_city()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->city().data(), this->city().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(66)) goto parse_country;
+        break;
+      }
+      
+      // optional string country = 8;
+      case 8: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_country:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_country()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->country().data(), this->country().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(74)) goto parse_regionalFocus;
+        break;
+      }
+      
+      // optional string regionalFocus = 9;
+      case 9: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_regionalFocus:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_regionalfocus()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->regionalfocus().data(), this->regionalfocus().length(),
             ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
@@ -277,7 +421,7 @@ bool Organisation::MergePartialFromCodedStream(
 
 void Organisation::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required int32 id = 1;
+  // optional int32 id = 1;
   if (has_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->id(), output);
   }
@@ -291,22 +435,67 @@ void Organisation::SerializeWithCachedSizes(
       2, this->name(), output);
   }
   
-  // optional string home_page = 3;
-  if (has_home_page()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->home_page().data(), this->home_page().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
-      3, this->home_page(), output);
-  }
-  
-  // optional string biography = 4;
+  // optional string biography = 3;
   if (has_biography()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->biography().data(), this->biography().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     ::google::protobuf::internal::WireFormatLite::WriteString(
-      4, this->biography(), output);
+      3, this->biography(), output);
+  }
+  
+  // optional string homepage = 4;
+  if (has_homepage()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->homepage().data(), this->homepage().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      4, this->homepage(), output);
+  }
+  
+  // optional string email = 5;
+  if (has_email()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->email().data(), this->email().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      5, this->email(), output);
+  }
+  
+  // optional string address = 6;
+  if (has_address()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->address().data(), this->address().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      6, this->address(), output);
+  }
+  
+  // optional string city = 7;
+  if (has_city()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->city().data(), this->city().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      7, this->city(), output);
+  }
+  
+  // optional string country = 8;
+  if (has_country()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->country().data(), this->country().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      8, this->country(), output);
+  }
+  
+  // optional string regionalFocus = 9;
+  if (has_regionalfocus()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->regionalfocus().data(), this->regionalfocus().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      9, this->regionalfocus(), output);
   }
   
   if (!unknown_fields().empty()) {
@@ -317,7 +506,7 @@ void Organisation::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* Organisation::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required int32 id = 1;
+  // optional int32 id = 1;
   if (has_id()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->id(), target);
   }
@@ -332,24 +521,74 @@ void Organisation::SerializeWithCachedSizes(
         2, this->name(), target);
   }
   
-  // optional string home_page = 3;
-  if (has_home_page()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->home_page().data(), this->home_page().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        3, this->home_page(), target);
-  }
-  
-  // optional string biography = 4;
+  // optional string biography = 3;
   if (has_biography()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->biography().data(), this->biography().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        4, this->biography(), target);
+        3, this->biography(), target);
+  }
+  
+  // optional string homepage = 4;
+  if (has_homepage()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->homepage().data(), this->homepage().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        4, this->homepage(), target);
+  }
+  
+  // optional string email = 5;
+  if (has_email()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->email().data(), this->email().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        5, this->email(), target);
+  }
+  
+  // optional string address = 6;
+  if (has_address()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->address().data(), this->address().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        6, this->address(), target);
+  }
+  
+  // optional string city = 7;
+  if (has_city()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->city().data(), this->city().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        7, this->city(), target);
+  }
+  
+  // optional string country = 8;
+  if (has_country()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->country().data(), this->country().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        8, this->country(), target);
+  }
+  
+  // optional string regionalFocus = 9;
+  if (has_regionalfocus()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->regionalfocus().data(), this->regionalfocus().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        9, this->regionalfocus(), target);
   }
   
   if (!unknown_fields().empty()) {
@@ -363,7 +602,7 @@ int Organisation::ByteSize() const {
   int total_size = 0;
   
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required int32 id = 1;
+    // optional int32 id = 1;
     if (has_id()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
@@ -377,18 +616,55 @@ int Organisation::ByteSize() const {
           this->name());
     }
     
-    // optional string home_page = 3;
-    if (has_home_page()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->home_page());
-    }
-    
-    // optional string biography = 4;
+    // optional string biography = 3;
     if (has_biography()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
           this->biography());
+    }
+    
+    // optional string homepage = 4;
+    if (has_homepage()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->homepage());
+    }
+    
+    // optional string email = 5;
+    if (has_email()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->email());
+    }
+    
+    // optional string address = 6;
+    if (has_address()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->address());
+    }
+    
+    // optional string city = 7;
+    if (has_city()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->city());
+    }
+    
+    // optional string country = 8;
+    if (has_country()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->country());
+    }
+    
+  }
+  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
+    // optional string regionalFocus = 9;
+    if (has_regionalfocus()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->regionalfocus());
     }
     
   }
@@ -424,11 +700,28 @@ void Organisation::MergeFrom(const Organisation& from) {
     if (from.has_name()) {
       set_name(from.name());
     }
-    if (from.has_home_page()) {
-      set_home_page(from.home_page());
-    }
     if (from.has_biography()) {
       set_biography(from.biography());
+    }
+    if (from.has_homepage()) {
+      set_homepage(from.homepage());
+    }
+    if (from.has_email()) {
+      set_email(from.email());
+    }
+    if (from.has_address()) {
+      set_address(from.address());
+    }
+    if (from.has_city()) {
+      set_city(from.city());
+    }
+    if (from.has_country()) {
+      set_country(from.country());
+    }
+  }
+  if (from._has_bits_[8 / 32] & (0xffu << (8 % 32))) {
+    if (from.has_regionalfocus()) {
+      set_regionalfocus(from.regionalfocus());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -447,7 +740,6 @@ void Organisation::CopyFrom(const Organisation& from) {
 }
 
 bool Organisation::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
   
   return true;
 }
@@ -456,8 +748,13 @@ void Organisation::Swap(Organisation* other) {
   if (other != this) {
     std::swap(id_, other->id_);
     std::swap(name_, other->name_);
-    std::swap(home_page_, other->home_page_);
     std::swap(biography_, other->biography_);
+    std::swap(homepage_, other->homepage_);
+    std::swap(email_, other->email_);
+    std::swap(address_, other->address_);
+    std::swap(city_, other->city_);
+    std::swap(country_, other->country_);
+    std::swap(regionalfocus_, other->regionalfocus_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

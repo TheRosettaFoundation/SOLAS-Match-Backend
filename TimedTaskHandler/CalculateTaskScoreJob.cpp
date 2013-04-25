@@ -19,6 +19,7 @@
 
 #include "Common/protobufs/models/User.pb.h"
 #include "Common/protobufs/models/Tag.pb.h"
+#include "Common/protobufs/models/Locale.pb.h"
 
 #include "Common/protobufs/emails/EmailMessage.pb.h"
 #include "Common/protobufs/emails/TaskScoreEmail.pb.h"
@@ -51,21 +52,26 @@ void CalculateTaskScore::run()
         QList<QSharedPointer<Task> > tasks = this->getTasks();  //Must use custom function to check message for task id
         if(users.length() > 0) {
             foreach(QSharedPointer<User> user, users) {
-                QList<QSharedPointer<Tag> > userTags = TagDao::getUserTags(db, user->user_id());
+                Locale userNativeLocale = user->nativelocale();
+                QList<QSharedPointer<Tag> > userTags = TagDao::getUserTags(db, user->id());
                 if(tasks.length() > 0) {
                     foreach(QSharedPointer<Task> task, tasks) {
                         int score = 0;
 
-                        if(user->native_lang_id() == task->sourcelanguagecode()) {
+                        Locale taskSourceLocale = task->sourcelocale();
+
+                        if(userNativeLocale.languagecode() == taskSourceLocale.languagecode()) {
                             score += 200;
-                            if(user->native_region_id() == task->sourcecountrycode()) {
+                            if(userNativeLocale.countrycode() == taskSourceLocale.countrycode()) {
                                 score += 75;
                             }
                         }
 
-                        if(user->native_lang_id() == task->targetlanguagecode()) {
+                        Locale taskTargetLocale = task->targetlocale();
+
+                        if(userNativeLocale.languagecode() == taskTargetLocale.languagecode()) {
                             score += 300;
-                            if(user->native_region_id() == task->targetcountrycode()) {
+                            if(userNativeLocale.countrycode() == taskTargetLocale.countrycode()) {
                                 score += 100;
                             }
                         }
@@ -87,10 +93,10 @@ void CalculateTaskScore::run()
                         score += created_time.daysTo(QDateTime::currentDateTime());
 
                         ctemplate::TemplateDictionary *score_sect = dict.AddSectionDictionary("SCORE_SECT");
-                        score_sect->SetIntValue("USER_ID", user->user_id());
+                        score_sect->SetIntValue("USER_ID", user->id());
                         score_sect->SetIntValue("TASK_ID", task->id());
                         score_sect->SetIntValue("SCORE", score);
-                        this->saveUserTaskScore(user->user_id(), task->id(), score);
+                        this->saveUserTaskScore(user->id(), task->id(), score);
                     }
                 } else {
                     qDebug() << "No tasks found";

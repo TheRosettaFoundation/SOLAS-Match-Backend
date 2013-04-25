@@ -29,7 +29,7 @@ void protobuf_AssignDesc_Task_2eproto() {
       "Task.proto");
   GOOGLE_CHECK(file != NULL);
   Task_descriptor_ = file->message_type(0);
-  static const int Task_offsets_[15] = {
+  static const int Task_offsets_[12] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Task, id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Task, projectid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Task, title_),
@@ -37,14 +37,11 @@ void protobuf_AssignDesc_Task_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Task, deadline_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Task, wordcount_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Task, createdtime_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Task, sourcelanguagecode_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Task, targetlanguagecode_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Task, sourcecountrycode_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Task, targetcountrycode_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Task, sourcelocale_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Task, targetlocale_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Task, tasktype_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Task, taskstatus_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Task, published_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Task, tag_),
   };
   Task_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -86,17 +83,15 @@ void protobuf_AddDesc_Task_2eproto() {
   already_here = true;
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-  ::protobuf_AddDesc_Tag_2eproto();
+  ::protobuf_AddDesc_Locale_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\nTask.proto\032\tTag.proto\"\271\002\n\004Task\022\n\n\002id\030\001"
-    " \002(\005\022\021\n\tprojectId\030\002 \001(\005\022\r\n\005title\030\003 \001(\t\022\017"
-    "\n\007comment\030\004 \001(\t\022\020\n\010deadline\030\005 \002(\t\022\021\n\twor"
-    "dCount\030\006 \001(\005\022\023\n\013createdTime\030\007 \001(\t\022\032\n\022sou"
-    "rceLanguageCode\030\010 \001(\t\022\032\n\022targetLanguageC"
-    "ode\030\t \001(\t\022\031\n\021sourceCountryCode\030\n \001(\t\022\031\n\021"
-    "targetCountryCode\030\013 \001(\t\022\020\n\010taskType\030\014 \001("
-    "\005\022\022\n\ntaskStatus\030\r \001(\005\022\021\n\tpublished\030\016 \001(\010"
-    "\022\021\n\003tag\030\017 \003(\0132\004.Tag", 339);
+    "\n\nTask.proto\032\014Locale.proto\"\366\001\n\004Task\022\n\n\002i"
+    "d\030\001 \001(\005\022\021\n\tprojectId\030\002 \001(\005\022\r\n\005title\030\003 \001("
+    "\t\022\017\n\007comment\030\004 \001(\t\022\020\n\010deadline\030\005 \001(\t\022\021\n\t"
+    "wordCount\030\006 \001(\005\022\023\n\013createdTime\030\007 \001(\t\022\035\n\014"
+    "sourceLocale\030\010 \001(\0132\007.Locale\022\035\n\014targetLoc"
+    "ale\030\t \001(\0132\007.Locale\022\020\n\010taskType\030\n \001(\005\022\022\n\n"
+    "taskStatus\030\013 \001(\005\022\021\n\tpublished\030\014 \001(\010", 275);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "Task.proto", &protobuf_RegisterTypes);
   Task::default_instance_ = new Task();
@@ -122,14 +117,11 @@ const int Task::kCommentFieldNumber;
 const int Task::kDeadlineFieldNumber;
 const int Task::kWordCountFieldNumber;
 const int Task::kCreatedTimeFieldNumber;
-const int Task::kSourceLanguageCodeFieldNumber;
-const int Task::kTargetLanguageCodeFieldNumber;
-const int Task::kSourceCountryCodeFieldNumber;
-const int Task::kTargetCountryCodeFieldNumber;
+const int Task::kSourceLocaleFieldNumber;
+const int Task::kTargetLocaleFieldNumber;
 const int Task::kTaskTypeFieldNumber;
 const int Task::kTaskStatusFieldNumber;
 const int Task::kPublishedFieldNumber;
-const int Task::kTagFieldNumber;
 #endif  // !_MSC_VER
 
 Task::Task()
@@ -138,6 +130,8 @@ Task::Task()
 }
 
 void Task::InitAsDefaultInstance() {
+  sourcelocale_ = const_cast< ::Locale*>(&::Locale::default_instance());
+  targetlocale_ = const_cast< ::Locale*>(&::Locale::default_instance());
 }
 
 Task::Task(const Task& from)
@@ -155,10 +149,8 @@ void Task::SharedCtor() {
   deadline_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   wordcount_ = 0;
   createdtime_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  sourcelanguagecode_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  targetlanguagecode_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  sourcecountrycode_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  targetcountrycode_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  sourcelocale_ = NULL;
+  targetlocale_ = NULL;
   tasktype_ = 0;
   taskstatus_ = 0;
   published_ = false;
@@ -182,19 +174,9 @@ void Task::SharedDtor() {
   if (createdtime_ != &::google::protobuf::internal::kEmptyString) {
     delete createdtime_;
   }
-  if (sourcelanguagecode_ != &::google::protobuf::internal::kEmptyString) {
-    delete sourcelanguagecode_;
-  }
-  if (targetlanguagecode_ != &::google::protobuf::internal::kEmptyString) {
-    delete targetlanguagecode_;
-  }
-  if (sourcecountrycode_ != &::google::protobuf::internal::kEmptyString) {
-    delete sourcecountrycode_;
-  }
-  if (targetcountrycode_ != &::google::protobuf::internal::kEmptyString) {
-    delete targetcountrycode_;
-  }
   if (this != default_instance_) {
+    delete sourcelocale_;
+    delete targetlocale_;
   }
 }
 
@@ -243,33 +225,18 @@ void Task::Clear() {
         createdtime_->clear();
       }
     }
-    if (has_sourcelanguagecode()) {
-      if (sourcelanguagecode_ != &::google::protobuf::internal::kEmptyString) {
-        sourcelanguagecode_->clear();
-      }
+    if (has_sourcelocale()) {
+      if (sourcelocale_ != NULL) sourcelocale_->::Locale::Clear();
     }
   }
   if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
-    if (has_targetlanguagecode()) {
-      if (targetlanguagecode_ != &::google::protobuf::internal::kEmptyString) {
-        targetlanguagecode_->clear();
-      }
-    }
-    if (has_sourcecountrycode()) {
-      if (sourcecountrycode_ != &::google::protobuf::internal::kEmptyString) {
-        sourcecountrycode_->clear();
-      }
-    }
-    if (has_targetcountrycode()) {
-      if (targetcountrycode_ != &::google::protobuf::internal::kEmptyString) {
-        targetcountrycode_->clear();
-      }
+    if (has_targetlocale()) {
+      if (targetlocale_ != NULL) targetlocale_->::Locale::Clear();
     }
     tasktype_ = 0;
     taskstatus_ = 0;
     published_ = false;
   }
-  tag_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
@@ -280,7 +247,7 @@ bool Task::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required int32 id = 1;
+      // optional int32 id = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
@@ -345,7 +312,7 @@ bool Task::MergePartialFromCodedStream(
         break;
       }
       
-      // required string deadline = 5;
+      // optional string deadline = 5;
       case 5: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
@@ -391,80 +358,40 @@ bool Task::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(66)) goto parse_sourceLanguageCode;
+        if (input->ExpectTag(66)) goto parse_sourceLocale;
         break;
       }
       
-      // optional string sourceLanguageCode = 8;
+      // optional .Locale sourceLocale = 8;
       case 8: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_sourceLanguageCode:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_sourcelanguagecode()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->sourcelanguagecode().data(), this->sourcelanguagecode().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+         parse_sourceLocale:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_sourcelocale()));
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(74)) goto parse_targetLanguageCode;
+        if (input->ExpectTag(74)) goto parse_targetLocale;
         break;
       }
       
-      // optional string targetLanguageCode = 9;
+      // optional .Locale targetLocale = 9;
       case 9: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_targetLanguageCode:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_targetlanguagecode()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->targetlanguagecode().data(), this->targetlanguagecode().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+         parse_targetLocale:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_targetlocale()));
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(82)) goto parse_sourceCountryCode;
+        if (input->ExpectTag(80)) goto parse_taskType;
         break;
       }
       
-      // optional string sourceCountryCode = 10;
+      // optional int32 taskType = 10;
       case 10: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_sourceCountryCode:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_sourcecountrycode()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->sourcecountrycode().data(), this->sourcecountrycode().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(90)) goto parse_targetCountryCode;
-        break;
-      }
-      
-      // optional string targetCountryCode = 11;
-      case 11: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_targetCountryCode:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_targetcountrycode()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->targetcountrycode().data(), this->targetcountrycode().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(96)) goto parse_taskType;
-        break;
-      }
-      
-      // optional int32 taskType = 12;
-      case 12: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_taskType:
@@ -475,12 +402,12 @@ bool Task::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(104)) goto parse_taskStatus;
+        if (input->ExpectTag(88)) goto parse_taskStatus;
         break;
       }
       
-      // optional int32 taskStatus = 13;
-      case 13: {
+      // optional int32 taskStatus = 11;
+      case 11: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_taskStatus:
@@ -491,12 +418,12 @@ bool Task::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(112)) goto parse_published;
+        if (input->ExpectTag(96)) goto parse_published;
         break;
       }
       
-      // optional bool published = 14;
-      case 14: {
+      // optional bool published = 12;
+      case 12: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_published:
@@ -507,21 +434,6 @@ bool Task::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(122)) goto parse_tag;
-        break;
-      }
-      
-      // repeated .Tag tag = 15;
-      case 15: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_tag:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-                input, add_tag()));
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(122)) goto parse_tag;
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -544,7 +456,7 @@ bool Task::MergePartialFromCodedStream(
 
 void Task::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required int32 id = 1;
+  // optional int32 id = 1;
   if (has_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->id(), output);
   }
@@ -572,7 +484,7 @@ void Task::SerializeWithCachedSizes(
       4, this->comment(), output);
   }
   
-  // required string deadline = 5;
+  // optional string deadline = 5;
   if (has_deadline()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->deadline().data(), this->deadline().length(),
@@ -595,61 +507,31 @@ void Task::SerializeWithCachedSizes(
       7, this->createdtime(), output);
   }
   
-  // optional string sourceLanguageCode = 8;
-  if (has_sourcelanguagecode()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->sourcelanguagecode().data(), this->sourcelanguagecode().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
-      8, this->sourcelanguagecode(), output);
-  }
-  
-  // optional string targetLanguageCode = 9;
-  if (has_targetlanguagecode()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->targetlanguagecode().data(), this->targetlanguagecode().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
-      9, this->targetlanguagecode(), output);
-  }
-  
-  // optional string sourceCountryCode = 10;
-  if (has_sourcecountrycode()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->sourcecountrycode().data(), this->sourcecountrycode().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
-      10, this->sourcecountrycode(), output);
-  }
-  
-  // optional string targetCountryCode = 11;
-  if (has_targetcountrycode()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->targetcountrycode().data(), this->targetcountrycode().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
-      11, this->targetcountrycode(), output);
-  }
-  
-  // optional int32 taskType = 12;
-  if (has_tasktype()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(12, this->tasktype(), output);
-  }
-  
-  // optional int32 taskStatus = 13;
-  if (has_taskstatus()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(13, this->taskstatus(), output);
-  }
-  
-  // optional bool published = 14;
-  if (has_published()) {
-    ::google::protobuf::internal::WireFormatLite::WriteBool(14, this->published(), output);
-  }
-  
-  // repeated .Tag tag = 15;
-  for (int i = 0; i < this->tag_size(); i++) {
+  // optional .Locale sourceLocale = 8;
+  if (has_sourcelocale()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      15, this->tag(i), output);
+      8, this->sourcelocale(), output);
+  }
+  
+  // optional .Locale targetLocale = 9;
+  if (has_targetlocale()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      9, this->targetlocale(), output);
+  }
+  
+  // optional int32 taskType = 10;
+  if (has_tasktype()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(10, this->tasktype(), output);
+  }
+  
+  // optional int32 taskStatus = 11;
+  if (has_taskstatus()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(11, this->taskstatus(), output);
+  }
+  
+  // optional bool published = 12;
+  if (has_published()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(12, this->published(), output);
   }
   
   if (!unknown_fields().empty()) {
@@ -660,7 +542,7 @@ void Task::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* Task::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required int32 id = 1;
+  // optional int32 id = 1;
   if (has_id()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->id(), target);
   }
@@ -690,7 +572,7 @@ void Task::SerializeWithCachedSizes(
         4, this->comment(), target);
   }
   
-  // required string deadline = 5;
+  // optional string deadline = 5;
   if (has_deadline()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->deadline().data(), this->deadline().length(),
@@ -715,66 +597,33 @@ void Task::SerializeWithCachedSizes(
         7, this->createdtime(), target);
   }
   
-  // optional string sourceLanguageCode = 8;
-  if (has_sourcelanguagecode()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->sourcelanguagecode().data(), this->sourcelanguagecode().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        8, this->sourcelanguagecode(), target);
-  }
-  
-  // optional string targetLanguageCode = 9;
-  if (has_targetlanguagecode()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->targetlanguagecode().data(), this->targetlanguagecode().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        9, this->targetlanguagecode(), target);
-  }
-  
-  // optional string sourceCountryCode = 10;
-  if (has_sourcecountrycode()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->sourcecountrycode().data(), this->sourcecountrycode().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        10, this->sourcecountrycode(), target);
-  }
-  
-  // optional string targetCountryCode = 11;
-  if (has_targetcountrycode()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->targetcountrycode().data(), this->targetcountrycode().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        11, this->targetcountrycode(), target);
-  }
-  
-  // optional int32 taskType = 12;
-  if (has_tasktype()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(12, this->tasktype(), target);
-  }
-  
-  // optional int32 taskStatus = 13;
-  if (has_taskstatus()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(13, this->taskstatus(), target);
-  }
-  
-  // optional bool published = 14;
-  if (has_published()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(14, this->published(), target);
-  }
-  
-  // repeated .Tag tag = 15;
-  for (int i = 0; i < this->tag_size(); i++) {
+  // optional .Locale sourceLocale = 8;
+  if (has_sourcelocale()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        15, this->tag(i), target);
+        8, this->sourcelocale(), target);
+  }
+  
+  // optional .Locale targetLocale = 9;
+  if (has_targetlocale()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        9, this->targetlocale(), target);
+  }
+  
+  // optional int32 taskType = 10;
+  if (has_tasktype()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(10, this->tasktype(), target);
+  }
+  
+  // optional int32 taskStatus = 11;
+  if (has_taskstatus()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(11, this->taskstatus(), target);
+  }
+  
+  // optional bool published = 12;
+  if (has_published()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(12, this->published(), target);
   }
   
   if (!unknown_fields().empty()) {
@@ -788,7 +637,7 @@ int Task::ByteSize() const {
   int total_size = 0;
   
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required int32 id = 1;
+    // optional int32 id = 1;
     if (has_id()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
@@ -816,7 +665,7 @@ int Task::ByteSize() const {
           this->comment());
     }
     
-    // required string deadline = 5;
+    // optional string deadline = 5;
     if (has_deadline()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
@@ -837,64 +686,42 @@ int Task::ByteSize() const {
           this->createdtime());
     }
     
-    // optional string sourceLanguageCode = 8;
-    if (has_sourcelanguagecode()) {
+    // optional .Locale sourceLocale = 8;
+    if (has_sourcelocale()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->sourcelanguagecode());
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->sourcelocale());
     }
     
   }
   if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
-    // optional string targetLanguageCode = 9;
-    if (has_targetlanguagecode()) {
+    // optional .Locale targetLocale = 9;
+    if (has_targetlocale()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->targetlanguagecode());
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->targetlocale());
     }
     
-    // optional string sourceCountryCode = 10;
-    if (has_sourcecountrycode()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->sourcecountrycode());
-    }
-    
-    // optional string targetCountryCode = 11;
-    if (has_targetcountrycode()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->targetcountrycode());
-    }
-    
-    // optional int32 taskType = 12;
+    // optional int32 taskType = 10;
     if (has_tasktype()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->tasktype());
     }
     
-    // optional int32 taskStatus = 13;
+    // optional int32 taskStatus = 11;
     if (has_taskstatus()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->taskstatus());
     }
     
-    // optional bool published = 14;
+    // optional bool published = 12;
     if (has_published()) {
       total_size += 1 + 1;
     }
     
   }
-  // repeated .Tag tag = 15;
-  total_size += 1 * this->tag_size();
-  for (int i = 0; i < this->tag_size(); i++) {
-    total_size +=
-      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-        this->tag(i));
-  }
-  
   if (!unknown_fields().empty()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
@@ -920,7 +747,6 @@ void Task::MergeFrom(const ::google::protobuf::Message& from) {
 
 void Task::MergeFrom(const Task& from) {
   GOOGLE_CHECK_NE(&from, this);
-  tag_.MergeFrom(from.tag_);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_id()) {
       set_id(from.id());
@@ -943,19 +769,13 @@ void Task::MergeFrom(const Task& from) {
     if (from.has_createdtime()) {
       set_createdtime(from.createdtime());
     }
-    if (from.has_sourcelanguagecode()) {
-      set_sourcelanguagecode(from.sourcelanguagecode());
+    if (from.has_sourcelocale()) {
+      mutable_sourcelocale()->::Locale::MergeFrom(from.sourcelocale());
     }
   }
   if (from._has_bits_[8 / 32] & (0xffu << (8 % 32))) {
-    if (from.has_targetlanguagecode()) {
-      set_targetlanguagecode(from.targetlanguagecode());
-    }
-    if (from.has_sourcecountrycode()) {
-      set_sourcecountrycode(from.sourcecountrycode());
-    }
-    if (from.has_targetcountrycode()) {
-      set_targetcountrycode(from.targetcountrycode());
+    if (from.has_targetlocale()) {
+      mutable_targetlocale()->::Locale::MergeFrom(from.targetlocale());
     }
     if (from.has_tasktype()) {
       set_tasktype(from.tasktype());
@@ -983,11 +803,7 @@ void Task::CopyFrom(const Task& from) {
 }
 
 bool Task::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000011) != 0x00000011) return false;
   
-  for (int i = 0; i < tag_size(); i++) {
-    if (!this->tag(i).IsInitialized()) return false;
-  }
   return true;
 }
 
@@ -1000,14 +816,11 @@ void Task::Swap(Task* other) {
     std::swap(deadline_, other->deadline_);
     std::swap(wordcount_, other->wordcount_);
     std::swap(createdtime_, other->createdtime_);
-    std::swap(sourcelanguagecode_, other->sourcelanguagecode_);
-    std::swap(targetlanguagecode_, other->targetlanguagecode_);
-    std::swap(sourcecountrycode_, other->sourcecountrycode_);
-    std::swap(targetcountrycode_, other->targetcountrycode_);
+    std::swap(sourcelocale_, other->sourcelocale_);
+    std::swap(targetlocale_, other->targetlocale_);
     std::swap(tasktype_, other->tasktype_);
     std::swap(taskstatus_, other->taskstatus_);
     std::swap(published_, other->published_);
-    tag_.Swap(&other->tag_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

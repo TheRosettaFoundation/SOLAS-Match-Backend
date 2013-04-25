@@ -20,8 +20,6 @@
 #include "Common/protobufs/models/ArchivedTask.pb.h"
 #include "Common/protobufs/models/Organisation.pb.h"
 
-#define TEMPLATE_DIRECTORY "/etc/SOLAS-Match/templates/"
-
 IEmailGenerator::IEmailGenerator()
 {
     //Default Constructor

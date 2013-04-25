@@ -24,7 +24,7 @@ QList<QSharedPointer<Task> > TaskDao::getTasks(MySQLHandler *db, int id, int pro
     }
 
     if(title != "") {
-        args += title + ", ";
+        args += MySQLHandler::wrapString(title) + ", ";
     } else {
         args += "null, ";
     }
@@ -36,31 +36,31 @@ QList<QSharedPointer<Task> > TaskDao::getTasks(MySQLHandler *db, int id, int pro
     }
 
     if(sourceLang != "") {
-        args += sourceLang + ", ";
+        args += MySQLHandler::wrapString(sourceLang) + ", ";
     } else {
         args += "null, ";
     }
 
     if(targetLangId != "") {
-        args += targetLangId + ", ";
+        args += MySQLHandler::wrapString(targetLangId) + ", ";
     } else {
         args += "null, ";
     }
 
     if (createdTime != "") {
-        args += createdTime + ", ";
+        args += MySQLHandler::wrapString(createdTime) + ", ";
     } else {
         args += "null, ";
     }
 
     if(sourceCountry != "") {
-        args += sourceCountry + ", ";
+        args += MySQLHandler::wrapString(sourceCountry) + ", ";
     } else {
         args += "null, ";
     }
 
     if(targetCountry != "") {
-        args += targetCountry + ", ";
+        args += MySQLHandler::wrapString(targetCountry) + ", ";
     } else {
         args += "null, ";
     }
@@ -90,7 +90,7 @@ QList<QSharedPointer<Task> > TaskDao::getTasks(MySQLHandler *db, int id, int pro
     }
 
     if(deadlineTime != "") {
-        args += deadlineTime;
+        args += MySQLHandler::wrapString(deadlineTime);
     } else {
         args += "null";
     }
@@ -121,6 +121,100 @@ QSharedPointer<Task> TaskDao::getTask(MySQLHandler *db, int id, int projectId, Q
     return task;
 }
 
+QSharedPointer<Task> TaskDao::insertAndUpdate(MySQLHandler *db, QSharedPointer<Task> task)
+{
+    QString args = "";
+    Locale sourceLocale = task->sourcelocale();
+    Locale targetLocale = task->targetlocale();
+
+    if (task->id() > 0) {
+        args += QString::number(task->id()) + ", ";
+    } else {
+        args += "null, ";
+    }
+
+    if (task->projectid() > 0) {
+        args += QString::number(task->projectid()) + ", ";
+    } else {
+        args += "null, ";
+    }
+
+    if (task->title() != "") {
+        args += MySQLHandler::wrapStdString(task->title()) + ", ";
+    } else {
+        args += "null, ";
+    }
+
+    if (task->wordcount() > 0) {
+        args += QString::number(task->wordcount()) + ", ";
+    } else {
+        args += "null, ";
+    }
+
+    if (sourceLocale.languagecode() != "") {
+        args += MySQLHandler::wrapStdString(sourceLocale.languagecode()) + ", ";
+    } else {
+        args += "null, ";
+    }
+
+    if (targetLocale.languagecode() != "") {
+        args += MySQLHandler::wrapStdString(targetLocale.languagecode()) + ", ";
+    } else {
+        args += "null, ";
+    }
+
+    if (task->createdtime() != "") {
+        args += MySQLHandler::wrapStdString(task->createdtime()) + ", ";
+    } else {
+        args += "null, ";
+    }
+
+    if (task->comment() != "") {
+        args += MySQLHandler::wrapStdString(task->comment()) + ", ";
+    } else {
+        args += "null, ";
+    }
+
+    if (sourceLocale.countrycode() != "") {
+        args +=  MySQLHandler::wrapStdString(sourceLocale.countrycode()) + ", ";
+    } else {
+        args += "null, ";
+    }
+
+    if (targetLocale.countrycode() != "") {
+        args += MySQLHandler::wrapStdString(targetLocale.countrycode()) + ", ";
+    } else {
+        args += "null, ";
+    }
+
+    if (task->deadline() != "") {
+        args += MySQLHandler::wrapStdString(task->deadline()) + ", ";
+    } else {
+        args += "null, ";
+    }
+
+    if (task->tasktype() > 0) {
+        args += QString::number(task->tasktype()) + ", ";
+    } else {
+        args += "null, ";
+    }
+
+    if (task->taskstatus() > 0) {
+        args += QString::number(task->taskstatus()) + ", ";
+    } else {
+        args += "null, ";
+    }
+
+    args += QString::number(task->published());
+
+    QSharedPointer<QSqlQuery> mQuery = db->call("taskInsertAndUpdate", args);
+    if (mQuery->first()) {
+        task = ModelGenerator::GenerateTask(mQuery);
+    }
+
+    return task;
+}
+
 QList<QSharedPointer<Task> > TaskDao::getActiveTasks(MySQLHandler *db, int limit)
 {
     QList<QSharedPointer<Task> > ret = QList<QSharedPointer<Task> >();
@@ -135,6 +229,21 @@ QList<QSharedPointer<Task> > TaskDao::getActiveTasks(MySQLHandler *db, int limit
             QSharedPointer<Task> task = TaskDao::getTask(db, MySQLHandler::getValueFromQuery("id", mQuery).toInt());
             ret.append(task);
         } while(mQuery->next());
+    }
+
+    return ret;
+}
+
+QList<QSharedPointer<Task> > TaskDao::getOverdueTasks(MySQLHandler *db)
+{
+    QList<QSharedPointer<Task> > ret = QList<QSharedPointer<Task> >();
+
+    QSharedPointer<QSqlQuery> mQuery = db->call("getOverdueTasks", "");
+    if (mQuery->first()) {
+        do {
+            QSharedPointer<Task> task = ModelGenerator::GenerateTask(mQuery);
+            ret.append(task);
+        } while (mQuery->next());
     }
 
     return ret;
