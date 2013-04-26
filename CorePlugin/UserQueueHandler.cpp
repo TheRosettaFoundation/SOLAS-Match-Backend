@@ -4,6 +4,8 @@
 #include <QTimer>
 #include <QDebug>
 
+#include "Common/ConfigParser.h"
+
 #include "UserJobs/TaskStreamNotificationHandler.h"
 #include "UserJobs/StatisticsUpdate.h"
 
@@ -15,6 +17,7 @@ UserQueueHandler::UserQueueHandler()
 void UserQueueHandler::run()
 {
     qDebug() << "Running UserQueueHandler on thread " << this->thread()->currentThreadId();
+    ConfigParser settings;
     QString exchange = "SOLAS_MATCH";
     QString topic = "users.#";
     QString queue = "CoreUsersQueue";
@@ -27,7 +30,7 @@ void UserQueueHandler::run()
 
     QTimer *message_queue_read_timer = new QTimer();
     connect(message_queue_read_timer, SIGNAL(timeout()), client, SLOT(consumeFromQueue()));
-    message_queue_read_timer->start(50);
+    message_queue_read_timer->start(settings.get("messaging.poll_rate").toInt());
 }
 
 void UserQueueHandler::messageReceived(AMQPMessage *message)

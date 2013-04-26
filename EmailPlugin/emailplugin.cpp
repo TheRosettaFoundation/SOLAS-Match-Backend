@@ -46,6 +46,7 @@ EmailPlugin::EmailPlugin()
 void EmailPlugin::run()
 {
     qDebug() << "EmailPlugin::Starting new Thread " << this->thread()->currentThreadId();
+    ConfigParser settings;
     QString exchange = "SOLAS_MATCH";
     QString topic = "email.#";
     QString queue = "email_queue";
@@ -60,16 +61,12 @@ void EmailPlugin::run()
     client->init();
     connect(client, SIGNAL(AMQPMessageReceived(AMQPMessage*)), this, SLOT(messageReveived(AMQPMessage*)));
 
-    try {
-        qDebug() << "EmailPlugin::Now consuming from " << exchange << " exchange";
-        client->declareQueue(exchange, topic, queue);
+    qDebug() << "EmailPlugin::Now consuming from " << exchange << " exchange";
+    client->declareQueue(exchange, topic, queue);
 
-        QTimer *message_queue_read_timer = new QTimer();
-        connect(message_queue_read_timer, SIGNAL(timeout()), client, SLOT(consumeFromQueue()));
-        message_queue_read_timer->start(50);
-    } catch(AMQPException e) {
-        qDebug() << "ERROR: " << QString::fromStdString(e.getMessage());
-    }
+    QTimer *message_queue_read_timer = new QTimer();
+    connect(message_queue_read_timer, SIGNAL(timeout()), client, SLOT(consumeFromQueue()));
+    message_queue_read_timer->start(settings.get("messaging.poll_rate").toInt());
 }
 
 void EmailPlugin::messageReveived(AMQPMessage *message)

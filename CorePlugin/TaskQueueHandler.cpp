@@ -4,6 +4,8 @@
 #include <QTimer>
 #include <QDebug>
 
+#include "Common/ConfigParser.h"
+
 #include "TaskJobs/CalculateTaskScore.h"
 #include "TaskJobs/DeadlineChecker.h"
 
@@ -15,6 +17,7 @@ TaskQueueHandler::TaskQueueHandler()
 void TaskQueueHandler::run()
 {
     qDebug() << "Running TaskQueueHandler on thread " << this->thread()->currentThreadId();
+    ConfigParser settings;
     QString exchange = "SOLAS_MATCH";
     QString queue = "CoreTaskQueue";
     QString topic = "tasks.#";
@@ -29,9 +32,9 @@ void TaskQueueHandler::run()
 
     QTimer *message_queue_read_timer = new QTimer();
     connect(message_queue_read_timer, SIGNAL(timeout()), client, SLOT(consumeFromQueue()));
-    message_queue_read_timer->start(50);
+    message_queue_read_timer->start(settings.get("messaging.poll_rate").toInt());
 
-    QTimer::singleShot(100, this, SLOT(calculateAllTasksScore()));   //Run on startup
+    QTimer::singleShot(1000, this, SLOT(calculateAllTasksScore()));   //Run on startup
 }
 
 void TaskQueueHandler::messageReceived(AMQPMessage *message)
