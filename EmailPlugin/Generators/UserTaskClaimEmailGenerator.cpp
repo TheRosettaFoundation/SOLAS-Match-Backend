@@ -45,7 +45,7 @@ void UserTaskClaimEmailGenerator::run()
         }
 
         QString task_url = settings.get("site.url");
-        task_url += "task/id/" + QString::number(task->id());
+        task_url += "task/" + QString::number(task->id()) + "/id";
         dict["TASK_PAGE"] = task_url.toStdString();
 
         std::string email_body;
