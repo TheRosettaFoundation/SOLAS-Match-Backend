@@ -3,7 +3,7 @@
 #include "../ModelGenerator.h"
 #include "UserDao.h"
 
-QList<QSharedPointer<Task> > TaskDao::getTasks(MySQLHandler *db, int id, int projectId, QString title,
+QList<QSharedPointer<Task> > TaskDao::getTasks(QSharedPointer<MySQLHandler> db, int id, int projectId, QString title,
                              int wc, QString sourceLang, QString targetLangId, QString createdTime,
                              QString sourceCountry, QString targetCountry, QString comment,
                              int type, int status, int published, QString deadlineTime)
@@ -106,7 +106,7 @@ QList<QSharedPointer<Task> > TaskDao::getTasks(MySQLHandler *db, int id, int pro
     return ret;
 }
 
-QSharedPointer<Task> TaskDao::getTask(MySQLHandler *db, int id, int projectId, QString title,
+QSharedPointer<Task> TaskDao::getTask(QSharedPointer<MySQLHandler> db, int id, int projectId, QString title,
                                       int wc, QString sourceLang, QString targetLangId, QString createdTime,
                                       QString sourceCountry, QString targetCountry, QString comment,
                                       int type, int status, int published, QString deadlineTime)
@@ -121,7 +121,7 @@ QSharedPointer<Task> TaskDao::getTask(MySQLHandler *db, int id, int projectId, Q
     return task;
 }
 
-QSharedPointer<Task> TaskDao::insertAndUpdate(MySQLHandler *db, QSharedPointer<Task> task)
+QSharedPointer<Task> TaskDao::insertAndUpdate(QSharedPointer<MySQLHandler> db, QSharedPointer<Task> task)
 {
     QString args = "";
     Locale sourceLocale = task->sourcelocale();
@@ -215,7 +215,7 @@ QSharedPointer<Task> TaskDao::insertAndUpdate(MySQLHandler *db, QSharedPointer<T
     return task;
 }
 
-QList<QSharedPointer<Task> > TaskDao::getActiveTasks(MySQLHandler *db, int limit)
+QList<QSharedPointer<Task> > TaskDao::getActiveTasks(QSharedPointer<MySQLHandler> db, int limit)
 {
     QList<QSharedPointer<Task> > ret = QList<QSharedPointer<Task> >();
     QString args = "null";
@@ -234,7 +234,7 @@ QList<QSharedPointer<Task> > TaskDao::getActiveTasks(MySQLHandler *db, int limit
     return ret;
 }
 
-QList<QSharedPointer<Task> > TaskDao::getOverdueTasks(MySQLHandler *db)
+QList<QSharedPointer<Task> > TaskDao::getOverdueTasks(QSharedPointer<MySQLHandler> db)
 {
     QList<QSharedPointer<Task> > ret = QList<QSharedPointer<Task> >();
 
@@ -249,7 +249,7 @@ QList<QSharedPointer<Task> > TaskDao::getOverdueTasks(MySQLHandler *db)
     return ret;
 }
 
-QSharedPointer<User> TaskDao::getTaskTranslator(MySQLHandler *db, int task_id)
+QSharedPointer<User> TaskDao::getTaskTranslator(QSharedPointer<MySQLHandler> db, int task_id)
 {
     QSharedPointer<User> user;
     QSharedPointer<QSqlQuery> mQuery = db->call("getUserClaimedTask", QString::number(task_id));
@@ -259,7 +259,7 @@ QSharedPointer<User> TaskDao::getTaskTranslator(MySQLHandler *db, int task_id)
     return user;
 }
 
-QList<QSharedPointer<User> > TaskDao::getSubscribedUsers(MySQLHandler *db, int task_id)
+QList<QSharedPointer<User> > TaskDao::getSubscribedUsers(QSharedPointer<MySQLHandler> db, int task_id)
 {
     QList<QSharedPointer<User> > users = QList<QSharedPointer<User> >();
 
@@ -273,7 +273,7 @@ QList<QSharedPointer<User> > TaskDao::getSubscribedUsers(MySQLHandler *db, int t
     return users;
 }
 
-QList<QSharedPointer<ArchivedTask> > TaskDao::getArchivedTasks(MySQLHandler *db, int arc_id, int o_id)
+QList<QSharedPointer<ArchivedTask> > TaskDao::getArchivedTasks(QSharedPointer<MySQLHandler> db, int arc_id, int o_id)
 {
     QList<QSharedPointer<ArchivedTask> > ret = QList<QSharedPointer<ArchivedTask> >();
     QString args = "";
@@ -301,7 +301,7 @@ QList<QSharedPointer<ArchivedTask> > TaskDao::getArchivedTasks(MySQLHandler *db,
     return ret;
 }
 
-QSharedPointer<ArchivedTask> TaskDao::getArchivedTask(MySQLHandler *db, int arc_id, int o_id)
+QSharedPointer<ArchivedTask> TaskDao::getArchivedTask(QSharedPointer<MySQLHandler> db, int arc_id, int o_id)
 {
     QSharedPointer<ArchivedTask> task = QSharedPointer<ArchivedTask>();
     QList<QSharedPointer<ArchivedTask> > arc_tasks = TaskDao::getArchivedTasks(db, arc_id, o_id);

@@ -20,7 +20,7 @@ void TaskTranslationUploadedEmailGenerator::run()
     QSharedPointer<Task> task = QSharedPointer<Task>();
     QSharedPointer<Project> project = QSharedPointer<Project>();
     QSharedPointer<Organisation> org = QSharedPointer<Organisation>();
-    MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
+    QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
 
     if(db->init()) {
         user = UserDao::getUser(db, email_message.user_id());
@@ -85,8 +85,6 @@ void TaskTranslationUploadedEmailGenerator::run()
     } else {
         email = this->generateErrorEmail(error);
     }
-
-    delete db;
 
     this->emailQueue->insert(email, currentMessage);
 }

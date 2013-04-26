@@ -1,7 +1,6 @@
 #include "StatisticsUpdate.h"
 
 #include <QThread>
-#include <QUuid>
 #include <QDebug>
 
 StatisticsUpdate::StatisticsUpdate()
@@ -22,12 +21,11 @@ StatisticsUpdate::~StatisticsUpdate()
 void StatisticsUpdate::run()
 {
     qDebug() << "Starting new Thread for statistics update " << this->thread()->currentThreadId();
-    MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
+    QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
     if (db->init()) {
         db->call("statsUpdateAll", "");
     } else {
         qDebug() << "Unable to connect to DB";
     }
-
-    delete db;
+    qDebug() << "Finished Statistics Update";
 }

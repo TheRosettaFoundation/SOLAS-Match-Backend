@@ -2,7 +2,7 @@
 
 #include "../ModelGenerator.h"
 
-QSharedPointer<Organisation> OrganisationDao::getOrg(MySQLHandler *db, int org_id)
+QSharedPointer<Organisation> OrganisationDao::getOrg(QSharedPointer<MySQLHandler> db, int org_id)
 {
     QSharedPointer<Organisation> org;
     QString args = QString::number(org_id);

@@ -1,8 +1,8 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
-    PluginHandler \
     Common \
+    PluginHandler \
     EmailPlugin \
     PluginScheduler \
     CorePlugin

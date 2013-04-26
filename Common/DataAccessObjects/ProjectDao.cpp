@@ -2,7 +2,7 @@
 
 #include "../ModelGenerator.h"
 
-QList<QSharedPointer<Project> > ProjectDao::getProjects(MySQLHandler *db, int id, QString title, QString desc, QString impact,
+QList<QSharedPointer<Project> > ProjectDao::getProjects(QSharedPointer<MySQLHandler> db, int id, QString title, QString desc, QString impact,
                                                         QString deadline, int orgId, QString ref, int wordCount,
                                                         QString created, QString language, QString country)
 {
@@ -86,7 +86,7 @@ QList<QSharedPointer<Project> > ProjectDao::getProjects(MySQLHandler *db, int id
     return ret;
 }
 
-QSharedPointer<Project> ProjectDao::getProject(MySQLHandler *db, int id, QString title, QString desc, QString impact,
+QSharedPointer<Project> ProjectDao::getProject(QSharedPointer<MySQLHandler> db, int id, QString title, QString desc, QString impact,
                                                QString deadline, int orgId, QString ref, int wordCount,
                                                QString created, QString language, QString country)
 {

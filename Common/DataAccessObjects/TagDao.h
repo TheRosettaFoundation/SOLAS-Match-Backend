@@ -12,8 +12,8 @@
 class TagDao
 {
 public:
-    static QList<QSharedPointer<Tag> > getUserTags(MySQLHandler *db, int user_id);
-    static QList<QSharedPointer<Tag> > getTaskTags(MySQLHandler *db, int task_id);
+    static QList<QSharedPointer<Tag> > getUserTags(QSharedPointer<MySQLHandler> db, int user_id);
+    static QList<QSharedPointer<Tag> > getTaskTags(QSharedPointer<MySQLHandler> db, int task_id);
 
 };
 

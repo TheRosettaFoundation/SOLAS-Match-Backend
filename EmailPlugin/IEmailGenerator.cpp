@@ -2,7 +2,6 @@
 
 #include <QDebug>
 #include <QStringList>
-#include <QUuid>
 #include <ctemplate/template.h>
 
 #include "Common/MySQLHandler.h"

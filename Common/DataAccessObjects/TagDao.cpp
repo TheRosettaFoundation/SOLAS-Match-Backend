@@ -2,7 +2,7 @@
 
 #include "Common/ModelGenerator.h"
 
-QList<QSharedPointer<Tag> > TagDao::getUserTags(MySQLHandler *db, int user_id)
+QList<QSharedPointer<Tag> > TagDao::getUserTags(QSharedPointer<MySQLHandler> db, int user_id)
 {
     QList<QSharedPointer<Tag> > tags = QList<QSharedPointer<Tag> >();
     QSharedPointer<QSqlQuery> q = db->call("getUserTags", QString::number(user_id) + ", null");
@@ -16,7 +16,7 @@ QList<QSharedPointer<Tag> > TagDao::getUserTags(MySQLHandler *db, int user_id)
     return tags;
 }
 
-QList<QSharedPointer<Tag> > TagDao::getTaskTags(MySQLHandler *db, int task_id)
+QList<QSharedPointer<Tag> > TagDao::getTaskTags(QSharedPointer<MySQLHandler> db, int task_id)
 {
     QList<QSharedPointer<Tag> > tags = QList<QSharedPointer<Tag> >();
     QSharedPointer<QSqlQuery> q = db->call("getTaskTags", QString::number(task_id));

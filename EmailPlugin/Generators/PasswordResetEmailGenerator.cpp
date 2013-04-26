@@ -17,7 +17,7 @@ void PasswordResetEmailGenerator::run()
     QString uuid = "";
     QString error = "";
     QSharedPointer<User> user = QSharedPointer<User>();
-    MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
+    QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
 
     if(db->init()) {
         user = UserDao::getUser(db, email_message.user_id());
@@ -57,8 +57,6 @@ void PasswordResetEmailGenerator::run()
     } else {
         email = this->generateErrorEmail(error);
     }
-
-    delete db;
 
     this->emailQueue->insert(email, currentMessage);
 }

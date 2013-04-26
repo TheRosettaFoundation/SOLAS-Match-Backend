@@ -4,6 +4,7 @@
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
 #include <QSharedPointer>
+#include <QMutex>
 #include <QVariant>
 #include <QString>
 #include <string>
@@ -11,8 +12,8 @@
 class MySQLHandler
 {
 public:
-    MySQLHandler(QString name);
     ~MySQLHandler();
+    static QSharedPointer<MySQLHandler> getInstance();
     bool init();
     void close();
     QSharedPointer<QSqlQuery> query(QString query);
@@ -22,6 +23,7 @@ public:
     static QString wrapStdString(const std::string str);
 
 private:
+    MySQLHandler(QString name);
     QSqlDatabase *conn;
     QString connName;
     QString host;

@@ -12,10 +12,10 @@
 class ProjectDao
 {
 public:
-    static QList<QSharedPointer<Project> > getProjects(MySQLHandler *db, int id = -1, QString title = "", QString desc = "",
+    static QList<QSharedPointer<Project> > getProjects(QSharedPointer<MySQLHandler> db, int id = -1, QString title = "", QString desc = "",
                                                        QString impact = "", QString deadline = "", int orgId = -1, QString ref = "",
                                       int wordCount = -1, QString created = "", QString language = "", QString country = "");
-    static QSharedPointer<Project> getProject(MySQLHandler *db, int id = -1, QString title = "", QString desc = "",
+    static QSharedPointer<Project> getProject(QSharedPointer<MySQLHandler> db, int id = -1, QString title = "", QString desc = "",
                                               QString impact = "", QString deadline = "", int orgId = -1, QString ref = "",
                                       int wordCount = -1, QString created = "", QString language = "", QString country = "");
 };

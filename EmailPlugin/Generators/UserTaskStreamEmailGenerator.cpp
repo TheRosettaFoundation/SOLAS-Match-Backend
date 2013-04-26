@@ -22,7 +22,7 @@ void UserTaskStreamEmailGenerator::run()
     QSharedPointer<Email> email;
     QSharedPointer<User> user;
     QList<QSharedPointer<Task> > userTasks;
-    MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
+    QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
 
     if (db->init()) {
         user = UserDao::getUser(db, emailRequest.user_id());
@@ -132,8 +132,6 @@ void UserTaskStreamEmailGenerator::run()
     } else {
         email = this->generateErrorEmail(error);
     }
-
-    delete db;
 
     this->emailQueue->insert(email, this->currentMessage);
 }

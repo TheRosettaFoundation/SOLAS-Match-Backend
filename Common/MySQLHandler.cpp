@@ -1,6 +1,9 @@
 #include "MySQLHandler.h"
 
 #include <QDebug>
+#include <QUuid>
+#include <QMutex>
+#include <QMutexLocker>
 #include <QtSql/QSqlDriver>
 #include <QtSql/QSqlError>
 #include <QtSql/QSqlRecord>
@@ -10,6 +13,7 @@
 MySQLHandler::MySQLHandler(QString name)
 {
     ConfigParser settings;
+    this->conn = 0;
     this->host = settings.get("database.server");
     this->database = settings.get("database.database");
     this->user = settings.get("database.username");
@@ -20,6 +24,14 @@ MySQLHandler::MySQLHandler(QString name)
 MySQLHandler::~MySQLHandler()
 {
     qDebug() << "Deleting MySQLHandler " << this->connName;
+}
+
+QSharedPointer<MySQLHandler> MySQLHandler::getInstance()
+{
+    qDebug() << "MySQLHandler::getInstance";
+    static QMutex mutex;
+    QMutexLocker locker(&mutex);
+    return QSharedPointer<MySQLHandler>(new MySQLHandler(QUuid::createUuid().toString()));
 }
 
 bool MySQLHandler::init()
@@ -36,18 +48,24 @@ bool MySQLHandler::openConnection()
     qDebug() << "MySQLHandler::Opening MySQL Connection";
     bool ret = false;
 
-    this->conn = new QSqlDatabase(QSqlDatabase::addDatabase("QMYSQL", this->connName));
-    this->conn->setHostName(this->host);
-    this->conn->setDatabaseName(this->database);
-    this->conn->setUserName(this->user);
-    this->conn->setPassword(this->pass);
+    if (this->conn == 0) {
+        this->conn = new QSqlDatabase(QSqlDatabase::addDatabase("QMYSQL", this->connName));
+        this->conn->setHostName(this->host);
+        this->conn->setDatabaseName(this->database);
+        this->conn->setUserName(this->user);
+        this->conn->setPassword(this->pass);
+    }
 
-    if(!this->conn->open())
-    {
-        qDebug() << "Failed to connect to database: " << this->conn->lastError().text();
+    if (!this->conn->isOpen()) {
+        if (!this->conn->open()) {
+            qDebug() << "Failed to connect to database: " << this->conn->lastError().text();
+        } else {
+            qDebug() << this->connName << " MySQL connection established";
+            ret = true;
+        }
     } else {
-        qDebug() << this->connName << " MySQL connection established";
         ret = true;
+        qDebug() << this->connName << " connection already established";
     }
 
     return ret;
@@ -70,6 +88,9 @@ QSharedPointer<QSqlQuery> MySQLHandler::call(QString proc_name, QString args)
 {
     QString query = "Call " + proc_name + " (" + args + ")";
     QSharedPointer<QSqlQuery> q = QSharedPointer<QSqlQuery>(new QSqlQuery(query, *(this->conn)));
+    if (q->lastError().isValid()) {
+        qDebug() << "MySQLHandler: ERROR - " << q->lastError().text();
+    }
 
     return q;
 }

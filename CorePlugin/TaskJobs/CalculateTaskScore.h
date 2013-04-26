@@ -26,7 +26,7 @@ private:
     int getCurrentScore(int user_id, int task_id);
     void saveUserTaskScore(int user_id, int task_id, int score);
     AMQPMessage *message;
-    MySQLHandler *db;
+    QSharedPointer<MySQLHandler> db;
 
 };
 

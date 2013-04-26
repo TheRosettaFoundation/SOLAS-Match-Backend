@@ -12,7 +12,7 @@
 class OrganisationDao
 {
 public:
-    static QSharedPointer<Organisation> getOrg(MySQLHandler *db, int org_id);
+    static QSharedPointer<Organisation> getOrg(QSharedPointer<MySQLHandler> db, int org_id);
 
 };
 

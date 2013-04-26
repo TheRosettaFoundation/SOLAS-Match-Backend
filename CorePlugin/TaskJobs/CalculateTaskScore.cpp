@@ -7,7 +7,6 @@
 #include <QDebug>
 #include <QList>
 #include <QThread>
-#include <QUuid>
 
 #include "Common/MessagingClient.h"
 
@@ -46,7 +45,7 @@ void CalculateTaskScore::run()
     qDebug() << "CalculateTaskScore: Starting new thread " << this->thread()->currentThreadId();
     QDateTime started = QDateTime::currentDateTime();
     ctemplate::TemplateDictionary dict("user_task_score");
-    db = new MySQLHandler(QUuid::createUuid().toString());
+    db = MySQLHandler::getInstance();
     if(db->init()) {
         QList<QSharedPointer<User> > users = UserDao::getUsers(db);
         QList<QSharedPointer<Task> > tasks = this->getTasks();  //Must use custom function to check message for task id
@@ -116,8 +115,6 @@ void CalculateTaskScore::run()
         dict.ShowSection("ERROR");
         dict.SetValue("ERROR_MESSAGE", "Unable to Connect to SQL Server. Check conf.ini and try again.");
     }
-
-    delete db;
 
     int time_msecs = started.msecsTo(QDateTime::currentDateTime());
     int time_secs = time_msecs / 1000;

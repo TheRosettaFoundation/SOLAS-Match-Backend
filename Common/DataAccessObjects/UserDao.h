@@ -14,7 +14,7 @@ class UserDao
 {
 public:
     //return a list of users
-    static QList<QSharedPointer<User> > getUsers(MySQLHandler *db,
+    static QList<QSharedPointer<User> > getUsers(QSharedPointer<MySQLHandler> db,
                                  int id = -1,
                                  QString name = "",
                                  QString email = "",
@@ -25,7 +25,7 @@ public:
                                  int lang_id = -1,
                                  int reg_id = -1);
     //return a single user
-    static QSharedPointer<User> getUser(MySQLHandler *db,
+    static QSharedPointer<User> getUser(QSharedPointer<MySQLHandler> db,
                          int id = -1,
                          QString name = "",
                          QString email = "",
@@ -35,11 +35,11 @@ public:
                          QString date = "",
                          int lang_id = -1,
                          int reg_id = -1);
-    static QString getPasswordResetUuid(MySQLHandler *db, int id);
-    static QList<QSharedPointer<Task> > getUserTopTasks(MySQLHandler *db, int userId,
+    static QString getPasswordResetUuid(QSharedPointer<MySQLHandler> db, int id);
+    static QList<QSharedPointer<Task> > getUserTopTasks(QSharedPointer<MySQLHandler> db, int userId,
                                                         int limit = 10, QString filter = "");
-    static QList<int> getUserIdsPendingTaskStreamNotification(MySQLHandler *db);
-    static bool taskStreamNotificationSent(MySQLHandler *db, int userId, QString sentDate);
+    static QList<int> getUserIdsPendingTaskStreamNotification(QSharedPointer<MySQLHandler> db);
+    static bool taskStreamNotificationSent(QSharedPointer<MySQLHandler> db, int userId, QString sentDate);
 
 };
 

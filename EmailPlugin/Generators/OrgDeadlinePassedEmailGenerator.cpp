@@ -18,7 +18,7 @@ void OrgDeadlinePassedMailGenerator::run()
     QSharedPointer<User> user = QSharedPointer<User>();
     QSharedPointer<User> translator = QSharedPointer<User>();
     QSharedPointer<Task> task = QSharedPointer<Task>();
-    MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
+    QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
 
     if(db->init()) {
         translator = UserDao::getUser(db, email_message.translator_id());
@@ -58,8 +58,6 @@ void OrgDeadlinePassedMailGenerator::run()
     } else {
         email = this->generateErrorEmail(error);
     }
-
-    delete db;
 
     this->emailQueue->insert(email, currentMessage);
 }

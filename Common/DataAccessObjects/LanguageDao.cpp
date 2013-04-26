@@ -2,7 +2,7 @@
 
 #include "Common/ModelGenerator.h"
 
-QList<QSharedPointer<Language> > LanguageDao::getLanguages(MySQLHandler *db)
+QList<QSharedPointer<Language> > LanguageDao::getLanguages(QSharedPointer<MySQLHandler> db)
 {
     QList<QSharedPointer<Language> > languages;
     QString args = "null, null, null";
@@ -16,7 +16,7 @@ QList<QSharedPointer<Language> > LanguageDao::getLanguages(MySQLHandler *db)
     return languages;
 }
 
-QSharedPointer<Language> LanguageDao::getLanguage(MySQLHandler *db, int id, QString code)
+QSharedPointer<Language> LanguageDao::getLanguage(QSharedPointer<MySQLHandler> db, int id, QString code)
 {
     QSharedPointer<Language> language;
     if (id != -1 || code != "") {

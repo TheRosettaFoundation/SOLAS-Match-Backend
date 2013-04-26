@@ -2,7 +2,6 @@
 
 #include <QDebug>
 #include <QThread>
-#include <QUuid>
 #include <QDateTime>
 
 #include "Common/MySQLHandler.h"
@@ -29,7 +28,7 @@ void TaskStreamNotificationHandler::run()
     qDebug() << "Starting new thread to send task stream notifications " << this->thread()->currentThreadId();
     QString exchange = "SOLAS_MATCH";
     QString topic = "email.user.task.stream";
-    MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
+    QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
     MessagingClient client;
     if(db->init()) {
         if(client.init()) {
@@ -41,6 +40,8 @@ void TaskStreamNotificationHandler::run()
                 request->set_email_type(EmailMessage::UserTaskStreamEmail);
                 QString body = QString::fromStdString(request->SerializeAsString());
                 client.publish(exchange, topic, body);
+                qDebug() << "TaskStreamNotificationHandler: publishing to " << topic
+                         << " for user " << id;
             }
         } else {
             qDebug() << "Unable to connect to RabbitMQ. Check conf.ini for settings.";
@@ -48,6 +49,5 @@ void TaskStreamNotificationHandler::run()
     } else {
         qDebug() << "Unable to connect to MySQL server. Check conf.ini for DB settings.";
     }
-
-    delete db;
+    qDebug() << "Finnished sending task stream notifications";
 }

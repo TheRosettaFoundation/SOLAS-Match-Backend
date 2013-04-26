@@ -5,7 +5,6 @@
 #include <QRunnable>
 #include <QQueue>
 #include <QSharedPointer>
-#include <QUuid>
 #include <QDebug>
 
 #include <ctemplate/template.h>

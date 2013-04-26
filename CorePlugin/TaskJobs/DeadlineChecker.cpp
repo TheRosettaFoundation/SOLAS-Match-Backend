@@ -1,7 +1,6 @@
 #include "DeadlineChecker.h"
 
 #include <QDebug>
-#include <QUuid>
 #include <QThread>
 #include <QDateTime>
 
@@ -33,7 +32,7 @@ void DeadlineChecker::run()
 {
     qDebug() << "Starting new thread to check deadlines " << this->thread()->currentThreadId();
     QString exchange = "SOLAS_MATCH";
-    MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
+    QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
     MessagingClient client;
     if(db->init()) {
         if(client.init()) {
@@ -80,6 +79,4 @@ void DeadlineChecker::run()
     } else {
         qDebug() << "Unable to connect to MySQL server. Check conf.ini for DB settings.";
     }
-
-    delete db;
 }

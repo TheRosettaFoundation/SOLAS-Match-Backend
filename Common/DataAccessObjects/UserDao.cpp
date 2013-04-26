@@ -2,7 +2,7 @@
 
 #include "../ModelGenerator.h"
 
-QList<QSharedPointer<User> > UserDao::getUsers(MySQLHandler *db, int id, QString name, QString email, QString pass,
+QList<QSharedPointer<User> > UserDao::getUsers(QSharedPointer<MySQLHandler> db, int id, QString name, QString email, QString pass,
                             QString bio, QString non, QString date, int lang_id, int reg_id)
 {
     QList<QSharedPointer<User> > users = QList<QSharedPointer<User> >();
@@ -73,7 +73,7 @@ QList<QSharedPointer<User> > UserDao::getUsers(MySQLHandler *db, int id, QString
     return users;
 }
 
-QSharedPointer<User> UserDao::getUser(MySQLHandler *db, int id, QString name,
+QSharedPointer<User> UserDao::getUser(QSharedPointer<MySQLHandler> db, int id, QString name,
                    QString email, QString pass, QString bio,
                    QString non, QString date, int lang_id, int reg_id)
 {
@@ -85,7 +85,7 @@ QSharedPointer<User> UserDao::getUser(MySQLHandler *db, int id, QString name,
     return user;
 }
 
-QString UserDao::getPasswordResetUuid(MySQLHandler *db, int id)
+QString UserDao::getPasswordResetUuid(QSharedPointer<MySQLHandler> db, int id)
 {
     QString ret;
     QString args = "null, " + QString::number(id);
@@ -97,7 +97,7 @@ QString UserDao::getPasswordResetUuid(MySQLHandler *db, int id)
     return ret;
 }
 
-QList<QSharedPointer<Task> > UserDao::getUserTopTasks(MySQLHandler *db, int userId, int limit, QString filter)
+QList<QSharedPointer<Task> > UserDao::getUserTopTasks(QSharedPointer<MySQLHandler> db, int userId, int limit, QString filter)
 {
     QList<QSharedPointer<Task> > taskList = QList<QSharedPointer<Task> >();
     QString args = QString::number(userId) + ", ";
@@ -113,7 +113,7 @@ QList<QSharedPointer<Task> > UserDao::getUserTopTasks(MySQLHandler *db, int user
     return taskList;
 }
 
-QList<int> UserDao::getUserIdsPendingTaskStreamNotification(MySQLHandler *db)
+QList<int> UserDao::getUserIdsPendingTaskStreamNotification(QSharedPointer<MySQLHandler> db)
 {
     QList<int> userIds = QList<int>();
     QSharedPointer<QSqlQuery> mQuery = db->call("getUserIdsPendingTaskStreamNotification", "");
@@ -125,7 +125,7 @@ QList<int> UserDao::getUserIdsPendingTaskStreamNotification(MySQLHandler *db)
     return userIds;
 }
 
-bool UserDao::taskStreamNotificationSent(MySQLHandler *db, int userId, QString sentDate)
+bool UserDao::taskStreamNotificationSent(QSharedPointer<MySQLHandler> db, int userId, QString sentDate)
 {
     bool ret = false;
     QString args = QString::number(userId) + ", " + MySQLHandler::wrapString(sentDate);

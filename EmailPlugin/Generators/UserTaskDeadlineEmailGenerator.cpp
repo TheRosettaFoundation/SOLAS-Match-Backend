@@ -17,7 +17,7 @@ void UserTaskDeadlineEmailGenerator::run()
     QSharedPointer<Email> email = QSharedPointer<Email>(new Email);
     QSharedPointer<User> user = QSharedPointer<User>();
     QSharedPointer<Task> task = QSharedPointer<Task>();
-    MySQLHandler* db = new MySQLHandler(QUuid::createUuid().toString());
+    QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
 
     if(db->init()) {
         user = UserDao::getUser(db, email_message.translator_id());
@@ -56,8 +56,6 @@ void UserTaskDeadlineEmailGenerator::run()
     } else {
         email = this->generateErrorEmail(error);
     }
-
-    delete db;
 
     this->emailQueue->insert(email, currentMessage);
 }

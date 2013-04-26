@@ -3,7 +3,6 @@
 #include "Common/ConfigParser.h"
 #include "Common/MySQLHandler.h"
 
-#include <QUuid>
 #include <QDebug>
 
 #include <ctemplate/template.h>
@@ -37,7 +36,7 @@ void OrgMembershipAcceptedGenerator::run()
 
     ConfigParser settings;
     QSharedPointer<Email> email = QSharedPointer<Email>(new Email());
-    MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
+    QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
     QSharedPointer<Organisation> org = QSharedPointer<Organisation>();
     QSharedPointer<User> user = QSharedPointer<User>();
     QString error = "";
@@ -78,8 +77,6 @@ void OrgMembershipAcceptedGenerator::run()
     } else {
         email = this->generateErrorEmail(error);
     }
-
-    delete db;
 
     if (email) {
         this->emailQueue->insert(email, currentMessage);

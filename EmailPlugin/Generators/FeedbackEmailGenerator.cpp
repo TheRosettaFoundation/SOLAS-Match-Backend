@@ -18,7 +18,7 @@ void FeedbackEmailGenerator::run()
     QSharedPointer<User> user = QSharedPointer<User>();
     QSharedPointer<Task> task = QSharedPointer<Task>();
     QString feedback;
-    MySQLHandler* db = new MySQLHandler(QUuid::createUuid().toString());
+    QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
 
     if (db->init()) {
         user = UserDao::getUser(db, email_message.userid().Get(0));
@@ -59,8 +59,6 @@ void FeedbackEmailGenerator::run()
     } else {
         email = this->generateErrorEmail(error);
     }
-
-    delete db;
 
     this->emailQueue->insert(email, currentMessage);
 }

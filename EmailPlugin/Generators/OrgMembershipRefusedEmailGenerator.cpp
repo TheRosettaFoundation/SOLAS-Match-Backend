@@ -15,7 +15,7 @@ void OrgMembershipRefusedEmailGenerator::run()
     QSharedPointer<Email> email = QSharedPointer<Email>(new Email());
     QSharedPointer<User> user = QSharedPointer<User>();
     QSharedPointer<Organisation> org = QSharedPointer<Organisation>();
-    MySQLHandler *db = new MySQLHandler(QUuid::createUuid().toString());
+    QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
     QString error = "";
 
     if(db->init()) {
@@ -55,8 +55,6 @@ void OrgMembershipRefusedEmailGenerator::run()
     } else {
         email = this->generateErrorEmail(error);
     }
-
-    delete db;
 
     this->emailQueue->insert(email, currentMessage);
 }
