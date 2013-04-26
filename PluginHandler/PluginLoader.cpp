@@ -5,11 +5,14 @@
 #include <QPluginLoader>
 #include <QDir>
 
+#include "Common/ConfigParser.h"
+
 PluginLoader::PluginLoader()
 {
+    ConfigParser settings;
     plugins = new QList<WorkerInterface *>();
     threadPool = new QThreadPool();
-    threadPool->setMaxThreadCount(25);
+    threadPool->setMaxThreadCount(settings.get("site.max_threads").toInt());
 }
 
 void PluginLoader::loadPlugins()

@@ -55,7 +55,7 @@ int main(int argc, char *argv[])
     }
 
     QList<WorkerInterface *> *workers;
-    PluginLoader mLoader;
+    PluginLoader mLoader = PluginLoader();
 
     qDebug() << "Starting main thread" << a.thread()->currentThreadId();
 

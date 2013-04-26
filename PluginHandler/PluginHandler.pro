@@ -17,7 +17,7 @@ TEMPLATE = app
 LIBS += -L../Common -lCommon \
     -L/usr/local/lib -lamqpcpp -lrabbitmq
 
-INCLUDEPATH += /usr/local/include
+INCLUDEPATH += /usr/local/include . ..
 
 SOURCES += main.cpp \
     PluginLoader.cpp
