@@ -9,6 +9,7 @@
 #include <QThread>
 
 #include "Common/MessagingClient.h"
+#include "Common/ConfigParser.h"
 
 #include "Common/DataAccessObjects/TaskDao.h"
 #include "Common/DataAccessObjects/UserDao.h"
@@ -43,6 +44,7 @@ CalculateTaskScore::~CalculateTaskScore()
 void CalculateTaskScore::run()
 {
     qDebug() << "CalculateTaskScore: Starting new thread " << this->thread()->currentThreadId();
+    ConfigParser settings;
     QDateTime started = QDateTime::currentDateTime();
     ctemplate::TemplateDictionary dict("user_task_score");
     db = MySQLHandler::getInstance();
@@ -132,7 +134,7 @@ void CalculateTaskScore::run()
     message_body->set_email_type(EmailMessage::TaskScoreEmail);
     message_body->set_body(email_body);
     try {
-        QString exchange_name = "SOLAS_MATCH";
+        QString exchange_name = settings.get("messaging.exchange");
         QString exchange_topic = "email.task.score";
         QString body = QString::fromStdString(message_body->SerializeAsString());
 

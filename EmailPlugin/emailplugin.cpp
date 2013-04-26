@@ -47,7 +47,7 @@ void EmailPlugin::run()
 {
     qDebug() << "EmailPlugin::Starting new Thread " << this->thread()->currentThreadId();
     ConfigParser settings;
-    QString exchange = "SOLAS_MATCH";
+    QString exchange = settings.get("messaging.exchange");
     QString topic = "email.#";
     QString queue = "email_queue";
     MessagingClient *client;

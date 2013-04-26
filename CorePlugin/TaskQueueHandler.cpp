@@ -18,7 +18,7 @@ void TaskQueueHandler::run()
 {
     qDebug() << "Running TaskQueueHandler on thread " << this->thread()->currentThreadId();
     ConfigParser settings;
-    QString exchange = "SOLAS_MATCH";
+    QString exchange = settings.get("messaging.exchange");
     QString queue = "CoreTaskQueue";
     QString topic = "tasks.#";
 

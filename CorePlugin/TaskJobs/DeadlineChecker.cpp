@@ -5,6 +5,7 @@
 #include <QDateTime>
 
 #include "Common/MessagingClient.h"
+#include "Common/ConfigParser.h"
 #include "Common/DataAccessObjects/TaskDao.h"
 #include "Common/DataAccessObjects/ProjectDao.h"
 #include "Common/protobufs/models/Task.pb.h"
@@ -31,7 +32,8 @@ DeadlineChecker::~DeadlineChecker()
 void DeadlineChecker::run()
 {
     qDebug() << "Starting new thread to check deadlines " << this->thread()->currentThreadId();
-    QString exchange = "SOLAS_MATCH";
+    ConfigParser settings;
+    QString exchange = settings.get("messaging.exchange");
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
     MessagingClient client;
     if(db->init()) {

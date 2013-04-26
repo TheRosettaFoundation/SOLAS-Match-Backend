@@ -6,6 +6,7 @@
 
 #include "Common/MySQLHandler.h"
 #include "Common/MessagingClient.h"
+#include "Common/ConfigParser.h"
 #include "Common/DataAccessObjects/UserDao.h"
 #include "Common/protobufs/emails/UserTaskStreamEmail.pb.h"
 
@@ -26,7 +27,8 @@ TaskStreamNotificationHandler::~TaskStreamNotificationHandler()
 void TaskStreamNotificationHandler::run()
 {
     qDebug() << "Starting new thread to send task stream notifications " << this->thread()->currentThreadId();
-    QString exchange = "SOLAS_MATCH";
+    ConfigParser settings;
+    QString exchange = settings.get("messaging.exchange");
     QString topic = "email.user.task.stream";
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
     MessagingClient client;

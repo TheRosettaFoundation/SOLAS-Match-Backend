@@ -18,7 +18,7 @@ void UserQueueHandler::run()
 {
     qDebug() << "Running UserQueueHandler on thread " << this->thread()->currentThreadId();
     ConfigParser settings;
-    QString exchange = "SOLAS_MATCH";
+    QString exchange = settings.get("messaging.exchange");
     QString topic = "users.#";
     QString queue = "CoreUsersQueue";
 
