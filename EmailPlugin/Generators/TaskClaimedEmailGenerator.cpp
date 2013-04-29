@@ -20,23 +20,16 @@ void TaskClaimedEmailGenerator::run()
     QSharedPointer<Task> task = QSharedPointer<Task>();
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
 
-    if(db->init()) {
-        user = UserDao::getUser(db, email_message.user_id());
-        translator = UserDao::getUser(db, email_message.translator_id());
-        task = TaskDao::getTask(db, email_message.task_id());
+    user = UserDao::getUser(db, email_message.user_id());
+    translator = UserDao::getUser(db, email_message.translator_id());
+    task = TaskDao::getTask(db, email_message.task_id());
 
-        if(user.isNull() || translator.isNull() || task.isNull()) {
-            error = "Failed to generate task claimed email: Unable to find relevant ";
-            error += "information in the database. Searched for user ID ";
-            error += QString::number(email_message.user_id()) + ", translator ID ";
-            error += QString::number(email_message.translator_id()) + " and task ID ";
-            error += QString::number(email_message.task_id()) + ".";
-        }
-
-    } else {
-        error = "Failed to generate task claimed email: Unable to Connect to SQL Server. ";
-        error += "Check conf.ini for connection settings and make sure mysqld has been started.";
-        qDebug() << "Unable to Connect to SQL Server. Check conf.ini and try again.";
+    if(user.isNull() || translator.isNull() || task.isNull()) {
+        error = "Failed to generate task claimed email: Unable to find relevant ";
+        error += "information in the database. Searched for user ID ";
+        error += QString::number(email_message.user_id()) + ", translator ID ";
+        error += QString::number(email_message.translator_id()) + " and task ID ";
+        error += QString::number(email_message.task_id()) + ".";
     }
 
     if(error.compare("") == 0) {

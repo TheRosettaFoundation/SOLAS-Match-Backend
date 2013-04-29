@@ -24,6 +24,8 @@ MySQLHandler::MySQLHandler(QString name)
 MySQLHandler::~MySQLHandler()
 {
     qDebug() << "Deleting MySQLHandler " << this->connName;
+    this->close();
+    delete this->conn;
 }
 
 QSharedPointer<MySQLHandler> MySQLHandler::getInstance()
@@ -37,18 +39,15 @@ QSharedPointer<MySQLHandler> MySQLHandler::getInstance()
 bool MySQLHandler::init()
 {
     bool ret = this->openConnection();
-    this->database = "";
-    this->user = "";
-    this->pass = "";
     return ret;
 }
 
 bool MySQLHandler::openConnection()
 {
-    qDebug() << "MySQLHandler::Opening MySQL Connection";
     bool ret = false;
 
     if (this->conn == 0) {
+        qDebug() << "MySQLHandler: Creating MySQL instance";
         this->conn = new QSqlDatabase(QSqlDatabase::addDatabase("QMYSQL", this->connName));
         this->conn->setHostName(this->host);
         this->conn->setDatabaseName(this->database);
@@ -57,15 +56,15 @@ bool MySQLHandler::openConnection()
     }
 
     if (!this->conn->isOpen()) {
+        qDebug() << "MySQLHandler::Opening MySQL Connection";
         if (!this->conn->open()) {
-            qDebug() << "Failed to connect to database: " << this->conn->lastError().text();
+            qDebug() << "MySQLHandler: Failed to connect to database: " << this->conn->lastError().text();
         } else {
             qDebug() << this->connName << " MySQL connection established";
             ret = true;
         }
     } else {
         ret = true;
-        qDebug() << this->connName << " connection already established";
     }
 
     return ret;
@@ -73,7 +72,7 @@ bool MySQLHandler::openConnection()
 
 void MySQLHandler::close()
 {
-    qDebug() << "Closing SQL Connection";
+    qDebug() << "MySQLHandler: Closing SQL Connection";
     this->conn->close();
 }
 
@@ -86,13 +85,18 @@ QSharedPointer<QSqlQuery> MySQLHandler::query(QString query)
 
 QSharedPointer<QSqlQuery> MySQLHandler::call(QString proc_name, QString args)
 {
-    QString query = "Call " + proc_name + " (" + args + ")";
-    QSharedPointer<QSqlQuery> q = QSharedPointer<QSqlQuery>(new QSqlQuery(query, *(this->conn)));
-    if (q->lastError().isValid()) {
-        qDebug() << "MySQLHandler: ERROR - " << q->lastError().text();
+    QSharedPointer<QSqlQuery> ret = QSharedPointer<QSqlQuery>(new QSqlQuery());
+    if (this->init()) {
+        QString query = "Call " + proc_name + " (" + args + ")";
+        ret = QSharedPointer<QSqlQuery>(new QSqlQuery(query, *(this->conn)));
+        if (ret->lastError().isValid()) {
+            qDebug() << "MySQLHandler: ERROR - " << ret->lastError().text();
+        }
+    } else {
+        qDebug() << "MySQLHandler::call - Initialization failed";
     }
 
-    return q;
+    return ret;
 }
 
 QVariant MySQLHandler::getValueFromQuery(QString field_name, QSharedPointer<QSqlQuery> mQuery)

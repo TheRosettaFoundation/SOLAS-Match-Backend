@@ -24,19 +24,13 @@ void UserTaskStreamEmailGenerator::run()
     QList<QSharedPointer<Task> > userTasks;
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
 
-    if (db->init()) {
-        user = UserDao::getUser(db, emailRequest.user_id());
-        userTasks = UserDao::getUserTopTasks(db, emailRequest.user_id(), 25);
+    user = UserDao::getUser(db, emailRequest.user_id());
+    userTasks = UserDao::getUserTopTasks(db, emailRequest.user_id(), 25);
 
-        if (user.isNull() || userTasks.count() < 1) {
-            error = "Failed to generate UserTaskStream email: Unable to find relevant ";
-            error += "data in the Database. Searched for User with ID ";
-            error += QString::number(emailRequest.user_id()) + " and their top tasks";
-        }
-    } else {
-        error = "Failed to generate UserTaskStreamEmail: Unable to Connect to SQL Server.";
-        error += " Check conf.ini for connection settings and make sure mysqld has been started.";
-        qDebug() << "Unable to Connect to SQL Server. Check conf.ini and try again.";
+    if (user.isNull() || userTasks.count() < 1) {
+        error = "Failed to generate UserTaskStream email: Unable to find relevant ";
+        error += "data in the Database. Searched for User with ID ";
+        error += QString::number(emailRequest.user_id()) + " and their top tasks";
     }
 
     if (error == "") {

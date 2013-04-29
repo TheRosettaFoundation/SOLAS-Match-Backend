@@ -36,49 +36,45 @@ void DeadlineChecker::run()
     QString exchange = settings.get("messaging.exchange");
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
     MessagingClient client;
-    if(db->init()) {
-        if(client.init()) {
-            QList<QSharedPointer<Task> > tasks = TaskDao::getOverdueTasks(db);
-            foreach(QSharedPointer<Task> task, tasks) {
-                qDebug() << "Task " << task->id() << " is pass its deadline of " << QString::fromStdString(task->deadline());
-                QSharedPointer<User> translator = TaskDao::getTaskTranslator(db, task->id());
+    if(client.init()) {
+        QList<QSharedPointer<Task> > tasks = TaskDao::getOverdueTasks(db);
+        foreach(QSharedPointer<Task> task, tasks) {
+            qDebug() << "Task " << task->id() << " is pass its deadline of " << QString::fromStdString(task->deadline());
+            QSharedPointer<User> translator = TaskDao::getTaskTranslator(db, task->id());
 
-                QList<QSharedPointer<User> > users = TaskDao::getSubscribedUsers(db, task->id());
-                foreach(QSharedPointer<User> user, users) {
+            QList<QSharedPointer<User> > users = TaskDao::getSubscribedUsers(db, task->id());
+            foreach(QSharedPointer<User> user, users) {
 
-                    QSharedPointer<Project> project = ProjectDao::getProject(db, task->projectid());
+                QSharedPointer<Project> project = ProjectDao::getProject(db, task->projectid());
 
-                    OrgTaskDeadlinePassed orgEmail;
-                    orgEmail.set_email_type(EmailMessage::OrgTaskDeadlinePassed);
-                    orgEmail.set_user_id(user->id());
-                    orgEmail.set_org_id(project->organisationid());
-                    orgEmail.set_task_id(task->id());
-                    if(!translator.isNull()) {
-                        orgEmail.set_translator_id(translator->id());
-                    }
-
-                    client.publish(exchange, "email.org.task.deadline",
-                                   QString::fromStdString(orgEmail.SerializeAsString()));
-                }
-
+                OrgTaskDeadlinePassed orgEmail;
+                orgEmail.set_email_type(EmailMessage::OrgTaskDeadlinePassed);
+                orgEmail.set_user_id(user->id());
+                orgEmail.set_org_id(project->organisationid());
+                orgEmail.set_task_id(task->id());
                 if(!translator.isNull()) {
-                    UserClaimedTaskDeadlinePassed userEmail;
-                    userEmail.set_email_type(EmailMessage::UserClaimedTaskDeadlinePassed);
-                    userEmail.set_task_id(task->id());
-                    userEmail.set_translator_id(translator->id());
-
-                    client.publish(exchange, "email.user.deadline.passed",
-                                   QString::fromStdString(userEmail.SerializeAsString()));
+                    orgEmail.set_translator_id(translator->id());
                 }
 
-                qDebug() << "DeadlineChecker::Finished processing task, unpublishing it now";
-                task->set_published(false);
-                TaskDao::insertAndUpdate(db, task);
+                client.publish(exchange, "email.org.task.deadline",
+                               QString::fromStdString(orgEmail.SerializeAsString()));
             }
-        } else {
-            qDebug() << "Unable to connect to RabbitMQ. Check conf.ini for settings.";
+
+            if(!translator.isNull()) {
+                UserClaimedTaskDeadlinePassed userEmail;
+                userEmail.set_email_type(EmailMessage::UserClaimedTaskDeadlinePassed);
+                userEmail.set_task_id(task->id());
+                userEmail.set_translator_id(translator->id());
+
+                client.publish(exchange, "email.user.deadline.passed",
+                               QString::fromStdString(userEmail.SerializeAsString()));
+            }
+
+            qDebug() << "DeadlineChecker::Finished processing task, unpublishing it now";
+            task->set_published(false);
+            TaskDao::insertAndUpdate(db, task);
         }
     } else {
-        qDebug() << "Unable to connect to MySQL server. Check conf.ini for DB settings.";
+        qDebug() << "Unable to connect to RabbitMQ. Check conf.ini for settings.";
     }
 }

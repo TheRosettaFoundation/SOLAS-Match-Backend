@@ -21,33 +21,27 @@ void TaskArchivedEmailGenerator::run()
     QSharedPointer<Project> project = QSharedPointer<Project>();
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
 
-    if(db->init()) {
-        user = UserDao::getUser(db, email_message.user_id());
-        task = TaskDao::getArchivedTask(db, email_message.task_id());
+    user = UserDao::getUser(db, email_message.user_id());
+    task = TaskDao::getArchivedTask(db, email_message.task_id());
 
-        if(!user.isNull() && !task.isNull()) {
-            project = ProjectDao::getProject(db, task->projectid());
+    if(!user.isNull() && !task.isNull()) {
+        project = ProjectDao::getProject(db, task->projectid());
 
-            if(!project.isNull()) {
-                org = OrganisationDao::getOrg(db, project->organisationid());
-                if(org.isNull()) {
-                    error = "Failed to Generate task archived email. Unable to find relevent information ";
-                    error += "in the Database. Unable to locate org with id " + QString::number(project->organisationid());
-                    error += ".";
-                }
-            } else {
+        if(!project.isNull()) {
+            org = OrganisationDao::getOrg(db, project->organisationid());
+            if(org.isNull()) {
                 error = "Failed to Generate task archived email. Unable to find relevent information ";
-                error += "in the Database. Searched for project ID " + QString::number(task->projectid());
+                error += "in the Database. Unable to locate org with id " + QString::number(project->organisationid());
+                error += ".";
             }
         } else {
             error = "Failed to Generate task archived email. Unable to find relevent information ";
-            error += "in the Database. Searched for user ID " + QString::number(email_message.user_id());
-            error += ", task ID " + QString::number(email_message.task_id()) + ".";
+            error += "in the Database. Searched for project ID " + QString::number(task->projectid());
         }
     } else {
-        error = "Failed to generate task archived email: Unable to Connect to SQL Server. ";
-        error += "Check conf.ini for connection settings and make sure mysqld has been started.";
-        qDebug() << "Unable to Connect to SQL Server. Check conf.ini and try again.";
+        error = "Failed to Generate task archived email. Unable to find relevent information ";
+        error += "in the Database. Searched for user ID " + QString::number(email_message.user_id());
+        error += ", task ID " + QString::number(email_message.task_id()) + ".";
     }
 
     if(error.compare("") == 0) {

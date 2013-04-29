@@ -20,21 +20,15 @@ void OrgDeadlinePassedMailGenerator::run()
     QSharedPointer<Task> task = QSharedPointer<Task>();
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
 
-    if(db->init()) {
-        translator = UserDao::getUser(db, email_message.translator_id());
-        task = TaskDao::getTask(db, email_message.task_id());
-        user = UserDao::getUser(db, email_message.user_id());
+    translator = UserDao::getUser(db, email_message.translator_id());
+    task = TaskDao::getTask(db, email_message.task_id());
+    user = UserDao::getUser(db, email_message.user_id());
 
-        if(user.isNull() || task.isNull() || translator.isNull()) {
-            error = "OrgTaskDeadlinePassed generation failed. Data missing from the DB.";
-            error += "Searched for user ID " + QString::number(email_message.translator_id());
-            error += " and " + QString::number(email_message.user_id());
-            error += " and task ID " + QString::number(email_message.task_id());
-        }
-    } else {
-        error = "Unable to Connect to SQL Server. Check conf.ini for connection settings and make sure ";
-        error += "mysqld has been started.";
-        qDebug() << "Unable to Connect to SQL Server. Check conf.ini and try again.";
+    if(user.isNull() || task.isNull() || translator.isNull()) {
+        error = "OrgTaskDeadlinePassed generation failed. Data missing from the DB.";
+        error += "Searched for user ID " + QString::number(email_message.translator_id());
+        error += " and " + QString::number(email_message.user_id());
+        error += " and task ID " + QString::number(email_message.task_id());
     }
 
     if(error.compare("") == 0) {

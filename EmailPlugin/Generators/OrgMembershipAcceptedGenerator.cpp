@@ -41,21 +41,16 @@ void OrgMembershipAcceptedGenerator::run()
     QSharedPointer<User> user = QSharedPointer<User>();
     QString error = "";
 
-    if(db->init()) {
-        user = UserDao::getUser(db, email_message.user_id());
-        org = OrganisationDao::getOrg(db, email_message.org_id());
-        if(user.isNull() || org.isNull()) {
-            error = "Unable to generate OrgMembershipAccepted email. Unable to find objects ";
-            error += "in the DB. Searched for user ID " + QString::number(email_message.user_id());
-            error += " and org ID " + QString::number(email_message.org_id()) + ".";
-        }
-    } else {
-        error = "Unable to Connect to SQL Server. Check conf.ini for connection settings and make sure ";
-        error += "mysqld has been started.";
-        qDebug() << "Unable to Connect to SQL Server. Check conf.ini and try again.";
+
+    user = UserDao::getUser(db, email_message.user_id());
+    org = OrganisationDao::getOrg(db, email_message.org_id());
+    if (user.isNull() || org.isNull()) {
+        error = "Unable to generate OrgMembershipAccepted email. Unable to find objects ";
+        error += "in the DB. Searched for user ID " + QString::number(email_message.user_id());
+        error += " and org ID " + QString::number(email_message.org_id()) + ".";
     }
 
-    if(error.compare("") == 0)
+    if (error.compare("") == 0)
     {
         //No error generate the email
         ctemplate::TemplateDictionary dict("org_membership_accepted");

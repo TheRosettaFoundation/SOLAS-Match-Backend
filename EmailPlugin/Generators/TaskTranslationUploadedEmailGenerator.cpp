@@ -22,40 +22,33 @@ void TaskTranslationUploadedEmailGenerator::run()
     QSharedPointer<Organisation> org = QSharedPointer<Organisation>();
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
 
-    if(db->init()) {
-        user = UserDao::getUser(db, email_message.user_id());
-        translator = UserDao::getUser(db, email_message.translator_id());
-        task = TaskDao::getTask(db, email_message.task_id());
+    user = UserDao::getUser(db, email_message.user_id());
+    translator = UserDao::getUser(db, email_message.translator_id());
+    task = TaskDao::getTask(db, email_message.task_id());
 
-        if(user.isNull() || translator.isNull() || task.isNull()) {
+    if(user.isNull() || translator.isNull() || task.isNull()) {
+        error = "Failed to generate task translation uploaded email. Unable ";
+        error += "to find relevant inforamtion in the Database. Searched for ";
+        error += "User ID " + QString::number(email_message.user_id()) + ", ";
+        error += "Translator ID " + QString::number(email_message.translator_id());
+        error += " and task and project identified by task ID ";
+        error += QString::number(email_message.task_id()) + ".";
+    } else {
+        project = ProjectDao::getProject(db, task->projectid());
+
+        if (project.isNull()) {
             error = "Failed to generate task translation uploaded email. Unable ";
-            error += "to find relevant inforamtion in the Database. Searched for ";
-            error += "User ID " + QString::number(email_message.user_id()) + ", ";
-            error += "Translator ID " + QString::number(email_message.translator_id());
-            error += " and task and project identified by task ID ";
-            error += QString::number(email_message.task_id()) + ".";
+            error += "to find relevant inforamtion in the Database. Could not find ";
+            error += "project with ID " + QString::number(task->projectid());
         } else {
-            project = ProjectDao::getProject(db, task->projectid());
+            org = OrganisationDao::getOrg(db, project->organisationid());
 
-            if (project.isNull()) {
+            if(org.isNull()) {
                 error = "Failed to generate task translation uploaded email. Unable ";
                 error += "to find relevant inforamtion in the Database. Could not find ";
-                error += "project with ID " + QString::number(task->projectid());
-            } else {
-                org = OrganisationDao::getOrg(db, project->organisationid());
-
-                if(org.isNull()) {
-                    error = "Failed to generate task translation uploaded email. Unable ";
-                    error += "to find relevant inforamtion in the Database. Could not find ";
-                    error += "Organisation with ID " + QString::number(project->organisationid()) + ".";
-                }
+                error += "Organisation with ID " + QString::number(project->organisationid()) + ".";
             }
         }
-
-    } else {
-        error = "Failed to generate task translation uploaded email: Unable to Connect to SQL Server.";
-        error += " Check conf.ini for connection settings and make sure mysqld has been started.";
-        qDebug() << "Unable to Connect to SQL Server. Check conf.ini and try again.";
     }
 
     if(error.compare("") == 0) {

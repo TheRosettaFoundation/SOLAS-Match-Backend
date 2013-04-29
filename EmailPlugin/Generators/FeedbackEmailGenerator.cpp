@@ -20,21 +20,15 @@ void FeedbackEmailGenerator::run()
     QString feedback;
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
 
-    if (db->init()) {
-        user = UserDao::getUser(db, email_message.userid().Get(0));
-        task = TaskDao::getTask(db, email_message.taskid());
-        feedback = email_message.feedback().data();
+    user = UserDao::getUser(db, email_message.userid().Get(0));
+    task = TaskDao::getTask(db, email_message.taskid());
+    feedback = email_message.feedback().data();
 
-        if (user.isNull() || task.isNull()) {
-            error = "Failed to generate UserClaimedTaskDeadlinePassed email: Unable to find relevant ";
-            error += "data in the Database. Searched for User ID ";
-            error += QString::number(email_message.userid().Get(0)) + " and Task ID ";
-            error += QString::number(email_message.taskid()) + ".";
-        }
-    } else {
-        error = "Failed to generate FeedbackEmail: Unable to Connect to SQL Server.";
-        error += " Check conf.ini for connection settings and make sure mysqld has been started.";
-        qDebug() << "Unable to Connect to SQL Server. Check conf.ini and try again.";
+    if (user.isNull() || task.isNull()) {
+        error = "Failed to generate UserClaimedTaskDeadlinePassed email: Unable to find relevant ";
+        error += "data in the Database. Searched for User ID ";
+        error += QString::number(email_message.userid().Get(0)) + " and Task ID ";
+        error += QString::number(email_message.taskid()) + ".";
     }
 
     if(error.compare("") == 0) {

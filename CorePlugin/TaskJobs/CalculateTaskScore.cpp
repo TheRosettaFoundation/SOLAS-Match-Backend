@@ -48,74 +48,66 @@ void CalculateTaskScore::run()
     QDateTime started = QDateTime::currentDateTime();
     ctemplate::TemplateDictionary dict("user_task_score");
     db = MySQLHandler::getInstance();
-    if(db->init()) {
-        QList<QSharedPointer<User> > users = UserDao::getUsers(db);
-        QList<QSharedPointer<Task> > tasks = this->getTasks();  //Must use custom function to check message for task id
-        if(users.length() > 0) {
-            foreach(QSharedPointer<User> user, users) {
-                Locale userNativeLocale = user->nativelocale();
-                QList<QSharedPointer<Tag> > userTags = TagDao::getUserTags(db, user->id());
-                if(tasks.length() > 0) {
-                    foreach(QSharedPointer<Task> task, tasks) {
-                        int score = 0;
+    QList<QSharedPointer<User> > users = UserDao::getUsers(db);
+    QList<QSharedPointer<Task> > tasks = this->getTasks();  //Must use custom function to check message for task id
+    if(users.length() > 0) {
+        foreach(QSharedPointer<User> user, users) {
+            Locale userNativeLocale = user->nativelocale();
+            QList<QSharedPointer<Tag> > userTags = TagDao::getUserTags(db, user->id());
+            if(tasks.length() > 0) {
+                foreach(QSharedPointer<Task> task, tasks) {
+                    int score = 0;
 
-                        Locale taskSourceLocale = task->sourcelocale();
+                    Locale taskSourceLocale = task->sourcelocale();
 
-                        if(userNativeLocale.languagecode() == taskSourceLocale.languagecode()) {
-                            score += 200;
-                            if(userNativeLocale.countrycode() == taskSourceLocale.countrycode()) {
-                                score += 75;
-                            }
+                    if(userNativeLocale.languagecode() == taskSourceLocale.languagecode()) {
+                        score += 200;
+                        if(userNativeLocale.countrycode() == taskSourceLocale.countrycode()) {
+                            score += 75;
                         }
-
-                        Locale taskTargetLocale = task->targetlocale();
-
-                        if(userNativeLocale.languagecode() == taskTargetLocale.languagecode()) {
-                            score += 300;
-                            if(userNativeLocale.countrycode() == taskTargetLocale.countrycode()) {
-                                score += 100;
-                            }
-                        }
-
-                        QList<QSharedPointer<Tag> > taskTags = TagDao::getTaskTags(db, task->id());
-                        int increment_value = 100;
-                        foreach(QSharedPointer<Tag> user_tag, userTags) {
-                            foreach(QSharedPointer<Tag> task_tag, taskTags) {
-                                if(user_tag->id() == task_tag->id()) {
-                                    score += increment_value;
-                                    increment_value *= 0.75;
-                                }
-                            }
-                        }
-
-                        QDateTime created_time = QDateTime::fromString(
-                                    QString::fromStdString(task->createdtime()), "yyyy-MM-ddTHH:mm:ss");
-                        //increase score by one per day since created time
-                        score += created_time.daysTo(QDateTime::currentDateTime());
-
-                        ctemplate::TemplateDictionary *score_sect = dict.AddSectionDictionary("SCORE_SECT");
-                        score_sect->SetIntValue("USER_ID", user->id());
-                        score_sect->SetIntValue("TASK_ID", task->id());
-                        score_sect->SetIntValue("SCORE", score);
-                        this->saveUserTaskScore(user->id(), task->id(), score);
                     }
-                } else {
-                    qDebug() << "No tasks found";
-                    dict.ShowSection("ERROR");
-                    dict["ERROR_MESSAGE"] = "No tasks found";
-                }
-            }
-        } else {
-            qDebug() << "No users found";
-            dict.ShowSection("ERROR");
-            dict["ERROR_MESSAGE"] = "No users found";
-        }
 
-        db->close();
+                    Locale taskTargetLocale = task->targetlocale();
+
+                    if(userNativeLocale.languagecode() == taskTargetLocale.languagecode()) {
+                        score += 300;
+                        if(userNativeLocale.countrycode() == taskTargetLocale.countrycode()) {
+                            score += 100;
+                        }
+                    }
+
+                    QList<QSharedPointer<Tag> > taskTags = TagDao::getTaskTags(db, task->id());
+                    int increment_value = 100;
+                    foreach(QSharedPointer<Tag> user_tag, userTags) {
+                        foreach(QSharedPointer<Tag> task_tag, taskTags) {
+                            if(user_tag->id() == task_tag->id()) {
+                                score += increment_value;
+                                increment_value *= 0.75;
+                            }
+                        }
+                    }
+
+                    QDateTime created_time = QDateTime::fromString(
+                                QString::fromStdString(task->createdtime()), "yyyy-MM-ddTHH:mm:ss");
+                    //increase score by one per day since created time
+                    score += created_time.daysTo(QDateTime::currentDateTime());
+
+                    ctemplate::TemplateDictionary *score_sect = dict.AddSectionDictionary("SCORE_SECT");
+                    score_sect->SetIntValue("USER_ID", user->id());
+                    score_sect->SetIntValue("TASK_ID", task->id());
+                    score_sect->SetIntValue("SCORE", score);
+                    this->saveUserTaskScore(user->id(), task->id(), score);
+                }
+            } else {
+                qDebug() << "No tasks found";
+                dict.ShowSection("ERROR");
+                dict["ERROR_MESSAGE"] = "No tasks found";
+            }
+        }
     } else {
-        qDebug() << "Unable to Connect to SQL Server. Check conf.ini and try again.";
+        qDebug() << "No users found";
         dict.ShowSection("ERROR");
-        dict.SetValue("ERROR_MESSAGE", "Unable to Connect to SQL Server. Check conf.ini and try again.");
+        dict["ERROR_MESSAGE"] = "No users found";
     }
 
     int time_msecs = started.msecsTo(QDateTime::currentDateTime());

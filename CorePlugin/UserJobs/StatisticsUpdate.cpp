@@ -22,10 +22,6 @@ void StatisticsUpdate::run()
 {
     qDebug() << "Starting new Thread for statistics update " << this->thread()->currentThreadId();
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
-    if (db->init()) {
-        db->call("statsUpdateAll", "");
-    } else {
-        qDebug() << "Unable to connect to DB";
-    }
+    db->call("statsUpdateAll", "");
     qDebug() << "Finished Statistics Update";
 }

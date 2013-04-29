@@ -19,18 +19,13 @@ void PasswordResetEmailGenerator::run()
     QSharedPointer<User> user = QSharedPointer<User>();
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
 
-    if(db->init()) {
-        user = UserDao::getUser(db, email_message.user_id());
-        uuid = UserDao::getPasswordResetUuid(db, email_message.user_id());
 
-        if(user.isNull() || uuid.compare("") == 0) {
-            error = "Password Reset email generation failed. Unable to find ";
-            error += "data in the DB. Looking for user id " + email_message.user_id();
-        }
-    } else {
-        error = "Unable to Connect to SQL Server. Check conf.ini for connection settings and make sure ";
-        error += "mysqld has been started.";
-        qDebug() << "Unable to Connect to SQL Server. Check conf.ini and try again.";
+    user = UserDao::getUser(db, email_message.user_id());
+    uuid = UserDao::getPasswordResetUuid(db, email_message.user_id());
+
+    if(user.isNull() || uuid.compare("") == 0) {
+        error = "Password Reset email generation failed. Unable to find ";
+        error += "data in the DB. Looking for user id " + email_message.user_id();
     }
 
     if(error.compare("") == 0) {
