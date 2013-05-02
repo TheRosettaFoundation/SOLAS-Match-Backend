@@ -18,6 +18,7 @@
 #include "Generators/FeedbackEmailGenerator.h"
 #include "Generators/UserTaskStreamEmailGenerator.h"
 #include "Generators/TaskTranslationUploadedEmailGenerator.h"
+#include "Generators/EmailVerificationGenerator.h"
 
 #include "Smtp.h"
 #include "IEmailGenerator.h"
@@ -126,6 +127,8 @@ void EmailPlugin::registerEmailTypes()
     qRegisterMetaType<UserTaskDeadlineEmailGenerator>(name.toLatin1());
     name = "EmailGenerator_" + QString::number(EmailMessage::UserTaskStreamEmail);
     qRegisterMetaType<UserTaskStreamEmailGenerator>(name.toLatin1());
+    name = "EmailGenerator_" + QString::number(EmailMessage::EmailVerification);
+    qRegisterMetaType<EmailVerificationGenerator>(name.toLatin1());
 }
 
 void EmailPlugin::setThreadPool(QThreadPool *tp)

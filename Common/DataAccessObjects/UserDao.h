@@ -35,6 +35,7 @@ public:
                          QString date = "",
                          int lang_id = -1,
                          int reg_id = -1);
+    static QString getRegistrationId(QSharedPointer<MySQLHandler> db, int userId);
     static QString getPasswordResetUuid(QSharedPointer<MySQLHandler> db, int id);
     static QList<QSharedPointer<Task> > getUserTopTasks(QSharedPointer<MySQLHandler> db, int userId,
                                                         int limit = 10, QString filter = "");
