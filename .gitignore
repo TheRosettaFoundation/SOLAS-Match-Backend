@@ -1,4 +1,4 @@
 Makefile
 conf.ini
 plugins
-*.user
+*.user*
