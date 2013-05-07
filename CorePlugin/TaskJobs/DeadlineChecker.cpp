@@ -2,7 +2,6 @@
 
 #include <QDebug>
 #include <QThread>
-#include <QDateTime>
 
 #include "Common/MessagingClient.h"
 #include "Common/ConfigParser.h"

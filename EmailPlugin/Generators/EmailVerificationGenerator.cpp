@@ -27,9 +27,6 @@ void EmailVerificationGenerator::run()
     if (uniqueId == "" || user.isNull()) {
         error = "EmailVerificationGenerator - Unable to find user data for user "
                 + QString::number(emailMessage.user_id());
-    } else {
-        qDebug() << "uniqueId is not \"\"";
-        qDebug() << "uniqueId is " << uniqueId;
     }
 
     if (error == "") {

@@ -9,6 +9,7 @@
 #include "Common/MySQLHandler.h"
 #include "Common/protobufs/models/User.pb.h"
 #include "Common/protobufs/models/Task.pb.h"
+#include "Common/protobufs/models/BannedUser.pb.h"
 
 class UserDao
 {
@@ -35,6 +36,7 @@ public:
                          QString date = "",
                          int lang_id = -1,
                          int reg_id = -1);
+    static QSharedPointer<BannedUser> getBanData(QSharedPointer<MySQLHandler> db, int userId);
     static QString getRegistrationId(QSharedPointer<MySQLHandler> db, int userId);
     static QString getPasswordResetUuid(QSharedPointer<MySQLHandler> db, int id);
     static QList<QSharedPointer<Task> > getUserTopTasks(QSharedPointer<MySQLHandler> db, int userId,

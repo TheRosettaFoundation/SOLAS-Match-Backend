@@ -75,8 +75,8 @@ void protobuf_AddDesc_EmailMessage_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\022EmailMessage.proto\"\376\002\n\014EmailMessage\022&\n"
-    "\nemail_type\030\001 \002(\0162\022.EmailMessage.Type\"\273\002"
+    "\n\022EmailMessage.proto\"\217\003\n\014EmailMessage\022&\n"
+    "\nemail_type\030\001 \002(\0162\022.EmailMessage.Type\"\314\002"
     "\n\004Type\022\022\n\016TaskScoreEmail\020\001\022\021\n\rUserTaskCl"
     "aim\020\002\022\031\n\025OrgMembershipAccepted\020\003\022\030\n\024OrgM"
     "embershipRefused\020\004\022\026\n\022PasswordResetEmail"
@@ -84,8 +84,8 @@ void protobuf_AddDesc_EmailMessage_2eproto() {
     "\027TaskTranslationUploaded\020\010\022\031\n\025OrgTaskDea"
     "dlinePassed\020\t\022!\n\035UserClaimedTaskDeadline"
     "Passed\020\n\022\021\n\rFeedbackEmail\020\013\022\027\n\023UserTaskS"
-    "treamEmail\020\014\022\025\n\021EmailVerification\020\r*\010\010d\020"
-    "\200\200\200\200\002", 405);
+    "treamEmail\020\014\022\025\n\021EmailVerification\020\r\022\017\n\013B"
+    "annedLogin\020\016*\010\010d\020\200\200\200\200\002", 422);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "EmailMessage.proto", &protobuf_RegisterTypes);
   EmailMessage::default_instance_ = new EmailMessage();
@@ -122,6 +122,7 @@ bool EmailMessage_Type_IsValid(int value) {
     case 11:
     case 12:
     case 13:
+    case 14:
       return true;
     default:
       return false;
@@ -142,6 +143,7 @@ const EmailMessage_Type EmailMessage::UserClaimedTaskDeadlinePassed;
 const EmailMessage_Type EmailMessage::FeedbackEmail;
 const EmailMessage_Type EmailMessage::UserTaskStreamEmail;
 const EmailMessage_Type EmailMessage::EmailVerification;
+const EmailMessage_Type EmailMessage::BannedLogin;
 const EmailMessage_Type EmailMessage::Type_MIN;
 const EmailMessage_Type EmailMessage::Type_MAX;
 const int EmailMessage::Type_ARRAYSIZE;

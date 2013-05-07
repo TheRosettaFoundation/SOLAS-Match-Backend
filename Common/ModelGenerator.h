@@ -12,6 +12,7 @@
 #include "protobufs/models/Project.pb.h"
 #include "protobufs/models/ArchivedProject.pb.h"
 #include "protobufs/models/Language.pb.h"
+#include "protobufs/models/BannedUser.pb.h"
 
 class ModelGenerator
 {
@@ -24,6 +25,7 @@ public:
     static QSharedPointer<Project> GenerateProject(QSharedPointer<QSqlQuery> q);
     static QSharedPointer<ArchivedProject> GenerateArchivedProject(QSharedPointer<QSqlQuery> q);
     static QSharedPointer<Language> GenerateLanguage(QSharedPointer<QSqlQuery> q);
+    static QSharedPointer<BannedUser> GenerateBannedUser(QSharedPointer<QSqlQuery> q);
 
 };
 

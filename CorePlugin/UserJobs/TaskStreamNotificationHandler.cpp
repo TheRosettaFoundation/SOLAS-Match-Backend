@@ -2,7 +2,6 @@
 
 #include <QDebug>
 #include <QThread>
-#include <QDateTime>
 
 #include "Common/MySQLHandler.h"
 #include "Common/MessagingClient.h"

@@ -85,6 +85,18 @@ QSharedPointer<User> UserDao::getUser(QSharedPointer<MySQLHandler> db, int id, Q
     return user;
 }
 
+QSharedPointer<BannedUser> UserDao::getBanData(QSharedPointer<MySQLHandler> db, int userId)
+{
+    QSharedPointer<BannedUser> data = QSharedPointer<BannedUser>();
+    QString args = QString::number(userId);
+    args += ", null, null, null, null";
+    QSharedPointer<QSqlQuery> mQuery = db->call("getBannedUser", args);
+    if (mQuery->first()) {
+        data = ModelGenerator::GenerateBannedUser(mQuery);
+    }
+    return data;
+}
+
 QString UserDao::getPasswordResetUuid(QSharedPointer<MySQLHandler> db, int id)
 {
     QString ret;

@@ -103,7 +103,7 @@ QVariant MySQLHandler::getValueFromQuery(QString field_name, QSharedPointer<QSql
 {
     QVariant ret = 0;
     int field_pos = mQuery->record().indexOf(field_name);
-    if(field_pos != -1) {
+    if (field_pos != -1) {
         ret = mQuery->value(field_pos);
     }
 

@@ -157,3 +157,16 @@ QSharedPointer<Language> ModelGenerator::GenerateLanguage(QSharedPointer<QSqlQue
 
     return language;
 }
+
+QSharedPointer<BannedUser> ModelGenerator::GenerateBannedUser(QSharedPointer<QSqlQuery> q)
+{
+    QSharedPointer<BannedUser> banData = QSharedPointer<BannedUser>(new BannedUser());
+
+    banData->set_userid(MySQLHandler::getValueFromQuery("user_id", q).toInt());
+    banData->set_useridadmin(MySQLHandler::getValueFromQuery("user_id-admin", q).toInt());
+    banData->set_bantype(MySQLHandler::getValueFromQuery("bannedType", q).toString().toStdString());
+    banData->set_comment(MySQLHandler::getValueFromQuery("comment", q).toString().toStdString());
+    banData->set_banneddate(MySQLHandler::getValueFromQuery("banned-date", q).toString().toStdString());
+
+    return banData;
+}

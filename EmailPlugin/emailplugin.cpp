@@ -19,6 +19,7 @@
 #include "Generators/UserTaskStreamEmailGenerator.h"
 #include "Generators/TaskTranslationUploadedEmailGenerator.h"
 #include "Generators/EmailVerificationGenerator.h"
+#include "Generators/BannedLoginGenerator.h"
 
 #include "Smtp.h"
 #include "IEmailGenerator.h"
@@ -33,6 +34,7 @@
 #include "Common/protobufs/emails/TaskTranslationUploaded.pb.h"
 #include "Common/protobufs/emails/UserTaskClaim.pb.h"
 #include "Common/protobufs/emails/FeedbackEmail.pb.h"
+#include "Common/protobufs/emails/BannedLogin.pb.h"
 
 #include "Common/MessagingClient.h"
 
@@ -129,6 +131,8 @@ void EmailPlugin::registerEmailTypes()
     qRegisterMetaType<UserTaskStreamEmailGenerator>(name.toLatin1());
     name = "EmailGenerator_" + QString::number(EmailMessage::EmailVerification);
     qRegisterMetaType<EmailVerificationGenerator>(name.toLatin1());
+    name = "EmailGenerator_" + QString::number(EmailMessage::BannedLogin);
+    qRegisterMetaType<BannedLoginGenerator>(name.toLatin1());
 }
 
 void EmailPlugin::setThreadPool(QThreadPool *tp)
