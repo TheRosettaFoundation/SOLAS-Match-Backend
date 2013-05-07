@@ -3,9 +3,8 @@
 </p>
 
 <p>
-    You tried to log in to SOLAS Match recently. You have been banned by an administrator 
-    from using the site and can not currently log in. You were banned on {{BAN_TIME}}, 
-    {{BAN_LENGTH}}.
+    You have been banned by an administrator from using SOLAS Match and can no longer 
+    log in. You were banned on {{BAN_TIME}}, {{BAN_LENGTH}}.
 </p>
 
 {{#COMMENT_GIVEN}}
