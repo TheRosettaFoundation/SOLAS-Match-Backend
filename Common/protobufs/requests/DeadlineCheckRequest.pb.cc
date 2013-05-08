@@ -29,7 +29,8 @@ void protobuf_AssignDesc_DeadlineCheckRequest_2eproto() {
       "DeadlineCheckRequest.proto");
   GOOGLE_CHECK(file != NULL);
   DeadlineCheckRequest_descriptor_ = file->message_type(0);
-  static const int DeadlineCheckRequest_offsets_[3] = {
+  static const int DeadlineCheckRequest_offsets_[4] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DeadlineCheckRequest, name_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DeadlineCheckRequest, task_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DeadlineCheckRequest, org_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DeadlineCheckRequest, user_id_),
@@ -75,9 +76,10 @@ void protobuf_AddDesc_DeadlineCheckRequest_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\032DeadlineCheckRequest.proto\"H\n\024Deadline"
-    "CheckRequest\022\017\n\007task_id\030\001 \001(\005\022\016\n\006org_id\030"
-    "\002 \001(\005\022\017\n\007user_id\030\003 \001(\005", 102);
+    "\n\032DeadlineCheckRequest.proto\"l\n\024Deadline"
+    "CheckRequest\022\"\n\004name\030\001 \001(\t:\024DeadlineChec"
+    "kRequest\022\017\n\007task_id\030\002 \001(\005\022\016\n\006org_id\030\003 \001("
+    "\005\022\017\n\007user_id\030\004 \001(\005", 138);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "DeadlineCheckRequest.proto", &protobuf_RegisterTypes);
   DeadlineCheckRequest::default_instance_ = new DeadlineCheckRequest();
@@ -95,7 +97,9 @@ struct StaticDescriptorInitializer_DeadlineCheckRequest_2eproto {
 
 // ===================================================================
 
+const ::std::string DeadlineCheckRequest::_default_name_("DeadlineCheckRequest");
 #ifndef _MSC_VER
+const int DeadlineCheckRequest::kNameFieldNumber;
 const int DeadlineCheckRequest::kTaskIdFieldNumber;
 const int DeadlineCheckRequest::kOrgIdFieldNumber;
 const int DeadlineCheckRequest::kUserIdFieldNumber;
@@ -117,6 +121,7 @@ DeadlineCheckRequest::DeadlineCheckRequest(const DeadlineCheckRequest& from)
 
 void DeadlineCheckRequest::SharedCtor() {
   _cached_size_ = 0;
+  name_ = const_cast< ::std::string*>(&_default_name_);
   task_id_ = 0;
   org_id_ = 0;
   user_id_ = 0;
@@ -128,6 +133,9 @@ DeadlineCheckRequest::~DeadlineCheckRequest() {
 }
 
 void DeadlineCheckRequest::SharedDtor() {
+  if (name_ != &_default_name_) {
+    delete name_;
+  }
   if (this != default_instance_) {
   }
 }
@@ -154,6 +162,11 @@ DeadlineCheckRequest* DeadlineCheckRequest::New() const {
 
 void DeadlineCheckRequest::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (has_name()) {
+      if (name_ != &_default_name_) {
+        name_->assign(_default_name_);
+      }
+    }
     task_id_ = 0;
     org_id_ = 0;
     user_id_ = 0;
@@ -168,10 +181,27 @@ bool DeadlineCheckRequest::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional int32 task_id = 1;
+      // optional string name = 1 [default = "DeadlineCheckRequest"];
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_name()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->name().data(), this->name().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(16)) goto parse_task_id;
+        break;
+      }
+      
+      // optional int32 task_id = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_task_id:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &task_id_)));
@@ -179,12 +209,12 @@ bool DeadlineCheckRequest::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(16)) goto parse_org_id;
+        if (input->ExpectTag(24)) goto parse_org_id;
         break;
       }
       
-      // optional int32 org_id = 2;
-      case 2: {
+      // optional int32 org_id = 3;
+      case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_org_id:
@@ -195,12 +225,12 @@ bool DeadlineCheckRequest::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(24)) goto parse_user_id;
+        if (input->ExpectTag(32)) goto parse_user_id;
         break;
       }
       
-      // optional int32 user_id = 3;
-      case 3: {
+      // optional int32 user_id = 4;
+      case 4: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_user_id:
@@ -233,19 +263,28 @@ bool DeadlineCheckRequest::MergePartialFromCodedStream(
 
 void DeadlineCheckRequest::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // optional int32 task_id = 1;
+  // optional string name = 1 [default = "DeadlineCheckRequest"];
+  if (has_name()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->name().data(), this->name().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      1, this->name(), output);
+  }
+  
+  // optional int32 task_id = 2;
   if (has_task_id()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->task_id(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->task_id(), output);
   }
   
-  // optional int32 org_id = 2;
+  // optional int32 org_id = 3;
   if (has_org_id()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->org_id(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->org_id(), output);
   }
   
-  // optional int32 user_id = 3;
+  // optional int32 user_id = 4;
   if (has_user_id()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->user_id(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->user_id(), output);
   }
   
   if (!unknown_fields().empty()) {
@@ -256,19 +295,29 @@ void DeadlineCheckRequest::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* DeadlineCheckRequest::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // optional int32 task_id = 1;
+  // optional string name = 1 [default = "DeadlineCheckRequest"];
+  if (has_name()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->name().data(), this->name().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->name(), target);
+  }
+  
+  // optional int32 task_id = 2;
   if (has_task_id()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->task_id(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->task_id(), target);
   }
   
-  // optional int32 org_id = 2;
+  // optional int32 org_id = 3;
   if (has_org_id()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->org_id(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->org_id(), target);
   }
   
-  // optional int32 user_id = 3;
+  // optional int32 user_id = 4;
   if (has_user_id()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->user_id(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->user_id(), target);
   }
   
   if (!unknown_fields().empty()) {
@@ -282,21 +331,28 @@ int DeadlineCheckRequest::ByteSize() const {
   int total_size = 0;
   
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // optional int32 task_id = 1;
+    // optional string name = 1 [default = "DeadlineCheckRequest"];
+    if (has_name()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->name());
+    }
+    
+    // optional int32 task_id = 2;
     if (has_task_id()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->task_id());
     }
     
-    // optional int32 org_id = 2;
+    // optional int32 org_id = 3;
     if (has_org_id()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->org_id());
     }
     
-    // optional int32 user_id = 3;
+    // optional int32 user_id = 4;
     if (has_user_id()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
@@ -330,6 +386,9 @@ void DeadlineCheckRequest::MergeFrom(const ::google::protobuf::Message& from) {
 void DeadlineCheckRequest::MergeFrom(const DeadlineCheckRequest& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_name()) {
+      set_name(from.name());
+    }
     if (from.has_task_id()) {
       set_task_id(from.task_id());
     }
@@ -362,6 +421,7 @@ bool DeadlineCheckRequest::IsInitialized() const {
 
 void DeadlineCheckRequest::Swap(DeadlineCheckRequest* other) {
   if (other != this) {
+    std::swap(name_, other->name_);
     std::swap(task_id_, other->task_id_);
     std::swap(org_id_, other->org_id_);
     std::swap(user_id_, other->user_id_);

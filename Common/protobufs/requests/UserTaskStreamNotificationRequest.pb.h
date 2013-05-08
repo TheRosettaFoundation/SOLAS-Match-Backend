@@ -88,7 +88,7 @@ class UserTaskStreamNotificationRequest : public ::google::protobuf::Message {
   
   // accessors -------------------------------------------------------
   
-  // optional string name = 1 [default = "UserTaskStreamNotificationRequest"];
+  // required string name = 1 [default = "UserTaskStreamNotificationRequest"];
   inline bool has_name() const;
   inline void clear_name();
   static const int kNameFieldNumber = 1;
@@ -126,7 +126,7 @@ class UserTaskStreamNotificationRequest : public ::google::protobuf::Message {
 
 // UserTaskStreamNotificationRequest
 
-// optional string name = 1 [default = "UserTaskStreamNotificationRequest"];
+// required string name = 1 [default = "UserTaskStreamNotificationRequest"];
 inline bool UserTaskStreamNotificationRequest::has_name() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }

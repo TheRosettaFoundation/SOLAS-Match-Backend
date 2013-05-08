@@ -18,6 +18,7 @@ class UserQueueHandler : public WorkerInterface
 public:
     UserQueueHandler();
     void setThreadPool(QThreadPool *);
+    void registerRequestTypes();
     bool isEnabled();
 
 public slots:

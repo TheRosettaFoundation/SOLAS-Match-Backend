@@ -75,7 +75,7 @@ void protobuf_AddDesc_UserTaskStreamNotificationRequest_2eproto() {
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\'UserTaskStreamNotificationRequest.prot"
     "o\"T\n!UserTaskStreamNotificationRequest\022/"
-    "\n\004name\030\001 \001(\t:!UserTaskStreamNotification"
+    "\n\004name\030\001 \002(\t:!UserTaskStreamNotification"
     "Request", 127);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "UserTaskStreamNotificationRequest.proto", &protobuf_RegisterTypes);
@@ -169,7 +169,7 @@ bool UserTaskStreamNotificationRequest::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional string name = 1 [default = "UserTaskStreamNotificationRequest"];
+      // required string name = 1 [default = "UserTaskStreamNotificationRequest"];
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
@@ -203,7 +203,7 @@ bool UserTaskStreamNotificationRequest::MergePartialFromCodedStream(
 
 void UserTaskStreamNotificationRequest::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // optional string name = 1 [default = "UserTaskStreamNotificationRequest"];
+  // required string name = 1 [default = "UserTaskStreamNotificationRequest"];
   if (has_name()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->name().data(), this->name().length(),
@@ -220,7 +220,7 @@ void UserTaskStreamNotificationRequest::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* UserTaskStreamNotificationRequest::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // optional string name = 1 [default = "UserTaskStreamNotificationRequest"];
+  // required string name = 1 [default = "UserTaskStreamNotificationRequest"];
   if (has_name()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->name().data(), this->name().length(),
@@ -241,7 +241,7 @@ int UserTaskStreamNotificationRequest::ByteSize() const {
   int total_size = 0;
   
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // optional string name = 1 [default = "UserTaskStreamNotificationRequest"];
+    // required string name = 1 [default = "UserTaskStreamNotificationRequest"];
     if (has_name()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
@@ -295,6 +295,7 @@ void UserTaskStreamNotificationRequest::CopyFrom(const UserTaskStreamNotificatio
 }
 
 bool UserTaskStreamNotificationRequest::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
   
   return true;
 }

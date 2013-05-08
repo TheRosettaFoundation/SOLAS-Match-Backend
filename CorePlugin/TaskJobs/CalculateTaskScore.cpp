@@ -43,7 +43,7 @@ CalculateTaskScore::~CalculateTaskScore()
 
 void CalculateTaskScore::run()
 {
-    qDebug() << "CalculateTaskScore: Starting new thread " << this->thread()->currentThreadId();
+    qDebug() << "CalculateTaskScore: Starting new thread";
     ConfigParser settings;
     QDateTime started = QDateTime::currentDateTime();
     ctemplate::TemplateDictionary dict("user_task_score");
@@ -193,4 +193,9 @@ int CalculateTaskScore::getCurrentScore(int user_id, int task_id)
     }
 
     return ret;
+}
+
+void CalculateTaskScore::setAMQPMessage(AMQPMessage *message)
+{
+    this->message = message;
 }

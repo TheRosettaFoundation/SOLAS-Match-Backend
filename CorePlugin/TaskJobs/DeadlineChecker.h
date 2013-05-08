@@ -7,7 +7,7 @@
 #include "PluginHandler/JobInterface.h"
 #include "Common/MySQLHandler.h"
 
-class DeadlineChecker : public QObject, public JobInterface
+class DeadlineChecker : public JobInterface
 {
     Q_INTERFACES(JobInterface)
 
@@ -16,6 +16,7 @@ public:
     DeadlineChecker(AMQPMessage *);
     ~DeadlineChecker();
     void run();
+    void setAMQPMessage(AMQPMessage *message);
 
 private:
     AMQPMessage *message;

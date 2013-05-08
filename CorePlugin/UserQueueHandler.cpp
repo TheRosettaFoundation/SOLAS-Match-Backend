@@ -5,6 +5,9 @@
 #include <QDebug>
 
 #include "Common/ConfigParser.h"
+#include "Common/protobufs/requests/RequestMessage.pb.h"
+#include "Common/protobufs/requests/StatisticsUpdateRequest.pb.h"
+#include "Common/protobufs/requests/UserTaskStreamNotificationRequest.pb.h"
 
 #include "UserJobs/TaskStreamNotificationHandler.h"
 #include "UserJobs/StatisticsUpdate.h"
@@ -17,6 +20,7 @@ UserQueueHandler::UserQueueHandler()
 void UserQueueHandler::run()
 {
     qDebug() << "Running UserQueueHandler on thread " << this->thread()->currentThreadId();
+    this->registerRequestTypes();
     ConfigParser settings;
     QString exchange = settings.get("messaging.exchange");
     QString topic = "users.#";
@@ -43,18 +47,19 @@ void UserQueueHandler::messageReceived(AMQPMessage *message)
         messageQueue->Ack(message->getDeliveryTag());
     }
 
-    QRunnable *job = NULL;
+    uint32_t length = 0;
+    QString message_body = message->getMessage(&length);
 
-    if(message->getRoutingKey() == "users.stream.notify") {
-        job = new TaskStreamNotificationHandler(message);
-    } else if(message->getRoutingKey() == "users.statistics.update") {
-        job = new StatisticsUpdate(message);
-    }
+    RequestMessage requestMessage;
+    requestMessage.ParseFromString(message_body.toStdString());
 
-    if(job) {
-        this->mThreadPool->start(job);
+    int classId = QMetaType::type(QString::fromStdString(requestMessage.name()).toLatin1());
+    if (classId == 0) {
+        qDebug() << "TaskQueueHandler: Invalid proto type: " << QString::fromStdString(requestMessage.name());
     } else {
-        qDebug() << "Invalid routing key: " << QString::fromStdString(message->getRoutingKey());
+        JobInterface *runnable = static_cast<JobInterface *>(QMetaType::construct(classId));
+        runnable->setAMQPMessage(message);
+        this->mThreadPool->start(runnable);
     }
 }
 
@@ -71,4 +76,12 @@ void UserQueueHandler::setThreadPool(QThreadPool *tp)
 bool UserQueueHandler::isEnabled()
 {
     return true;
+}
+
+void UserQueueHandler::registerRequestTypes()
+{
+    StatisticsUpdateRequest statUpdate = StatisticsUpdateRequest();
+    qRegisterMetaType<StatisticsUpdate>(QString::fromStdString(statUpdate.name()).toLatin1());
+    UserTaskStreamNotificationRequest streamReq = UserTaskStreamNotificationRequest();
+    qRegisterMetaType<TaskStreamNotificationHandler>(QString::fromStdString(streamReq.name()).toLatin1());
 }

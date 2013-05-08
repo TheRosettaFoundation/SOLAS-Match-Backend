@@ -7,7 +7,7 @@
 #include "PluginHandler/JobInterface.h"
 #include "Common/MySQLHandler.h"
 
-class StatisticsUpdate : public QObject, public JobInterface
+class StatisticsUpdate : public JobInterface
 {
     Q_INTERFACES(JobInterface)
 
@@ -16,6 +16,7 @@ public:
     StatisticsUpdate(AMQPMessage *);
     ~StatisticsUpdate();
     void run();
+    void setAMQPMessage(AMQPMessage *message);
 
 private:
     AMQPMessage *message;

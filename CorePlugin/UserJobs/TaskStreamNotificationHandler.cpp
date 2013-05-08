@@ -25,7 +25,7 @@ TaskStreamNotificationHandler::~TaskStreamNotificationHandler()
 
 void TaskStreamNotificationHandler::run()
 {
-    qDebug() << "Starting new thread to send task stream notifications " << this->thread()->currentThreadId();
+    qDebug() << "Starting new thread to send task stream notifications";
     ConfigParser settings;
     QString exchange = settings.get("messaging.exchange");
     QString topic = "email.user.task.stream";
@@ -47,4 +47,9 @@ void TaskStreamNotificationHandler::run()
         qDebug() << "Unable to connect to RabbitMQ. Check conf.ini for settings.";
     }
     qDebug() << "Finnished sending task stream notifications";
+}
+
+void TaskStreamNotificationHandler::setAMQPMessage(AMQPMessage *message)
+{
+    this->message = message;
 }

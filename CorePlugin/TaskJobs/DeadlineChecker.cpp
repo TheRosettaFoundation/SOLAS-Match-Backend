@@ -30,7 +30,7 @@ DeadlineChecker::~DeadlineChecker()
 
 void DeadlineChecker::run()
 {
-    qDebug() << "Starting new thread to check deadlines " << this->thread()->currentThreadId();
+    qDebug() << "Starting new thread to check deadlines";
     ConfigParser settings;
     QString exchange = settings.get("messaging.exchange");
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
@@ -76,4 +76,9 @@ void DeadlineChecker::run()
     } else {
         qDebug() << "Unable to connect to RabbitMQ. Check conf.ini for settings.";
     }
+}
+
+void DeadlineChecker::setAMQPMessage(AMQPMessage *message)
+{
+    this->message = message;
 }

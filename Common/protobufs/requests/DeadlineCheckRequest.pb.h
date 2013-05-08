@@ -88,29 +88,42 @@ class DeadlineCheckRequest : public ::google::protobuf::Message {
   
   // accessors -------------------------------------------------------
   
-  // optional int32 task_id = 1;
+  // optional string name = 1 [default = "DeadlineCheckRequest"];
+  inline bool has_name() const;
+  inline void clear_name();
+  static const int kNameFieldNumber = 1;
+  inline const ::std::string& name() const;
+  inline void set_name(const ::std::string& value);
+  inline void set_name(const char* value);
+  inline void set_name(const char* value, size_t size);
+  inline ::std::string* mutable_name();
+  inline ::std::string* release_name();
+  
+  // optional int32 task_id = 2;
   inline bool has_task_id() const;
   inline void clear_task_id();
-  static const int kTaskIdFieldNumber = 1;
+  static const int kTaskIdFieldNumber = 2;
   inline ::google::protobuf::int32 task_id() const;
   inline void set_task_id(::google::protobuf::int32 value);
   
-  // optional int32 org_id = 2;
+  // optional int32 org_id = 3;
   inline bool has_org_id() const;
   inline void clear_org_id();
-  static const int kOrgIdFieldNumber = 2;
+  static const int kOrgIdFieldNumber = 3;
   inline ::google::protobuf::int32 org_id() const;
   inline void set_org_id(::google::protobuf::int32 value);
   
-  // optional int32 user_id = 3;
+  // optional int32 user_id = 4;
   inline bool has_user_id() const;
   inline void clear_user_id();
-  static const int kUserIdFieldNumber = 3;
+  static const int kUserIdFieldNumber = 4;
   inline ::google::protobuf::int32 user_id() const;
   inline void set_user_id(::google::protobuf::int32 value);
   
   // @@protoc_insertion_point(class_scope:DeadlineCheckRequest)
  private:
+  inline void set_has_name();
+  inline void clear_has_name();
   inline void set_has_task_id();
   inline void clear_has_task_id();
   inline void set_has_org_id();
@@ -120,12 +133,14 @@ class DeadlineCheckRequest : public ::google::protobuf::Message {
   
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
   
+  ::std::string* name_;
+  static const ::std::string _default_name_;
   ::google::protobuf::int32 task_id_;
   ::google::protobuf::int32 org_id_;
   ::google::protobuf::int32 user_id_;
   
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
   
   friend void  protobuf_AddDesc_DeadlineCheckRequest_2eproto();
   friend void protobuf_AssignDesc_DeadlineCheckRequest_2eproto();
@@ -141,15 +156,73 @@ class DeadlineCheckRequest : public ::google::protobuf::Message {
 
 // DeadlineCheckRequest
 
-// optional int32 task_id = 1;
-inline bool DeadlineCheckRequest::has_task_id() const {
+// optional string name = 1 [default = "DeadlineCheckRequest"];
+inline bool DeadlineCheckRequest::has_name() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void DeadlineCheckRequest::set_has_task_id() {
+inline void DeadlineCheckRequest::set_has_name() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void DeadlineCheckRequest::clear_has_task_id() {
+inline void DeadlineCheckRequest::clear_has_name() {
   _has_bits_[0] &= ~0x00000001u;
+}
+inline void DeadlineCheckRequest::clear_name() {
+  if (name_ != &_default_name_) {
+    name_->assign(_default_name_);
+  }
+  clear_has_name();
+}
+inline const ::std::string& DeadlineCheckRequest::name() const {
+  return *name_;
+}
+inline void DeadlineCheckRequest::set_name(const ::std::string& value) {
+  set_has_name();
+  if (name_ == &_default_name_) {
+    name_ = new ::std::string;
+  }
+  name_->assign(value);
+}
+inline void DeadlineCheckRequest::set_name(const char* value) {
+  set_has_name();
+  if (name_ == &_default_name_) {
+    name_ = new ::std::string;
+  }
+  name_->assign(value);
+}
+inline void DeadlineCheckRequest::set_name(const char* value, size_t size) {
+  set_has_name();
+  if (name_ == &_default_name_) {
+    name_ = new ::std::string;
+  }
+  name_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* DeadlineCheckRequest::mutable_name() {
+  set_has_name();
+  if (name_ == &_default_name_) {
+    name_ = new ::std::string(_default_name_);
+  }
+  return name_;
+}
+inline ::std::string* DeadlineCheckRequest::release_name() {
+  clear_has_name();
+  if (name_ == &_default_name_) {
+    return NULL;
+  } else {
+    ::std::string* temp = name_;
+    name_ = const_cast< ::std::string*>(&_default_name_);
+    return temp;
+  }
+}
+
+// optional int32 task_id = 2;
+inline bool DeadlineCheckRequest::has_task_id() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void DeadlineCheckRequest::set_has_task_id() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void DeadlineCheckRequest::clear_has_task_id() {
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline void DeadlineCheckRequest::clear_task_id() {
   task_id_ = 0;
@@ -163,15 +236,15 @@ inline void DeadlineCheckRequest::set_task_id(::google::protobuf::int32 value) {
   task_id_ = value;
 }
 
-// optional int32 org_id = 2;
+// optional int32 org_id = 3;
 inline bool DeadlineCheckRequest::has_org_id() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
+  return (_has_bits_[0] & 0x00000004u) != 0;
 }
 inline void DeadlineCheckRequest::set_has_org_id() {
-  _has_bits_[0] |= 0x00000002u;
+  _has_bits_[0] |= 0x00000004u;
 }
 inline void DeadlineCheckRequest::clear_has_org_id() {
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000004u;
 }
 inline void DeadlineCheckRequest::clear_org_id() {
   org_id_ = 0;
@@ -185,15 +258,15 @@ inline void DeadlineCheckRequest::set_org_id(::google::protobuf::int32 value) {
   org_id_ = value;
 }
 
-// optional int32 user_id = 3;
+// optional int32 user_id = 4;
 inline bool DeadlineCheckRequest::has_user_id() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
+  return (_has_bits_[0] & 0x00000008u) != 0;
 }
 inline void DeadlineCheckRequest::set_has_user_id() {
-  _has_bits_[0] |= 0x00000004u;
+  _has_bits_[0] |= 0x00000008u;
 }
 inline void DeadlineCheckRequest::clear_has_user_id() {
-  _has_bits_[0] &= ~0x00000004u;
+  _has_bits_[0] &= ~0x00000008u;
 }
 inline void DeadlineCheckRequest::clear_user_id() {
   user_id_ = 0;

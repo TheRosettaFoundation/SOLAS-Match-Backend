@@ -30,7 +30,7 @@ void protobuf_AssignDesc_StatisticsUpdateRequest_2eproto() {
   GOOGLE_CHECK(file != NULL);
   StatisticsUpdateRequest_descriptor_ = file->message_type(0);
   static const int StatisticsUpdateRequest_offsets_[1] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(StatisticsUpdateRequest, request_time_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(StatisticsUpdateRequest, name_),
   };
   StatisticsUpdateRequest_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -73,8 +73,9 @@ void protobuf_AddDesc_StatisticsUpdateRequest_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\035StatisticsUpdateRequest.proto\"/\n\027Stati"
-    "sticsUpdateRequest\022\024\n\014request_time\030\001 \001(\t", 80);
+    "\n\035StatisticsUpdateRequest.proto\"@\n\027Stati"
+    "sticsUpdateRequest\022%\n\004name\030\001 \002(\t:\027Statis"
+    "ticsUpdateRequest", 97);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "StatisticsUpdateRequest.proto", &protobuf_RegisterTypes);
   StatisticsUpdateRequest::default_instance_ = new StatisticsUpdateRequest();
@@ -92,8 +93,9 @@ struct StaticDescriptorInitializer_StatisticsUpdateRequest_2eproto {
 
 // ===================================================================
 
+const ::std::string StatisticsUpdateRequest::_default_name_("StatisticsUpdateRequest");
 #ifndef _MSC_VER
-const int StatisticsUpdateRequest::kRequestTimeFieldNumber;
+const int StatisticsUpdateRequest::kNameFieldNumber;
 #endif  // !_MSC_VER
 
 StatisticsUpdateRequest::StatisticsUpdateRequest()
@@ -112,7 +114,7 @@ StatisticsUpdateRequest::StatisticsUpdateRequest(const StatisticsUpdateRequest& 
 
 void StatisticsUpdateRequest::SharedCtor() {
   _cached_size_ = 0;
-  request_time_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  name_ = const_cast< ::std::string*>(&_default_name_);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -121,8 +123,8 @@ StatisticsUpdateRequest::~StatisticsUpdateRequest() {
 }
 
 void StatisticsUpdateRequest::SharedDtor() {
-  if (request_time_ != &::google::protobuf::internal::kEmptyString) {
-    delete request_time_;
+  if (name_ != &_default_name_) {
+    delete name_;
   }
   if (this != default_instance_) {
   }
@@ -150,9 +152,9 @@ StatisticsUpdateRequest* StatisticsUpdateRequest::New() const {
 
 void StatisticsUpdateRequest::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (has_request_time()) {
-      if (request_time_ != &::google::protobuf::internal::kEmptyString) {
-        request_time_->clear();
+    if (has_name()) {
+      if (name_ != &_default_name_) {
+        name_->assign(_default_name_);
       }
     }
   }
@@ -166,14 +168,14 @@ bool StatisticsUpdateRequest::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional string request_time = 1;
+      // required string name = 1 [default = "StatisticsUpdateRequest"];
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_request_time()));
+                input, this->mutable_name()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->request_time().data(), this->request_time().length(),
+            this->name().data(), this->name().length(),
             ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
@@ -200,13 +202,13 @@ bool StatisticsUpdateRequest::MergePartialFromCodedStream(
 
 void StatisticsUpdateRequest::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // optional string request_time = 1;
-  if (has_request_time()) {
+  // required string name = 1 [default = "StatisticsUpdateRequest"];
+  if (has_name()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->request_time().data(), this->request_time().length(),
+      this->name().data(), this->name().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     ::google::protobuf::internal::WireFormatLite::WriteString(
-      1, this->request_time(), output);
+      1, this->name(), output);
   }
   
   if (!unknown_fields().empty()) {
@@ -217,14 +219,14 @@ void StatisticsUpdateRequest::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* StatisticsUpdateRequest::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // optional string request_time = 1;
-  if (has_request_time()) {
+  // required string name = 1 [default = "StatisticsUpdateRequest"];
+  if (has_name()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->request_time().data(), this->request_time().length(),
+      this->name().data(), this->name().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->request_time(), target);
+        1, this->name(), target);
   }
   
   if (!unknown_fields().empty()) {
@@ -238,11 +240,11 @@ int StatisticsUpdateRequest::ByteSize() const {
   int total_size = 0;
   
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // optional string request_time = 1;
-    if (has_request_time()) {
+    // required string name = 1 [default = "StatisticsUpdateRequest"];
+    if (has_name()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->request_time());
+          this->name());
     }
     
   }
@@ -272,8 +274,8 @@ void StatisticsUpdateRequest::MergeFrom(const ::google::protobuf::Message& from)
 void StatisticsUpdateRequest::MergeFrom(const StatisticsUpdateRequest& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_request_time()) {
-      set_request_time(from.request_time());
+    if (from.has_name()) {
+      set_name(from.name());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -292,13 +294,14 @@ void StatisticsUpdateRequest::CopyFrom(const StatisticsUpdateRequest& from) {
 }
 
 bool StatisticsUpdateRequest::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
   
   return true;
 }
 
 void StatisticsUpdateRequest::Swap(StatisticsUpdateRequest* other) {
   if (other != this) {
-    std::swap(request_time_, other->request_time_);
+    std::swap(name_, other->name_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

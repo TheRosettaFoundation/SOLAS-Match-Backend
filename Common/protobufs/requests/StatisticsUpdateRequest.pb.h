@@ -88,25 +88,26 @@ class StatisticsUpdateRequest : public ::google::protobuf::Message {
   
   // accessors -------------------------------------------------------
   
-  // optional string request_time = 1;
-  inline bool has_request_time() const;
-  inline void clear_request_time();
-  static const int kRequestTimeFieldNumber = 1;
-  inline const ::std::string& request_time() const;
-  inline void set_request_time(const ::std::string& value);
-  inline void set_request_time(const char* value);
-  inline void set_request_time(const char* value, size_t size);
-  inline ::std::string* mutable_request_time();
-  inline ::std::string* release_request_time();
+  // required string name = 1 [default = "StatisticsUpdateRequest"];
+  inline bool has_name() const;
+  inline void clear_name();
+  static const int kNameFieldNumber = 1;
+  inline const ::std::string& name() const;
+  inline void set_name(const ::std::string& value);
+  inline void set_name(const char* value);
+  inline void set_name(const char* value, size_t size);
+  inline ::std::string* mutable_name();
+  inline ::std::string* release_name();
   
   // @@protoc_insertion_point(class_scope:StatisticsUpdateRequest)
  private:
-  inline void set_has_request_time();
-  inline void clear_has_request_time();
+  inline void set_has_name();
+  inline void clear_has_name();
   
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
   
-  ::std::string* request_time_;
+  ::std::string* name_;
+  static const ::std::string _default_name_;
   
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
@@ -125,60 +126,60 @@ class StatisticsUpdateRequest : public ::google::protobuf::Message {
 
 // StatisticsUpdateRequest
 
-// optional string request_time = 1;
-inline bool StatisticsUpdateRequest::has_request_time() const {
+// required string name = 1 [default = "StatisticsUpdateRequest"];
+inline bool StatisticsUpdateRequest::has_name() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void StatisticsUpdateRequest::set_has_request_time() {
+inline void StatisticsUpdateRequest::set_has_name() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void StatisticsUpdateRequest::clear_has_request_time() {
+inline void StatisticsUpdateRequest::clear_has_name() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void StatisticsUpdateRequest::clear_request_time() {
-  if (request_time_ != &::google::protobuf::internal::kEmptyString) {
-    request_time_->clear();
+inline void StatisticsUpdateRequest::clear_name() {
+  if (name_ != &_default_name_) {
+    name_->assign(_default_name_);
   }
-  clear_has_request_time();
+  clear_has_name();
 }
-inline const ::std::string& StatisticsUpdateRequest::request_time() const {
-  return *request_time_;
+inline const ::std::string& StatisticsUpdateRequest::name() const {
+  return *name_;
 }
-inline void StatisticsUpdateRequest::set_request_time(const ::std::string& value) {
-  set_has_request_time();
-  if (request_time_ == &::google::protobuf::internal::kEmptyString) {
-    request_time_ = new ::std::string;
+inline void StatisticsUpdateRequest::set_name(const ::std::string& value) {
+  set_has_name();
+  if (name_ == &_default_name_) {
+    name_ = new ::std::string;
   }
-  request_time_->assign(value);
+  name_->assign(value);
 }
-inline void StatisticsUpdateRequest::set_request_time(const char* value) {
-  set_has_request_time();
-  if (request_time_ == &::google::protobuf::internal::kEmptyString) {
-    request_time_ = new ::std::string;
+inline void StatisticsUpdateRequest::set_name(const char* value) {
+  set_has_name();
+  if (name_ == &_default_name_) {
+    name_ = new ::std::string;
   }
-  request_time_->assign(value);
+  name_->assign(value);
 }
-inline void StatisticsUpdateRequest::set_request_time(const char* value, size_t size) {
-  set_has_request_time();
-  if (request_time_ == &::google::protobuf::internal::kEmptyString) {
-    request_time_ = new ::std::string;
+inline void StatisticsUpdateRequest::set_name(const char* value, size_t size) {
+  set_has_name();
+  if (name_ == &_default_name_) {
+    name_ = new ::std::string;
   }
-  request_time_->assign(reinterpret_cast<const char*>(value), size);
+  name_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* StatisticsUpdateRequest::mutable_request_time() {
-  set_has_request_time();
-  if (request_time_ == &::google::protobuf::internal::kEmptyString) {
-    request_time_ = new ::std::string;
+inline ::std::string* StatisticsUpdateRequest::mutable_name() {
+  set_has_name();
+  if (name_ == &_default_name_) {
+    name_ = new ::std::string(_default_name_);
   }
-  return request_time_;
+  return name_;
 }
-inline ::std::string* StatisticsUpdateRequest::release_request_time() {
-  clear_has_request_time();
-  if (request_time_ == &::google::protobuf::internal::kEmptyString) {
+inline ::std::string* StatisticsUpdateRequest::release_name() {
+  clear_has_name();
+  if (name_ == &_default_name_) {
     return NULL;
   } else {
-    ::std::string* temp = request_time_;
-    request_time_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    ::std::string* temp = name_;
+    name_ = const_cast< ::std::string*>(&_default_name_);
     return temp;
   }
 }

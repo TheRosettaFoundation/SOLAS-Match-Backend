@@ -27,6 +27,7 @@ public slots:
     void calculateAllTasksScore();
 
 private:
+    void registerRequestTypes();
     QThreadPool *mThreadPool;
     MessagingClient *client;
 

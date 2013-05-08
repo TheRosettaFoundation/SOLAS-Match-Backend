@@ -13,6 +13,7 @@
 #include "Common/protobufs/requests/UserTaskScoreRequest.pb.h"
 #include "Common/protobufs/requests/DeadlineCheckRequest.pb.h"
 #include "Common/protobufs/requests/StatisticsUpdateRequest.pb.h"
+#include "Common/protobufs/requests/UserTaskStreamNotificationRequest.pb.h"
 
 #include "Common/ConfigParser.h"
 #include "Common/MessagingClient.h"
@@ -132,7 +133,7 @@ void PluginScheduler::processTask(QPointer<TimedTask> task)
     } else if(task->getMessage() == "DeadlineCheckRequest") {
         request = generator.GenerateTask(QSharedPointer<DeadlineCheckRequest>(new DeadlineCheckRequest));
     } else if (task->getMessage() == "StatisticsUpdateRequest") {
-        request = generator.GenerateTask(QSharedPointer<StatisticsUpdateRequest>(new StatisticsUpdateRequest));
+        request = generator.GenerateTask(QSharedPointer<StatisticsUpdateRequest>(new StatisticsUpdateRequest()));
     } else if (task->getMessage() == "UserTaskStreamNotificationRequest") {
         request = generator.GenerateTask(QSharedPointer<UserTaskStreamNotificationRequest>
                                          (new UserTaskStreamNotificationRequest));

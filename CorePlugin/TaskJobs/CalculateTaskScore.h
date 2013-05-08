@@ -10,7 +10,7 @@
 #include "Common/protobufs/models/Task.pb.h"
 #include "Common/MySQLHandler.h"
 
-class CalculateTaskScore : public QObject, public JobInterface
+class CalculateTaskScore : public JobInterface
 {
     Q_INTERFACES(JobInterface)
 
@@ -19,6 +19,7 @@ public:
     CalculateTaskScore(AMQPMessage *);
     ~CalculateTaskScore();
     void run();
+    void setAMQPMessage(AMQPMessage *message);
 
 private:
     QList<QSharedPointer<Task> > getTasks();

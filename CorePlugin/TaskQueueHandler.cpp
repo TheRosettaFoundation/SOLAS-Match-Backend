@@ -5,6 +5,9 @@
 #include <QDebug>
 
 #include "Common/ConfigParser.h"
+#include "Common/protobufs/requests/RequestMessage.pb.h"
+#include "Common/protobufs/requests/DeadlineCheckRequest.pb.h"
+#include "Common/protobufs/requests/UserTaskScoreRequest.pb.h"
 
 #include "TaskJobs/CalculateTaskScore.h"
 #include "TaskJobs/DeadlineChecker.h"
@@ -17,6 +20,7 @@ TaskQueueHandler::TaskQueueHandler()
 void TaskQueueHandler::run()
 {
     qDebug() << "Running TaskQueueHandler on thread " << this->thread()->currentThreadId();
+    this->registerRequestTypes();
     ConfigParser settings;
     QString exchange = settings.get("messaging.exchange");
     QString queue = "CoreTaskQueue";
@@ -47,19 +51,28 @@ void TaskQueueHandler::messageReceived(AMQPMessage *message)
         messageQueue->Ack(message->getDeliveryTag());
     }
 
-    QRunnable *job = NULL;
+    uint32_t length = 0;
+    QString message_body = message->getMessage(&length);
 
-    if(message->getRoutingKey() == "tasks.score") {
-        job = new CalculateTaskScore(message);
-    } else if(message->getRoutingKey() == "tasks.deadline.check") {
-        job = new DeadlineChecker(message);
-    }
+    RequestMessage requestMessage;
+    requestMessage.ParseFromString(message_body.toStdString());
 
-    if(job) {
-        this->mThreadPool->start(job);
+    int classId = QMetaType::type(QString::fromStdString(requestMessage.name()).toLatin1());
+    if (classId == 0) {
+        qDebug() << "TaskQueueHandler: Invalid proto type: " << QString::fromStdString(requestMessage.name());
     } else {
-        qDebug() << "Invalid routing key: " << QString::fromStdString(message->getRoutingKey());
+        JobInterface *runnable = static_cast<JobInterface *>(QMetaType::construct(classId));
+        runnable->setAMQPMessage(message);
+        this->mThreadPool->start(runnable);
     }
+}
+
+void TaskQueueHandler::registerRequestTypes()
+{
+    UserTaskScoreRequest scoreReq = UserTaskScoreRequest();
+    qRegisterMetaType<CalculateTaskScore>(QString::fromStdString(scoreReq.name()).toLatin1());
+    DeadlineCheckRequest deadlineReq = DeadlineCheckRequest();
+    qRegisterMetaType<DeadlineChecker>(QString::fromStdString(deadlineReq.name()).toLatin1());
 }
 
 void TaskQueueHandler::calculateAllTasksScore()
