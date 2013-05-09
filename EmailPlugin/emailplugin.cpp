@@ -17,7 +17,7 @@
 #include "Generators/UserTaskDeadlineEmailGenerator.h"
 #include "Generators/FeedbackEmailGenerator.h"
 #include "Generators/UserTaskStreamEmailGenerator.h"
-#include "Generators/TaskTranslationUploadedEmailGenerator.h"
+#include "Generators/TrackedTaskUploadedEmailGenerator.h"
 #include "Generators/EmailVerificationGenerator.h"
 #include "Generators/BannedLoginGenerator.h"
 
@@ -31,7 +31,7 @@
 #include "Common/protobufs/emails/PasswordResetEmail.pb.h"
 #include "Common/protobufs/emails/TaskArchived.pb.h"
 #include "Common/protobufs/emails/TaskClaimed.pb.h"
-#include "Common/protobufs/emails/TaskTranslationUploaded.pb.h"
+#include "Common/protobufs/emails/TrackedTaskUploaded.pb.h"
 #include "Common/protobufs/emails/UserTaskClaim.pb.h"
 #include "Common/protobufs/emails/FeedbackEmail.pb.h"
 #include "Common/protobufs/emails/BannedLogin.pb.h"
@@ -115,8 +115,8 @@ void EmailPlugin::registerEmailTypes()
     qRegisterMetaType<PasswordResetEmailGenerator>(name.toLatin1());
     name = "EmailGenerator_" + QString::number(EmailMessage::TaskArchived);
     qRegisterMetaType<TaskArchivedEmailGenerator>(name.toLatin1());
-    name = "EmailGenerator_" + QString::number(EmailMessage::TaskTranslationUploaded);
-    qRegisterMetaType<TaskTranslationUploadedEmailGenerator>(name.toLatin1());
+    name = "EmailGenerator_" + QString::number(EmailMessage::TrackedTaskUploaded);
+    qRegisterMetaType<TrackedTaskUploadedEmailGenerator>(name.toLatin1());
     name = "EmailGenerator_" + QString::number(EmailMessage::TaskClaimed);
     qRegisterMetaType<TaskClaimedEmailGenerator>(name.toLatin1());
     name = "EmailGenerator_" + QString::number(EmailMessage::UserTaskClaim);

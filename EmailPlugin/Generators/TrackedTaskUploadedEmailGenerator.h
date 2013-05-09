@@ -2,12 +2,12 @@
 #define TASKTRANSLATIONUPLOADEDEMAILGENERATOR_H
 
 #include "../IEmailGenerator.h"
-#include "Common/protobufs/emails/TaskTranslationUploaded.pb.h"
+#include "Common/protobufs/emails/TrackedTaskUploaded.pb.h"
 
-class TaskTranslationUploadedEmailGenerator : public IEmailGenerator
+class TrackedTaskUploadedEmailGenerator : public IEmailGenerator
 {
 public:
-    TaskTranslationUploadedEmailGenerator();
+    TrackedTaskUploadedEmailGenerator();
     void run();
 
 };

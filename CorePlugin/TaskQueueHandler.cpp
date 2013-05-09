@@ -8,9 +8,11 @@
 #include "Common/protobufs/requests/RequestMessage.pb.h"
 #include "Common/protobufs/requests/DeadlineCheckRequest.pb.h"
 #include "Common/protobufs/requests/UserTaskScoreRequest.pb.h"
+#include "Common/protobufs/requests/TaskUploadNotificationRequest.pb.h"
 
 #include "TaskJobs/CalculateTaskScore.h"
 #include "TaskJobs/DeadlineChecker.h"
+#include "TaskJobs/SendTaskUploadNotifications.h"
 
 TaskQueueHandler::TaskQueueHandler()
 {
@@ -73,6 +75,8 @@ void TaskQueueHandler::registerRequestTypes()
     qRegisterMetaType<CalculateTaskScore>(QString::fromStdString(scoreReq.class_name()).toLatin1());
     DeadlineCheckRequest deadlineReq = DeadlineCheckRequest();
     qRegisterMetaType<DeadlineChecker>(QString::fromStdString(deadlineReq.class_name()).toLatin1());
+    TaskUploadNotificationRequest uploadRequest = TaskUploadNotificationRequest();
+    qRegisterMetaType<SendTaskUploadNotifications>(QString::fromStdString(uploadRequest.class_name()).toLatin1());
 }
 
 void TaskQueueHandler::calculateAllTasksScore()

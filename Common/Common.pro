@@ -30,7 +30,6 @@ SOURCES += \
     protobufs/emails/PasswordResetEmail.pb.cc \
     protobufs/emails/TaskArchived.pb.cc \
     protobufs/emails/TaskClaimed.pb.cc \
-    protobufs/emails/TaskTranslationUploaded.pb.cc \
     protobufs/emails/UserTaskClaim.pb.cc \
     ModelGenerator.cpp \
     protobufs/models/User.pb.cc \
@@ -60,7 +59,12 @@ SOURCES += \
     protobufs/emails/EmailVerification.pb.cc \
     protobufs/emails/BannedLogin.pb.cc \
     protobufs/models/BannedUser.pb.cc \
-    protobufs/requests/RequestMessage.pb.cc
+    protobufs/requests/RequestMessage.pb.cc \
+    protobufs/requests/TaskUploadNotificationRequest.pb.cc \
+    protobufs/emails/ClaimedTaskSourceUpdated.pb.cc \
+    protobufs/emails/ClaimedTaskUploaded.pb.cc \
+    protobufs/emails/TrackedTaskSourceUpdated.pb.cc \
+    protobufs/emails/TrackedTaskUploaded.pb.cc
 
 HEADERS +=\
     MySQLHandler.h \
@@ -73,7 +77,6 @@ HEADERS +=\
     protobufs/emails/PasswordResetEmail.pb.h \
     protobufs/emails/TaskArchived.pb.h \
     protobufs/emails/TaskClaimed.pb.h \
-    protobufs/emails/TaskTranslationUploaded.pb.h \
     protobufs/emails/UserTaskClaim.pb.h \
     ModelGenerator.h \
     protobufs/models/User.pb.h \
@@ -103,7 +106,12 @@ HEADERS +=\
     protobufs/emails/EmailVerification.pb.h \
     protobufs/emails/BannedLogin.pb.h \
     protobufs/models/BannedUser.pb.h \
-    protobufs/requests/RequestMessage.pb.h
+    protobufs/requests/RequestMessage.pb.h \
+    protobufs/requests/TaskUploadNotificationRequest.pb.h \
+    protobufs/emails/ClaimedTaskSourceUpdated.pb.h \
+    protobufs/emails/ClaimedTaskUploaded.pb.h \
+    protobufs/emails/TrackedTaskSourceUpdated.pb.h \
+    protobufs/emails/TrackedTaskUploaded.pb.h
 
 symbian {
     MMP_RULES += EXPORTUNFROZEN

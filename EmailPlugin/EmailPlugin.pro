@@ -37,7 +37,7 @@ SOURCES += emailplugin.cpp \
     Generators/PasswordResetEmailGenerator.cpp \
     Generators/TaskArchivedEmailGenerator.cpp \
     Generators/TaskClaimedEmailGenerator.cpp \
-    Generators/TaskTranslationUploadedEmailGenerator.cpp \
+    Generators/TrackedTaskUploadedEmailGenerator.cpp \
     Generators/UserTaskClaimEmailGenerator.cpp \
     Generators/FeedbackEmailGenerator.cpp \
     Generators/OrgDeadlinePassedEmailGenerator.cpp \
@@ -57,11 +57,11 @@ HEADERS += emailplugin.h\
     Generators/PasswordResetEmailGenerator.h \
     Generators/TaskArchivedEmailGenerator.h \
     Generators/TaskClaimedEmailGenerator.h \
-    Generators/TaskTranslationUploadedEmailGenerator.h \
     Generators/UserTaskClaimEmailGenerator.h \
     Generators/FeedbackEmailGenerator.h \
     Generators/OrgDeadlinePassedEmailGenerator.h \
     Generators/UserTaskDeadlineEmailGenerator.h \
     Generators/UserTaskStreamEmailGenerator.h \
     Generators/EmailVerificationGenerator.h \
-    Generators/BannedLoginGenerator.h
+    Generators/BannedLoginGenerator.h \
+    Generators/TrackedTaskUploadedEmailGenerator.h

@@ -1,15 +1,15 @@
-#include "TaskTranslationUploadedEmailGenerator.h"
+#include "TrackedTaskUploadedEmailGenerator.h"
 
-TaskTranslationUploadedEmailGenerator::TaskTranslationUploadedEmailGenerator()
+TrackedTaskUploadedEmailGenerator::TrackedTaskUploadedEmailGenerator()
 {
     //Default Constructor
 }
 
-void TaskTranslationUploadedEmailGenerator::run()
+void TrackedTaskUploadedEmailGenerator::run()
 {
-    qDebug() << "EmailGenerator - Generating TaskTranslationUploaded";
+    qDebug() << "EmailGenerator - Generating TrackedTaskUploaded email";
 
-    TaskTranslationUploaded email_message;
+    TrackedTaskUploaded email_message;
     email_message.ParseFromString(this->protoBody.toStdString());
 
     ConfigParser settings;

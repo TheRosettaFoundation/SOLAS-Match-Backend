@@ -1,7 +1,6 @@
 #ifndef CALCULATETASKSCOREJOB_H
 #define CALCULATETASKSCOREJOB_H
 
-#include <QObject>
 #include <AMQPcpp.h>
 #include <QList>
 #include <QSharedPointer>
