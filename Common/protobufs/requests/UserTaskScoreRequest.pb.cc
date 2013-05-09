@@ -30,7 +30,7 @@ void protobuf_AssignDesc_UserTaskScoreRequest_2eproto() {
   GOOGLE_CHECK(file != NULL);
   UserTaskScoreRequest_descriptor_ = file->message_type(0);
   static const int UserTaskScoreRequest_offsets_[2] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserTaskScoreRequest, name_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserTaskScoreRequest, class_name_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserTaskScoreRequest, task_id_),
   };
   UserTaskScoreRequest_reflection_ =
@@ -74,9 +74,9 @@ void protobuf_AddDesc_UserTaskScoreRequest_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\032UserTaskScoreRequest.proto\"K\n\024UserTask"
-    "ScoreRequest\022\"\n\004name\030\001 \002(\t:\024UserTaskScor"
-    "eRequest\022\017\n\007task_id\030\002 \001(\005", 105);
+    "\n\032UserTaskScoreRequest.proto\"Q\n\024UserTask"
+    "ScoreRequest\022(\n\nclass_name\030\001 \002(\t:\024UserTa"
+    "skScoreRequest\022\017\n\007task_id\030\002 \001(\005", 111);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "UserTaskScoreRequest.proto", &protobuf_RegisterTypes);
   UserTaskScoreRequest::default_instance_ = new UserTaskScoreRequest();
@@ -94,9 +94,9 @@ struct StaticDescriptorInitializer_UserTaskScoreRequest_2eproto {
 
 // ===================================================================
 
-const ::std::string UserTaskScoreRequest::_default_name_("UserTaskScoreRequest");
+const ::std::string UserTaskScoreRequest::_default_class_name_("UserTaskScoreRequest");
 #ifndef _MSC_VER
-const int UserTaskScoreRequest::kNameFieldNumber;
+const int UserTaskScoreRequest::kClassNameFieldNumber;
 const int UserTaskScoreRequest::kTaskIdFieldNumber;
 #endif  // !_MSC_VER
 
@@ -116,7 +116,7 @@ UserTaskScoreRequest::UserTaskScoreRequest(const UserTaskScoreRequest& from)
 
 void UserTaskScoreRequest::SharedCtor() {
   _cached_size_ = 0;
-  name_ = const_cast< ::std::string*>(&_default_name_);
+  class_name_ = const_cast< ::std::string*>(&_default_class_name_);
   task_id_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
@@ -126,8 +126,8 @@ UserTaskScoreRequest::~UserTaskScoreRequest() {
 }
 
 void UserTaskScoreRequest::SharedDtor() {
-  if (name_ != &_default_name_) {
-    delete name_;
+  if (class_name_ != &_default_class_name_) {
+    delete class_name_;
   }
   if (this != default_instance_) {
   }
@@ -155,9 +155,9 @@ UserTaskScoreRequest* UserTaskScoreRequest::New() const {
 
 void UserTaskScoreRequest::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (has_name()) {
-      if (name_ != &_default_name_) {
-        name_->assign(_default_name_);
+    if (has_class_name()) {
+      if (class_name_ != &_default_class_name_) {
+        class_name_->assign(_default_class_name_);
       }
     }
     task_id_ = 0;
@@ -172,14 +172,14 @@ bool UserTaskScoreRequest::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required string name = 1 [default = "UserTaskScoreRequest"];
+      // required string class_name = 1 [default = "UserTaskScoreRequest"];
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_name()));
+                input, this->mutable_class_name()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->name().data(), this->name().length(),
+            this->class_name().data(), this->class_name().length(),
             ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
@@ -222,13 +222,13 @@ bool UserTaskScoreRequest::MergePartialFromCodedStream(
 
 void UserTaskScoreRequest::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required string name = 1 [default = "UserTaskScoreRequest"];
-  if (has_name()) {
+  // required string class_name = 1 [default = "UserTaskScoreRequest"];
+  if (has_class_name()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->name().data(), this->name().length(),
+      this->class_name().data(), this->class_name().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     ::google::protobuf::internal::WireFormatLite::WriteString(
-      1, this->name(), output);
+      1, this->class_name(), output);
   }
   
   // optional int32 task_id = 2;
@@ -244,14 +244,14 @@ void UserTaskScoreRequest::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* UserTaskScoreRequest::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required string name = 1 [default = "UserTaskScoreRequest"];
-  if (has_name()) {
+  // required string class_name = 1 [default = "UserTaskScoreRequest"];
+  if (has_class_name()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->name().data(), this->name().length(),
+      this->class_name().data(), this->class_name().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->name(), target);
+        1, this->class_name(), target);
   }
   
   // optional int32 task_id = 2;
@@ -270,11 +270,11 @@ int UserTaskScoreRequest::ByteSize() const {
   int total_size = 0;
   
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required string name = 1 [default = "UserTaskScoreRequest"];
-    if (has_name()) {
+    // required string class_name = 1 [default = "UserTaskScoreRequest"];
+    if (has_class_name()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->name());
+          this->class_name());
     }
     
     // optional int32 task_id = 2;
@@ -311,8 +311,8 @@ void UserTaskScoreRequest::MergeFrom(const ::google::protobuf::Message& from) {
 void UserTaskScoreRequest::MergeFrom(const UserTaskScoreRequest& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_name()) {
-      set_name(from.name());
+    if (from.has_class_name()) {
+      set_class_name(from.class_name());
     }
     if (from.has_task_id()) {
       set_task_id(from.task_id());
@@ -341,7 +341,7 @@ bool UserTaskScoreRequest::IsInitialized() const {
 
 void UserTaskScoreRequest::Swap(UserTaskScoreRequest* other) {
   if (other != this) {
-    std::swap(name_, other->name_);
+    std::swap(class_name_, other->class_name_);
     std::swap(task_id_, other->task_id_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);

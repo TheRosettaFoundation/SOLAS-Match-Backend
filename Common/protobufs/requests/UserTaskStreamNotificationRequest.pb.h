@@ -88,26 +88,26 @@ class UserTaskStreamNotificationRequest : public ::google::protobuf::Message {
   
   // accessors -------------------------------------------------------
   
-  // required string name = 1 [default = "UserTaskStreamNotificationRequest"];
-  inline bool has_name() const;
-  inline void clear_name();
-  static const int kNameFieldNumber = 1;
-  inline const ::std::string& name() const;
-  inline void set_name(const ::std::string& value);
-  inline void set_name(const char* value);
-  inline void set_name(const char* value, size_t size);
-  inline ::std::string* mutable_name();
-  inline ::std::string* release_name();
+  // required string class_name = 1 [default = "UserTaskStreamNotificationRequest"];
+  inline bool has_class_name() const;
+  inline void clear_class_name();
+  static const int kClassNameFieldNumber = 1;
+  inline const ::std::string& class_name() const;
+  inline void set_class_name(const ::std::string& value);
+  inline void set_class_name(const char* value);
+  inline void set_class_name(const char* value, size_t size);
+  inline ::std::string* mutable_class_name();
+  inline ::std::string* release_class_name();
   
   // @@protoc_insertion_point(class_scope:UserTaskStreamNotificationRequest)
  private:
-  inline void set_has_name();
-  inline void clear_has_name();
+  inline void set_has_class_name();
+  inline void clear_has_class_name();
   
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
   
-  ::std::string* name_;
-  static const ::std::string _default_name_;
+  ::std::string* class_name_;
+  static const ::std::string _default_class_name_;
   
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
@@ -126,60 +126,60 @@ class UserTaskStreamNotificationRequest : public ::google::protobuf::Message {
 
 // UserTaskStreamNotificationRequest
 
-// required string name = 1 [default = "UserTaskStreamNotificationRequest"];
-inline bool UserTaskStreamNotificationRequest::has_name() const {
+// required string class_name = 1 [default = "UserTaskStreamNotificationRequest"];
+inline bool UserTaskStreamNotificationRequest::has_class_name() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void UserTaskStreamNotificationRequest::set_has_name() {
+inline void UserTaskStreamNotificationRequest::set_has_class_name() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void UserTaskStreamNotificationRequest::clear_has_name() {
+inline void UserTaskStreamNotificationRequest::clear_has_class_name() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void UserTaskStreamNotificationRequest::clear_name() {
-  if (name_ != &_default_name_) {
-    name_->assign(_default_name_);
+inline void UserTaskStreamNotificationRequest::clear_class_name() {
+  if (class_name_ != &_default_class_name_) {
+    class_name_->assign(_default_class_name_);
   }
-  clear_has_name();
+  clear_has_class_name();
 }
-inline const ::std::string& UserTaskStreamNotificationRequest::name() const {
-  return *name_;
+inline const ::std::string& UserTaskStreamNotificationRequest::class_name() const {
+  return *class_name_;
 }
-inline void UserTaskStreamNotificationRequest::set_name(const ::std::string& value) {
-  set_has_name();
-  if (name_ == &_default_name_) {
-    name_ = new ::std::string;
+inline void UserTaskStreamNotificationRequest::set_class_name(const ::std::string& value) {
+  set_has_class_name();
+  if (class_name_ == &_default_class_name_) {
+    class_name_ = new ::std::string;
   }
-  name_->assign(value);
+  class_name_->assign(value);
 }
-inline void UserTaskStreamNotificationRequest::set_name(const char* value) {
-  set_has_name();
-  if (name_ == &_default_name_) {
-    name_ = new ::std::string;
+inline void UserTaskStreamNotificationRequest::set_class_name(const char* value) {
+  set_has_class_name();
+  if (class_name_ == &_default_class_name_) {
+    class_name_ = new ::std::string;
   }
-  name_->assign(value);
+  class_name_->assign(value);
 }
-inline void UserTaskStreamNotificationRequest::set_name(const char* value, size_t size) {
-  set_has_name();
-  if (name_ == &_default_name_) {
-    name_ = new ::std::string;
+inline void UserTaskStreamNotificationRequest::set_class_name(const char* value, size_t size) {
+  set_has_class_name();
+  if (class_name_ == &_default_class_name_) {
+    class_name_ = new ::std::string;
   }
-  name_->assign(reinterpret_cast<const char*>(value), size);
+  class_name_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* UserTaskStreamNotificationRequest::mutable_name() {
-  set_has_name();
-  if (name_ == &_default_name_) {
-    name_ = new ::std::string(_default_name_);
+inline ::std::string* UserTaskStreamNotificationRequest::mutable_class_name() {
+  set_has_class_name();
+  if (class_name_ == &_default_class_name_) {
+    class_name_ = new ::std::string(_default_class_name_);
   }
-  return name_;
+  return class_name_;
 }
-inline ::std::string* UserTaskStreamNotificationRequest::release_name() {
-  clear_has_name();
-  if (name_ == &_default_name_) {
+inline ::std::string* UserTaskStreamNotificationRequest::release_class_name() {
+  clear_has_class_name();
+  if (class_name_ == &_default_class_name_) {
     return NULL;
   } else {
-    ::std::string* temp = name_;
-    name_ = const_cast< ::std::string*>(&_default_name_);
+    ::std::string* temp = class_name_;
+    class_name_ = const_cast< ::std::string*>(&_default_class_name_);
     return temp;
   }
 }

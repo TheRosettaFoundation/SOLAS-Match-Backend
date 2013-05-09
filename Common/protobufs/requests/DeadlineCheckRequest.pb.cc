@@ -30,7 +30,7 @@ void protobuf_AssignDesc_DeadlineCheckRequest_2eproto() {
   GOOGLE_CHECK(file != NULL);
   DeadlineCheckRequest_descriptor_ = file->message_type(0);
   static const int DeadlineCheckRequest_offsets_[4] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DeadlineCheckRequest, name_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DeadlineCheckRequest, class_name_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DeadlineCheckRequest, task_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DeadlineCheckRequest, org_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DeadlineCheckRequest, user_id_),
@@ -76,10 +76,10 @@ void protobuf_AddDesc_DeadlineCheckRequest_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\032DeadlineCheckRequest.proto\"l\n\024Deadline"
-    "CheckRequest\022\"\n\004name\030\001 \001(\t:\024DeadlineChec"
-    "kRequest\022\017\n\007task_id\030\002 \001(\005\022\016\n\006org_id\030\003 \001("
-    "\005\022\017\n\007user_id\030\004 \001(\005", 138);
+    "\n\032DeadlineCheckRequest.proto\"r\n\024Deadline"
+    "CheckRequest\022(\n\nclass_name\030\001 \001(\t:\024Deadli"
+    "neCheckRequest\022\017\n\007task_id\030\002 \001(\005\022\016\n\006org_i"
+    "d\030\003 \001(\005\022\017\n\007user_id\030\004 \001(\005", 144);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "DeadlineCheckRequest.proto", &protobuf_RegisterTypes);
   DeadlineCheckRequest::default_instance_ = new DeadlineCheckRequest();
@@ -97,9 +97,9 @@ struct StaticDescriptorInitializer_DeadlineCheckRequest_2eproto {
 
 // ===================================================================
 
-const ::std::string DeadlineCheckRequest::_default_name_("DeadlineCheckRequest");
+const ::std::string DeadlineCheckRequest::_default_class_name_("DeadlineCheckRequest");
 #ifndef _MSC_VER
-const int DeadlineCheckRequest::kNameFieldNumber;
+const int DeadlineCheckRequest::kClassNameFieldNumber;
 const int DeadlineCheckRequest::kTaskIdFieldNumber;
 const int DeadlineCheckRequest::kOrgIdFieldNumber;
 const int DeadlineCheckRequest::kUserIdFieldNumber;
@@ -121,7 +121,7 @@ DeadlineCheckRequest::DeadlineCheckRequest(const DeadlineCheckRequest& from)
 
 void DeadlineCheckRequest::SharedCtor() {
   _cached_size_ = 0;
-  name_ = const_cast< ::std::string*>(&_default_name_);
+  class_name_ = const_cast< ::std::string*>(&_default_class_name_);
   task_id_ = 0;
   org_id_ = 0;
   user_id_ = 0;
@@ -133,8 +133,8 @@ DeadlineCheckRequest::~DeadlineCheckRequest() {
 }
 
 void DeadlineCheckRequest::SharedDtor() {
-  if (name_ != &_default_name_) {
-    delete name_;
+  if (class_name_ != &_default_class_name_) {
+    delete class_name_;
   }
   if (this != default_instance_) {
   }
@@ -162,9 +162,9 @@ DeadlineCheckRequest* DeadlineCheckRequest::New() const {
 
 void DeadlineCheckRequest::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (has_name()) {
-      if (name_ != &_default_name_) {
-        name_->assign(_default_name_);
+    if (has_class_name()) {
+      if (class_name_ != &_default_class_name_) {
+        class_name_->assign(_default_class_name_);
       }
     }
     task_id_ = 0;
@@ -181,14 +181,14 @@ bool DeadlineCheckRequest::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional string name = 1 [default = "DeadlineCheckRequest"];
+      // optional string class_name = 1 [default = "DeadlineCheckRequest"];
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_name()));
+                input, this->mutable_class_name()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->name().data(), this->name().length(),
+            this->class_name().data(), this->class_name().length(),
             ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
@@ -263,13 +263,13 @@ bool DeadlineCheckRequest::MergePartialFromCodedStream(
 
 void DeadlineCheckRequest::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // optional string name = 1 [default = "DeadlineCheckRequest"];
-  if (has_name()) {
+  // optional string class_name = 1 [default = "DeadlineCheckRequest"];
+  if (has_class_name()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->name().data(), this->name().length(),
+      this->class_name().data(), this->class_name().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     ::google::protobuf::internal::WireFormatLite::WriteString(
-      1, this->name(), output);
+      1, this->class_name(), output);
   }
   
   // optional int32 task_id = 2;
@@ -295,14 +295,14 @@ void DeadlineCheckRequest::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* DeadlineCheckRequest::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // optional string name = 1 [default = "DeadlineCheckRequest"];
-  if (has_name()) {
+  // optional string class_name = 1 [default = "DeadlineCheckRequest"];
+  if (has_class_name()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->name().data(), this->name().length(),
+      this->class_name().data(), this->class_name().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->name(), target);
+        1, this->class_name(), target);
   }
   
   // optional int32 task_id = 2;
@@ -331,11 +331,11 @@ int DeadlineCheckRequest::ByteSize() const {
   int total_size = 0;
   
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // optional string name = 1 [default = "DeadlineCheckRequest"];
-    if (has_name()) {
+    // optional string class_name = 1 [default = "DeadlineCheckRequest"];
+    if (has_class_name()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->name());
+          this->class_name());
     }
     
     // optional int32 task_id = 2;
@@ -386,8 +386,8 @@ void DeadlineCheckRequest::MergeFrom(const ::google::protobuf::Message& from) {
 void DeadlineCheckRequest::MergeFrom(const DeadlineCheckRequest& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_name()) {
-      set_name(from.name());
+    if (from.has_class_name()) {
+      set_class_name(from.class_name());
     }
     if (from.has_task_id()) {
       set_task_id(from.task_id());
@@ -421,7 +421,7 @@ bool DeadlineCheckRequest::IsInitialized() const {
 
 void DeadlineCheckRequest::Swap(DeadlineCheckRequest* other) {
   if (other != this) {
-    std::swap(name_, other->name_);
+    std::swap(class_name_, other->class_name_);
     std::swap(task_id_, other->task_id_);
     std::swap(org_id_, other->org_id_);
     std::swap(user_id_, other->user_id_);

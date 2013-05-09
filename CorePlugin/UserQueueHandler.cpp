@@ -53,9 +53,9 @@ void UserQueueHandler::messageReceived(AMQPMessage *message)
     RequestMessage requestMessage;
     requestMessage.ParseFromString(message_body.toStdString());
 
-    int classId = QMetaType::type(QString::fromStdString(requestMessage.name()).toLatin1());
+    int classId = QMetaType::type(QString::fromStdString(requestMessage.class_name()).toLatin1());
     if (classId == 0) {
-        qDebug() << "TaskQueueHandler: Invalid proto type: " << QString::fromStdString(requestMessage.name());
+        qDebug() << "TaskQueueHandler: Invalid proto type: " << QString::fromStdString(requestMessage.class_name());
     } else {
         JobInterface *runnable = static_cast<JobInterface *>(QMetaType::construct(classId));
         runnable->setAMQPMessage(message);
@@ -81,7 +81,7 @@ bool UserQueueHandler::isEnabled()
 void UserQueueHandler::registerRequestTypes()
 {
     StatisticsUpdateRequest statUpdate = StatisticsUpdateRequest();
-    qRegisterMetaType<StatisticsUpdate>(QString::fromStdString(statUpdate.name()).toLatin1());
+    qRegisterMetaType<StatisticsUpdate>(QString::fromStdString(statUpdate.class_name()).toLatin1());
     UserTaskStreamNotificationRequest streamReq = UserTaskStreamNotificationRequest();
-    qRegisterMetaType<TaskStreamNotificationHandler>(QString::fromStdString(streamReq.name()).toLatin1());
+    qRegisterMetaType<TaskStreamNotificationHandler>(QString::fromStdString(streamReq.class_name()).toLatin1());
 }

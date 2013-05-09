@@ -88,25 +88,25 @@ class RequestMessage : public ::google::protobuf::Message {
   
   // accessors -------------------------------------------------------
   
-  // required string name = 1;
-  inline bool has_name() const;
-  inline void clear_name();
-  static const int kNameFieldNumber = 1;
-  inline const ::std::string& name() const;
-  inline void set_name(const ::std::string& value);
-  inline void set_name(const char* value);
-  inline void set_name(const char* value, size_t size);
-  inline ::std::string* mutable_name();
-  inline ::std::string* release_name();
+  // required string class_name = 1;
+  inline bool has_class_name() const;
+  inline void clear_class_name();
+  static const int kClassNameFieldNumber = 1;
+  inline const ::std::string& class_name() const;
+  inline void set_class_name(const ::std::string& value);
+  inline void set_class_name(const char* value);
+  inline void set_class_name(const char* value, size_t size);
+  inline ::std::string* mutable_class_name();
+  inline ::std::string* release_class_name();
   
   // @@protoc_insertion_point(class_scope:RequestMessage)
  private:
-  inline void set_has_name();
-  inline void clear_has_name();
+  inline void set_has_class_name();
+  inline void clear_has_class_name();
   
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
   
-  ::std::string* name_;
+  ::std::string* class_name_;
   
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
@@ -125,60 +125,60 @@ class RequestMessage : public ::google::protobuf::Message {
 
 // RequestMessage
 
-// required string name = 1;
-inline bool RequestMessage::has_name() const {
+// required string class_name = 1;
+inline bool RequestMessage::has_class_name() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void RequestMessage::set_has_name() {
+inline void RequestMessage::set_has_class_name() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void RequestMessage::clear_has_name() {
+inline void RequestMessage::clear_has_class_name() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void RequestMessage::clear_name() {
-  if (name_ != &::google::protobuf::internal::kEmptyString) {
-    name_->clear();
+inline void RequestMessage::clear_class_name() {
+  if (class_name_ != &::google::protobuf::internal::kEmptyString) {
+    class_name_->clear();
   }
-  clear_has_name();
+  clear_has_class_name();
 }
-inline const ::std::string& RequestMessage::name() const {
-  return *name_;
+inline const ::std::string& RequestMessage::class_name() const {
+  return *class_name_;
 }
-inline void RequestMessage::set_name(const ::std::string& value) {
-  set_has_name();
-  if (name_ == &::google::protobuf::internal::kEmptyString) {
-    name_ = new ::std::string;
+inline void RequestMessage::set_class_name(const ::std::string& value) {
+  set_has_class_name();
+  if (class_name_ == &::google::protobuf::internal::kEmptyString) {
+    class_name_ = new ::std::string;
   }
-  name_->assign(value);
+  class_name_->assign(value);
 }
-inline void RequestMessage::set_name(const char* value) {
-  set_has_name();
-  if (name_ == &::google::protobuf::internal::kEmptyString) {
-    name_ = new ::std::string;
+inline void RequestMessage::set_class_name(const char* value) {
+  set_has_class_name();
+  if (class_name_ == &::google::protobuf::internal::kEmptyString) {
+    class_name_ = new ::std::string;
   }
-  name_->assign(value);
+  class_name_->assign(value);
 }
-inline void RequestMessage::set_name(const char* value, size_t size) {
-  set_has_name();
-  if (name_ == &::google::protobuf::internal::kEmptyString) {
-    name_ = new ::std::string;
+inline void RequestMessage::set_class_name(const char* value, size_t size) {
+  set_has_class_name();
+  if (class_name_ == &::google::protobuf::internal::kEmptyString) {
+    class_name_ = new ::std::string;
   }
-  name_->assign(reinterpret_cast<const char*>(value), size);
+  class_name_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* RequestMessage::mutable_name() {
-  set_has_name();
-  if (name_ == &::google::protobuf::internal::kEmptyString) {
-    name_ = new ::std::string;
+inline ::std::string* RequestMessage::mutable_class_name() {
+  set_has_class_name();
+  if (class_name_ == &::google::protobuf::internal::kEmptyString) {
+    class_name_ = new ::std::string;
   }
-  return name_;
+  return class_name_;
 }
-inline ::std::string* RequestMessage::release_name() {
-  clear_has_name();
-  if (name_ == &::google::protobuf::internal::kEmptyString) {
+inline ::std::string* RequestMessage::release_class_name() {
+  clear_has_class_name();
+  if (class_name_ == &::google::protobuf::internal::kEmptyString) {
     return NULL;
   } else {
-    ::std::string* temp = name_;
-    name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    ::std::string* temp = class_name_;
+    class_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
     return temp;
   }
 }

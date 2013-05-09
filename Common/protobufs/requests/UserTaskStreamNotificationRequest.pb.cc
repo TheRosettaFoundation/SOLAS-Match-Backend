@@ -30,7 +30,7 @@ void protobuf_AssignDesc_UserTaskStreamNotificationRequest_2eproto() {
   GOOGLE_CHECK(file != NULL);
   UserTaskStreamNotificationRequest_descriptor_ = file->message_type(0);
   static const int UserTaskStreamNotificationRequest_offsets_[1] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserTaskStreamNotificationRequest, name_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserTaskStreamNotificationRequest, class_name_),
   };
   UserTaskStreamNotificationRequest_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -74,9 +74,9 @@ void protobuf_AddDesc_UserTaskStreamNotificationRequest_2eproto() {
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\'UserTaskStreamNotificationRequest.prot"
-    "o\"T\n!UserTaskStreamNotificationRequest\022/"
-    "\n\004name\030\001 \002(\t:!UserTaskStreamNotification"
-    "Request", 127);
+    "o\"Z\n!UserTaskStreamNotificationRequest\0225"
+    "\n\nclass_name\030\001 \002(\t:!UserTaskStreamNotifi"
+    "cationRequest", 133);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "UserTaskStreamNotificationRequest.proto", &protobuf_RegisterTypes);
   UserTaskStreamNotificationRequest::default_instance_ = new UserTaskStreamNotificationRequest();
@@ -94,9 +94,9 @@ struct StaticDescriptorInitializer_UserTaskStreamNotificationRequest_2eproto {
 
 // ===================================================================
 
-const ::std::string UserTaskStreamNotificationRequest::_default_name_("UserTaskStreamNotificationRequest");
+const ::std::string UserTaskStreamNotificationRequest::_default_class_name_("UserTaskStreamNotificationRequest");
 #ifndef _MSC_VER
-const int UserTaskStreamNotificationRequest::kNameFieldNumber;
+const int UserTaskStreamNotificationRequest::kClassNameFieldNumber;
 #endif  // !_MSC_VER
 
 UserTaskStreamNotificationRequest::UserTaskStreamNotificationRequest()
@@ -115,7 +115,7 @@ UserTaskStreamNotificationRequest::UserTaskStreamNotificationRequest(const UserT
 
 void UserTaskStreamNotificationRequest::SharedCtor() {
   _cached_size_ = 0;
-  name_ = const_cast< ::std::string*>(&_default_name_);
+  class_name_ = const_cast< ::std::string*>(&_default_class_name_);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -124,8 +124,8 @@ UserTaskStreamNotificationRequest::~UserTaskStreamNotificationRequest() {
 }
 
 void UserTaskStreamNotificationRequest::SharedDtor() {
-  if (name_ != &_default_name_) {
-    delete name_;
+  if (class_name_ != &_default_class_name_) {
+    delete class_name_;
   }
   if (this != default_instance_) {
   }
@@ -153,9 +153,9 @@ UserTaskStreamNotificationRequest* UserTaskStreamNotificationRequest::New() cons
 
 void UserTaskStreamNotificationRequest::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (has_name()) {
-      if (name_ != &_default_name_) {
-        name_->assign(_default_name_);
+    if (has_class_name()) {
+      if (class_name_ != &_default_class_name_) {
+        class_name_->assign(_default_class_name_);
       }
     }
   }
@@ -169,14 +169,14 @@ bool UserTaskStreamNotificationRequest::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required string name = 1 [default = "UserTaskStreamNotificationRequest"];
+      // required string class_name = 1 [default = "UserTaskStreamNotificationRequest"];
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_name()));
+                input, this->mutable_class_name()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->name().data(), this->name().length(),
+            this->class_name().data(), this->class_name().length(),
             ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
@@ -203,13 +203,13 @@ bool UserTaskStreamNotificationRequest::MergePartialFromCodedStream(
 
 void UserTaskStreamNotificationRequest::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required string name = 1 [default = "UserTaskStreamNotificationRequest"];
-  if (has_name()) {
+  // required string class_name = 1 [default = "UserTaskStreamNotificationRequest"];
+  if (has_class_name()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->name().data(), this->name().length(),
+      this->class_name().data(), this->class_name().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     ::google::protobuf::internal::WireFormatLite::WriteString(
-      1, this->name(), output);
+      1, this->class_name(), output);
   }
   
   if (!unknown_fields().empty()) {
@@ -220,14 +220,14 @@ void UserTaskStreamNotificationRequest::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* UserTaskStreamNotificationRequest::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required string name = 1 [default = "UserTaskStreamNotificationRequest"];
-  if (has_name()) {
+  // required string class_name = 1 [default = "UserTaskStreamNotificationRequest"];
+  if (has_class_name()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->name().data(), this->name().length(),
+      this->class_name().data(), this->class_name().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->name(), target);
+        1, this->class_name(), target);
   }
   
   if (!unknown_fields().empty()) {
@@ -241,11 +241,11 @@ int UserTaskStreamNotificationRequest::ByteSize() const {
   int total_size = 0;
   
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required string name = 1 [default = "UserTaskStreamNotificationRequest"];
-    if (has_name()) {
+    // required string class_name = 1 [default = "UserTaskStreamNotificationRequest"];
+    if (has_class_name()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->name());
+          this->class_name());
     }
     
   }
@@ -275,8 +275,8 @@ void UserTaskStreamNotificationRequest::MergeFrom(const ::google::protobuf::Mess
 void UserTaskStreamNotificationRequest::MergeFrom(const UserTaskStreamNotificationRequest& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_name()) {
-      set_name(from.name());
+    if (from.has_class_name()) {
+      set_class_name(from.class_name());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -302,7 +302,7 @@ bool UserTaskStreamNotificationRequest::IsInitialized() const {
 
 void UserTaskStreamNotificationRequest::Swap(UserTaskStreamNotificationRequest* other) {
   if (other != this) {
-    std::swap(name_, other->name_);
+    std::swap(class_name_, other->class_name_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

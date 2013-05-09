@@ -88,16 +88,16 @@ class DeadlineCheckRequest : public ::google::protobuf::Message {
   
   // accessors -------------------------------------------------------
   
-  // optional string name = 1 [default = "DeadlineCheckRequest"];
-  inline bool has_name() const;
-  inline void clear_name();
-  static const int kNameFieldNumber = 1;
-  inline const ::std::string& name() const;
-  inline void set_name(const ::std::string& value);
-  inline void set_name(const char* value);
-  inline void set_name(const char* value, size_t size);
-  inline ::std::string* mutable_name();
-  inline ::std::string* release_name();
+  // optional string class_name = 1 [default = "DeadlineCheckRequest"];
+  inline bool has_class_name() const;
+  inline void clear_class_name();
+  static const int kClassNameFieldNumber = 1;
+  inline const ::std::string& class_name() const;
+  inline void set_class_name(const ::std::string& value);
+  inline void set_class_name(const char* value);
+  inline void set_class_name(const char* value, size_t size);
+  inline ::std::string* mutable_class_name();
+  inline ::std::string* release_class_name();
   
   // optional int32 task_id = 2;
   inline bool has_task_id() const;
@@ -122,8 +122,8 @@ class DeadlineCheckRequest : public ::google::protobuf::Message {
   
   // @@protoc_insertion_point(class_scope:DeadlineCheckRequest)
  private:
-  inline void set_has_name();
-  inline void clear_has_name();
+  inline void set_has_class_name();
+  inline void clear_has_class_name();
   inline void set_has_task_id();
   inline void clear_has_task_id();
   inline void set_has_org_id();
@@ -133,8 +133,8 @@ class DeadlineCheckRequest : public ::google::protobuf::Message {
   
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
   
-  ::std::string* name_;
-  static const ::std::string _default_name_;
+  ::std::string* class_name_;
+  static const ::std::string _default_class_name_;
   ::google::protobuf::int32 task_id_;
   ::google::protobuf::int32 org_id_;
   ::google::protobuf::int32 user_id_;
@@ -156,60 +156,60 @@ class DeadlineCheckRequest : public ::google::protobuf::Message {
 
 // DeadlineCheckRequest
 
-// optional string name = 1 [default = "DeadlineCheckRequest"];
-inline bool DeadlineCheckRequest::has_name() const {
+// optional string class_name = 1 [default = "DeadlineCheckRequest"];
+inline bool DeadlineCheckRequest::has_class_name() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void DeadlineCheckRequest::set_has_name() {
+inline void DeadlineCheckRequest::set_has_class_name() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void DeadlineCheckRequest::clear_has_name() {
+inline void DeadlineCheckRequest::clear_has_class_name() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void DeadlineCheckRequest::clear_name() {
-  if (name_ != &_default_name_) {
-    name_->assign(_default_name_);
+inline void DeadlineCheckRequest::clear_class_name() {
+  if (class_name_ != &_default_class_name_) {
+    class_name_->assign(_default_class_name_);
   }
-  clear_has_name();
+  clear_has_class_name();
 }
-inline const ::std::string& DeadlineCheckRequest::name() const {
-  return *name_;
+inline const ::std::string& DeadlineCheckRequest::class_name() const {
+  return *class_name_;
 }
-inline void DeadlineCheckRequest::set_name(const ::std::string& value) {
-  set_has_name();
-  if (name_ == &_default_name_) {
-    name_ = new ::std::string;
+inline void DeadlineCheckRequest::set_class_name(const ::std::string& value) {
+  set_has_class_name();
+  if (class_name_ == &_default_class_name_) {
+    class_name_ = new ::std::string;
   }
-  name_->assign(value);
+  class_name_->assign(value);
 }
-inline void DeadlineCheckRequest::set_name(const char* value) {
-  set_has_name();
-  if (name_ == &_default_name_) {
-    name_ = new ::std::string;
+inline void DeadlineCheckRequest::set_class_name(const char* value) {
+  set_has_class_name();
+  if (class_name_ == &_default_class_name_) {
+    class_name_ = new ::std::string;
   }
-  name_->assign(value);
+  class_name_->assign(value);
 }
-inline void DeadlineCheckRequest::set_name(const char* value, size_t size) {
-  set_has_name();
-  if (name_ == &_default_name_) {
-    name_ = new ::std::string;
+inline void DeadlineCheckRequest::set_class_name(const char* value, size_t size) {
+  set_has_class_name();
+  if (class_name_ == &_default_class_name_) {
+    class_name_ = new ::std::string;
   }
-  name_->assign(reinterpret_cast<const char*>(value), size);
+  class_name_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* DeadlineCheckRequest::mutable_name() {
-  set_has_name();
-  if (name_ == &_default_name_) {
-    name_ = new ::std::string(_default_name_);
+inline ::std::string* DeadlineCheckRequest::mutable_class_name() {
+  set_has_class_name();
+  if (class_name_ == &_default_class_name_) {
+    class_name_ = new ::std::string(_default_class_name_);
   }
-  return name_;
+  return class_name_;
 }
-inline ::std::string* DeadlineCheckRequest::release_name() {
-  clear_has_name();
-  if (name_ == &_default_name_) {
+inline ::std::string* DeadlineCheckRequest::release_class_name() {
+  clear_has_class_name();
+  if (class_name_ == &_default_class_name_) {
     return NULL;
   } else {
-    ::std::string* temp = name_;
-    name_ = const_cast< ::std::string*>(&_default_name_);
+    ::std::string* temp = class_name_;
+    class_name_ = const_cast< ::std::string*>(&_default_class_name_);
     return temp;
   }
 }

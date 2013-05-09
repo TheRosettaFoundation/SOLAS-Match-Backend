@@ -30,7 +30,7 @@ void protobuf_AssignDesc_RequestMessage_2eproto() {
   GOOGLE_CHECK(file != NULL);
   RequestMessage_descriptor_ = file->message_type(0);
   static const int RequestMessage_offsets_[1] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RequestMessage, name_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RequestMessage, class_name_),
   };
   RequestMessage_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -73,8 +73,8 @@ void protobuf_AddDesc_RequestMessage_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\024RequestMessage.proto\"\036\n\016RequestMessage"
-    "\022\014\n\004name\030\001 \002(\t", 54);
+    "\n\024RequestMessage.proto\"$\n\016RequestMessage"
+    "\022\022\n\nclass_name\030\001 \002(\t", 60);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "RequestMessage.proto", &protobuf_RegisterTypes);
   RequestMessage::default_instance_ = new RequestMessage();
@@ -93,7 +93,7 @@ struct StaticDescriptorInitializer_RequestMessage_2eproto {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int RequestMessage::kNameFieldNumber;
+const int RequestMessage::kClassNameFieldNumber;
 #endif  // !_MSC_VER
 
 RequestMessage::RequestMessage()
@@ -112,7 +112,7 @@ RequestMessage::RequestMessage(const RequestMessage& from)
 
 void RequestMessage::SharedCtor() {
   _cached_size_ = 0;
-  name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  class_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -121,8 +121,8 @@ RequestMessage::~RequestMessage() {
 }
 
 void RequestMessage::SharedDtor() {
-  if (name_ != &::google::protobuf::internal::kEmptyString) {
-    delete name_;
+  if (class_name_ != &::google::protobuf::internal::kEmptyString) {
+    delete class_name_;
   }
   if (this != default_instance_) {
   }
@@ -150,9 +150,9 @@ RequestMessage* RequestMessage::New() const {
 
 void RequestMessage::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (has_name()) {
-      if (name_ != &::google::protobuf::internal::kEmptyString) {
-        name_->clear();
+    if (has_class_name()) {
+      if (class_name_ != &::google::protobuf::internal::kEmptyString) {
+        class_name_->clear();
       }
     }
   }
@@ -166,14 +166,14 @@ bool RequestMessage::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required string name = 1;
+      // required string class_name = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_name()));
+                input, this->mutable_class_name()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->name().data(), this->name().length(),
+            this->class_name().data(), this->class_name().length(),
             ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
@@ -200,13 +200,13 @@ bool RequestMessage::MergePartialFromCodedStream(
 
 void RequestMessage::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required string name = 1;
-  if (has_name()) {
+  // required string class_name = 1;
+  if (has_class_name()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->name().data(), this->name().length(),
+      this->class_name().data(), this->class_name().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     ::google::protobuf::internal::WireFormatLite::WriteString(
-      1, this->name(), output);
+      1, this->class_name(), output);
   }
   
   if (!unknown_fields().empty()) {
@@ -217,14 +217,14 @@ void RequestMessage::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* RequestMessage::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required string name = 1;
-  if (has_name()) {
+  // required string class_name = 1;
+  if (has_class_name()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->name().data(), this->name().length(),
+      this->class_name().data(), this->class_name().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->name(), target);
+        1, this->class_name(), target);
   }
   
   if (!unknown_fields().empty()) {
@@ -238,11 +238,11 @@ int RequestMessage::ByteSize() const {
   int total_size = 0;
   
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required string name = 1;
-    if (has_name()) {
+    // required string class_name = 1;
+    if (has_class_name()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->name());
+          this->class_name());
     }
     
   }
@@ -272,8 +272,8 @@ void RequestMessage::MergeFrom(const ::google::protobuf::Message& from) {
 void RequestMessage::MergeFrom(const RequestMessage& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_name()) {
-      set_name(from.name());
+    if (from.has_class_name()) {
+      set_class_name(from.class_name());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -299,7 +299,7 @@ bool RequestMessage::IsInitialized() const {
 
 void RequestMessage::Swap(RequestMessage* other) {
   if (other != this) {
-    std::swap(name_, other->name_);
+    std::swap(class_name_, other->class_name_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

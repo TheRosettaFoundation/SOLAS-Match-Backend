@@ -57,9 +57,9 @@ void TaskQueueHandler::messageReceived(AMQPMessage *message)
     RequestMessage requestMessage;
     requestMessage.ParseFromString(message_body.toStdString());
 
-    int classId = QMetaType::type(QString::fromStdString(requestMessage.name()).toLatin1());
+    int classId = QMetaType::type(QString::fromStdString(requestMessage.class_name()).toLatin1());
     if (classId == 0) {
-        qDebug() << "TaskQueueHandler: Invalid proto type: " << QString::fromStdString(requestMessage.name());
+        qDebug() << "TaskQueueHandler: Invalid proto type: " << QString::fromStdString(requestMessage.class_name());
     } else {
         JobInterface *runnable = static_cast<JobInterface *>(QMetaType::construct(classId));
         runnable->setAMQPMessage(message);
@@ -70,9 +70,9 @@ void TaskQueueHandler::messageReceived(AMQPMessage *message)
 void TaskQueueHandler::registerRequestTypes()
 {
     UserTaskScoreRequest scoreReq = UserTaskScoreRequest();
-    qRegisterMetaType<CalculateTaskScore>(QString::fromStdString(scoreReq.name()).toLatin1());
+    qRegisterMetaType<CalculateTaskScore>(QString::fromStdString(scoreReq.class_name()).toLatin1());
     DeadlineCheckRequest deadlineReq = DeadlineCheckRequest();
-    qRegisterMetaType<DeadlineChecker>(QString::fromStdString(deadlineReq.name()).toLatin1());
+    qRegisterMetaType<DeadlineChecker>(QString::fromStdString(deadlineReq.class_name()).toLatin1());
 }
 
 void TaskQueueHandler::calculateAllTasksScore()
