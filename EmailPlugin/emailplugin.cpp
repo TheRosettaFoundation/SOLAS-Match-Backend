@@ -20,21 +20,13 @@
 #include "Generators/TrackedTaskUploadedEmailGenerator.h"
 #include "Generators/EmailVerificationGenerator.h"
 #include "Generators/BannedLoginGenerator.h"
+#include "Generators/TrackedTaskSourceUpdatedGenerator.h"
+#include "Generators/ClaimedTaskSourceUpdatedGenerator.h"
+#include "Generators/ClaimedTaskUploadedGenerator.h"
 
 #include "Smtp.h"
 #include "IEmailGenerator.h"
 #include "Common/ConfigParser.h"
-#include "Common/protobufs/emails/TaskScoreEmail.pb.h"
-#include "Common/protobufs/emails/OrgTaskDeadlinePassed.pb.h"
-#include "Common/protobufs/emails/OrgMembershipAccepted.pb.h"
-#include "Common/protobufs/emails/OrgMembershipRefused.pb.h"
-#include "Common/protobufs/emails/PasswordResetEmail.pb.h"
-#include "Common/protobufs/emails/TaskArchived.pb.h"
-#include "Common/protobufs/emails/TaskClaimed.pb.h"
-#include "Common/protobufs/emails/TrackedTaskUploaded.pb.h"
-#include "Common/protobufs/emails/UserTaskClaim.pb.h"
-#include "Common/protobufs/emails/FeedbackEmail.pb.h"
-#include "Common/protobufs/emails/BannedLogin.pb.h"
 
 #include "Common/MessagingClient.h"
 
@@ -133,6 +125,12 @@ void EmailPlugin::registerEmailTypes()
     qRegisterMetaType<EmailVerificationGenerator>(name.toLatin1());
     name = "EmailGenerator_" + QString::number(EmailMessage::BannedLogin);
     qRegisterMetaType<BannedLoginGenerator>(name.toLatin1());
+    name = "EmailGenerator_" + QString::number(EmailMessage::TrackedTaskSourceUpdated);
+    qRegisterMetaType<TrackedTaskSourceUpdatedGenerator>(name.toLatin1());
+    name = "EmailGenerator_" + QString::number(EmailMessage::ClaimedTaskSourceUpdated);
+    qRegisterMetaType<ClaimedTaskSourceUpdatedGenerator>(name.toLatin1());
+    name = "EmailGenerator_" + QString::number(EmailMessage::ClaimedTaskUploaded);
+    qRegisterMetaType<ClaimedTaskUploadedGenerator>(name.toLatin1());
 }
 
 void EmailPlugin::setThreadPool(QThreadPool *tp)

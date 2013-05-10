@@ -34,8 +34,6 @@ void SendTaskUploadNotifications::run()
         TaskUploadNotificationRequest request;
         request.ParseFromString(body);
 
-        qDebug() << "SendTaskUploadNotifications: Task id is " << request.task_id();
-
         QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
         QSharedPointer<Task> task = TaskDao::getTask(db, request.task_id());
 
