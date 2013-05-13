@@ -33,9 +33,6 @@ void ProjectQueueHandler::run()
     QTimer *message_queue_read_timer = new QTimer();
     connect(message_queue_read_timer, SIGNAL(timeout()), client, SLOT(consumeFromQueue()));
     message_queue_read_timer->start(settings.get("messaging.poll_rate").toInt());
-
-    JobInterface *runnable = new CalculateProjectDeadlines();
-    this->mThreadPool->start(runnable);
 }
 
 void ProjectQueueHandler::messageReceived(AMQPMessage *message)
