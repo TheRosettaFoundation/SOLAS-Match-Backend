@@ -64,7 +64,8 @@ SOURCES += \
     protobufs/emails/ClaimedTaskSourceUpdated.pb.cc \
     protobufs/emails/ClaimedTaskUploaded.pb.cc \
     protobufs/emails/TrackedTaskSourceUpdated.pb.cc \
-    protobufs/emails/TrackedTaskUploaded.pb.cc
+    protobufs/emails/TrackedTaskUploaded.pb.cc \
+    protobufs/requests/CalculateProjectDeadlinesRequest.pb.cc
 
 HEADERS +=\
     MySQLHandler.h \
@@ -111,7 +112,8 @@ HEADERS +=\
     protobufs/emails/ClaimedTaskSourceUpdated.pb.h \
     protobufs/emails/ClaimedTaskUploaded.pb.h \
     protobufs/emails/TrackedTaskSourceUpdated.pb.h \
-    protobufs/emails/TrackedTaskUploaded.pb.h
+    protobufs/emails/TrackedTaskUploaded.pb.h \
+    protobufs/requests/CalculateProjectDeadlinesRequest.pb.h
 
 symbian {
     MMP_RULES += EXPORTUNFROZEN

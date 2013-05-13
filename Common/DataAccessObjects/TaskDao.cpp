@@ -310,3 +310,16 @@ QSharedPointer<ArchivedTask> TaskDao::getArchivedTask(QSharedPointer<MySQLHandle
     }
     return task;
 }
+
+QList<QSharedPointer<Task> > TaskDao::getTaskPreReqs(QSharedPointer<MySQLHandler> db, int taskId)
+{
+    QList<QSharedPointer<Task> > tasks = QList<QSharedPointer<Task> >();
+    QSharedPointer<QSqlQuery> mQuery = db->call("getTaskPreReqs", QString::number(taskId));
+    if (mQuery->first()) {
+        do {
+            QSharedPointer<Task> task = ModelGenerator::GenerateTask(mQuery);
+            tasks.append(task);
+        } while (mQuery->next());
+    }
+    return tasks;
+}

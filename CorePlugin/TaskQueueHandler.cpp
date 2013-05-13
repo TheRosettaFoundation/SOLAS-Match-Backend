@@ -16,7 +16,7 @@
 
 TaskQueueHandler::TaskQueueHandler()
 {
-    qDebug() << "Constructing TaskQueueHandler";
+    // Default Constructor
 }
 
 void TaskQueueHandler::run()
