@@ -1,5 +1,5 @@
-#ifndef DEFINITIONS_H
-#define DEFINITIONS_H
+#ifndef EMAILDEFINITIONS_H
+#define EMAILDEFINITIONS_H
 
 #include <QMap>
 #include <QSharedPointer>
@@ -8,13 +8,6 @@
 
 typedef QMap<QSharedPointer<Email>, AMQPMessage *> EmailQueue;
 
-enum TaskTypes {
-    CHUNKING = 1,
-    TRANSLATION = 2,
-    PROOFREADING = 3,
-    POSTEDITING = 4
-};
-
 #define TEMPLATE_DIRECTORY "./templates/"
 
-#endif // DEFINITIONS_H
+#endif // EMAILDEFINITIONS_H

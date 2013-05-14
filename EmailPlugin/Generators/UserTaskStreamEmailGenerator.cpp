@@ -2,6 +2,7 @@
 
 #include <QDateTime>
 
+#include "Common/Definitions.h"
 #include "Common/protobufs/models/Language.pb.h"
 #include "Common/DataAccessObjects/LanguageDao.h"
 #include "Common/DataAccessObjects/TagDao.h"

@@ -10,7 +10,7 @@
 #include <ctemplate/template.h>
 
 #include "Email.h"
-#include "Definitions.h"
+#include "EmailDefinitions.h"
 
 #include "Common/ConfigParser.h"
 #include "Common/MySQLHandler.h"

@@ -56,7 +56,6 @@ HEADERS += emailplugin.h\
     IEmailGenerator.h \
     Generators/OrgMembershipAcceptedGenerator.h \
     Generators/OrgMembershipRefusedEmailGenerator.h \
-    Definitions.h \
     Generators/PasswordResetEmailGenerator.h \
     Generators/TaskArchivedEmailGenerator.h \
     Generators/TaskClaimedEmailGenerator.h \
@@ -70,4 +69,5 @@ HEADERS += emailplugin.h\
     Generators/TrackedTaskUploadedEmailGenerator.h \
     Generators/TrackedTaskSourceUpdatedGenerator.h \
     Generators/ClaimedTaskUploadedGenerator.h \
-    Generators/ClaimedTaskSourceUpdatedGenerator.h
+    Generators/ClaimedTaskSourceUpdatedGenerator.h \
+    EmailDefinitions.h

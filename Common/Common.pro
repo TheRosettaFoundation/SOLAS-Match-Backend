@@ -65,7 +65,10 @@ SOURCES += \
     protobufs/emails/ClaimedTaskUploaded.pb.cc \
     protobufs/emails/TrackedTaskSourceUpdated.pb.cc \
     protobufs/emails/TrackedTaskUploaded.pb.cc \
-    protobufs/requests/CalculateProjectDeadlinesRequest.pb.cc
+    protobufs/requests/CalculateProjectDeadlinesRequest.pb.cc \
+    protobufs/models/WorkflowGraph.pb.cc \
+    protobufs/models/WorkflowNode.pb.cc \
+    GraphBuilder.cpp
 
 HEADERS +=\
     MySQLHandler.h \
@@ -113,7 +116,11 @@ HEADERS +=\
     protobufs/emails/ClaimedTaskUploaded.pb.h \
     protobufs/emails/TrackedTaskSourceUpdated.pb.h \
     protobufs/emails/TrackedTaskUploaded.pb.h \
-    protobufs/requests/CalculateProjectDeadlinesRequest.pb.h
+    protobufs/requests/CalculateProjectDeadlinesRequest.pb.h \
+    Definitions.h \
+    GraphBuilder.h \
+    protobufs/models/WorkflowGraph.pb.h \
+    protobufs/models/WorkflowNode.pb.h
 
 symbian {
     MMP_RULES += EXPORTUNFROZEN

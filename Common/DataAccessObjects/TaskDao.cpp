@@ -163,12 +163,6 @@ QSharedPointer<Task> TaskDao::insertAndUpdate(QSharedPointer<MySQLHandler> db, Q
         args += "null, ";
     }
 
-    if (task->createdtime() != "") {
-        args += MySQLHandler::wrapStdString(task->createdtime()) + ", ";
-    } else {
-        args += "null, ";
-    }
-
     if (task->comment() != "") {
         args += MySQLHandler::wrapStdString(task->comment()) + ", ";
     } else {
