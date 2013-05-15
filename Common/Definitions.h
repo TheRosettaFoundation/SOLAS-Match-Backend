@@ -8,4 +8,11 @@ enum TaskTypes {
     POSTEDITING = 4
 };
 
+enum TaskStatus {
+    WAITING_FOR_PREREQUISITES = 1,
+    PENDING_CLAIM = 2,
+    IN_PROGRESS = 3,
+    COMPLETE = 4
+};
+
 #endif // DEFINITIONS_H

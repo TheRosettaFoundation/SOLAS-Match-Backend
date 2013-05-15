@@ -13,6 +13,7 @@ public:
     bool getProjectGraph(int projectId);
     bool insertNode(WorkflowNode *node);
     bool updateNode(WorkflowNode *node);
+    bool isGraphValid();
     int find(int taskId);
     QSharedPointer<WorkflowGraph> getGraph();
     void printGraph();

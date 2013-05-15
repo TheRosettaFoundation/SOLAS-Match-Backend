@@ -23,6 +23,7 @@ bool GraphBuilder::getProjectGraph(int projectId)
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
     QList<QSharedPointer<Task> > tasks = TaskDao::getTasks(db, -1, projectId);
     if (tasks.count() > 0) {
+        QMap<int, QSharedPointer<Task> > tasksMap = QMap<int, QSharedPointer<Task> >();
         QMap<int, QList<QSharedPointer<Task> > > taskPreReqs = QMap<int, QList<QSharedPointer<Task> > >();
         QList<int> previousLayer = QList<int>();
         QList<int> currentLayer = QList<int>();
@@ -31,10 +32,13 @@ bool GraphBuilder::getProjectGraph(int projectId)
             if (preReqs.count() < 1) {
                 WorkflowNode *node = new WorkflowNode();
                 node->set_taskid(task->id());
+                Task *mTask = node->mutable_task();
+                mTask->CopyFrom(*task);
                 this->insertNode(node);
                 previousLayer.append(task->id());
             } else {
                 taskPreReqs.insert(task->id(), preReqs);
+                tasksMap.insert(task->id(), task);
             }
         }
 
@@ -55,6 +59,8 @@ bool GraphBuilder::getProjectGraph(int projectId)
                     if (preReqs.count() < 1) {
                         WorkflowNode *newNode = new WorkflowNode();
                         newNode->set_taskid(i.key());
+                        Task *mTask = newNode->mutable_task();
+                        mTask->CopyFrom(*(tasksMap.value(i.key())));
 
                         foreach (int preReqId, satisfiedPreReqs) {
                             newNode->add_previous(preReqId);
@@ -79,10 +85,12 @@ bool GraphBuilder::getProjectGraph(int projectId)
 
             if (taskPreReqs.count() > 0) {
                 qDebug() << "GraphBuilder: A deadlock occured";
+                this->graph->Clear();
                 ret = false;
             }
         } else {
             qDebug() << "GraphBuilder: No root nodes present";
+            this->graph->Clear();
             ret = false;
         }
     } else {
@@ -130,6 +138,15 @@ bool GraphBuilder::updateNode(WorkflowNode *node)
         }
         WorkflowNode *oldNode = this->graph->mutable_allnodes(index);
         oldNode->CopyFrom(*node);
+        ret = true;
+    }
+    return ret;
+}
+
+bool GraphBuilder::isGraphValid()
+{
+    bool ret = false;
+    if (!this->graph.isNull() && this->graph->rootnode_size() > 0) {
         ret = true;
     }
     return ret;
