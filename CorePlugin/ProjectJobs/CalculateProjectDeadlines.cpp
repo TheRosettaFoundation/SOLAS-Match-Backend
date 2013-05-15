@@ -42,7 +42,7 @@ void CalculateProjectDeadlines::run()
             foreach (::google::protobuf::int32 nodeId, graph->rootnode()) {
                 int index = mBuilder.find(nodeId);
                 WorkflowNode node = graph->allnodes(index);
-                this->calculateSubGraphDeadlines(node, mBuilder, project);
+                this->calculateSubGraphDeadlines(node, mBuilder, project, db);
             }
         } else {
             qDebug() << "CalculateProjectDeadlines: failed to construct workflow graph";
@@ -53,20 +53,22 @@ void CalculateProjectDeadlines::run()
 }
 
 void CalculateProjectDeadlines::calculateSubGraphDeadlines(WorkflowNode node, GraphBuilder builder,
-                                                           QSharedPointer<Project> project)
+                                                           QSharedPointer<Project> project, QSharedPointer<MySQLHandler> db)
 {
-    int *zero = new int(0);
-    int *gracePeriod = new int(1);
-    int *segmentationPeriod = new int(3);
-    int *translationPeriod = new int(3);
-    int *proofreadingPeriod = new int(3);
-    int *desegmentationPeriod = new int(3);
-    QList<int *> deadlineLengths = QList<int *>();
+    QMap<QString, int> deadlineDefaults = QMap<QString, int>();
+    deadlineDefaults.insert("zero", 0);
+    deadlineDefaults.insert("gracePeriod", 1);
+    deadlineDefaults.insert("segmentationPeriod", 3);
+    deadlineDefaults.insert("translationPeriod", 3);
+    deadlineDefaults.insert("proofreadingPeriod", 3);
+    deadlineDefaults.insert("desegmentationPeriod", 3);
+    QList<QString> deadlineLengths = QList<QString>();
 
     QDateTime projectDeadline = QDateTime::fromString(
                 QString::fromStdString(project->deadline()), "yyyy-MM-ddTHH:mm:ss");
     QDateTime createdDate = QDateTime::fromString(
                 QString::fromStdString(project->createdtime()), "yyyy-MM-ddTHH:mm:ss");
+
     ::google::protobuf::RepeatedField< ::google::protobuf::int32> currentLayer =
             ::google::protobuf::RepeatedField< ::google::protobuf::int32>();
     currentLayer.Add(node.taskid());
@@ -74,31 +76,32 @@ void CalculateProjectDeadlines::calculateSubGraphDeadlines(WorkflowNode node, Gr
             ::google::protobuf::RepeatedField< ::google::protobuf::int32>();
     ::google::protobuf::RepeatedField< ::google::protobuf::int32> previousLayer =
             ::google::protobuf::RepeatedField< ::google::protobuf::int32>();
+
     while (currentLayer.size() > 0) {
-        int *maxDeadline = zero;
+        QString maxDeadline = "zero";
         foreach (::google::protobuf::int32 nodeId, currentLayer) {
             int index = builder.find(nodeId);
             WorkflowNode node = builder.getGraph()->allnodes(index);
             Task task = node.task();
             switch (task.tasktype()) {
                 case CHUNKING:
-                if (*(maxDeadline) < *(segmentationPeriod)) {
-                    maxDeadline = segmentationPeriod;
+                if (deadlineDefaults.value(maxDeadline) < deadlineDefaults.value("segmentationPeriod")) {
+                    maxDeadline = "segmentationPeriod";
                 }
                 break;
                 case TRANSLATION:
-                if (*(maxDeadline) < *(translationPeriod)) {
-                    maxDeadline = translationPeriod;
+                if (deadlineDefaults.value(maxDeadline) < deadlineDefaults.value("translationPeriod")) {
+                    maxDeadline = "translationPeriod";
                 }
                 break;
                 case PROOFREADING:
-                if (*(maxDeadline) < *(proofreadingPeriod)) {
-                    maxDeadline = proofreadingPeriod;
+                if (deadlineDefaults.value(maxDeadline) < deadlineDefaults.value("proofreadingPeriod")) {
+                    maxDeadline = "proofreadingPeriod";
                 }
                 break;
                 case POSTEDITING:
-                if (*(maxDeadline) < *(desegmentationPeriod)) {
-                    maxDeadline = desegmentationPeriod;
+                if (deadlineDefaults.value(maxDeadline) < deadlineDefaults.value("desegmentationPeriod")) {
+                    maxDeadline = "desegmentationPeriod";
                 }
                 break;
             }
@@ -123,41 +126,10 @@ void CalculateProjectDeadlines::calculateSubGraphDeadlines(WorkflowNode node, Gr
     }
 
     deadlineLengths.removeLast();
-    deadlineLengths.append(gracePeriod);
-    int estimatedProjectLength = 0;
-    foreach (int *period, deadlineLengths) {
-        estimatedProjectLength += *(period);
-    }
+    deadlineLengths.append("gracePeriod");
+    deadlineDefaults = this->calculateDeadlineDefaults(deadlineDefaults, deadlineLengths, createdDate, projectDeadline);
 
-    int count = -1;
-    while (createdDate.addDays(estimatedProjectLength + 3) > projectDeadline) {
-        switch (count) {
-            case -1:
-                (*gracePeriod)--;
-                break;
-            case 0:
-                (*segmentationPeriod)--;
-                break;
-            case 1:
-                (*desegmentationPeriod)--;
-                break;
-            case 2:
-                (*proofreadingPeriod)--;
-                break;
-            case 3:
-                (*translationPeriod)--;
-                break;
-        }
-        count++;
-        count = count % 4;
-
-        estimatedProjectLength = 0;
-        foreach (int *period, deadlineLengths) {
-            estimatedProjectLength += *(period);
-        }
-    }
-
-    count = deadlineLengths.size() - 1;
+    int count = deadlineLengths.size() - 1;
     currentLayer = previousLayer;
     previousLayer.Clear();
     while (currentLayer.size() > 0) {
@@ -169,11 +141,11 @@ void CalculateProjectDeadlines::calculateSubGraphDeadlines(WorkflowNode node, Gr
             if (task.taskstatus() < IN_PROGRESS) {
                 int taskDeadlinePeriod = 0;
                 for (int i = count; i < deadlineLengths.size(); i++) {
-                    taskDeadlinePeriod += *(deadlineLengths.at(i));
+                    taskDeadlinePeriod += deadlineDefaults.value(deadlineLengths.at(i));
                 }
                 QDateTime taskDeadline = projectDeadline.addDays(-(taskDeadlinePeriod));
-                task.set_deadline(taskDeadline.toString("yyyy-MM-ddTHH:mm:ss").toStdString());
-                TaskDao::insertAndUpdate(db, QSharedPointer<Task>(&task));
+                task.set_deadline(taskDeadline.toString("yyyy-MM-dd HH:mm:ss").toStdString());
+                TaskDao::insertAndUpdate(db, task);
             }
 
             foreach (::google::protobuf::int32 prevId, currentNode.previous()) {
@@ -193,13 +165,46 @@ void CalculateProjectDeadlines::calculateSubGraphDeadlines(WorkflowNode node, Gr
         currentLayer = previousLayer;
         previousLayer.Clear();
     }
+}
 
-    delete zero;
-    delete gracePeriod;
-    delete segmentationPeriod;
-    delete translationPeriod;
-    delete proofreadingPeriod;
-    delete desegmentationPeriod;
+QMap<QString, int> CalculateProjectDeadlines::calculateDeadlineDefaults(QMap<QString, int> deadlineDefaults,
+                                                                        QList<QString> deadlineLengths,
+                                                                        QDateTime created, QDateTime deadline)
+{
+    int estimatedProjectLength = 0;
+    foreach (QString period, deadlineLengths) {
+        estimatedProjectLength += deadlineDefaults.value(period);
+    }
+
+    int count = -1;
+    while (created.addDays(estimatedProjectLength + 3) > deadline) {
+        switch (count) {
+            case -1:
+                deadlineDefaults.insert("gracePeriod", deadlineDefaults.value("gracePeriod") - 1);
+                break;
+            case 0:
+                deadlineDefaults.insert("segmentationPeriod", deadlineDefaults.value("segmentationPeriod") - 1);
+                break;
+            case 1:
+                deadlineDefaults.insert("desegmentationPeriod", deadlineDefaults.value("desegmentationPeriod") - 1);
+                break;
+            case 2:
+                deadlineDefaults.insert("proofreadingPeriod", deadlineDefaults.value("proofreadingPeriod") - 1);
+                break;
+            case 3:
+                deadlineDefaults.insert("translationPeriod", deadlineDefaults.value("translationPeriod") - 1);
+                break;
+        }
+        count++;
+        count = count % 4;
+
+        estimatedProjectLength = 0;
+        foreach (QString period, deadlineLengths) {
+            estimatedProjectLength += deadlineDefaults.value(period);
+        }
+    }
+
+    return deadlineDefaults;
 }
 
 void CalculateProjectDeadlines::setAMQPMessage(AMQPMessage *message)

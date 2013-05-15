@@ -121,6 +121,95 @@ QSharedPointer<Task> TaskDao::getTask(QSharedPointer<MySQLHandler> db, int id, i
     return task;
 }
 
+QSharedPointer<Task> TaskDao::insertAndUpdate(QSharedPointer<MySQLHandler> db, Task task)
+{
+    QString args = "";
+    Locale sourceLocale = task.sourcelocale();
+    Locale targetLocale = task.targetlocale();
+
+    if (task.id() > 0) {
+        args += QString::number(task.id()) + ", ";
+    } else {
+        args += "null, ";
+    }
+
+    if (task.projectid() > 0) {
+        args += QString::number(task.projectid()) + ", ";
+    } else {
+        args += "null, ";
+    }
+
+    if (task.title() != "") {
+        args += MySQLHandler::wrapStdString(task.title()) + ", ";
+    } else {
+        args += "null, ";
+    }
+
+    if (task.wordcount() > 0) {
+        args += QString::number(task.wordcount()) + ", ";
+    } else {
+        args += "null, ";
+    }
+
+    if (sourceLocale.languagecode() != "") {
+        args += MySQLHandler::wrapStdString(sourceLocale.languagecode()) + ", ";
+    } else {
+        args += "null, ";
+    }
+
+    if (targetLocale.languagecode() != "") {
+        args += MySQLHandler::wrapStdString(targetLocale.languagecode()) + ", ";
+    } else {
+        args += "null, ";
+    }
+
+    if (task.comment() != "") {
+        args += MySQLHandler::wrapStdString(task.comment()) + ", ";
+    } else {
+        args += "null, ";
+    }
+
+    if (sourceLocale.countrycode() != "") {
+        args +=  MySQLHandler::wrapStdString(sourceLocale.countrycode()) + ", ";
+    } else {
+        args += "null, ";
+    }
+
+    if (targetLocale.countrycode() != "") {
+        args += MySQLHandler::wrapStdString(targetLocale.countrycode()) + ", ";
+    } else {
+        args += "null, ";
+    }
+
+    if (task.deadline() != "") {
+        args += MySQLHandler::wrapStdString(task.deadline()) + ", ";
+    } else {
+        args += "null, ";
+    }
+
+    if (task.tasktype() > 0) {
+        args += QString::number(task.tasktype()) + ", ";
+    } else {
+        args += "null, ";
+    }
+
+    if (task.taskstatus() > 0) {
+        args += QString::number(task.taskstatus()) + ", ";
+    } else {
+        args += "null, ";
+    }
+
+    args += QString::number(task.published());
+
+    QSharedPointer<QSqlQuery> mQuery = db->call("taskInsertAndUpdate", args);
+    QSharedPointer<Task> ret = QSharedPointer<Task>();
+    if (mQuery->first()) {
+        ret = ModelGenerator::GenerateTask(mQuery);
+    }
+
+    return ret;
+}
+
 QSharedPointer<Task> TaskDao::insertAndUpdate(QSharedPointer<MySQLHandler> db, QSharedPointer<Task> task)
 {
     QString args = "";
