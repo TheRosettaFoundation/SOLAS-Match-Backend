@@ -102,16 +102,12 @@ class BannedUser : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 useridadmin() const;
   inline void set_useridadmin(::google::protobuf::int32 value);
   
-  // optional string banType = 3;
+  // optional int32 banType = 3;
   inline bool has_bantype() const;
   inline void clear_bantype();
   static const int kBanTypeFieldNumber = 3;
-  inline const ::std::string& bantype() const;
-  inline void set_bantype(const ::std::string& value);
-  inline void set_bantype(const char* value);
-  inline void set_bantype(const char* value, size_t size);
-  inline ::std::string* mutable_bantype();
-  inline ::std::string* release_bantype();
+  inline ::google::protobuf::int32 bantype() const;
+  inline void set_bantype(::google::protobuf::int32 value);
   
   // optional string comment = 4;
   inline bool has_comment() const;
@@ -152,9 +148,9 @@ class BannedUser : public ::google::protobuf::Message {
   
   ::google::protobuf::int32 userid_;
   ::google::protobuf::int32 useridadmin_;
-  ::std::string* bantype_;
   ::std::string* comment_;
   ::std::string* banneddate_;
+  ::google::protobuf::int32 bantype_;
   
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
@@ -217,7 +213,7 @@ inline void BannedUser::set_useridadmin(::google::protobuf::int32 value) {
   useridadmin_ = value;
 }
 
-// optional string banType = 3;
+// optional int32 banType = 3;
 inline bool BannedUser::has_bantype() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
@@ -228,51 +224,15 @@ inline void BannedUser::clear_has_bantype() {
   _has_bits_[0] &= ~0x00000004u;
 }
 inline void BannedUser::clear_bantype() {
-  if (bantype_ != &::google::protobuf::internal::kEmptyString) {
-    bantype_->clear();
-  }
+  bantype_ = 0;
   clear_has_bantype();
 }
-inline const ::std::string& BannedUser::bantype() const {
-  return *bantype_;
-}
-inline void BannedUser::set_bantype(const ::std::string& value) {
-  set_has_bantype();
-  if (bantype_ == &::google::protobuf::internal::kEmptyString) {
-    bantype_ = new ::std::string;
-  }
-  bantype_->assign(value);
-}
-inline void BannedUser::set_bantype(const char* value) {
-  set_has_bantype();
-  if (bantype_ == &::google::protobuf::internal::kEmptyString) {
-    bantype_ = new ::std::string;
-  }
-  bantype_->assign(value);
-}
-inline void BannedUser::set_bantype(const char* value, size_t size) {
-  set_has_bantype();
-  if (bantype_ == &::google::protobuf::internal::kEmptyString) {
-    bantype_ = new ::std::string;
-  }
-  bantype_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* BannedUser::mutable_bantype() {
-  set_has_bantype();
-  if (bantype_ == &::google::protobuf::internal::kEmptyString) {
-    bantype_ = new ::std::string;
-  }
+inline ::google::protobuf::int32 BannedUser::bantype() const {
   return bantype_;
 }
-inline ::std::string* BannedUser::release_bantype() {
-  clear_has_bantype();
-  if (bantype_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = bantype_;
-    bantype_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
+inline void BannedUser::set_bantype(::google::protobuf::int32 value) {
+  set_has_bantype();
+  bantype_ = value;
 }
 
 // optional string comment = 4;

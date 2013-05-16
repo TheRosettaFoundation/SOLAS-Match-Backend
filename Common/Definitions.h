@@ -15,4 +15,11 @@ enum TaskStatus {
     COMPLETE = 4
 };
 
+enum BanTypes {
+    DAY = 1,
+    WEEK = 2,
+    MONTH = 3,
+    PERMANENT = 4
+};
+
 #endif // DEFINITIONS_H

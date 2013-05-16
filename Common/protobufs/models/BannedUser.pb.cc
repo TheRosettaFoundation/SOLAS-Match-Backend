@@ -79,7 +79,7 @@ void protobuf_AddDesc_BannedUser_2eproto() {
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\020BannedUser.proto\"g\n\nBannedUser\022\016\n\006user"
     "Id\030\001 \001(\005\022\023\n\013userIdAdmin\030\002 \001(\005\022\017\n\007banType"
-    "\030\003 \001(\t\022\017\n\007comment\030\004 \001(\t\022\022\n\nbannedDate\030\005 "
+    "\030\003 \001(\005\022\017\n\007comment\030\004 \001(\t\022\022\n\nbannedDate\030\005 "
     "\001(\t", 123);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "BannedUser.proto", &protobuf_RegisterTypes);
@@ -124,7 +124,7 @@ void BannedUser::SharedCtor() {
   _cached_size_ = 0;
   userid_ = 0;
   useridadmin_ = 0;
-  bantype_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  bantype_ = 0;
   comment_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   banneddate_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -135,9 +135,6 @@ BannedUser::~BannedUser() {
 }
 
 void BannedUser::SharedDtor() {
-  if (bantype_ != &::google::protobuf::internal::kEmptyString) {
-    delete bantype_;
-  }
   if (comment_ != &::google::protobuf::internal::kEmptyString) {
     delete comment_;
   }
@@ -172,11 +169,7 @@ void BannedUser::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     userid_ = 0;
     useridadmin_ = 0;
-    if (has_bantype()) {
-      if (bantype_ != &::google::protobuf::internal::kEmptyString) {
-        bantype_->clear();
-      }
-    }
+    bantype_ = 0;
     if (has_comment()) {
       if (comment_ != &::google::protobuf::internal::kEmptyString) {
         comment_->clear();
@@ -225,20 +218,19 @@ bool BannedUser::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(26)) goto parse_banType;
+        if (input->ExpectTag(24)) goto parse_banType;
         break;
       }
       
-      // optional string banType = 3;
+      // optional int32 banType = 3;
       case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_banType:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_bantype()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->bantype().data(), this->bantype().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &bantype_)));
+          set_has_bantype();
         } else {
           goto handle_uninterpreted;
         }
@@ -308,13 +300,9 @@ void BannedUser::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->useridadmin(), output);
   }
   
-  // optional string banType = 3;
+  // optional int32 banType = 3;
   if (has_bantype()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->bantype().data(), this->bantype().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
-      3, this->bantype(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->bantype(), output);
   }
   
   // optional string comment = 4;
@@ -353,14 +341,9 @@ void BannedUser::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->useridadmin(), target);
   }
   
-  // optional string banType = 3;
+  // optional int32 banType = 3;
   if (has_bantype()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->bantype().data(), this->bantype().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        3, this->bantype(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->bantype(), target);
   }
   
   // optional string comment = 4;
@@ -408,10 +391,10 @@ int BannedUser::ByteSize() const {
           this->useridadmin());
     }
     
-    // optional string banType = 3;
+    // optional int32 banType = 3;
     if (has_bantype()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->bantype());
     }
     

@@ -50,7 +50,6 @@ void EmailPlugin::run()
     this->registerEmailTypes();
 
     smtp = new Smtp();
-    smtp->init();
 
     client = new MessagingClient();
     client->init();
@@ -79,7 +78,6 @@ void EmailPlugin::messageReveived(AMQPMessage *message)
 
     EmailMessage email_message;
     email_message.ParseFromString(message_body.toStdString());
-    qDebug() << "Instantiated generic message";
 
     QString type = "EmailGenerator_" + QString::number(email_message.email_type());
     int classId = QMetaType::type(type.toLatin1());
