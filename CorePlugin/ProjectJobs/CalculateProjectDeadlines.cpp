@@ -64,10 +64,10 @@ void CalculateProjectDeadlines::calculateSubGraphDeadlines(WorkflowNode node, Gr
     deadlineDefaults.insert("desegmentationPeriod", 3);
     QList<QString> deadlineLengths = QList<QString>();
 
-    QDateTime projectDeadline = QDateTime::fromString(
-                QString::fromStdString(project->deadline()), "yyyy-MM-ddTHH:mm:ss");
     QDateTime createdDate = QDateTime::fromString(
                 QString::fromStdString(project->createdtime()), "yyyy-MM-ddTHH:mm:ss");
+    QDateTime projectDeadline = QDateTime::fromString(
+                QString::fromStdString(project->deadline()), "yyyy-MM-ddTHH:mm:ss");
 
     ::google::protobuf::RepeatedField< ::google::protobuf::int32> currentLayer =
             ::google::protobuf::RepeatedField< ::google::protobuf::int32>();
@@ -80,42 +80,7 @@ void CalculateProjectDeadlines::calculateSubGraphDeadlines(WorkflowNode node, Gr
     deadlineLengths.append("gracePeriod");
     deadlineDefaults = this->calculateDeadlineDefaults(deadlineDefaults, deadlineLengths, createdDate, projectDeadline);
 
-    int count = deadlineLengths.size() - 1;
-    currentLayer = previousLayer;
-    previousLayer.Clear();
-    while (currentLayer.size() > 0) {
-        foreach (::google::protobuf::int32 nodeId, currentLayer) {
-            int index = builder.find(nodeId);
-            WorkflowNode currentNode = builder.getGraph()->allnodes(index);
-            Task task = currentNode.task();
-
-            if (task.taskstatus() < IN_PROGRESS) {
-                int taskDeadlinePeriod = 0;
-                for (int i = count; i < deadlineLengths.size(); i++) {
-                    taskDeadlinePeriod += deadlineDefaults.value(deadlineLengths.at(i));
-                }
-                QDateTime taskDeadline = projectDeadline.addDays(-(taskDeadlinePeriod));
-                task.set_deadline(taskDeadline.toString("yyyy-MM-dd HH:mm:ss").toStdString());
-                TaskDao::insertAndUpdate(db, task);
-            }
-
-            foreach (::google::protobuf::int32 prevId, currentNode.previous()) {
-                bool found = false;
-                foreach (::google::protobuf::int32 pId, previousLayer) {
-                    if (prevId == pId) {
-                        found = true;
-                    }
-                }
-                if (!found) {
-                    previousLayer.Add(prevId);
-                }
-            }
-        }
-        count--;
-
-        currentLayer = previousLayer;
-        previousLayer.Clear();
-    }
+    this->setProjectDeadlines(deadlineLengths, deadlineDefaults, builder, projectDeadline, db, previousLayer);
 }
 
 QMap<QString, int> CalculateProjectDeadlines::calculateDeadlineDefaults(QMap<QString, int> deadlineDefaults,
@@ -224,6 +189,53 @@ QList<QString> CalculateProjectDeadlines::parseGraphForDefaultLengths(QMap<QStri
     }
 
     return deadlineLengths;
+}
+
+/*
+ * @param currentLayer - The list of task ids in the bottom layer of the graph
+ */
+void CalculateProjectDeadlines::setProjectDeadlines(QList<QString> deadlineLengths, QMap<QString, int> defaults,
+                                                    GraphBuilder builder, QDateTime projectDeadline, QSharedPointer<MySQLHandler> db,
+                                                    ::google::protobuf::RepeatedField<google::protobuf::int32> currentLayer)
+{
+    ::google::protobuf::RepeatedField< ::google::protobuf::int32> previousLayer =
+            ::google::protobuf::RepeatedField< ::google::protobuf::int32>();
+    int count = deadlineLengths.size() - 1;
+
+    while (currentLayer.size() > 0) {
+        foreach (::google::protobuf::int32 nodeId, currentLayer) {
+            int index = builder.find(nodeId);
+            WorkflowNode currentNode = builder.getGraph()->allnodes(index);
+            Task task = currentNode.task();
+
+            if (task.taskstatus() < IN_PROGRESS) {
+                int taskDeadlinePeriod = 0;
+                for (int i = count; i < deadlineLengths.size(); i++) {
+                    taskDeadlinePeriod += defaults.value(deadlineLengths.at(i));
+                }
+                QDateTime taskDeadline = projectDeadline.addDays(-(taskDeadlinePeriod));
+                task.set_deadline(taskDeadline.toString("yyyy-MM-dd HH:mm:ss").toStdString());
+                qDebug() << "Setting deadline of task " << task.id() << " to " << taskDeadline.toString("yyyy-MM-dd HH:mm:ss");
+                TaskDao::insertAndUpdate(db, task);
+            }
+
+            foreach (::google::protobuf::int32 prevId, currentNode.previous()) {
+                bool found = false;
+                foreach (::google::protobuf::int32 pId, previousLayer) {
+                    if (prevId == pId) {
+                        found = true;
+                    }
+                }
+                if (!found) {
+                    previousLayer.Add(prevId);
+                }
+            }
+        }
+        count--;
+
+        currentLayer = previousLayer;
+        previousLayer.Clear();
+    }
 }
 
 void CalculateProjectDeadlines::setAMQPMessage(AMQPMessage *message)

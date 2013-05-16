@@ -33,6 +33,9 @@ private:
     QList<QString> parseGraphForDefaultLengths(QMap<QString, int> defaults, GraphBuilder builder,
                                                ::google::protobuf::RepeatedField< ::google::protobuf::int32> currentLayer,
                                                ::google::protobuf::RepeatedField< ::google::protobuf::int32> *leafNodes);
+    void setProjectDeadlines(QList<QString> deadlineLengths, QMap<QString, int> defaults,
+                             GraphBuilder builder, QDateTime projectDeadline, QSharedPointer<MySQLHandler> db,
+                             ::google::protobuf::RepeatedField< ::google::protobuf::int32> currentLayer);
     AMQPMessage *message;
 
 };
