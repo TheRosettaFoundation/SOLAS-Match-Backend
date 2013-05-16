@@ -30,6 +30,9 @@ private:
                                     QSharedPointer<MySQLHandler> db);
     QMap<QString, int> calculateDeadlineDefaults(QMap<QString, int> deadlineDefaults, QList<QString> deadlineLengths,
                                                  QDateTime created, QDateTime deadline);
+    QList<QString> parseGraphForDefaultLengths(QMap<QString, int> defaults, GraphBuilder builder,
+                                               ::google::protobuf::RepeatedField< ::google::protobuf::int32> currentLayer,
+                                               ::google::protobuf::RepeatedField< ::google::protobuf::int32> *leafNodes);
     AMQPMessage *message;
 
 };

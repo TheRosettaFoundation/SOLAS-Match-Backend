@@ -30,7 +30,6 @@ MySQLHandler::~MySQLHandler()
 
 QSharedPointer<MySQLHandler> MySQLHandler::getInstance()
 {
-    qDebug() << "MySQLHandler::getInstance";
     static QMutex mutex;
     QMutexLocker locker(&mutex);
     return QSharedPointer<MySQLHandler>(new MySQLHandler(QUuid::createUuid().toString()));
@@ -47,7 +46,6 @@ bool MySQLHandler::openConnection()
     bool ret = false;
 
     if (this->conn == 0) {
-        qDebug() << "MySQLHandler: Creating MySQL instance";
         this->conn = new QSqlDatabase(QSqlDatabase::addDatabase("QMYSQL", this->connName));
         this->conn->setHostName(this->host);
         this->conn->setDatabaseName(this->database);
@@ -56,7 +54,6 @@ bool MySQLHandler::openConnection()
     }
 
     if (!this->conn->isOpen()) {
-        qDebug() << "MySQLHandler::Opening MySQL Connection";
         if (!this->conn->open()) {
             qDebug() << "MySQLHandler: Failed to connect to database: " << this->conn->lastError().text();
         } else {
@@ -72,7 +69,6 @@ bool MySQLHandler::openConnection()
 
 void MySQLHandler::close()
 {
-    qDebug() << "MySQLHandler: Closing SQL Connection";
     this->conn->close();
 }
 

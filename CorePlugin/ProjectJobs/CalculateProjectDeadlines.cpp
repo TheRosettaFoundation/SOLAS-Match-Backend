@@ -72,59 +72,10 @@ void CalculateProjectDeadlines::calculateSubGraphDeadlines(WorkflowNode node, Gr
     ::google::protobuf::RepeatedField< ::google::protobuf::int32> currentLayer =
             ::google::protobuf::RepeatedField< ::google::protobuf::int32>();
     currentLayer.Add(node.taskid());
-    ::google::protobuf::RepeatedField< ::google::protobuf::int32> nextLayer =
-            ::google::protobuf::RepeatedField< ::google::protobuf::int32>();
     ::google::protobuf::RepeatedField< ::google::protobuf::int32> previousLayer =
             ::google::protobuf::RepeatedField< ::google::protobuf::int32>();
 
-    while (currentLayer.size() > 0) {
-        QString maxDeadline = "zero";
-        foreach (::google::protobuf::int32 nodeId, currentLayer) {
-            int index = builder.find(nodeId);
-            WorkflowNode node = builder.getGraph()->allnodes(index);
-            Task task = node.task();
-            switch (task.tasktype()) {
-                case CHUNKING:
-                if (deadlineDefaults.value(maxDeadline) < deadlineDefaults.value("segmentationPeriod")) {
-                    maxDeadline = "segmentationPeriod";
-                }
-                break;
-                case TRANSLATION:
-                if (deadlineDefaults.value(maxDeadline) < deadlineDefaults.value("translationPeriod")) {
-                    maxDeadline = "translationPeriod";
-                }
-                break;
-                case PROOFREADING:
-                if (deadlineDefaults.value(maxDeadline) < deadlineDefaults.value("proofreadingPeriod")) {
-                    maxDeadline = "proofreadingPeriod";
-                }
-                break;
-                case POSTEDITING:
-                if (deadlineDefaults.value(maxDeadline) < deadlineDefaults.value("desegmentationPeriod")) {
-                    maxDeadline = "desegmentationPeriod";
-                }
-                break;
-            }
-
-            foreach (::google::protobuf::int32 nextId, node.next()) {
-                bool found = false;
-                foreach (::google::protobuf::int32 nId, nextLayer) {
-                    if (nextId == nId) {
-                        found = true;
-                    }
-                }
-                if (!found) {
-                    nextLayer.Add(nextId);
-                }
-            }
-        }
-        deadlineLengths.append(maxDeadline);
-
-        previousLayer = currentLayer;
-        currentLayer = nextLayer;
-        nextLayer.Clear();
-    }
-
+    deadlineLengths = this->parseGraphForDefaultLengths(deadlineDefaults, builder, currentLayer, &previousLayer);
     deadlineLengths.removeLast();
     deadlineLengths.append("gracePeriod");
     deadlineDefaults = this->calculateDeadlineDefaults(deadlineDefaults, deadlineLengths, createdDate, projectDeadline);
@@ -205,6 +156,74 @@ QMap<QString, int> CalculateProjectDeadlines::calculateDeadlineDefaults(QMap<QSt
     }
 
     return deadlineDefaults;
+}
+
+/*
+ * @param leafNodes - When this returns leafNodes contains the ids of all tasks in the last layer of the graph
+ */
+QList<QString> CalculateProjectDeadlines::parseGraphForDefaultLengths(QMap<QString, int> defaults, GraphBuilder builder,
+                                              ::google::protobuf::RepeatedField<google::protobuf::int32> currentLayer,
+                                              ::google::protobuf::RepeatedField<google::protobuf::int32> *leafNodes)
+{
+    ::google::protobuf::RepeatedField< ::google::protobuf::int32> nextLayer =
+            ::google::protobuf::RepeatedField< ::google::protobuf::int32>();
+    ::google::protobuf::RepeatedField< ::google::protobuf::int32> previousLayer =
+            ::google::protobuf::RepeatedField< ::google::protobuf::int32>();
+    QList<QString> deadlineLengths = QList<QString>();
+
+    while (currentLayer.size() > 0) {
+        QString maxDeadline = "zero";
+        foreach (::google::protobuf::int32 nodeId, currentLayer) {
+            int index = builder.find(nodeId);
+            WorkflowNode node = builder.getGraph()->allnodes(index);
+            Task task = node.task();
+            switch (task.tasktype()) {
+                case CHUNKING:
+                if (defaults.value(maxDeadline) < defaults.value("segmentationPeriod")) {
+                    maxDeadline = "segmentationPeriod";
+                }
+                break;
+                case TRANSLATION:
+                if (defaults.value(maxDeadline) < defaults.value("translationPeriod")) {
+                    maxDeadline = "translationPeriod";
+                }
+                break;
+                case PROOFREADING:
+                if (defaults.value(maxDeadline) < defaults.value("proofreadingPeriod")) {
+                    maxDeadline = "proofreadingPeriod";
+                }
+                break;
+                case POSTEDITING:
+                if (defaults.value(maxDeadline) < defaults.value("desegmentationPeriod")) {
+                    maxDeadline = "desegmentationPeriod";
+                }
+                break;
+            }
+
+            foreach (::google::protobuf::int32 nextId, node.next()) {
+                bool found = false;
+                foreach (::google::protobuf::int32 nId, nextLayer) {
+                    if (nextId == nId) {
+                        found = true;
+                    }
+                }
+                if (!found) {
+                    nextLayer.Add(nextId);
+                }
+            }
+        }
+        deadlineLengths.append(maxDeadline);
+
+        previousLayer = currentLayer;
+        currentLayer = nextLayer;
+        nextLayer.Clear();
+    }
+
+    foreach (::google::protobuf::int32 leafId, previousLayer) {
+        leafNodes->Add(leafId);
+    }
+
+    return deadlineLengths;
 }
 
 void CalculateProjectDeadlines::setAMQPMessage(AMQPMessage *message)
