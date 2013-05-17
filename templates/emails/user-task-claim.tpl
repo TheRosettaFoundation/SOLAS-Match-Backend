@@ -8,16 +8,17 @@
 </p>
 
 <p>
-    You have claimed a task on SOLAS Match.
+    You have claimed a task on {{SITE_NAME}}.
 </p>
 <p>
     Thanks for helping to volunteer.
 </p>
 <p>
-    As soon as you have translated the file you have downloaded, 
-    please upload it back again on the following page: <br />
+    As soon as you have processed the file you downloaded, 
+    please upload the output file on the following page: <br />
     {{TASK_PAGE}}
 </p>
 <p>
-    The SOLAS Match Team
+    Sincerely,<br />
+    The {{SITE_NAME}} Team
 </p>
