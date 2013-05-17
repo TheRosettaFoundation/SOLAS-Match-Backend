@@ -33,14 +33,15 @@ void UserTaskClaimEmailGenerator::run()
         ctemplate::TemplateDictionary dict("user_task_claim");
         if(user->display_name() != "") {
             dict.ShowSection("USER_HAS_NAME");
-            dict["USERNAME"] = user->display_name();
+            dict.SetValue("USERNAME", user->display_name());
         } else {
             dict.ShowSection("NO_USER_NAME");
         }
 
         QString task_url = settings.get("site.url");
         task_url += "task/" + QString::number(task->id()) + "/id";
-        dict["TASK_PAGE"] = task_url.toStdString();
+        dict.SetValue("TASK_PAGE", task_url.toStdString());
+        dict.SetValue("SITE_NAME", settings.get("site.name").toStdString());
 
         std::string email_body;
         QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/user-task-claim.tpl";

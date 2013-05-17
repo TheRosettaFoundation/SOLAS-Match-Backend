@@ -8,7 +8,7 @@
 </p>
 
 <p>
-    A task that you are following on SOLAS Match has changed its state.
+    A task that you are following on {{SITE_NAME}} has changed its status.
     The task "{{TASK_TITLE}}" has been claimed by {{TRANSLATOR_NAME}}. 
     You can visit the translator's public profile 
     <a href="{{USER_PROFILE_URL}}">here</a>. You will be informed when 
@@ -17,5 +17,5 @@
 <p>
     From,
     <br />
-    The SOLAS Match Team
+    The {{SITE_NAME}} Team
 </p>
