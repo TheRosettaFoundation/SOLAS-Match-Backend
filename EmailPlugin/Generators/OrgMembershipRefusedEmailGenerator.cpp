@@ -33,11 +33,12 @@ void OrgMembershipRefusedEmailGenerator::run()
         ctemplate::TemplateDictionary dict("org_membershipt_refused");
         if(user->display_name() != "") {
             dict.ShowSection("USER_HAS_NAME");
-            dict["USERNAME"] = user->display_name();
+            dict.SetValue("USERNAME", user->display_name());
         } else {
             dict.ShowSection("NO_USER_NAME");
         }
-        dict["ORG_NAME"] = org->name();
+        dict.SetValue("ORG_NAME", org->name());
+        dict.SetValue("SITE_NAME", settings.get("site.name").toStdString());
         std::string email_body;
         QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/org-membership-refused.tpl";
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
