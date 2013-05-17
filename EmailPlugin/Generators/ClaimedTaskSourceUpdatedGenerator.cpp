@@ -35,6 +35,7 @@ void ClaimedTaskSourceUpdatedGenerator::run()
         ctemplate::TemplateDictionary dict("claimed-task-source-updated");
 
         dict.SetValue("USERNAME", user->display_name());
+        dict.SetValue("SITE_NAME", settings.get("site.name").toStdString());
         dict.SetValue("TASK_TITLE", task->title());
         QString uploadUrl = settings.get("site.url");
         uploadUrl += "task/" + QString::number(task->id()) + "/id";
