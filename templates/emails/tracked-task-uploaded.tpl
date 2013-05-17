@@ -3,7 +3,7 @@
 </p>
 
 <p>
-    A task that you are following on SOLAS Match has changed its status.
+    A task that you are following on {{SITE_NAME}} has changed its status.
     The translator {{TRANSLATOR_NAME}} has uploaded a translation for the 
     file "{{TASK_TITLE}}". To download the the latest version of the file 
     <a href="{{TASK_REVIEW}}">here</a>. On this page you can provide a rating
@@ -22,5 +22,5 @@
 
 <p>
     Sincerely,<br />
-    The SOLAS Match Team
+    The {{SITE_NAME}} Team
 </p>
