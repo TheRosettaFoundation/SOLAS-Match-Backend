@@ -36,6 +36,7 @@ void BannedLoginGenerator::run()
     if (error == "") {
         ctemplate::TemplateDictionary dict("BannedLogin");
         dict["USERNAME"] = user->display_name();
+        dict["SITE_NAME"] = settings.get("site.name").toStdString();
 
         QDateTime banDate = QDateTime::fromString(QString::fromStdString(banData->banneddate()),
                 "yyyy-MM-ddTHH:mm:ss");
