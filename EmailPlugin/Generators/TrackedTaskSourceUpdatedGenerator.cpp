@@ -36,6 +36,7 @@ void TrackedTaskSourceUpdatedGenerator::run()
 
         dict.SetValue("USERNAME", user->display_name());
         dict.SetValue("TASK_TITLE", task->title());
+        dict.SetValue("SITE_NAME", settings.get("site.name").toStdString());
 
         if (!translator.isNull()) {
             ctemplate::TemplateDictionary *translatorSect = dict.AddSectionDictionary("TRANSLATOR_SECT");

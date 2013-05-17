@@ -4,7 +4,7 @@
 
 <p>
     The task, {{TASK_TITLE}}, has been updated. A new version of the source file
-    has been uploaded. This is the file the volunteer will base their work off of.
+    has been uploaded. This is the file the volunteer will base their work on.
 </p>
 
 {{#TRANSLATOR_SECT}}
@@ -23,5 +23,5 @@
 
 <p>
     Sincerely,<br />
-    The SOLAS Match Team
+    The {{SITE_NAME}} Team
 </p>
