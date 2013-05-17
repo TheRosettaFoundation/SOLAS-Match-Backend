@@ -1,6 +1,6 @@
 <p>Hello,</p>
 <p>
-    Thank you for registering with Trommons, the open translation space for volunteers 
+    Thank you for registering with {{SITE_NAME}}, the open translation space for volunteers 
     and non-profit partners of The Rosetta Foundation. You can complete your registration 
     by clicking on the link below.
 </p>
@@ -9,5 +9,5 @@
 </p>
 <p>
     Sincerely,<br />
-    The Trommons Team
+    The {{SITE_NAME}} Team
 </p>
