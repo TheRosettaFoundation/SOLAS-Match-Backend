@@ -48,7 +48,6 @@ SOURCES += \
     protobufs/models/ArchivedProject.pb.cc \
     protobufs/models/Project.pb.cc \
     DataAccessObjects/ProjectDao.cpp \
-    protobufs/emails/FeedbackEmail.pb.cc \
     protobufs/models/Statistic.pb.cc \
     protobufs/requests/StatisticsUpdateRequest.pb.cc \
     protobufs/emails/UserTaskStreamEmail.pb.cc \
@@ -68,7 +67,9 @@ SOURCES += \
     protobufs/requests/CalculateProjectDeadlinesRequest.pb.cc \
     protobufs/models/WorkflowGraph.pb.cc \
     protobufs/models/WorkflowNode.pb.cc \
-    GraphBuilder.cpp
+    GraphBuilder.cpp \
+    protobufs/emails/OrgFeedback.pb.cc \
+    protobufs/emails/UserFeedback.pb.cc
 
 HEADERS +=\
     MySQLHandler.h \
@@ -99,7 +100,6 @@ HEADERS +=\
     protobufs/models/ArchivedProject.pb.h \
     protobufs/models/Project.pb.h \
     DataAccessObjects/ProjectDao.h \
-    protobufs/emails/FeedbackEmail.pb.h \
     protobufs/models/Statistic.pb.h \
     protobufs/requests/StatisticsUpdateRequest.pb.h \
     protobufs/emails/UserTaskStreamEmail.pb.h \
@@ -120,7 +120,9 @@ HEADERS +=\
     Definitions.h \
     GraphBuilder.h \
     protobufs/models/WorkflowGraph.pb.h \
-    protobufs/models/WorkflowNode.pb.h
+    protobufs/models/WorkflowNode.pb.h \
+    protobufs/emails/OrgFeedback.pb.h \
+    protobufs/emails/UserFeedback.pb.h
 
 symbian {
     MMP_RULES += EXPORTUNFROZEN

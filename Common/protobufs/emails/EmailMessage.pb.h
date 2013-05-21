@@ -43,17 +43,18 @@ enum EmailMessage_Type {
   EmailMessage_Type_TrackedTaskUploaded = 8,
   EmailMessage_Type_OrgTaskDeadlinePassed = 9,
   EmailMessage_Type_UserClaimedTaskDeadlinePassed = 10,
-  EmailMessage_Type_FeedbackEmail = 11,
+  EmailMessage_Type_UserFeedback = 11,
   EmailMessage_Type_UserTaskStreamEmail = 12,
   EmailMessage_Type_EmailVerification = 13,
   EmailMessage_Type_BannedLogin = 14,
   EmailMessage_Type_TrackedTaskSourceUpdated = 15,
   EmailMessage_Type_ClaimedTaskUploaded = 16,
-  EmailMessage_Type_ClaimedTaskSourceUpdated = 17
+  EmailMessage_Type_ClaimedTaskSourceUpdated = 17,
+  EmailMessage_Type_OrgFeedback = 18
 };
 bool EmailMessage_Type_IsValid(int value);
 const EmailMessage_Type EmailMessage_Type_Type_MIN = EmailMessage_Type_TaskScoreEmail;
-const EmailMessage_Type EmailMessage_Type_Type_MAX = EmailMessage_Type_ClaimedTaskSourceUpdated;
+const EmailMessage_Type EmailMessage_Type_Type_MAX = EmailMessage_Type_OrgFeedback;
 const int EmailMessage_Type_Type_ARRAYSIZE = EmailMessage_Type_Type_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* EmailMessage_Type_descriptor();
@@ -131,13 +132,14 @@ class EmailMessage : public ::google::protobuf::Message {
   static const Type TrackedTaskUploaded = EmailMessage_Type_TrackedTaskUploaded;
   static const Type OrgTaskDeadlinePassed = EmailMessage_Type_OrgTaskDeadlinePassed;
   static const Type UserClaimedTaskDeadlinePassed = EmailMessage_Type_UserClaimedTaskDeadlinePassed;
-  static const Type FeedbackEmail = EmailMessage_Type_FeedbackEmail;
+  static const Type UserFeedback = EmailMessage_Type_UserFeedback;
   static const Type UserTaskStreamEmail = EmailMessage_Type_UserTaskStreamEmail;
   static const Type EmailVerification = EmailMessage_Type_EmailVerification;
   static const Type BannedLogin = EmailMessage_Type_BannedLogin;
   static const Type TrackedTaskSourceUpdated = EmailMessage_Type_TrackedTaskSourceUpdated;
   static const Type ClaimedTaskUploaded = EmailMessage_Type_ClaimedTaskUploaded;
   static const Type ClaimedTaskSourceUpdated = EmailMessage_Type_ClaimedTaskSourceUpdated;
+  static const Type OrgFeedback = EmailMessage_Type_OrgFeedback;
   static inline bool Type_IsValid(int value) {
     return EmailMessage_Type_IsValid(value);
   }
