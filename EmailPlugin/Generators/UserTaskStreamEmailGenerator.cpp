@@ -86,7 +86,7 @@ void UserTaskStreamEmailGenerator::run()
             taskSect->SetValue("WORD_COUNT", QString::number(task->wordcount()).toStdString());
             QString createdTime = QDateTime::fromString(QString::fromStdString(task->createdtime()),
                        "yyyy-MM-ddTHH:mm:ss").toString("d MMMM yyyy - hh:mm");
-            taskSect->SetValue("CREATE_TIME", createdTime.toStdString());
+            taskSect->SetValue("CREATED_TIME", createdTime.toStdString());
             QString deadline = QDateTime::fromString(QString::fromStdString(task->deadline()),
                     "yyyy-MM-ddTHH:mm:ss").toString("d MMMM yyyy - hh:mm");
             taskSect->SetValue("DEADLINE_TIME", deadline.toStdString());
