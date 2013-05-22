@@ -5,7 +5,7 @@
 #-------------------------------------------------
 
 ! include( ../Common.pri ) {
-    error( Couldn't find the Common.pri file! )
+    error( "Couldn't find the Common.pri file!" )
 }
 
 QT       -= gui
@@ -16,8 +16,9 @@ CONFIG += plugin
 
 DESTDIR = ../plugins
 
-LIBS += -L../Common -lCommon \
-    -L/usr/local/lib -lamqpcpp -lrabbitmq -lctemplate
+LIBS += -L../Common -lCommon
+LIBS += -L../lib/ -lamqpcpp -lrabbitmq -lctemplate
+INCLUDEPATH += ../include . ..
 
 DEFINES += COREPLUGIN_LIBRARY
 

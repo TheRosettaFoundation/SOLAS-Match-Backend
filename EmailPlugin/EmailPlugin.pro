@@ -5,7 +5,7 @@
 #-------------------------------------------------
 
 ! include( ../Common.pri ) {
-    error( Couldn't find the Common.pri file! )
+    error( "Couldn't find the Common.pri file!" )
 }
 
 QT       += network
@@ -21,9 +21,9 @@ QXT    += network
 
 DESTDIR = ../plugins
 
-LIBS += -L../Common -lCommon \
-    -L/usr/local/lib -lamqpcpp -lrabbitmq \
-    -lprotobuf -lctemplate
+LIBS += -L../Common -lCommon -lctemplate
+LIBS += -lprotobuf -L../lib/ -lamqpcpp -lrabbitmq
+INCLUDEPATH += ../include . ..
 
 DEFINES += EMAILPLUGIN_LIBRARY
 

@@ -1,5 +1,5 @@
 ! include( ../Common.pri ) {
-    error( Couldn't find the Common.pri file! )
+    error( "Couldn't find the Common.pri file!" )
 }
 
 QT       -= gui
@@ -11,10 +11,9 @@ CONFIG += plugin
 
 DESTDIR = ../plugins
 
-LIBS += -L../Common -lCommon \
-    -L/usr/local/lib -lamqpcpp -lrabbitmq \
-    -lprotobuf
-
+LIBS += -L../Common -lCommon
+LIBS += -lprotobuf -L../lib/ -lamqpcpp -lrabbitmq
+INCLUDEPATH += ../include . ..
 DEFINES += PLUGINSCHEDULER_LIBRARY
 
 HEADERS += \

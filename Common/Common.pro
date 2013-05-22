@@ -5,7 +5,7 @@
 #-------------------------------------------------
 
 ! include( ../Common.pri ) {
-    error( Couldn't find the Common.pri file! )
+    error( "Couldn't find the Common.pri file!" )
 }
 
 QT       += network sql
@@ -14,8 +14,12 @@ QT       -= gui
 
 TARGET = Common
 
-LIBS += -lprotobuf \
-        -L/usr/local/lib -lamqpcpp -lrabbitmq
+#LIBS += -lprotobuf \
+#        -L/usr/local/lib -lamqpcpp -lrabbitmq
+
+LIBS += -lprotobuf -L../lib/ -lamqpcpp -lrabbitmq
+INCLUDEPATH += ../include . ..
+
 
 DEFINES += COMMON_LIBRARY
 
@@ -123,3 +127,6 @@ unix:!symbian {
     }
     INSTALLS += target
 }
+
+
+

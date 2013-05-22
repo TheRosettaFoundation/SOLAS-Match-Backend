@@ -14,10 +14,11 @@ CONFIG   -= app_bundle
 
 TEMPLATE = app
 
-LIBS += -L../Common -lCommon \
-    -L/usr/local/lib -lamqpcpp -lrabbitmq
-
+LIBS += -L../Common -lCommon
+LIBS += -lprotobuf -L../lib/ -lamqpcpp -lrabbitmq
+INCLUDEPATH += ../include . ..
 INCLUDEPATH += /usr/local/include . ..
+
 
 SOURCES += main.cpp \
     PluginLoader.cpp
