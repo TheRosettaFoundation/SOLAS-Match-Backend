@@ -28,7 +28,10 @@ SOURCES += CorePlugin.cpp \
     TaskJobs/DeadlineChecker.cpp \
     UserQueueHandler.cpp \
     UserJobs/TaskStreamNotificationHandler.cpp \
-    UserJobs/StatisticsUpdate.cpp
+    UserJobs/StatisticsUpdate.cpp \
+    TaskJobs/SendTaskUploadNotifications.cpp \
+    ProjectQueueHandler.cpp \
+    ProjectJobs/CalculateProjectDeadlines.cpp
 
 HEADERS += CorePlugin.h \
     TaskQueueHandler.h \
@@ -36,4 +39,7 @@ HEADERS += CorePlugin.h \
     TaskJobs/DeadlineChecker.h \
     UserQueueHandler.h \
     UserJobs/TaskStreamNotificationHandler.h \
-    UserJobs/StatisticsUpdate.h
+    UserJobs/StatisticsUpdate.h \
+    TaskJobs/SendTaskUploadNotifications.h \
+    ProjectQueueHandler.h \
+    ProjectJobs/CalculateProjectDeadlines.h

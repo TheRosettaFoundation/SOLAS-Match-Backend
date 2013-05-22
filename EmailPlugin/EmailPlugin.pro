@@ -37,14 +37,17 @@ SOURCES += emailplugin.cpp \
     Generators/PasswordResetEmailGenerator.cpp \
     Generators/TaskArchivedEmailGenerator.cpp \
     Generators/TaskClaimedEmailGenerator.cpp \
-    Generators/TaskTranslationUploadedEmailGenerator.cpp \
     Generators/UserTaskClaimEmailGenerator.cpp \
     Generators/FeedbackEmailGenerator.cpp \
     Generators/OrgDeadlinePassedEmailGenerator.cpp \
     Generators/UserTaskDeadlineEmailGenerator.cpp \
     Generators/UserTaskStreamEmailGenerator.cpp \
     Generators/EmailVerificationGenerator.cpp \
-    Generators/BannedLoginGenerator.cpp
+    Generators/BannedLoginGenerator.cpp \
+    Generators/TrackedTaskSourceUpdatedGenerator.cpp \
+    Generators/TrackedTaskUploadedEmailGenerator.cpp \
+    Generators/ClaimedTaskUploadedGenerator.cpp \
+    Generators/ClaimedTaskSourceUpdatedGenerator.cpp
 
 HEADERS += emailplugin.h\
         Smtp.h \
@@ -53,15 +56,18 @@ HEADERS += emailplugin.h\
     IEmailGenerator.h \
     Generators/OrgMembershipAcceptedGenerator.h \
     Generators/OrgMembershipRefusedEmailGenerator.h \
-    Definitions.h \
     Generators/PasswordResetEmailGenerator.h \
     Generators/TaskArchivedEmailGenerator.h \
     Generators/TaskClaimedEmailGenerator.h \
-    Generators/TaskTranslationUploadedEmailGenerator.h \
     Generators/UserTaskClaimEmailGenerator.h \
     Generators/FeedbackEmailGenerator.h \
     Generators/OrgDeadlinePassedEmailGenerator.h \
     Generators/UserTaskDeadlineEmailGenerator.h \
     Generators/UserTaskStreamEmailGenerator.h \
     Generators/EmailVerificationGenerator.h \
-    Generators/BannedLoginGenerator.h
+    Generators/BannedLoginGenerator.h \
+    Generators/TrackedTaskUploadedEmailGenerator.h \
+    Generators/TrackedTaskSourceUpdatedGenerator.h \
+    Generators/ClaimedTaskUploadedGenerator.h \
+    Generators/ClaimedTaskSourceUpdatedGenerator.h \
+    EmailDefinitions.h

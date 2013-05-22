@@ -3,7 +3,7 @@
 </p>
 
 <p>
-    You have been banned by an administrator from using SOLAS Match and can no longer 
+    You have been banned by an administrator from using {{SITE_NAME}} and can no longer 
     log in. You were banned on {{BAN_TIME}}, {{BAN_LENGTH}}.
 </p>
 
@@ -23,5 +23,5 @@
 
 <p>
     Sincerely,<br />
-    The SOLAS Match Team
+    The {{SITE_NAME}} Team
 </p>

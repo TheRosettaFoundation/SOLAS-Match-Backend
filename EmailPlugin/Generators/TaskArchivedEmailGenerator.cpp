@@ -48,12 +48,13 @@ void TaskArchivedEmailGenerator::run()
         ctemplate::TemplateDictionary dict("task_archived");
         if(user->display_name() != "") {
             dict.ShowSection("USER_HAS_NAME");
-            dict["USERNAME"] = user->display_name();
+            dict.SetValue("USERNAME", user->display_name());
         } else {
             dict.ShowSection("NO_USER_NAME");
         }
-        dict["TASK_TITLE"] = task->title();
-        dict["ORG_NAME"] = org->name();
+        dict.SetValue("TASK_TITLE", task->title());
+        dict.SetValue("ORG_NAME", org->name());
+        dict.SetValue("SITE_NAME", settings.get("site.name").toStdString());
 
         std::string email_body;
         QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/task-archived.tpl";

@@ -8,7 +8,7 @@
 </p>
 
 <p>
-    A task you are following on SOLAS Match has passed its deadline. The task
+    A task you are following on {{SITE_NAME}} has passed its deadline. The task
     "{{TASK_TITLE}}" has passed its deadline.
 </p>
 
@@ -16,6 +16,6 @@
     From,
 </p>
 <p>
-    The SOLAS Match Team
+    The {{SITE_NAME}} Team
 </p>
 

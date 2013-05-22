@@ -2,6 +2,7 @@
 
 #include <QDateTime>
 
+#include "Common/Definitions.h"
 #include "Common/protobufs/models/BannedUser.pb.h"
 
 BannedLoginGenerator::BannedLoginGenerator()
@@ -35,21 +36,20 @@ void BannedLoginGenerator::run()
     if (error == "") {
         ctemplate::TemplateDictionary dict("BannedLogin");
         dict["USERNAME"] = user->display_name();
+        dict["SITE_NAME"] = settings.get("site.name").toStdString();
 
         QDateTime banDate = QDateTime::fromString(QString::fromStdString(banData->banneddate()),
                 "yyyy-MM-ddTHH:mm:ss");
         dict["BAN_TIME"] = banDate.toString("d MMMM yyyy - hh:mm").toStdString();
 
-        qDebug() << "Ban Type: " << QString::fromStdString(banData->bantype());
-
         QString banLength = "";
-        if (banData->bantype() == "Day") {
+        if (banData->bantype() == DAY) {
             banLength = "for one day";
-        } else if (banData->bantype() == "Week") {
+        } else if (banData->bantype() == WEEK) {
             banLength = "for one week";
-        } else if (banData->bantype() == "Month") {
+        } else if (banData->bantype() == MONTH) {
             banLength = "for one month";
-        } else if (banData->bantype() == "Permanent") {
+        } else if (banData->bantype() == PERMANENT) {
             banLength = "permanently";
         }
         dict["BAN_LENGTH"] = banLength.toStdString();

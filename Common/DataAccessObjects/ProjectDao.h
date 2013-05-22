@@ -18,6 +18,7 @@ public:
     static QSharedPointer<Project> getProject(QSharedPointer<MySQLHandler> db, int id = -1, QString title = "", QString desc = "",
                                               QString impact = "", QString deadline = "", int orgId = -1, QString ref = "",
                                       int wordCount = -1, QString created = "", QString language = "", QString country = "");
+
 };
 
 #endif // PROJECTDAO_H

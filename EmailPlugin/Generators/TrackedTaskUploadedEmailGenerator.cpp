@@ -1,30 +1,26 @@
-#include "TaskTranslationUploadedEmailGenerator.h"
+#include "TrackedTaskUploadedEmailGenerator.h"
 
-TaskTranslationUploadedEmailGenerator::TaskTranslationUploadedEmailGenerator()
+TrackedTaskUploadedEmailGenerator::TrackedTaskUploadedEmailGenerator()
 {
     //Default Constructor
 }
 
-void TaskTranslationUploadedEmailGenerator::run()
+void TrackedTaskUploadedEmailGenerator::run()
 {
-    qDebug() << "EmailGenerator - Generating TaskTranslationUploaded";
+    qDebug() << "EmailGenerator - Generating TrackedTaskUploaded email";
 
-    TaskTranslationUploaded email_message;
+    TrackedTaskUploaded email_message;
     email_message.ParseFromString(this->protoBody.toStdString());
 
     ConfigParser settings;
     QString error = "";
     QSharedPointer<Email> email = QSharedPointer<Email>(new Email());
-    QSharedPointer<User> user = QSharedPointer<User>();
-    QSharedPointer<User> translator = QSharedPointer<User>();
-    QSharedPointer<Task> task = QSharedPointer<Task>();
+    QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
+    QSharedPointer<User> user = UserDao::getUser(db, email_message.user_id());
+    QSharedPointer<User> translator = UserDao::getUser(db, email_message.translator_id());
+    QSharedPointer<Task> task = TaskDao::getTask(db, email_message.task_id());
     QSharedPointer<Project> project = QSharedPointer<Project>();
     QSharedPointer<Organisation> org = QSharedPointer<Organisation>();
-    QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
-
-    user = UserDao::getUser(db, email_message.user_id());
-    translator = UserDao::getUser(db, email_message.translator_id());
-    task = TaskDao::getTask(db, email_message.task_id());
 
     if(user.isNull() || translator.isNull() || task.isNull()) {
         error = "Failed to generate task translation uploaded email. Unable ";
@@ -52,23 +48,32 @@ void TaskTranslationUploadedEmailGenerator::run()
     }
 
     if(error.compare("") == 0) {
-        ctemplate::TemplateDictionary dict("task_translation_uploaded");
-        if(user->display_name() != "") {
-            dict.ShowSection("USER_HAS_NAME");
-            dict["USERNAME"] = user->display_name();
-        } else {
-            dict.ShowSection("NO_USER_NAME");
-        }
-        dict["TRANSLATOR_NAME"] = translator->display_name();
-        dict["TASK_TITLE"] = task->title();
-        dict["ORG_NAME"] = org->name();
+        ctemplate::TemplateDictionary dict("tracked-task-uploaded");
+
+        dict.SetValue("USERNAME", user->display_name());
+        dict.SetValue("TRANSLATOR_NAME", translator->display_name());
+        dict.SetValue("TASK_TITLE", task->title());
+        dict.SetValue("ORG_NAME", org->name());
+        dict.SetValue("SITE_NAME", settings.get("site.name").toStdString());
+
+        QString reviewUrl = settings.get("site.url");
+        reviewUrl += "org/" + QString::number(org->id()) + "/task/" + QString::number(task->id());
+        dict.SetValue("TASK_REVIEW", reviewUrl.toStdString());
 
         QString dash_url = settings.get("site.url");
         dash_url += "client/dashboard";
         dict["DASHBOARD_URL"] = dash_url.toStdString();
 
+        QString taskView = settings.get("site.url");
+        taskView += "task/" + QString::number(task->id()) + "/view";
+        dict.SetValue("TASK_VIEW", taskView.toStdString());
+
+        QString projectView = settings.get("site.url");
+        projectView += "project/" + QString::number(task->projectid()) + "/view";
+        dict.SetValue("PROJECT_VIEW", projectView.toStdString());
+
         std::string email_body;
-        QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/task-translation-uploaded.tpl";
+        QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/tracked-task-uploaded.tpl";
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
         email->setSender(settings.get("site.system_email_address"));;

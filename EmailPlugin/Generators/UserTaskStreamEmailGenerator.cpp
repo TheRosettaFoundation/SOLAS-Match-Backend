@@ -2,6 +2,7 @@
 
 #include <QDateTime>
 
+#include "Common/Definitions.h"
 #include "Common/protobufs/models/Language.pb.h"
 #include "Common/DataAccessObjects/LanguageDao.h"
 #include "Common/DataAccessObjects/TagDao.h"
@@ -38,6 +39,7 @@ void UserTaskStreamEmailGenerator::run()
         email = QSharedPointer<Email>(new Email);
 
         ctemplate::TemplateDictionary dict("userTaskStreamDict");
+        dict.SetValue("SITE_NAME", settings.get("site.name").toStdString());
         foreach (QSharedPointer<Task> task, userTasks) {
             ctemplate::TemplateDictionary *taskSect = dict.AddSectionDictionary("TASK_SECT");
             QString taskView = settings.get("site.url") + "task/" + QString::number(task->id()) + "/view";

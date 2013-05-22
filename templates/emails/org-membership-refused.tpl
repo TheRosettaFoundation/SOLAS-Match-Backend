@@ -9,11 +9,11 @@
 
 <p>
     I regret to inform you that your request to become a member of the organisation,
-    {{ORG_NAME}}, has been rejected. Feel free to apply again another time or start 
-    your own organisation so that you can upload files.
+    {{ORG_NAME}}, on {{SITE_NAME}} has been rejected. Feel free to apply again another 
+    time or start your own organisation so that you can upload files.
 </p>
 
 <p>
-    The SOLAS Match Team
+    The {{SITE_NAME}} Team
 </p>
 

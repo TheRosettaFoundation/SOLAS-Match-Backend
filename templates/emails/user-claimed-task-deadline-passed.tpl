@@ -8,14 +8,12 @@
 </p>
 
 <p>
-    The task "{{TASK_TITLE}}" has passed its deadline. As the translator of this
-    task you must be sure you have uploaded a translation by now.
+    The task "{{TASK_TITLE}}" has passed its deadline. As you have claimed this
+    task you must be sure you have uploaded an output by now.
 </p>
 
 <p>
-    From.
-</p>
-<p>
-    The SOLAS Match Team
+    From,<br />
+    The {{SITE_NAME}} Team
 </p>
 

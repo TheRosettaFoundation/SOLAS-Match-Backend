@@ -164,9 +164,21 @@ QSharedPointer<BannedUser> ModelGenerator::GenerateBannedUser(QSharedPointer<QSq
 
     banData->set_userid(MySQLHandler::getValueFromQuery("user_id", q).toInt());
     banData->set_useridadmin(MySQLHandler::getValueFromQuery("user_id-admin", q).toInt());
-    banData->set_bantype(MySQLHandler::getValueFromQuery("bannedType", q).toString().toStdString());
+    banData->set_bantype(MySQLHandler::getValueFromQuery("bannedtype_id", q).toInt());
     banData->set_comment(MySQLHandler::getValueFromQuery("comment", q).toString().toStdString());
     banData->set_banneddate(MySQLHandler::getValueFromQuery("banned-date", q).toString().toStdString());
 
     return banData;
+}
+
+QSharedPointer<Locale> ModelGenerator::GenerateLocale(QSharedPointer<QSqlQuery> q)
+{
+    QSharedPointer<Locale> localeData = QSharedPointer<Locale>(new Locale());
+
+    localeData->set_languagename(MySQLHandler::getValueFromQuery("languageName", q).toString().toStdString());
+    localeData->set_languagecode(MySQLHandler::getValueFromQuery("languageCode", q).toString().toStdString());
+    localeData->set_countryname(MySQLHandler::getValueFromQuery("countryName", q).toString().toStdString());
+    localeData->set_countrycode(MySQLHandler::getValueFromQuery("countryCode", q).toString().toStdString());
+
+    return localeData;
 }

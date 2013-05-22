@@ -36,11 +36,12 @@ void PasswordResetEmailGenerator::run()
         ctemplate::TemplateDictionary dict("password_reset");
         if(user->display_name() != "") {
             dict.ShowSection("USER_HAS_NAME");
-            dict["USERNAME"] = user->display_name();
+            dict.SetValue("USERNAME", user->display_name());
         } else {
             dict.ShowSection("NO_USER_NAME");
         }
-        dict["URL"] = page_url.toStdString();
+        dict.SetValue("URL", page_url.toStdString());
+        dict.SetValue("SITE_NAME", settings.get("site.name").toStdString());
         std::string email_body;
         QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/password-reset.tpl";
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);

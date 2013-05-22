@@ -1,4 +1,5 @@
-<h3>Your Task Stream</h3>
+<h3>Your {{SITE_NAME}} Task Stream</h3>
+<br />
 <hr />
 
 {{#TASK_SECT}}

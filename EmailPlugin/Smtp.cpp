@@ -94,6 +94,7 @@ void Smtp::connected()
 void Smtp::connectionFailed()
 {
     qDebug() << "SMTP::Failed to connect to host";
+    this->busy = false;
 }
 
 void Smtp::authenticated()

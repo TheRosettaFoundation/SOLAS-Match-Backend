@@ -50,9 +50,13 @@ void CalculateTaskScore::run()
     db = MySQLHandler::getInstance();
     QList<QSharedPointer<User> > users = UserDao::getUsers(db);
     QList<QSharedPointer<Task> > tasks = this->getTasks();  //Must use custom function to check message for task id
+    QMultiMap<int , int> userTags;
+    QMultiMap<int , int> taskTags;
+
     if(users.length() > 0) {
         foreach(QSharedPointer<User> user, users) {
             Locale userNativeLocale = user->nativelocale();
+            QList<QSharedPointer<Locale> > userSecondaryLocales = UserDao::getUserSecondaryLanguages(db, user->id());
             QList<QSharedPointer<Tag> > userTags = TagDao::getUserTags(db, user->id());
             if(tasks.length() > 0) {
                 foreach(QSharedPointer<Task> task, tasks) {
@@ -61,7 +65,7 @@ void CalculateTaskScore::run()
                     Locale taskSourceLocale = task->sourcelocale();
 
                     if(userNativeLocale.languagecode() == taskSourceLocale.languagecode()) {
-                        score += 200;
+                        score += 750;
                         if(userNativeLocale.countrycode() == taskSourceLocale.countrycode()) {
                             score += 75;
                         }
@@ -70,14 +74,29 @@ void CalculateTaskScore::run()
                     Locale taskTargetLocale = task->targetlocale();
 
                     if(userNativeLocale.languagecode() == taskTargetLocale.languagecode()) {
-                        score += 300;
+                        score += 1000;
                         if(userNativeLocale.countrycode() == taskTargetLocale.countrycode()) {
                             score += 100;
                         }
                     }
 
+                    foreach (QSharedPointer<Locale> userSecLocale, userSecondaryLocales) {
+                        if(userSecLocale->languagecode() == taskSourceLocale.languagecode()) {
+                            score += 500;
+                            if(userSecLocale->countrycode() == taskSourceLocale.countrycode()) {
+                                score += 50;
+                            }
+                        }
+                        if(userSecLocale->languagecode() == taskTargetLocale.languagecode()) {
+                            score += 750;
+                            if(userSecLocale->countrycode() == taskTargetLocale.countrycode()) {
+                                score += 75;
+                            }
+                        }
+                    }
+
                     QList<QSharedPointer<Tag> > taskTags = TagDao::getTaskTags(db, task->id());
-                    int increment_value = 100;
+                    int increment_value = 250;
                     foreach(QSharedPointer<Tag> user_tag, userTags) {
                         foreach(QSharedPointer<Tag> task_tag, taskTags) {
                             if(user_tag->id() == task_tag->id()) {
@@ -88,14 +107,14 @@ void CalculateTaskScore::run()
                     }
 
                     QDateTime created_time = QDateTime::fromString(
-                                QString::fromStdString(task->createdtime()), "yyyy-MM-ddTHH:mm:ss");
+                                QString::fromStdString(task->createdtime()), Qt::ISODate);
                     //increase score by one per day since created time
                     score += created_time.daysTo(QDateTime::currentDateTime());
 
-                    ctemplate::TemplateDictionary *score_sect = dict.AddSectionDictionary("SCORE_SECT");
-                    score_sect->SetIntValue("USER_ID", user->id());
-                    score_sect->SetIntValue("TASK_ID", task->id());
-                    score_sect->SetIntValue("SCORE", score);
+//                    ctemplate::TemplateDictionary *score_sect = dict.AddSectionDictionary("SCORE_SECT");
+//                    score_sect->SetIntValue("USER_ID", user->id());
+//                    score_sect->SetIntValue("TASK_ID", task->id());
+//                    score_sect->SetIntValue("SCORE", score);
                     this->saveUserTaskScore(user->id(), task->id(), score);
                 }
             } else {
@@ -117,6 +136,11 @@ void CalculateTaskScore::run()
     QString time_value = QString::number(time_secs) + "." +
             QString("%1 seconds").arg(time_msecs, 3, 10, QChar('0'));
     dict["TIME"] = time_value.toStdString();
+
+
+    dict.SetIntValue("TOTAL_USERS", users.size());
+    dict.SetIntValue("TOTAL_TASKS", tasks.size());
+
 
     QString template_location = QString(TEMPLATE_DIRECTORY) + "score_results.tpl";
     std::string email_body;

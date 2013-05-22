@@ -35,11 +35,12 @@ void OrgDeadlinePassedMailGenerator::run()
         ctemplate::TemplateDictionary dict("OrgTaskDeadlinePassed");
         if(user->display_name() != "") {
             dict.ShowSection("USER_HAS_NAME");
-            dict["USERNAME"] = user->display_name();
+            dict.SetValue("USERNAME", user->display_name());
         } else {
             dict.ShowSection("NO_USER_NAME");
         }
-        dict["TASK_TITLE"] = task->title();
+        dict.SetValue("TASK_TITLE", task->title());
+        dict.SetValue("SITE_NAME", settings.get("site.name").toStdString());
 
         std::string email_body;
         QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/org-task-deadline-passed.tpl";

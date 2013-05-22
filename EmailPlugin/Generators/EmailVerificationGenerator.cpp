@@ -22,8 +22,6 @@ void EmailVerificationGenerator::run()
     uniqueId = UserDao::getRegistrationId(db, emailMessage.user_id());
     user = UserDao::getUser(db, emailMessage.user_id());
 
-    qDebug() << "Unique ID is " << uniqueId;
-
     if (uniqueId == "" || user.isNull()) {
         error = "EmailVerificationGenerator - Unable to find user data for user "
                 + QString::number(emailMessage.user_id());
@@ -33,7 +31,8 @@ void EmailVerificationGenerator::run()
         ctemplate::TemplateDictionary dict("registrationEmail");
         QString url = settings.get("site.url");
         url += "user/" + uniqueId + "/verification";
-        dict["URL"] = url.toStdString();
+        dict.SetValue("URL", url.toStdString());
+        dict.SetValue("SITE_NAME", settings.get("site.name").toStdString());
 
         std::string email_body;
         QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/registration-email.tpl";
