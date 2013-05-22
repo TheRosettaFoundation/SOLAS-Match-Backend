@@ -10,6 +10,14 @@
 
 <hr />
 
+
+    <p>Total Users: {{TOTAL_USERS}}</p>
+
+
+
+    <p>Total Tasks: {{TOTAL_TASKS}}</p>
+
+
 {{#TIMING}}
     <p>Finished processing. It took {{TIME}} to complete</p>
 {{/TIMING}}

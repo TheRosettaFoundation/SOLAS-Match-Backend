@@ -170,3 +170,15 @@ QSharedPointer<BannedUser> ModelGenerator::GenerateBannedUser(QSharedPointer<QSq
 
     return banData;
 }
+
+QSharedPointer<Locale> ModelGenerator::GenerateLocale(QSharedPointer<QSqlQuery> q)
+{
+    QSharedPointer<Locale> localeData = QSharedPointer<Locale>(new Locale());
+
+    localeData->set_languagename(MySQLHandler::getValueFromQuery("languageName", q).toString().toStdString());
+    localeData->set_languagecode(MySQLHandler::getValueFromQuery("languageCode", q).toString().toStdString());
+    localeData->set_countryname(MySQLHandler::getValueFromQuery("countryName", q).toString().toStdString());
+    localeData->set_countrycode(MySQLHandler::getValueFromQuery("countryCode", q).toString().toStdString());
+
+    return localeData;
+}

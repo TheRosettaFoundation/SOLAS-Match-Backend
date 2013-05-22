@@ -159,3 +159,18 @@ bool UserDao::taskStreamNotificationSent(QSharedPointer<MySQLHandler> db, int us
     }
     return ret;
 }
+
+QList<QSharedPointer<Locale> > UserDao::getUserSecondaryLanguages(QSharedPointer<MySQLHandler> db, int userId)
+{
+    QList<QSharedPointer<Locale> > userSecondaryLocales;
+
+    QString args = QString::number(userId);
+    QSharedPointer<QSqlQuery> mQuery = db->call("getUserSecondaryLanguages", args);
+    if(mQuery->first()) {
+        do {
+            QSharedPointer<Locale> locale = ModelGenerator::GenerateLocale(mQuery);
+            userSecondaryLocales.append(locale);
+        } while (mQuery->next());
+    }
+    return userSecondaryLocales;
+}

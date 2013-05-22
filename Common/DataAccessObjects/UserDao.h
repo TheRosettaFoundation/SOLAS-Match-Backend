@@ -44,6 +44,8 @@ public:
     static QList<int> getUserIdsPendingTaskStreamNotification(QSharedPointer<MySQLHandler> db);
     static bool taskStreamNotificationSent(QSharedPointer<MySQLHandler> db, int userId, QString sentDate);
 
+    static QList<QSharedPointer<Locale> > getUserSecondaryLanguages(QSharedPointer<MySQLHandler> db, int userId);
+
 };
 
 #endif  //USERDAO_H

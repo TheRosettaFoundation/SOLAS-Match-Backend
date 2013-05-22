@@ -26,6 +26,8 @@ public:
     static QSharedPointer<ArchivedProject> GenerateArchivedProject(QSharedPointer<QSqlQuery> q);
     static QSharedPointer<Language> GenerateLanguage(QSharedPointer<QSqlQuery> q);
     static QSharedPointer<BannedUser> GenerateBannedUser(QSharedPointer<QSqlQuery> q);
+    static QSharedPointer<Locale> GenerateLocale(QSharedPointer<QSqlQuery> q);
+
 
 };
 
