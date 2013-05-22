@@ -349,7 +349,7 @@ QList<QSharedPointer<User> > TaskDao::getSubscribedUsers(QSharedPointer<MySQLHan
     QSharedPointer<QSqlQuery> mQuery = db->call("getSubscribedUsers", QString::number(task_id));
     if(mQuery->first()) {
         do {
-            users.append(UserDao::getUser(db, MySQLHandler::getValueFromQuery("user_id", mQuery).toInt()));
+            users.append(ModelGenerator::GenerateUser(mQuery));
         } while(mQuery->next());
     }
 

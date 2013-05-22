@@ -50,12 +50,7 @@ void UserFeedbackGenerator::run()
     }
 
     if(error.compare("") == 0) {
-        bool isTracked = true;
         QList<QSharedPointer<User> > users = TaskDao::getSubscribedUsers(db, task->id());
-        if (users.count() < 1) {
-            isTracked = false;
-            users = OrganisationDao::getOrgAdmins(db, org->id());
-        }
 
         foreach (QSharedPointer<User> user, users) {
             email = QSharedPointer<Email>(new Email);
@@ -64,13 +59,7 @@ void UserFeedbackGenerator::run()
             dict.SetValue("FEEDBACK", feedback.toStdString());
             dict.SetValue("ORG_NAME", org->name());
             dict.SetValue("SITE_NAME", settings.get("site.name").toStdString());
-            if (isTracked) {
-                dict.ShowSection("TRACKING_USER");
-                dict.SetValue("CLAIMANT_NAME", claimant->display_name());
-            } else {
-                dict.ShowSection("ORG_ADMIN");
-                dict.SetValue("CLAIMANT_NAME", claimant->display_name());
-            }
+            dict.SetValue("CLAIMANT_NAME", claimant->display_name());
 
             std::string email_body;
             QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/user-feedback.tpl";
