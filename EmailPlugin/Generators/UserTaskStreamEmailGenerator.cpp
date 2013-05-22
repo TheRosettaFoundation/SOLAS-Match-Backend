@@ -114,7 +114,7 @@ void UserTaskStreamEmailGenerator::run()
 
         email->setSender(settings.get("site.system_email_address"));;
         email->addRecipient(QString::fromStdString(user->email()));
-        email->setSubject("Task Stream");
+        email->setSubject(settings.get("site.name") + ": Task Stream");
         email->setBody(QString::fromStdString(email_body));
 
         QString sentDateTime = QDateTime::currentDateTime().toString("yyyy-MM-dd HH:mm:ss");

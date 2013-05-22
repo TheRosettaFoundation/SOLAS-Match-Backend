@@ -48,7 +48,7 @@ void OrgDeadlinePassedMailGenerator::run()
 
         email->setSender(settings.get("site.system_email_address"));
         email->addRecipient(QString::fromStdString(user->email()));
-        email->setSubject("SOLAS Match: Organisation Membership Update");
+        email->setSubject(settings.get("site.name") + ": Task Update");
         email->setBody(QString::fromStdString(email_body));
     } else {
         email = this->generateErrorEmail(error);

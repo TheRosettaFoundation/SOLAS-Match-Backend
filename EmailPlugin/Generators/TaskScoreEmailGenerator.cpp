@@ -15,7 +15,7 @@ void TaskScoreEmailGenerator::run()
     }
 
     email->setSender(settings.get("site.system_email_address"));
-    email->setSubject("User Task Score Results");
+    email->setSubject(settings.get("site.name") + ": User Task Score Results");
     email->setBody(QString::fromStdString(email_message.body()));
 
     this->emailQueue->insert(email, currentMessage);

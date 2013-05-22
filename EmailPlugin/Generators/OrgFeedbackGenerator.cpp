@@ -65,7 +65,7 @@ void OrgFeedbackGenerator::run()
 
         email->setSender(settings.get("site.system_email_address"));;
         email->addRecipient(QString::fromStdString(claimant->email()));
-        email->setSubject("Organisation Feedback");
+        email->setSubject(settings.get("site.name") + ": Organisation Feedback");
         email->setBody(QString::fromStdString(email_body));
     } else {
         email = this->generateErrorEmail(error);

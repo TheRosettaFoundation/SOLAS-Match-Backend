@@ -47,7 +47,7 @@ void UserTaskDeadlineEmailGenerator::run()
 
         email->setSender(settings.get("site.system_email_address"));;
         email->addRecipient(QString::fromStdString(user->email()));
-        email->setSubject("Task Claim Notification");
+        email->setSubject(settings.get("site.name") + ": Task Deadline Passed");
         email->setBody(QString::fromStdString(email_body));
     } else {
         email = this->generateErrorEmail(error);

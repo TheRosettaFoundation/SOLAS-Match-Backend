@@ -65,7 +65,7 @@ void BannedLoginGenerator::run()
 
         email->setSender(settings.get("site.system_email_address"));;
         email->addRecipient(QString::fromStdString(user->email()));
-        email->setSubject("Banned Login");
+        email->setSubject(settings.get("site.name") + ": Banned Notification");
         email->setBody(QString::fromStdString(email_body));
     } else {
         email = this->generateErrorEmail(error);
