@@ -174,3 +174,45 @@ QList<QSharedPointer<Locale> > UserDao::getUserSecondaryLanguages(QSharedPointer
     }
     return userSecondaryLocales;
 }
+
+
+
+QMultiMap<int, LCCode> UserDao::getUserLCCodes(QSharedPointer<MySQLHandler> db, int limit, int offset)
+{
+    QMultiMap<int, LCCode> userLCIDs;
+    QString args = QString::number(limit) + ", " + QString::number(offset);
+    QSharedPointer<QSqlQuery> mQuery = db->call("getUserLCCodes", args);
+    if(mQuery->first()) {
+        do {
+            LCCode languageCountryId(MySQLHandler::getValueFromQuery("languageCode", mQuery).toString().toStdString(), MySQLHandler::getValueFromQuery("countryCode", mQuery).toString().toStdString());
+            userLCIDs.insert(MySQLHandler::getValueFromQuery("user_id", mQuery).toInt(), languageCountryId);
+        } while (mQuery->next());
+    }
+    return userLCIDs;
+}
+
+QMultiMap<int, int> UserDao::getUserTagIds(QSharedPointer<MySQLHandler> db, int limit, int offset)
+{
+    QMultiMap<int, int> userTagIds;
+    QString args = QString::number(limit) + ", " + QString::number(offset);
+    QSharedPointer<QSqlQuery> mQuery = db->call("getUserTagIds", args);
+    if(mQuery->first()) {
+        do {
+            userTagIds.insert(MySQLHandler::getValueFromQuery("user_id", mQuery).toInt(), MySQLHandler::getValueFromQuery("tag_id", mQuery).toInt());
+        } while (mQuery->next());
+    }
+    return userTagIds;
+}
+
+QMultiMap<int, int> UserDao::getTaskTagIds(QSharedPointer<MySQLHandler> db, int limit, int offset)
+{
+    QMultiMap<int, int> taskTagIds;
+    QString args = QString::number(limit) + ", " + QString::number(offset);
+    QSharedPointer<QSqlQuery> mQuery = db->call("getTaskTagIds", args);
+    if(mQuery->first()) {
+        do {
+            taskTagIds.insert(MySQLHandler::getValueFromQuery("task_id", mQuery).toInt(), MySQLHandler::getValueFromQuery("tag_id", mQuery).toInt());
+        } while (mQuery->next());
+    }
+    return taskTagIds;
+}

@@ -43,21 +43,23 @@ CalculateTaskScore::~CalculateTaskScore()
 
 void CalculateTaskScore::run()
 {
+
     qDebug() << "CalculateTaskScore: Starting new thread";
+
     ConfigParser settings;
     QDateTime started = QDateTime::currentDateTime();
     ctemplate::TemplateDictionary dict("user_task_score");
     db = MySQLHandler::getInstance();
     QList<QSharedPointer<User> > users = UserDao::getUsers(db);
     QList<QSharedPointer<Task> > tasks = this->getTasks();  //Must use custom function to check message for task id
-    QMultiMap<int , int> userTags;
-    QMultiMap<int , int> taskTags;
+
+    QMultiMap<int, LCCode> userSecondaryLanguages = UserDao::getUserLCCodes(db, 0, 0);
+    QMultiMap<int, int> userTags = UserDao::getUserTagIds(db);
+    QMultiMap<int, int> taskTags = UserDao::getTaskTagIds(db);
 
     if(users.length() > 0) {
         foreach(QSharedPointer<User> user, users) {
             Locale userNativeLocale = user->nativelocale();
-            QList<QSharedPointer<Locale> > userSecondaryLocales = UserDao::getUserSecondaryLanguages(db, user->id());
-            QList<QSharedPointer<Tag> > userTags = TagDao::getUserTags(db, user->id());
             if(tasks.length() > 0) {
                 foreach(QSharedPointer<Task> task, tasks) {
                     int score = 0;
@@ -80,28 +82,45 @@ void CalculateTaskScore::run()
                         }
                     }
 
-                    foreach (QSharedPointer<Locale> userSecLocale, userSecondaryLocales) {
-                        if(userSecLocale->languagecode() == taskSourceLocale.languagecode()) {
+                    if(userSecondaryLanguages.contains(user->id())) {
+                        const QList<LCCode> lcCodes = userSecondaryLanguages.values(user->id());
+                        if(lcCodes.end()!=std::find_if(lcCodes.begin(), lcCodes.end(),LidMatch(taskSourceLocale.languagecode()))) {
                             score += 500;
-                            if(userSecLocale->countrycode() == taskSourceLocale.countrycode()) {
+                            if(lcCodes.end()!=std::find_if(lcCodes.begin(), lcCodes.end(),CidMatch(taskSourceLocale.countrycode())) ) {
                                 score += 50;
                             }
                         }
-                        if(userSecLocale->languagecode() == taskTargetLocale.languagecode()) {
-                            score += 750;
-                            if(userSecLocale->countrycode() == taskTargetLocale.countrycode()) {
-                                score += 75;
+                        if(lcCodes.end()!=std::find_if(lcCodes.begin(), lcCodes.end(),LidMatch(taskTargetLocale.languagecode()))) {
+                            score += 500;
+                            if(lcCodes.end()!=std::find_if(lcCodes.begin(), lcCodes.end(),CidMatch(taskTargetLocale.countrycode())) ) {
+                                score += 50;
                             }
                         }
+//                        foreach(LCCode lcCode, lcCodes) {
+//                            if(lcCode.first == taskSourceLocale.languagecode()) {
+//                                score += 500;
+//                                if(lcCode.second == taskSourceLocale.countrycode()) {
+//                                    score += 50;
+//                                }
+//                            }
+//                            if(lcCode.first == taskTargetLocale.languagecode()) {
+//                                score += 750;
+//                                if(lcCode.second == taskTargetLocale.countrycode()) {
+//                                    score += 75;
+//                                }
+//                            }
+//                        }
                     }
 
-                    QList<QSharedPointer<Tag> > taskTags = TagDao::getTaskTags(db, task->id());
-                    int increment_value = 250;
-                    foreach(QSharedPointer<Tag> user_tag, userTags) {
-                        foreach(QSharedPointer<Tag> task_tag, taskTags) {
-                            if(user_tag->id() == task_tag->id()) {
-                                score += increment_value;
-                                increment_value *= 0.75;
+                    if(userTags.contains(user->id()) && taskTags.contains(task->id())) {
+                        int increment_value = 250;
+                        QList<int> userTagIds = userTags.values(user->id());
+                        QList<int> userTaskTagIds = taskTags.values(task->id());
+
+                        foreach(int userTagId, userTagIds) {
+                            if(userTaskTagIds.contains(userTagId)) {
+                                    score += increment_value;
+                                    increment_value *= 0.75;
                             }
                         }
                     }
@@ -110,11 +129,6 @@ void CalculateTaskScore::run()
                                 QString::fromStdString(task->createdtime()), Qt::ISODate);
                     //increase score by one per day since created time
                     score += created_time.daysTo(QDateTime::currentDateTime());
-
-//                    ctemplate::TemplateDictionary *score_sect = dict.AddSectionDictionary("SCORE_SECT");
-//                    score_sect->SetIntValue("USER_ID", user->id());
-//                    score_sect->SetIntValue("TASK_ID", task->id());
-//                    score_sect->SetIntValue("SCORE", score);
                     this->saveUserTaskScore(user->id(), task->id(), score);
                 }
             } else {
@@ -122,6 +136,7 @@ void CalculateTaskScore::run()
                 dict.ShowSection("ERROR");
                 dict["ERROR_MESSAGE"] = "No tasks found";
             }
+
         }
     } else {
         qDebug() << "No users found";
@@ -164,6 +179,7 @@ void CalculateTaskScore::run()
     }
     delete message_body;
     qDebug() << "CalcUserTaskScore::Finished publishing";
+
 }
 
 QList<QSharedPointer<Task> > CalculateTaskScore::getTasks()
