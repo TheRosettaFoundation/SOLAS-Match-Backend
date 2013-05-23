@@ -50,10 +50,13 @@ bool MessagingClient::openConnection()
 
 void MessagingClient::declareQueue(QString exchange, QString topic, QString queue)
 {
-    mQueue = this->conn->createQueue(queue.toStdString());
-
-    mQueue->Declare();
-    mQueue->Bind(exchange.toStdString(), topic.toStdString());
+    if(this->conn) {
+        mQueue = this->conn->createQueue(queue.toStdString());
+        mQueue->Declare();
+        mQueue->Bind(exchange.toStdString(), topic.toStdString());
+    } else {
+        qDebug() << "Connection not initialized";
+    }
 }
 
 void MessagingClient::publish(QString exchange, QString topic, QString message)
@@ -82,15 +85,17 @@ void MessagingClient::republish(AMQPMessage *message)
 
 void MessagingClient::consumeFromQueue()
 {
-    try {
-        mQueue->Get();
+    if(mQueue){
+        try {
+            mQueue->Get();
 
-        AMQPMessage *message = mQueue->getMessage();
-        if(message && message->getMessageCount() > -1) {
-            emit AMQPMessageReceived(message);
+            AMQPMessage *message = mQueue->getMessage();
+            if(message && message->getMessageCount() > -1) {
+                emit AMQPMessageReceived(message);
+            }
+        } catch (AMQPException e) {
+            qDebug() << "ERROR: Consuming from Queue";
+            emit AMQPError(QString::fromStdString(e.getMessage()));
         }
-    } catch (AMQPException e) {
-        qDebug() << "ERROR: Consuming from Queue";
-        emit AMQPError(QString::fromStdString(e.getMessage()));
     }
 }
