@@ -24,6 +24,8 @@
 #include "Generators/TrackedTaskSourceUpdatedGenerator.h"
 #include "Generators/ClaimedTaskSourceUpdatedGenerator.h"
 #include "Generators/ClaimedTaskUploadedGenerator.h"
+#include "Generators/OrgCreated_OrgEmail.h"
+#include "Generators/OrgCreated_SiteAdmin.h"
 
 #include "Smtp.h"
 #include "IEmailGenerator.h"
@@ -132,6 +134,10 @@ void EmailPlugin::registerEmailTypes()
     qRegisterMetaType<OrgFeedbackGenerator>(name.toLatin1());
     name = "EmailGenerator_" + QString::number(EmailMessage::UserFeedback);
     qRegisterMetaType<UserFeedbackGenerator>(name.toLatin1());
+    name = "EmailGenerator_" + QString::number(EmailMessage::OrgCreatedSiteAdmin);
+    qRegisterMetaType<OrgCreate_SiteAdmin>(name.toLatin1());
+    name = "EmailGenerator_" + QString::number(EmailMessage::OrgCreatedOrgAdmin);
+    qRegisterMetaType<OrgCreated_OrgEmail>(name.toLatin1());
 }
 
 void EmailPlugin::setThreadPool(QThreadPool *tp)
