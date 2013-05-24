@@ -40,7 +40,7 @@ CalculateTaskScore::~CalculateTaskScore()
 {
     // Default Destructor
 }
-
+static int countx = 0;
 void CalculateTaskScore::run()
 {
 
@@ -50,71 +50,58 @@ void CalculateTaskScore::run()
     QDateTime started = QDateTime::currentDateTime();
     ctemplate::TemplateDictionary dict("user_task_score");
     db = MySQLHandler::getInstance();
-    QList<QSharedPointer<User> > users = UserDao::getUsers(db);
+    QMultiMap<int, LCCode> users = UserDao::getUserNativeLCCodes(db);
     QList<QSharedPointer<Task> > tasks = this->getTasks();  //Must use custom function to check message for task id
 
-    QMultiMap<int, LCCode> userSecondaryLanguages = UserDao::getUserLCCodes(db, 0, 0);
+    QMultiMap<int, LCCode> userSecondaryLanguages = UserDao::getUserLCCodes(db);
     QMultiMap<int, int> userTags = UserDao::getUserTagIds(db);
     QMultiMap<int, int> taskTags = UserDao::getTaskTagIds(db);
 
-    if(users.length() > 0) {
-        foreach(QSharedPointer<User> user, users) {
-            Locale userNativeLocale = user->nativelocale();
+    if(users.count() > 0) {
+        for(QMultiMap<int, LCCode>::ConstIterator usersIter = users.constBegin(); usersIter != users.constEnd(); ++usersIter) {
             if(tasks.length() > 0) {
+                const LCCode userNativeLCCode = users.value(usersIter.key());
+                QList<TaskScore> taskScores;
                 foreach(QSharedPointer<Task> task, tasks) {
                     int score = 0;
 
                     Locale taskSourceLocale = task->sourcelocale();
 
-                    if(userNativeLocale.languagecode() == taskSourceLocale.languagecode()) {
+                    if(userNativeLCCode.first == taskSourceLocale.languagecode()) {
                         score += 750;
-                        if(userNativeLocale.countrycode() == taskSourceLocale.countrycode()) {
+                        if(userNativeLCCode.second == taskSourceLocale.countrycode()) {
                             score += 75;
                         }
                     }
 
                     Locale taskTargetLocale = task->targetlocale();
 
-                    if(userNativeLocale.languagecode() == taskTargetLocale.languagecode()) {
+                    if(userNativeLCCode.first == taskTargetLocale.languagecode()) {
                         score += 1000;
-                        if(userNativeLocale.countrycode() == taskTargetLocale.countrycode()) {
+                        if(userNativeLCCode.second == taskTargetLocale.countrycode()) {
                             score += 100;
                         }
                     }
 
-                    if(userSecondaryLanguages.contains(user->id())) {
-                        const QList<LCCode> lcCodes = userSecondaryLanguages.values(user->id());
-                        if(lcCodes.end()!=std::find_if(lcCodes.begin(), lcCodes.end(),LidMatch(taskSourceLocale.languagecode()))) {
+                    if(userSecondaryLanguages.contains(usersIter.key())) {
+                        const QList<LCCode> lcCodes = userSecondaryLanguages.values(usersIter.key());
+                        if(lcCodes.end() != std::find_if(lcCodes.begin(), lcCodes.end(), LidMatch(taskSourceLocale.languagecode()))) {
                             score += 500;
-                            if(lcCodes.end()!=std::find_if(lcCodes.begin(), lcCodes.end(),CidMatch(taskSourceLocale.countrycode())) ) {
+                            if(lcCodes.end() != std::find_if(lcCodes.begin(), lcCodes.end(), CidMatch(taskSourceLocale.countrycode())) ) {
                                 score += 50;
                             }
                         }
-                        if(lcCodes.end()!=std::find_if(lcCodes.begin(), lcCodes.end(),LidMatch(taskTargetLocale.languagecode()))) {
+                        if(lcCodes.end() != std::find_if(lcCodes.begin(), lcCodes.end(), LidMatch(taskTargetLocale.languagecode()))) {
                             score += 500;
-                            if(lcCodes.end()!=std::find_if(lcCodes.begin(), lcCodes.end(),CidMatch(taskTargetLocale.countrycode())) ) {
+                            if(lcCodes.end() != std::find_if(lcCodes.begin(), lcCodes.end(), CidMatch(taskTargetLocale.countrycode())) ) {
                                 score += 50;
                             }
                         }
-//                        foreach(LCCode lcCode, lcCodes) {
-//                            if(lcCode.first == taskSourceLocale.languagecode()) {
-//                                score += 500;
-//                                if(lcCode.second == taskSourceLocale.countrycode()) {
-//                                    score += 50;
-//                                }
-//                            }
-//                            if(lcCode.first == taskTargetLocale.languagecode()) {
-//                                score += 750;
-//                                if(lcCode.second == taskTargetLocale.countrycode()) {
-//                                    score += 75;
-//                                }
-//                            }
-//                        }
                     }
 
-                    if(userTags.contains(user->id()) && taskTags.contains(task->id())) {
+                    if(userTags.contains(usersIter.key()) && taskTags.contains(task->id())) {
                         int increment_value = 250;
-                        QList<int> userTagIds = userTags.values(user->id());
+                        QList<int> userTagIds = userTags.values(usersIter.key());
                         QList<int> userTaskTagIds = taskTags.values(task->id());
 
                         foreach(int userTagId, userTagIds) {
@@ -126,11 +113,14 @@ void CalculateTaskScore::run()
                     }
 
                     QDateTime created_time = QDateTime::fromString(
-                                QString::fromStdString(task->createdtime()), Qt::ISODate);
+                                            QString::fromStdString(task->createdtime()), Qt::ISODate);
                     //increase score by one per day since created time
                     score += created_time.daysTo(QDateTime::currentDateTime());
-                    this->saveUserTaskScore(user->id(), task->id(), score);
+                    taskScores.append(TaskScore(task->id(), score));
                 }
+
+                    this->saveUserTaskScore(usersIter.key(),taskScores);
+
             } else {
                 qDebug() << "No tasks found";
                 dict.ShowSection("ERROR");
@@ -155,7 +145,7 @@ void CalculateTaskScore::run()
 
     dict.SetIntValue("TOTAL_USERS", users.size());
     dict.SetIntValue("TOTAL_TASKS", tasks.size());
-
+    qDebug() << "count " << countx;
 
     QString template_location = QString(TEMPLATE_DIRECTORY) + "score_results.tpl";
     std::string email_body;
@@ -213,14 +203,20 @@ int CalculateTaskScore::getTaskIdFromMessage()
     return ret;
 }
 
-void CalculateTaskScore::saveUserTaskScore(int user_id, int task_id, int score)
+
+void CalculateTaskScore::saveUserTaskScore(int user_id, QList<TaskScore > scores)
 {
-    int old_score = this->getCurrentScore(user_id, task_id);
-    if(old_score != score) {
-        QString args = QString::number(user_id) + ", " + QString::number(task_id)
-                + ", " + QString::number(score);
-        db->call("saveUserTaskScore", args);
-    }
+        QList<QString> argList;
+        foreach(TaskScore score,scores){
+            int old_score = this->getCurrentScore(user_id, score.first);
+            if(old_score != score.second) {
+                ++countx;
+            QString args = QString::number(user_id) + ", " + QString::number(score.first)
+                + ", " + QString::number(score.second);
+                argList.append(args);
+            }
+        }
+        if(!argList.empty())       db->multicall("saveUserTaskScore", argList);
 }
 
 int CalculateTaskScore::getCurrentScore(int user_id, int task_id)

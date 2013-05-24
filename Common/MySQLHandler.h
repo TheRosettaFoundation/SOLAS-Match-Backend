@@ -15,6 +15,7 @@ public:
     ~MySQLHandler();
     static QSharedPointer<MySQLHandler> getInstance();
     QSharedPointer<QSqlQuery> call(QString proc_name, QString args);
+    QList<QSharedPointer <QSqlQuery> > multicall(QString proc_name, QList<QString> arglist);
     static QVariant getValueFromQuery(QString field_name, QSharedPointer<QSqlQuery> mQuery);
     static QString wrapString(QString str);
     static QString wrapStdString(const std::string str);

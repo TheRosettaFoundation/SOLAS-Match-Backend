@@ -21,10 +21,11 @@ public:
     void setAMQPMessage(AMQPMessage *message);
 
 private:
+    typedef QPair<int, int> TaskScore;
     QList<QSharedPointer<Task> > getTasks();
     int getTaskIdFromMessage();
     int getCurrentScore(int user_id, int task_id);
-    void saveUserTaskScore(int user_id, int task_id, int score);
+    void saveUserTaskScore(int user_id, QList<TaskScore> scores);
     AMQPMessage *message;
     QSharedPointer<MySQLHandler> db;
 

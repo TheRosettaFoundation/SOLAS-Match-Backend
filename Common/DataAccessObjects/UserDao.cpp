@@ -216,3 +216,17 @@ QMultiMap<int, int> UserDao::getTaskTagIds(QSharedPointer<MySQLHandler> db, int 
     }
     return taskTagIds;
 }
+
+QMultiMap<int, LCCode> UserDao::getUserNativeLCCodes(QSharedPointer<MySQLHandler> db, int limit, int offset)
+{
+    QMultiMap<int, LCCode> userNativeLCIDs;
+    QString args = QString::number(limit) + ", " + QString::number(offset);
+    QSharedPointer<QSqlQuery> mQuery = db->call("getUserNativeLCCodes", args);
+    if(mQuery->first()) {
+        do {
+            LCCode languageCountryId(MySQLHandler::getValueFromQuery("languageCode", mQuery).toString().toStdString(), MySQLHandler::getValueFromQuery("countryCode", mQuery).toString().toStdString());
+            userNativeLCIDs.insert(MySQLHandler::getValueFromQuery("id", mQuery).toInt(), languageCountryId);
+        } while (mQuery->next());
+    }
+    return userNativeLCIDs;
+}

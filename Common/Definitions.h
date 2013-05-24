@@ -2,6 +2,7 @@
 #define DEFINITIONS_H
 
 #include <QString>
+#include <QPair>
 
 enum TaskTypes {
     CHUNKING = 1,
@@ -27,9 +28,9 @@ enum BanTypes {
 const int RETURN_ALL = 0;
 
 // <languageCode, countryCode>
-typedef std::pair<std::string, std::string> LCCode;
+typedef QPair<std::string, std::string> LCCode;
 
-typedef std::pair<int, int> userTag;
+typedef QPair<int, int> userTag;
 typedef userTag taskTag;
 
 struct LidMatch {

@@ -95,6 +95,46 @@ QSharedPointer<QSqlQuery> MySQLHandler::call(QString proc_name, QString args)
     return ret;
 }
 
+QList<QSharedPointer <QSqlQuery> > MySQLHandler::multicall(QString proc_name, QList<QString> arglist)
+{
+    QList<QSharedPointer <QSqlQuery> > ret = QList<QSharedPointer <QSqlQuery> >();
+    QSharedPointer<QSqlQuery> q = QSharedPointer<QSqlQuery>(new QSqlQuery(*(this->conn)));
+
+    foreach (QString str,arglist) {
+        ret.append(this->call(proc_name,str));
+    }
+
+
+//    if (this->init()) {
+//        QString query = "Call " + proc_name+" (";
+//        QStringList item =arglist.first().split(",");
+//        for(int i = 0; i<item.size(); i++){
+//            if(i!=0) query +=",";
+//            query +="?";
+//        }
+//        query += ")";
+//        q->prepare(query);
+//        foreach (QString args, arglist) {
+//            item =args.split(",");
+//            for(int i = 0; i<item.size(); i++){
+//               q->addBindValue(item.at(i));
+//            }
+
+//           QSharedPointer<QSqlQuery> result = QSharedPointer<QSqlQuery>(new QSqlQuery(query, *(this->conn)));
+
+//           if (result->lastError().isValid()) {
+//               qDebug() << "MySQLHandler: ERROR - " << result->lastError().text();
+//           } else ret.append(result);
+//        }
+
+
+//    } else {
+//        qDebug() << "MySQLHandler::call - Initialization failed";
+//    }
+
+    return ret;
+}
+
 QVariant MySQLHandler::getValueFromQuery(QString field_name, QSharedPointer<QSqlQuery> mQuery)
 {
     QVariant ret = 0;
