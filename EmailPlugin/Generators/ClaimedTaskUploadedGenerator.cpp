@@ -60,7 +60,7 @@ void ClaimedTaskUploadedGenerator::run()
 
         email->setSender(settings.get("site.system_email_address"));;
         email->addRecipient(QString::fromStdString(user->email()));
-        email->setSubject("Task Successfully Uploaded");
+        email->setSubject(settings.get("site.name") + ": Task Successfully Uploaded");
         email->setBody(QString::fromStdString(email_body));
     } else {
         email = this->generateErrorEmail(error);

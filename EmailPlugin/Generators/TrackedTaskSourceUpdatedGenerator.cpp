@@ -57,7 +57,7 @@ void TrackedTaskSourceUpdatedGenerator::run()
 
         email->setSender(settings.get("site.system_email_address"));;
         email->addRecipient(QString::fromStdString(user->email()));
-        email->setSubject("Tracked Task Updated");
+        email->setSubject(settings.get("site.name") + ": Tracked Task Updated");
         email->setBody(QString::fromStdString(email_body));
     } else {
         email = this->generateErrorEmail(error);

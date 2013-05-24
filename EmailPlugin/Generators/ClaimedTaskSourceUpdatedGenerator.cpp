@@ -47,7 +47,7 @@ void ClaimedTaskSourceUpdatedGenerator::run()
 
         email->setSender(settings.get("site.system_email_address"));;
         email->addRecipient(QString::fromStdString(user->email()));
-        email->setSubject("Task Source File Updated");
+        email->setSubject(settings.get("site.name") + ": Task Source File Updated");
         email->setBody(QString::fromStdString(email_body));
     } else {
         email = this->generateErrorEmail(error);

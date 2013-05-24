@@ -15,7 +15,8 @@
 #include "Generators/TaskClaimedEmailGenerator.h"
 #include "Generators/UserTaskClaimEmailGenerator.h"
 #include "Generators/UserTaskDeadlineEmailGenerator.h"
-#include "Generators/FeedbackEmailGenerator.h"
+#include "Generators/OrgFeedbackGenerator.h"
+#include "Generators/UserFeedbackGenerator.h"
 #include "Generators/UserTaskStreamEmailGenerator.h"
 #include "Generators/TrackedTaskUploadedEmailGenerator.h"
 #include "Generators/EmailVerificationGenerator.h"
@@ -23,6 +24,8 @@
 #include "Generators/TrackedTaskSourceUpdatedGenerator.h"
 #include "Generators/ClaimedTaskSourceUpdatedGenerator.h"
 #include "Generators/ClaimedTaskUploadedGenerator.h"
+#include "Generators/OrgCreated_OrgEmail.h"
+#include "Generators/OrgCreated_SiteAdmin.h"
 
 #include "Smtp.h"
 #include "IEmailGenerator.h"
@@ -111,8 +114,6 @@ void EmailPlugin::registerEmailTypes()
     qRegisterMetaType<TaskClaimedEmailGenerator>(name.toLatin1());
     name = "EmailGenerator_" + QString::number(EmailMessage::UserTaskClaim);
     qRegisterMetaType<UserTaskClaimEmailGenerator>(name.toLatin1());
-    name = "EmailGenerator_" + QString::number(EmailMessage::FeedbackEmail);
-    qRegisterMetaType<FeedbackEmailGenerator>(name.toLatin1());
     name = "EmailGenerator_" + QString::number(EmailMessage::OrgTaskDeadlinePassed);
     qRegisterMetaType<OrgDeadlinePassedMailGenerator>(name.toLatin1());
     name = "EmailGenerator_" + QString::number(EmailMessage::UserClaimedTaskDeadlinePassed);
@@ -129,6 +130,14 @@ void EmailPlugin::registerEmailTypes()
     qRegisterMetaType<ClaimedTaskSourceUpdatedGenerator>(name.toLatin1());
     name = "EmailGenerator_" + QString::number(EmailMessage::ClaimedTaskUploaded);
     qRegisterMetaType<ClaimedTaskUploadedGenerator>(name.toLatin1());
+    name = "EmailGenerator_" + QString::number(EmailMessage::OrgFeedback);
+    qRegisterMetaType<OrgFeedbackGenerator>(name.toLatin1());
+    name = "EmailGenerator_" + QString::number(EmailMessage::UserFeedback);
+    qRegisterMetaType<UserFeedbackGenerator>(name.toLatin1());
+    name = "EmailGenerator_" + QString::number(EmailMessage::OrgCreatedSiteAdmin);
+    qRegisterMetaType<OrgCreate_SiteAdmin>(name.toLatin1());
+    name = "EmailGenerator_" + QString::number(EmailMessage::OrgCreatedOrgAdmin);
+    qRegisterMetaType<OrgCreated_OrgEmail>(name.toLatin1());
 }
 
 void EmailPlugin::setThreadPool(QThreadPool *tp)

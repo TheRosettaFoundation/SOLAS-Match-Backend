@@ -45,7 +45,7 @@ void TaskClaimedEmailGenerator::run()
         dict.SetValue("SITE_NAME", settings.get("site.name").toStdString());
 
         QString user_profile_url = settings.get("site.url");
-        user_profile_url += "profile/" + QString::number(translator->id());
+        user_profile_url += QString::number(translator->id()) + "/profile";
         dict["USER_PROFILE_URL"] = user_profile_url.toStdString();
 
         std::string email_body;
@@ -54,7 +54,7 @@ void TaskClaimedEmailGenerator::run()
 
         email->setSender(settings.get("site.system_email_address"));;
         email->addRecipient(QString::fromStdString(user->email()));
-        email->setSubject("Task Claim Notification");
+        email->setSubject(settings.get("site.name") + ": Task Claim Notification");
         email->setBody(QString::fromStdString(email_body));
     } else {
         email = this->generateErrorEmail(error);

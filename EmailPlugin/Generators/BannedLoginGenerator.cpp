@@ -35,12 +35,12 @@ void BannedLoginGenerator::run()
 
     if (error == "") {
         ctemplate::TemplateDictionary dict("BannedLogin");
-        dict["USERNAME"] = user->display_name();
-        dict["SITE_NAME"] = settings.get("site.name").toStdString();
+        dict.SetValue("USERNAME", user->display_name());
+        dict.SetValue("SITE_NAME", settings.get("site.name").toStdString());
 
         QDateTime banDate = QDateTime::fromString(QString::fromStdString(banData->banneddate()),
                 "yyyy-MM-ddTHH:mm:ss");
-        dict["BAN_TIME"] = banDate.toString("d MMMM yyyy - hh:mm").toStdString();
+        dict.SetValue("BAN_TIME", banDate.toString("d MMMM yyyy - hh:mm").toStdString());
 
         QString banLength = "";
         if (banData->bantype() == DAY) {
@@ -52,7 +52,7 @@ void BannedLoginGenerator::run()
         } else if (banData->bantype() == PERMANENT) {
             banLength = "permanently";
         }
-        dict["BAN_LENGTH"] = banLength.toStdString();
+        dict.SetValue("BAN_LENGTH", banLength.toStdString());
 
         if (banData->has_comment()) {
             ctemplate::TemplateDictionary *commentDict = dict.AddSectionDictionary("COMMENT_GIVEN");
@@ -65,7 +65,7 @@ void BannedLoginGenerator::run()
 
         email->setSender(settings.get("site.system_email_address"));;
         email->addRecipient(QString::fromStdString(user->email()));
-        email->setSubject("Banned Login");
+        email->setSubject(settings.get("site.name") + ": Banned Notification");
         email->setBody(QString::fromStdString(email_body));
     } else {
         email = this->generateErrorEmail(error);

@@ -30,7 +30,8 @@ SOURCES += CorePlugin.cpp \
     UserJobs/StatisticsUpdate.cpp \
     TaskJobs/SendTaskUploadNotifications.cpp \
     ProjectQueueHandler.cpp \
-    ProjectJobs/CalculateProjectDeadlines.cpp
+    ProjectJobs/CalculateProjectDeadlines.cpp \
+    UserJobs/OrgCreatedNotifications.cpp
 
 HEADERS += CorePlugin.h \
     TaskQueueHandler.h \
@@ -41,4 +42,5 @@ HEADERS += CorePlugin.h \
     UserJobs/StatisticsUpdate.h \
     TaskJobs/SendTaskUploadNotifications.h \
     ProjectQueueHandler.h \
-    ProjectJobs/CalculateProjectDeadlines.h
+    ProjectJobs/CalculateProjectDeadlines.h \
+    UserJobs/OrgCreatedNotifications.h

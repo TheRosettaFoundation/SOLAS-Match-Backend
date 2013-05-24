@@ -38,7 +38,6 @@ SOURCES += emailplugin.cpp \
     Generators/TaskArchivedEmailGenerator.cpp \
     Generators/TaskClaimedEmailGenerator.cpp \
     Generators/UserTaskClaimEmailGenerator.cpp \
-    Generators/FeedbackEmailGenerator.cpp \
     Generators/OrgDeadlinePassedEmailGenerator.cpp \
     Generators/UserTaskDeadlineEmailGenerator.cpp \
     Generators/UserTaskStreamEmailGenerator.cpp \
@@ -47,7 +46,11 @@ SOURCES += emailplugin.cpp \
     Generators/TrackedTaskSourceUpdatedGenerator.cpp \
     Generators/TrackedTaskUploadedEmailGenerator.cpp \
     Generators/ClaimedTaskUploadedGenerator.cpp \
-    Generators/ClaimedTaskSourceUpdatedGenerator.cpp
+    Generators/ClaimedTaskSourceUpdatedGenerator.cpp \
+    Generators/OrgFeedbackGenerator.cpp \
+    Generators/UserFeedbackGenerator.cpp \
+    Generators/OrgCreated_OrgEmail.cpp \
+    Generators/OrgCreated_SiteAdmin.cpp
 
 HEADERS += emailplugin.h\
         Smtp.h \
@@ -60,7 +63,6 @@ HEADERS += emailplugin.h\
     Generators/TaskArchivedEmailGenerator.h \
     Generators/TaskClaimedEmailGenerator.h \
     Generators/UserTaskClaimEmailGenerator.h \
-    Generators/FeedbackEmailGenerator.h \
     Generators/OrgDeadlinePassedEmailGenerator.h \
     Generators/UserTaskDeadlineEmailGenerator.h \
     Generators/UserTaskStreamEmailGenerator.h \
@@ -70,4 +72,8 @@ HEADERS += emailplugin.h\
     Generators/TrackedTaskSourceUpdatedGenerator.h \
     Generators/ClaimedTaskUploadedGenerator.h \
     Generators/ClaimedTaskSourceUpdatedGenerator.h \
-    EmailDefinitions.h
+    EmailDefinitions.h \
+    Generators/OrgFeedbackGenerator.h \
+    Generators/UserFeedbackGenerator.h \
+    Generators/OrgCreated_OrgEmail.h \
+    Generators/OrgCreated_SiteAdmin.h
