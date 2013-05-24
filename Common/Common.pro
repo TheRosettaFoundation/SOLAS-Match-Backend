@@ -69,7 +69,11 @@ SOURCES += \
     protobufs/models/WorkflowNode.pb.cc \
     GraphBuilder.cpp \
     protobufs/emails/OrgFeedback.pb.cc \
-    protobufs/emails/UserFeedback.pb.cc
+    protobufs/emails/UserFeedback.pb.cc \
+    protobufs/requests/OrgCreatedNotificationRequest.pb.cc \
+    DataAccessObjects/AdminDao.cpp \
+    protobufs/emails/OrgCreatedOrgAdmin.pb.cc \
+    protobufs/emails/OrgCreatedSiteAdmin.pb.cc
 
 HEADERS +=\
     MySQLHandler.h \
@@ -122,7 +126,11 @@ HEADERS +=\
     protobufs/models/WorkflowGraph.pb.h \
     protobufs/models/WorkflowNode.pb.h \
     protobufs/emails/OrgFeedback.pb.h \
-    protobufs/emails/UserFeedback.pb.h
+    protobufs/emails/UserFeedback.pb.h \
+    protobufs/requests/OrgCreatedNotificationRequest.pb.h \
+    DataAccessObjects/AdminDao.h \
+    protobufs/emails/OrgCreatedOrgAdmin.pb.h \
+    protobufs/emails/OrgCreatedSiteAdmin.pb.h
 
 symbian {
     MMP_RULES += EXPORTUNFROZEN

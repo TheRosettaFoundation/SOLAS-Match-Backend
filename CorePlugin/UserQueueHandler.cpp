@@ -8,9 +8,11 @@
 #include "Common/protobufs/requests/RequestMessage.pb.h"
 #include "Common/protobufs/requests/StatisticsUpdateRequest.pb.h"
 #include "Common/protobufs/requests/UserTaskStreamNotificationRequest.pb.h"
+#include "Common/protobufs/requests/OrgCreatedNotificationRequest.pb.h"
 
 #include "UserJobs/TaskStreamNotificationHandler.h"
 #include "UserJobs/StatisticsUpdate.h"
+#include "UserJobs/OrgCreatedNotifications.h"
 
 UserQueueHandler::UserQueueHandler()
 {
@@ -55,7 +57,7 @@ void UserQueueHandler::messageReceived(AMQPMessage *message)
 
     int classId = QMetaType::type(QString::fromStdString(requestMessage.class_name()).toLatin1());
     if (classId == 0) {
-        qDebug() << "TaskQueueHandler: Invalid proto type: " << QString::fromStdString(requestMessage.class_name());
+        qDebug() << "UserQueueHandler: Invalid proto type: " << QString::fromStdString(requestMessage.class_name());
     } else {
         JobInterface *runnable = static_cast<JobInterface *>(QMetaType::construct(classId));
         runnable->setAMQPMessage(message);
@@ -84,4 +86,6 @@ void UserQueueHandler::registerRequestTypes()
     qRegisterMetaType<StatisticsUpdate>(QString::fromStdString(statUpdate.class_name()).toLatin1());
     UserTaskStreamNotificationRequest streamReq = UserTaskStreamNotificationRequest();
     qRegisterMetaType<TaskStreamNotificationHandler>(QString::fromStdString(streamReq.class_name()).toLatin1());
+    OrgCreatedNotificationRequest orgCreated = OrgCreatedNotificationRequest();
+    qRegisterMetaType<OrgCreatedNotifications>(QString::fromStdString(orgCreated.class_name()).toLatin1());
 }
