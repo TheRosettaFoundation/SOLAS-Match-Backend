@@ -137,15 +137,12 @@ void CalculateTaskScore::run()
     int time_msecs = started.msecsTo(QDateTime::currentDateTime());
     int time_secs = time_msecs / 1000;
     time_msecs %= 1000;
-    dict.ShowSection("TIMING");
     QString time_value = QString::number(time_secs) + "." +
             QString("%1 seconds").arg(time_msecs, 3, 10, QChar('0'));
-    dict["TIME"] = time_value.toStdString();
-
-
+    dict.SetValue("TIME", time_value.toStdString());
     dict.SetIntValue("TOTAL_USERS", users.size());
     dict.SetIntValue("TOTAL_TASKS", tasks.size());
-    qDebug() << "count " << countx;
+    dict.SetIntValue("UPDATE_COUNT", countx);
 
     QString template_location = QString(TEMPLATE_DIRECTORY) + "score_results.tpl";
     std::string email_body;

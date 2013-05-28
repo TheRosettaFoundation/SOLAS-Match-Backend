@@ -4,20 +4,8 @@
     <p>An error occured: {{ERROR_MESSAGE}}</p>
 {{/ERROR}}
 
-{{#SCORE_SECT}}
-    <p>Updating user {{USER_ID}} task {{TASK_ID}} score to {{SCORE}}</p>
-{{/SCORE_SECT}}
-
 <hr />
-
-
-    <p>Total Users: {{TOTAL_USERS}}</p>
-
-
-
-    <p>Total Tasks: {{TOTAL_TASKS}}</p>
-
-
-{{#TIMING}}
-    <p>Finished processing. It took {{TIME}} to complete</p>
-{{/TIMING}}
+<p> 
+    Calculated scores for {{TOTAL_USERS}} users and {{TOTAL_TASKS}} tasks. {{UPDATE_COUNT}}
+    rows were updated in {{TIME}}.
+</p>
