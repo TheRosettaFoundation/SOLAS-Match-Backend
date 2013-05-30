@@ -57,11 +57,11 @@ void TrackedTaskUploadedEmailGenerator::run()
         dict.SetValue("SITE_NAME", settings.get("site.name").toStdString());
 
         QString reviewUrl = settings.get("site.url");
-        reviewUrl += "org/" + QString::number(org->id()) + "/task/" + QString::number(task->id());
+        reviewUrl += "org/" + QString::number(org->id()) + "/task/" + QString::number(task->id()) + "/review";
         dict.SetValue("TASK_REVIEW", reviewUrl.toStdString());
 
         QString dash_url = settings.get("site.url");
-        dash_url += "client/dashboard";
+        dash_url += "org/dashboard";
         dict["DASHBOARD_URL"] = dash_url.toStdString();
 
         QString taskView = settings.get("site.url");
