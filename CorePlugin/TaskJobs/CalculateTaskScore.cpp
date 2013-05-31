@@ -148,13 +148,13 @@ void CalculateTaskScore::run()
     std::string email_body;
     ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
-    TaskScoreEmail *message_body = new TaskScoreEmail();
-    message_body->set_email_type(EmailMessage::TaskScoreEmail);
-    message_body->set_body(email_body);
+    TaskScoreEmail message_body = TaskScoreEmail();
+    message_body.set_email_type(EmailMessage::TaskScoreEmail);
+    message_body.set_body(email_body);
     try {
         QString exchange_name = settings.get("messaging.exchange");
         QString exchange_topic = "email.task.score";
-        QString body = QString::fromStdString(message_body->SerializeAsString());
+        QString body = QString::fromStdString(message_body.SerializeAsString());
 
         MessagingClient publisher;
         publisher.init();
@@ -164,7 +164,7 @@ void CalculateTaskScore::run()
     } catch (exception e) {
         qDebug() << "Failed to publish message" << QString::fromStdString(e.what());
     }
-    delete message_body;
+    countx = 0;
     qDebug() << "CalcUserTaskScore::Finished publishing";
 
 }
