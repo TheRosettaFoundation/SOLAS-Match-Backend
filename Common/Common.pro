@@ -62,7 +62,6 @@ SOURCES += \
     protobufs/requests/TaskUploadNotificationRequest.pb.cc \
     protobufs/emails/ClaimedTaskSourceUpdated.pb.cc \
     protobufs/emails/ClaimedTaskUploaded.pb.cc \
-    protobufs/emails/TrackedTaskSourceUpdated.pb.cc \
     protobufs/emails/TrackedTaskUploaded.pb.cc \
     protobufs/requests/CalculateProjectDeadlinesRequest.pb.cc \
     protobufs/models/WorkflowGraph.pb.cc \
@@ -118,7 +117,6 @@ HEADERS +=\
     protobufs/requests/TaskUploadNotificationRequest.pb.h \
     protobufs/emails/ClaimedTaskSourceUpdated.pb.h \
     protobufs/emails/ClaimedTaskUploaded.pb.h \
-    protobufs/emails/TrackedTaskSourceUpdated.pb.h \
     protobufs/emails/TrackedTaskUploaded.pb.h \
     protobufs/requests/CalculateProjectDeadlinesRequest.pb.h \
     Definitions.h \

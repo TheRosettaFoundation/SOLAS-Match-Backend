@@ -21,7 +21,6 @@
 #include "Generators/TrackedTaskUploadedEmailGenerator.h"
 #include "Generators/EmailVerificationGenerator.h"
 #include "Generators/BannedLoginGenerator.h"
-#include "Generators/TrackedTaskSourceUpdatedGenerator.h"
 #include "Generators/ClaimedTaskSourceUpdatedGenerator.h"
 #include "Generators/ClaimedTaskUploadedGenerator.h"
 #include "Generators/OrgCreated_OrgEmail.h"
@@ -124,8 +123,6 @@ void EmailPlugin::registerEmailTypes()
     qRegisterMetaType<EmailVerificationGenerator>(name.toLatin1());
     name = "EmailGenerator_" + QString::number(EmailMessage::BannedLogin);
     qRegisterMetaType<BannedLoginGenerator>(name.toLatin1());
-    name = "EmailGenerator_" + QString::number(EmailMessage::TrackedTaskSourceUpdated);
-    qRegisterMetaType<TrackedTaskSourceUpdatedGenerator>(name.toLatin1());
     name = "EmailGenerator_" + QString::number(EmailMessage::ClaimedTaskSourceUpdated);
     qRegisterMetaType<ClaimedTaskSourceUpdatedGenerator>(name.toLatin1());
     name = "EmailGenerator_" + QString::number(EmailMessage::ClaimedTaskUploaded);

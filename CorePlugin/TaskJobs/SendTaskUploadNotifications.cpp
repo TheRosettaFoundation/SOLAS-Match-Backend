@@ -8,7 +8,6 @@
 #include "Common/protobufs/models/User.pb.h"
 
 #include "Common/protobufs/emails/TrackedTaskUploaded.pb.h"
-#include "Common/protobufs/emails/TrackedTaskSourceUpdated.pb.h"
 #include "Common/protobufs/emails/ClaimedTaskSourceUpdated.pb.h"
 #include "Common/protobufs/emails/ClaimedTaskUploaded.pb.h"
 
@@ -45,18 +44,6 @@ void SendTaskUploadNotifications::run()
             MessagingClient publisher;
             if (publisher.init()) {
                 if (request.file_version() == 0) {
-                    foreach (QSharedPointer<User> user, users) {
-                        TrackedTaskSourceUpdated trackedUpdate;
-                        trackedUpdate.set_email_type(trackedUpdate.email_type());
-                        trackedUpdate.set_task_id(task->id());
-                        trackedUpdate.set_user_id(user->id());
-                        if (!translator.isNull()) {
-                            trackedUpdate.set_translator_id(translator->id());
-                        }
-                        body = QString::fromStdString(trackedUpdate.SerializeAsString());
-                        publisher.publish(exchange, topic, body);
-                    }
-
                     if (!translator.isNull()) {
                         ClaimedTaskSourceUpdated claimedUpdate;
                         claimedUpdate.set_email_type(claimedUpdate.email_type());

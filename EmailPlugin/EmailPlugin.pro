@@ -43,7 +43,6 @@ SOURCES += emailplugin.cpp \
     Generators/UserTaskStreamEmailGenerator.cpp \
     Generators/EmailVerificationGenerator.cpp \
     Generators/BannedLoginGenerator.cpp \
-    Generators/TrackedTaskSourceUpdatedGenerator.cpp \
     Generators/TrackedTaskUploadedEmailGenerator.cpp \
     Generators/ClaimedTaskUploadedGenerator.cpp \
     Generators/ClaimedTaskSourceUpdatedGenerator.cpp \
@@ -69,7 +68,6 @@ HEADERS += emailplugin.h\
     Generators/EmailVerificationGenerator.h \
     Generators/BannedLoginGenerator.h \
     Generators/TrackedTaskUploadedEmailGenerator.h \
-    Generators/TrackedTaskSourceUpdatedGenerator.h \
     Generators/ClaimedTaskUploadedGenerator.h \
     Generators/ClaimedTaskSourceUpdatedGenerator.h \
     EmailDefinitions.h \
