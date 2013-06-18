@@ -121,10 +121,15 @@ QString UserDao::getRegistrationId(QSharedPointer<MySQLHandler> db, int userId)
     return ret;
 }
 
-QList<QSharedPointer<Task> > UserDao::getUserTopTasks(QSharedPointer<MySQLHandler> db, int userId, int limit, QString filter)
+QList<QSharedPointer<Task> > UserDao::getUserTopTasks(QSharedPointer<MySQLHandler> db, int userId, bool strict, int limit, QString filter)
 {
     QList<QSharedPointer<Task> > taskList = QList<QSharedPointer<Task> >();
     QString args = QString::number(userId) + ", ";
+    if (strict) {
+        args += "1, ";
+    } else {
+        args += "0, ";
+    }
     args = args + QString::number(limit) + ", ";
     args += MySQLHandler::wrapString(filter);
     QSharedPointer<QSqlQuery> mQuery = db->call("getUserTopTasks", args);
@@ -147,6 +152,18 @@ QList<int> UserDao::getUserIdsPendingTaskStreamNotification(QSharedPointer<MySQL
         } while (mQuery->next());
     }
     return userIds;
+}
+
+QSharedPointer<UserTaskStreamNotification> UserDao::getUserTaskStreamNotification(QSharedPointer<MySQLHandler> db,
+                                                                                  int userId)
+{
+    QSharedPointer<UserTaskStreamNotification> data = QSharedPointer<UserTaskStreamNotification>(
+                new UserTaskStreamNotification());
+    QSharedPointer<QSqlQuery> mQuery = db->call("getUserTaskStreamNotification", QString::number(userId));
+    if (mQuery->first()) {
+        data = ModelGenerator::GenerateUserTaskStreamNotification(mQuery);
+    }
+    return data;
 }
 
 bool UserDao::taskStreamNotificationSent(QSharedPointer<MySQLHandler> db, int userId, QString sentDate)
@@ -202,19 +219,6 @@ QMultiMap<int, int> UserDao::getUserTagIds(QSharedPointer<MySQLHandler> db, int 
         } while (mQuery->next());
     }
     return userTagIds;
-}
-
-QMultiMap<int, int> UserDao::getTaskTagIds(QSharedPointer<MySQLHandler> db, int limit, int offset)
-{
-    QMultiMap<int, int> taskTagIds;
-    QString args = QString::number(limit) + ", " + QString::number(offset);
-    QSharedPointer<QSqlQuery> mQuery = db->call("getTaskTagIds", args);
-    if(mQuery->first()) {
-        do {
-            taskTagIds.insert(MySQLHandler::getValueFromQuery("task_id", mQuery).toInt(), MySQLHandler::getValueFromQuery("tag_id", mQuery).toInt());
-        } while (mQuery->next());
-    }
-    return taskTagIds;
 }
 
 QMultiMap<int, LCCode> UserDao::getUserNativeLCCodes(QSharedPointer<MySQLHandler> db, int limit, int offset)

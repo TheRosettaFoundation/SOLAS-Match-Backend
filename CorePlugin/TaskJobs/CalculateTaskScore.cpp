@@ -55,7 +55,7 @@ void CalculateTaskScore::run()
 
     QMultiMap<int, LCCode> userSecondaryLanguages = UserDao::getUserLCCodes(db);
     QMultiMap<int, int> userTags = UserDao::getUserTagIds(db);
-    QMultiMap<int, int> taskTags = UserDao::getTaskTagIds(db);
+    QMultiMap<int, int> taskTags = TaskDao::getTaskTagIds(db);
 
     if(users.count() > 0) {
         for(QMultiMap<int, LCCode>::ConstIterator usersIter = users.constBegin(); usersIter != users.constEnd(); ++usersIter) {

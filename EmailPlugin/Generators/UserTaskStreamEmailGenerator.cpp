@@ -4,6 +4,7 @@
 
 #include "Common/Definitions.h"
 #include "Common/protobufs/models/Language.pb.h"
+#include "Common/protobufs/models/UserTaskStreamNotification.pb.h"
 #include "Common/DataAccessObjects/LanguageDao.h"
 #include "Common/DataAccessObjects/TagDao.h"
 
@@ -21,17 +22,28 @@ void UserTaskStreamEmailGenerator::run()
 
     QString error = "";
     QSharedPointer<Email> email;
-    QSharedPointer<User> user;
     QList<QSharedPointer<Task> > userTasks;
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
+    QSharedPointer<User> user = UserDao::getUser(db, emailRequest.user_id());
+    QSharedPointer<UserTaskStreamNotification> notifData = UserDao::getUserTaskStreamNotification(db,
+                                                             emailRequest.user_id());
 
-    user = UserDao::getUser(db, emailRequest.user_id());
-    userTasks = UserDao::getUserTopTasks(db, emailRequest.user_id(), 25);
-
-    if (user.isNull() || userTasks.count() < 1) {
+    if (user.isNull() || notifData.isNull() ) {
         error = "Failed to generate UserTaskStream email: Unable to find relevant ";
         error += "data in the Database. Searched for User with ID ";
-        error += QString::number(emailRequest.user_id()) + " and their top tasks";
+        error += QString::number(emailRequest.user_id()) + " and their notification data";
+    } else {
+        if (notifData->strict()) {
+            userTasks = UserDao::getUserTopTasks(db, emailRequest.user_id(), true, 25);
+        } else {
+            userTasks = UserDao::getUserTopTasks(db, emailRequest.user_id(), false, 25);
+        }
+
+        if (userTasks.count() < 1) {
+            error = "Failed to generate UserTaskStream email: Unable to find relevant ";
+            error += "data in the Database. Searched for User's' top tasks with ID ";
+            error += QString::number(emailRequest.user_id());
+        }
     }
 
     if (error == "") {

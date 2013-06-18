@@ -13,6 +13,7 @@
 #include "protobufs/models/ArchivedProject.pb.h"
 #include "protobufs/models/Language.pb.h"
 #include "protobufs/models/BannedUser.pb.h"
+#include "protobufs/models/UserTaskStreamNotification.pb.h"
 
 class ModelGenerator
 {
@@ -27,7 +28,7 @@ public:
     static QSharedPointer<Language> GenerateLanguage(QSharedPointer<QSqlQuery> q);
     static QSharedPointer<BannedUser> GenerateBannedUser(QSharedPointer<QSqlQuery> q);
     static QSharedPointer<Locale> GenerateLocale(QSharedPointer<QSqlQuery> q);
-
+    static QSharedPointer<UserTaskStreamNotification> GenerateUserTaskStreamNotification(QSharedPointer<QSqlQuery> q);
 
 };
 

@@ -406,3 +406,16 @@ QList<QSharedPointer<Task> > TaskDao::getTaskPreReqs(QSharedPointer<MySQLHandler
     }
     return tasks;
 }
+
+QMultiMap<int, int> TaskDao::getTaskTagIds(QSharedPointer<MySQLHandler> db, int limit, int offset)
+{
+    QMultiMap<int, int> taskTagIds;
+    QString args = QString::number(limit) + ", " + QString::number(offset);
+    QSharedPointer<QSqlQuery> mQuery = db->call("getTaskTagIds", args);
+    if(mQuery->first()) {
+        do {
+            taskTagIds.insert(MySQLHandler::getValueFromQuery("task_id", mQuery).toInt(), MySQLHandler::getValueFromQuery("tag_id", mQuery).toInt());
+        } while (mQuery->next());
+    }
+    return taskTagIds;
+}

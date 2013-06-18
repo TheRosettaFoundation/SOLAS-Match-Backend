@@ -182,3 +182,16 @@ QSharedPointer<Locale> ModelGenerator::GenerateLocale(QSharedPointer<QSqlQuery> 
 
     return localeData;
 }
+
+QSharedPointer<UserTaskStreamNotification> ModelGenerator::GenerateUserTaskStreamNotification(QSharedPointer<QSqlQuery> q)
+{
+    QSharedPointer<UserTaskStreamNotification> ret = QSharedPointer<UserTaskStreamNotification>(
+                new UserTaskStreamNotification());
+
+    ret->set_user_id(MySQLHandler::getValueFromQuery("user_id", q).toInt());
+    ret->set_interval(MySQLHandler::getValueFromQuery("interval", q).toInt());
+    ret->set_strict(MySQLHandler::getValueFromQuery("strict", q).toBool());
+    ret->set_last_sent(MySQLHandler::getValueFromQuery("last-sent", q).toString().toStdString());
+
+    return ret;
+}

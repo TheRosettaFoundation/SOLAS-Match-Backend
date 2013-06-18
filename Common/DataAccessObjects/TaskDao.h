@@ -7,6 +7,7 @@
 #include <QSharedPointer>
 
 #include "Common/MySQLHandler.h"
+#include "Common/Definitions.h"
 #include "../protobufs/models/ArchivedTask.pb.h"
 #include "../protobufs/models/User.pb.h"
 #include "../protobufs/models/Task.pb.h"
@@ -31,6 +32,7 @@ public:
     static QList<QSharedPointer<ArchivedTask> > getArchivedTasks(QSharedPointer<MySQLHandler> db, int arc_id = -1, int o_id = -1);
     static QSharedPointer<ArchivedTask> getArchivedTask(QSharedPointer<MySQLHandler> db, int arc_id = -1, int o_id = -1);
     static QList<QSharedPointer<Task> > getTaskPreReqs(QSharedPointer<MySQLHandler> db, int taskId);
+    static QMultiMap<int, int> getTaskTagIds(QSharedPointer<MySQLHandler> db, int limit = RETURN_ALL, int offset = RETURN_ALL);
 
 };
 

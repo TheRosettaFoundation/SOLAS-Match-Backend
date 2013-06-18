@@ -11,6 +11,7 @@
 #include "Common/protobufs/models/User.pb.h"
 #include "Common/protobufs/models/Task.pb.h"
 #include "Common/protobufs/models/BannedUser.pb.h"
+#include "Common/protobufs/models/UserTaskStreamNotification.pb.h"
 
 class UserDao
 {
@@ -40,15 +41,16 @@ public:
     static QSharedPointer<BannedUser> getBanData(QSharedPointer<MySQLHandler> db, int userId);
     static QString getRegistrationId(QSharedPointer<MySQLHandler> db, int userId);
     static QString getPasswordResetUuid(QSharedPointer<MySQLHandler> db, int id);
-    static QList<QSharedPointer<Task> > getUserTopTasks(QSharedPointer<MySQLHandler> db, int userId,
+    static QList<QSharedPointer<Task> > getUserTopTasks(QSharedPointer<MySQLHandler> db, int userId, bool strict = false,
                                                         int limit = 10, QString filter = "");
     static QList<int> getUserIdsPendingTaskStreamNotification(QSharedPointer<MySQLHandler> db);
+    static QSharedPointer<UserTaskStreamNotification> getUserTaskStreamNotification(QSharedPointer<MySQLHandler> db,
+                                                        int userId);
     static bool taskStreamNotificationSent(QSharedPointer<MySQLHandler> db, int userId, QString sentDate);
 
     static QList<QSharedPointer<Locale> > getUserSecondaryLanguages(QSharedPointer<MySQLHandler> db, int userId);
     static QMultiMap<int, LCCode> getUserLCCodes(QSharedPointer<MySQLHandler> db, int limit = RETURN_ALL, int offset = RETURN_ALL);
     static QMultiMap<int, int> getUserTagIds(QSharedPointer<MySQLHandler> db, int limit = RETURN_ALL, int offset = RETURN_ALL);
-    static QMultiMap<int, int> getTaskTagIds(QSharedPointer<MySQLHandler> db, int limit = RETURN_ALL, int offset = RETURN_ALL);
     static QMultiMap<int, LCCode> getUserNativeLCCodes(QSharedPointer<MySQLHandler> db, int limit = RETURN_ALL, int offset = RETURN_ALL);
 
 };
