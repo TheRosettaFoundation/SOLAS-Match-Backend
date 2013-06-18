@@ -1,5 +1,6 @@
 #include "UserDao.h"
 
+#include <QDebug>
 #include "../ModelGenerator.h"
 
 QList<QSharedPointer<User> > UserDao::getUsers(QSharedPointer<MySQLHandler> db, int id, QString name, QString email, QString pass,
@@ -65,7 +66,8 @@ QList<QSharedPointer<User> > UserDao::getUsers(QSharedPointer<MySQLHandler> db, 
     QSharedPointer<QSqlQuery> mQuery = db->call("getUser", args);
     if(mQuery->first()) {
         do {
-            QSharedPointer<User> user = ModelGenerator::GenerateUser(mQuery);
+            QSharedPointer<User> user = QSharedPointer<User>(new User());
+            ModelGenerator::Generate(mQuery, user);
             users.append(user);
         } while(mQuery->next());
     }
@@ -92,7 +94,8 @@ QSharedPointer<BannedUser> UserDao::getBanData(QSharedPointer<MySQLHandler> db, 
     args += ", null, null, null, null";
     QSharedPointer<QSqlQuery> mQuery = db->call("getBannedUser", args);
     if (mQuery->first()) {
-        data = ModelGenerator::GenerateBannedUser(mQuery);
+        data = QSharedPointer<BannedUser>(new BannedUser());
+        ModelGenerator::Generate(mQuery, data);
     }
     return data;
 }
@@ -135,7 +138,8 @@ QList<QSharedPointer<Task> > UserDao::getUserTopTasks(QSharedPointer<MySQLHandle
     QSharedPointer<QSqlQuery> mQuery = db->call("getUserTopTasks", args);
     if (mQuery->first()) {
         do {
-            QSharedPointer<Task> task = ModelGenerator::GenerateTask(mQuery);
+            QSharedPointer<Task> task = QSharedPointer<Task>(new Task());
+            ModelGenerator::Generate(mQuery, task);
             taskList.append(task);
         } while (mQuery->next());
     }
@@ -157,11 +161,11 @@ QList<int> UserDao::getUserIdsPendingTaskStreamNotification(QSharedPointer<MySQL
 QSharedPointer<UserTaskStreamNotification> UserDao::getUserTaskStreamNotification(QSharedPointer<MySQLHandler> db,
                                                                                   int userId)
 {
-    QSharedPointer<UserTaskStreamNotification> data = QSharedPointer<UserTaskStreamNotification>(
-                new UserTaskStreamNotification());
+    QSharedPointer<UserTaskStreamNotification> data = QSharedPointer<UserTaskStreamNotification>();
     QSharedPointer<QSqlQuery> mQuery = db->call("getUserTaskStreamNotification", QString::number(userId));
     if (mQuery->first()) {
-        data = ModelGenerator::GenerateUserTaskStreamNotification(mQuery);
+        data = QSharedPointer<UserTaskStreamNotification>(new UserTaskStreamNotification());
+        ModelGenerator::Generate(mQuery, data);
     }
     return data;
 }
@@ -185,7 +189,8 @@ QList<QSharedPointer<Locale> > UserDao::getUserSecondaryLanguages(QSharedPointer
     QSharedPointer<QSqlQuery> mQuery = db->call("getUserSecondaryLanguages", args);
     if(mQuery->first()) {
         do {
-            QSharedPointer<Locale> locale = ModelGenerator::GenerateLocale(mQuery);
+            QSharedPointer<Locale> locale = QSharedPointer<Locale>(new Locale());
+            ModelGenerator::Generate(mQuery, locale);
             userSecondaryLocales.append(locale);
         } while (mQuery->next());
     }

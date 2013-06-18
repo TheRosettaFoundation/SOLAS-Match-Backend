@@ -3,10 +3,8 @@
 #include "Common/MySQLHandler.h"
 #include "Common/protobufs/models/Locale.pb.h"
 
-QSharedPointer<User> ModelGenerator::GenerateUser(QSharedPointer<QSqlQuery> q)
+void ModelGenerator::Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<User> user)
 {
-    QSharedPointer<User> user = QSharedPointer<User>(new User());
-
     user->set_id(MySQLHandler::getValueFromQuery("id", q).toInt());
     user->set_biography(MySQLHandler::getValueFromQuery("biography", q).toString().toStdString());
     user->set_created_time(MySQLHandler::getValueFromQuery("created-time", q).toString().toStdString());
@@ -19,24 +17,16 @@ QSharedPointer<User> ModelGenerator::GenerateUser(QSharedPointer<QSqlQuery> q)
     nativeLocale->set_languagename(MySQLHandler::getValueFromQuery("languageName", q).toString().toStdString());
     nativeLocale->set_countrycode(MySQLHandler::getValueFromQuery("countryCode", q).toString().toStdString());
     nativeLocale->set_countryname(MySQLHandler::getValueFromQuery("countryName", q).toString().toStdString());
-
-    return user;
 }
 
-QSharedPointer<Tag> ModelGenerator::GenerateTag(QSharedPointer<QSqlQuery> q)
+void ModelGenerator::Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<Tag> tag)
 {
-    QSharedPointer<Tag> tag = QSharedPointer<Tag>(new Tag());
-
     tag->set_id(MySQLHandler::getValueFromQuery("id", q).toInt());
     tag->set_label(MySQLHandler::getValueFromQuery("label", q).toString().toStdString());
-
-    return tag;
 }
 
-QSharedPointer<Organisation> ModelGenerator::GenerateOrg(QSharedPointer<QSqlQuery> q)
+void ModelGenerator::Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<Organisation> org)
 {
-    QSharedPointer<Organisation> org = QSharedPointer<Organisation>(new Organisation);
-
     org->set_id(MySQLHandler::getValueFromQuery("id", q).toInt());
     org->set_name(MySQLHandler::getValueFromQuery("name", q).toString().toStdString());
     org->set_biography(MySQLHandler::getValueFromQuery("biography", q).toString().toStdString());
@@ -46,14 +36,10 @@ QSharedPointer<Organisation> ModelGenerator::GenerateOrg(QSharedPointer<QSqlQuer
     org->set_city(MySQLHandler::getValueFromQuery("city", q).toString().toStdString());
     org->set_country(MySQLHandler::getValueFromQuery("country", q).toString().toStdString());
     org->set_regionalfocus(MySQLHandler::getValueFromQuery("regional-focus", q).toString().toStdString());
-
-    return org;
 }
 
-QSharedPointer<ArchivedTask> ModelGenerator::GenerateArchivedTask(QSharedPointer<QSqlQuery> q)
+void ModelGenerator::Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<ArchivedTask> task)
 {
-    QSharedPointer<ArchivedTask> task = QSharedPointer<ArchivedTask>(new ArchivedTask());
-
     task->set_id(MySQLHandler::getValueFromQuery("id", q).toInt());
     task->set_projectid(MySQLHandler::getValueFromQuery("project_id", q).toInt());
     task->set_title(MySQLHandler::getValueFromQuery("title", q).toString().toStdString());
@@ -71,14 +57,10 @@ QSharedPointer<ArchivedTask> ModelGenerator::GenerateArchivedTask(QSharedPointer
     task->set_translatorid(MySQLHandler::getValueFromQuery("user_id-claimed", q).toInt());
     task->set_archiveuserid(MySQLHandler::getValueFromQuery("user_id-archived", q).toInt());
     task->set_archivedate(MySQLHandler::getValueFromQuery("archived-date", q).toString().toStdString());
-
-    return task;
 }
 
-QSharedPointer<Task> ModelGenerator::GenerateTask(QSharedPointer<QSqlQuery> q)
+void ModelGenerator::Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<Task> task)
 {
-    QSharedPointer<Task> task = QSharedPointer<Task>(new Task());
-
     task->set_id(MySQLHandler::getValueFromQuery("id", q).toInt());
     task->set_projectid(MySQLHandler::getValueFromQuery("project_id", q).toInt());
     task->set_title(MySQLHandler::getValueFromQuery("title", q).toString().toStdString());
@@ -99,14 +81,10 @@ QSharedPointer<Task> ModelGenerator::GenerateTask(QSharedPointer<QSqlQuery> q)
     targetLocale->set_countryname(MySQLHandler::getValueFromQuery("targetCountryName", q).toString().toStdString());
     targetLocale->set_languagecode(MySQLHandler::getValueFromQuery("targetLanguageCode", q).toString().toStdString());
     targetLocale->set_languagename(MySQLHandler::getValueFromQuery("targetLanguageName", q).toString().toStdString());
-
-    return task;
 }
 
-QSharedPointer<Project> ModelGenerator::GenerateProject(QSharedPointer<QSqlQuery> q)
+void ModelGenerator::Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<Project> project)
 {
-    QSharedPointer<Project> project = QSharedPointer<Project>(new Project());
-
     project->set_id(MySQLHandler::getValueFromQuery("id", q).toInt());
     project->set_title(MySQLHandler::getValueFromQuery("title", q).toString().toStdString());
     project->set_description(MySQLHandler::getValueFromQuery("description", q).toString().toStdString());
@@ -122,14 +100,10 @@ QSharedPointer<Project> ModelGenerator::GenerateProject(QSharedPointer<QSqlQuery
     sourceLocale->set_countryname(MySQLHandler::getValueFromQuery("sourceCountryName", q).toString().toStdString());
     sourceLocale->set_languagecode(MySQLHandler::getValueFromQuery("sourceLanguageCode", q).toString().toStdString());
     sourceLocale->set_languagename(MySQLHandler::getValueFromQuery("sourceLanguageName", q).toString().toStdString());
-
-    return project;
 }
 
-QSharedPointer<ArchivedProject> ModelGenerator::GenerateArchivedProject(QSharedPointer<QSqlQuery> q)
+void ModelGenerator::Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<ArchivedProject> project)
 {
-    QSharedPointer<ArchivedProject> project = QSharedPointer<ArchivedProject>(new ArchivedProject());
-
     project->set_id(MySQLHandler::getValueFromQuery("id", q).toInt());
     project->set_title(MySQLHandler::getValueFromQuery("title", q).toString().toStdString());
     project->set_description(MySQLHandler::getValueFromQuery("description", q).toString().toStdString());
@@ -143,55 +117,36 @@ QSharedPointer<ArchivedProject> ModelGenerator::GenerateArchivedProject(QSharedP
     project->set_countrycode(MySQLHandler::getValueFromQuery("country_id", q).toString().toStdString());
     project->set_archiveddate(MySQLHandler::getValueFromQuery("archived-date", q).toString().toStdString());
     project->set_translatorid(MySQLHandler::getValueFromQuery("user_id-archived", q).toInt());
-
-    return project;
 }
 
-QSharedPointer<Language> ModelGenerator::GenerateLanguage(QSharedPointer<QSqlQuery> q)
+void ModelGenerator::Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<Language> language)
 {
-    QSharedPointer<Language> language = QSharedPointer<Language>(new Language());
-
     language->set_id(MySQLHandler::getValueFromQuery("id", q).toInt());
     language->set_code(MySQLHandler::getValueFromQuery("code", q).toString().toStdString());
     language->set_name(MySQLHandler::getValueFromQuery("language", q).toString().toStdString());
-
-    return language;
 }
 
-QSharedPointer<BannedUser> ModelGenerator::GenerateBannedUser(QSharedPointer<QSqlQuery> q)
+void ModelGenerator::Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<BannedUser> banData)
 {
-    QSharedPointer<BannedUser> banData = QSharedPointer<BannedUser>(new BannedUser());
-
     banData->set_userid(MySQLHandler::getValueFromQuery("user_id", q).toInt());
     banData->set_useridadmin(MySQLHandler::getValueFromQuery("user_id-admin", q).toInt());
     banData->set_bantype(MySQLHandler::getValueFromQuery("bannedtype_id", q).toInt());
     banData->set_comment(MySQLHandler::getValueFromQuery("comment", q).toString().toStdString());
     banData->set_banneddate(MySQLHandler::getValueFromQuery("banned-date", q).toString().toStdString());
-
-    return banData;
 }
 
-QSharedPointer<Locale> ModelGenerator::GenerateLocale(QSharedPointer<QSqlQuery> q)
+void ModelGenerator::Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<Locale> localeData)
 {
-    QSharedPointer<Locale> localeData = QSharedPointer<Locale>(new Locale());
-
     localeData->set_languagename(MySQLHandler::getValueFromQuery("languageName", q).toString().toStdString());
     localeData->set_languagecode(MySQLHandler::getValueFromQuery("languageCode", q).toString().toStdString());
     localeData->set_countryname(MySQLHandler::getValueFromQuery("countryName", q).toString().toStdString());
     localeData->set_countrycode(MySQLHandler::getValueFromQuery("countryCode", q).toString().toStdString());
-
-    return localeData;
 }
 
-QSharedPointer<UserTaskStreamNotification> ModelGenerator::GenerateUserTaskStreamNotification(QSharedPointer<QSqlQuery> q)
+void ModelGenerator::Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<UserTaskStreamNotification> data)
 {
-    QSharedPointer<UserTaskStreamNotification> ret = QSharedPointer<UserTaskStreamNotification>(
-                new UserTaskStreamNotification());
-
-    ret->set_user_id(MySQLHandler::getValueFromQuery("user_id", q).toInt());
-    ret->set_interval(MySQLHandler::getValueFromQuery("interval", q).toInt());
-    ret->set_strict(MySQLHandler::getValueFromQuery("strict", q).toBool());
-    ret->set_last_sent(MySQLHandler::getValueFromQuery("last-sent", q).toString().toStdString());
-
-    return ret;
+    data->set_user_id(MySQLHandler::getValueFromQuery("user_id", q).toInt());
+    data->set_interval(MySQLHandler::getValueFromQuery("interval", q).toInt());
+    data->set_strict(MySQLHandler::getValueFromQuery("strict", q).toBool());
+    data->set_last_sent(MySQLHandler::getValueFromQuery("last-sent", q).toString().toStdString());
 }

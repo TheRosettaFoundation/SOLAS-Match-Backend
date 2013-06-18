@@ -98,7 +98,8 @@ QList<QSharedPointer<Task> > TaskDao::getTasks(QSharedPointer<MySQLHandler> db, 
     QSharedPointer<QSqlQuery> mQuery = db->call("getTask", args);
     if(mQuery->first()) {
         do {
-            QSharedPointer<Task> task = ModelGenerator::GenerateTask(mQuery);
+            QSharedPointer<Task> task = QSharedPointer<Task>(new Task());
+            ModelGenerator::Generate(mQuery, task);
             ret.append(task);
         } while(mQuery->next());
     }
@@ -204,7 +205,8 @@ QSharedPointer<Task> TaskDao::insertAndUpdate(QSharedPointer<MySQLHandler> db, T
     QSharedPointer<QSqlQuery> mQuery = db->call("taskInsertAndUpdate", args);
     QSharedPointer<Task> ret = QSharedPointer<Task>();
     if (mQuery->first()) {
-        ret = ModelGenerator::GenerateTask(mQuery);
+        ret = QSharedPointer<Task>(new Task());
+        ModelGenerator::Generate(mQuery, ret);
     }
 
     return ret;
@@ -292,7 +294,8 @@ QSharedPointer<Task> TaskDao::insertAndUpdate(QSharedPointer<MySQLHandler> db, Q
 
     QSharedPointer<QSqlQuery> mQuery = db->call("taskInsertAndUpdate", args);
     if (mQuery->first()) {
-        task = ModelGenerator::GenerateTask(mQuery);
+        task = QSharedPointer<Task>(new Task());
+        ModelGenerator::Generate(mQuery, task);
     }
 
     return task;
@@ -309,7 +312,8 @@ QList<QSharedPointer<Task> > TaskDao::getActiveTasks(QSharedPointer<MySQLHandler
     QSharedPointer<QSqlQuery> mQuery = db->call("getLatestAvailableTasks", args);
     if(mQuery->first()) {
         do {
-            QSharedPointer<Task> task = TaskDao::getTask(db, MySQLHandler::getValueFromQuery("id", mQuery).toInt());
+            QSharedPointer<Task> task = QSharedPointer<Task>(new Task());
+            ModelGenerator::Generate(mQuery, task);
             ret.append(task);
         } while(mQuery->next());
     }
@@ -324,7 +328,8 @@ QList<QSharedPointer<Task> > TaskDao::getOverdueTasks(QSharedPointer<MySQLHandle
     QSharedPointer<QSqlQuery> mQuery = db->call("getOverdueTasks", "");
     if (mQuery->first()) {
         do {
-            QSharedPointer<Task> task = ModelGenerator::GenerateTask(mQuery);
+            QSharedPointer<Task> task = QSharedPointer<Task>(new Task());
+            ModelGenerator::Generate(mQuery, task);
             ret.append(task);
         } while (mQuery->next());
     }
@@ -337,7 +342,8 @@ QSharedPointer<User> TaskDao::getTaskTranslator(QSharedPointer<MySQLHandler> db,
     QSharedPointer<User> user;
     QSharedPointer<QSqlQuery> mQuery = db->call("getUserClaimedTask", QString::number(task_id));
     if(mQuery->first()) {
-        user = ModelGenerator::GenerateUser(mQuery);
+        user = QSharedPointer<User>(new User());
+        ModelGenerator::Generate(mQuery, user);
     }
     return user;
 }
@@ -349,7 +355,9 @@ QList<QSharedPointer<User> > TaskDao::getSubscribedUsers(QSharedPointer<MySQLHan
     QSharedPointer<QSqlQuery> mQuery = db->call("getSubscribedUsers", QString::number(task_id));
     if(mQuery->first()) {
         do {
-            users.append(ModelGenerator::GenerateUser(mQuery));
+            QSharedPointer<User> user = QSharedPointer<User>(new User());
+            ModelGenerator::Generate(mQuery, user);
+            users.append(user);
         } while(mQuery->next());
     }
 
@@ -376,7 +384,8 @@ QList<QSharedPointer<ArchivedTask> > TaskDao::getArchivedTasks(QSharedPointer<My
     QSharedPointer<QSqlQuery> mQuery = db->call("getArchivedTasks", args);
     if(mQuery->first()) {
         do {
-            QSharedPointer<ArchivedTask> task = ModelGenerator::GenerateArchivedTask(mQuery);
+            QSharedPointer<ArchivedTask> task = QSharedPointer<ArchivedTask>(new ArchivedTask());
+            ModelGenerator::Generate(mQuery, task);
             ret.append(task);
         } while(mQuery->next());
     }
@@ -400,7 +409,8 @@ QList<QSharedPointer<Task> > TaskDao::getTaskPreReqs(QSharedPointer<MySQLHandler
     QSharedPointer<QSqlQuery> mQuery = db->call("getTaskPreReqs", QString::number(taskId));
     if (mQuery->first()) {
         do {
-            QSharedPointer<Task> task = ModelGenerator::GenerateTask(mQuery);
+            QSharedPointer<Task> task = QSharedPointer<Task>(new Task());
+            ModelGenerator::Generate(mQuery, task);
             tasks.append(task);
         } while (mQuery->next());
     }

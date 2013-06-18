@@ -16,7 +16,9 @@ QList<QSharedPointer<User> > AdminDao::getAdmins(QSharedPointer<MySQLHandler> db
     QSharedPointer<QSqlQuery> q = db->call("getAdmin", args);
     if (q->first()) {
         do {
-            admins.append(ModelGenerator::GenerateUser(q));
+            QSharedPointer<User> admin = QSharedPointer<User>(new User());
+            ModelGenerator::Generate(q, admin);
+            admins.append(admin);
         } while (q->next());
     }
     return admins;

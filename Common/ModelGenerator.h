@@ -18,17 +18,17 @@
 class ModelGenerator
 {
 public:
-    static QSharedPointer<Tag> GenerateTag(QSharedPointer<QSqlQuery> q);
-    static QSharedPointer<User> GenerateUser(QSharedPointer<QSqlQuery> q);
-    static QSharedPointer<Task> GenerateTask(QSharedPointer<QSqlQuery> q);
-    static QSharedPointer<Organisation> GenerateOrg(QSharedPointer<QSqlQuery> q);
-    static QSharedPointer<ArchivedTask> GenerateArchivedTask(QSharedPointer<QSqlQuery> q);
-    static QSharedPointer<Project> GenerateProject(QSharedPointer<QSqlQuery> q);
-    static QSharedPointer<ArchivedProject> GenerateArchivedProject(QSharedPointer<QSqlQuery> q);
-    static QSharedPointer<Language> GenerateLanguage(QSharedPointer<QSqlQuery> q);
-    static QSharedPointer<BannedUser> GenerateBannedUser(QSharedPointer<QSqlQuery> q);
-    static QSharedPointer<Locale> GenerateLocale(QSharedPointer<QSqlQuery> q);
-    static QSharedPointer<UserTaskStreamNotification> GenerateUserTaskStreamNotification(QSharedPointer<QSqlQuery> q);
+    static void Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<Tag>);
+    static void Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<User>);
+    static void Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<Task>);
+    static void Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<Organisation>);
+    static void Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<ArchivedTask>);
+    static void Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<Project>);
+    static void Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<ArchivedProject>);
+    static void Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<Language>);
+    static void Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<BannedUser>);
+    static void Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<Locale>);
+    static void Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<UserTaskStreamNotification>);
 
 };
 

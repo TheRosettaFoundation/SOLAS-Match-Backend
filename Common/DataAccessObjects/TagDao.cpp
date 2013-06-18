@@ -8,7 +8,8 @@ QList<QSharedPointer<Tag> > TagDao::getUserTags(QSharedPointer<MySQLHandler> db,
     QSharedPointer<QSqlQuery> q = db->call("getUserTags", QString::number(user_id) + ", null");
     if(q->first()) {
         do {
-            QSharedPointer<Tag> tag = ModelGenerator::GenerateTag(q);
+            QSharedPointer<Tag> tag = QSharedPointer<Tag>(new Tag());
+            ModelGenerator::Generate(q, tag);
             tags.append(tag);
         } while(q->next());
     }
@@ -22,7 +23,8 @@ QList<QSharedPointer<Tag> > TagDao::getTaskTags(QSharedPointer<MySQLHandler> db,
     QSharedPointer<QSqlQuery> q = db->call("getTaskTags", QString::number(task_id));
     if(q->first()) {
         do {
-            QSharedPointer<Tag> tag = ModelGenerator::GenerateTag(q);
+            QSharedPointer<Tag> tag = QSharedPointer<Tag>(new Tag());
+            ModelGenerator::Generate(q, tag);
             tags.append(tag);
         } while(q->next());
     }

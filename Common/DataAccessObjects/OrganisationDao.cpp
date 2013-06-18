@@ -10,7 +10,8 @@ QSharedPointer<Organisation> OrganisationDao::getOrg(QSharedPointer<MySQLHandler
     QSharedPointer<QSqlQuery> result = db->call("getOrg", args);
     if(result->first())
     {
-        org = ModelGenerator::GenerateOrg(result);
+        org = QSharedPointer<Organisation>(new Organisation());
+        ModelGenerator::Generate(result, org);
     }
 
     return org;
@@ -23,7 +24,9 @@ QList<QSharedPointer<User> > OrganisationDao::getOrgAdmins(QSharedPointer<MySQLH
     QSharedPointer<QSqlQuery> result = db->call("getAdmin", args);
     if (result->first()) {
         do {
-            users.append(ModelGenerator::GenerateUser(result));
+            QSharedPointer<User> user = QSharedPointer<User>(new User());
+            ModelGenerator::Generate(result, user);
+            users.append(user);
         } while (result->next());
     }
     return users;
