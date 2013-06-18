@@ -18,17 +18,17 @@
 class ModelGenerator
 {
 public:
-    static void Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<Tag>);
-    static void Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<User>);
-    static void Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<Task>);
-    static void Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<Organisation>);
-    static void Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<ArchivedTask>);
-    static void Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<Project>);
-    static void Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<ArchivedProject>);
-    static void Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<Language>);
-    static void Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<BannedUser>);
-    static void Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<Locale>);
-    static void Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<UserTaskStreamNotification>);
+    static void Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<Tag>, QMap<QString, int> fieldMap);
+    static void Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<User>, QMap<QString, int> fieldMap);
+    static void Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<Task>, QMap<QString, int> fieldMap);
+    static void Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<Organisation>, QMap<QString, int> fieldMap);
+    static void Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<ArchivedTask>, QMap<QString, int> fieldMap);
+    static void Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<Project>, QMap<QString, int> fieldMap);
+    static void Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<ArchivedProject>, QMap<QString, int> fieldMap);
+    static void Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<Language>, QMap<QString, int> fieldMap);
+    static void Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<BannedUser>, QMap<QString, int> fieldMap);
+    static void Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<Locale>, QMap<QString, int> fieldMap);
+    static void Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<UserTaskStreamNotification>, QMap<QString, int> fieldMap);
 
 };
 

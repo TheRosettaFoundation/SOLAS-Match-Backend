@@ -17,6 +17,8 @@ public:
     QSharedPointer<QSqlQuery> call(QString proc_name, QString args);
     QList<QSharedPointer <QSqlQuery> > multicall(QString proc_name, QList<QString> arglist);
     static QVariant getValueFromQuery(QString field_name, QSharedPointer<QSqlQuery> mQuery);
+    static QVariant getValueFromQuery(int field_pos, QSharedPointer<QSqlQuery> mQuery);
+    static QMap<QString, int> getFieldMap(QSharedPointer<QSqlQuery> q);
     static QString wrapString(QString str);
     static QString wrapStdString(const std::string str);
 

@@ -97,9 +97,10 @@ QList<QSharedPointer<Task> > TaskDao::getTasks(QSharedPointer<MySQLHandler> db, 
 
     QSharedPointer<QSqlQuery> mQuery = db->call("getTask", args);
     if(mQuery->first()) {
+        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
         do {
             QSharedPointer<Task> task = QSharedPointer<Task>(new Task());
-            ModelGenerator::Generate(mQuery, task);
+            ModelGenerator::Generate(mQuery, task, fieldMap);
             ret.append(task);
         } while(mQuery->next());
     }
@@ -205,8 +206,9 @@ QSharedPointer<Task> TaskDao::insertAndUpdate(QSharedPointer<MySQLHandler> db, T
     QSharedPointer<QSqlQuery> mQuery = db->call("taskInsertAndUpdate", args);
     QSharedPointer<Task> ret = QSharedPointer<Task>();
     if (mQuery->first()) {
+        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
         ret = QSharedPointer<Task>(new Task());
-        ModelGenerator::Generate(mQuery, ret);
+        ModelGenerator::Generate(mQuery, ret, fieldMap);
     }
 
     return ret;
@@ -294,8 +296,9 @@ QSharedPointer<Task> TaskDao::insertAndUpdate(QSharedPointer<MySQLHandler> db, Q
 
     QSharedPointer<QSqlQuery> mQuery = db->call("taskInsertAndUpdate", args);
     if (mQuery->first()) {
+        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
         task = QSharedPointer<Task>(new Task());
-        ModelGenerator::Generate(mQuery, task);
+        ModelGenerator::Generate(mQuery, task, fieldMap);
     }
 
     return task;
@@ -311,9 +314,10 @@ QList<QSharedPointer<Task> > TaskDao::getActiveTasks(QSharedPointer<MySQLHandler
 
     QSharedPointer<QSqlQuery> mQuery = db->call("getLatestAvailableTasks", args);
     if(mQuery->first()) {
+        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
         do {
             QSharedPointer<Task> task = QSharedPointer<Task>(new Task());
-            ModelGenerator::Generate(mQuery, task);
+            ModelGenerator::Generate(mQuery, task, fieldMap);
             ret.append(task);
         } while(mQuery->next());
     }
@@ -327,9 +331,10 @@ QList<QSharedPointer<Task> > TaskDao::getOverdueTasks(QSharedPointer<MySQLHandle
 
     QSharedPointer<QSqlQuery> mQuery = db->call("getOverdueTasks", "");
     if (mQuery->first()) {
+        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
         do {
             QSharedPointer<Task> task = QSharedPointer<Task>(new Task());
-            ModelGenerator::Generate(mQuery, task);
+            ModelGenerator::Generate(mQuery, task, fieldMap);
             ret.append(task);
         } while (mQuery->next());
     }
@@ -342,8 +347,9 @@ QSharedPointer<User> TaskDao::getTaskTranslator(QSharedPointer<MySQLHandler> db,
     QSharedPointer<User> user;
     QSharedPointer<QSqlQuery> mQuery = db->call("getUserClaimedTask", QString::number(task_id));
     if(mQuery->first()) {
+        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
         user = QSharedPointer<User>(new User());
-        ModelGenerator::Generate(mQuery, user);
+        ModelGenerator::Generate(mQuery, user, fieldMap);
     }
     return user;
 }
@@ -354,9 +360,10 @@ QList<QSharedPointer<User> > TaskDao::getSubscribedUsers(QSharedPointer<MySQLHan
 
     QSharedPointer<QSqlQuery> mQuery = db->call("getSubscribedUsers", QString::number(task_id));
     if(mQuery->first()) {
+        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
         do {
             QSharedPointer<User> user = QSharedPointer<User>(new User());
-            ModelGenerator::Generate(mQuery, user);
+            ModelGenerator::Generate(mQuery, user, fieldMap);
             users.append(user);
         } while(mQuery->next());
     }
@@ -383,9 +390,10 @@ QList<QSharedPointer<ArchivedTask> > TaskDao::getArchivedTasks(QSharedPointer<My
 
     QSharedPointer<QSqlQuery> mQuery = db->call("getArchivedTasks", args);
     if(mQuery->first()) {
+        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
         do {
             QSharedPointer<ArchivedTask> task = QSharedPointer<ArchivedTask>(new ArchivedTask());
-            ModelGenerator::Generate(mQuery, task);
+            ModelGenerator::Generate(mQuery, task, fieldMap);
             ret.append(task);
         } while(mQuery->next());
     }
@@ -408,9 +416,10 @@ QList<QSharedPointer<Task> > TaskDao::getTaskPreReqs(QSharedPointer<MySQLHandler
     QList<QSharedPointer<Task> > tasks = QList<QSharedPointer<Task> >();
     QSharedPointer<QSqlQuery> mQuery = db->call("getTaskPreReqs", QString::number(taskId));
     if (mQuery->first()) {
+        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
         do {
             QSharedPointer<Task> task = QSharedPointer<Task>(new Task());
-            ModelGenerator::Generate(mQuery, task);
+            ModelGenerator::Generate(mQuery, task, fieldMap);
             tasks.append(task);
         } while (mQuery->next());
     }
@@ -423,8 +432,10 @@ QMultiMap<int, int> TaskDao::getTaskTagIds(QSharedPointer<MySQLHandler> db, int 
     QString args = QString::number(limit) + ", " + QString::number(offset);
     QSharedPointer<QSqlQuery> mQuery = db->call("getTaskTagIds", args);
     if(mQuery->first()) {
+        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
         do {
-            taskTagIds.insert(MySQLHandler::getValueFromQuery("task_id", mQuery).toInt(), MySQLHandler::getValueFromQuery("tag_id", mQuery).toInt());
+            taskTagIds.insert(MySQLHandler::getValueFromQuery(fieldMap.value("task_id"), mQuery).toInt(),
+                              MySQLHandler::getValueFromQuery(fieldMap.value("tag_id"), mQuery).toInt());
         } while (mQuery->next());
     }
     return taskTagIds;

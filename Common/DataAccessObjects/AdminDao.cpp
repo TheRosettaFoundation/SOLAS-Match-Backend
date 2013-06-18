@@ -15,9 +15,10 @@ QList<QSharedPointer<User> > AdminDao::getAdmins(QSharedPointer<MySQLHandler> db
 
     QSharedPointer<QSqlQuery> q = db->call("getAdmin", args);
     if (q->first()) {
+        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(q);
         do {
             QSharedPointer<User> admin = QSharedPointer<User>(new User());
-            ModelGenerator::Generate(q, admin);
+            ModelGenerator::Generate(q, admin, fieldMap);
             admins.append(admin);
         } while (q->next());
     }

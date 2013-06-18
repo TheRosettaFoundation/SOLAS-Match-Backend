@@ -65,9 +65,10 @@ QList<QSharedPointer<User> > UserDao::getUsers(QSharedPointer<MySQLHandler> db, 
 
     QSharedPointer<QSqlQuery> mQuery = db->call("getUser", args);
     if(mQuery->first()) {
+        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
         do {
             QSharedPointer<User> user = QSharedPointer<User>(new User());
-            ModelGenerator::Generate(mQuery, user);
+            ModelGenerator::Generate(mQuery, user, fieldMap);
             users.append(user);
         } while(mQuery->next());
     }
@@ -94,8 +95,9 @@ QSharedPointer<BannedUser> UserDao::getBanData(QSharedPointer<MySQLHandler> db, 
     args += ", null, null, null, null";
     QSharedPointer<QSqlQuery> mQuery = db->call("getBannedUser", args);
     if (mQuery->first()) {
+        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
         data = QSharedPointer<BannedUser>(new BannedUser());
-        ModelGenerator::Generate(mQuery, data);
+        ModelGenerator::Generate(mQuery, data, fieldMap);
     }
     return data;
 }
@@ -106,7 +108,8 @@ QString UserDao::getPasswordResetUuid(QSharedPointer<MySQLHandler> db, int id)
     QString args = "null, " + QString::number(id);
     QSharedPointer<QSqlQuery> mQuery = db->call("getPasswordResetRequests", args);
     if(mQuery->first()) {
-        ret = MySQLHandler::getValueFromQuery("uid", mQuery).toString();
+        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
+        ret = MySQLHandler::getValueFromQuery(fieldMap.value("uid"), mQuery).toString();
     }
 
     return ret;
@@ -118,7 +121,8 @@ QString UserDao::getRegistrationId(QSharedPointer<MySQLHandler> db, int userId)
     QString args = QString::number(userId);
     QSharedPointer<QSqlQuery> mQuery = db->call("getRegistrationId", args);
     if (mQuery->first()) {
-        ret = MySQLHandler::getValueFromQuery("unique_id", mQuery).toString();
+        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
+        ret = MySQLHandler::getValueFromQuery(fieldMap.value("unique_id"), mQuery).toString();
     }
 
     return ret;
@@ -137,9 +141,10 @@ QList<QSharedPointer<Task> > UserDao::getUserTopTasks(QSharedPointer<MySQLHandle
     args += MySQLHandler::wrapString(filter);
     QSharedPointer<QSqlQuery> mQuery = db->call("getUserTopTasks", args);
     if (mQuery->first()) {
+        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
         do {
             QSharedPointer<Task> task = QSharedPointer<Task>(new Task());
-            ModelGenerator::Generate(mQuery, task);
+            ModelGenerator::Generate(mQuery, task, fieldMap);
             taskList.append(task);
         } while (mQuery->next());
     }
@@ -164,8 +169,9 @@ QSharedPointer<UserTaskStreamNotification> UserDao::getUserTaskStreamNotificatio
     QSharedPointer<UserTaskStreamNotification> data = QSharedPointer<UserTaskStreamNotification>();
     QSharedPointer<QSqlQuery> mQuery = db->call("getUserTaskStreamNotification", QString::number(userId));
     if (mQuery->first()) {
+        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
         data = QSharedPointer<UserTaskStreamNotification>(new UserTaskStreamNotification());
-        ModelGenerator::Generate(mQuery, data);
+        ModelGenerator::Generate(mQuery, data, fieldMap);
     }
     return data;
 }
@@ -188,9 +194,10 @@ QList<QSharedPointer<Locale> > UserDao::getUserSecondaryLanguages(QSharedPointer
     QString args = QString::number(userId);
     QSharedPointer<QSqlQuery> mQuery = db->call("getUserSecondaryLanguages", args);
     if(mQuery->first()) {
+        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
         do {
             QSharedPointer<Locale> locale = QSharedPointer<Locale>(new Locale());
-            ModelGenerator::Generate(mQuery, locale);
+            ModelGenerator::Generate(mQuery, locale, fieldMap);
             userSecondaryLocales.append(locale);
         } while (mQuery->next());
     }
@@ -205,9 +212,13 @@ QMultiMap<int, LCCode> UserDao::getUserLCCodes(QSharedPointer<MySQLHandler> db, 
     QString args = QString::number(limit) + ", " + QString::number(offset);
     QSharedPointer<QSqlQuery> mQuery = db->call("getUserLCCodes", args);
     if(mQuery->first()) {
+        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
         do {
-            LCCode languageCountryId(MySQLHandler::getValueFromQuery("languageCode", mQuery).toString().toStdString(), MySQLHandler::getValueFromQuery("countryCode", mQuery).toString().toStdString());
-            userLCIDs.insert(MySQLHandler::getValueFromQuery("user_id", mQuery).toInt(), languageCountryId);
+            LCCode languageCountryId(MySQLHandler::getValueFromQuery(fieldMap.value("languageCode"),
+                                                                     mQuery).toString().toStdString(),
+                                     MySQLHandler::getValueFromQuery(fieldMap.value("countryCode"),
+                                                                     mQuery).toString().toStdString());
+            userLCIDs.insert(MySQLHandler::getValueFromQuery(fieldMap.value("user_id"), mQuery).toInt(), languageCountryId);
         } while (mQuery->next());
     }
     return userLCIDs;
@@ -219,8 +230,10 @@ QMultiMap<int, int> UserDao::getUserTagIds(QSharedPointer<MySQLHandler> db, int 
     QString args = QString::number(limit) + ", " + QString::number(offset);
     QSharedPointer<QSqlQuery> mQuery = db->call("getUserTagIds", args);
     if(mQuery->first()) {
+        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
         do {
-            userTagIds.insert(MySQLHandler::getValueFromQuery("user_id", mQuery).toInt(), MySQLHandler::getValueFromQuery("tag_id", mQuery).toInt());
+            userTagIds.insert(MySQLHandler::getValueFromQuery(fieldMap.value("user_id"), mQuery).toInt(),
+                              MySQLHandler::getValueFromQuery(fieldMap.value("tag_id"), mQuery).toInt());
         } while (mQuery->next());
     }
     return userTagIds;
@@ -232,9 +245,13 @@ QMultiMap<int, LCCode> UserDao::getUserNativeLCCodes(QSharedPointer<MySQLHandler
     QString args = QString::number(limit) + ", " + QString::number(offset);
     QSharedPointer<QSqlQuery> mQuery = db->call("getUserNativeLCCodes", args);
     if(mQuery->first()) {
+        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
         do {
-            LCCode languageCountryId(MySQLHandler::getValueFromQuery("languageCode", mQuery).toString().toStdString(), MySQLHandler::getValueFromQuery("countryCode", mQuery).toString().toStdString());
-            userNativeLCIDs.insert(MySQLHandler::getValueFromQuery("id", mQuery).toInt(), languageCountryId);
+            LCCode languageCountryId(MySQLHandler::getValueFromQuery(fieldMap.value("languageCode"),
+                                                                     mQuery).toString().toStdString(),
+                                     MySQLHandler::getValueFromQuery(fieldMap.value("countryCode"),
+                                                                     mQuery).toString().toStdString());
+            userNativeLCIDs.insert(MySQLHandler::getValueFromQuery(fieldMap.value("id"), mQuery).toInt(), languageCountryId);
         } while (mQuery->next());
     }
     return userNativeLCIDs;

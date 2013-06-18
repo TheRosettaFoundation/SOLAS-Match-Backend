@@ -77,9 +77,10 @@ QList<QSharedPointer<Project> > ProjectDao::getProjects(QSharedPointer<MySQLHand
 
     QSharedPointer<QSqlQuery> mQuery = db->call("getProject", args);
     if (mQuery->first()) {
+        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
         do {
             QSharedPointer<Project> project = QSharedPointer<Project>(new Project());
-            ModelGenerator::Generate(mQuery, project);
+            ModelGenerator::Generate(mQuery, project, fieldMap);
             ret.append(project);
         } while (mQuery->next());
     }

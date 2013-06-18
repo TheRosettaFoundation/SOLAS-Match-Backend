@@ -146,6 +146,27 @@ QVariant MySQLHandler::getValueFromQuery(QString field_name, QSharedPointer<QSql
     return ret;
 }
 
+QVariant MySQLHandler::getValueFromQuery(int field_pos, QSharedPointer<QSqlQuery> mQuery)
+{
+    QVariant ret = 0;
+    if (field_pos >= 0 && field_pos < mQuery->record().count()) {
+        ret = mQuery->value(field_pos);
+    }
+
+    return ret;
+}
+
+QMap<QString, int> MySQLHandler::getFieldMap(QSharedPointer<QSqlQuery> q)
+{
+    QMap<QString, int> fieldMap;
+    QSqlRecord rec = q->record();
+    for (int i = 0; i < rec.count(); i++) {
+        fieldMap.insert(rec.fieldName(i), i);
+    }
+    qDebug() << "FieldMap is " << fieldMap;
+    return fieldMap;
+}
+
 QString MySQLHandler::wrapString(QString str)
 {
     return "'" + str + "'";

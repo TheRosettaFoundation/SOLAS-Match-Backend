@@ -8,9 +8,10 @@ QList<QSharedPointer<Language> > LanguageDao::getLanguages(QSharedPointer<MySQLH
     QString args = "null, null, null";
     QSharedPointer<QSqlQuery> mQuery = db->call("getLanguage", args);
     if (mQuery->first()) {
+        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
         do {
             QSharedPointer<Language> lang = QSharedPointer<Language>(new Language());
-            ModelGenerator::Generate(mQuery, lang);
+            ModelGenerator::Generate(mQuery, lang, fieldMap);
             languages.append(lang);
         } while (mQuery->next());
     }
@@ -37,8 +38,9 @@ QSharedPointer<Language> LanguageDao::getLanguage(QSharedPointer<MySQLHandler> d
 
         QSharedPointer<QSqlQuery> mQuery = db->call("getLanguage", args);
         if (mQuery->first()) {
+            QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
             language = QSharedPointer<Language>(new Language());
-            ModelGenerator::Generate(mQuery, language);
+            ModelGenerator::Generate(mQuery, language, fieldMap);
         }
     }
     return language;
