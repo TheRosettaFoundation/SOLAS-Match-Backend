@@ -58,6 +58,9 @@ void UserFeedbackGenerator::run()
             dict.SetValue("USERNAME", user->display_name());
             dict.SetValue("FEEDBACK", feedback.toStdString());
             dict.SetValue("ORG_NAME", org->name());
+            QString taskView = settings.get("site.url") + "task/" + QString::number(task->id()) + "/view";
+            dict.SetValue("TASK_VIEW", taskView.toStdString());
+            dict.SetValue("TASK_TITLE", task->title());
             dict.SetValue("SITE_NAME", settings.get("site.name").toStdString());
             dict.SetValue("CLAIMANT_NAME", claimant->display_name());
 

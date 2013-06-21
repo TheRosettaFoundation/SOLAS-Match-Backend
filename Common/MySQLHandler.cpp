@@ -163,7 +163,6 @@ QMap<QString, int> MySQLHandler::getFieldMap(QSharedPointer<QSqlQuery> q)
     for (int i = 0; i < rec.count(); i++) {
         fieldMap.insert(rec.fieldName(i), i);
     }
-    qDebug() << "FieldMap is " << fieldMap;
     return fieldMap;
 }
 
