@@ -128,7 +128,8 @@ QString UserDao::getRegistrationId(QSharedPointer<MySQLHandler> db, int userId)
     return ret;
 }
 
-QList<QSharedPointer<Task> > UserDao::getUserTopTasks(QSharedPointer<MySQLHandler> db, int userId, bool strict, int limit, QString filter)
+QList<QSharedPointer<Task> > UserDao::getUserTopTasks(QSharedPointer<MySQLHandler> db, int userId, bool strict, int limit,
+                                                      int offset, QString filter)
 {
     QList<QSharedPointer<Task> > taskList = QList<QSharedPointer<Task> >();
     QString args = QString::number(userId) + ", ";
@@ -138,12 +139,55 @@ QList<QSharedPointer<Task> > UserDao::getUserTopTasks(QSharedPointer<MySQLHandle
         args += "0, ";
     }
     args = args + QString::number(limit) + ", ";
+    args = args + QString::number(offset) + ", ";
     args += MySQLHandler::wrapString(filter);
     QSharedPointer<QSqlQuery> mQuery = db->call("getUserTopTasks", args);
     if (mQuery->first()) {
         QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
         do {
             QSharedPointer<Task> task = QSharedPointer<Task>(new Task());
+            ModelGenerator::Generate(mQuery, task, fieldMap);
+            taskList.append(task);
+        } while (mQuery->next());
+    }
+    return taskList;
+}
+
+QList<QSharedPointer<Task> > UserDao::getUserTasks(QSharedPointer<MySQLHandler> db, int userId, int limit)
+{
+    QList<QSharedPointer<Task> > taskList = QList<QSharedPointer<Task> >();
+    QString args = QString::number(userId) + ", ";
+    if (limit > 0) {
+        args += QString::number(limit);
+    } else {
+        args += "null";
+    }
+    QSharedPointer<QSqlQuery> mQuery = db->call("getUserTasks", args);
+    if (mQuery->first()) {
+        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
+        do {
+            QSharedPointer<Task> task = QSharedPointer<Task>(new Task());
+            ModelGenerator::Generate(mQuery, task, fieldMap);
+            taskList.append(task);
+        } while (mQuery->next());
+    }
+    return taskList;
+}
+
+QList<QSharedPointer<ArchivedTask> > UserDao::getUserArchivedTasks(QSharedPointer<MySQLHandler> db, int userId, int limit)
+{
+    QList<QSharedPointer<ArchivedTask> > taskList = QList<QSharedPointer<ArchivedTask> >();
+    QString args = QString::number(userId) + ", ";
+    if (limit > 0) {
+        args += QString::number(limit);
+    } else {
+        args += "null";
+    }
+    QSharedPointer<QSqlQuery> mQuery = db->call("getUserArchivedTasks", args);
+    if (mQuery->first()) {
+        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
+        do {
+            QSharedPointer<ArchivedTask> task = QSharedPointer<ArchivedTask>(new ArchivedTask());
             ModelGenerator::Generate(mQuery, task, fieldMap);
             taskList.append(task);
         } while (mQuery->next());

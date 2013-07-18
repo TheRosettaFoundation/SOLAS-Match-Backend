@@ -12,6 +12,7 @@
 #include "Common/protobufs/models/Task.pb.h"
 #include "Common/protobufs/models/BannedUser.pb.h"
 #include "Common/protobufs/models/UserTaskStreamNotification.pb.h"
+#include "Common/protobufs/models/ArchivedTask.pb.h"
 
 class UserDao
 {
@@ -39,10 +40,12 @@ public:
                          int lang_id = -1,
                          int reg_id = -1);
     static QSharedPointer<BannedUser> getBanData(QSharedPointer<MySQLHandler> db, int userId);
+    static QList<QSharedPointer<Task> > getUserTasks(QSharedPointer<MySQLHandler> db, int userId, int limit = RETURN_ALL);
+    static QList<QSharedPointer<ArchivedTask> > getUserArchivedTasks(QSharedPointer<MySQLHandler> db, int userId, int limit = RETURN_ALL);
     static QString getRegistrationId(QSharedPointer<MySQLHandler> db, int userId);
     static QString getPasswordResetUuid(QSharedPointer<MySQLHandler> db, int id);
     static QList<QSharedPointer<Task> > getUserTopTasks(QSharedPointer<MySQLHandler> db, int userId, bool strict = false,
-                                                        int limit = 10, QString filter = "");
+                                                        int limit = 10, int offset = RETURN_ALL, QString filter = "");
     static QList<int> getUserIdsPendingTaskStreamNotification(QSharedPointer<MySQLHandler> db);
     static QSharedPointer<UserTaskStreamNotification> getUserTaskStreamNotification(QSharedPointer<MySQLHandler> db,
                                                         int userId);

@@ -25,7 +25,7 @@ public:
                           int type = -1, int status = -1, int published = -1, QString deadlineTime = "");
     static QSharedPointer<Task> insertAndUpdate(QSharedPointer<MySQLHandler> db, QSharedPointer<Task> task);
     static QSharedPointer<Task> insertAndUpdate(QSharedPointer<MySQLHandler> db, Task task);
-    static QList<QSharedPointer<Task> > getActiveTasks(QSharedPointer<MySQLHandler> db, int limit = -1);
+    static QList<QSharedPointer<Task> > getActiveTasks(QSharedPointer<MySQLHandler> db, int limit = -1, int offset = RETURN_ALL);
     static QList<QSharedPointer<Task> > getOverdueTasks(QSharedPointer<MySQLHandler> db);
     static QSharedPointer<User> getTaskTranslator(QSharedPointer<MySQLHandler> db, int task_id);
     static QList<QSharedPointer<User> > getSubscribedUsers(QSharedPointer<MySQLHandler> db, int task_id);

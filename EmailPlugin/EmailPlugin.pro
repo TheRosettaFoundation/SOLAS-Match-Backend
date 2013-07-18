@@ -49,7 +49,8 @@ SOURCES += emailplugin.cpp \
     Generators/OrgFeedbackGenerator.cpp \
     Generators/UserFeedbackGenerator.cpp \
     Generators/OrgCreated_OrgEmail.cpp \
-    Generators/OrgCreated_SiteAdmin.cpp
+    Generators/OrgCreated_SiteAdmin.cpp \
+    Generators/UserReferenceEmailGenerator.cpp
 
 HEADERS += emailplugin.h\
         Smtp.h \
@@ -74,4 +75,5 @@ HEADERS += emailplugin.h\
     Generators/OrgFeedbackGenerator.h \
     Generators/UserFeedbackGenerator.h \
     Generators/OrgCreated_OrgEmail.h \
-    Generators/OrgCreated_SiteAdmin.h
+    Generators/OrgCreated_SiteAdmin.h \
+    Generators/UserReferenceEmailGenerator.h

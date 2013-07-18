@@ -7,6 +7,7 @@
 #include <QSharedPointer>
 
 #include "Common/protobufs/models/Project.pb.h"
+#include "Common/protobufs/models/ArchivedProject.pb.h"
 #include "Common/MySQLHandler.h"
 
 class ProjectDao
@@ -18,6 +19,8 @@ public:
     static QSharedPointer<Project> getProject(QSharedPointer<MySQLHandler> db, int id = -1, QString title = "", QString desc = "",
                                               QString impact = "", QString deadline = "", int orgId = -1, QString ref = "",
                                       int wordCount = -1, QString created = "", QString language = "", QString country = "");
+    static QSharedPointer<ArchivedProject> getArchivedProject(QSharedPointer<MySQLHandler> db, int id = -1);
+    static QList<QSharedPointer<ArchivedProject> > getArchivedProjects(QSharedPointer<MySQLHandler> db, int id = -1);
 
 };
 

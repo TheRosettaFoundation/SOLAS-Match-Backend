@@ -100,3 +100,36 @@ QSharedPointer<Project> ProjectDao::getProject(QSharedPointer<MySQLHandler> db, 
     }
     return project;
 }
+
+QList<QSharedPointer<ArchivedProject> > ProjectDao::getArchivedProjects(QSharedPointer<MySQLHandler> db, int id)
+{
+    QList<QSharedPointer<ArchivedProject> > projects = QList<QSharedPointer<ArchivedProject> >();
+    QString args = "";
+    if (id > 0) {
+        args += QString::number(id) + ", ";
+    } else {
+        args += "null, ";
+    }
+    args += "null, null, null, null, null, null, null, null, null, null";
+
+    QSharedPointer<QSqlQuery> mQuery = db->call("getArchivedProject", args);
+    if (mQuery->first()) {
+        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
+        do {
+            QSharedPointer<ArchivedProject> project = QSharedPointer<ArchivedProject>(new ArchivedProject());
+            ModelGenerator::Generate(mQuery, project, fieldMap);
+            projects.append(project);
+        } while (mQuery->next());
+    }
+    return projects;
+}
+
+QSharedPointer<ArchivedProject> ProjectDao::getArchivedProject(QSharedPointer<MySQLHandler> db, int id)
+{
+    QSharedPointer<ArchivedProject> project;
+    QList<QSharedPointer<ArchivedProject> > projectList = ProjectDao::getArchivedProjects(db, id);
+    if (projectList.count() > 0) {
+        project = projectList.at(0);
+    }
+    return project;
+}

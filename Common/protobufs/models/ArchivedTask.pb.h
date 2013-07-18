@@ -23,6 +23,7 @@
 #include <google/protobuf/repeated_field.h>
 #include <google/protobuf/extension_set.h>
 #include <google/protobuf/generated_message_reflection.h>
+#include "Locale.pb.h"
 // @@protoc_insertion_point(includes)
 
 // Internal implementation detail -- do not call these.
@@ -88,7 +89,7 @@ class ArchivedTask : public ::google::protobuf::Message {
   
   // accessors -------------------------------------------------------
   
-  // required int32 id = 1;
+  // optional int32 id = 1;
   inline bool has_id() const;
   inline void clear_id();
   static const int kIdFieldNumber = 1;
@@ -153,54 +154,26 @@ class ArchivedTask : public ::google::protobuf::Message {
   inline ::std::string* mutable_createdtime();
   inline ::std::string* release_createdtime();
   
-  // optional string sourceLanguageCode = 8;
-  inline bool has_sourcelanguagecode() const;
-  inline void clear_sourcelanguagecode();
-  static const int kSourceLanguageCodeFieldNumber = 8;
-  inline const ::std::string& sourcelanguagecode() const;
-  inline void set_sourcelanguagecode(const ::std::string& value);
-  inline void set_sourcelanguagecode(const char* value);
-  inline void set_sourcelanguagecode(const char* value, size_t size);
-  inline ::std::string* mutable_sourcelanguagecode();
-  inline ::std::string* release_sourcelanguagecode();
+  // optional .Locale sourceLocale = 8;
+  inline bool has_sourcelocale() const;
+  inline void clear_sourcelocale();
+  static const int kSourceLocaleFieldNumber = 8;
+  inline const ::Locale& sourcelocale() const;
+  inline ::Locale* mutable_sourcelocale();
+  inline ::Locale* release_sourcelocale();
   
-  // optional string targetLanguageCode = 9;
-  inline bool has_targetlanguagecode() const;
-  inline void clear_targetlanguagecode();
-  static const int kTargetLanguageCodeFieldNumber = 9;
-  inline const ::std::string& targetlanguagecode() const;
-  inline void set_targetlanguagecode(const ::std::string& value);
-  inline void set_targetlanguagecode(const char* value);
-  inline void set_targetlanguagecode(const char* value, size_t size);
-  inline ::std::string* mutable_targetlanguagecode();
-  inline ::std::string* release_targetlanguagecode();
+  // optional .Locale targetLocale = 9;
+  inline bool has_targetlocale() const;
+  inline void clear_targetlocale();
+  static const int kTargetLocaleFieldNumber = 9;
+  inline const ::Locale& targetlocale() const;
+  inline ::Locale* mutable_targetlocale();
+  inline ::Locale* release_targetlocale();
   
-  // optional string sourceCountryCode = 10;
-  inline bool has_sourcecountrycode() const;
-  inline void clear_sourcecountrycode();
-  static const int kSourceCountryCodeFieldNumber = 10;
-  inline const ::std::string& sourcecountrycode() const;
-  inline void set_sourcecountrycode(const ::std::string& value);
-  inline void set_sourcecountrycode(const char* value);
-  inline void set_sourcecountrycode(const char* value, size_t size);
-  inline ::std::string* mutable_sourcecountrycode();
-  inline ::std::string* release_sourcecountrycode();
-  
-  // optional string targetCountryCode = 11;
-  inline bool has_targetcountrycode() const;
-  inline void clear_targetcountrycode();
-  static const int kTargetCountryCodeFieldNumber = 11;
-  inline const ::std::string& targetcountrycode() const;
-  inline void set_targetcountrycode(const ::std::string& value);
-  inline void set_targetcountrycode(const char* value);
-  inline void set_targetcountrycode(const char* value, size_t size);
-  inline ::std::string* mutable_targetcountrycode();
-  inline ::std::string* release_targetcountrycode();
-  
-  // optional string taskType = 12;
+  // optional string taskType = 10;
   inline bool has_tasktype() const;
   inline void clear_tasktype();
-  static const int kTaskTypeFieldNumber = 12;
+  static const int kTaskTypeFieldNumber = 10;
   inline const ::std::string& tasktype() const;
   inline void set_tasktype(const ::std::string& value);
   inline void set_tasktype(const char* value);
@@ -208,10 +181,10 @@ class ArchivedTask : public ::google::protobuf::Message {
   inline ::std::string* mutable_tasktype();
   inline ::std::string* release_tasktype();
   
-  // optional string taskStatus = 13;
+  // optional string taskStatus = 11;
   inline bool has_taskstatus() const;
   inline void clear_taskstatus();
-  static const int kTaskStatusFieldNumber = 13;
+  static const int kTaskStatusFieldNumber = 11;
   inline const ::std::string& taskstatus() const;
   inline void set_taskstatus(const ::std::string& value);
   inline void set_taskstatus(const char* value);
@@ -219,31 +192,31 @@ class ArchivedTask : public ::google::protobuf::Message {
   inline ::std::string* mutable_taskstatus();
   inline ::std::string* release_taskstatus();
   
-  // optional bool published = 14;
+  // optional bool published = 12;
   inline bool has_published() const;
   inline void clear_published();
-  static const int kPublishedFieldNumber = 14;
+  static const int kPublishedFieldNumber = 12;
   inline bool published() const;
   inline void set_published(bool value);
   
-  // optional int32 translatorId = 15;
+  // optional int32 translatorId = 13;
   inline bool has_translatorid() const;
   inline void clear_translatorid();
-  static const int kTranslatorIdFieldNumber = 15;
+  static const int kTranslatorIdFieldNumber = 13;
   inline ::google::protobuf::int32 translatorid() const;
   inline void set_translatorid(::google::protobuf::int32 value);
   
-  // optional int32 archiveUserId = 16;
+  // optional int32 archiveUserId = 14;
   inline bool has_archiveuserid() const;
   inline void clear_archiveuserid();
-  static const int kArchiveUserIdFieldNumber = 16;
+  static const int kArchiveUserIdFieldNumber = 14;
   inline ::google::protobuf::int32 archiveuserid() const;
   inline void set_archiveuserid(::google::protobuf::int32 value);
   
-  // optional string archiveDate = 17;
+  // optional string archiveDate = 15;
   inline bool has_archivedate() const;
   inline void clear_archivedate();
-  static const int kArchiveDateFieldNumber = 17;
+  static const int kArchiveDateFieldNumber = 15;
   inline const ::std::string& archivedate() const;
   inline void set_archivedate(const ::std::string& value);
   inline void set_archivedate(const char* value);
@@ -251,16 +224,88 @@ class ArchivedTask : public ::google::protobuf::Message {
   inline ::std::string* mutable_archivedate();
   inline ::std::string* release_archivedate();
   
-  // optional string tags = 18;
-  inline bool has_tags() const;
-  inline void clear_tags();
-  static const int kTagsFieldNumber = 18;
-  inline const ::std::string& tags() const;
-  inline void set_tags(const ::std::string& value);
-  inline void set_tags(const char* value);
-  inline void set_tags(const char* value, size_t size);
-  inline ::std::string* mutable_tags();
-  inline ::std::string* release_tags();
+  // optional int32 version = 16;
+  inline bool has_version() const;
+  inline void clear_version();
+  static const int kVersionFieldNumber = 16;
+  inline ::google::protobuf::int32 version() const;
+  inline void set_version(::google::protobuf::int32 value);
+  
+  // optional string fileName = 17;
+  inline bool has_filename() const;
+  inline void clear_filename();
+  static const int kFileNameFieldNumber = 17;
+  inline const ::std::string& filename() const;
+  inline void set_filename(const ::std::string& value);
+  inline void set_filename(const char* value);
+  inline void set_filename(const char* value, size_t size);
+  inline ::std::string* mutable_filename();
+  inline ::std::string* release_filename();
+  
+  // optional string contentType = 18;
+  inline bool has_contenttype() const;
+  inline void clear_contenttype();
+  static const int kContentTypeFieldNumber = 18;
+  inline const ::std::string& contenttype() const;
+  inline void set_contenttype(const ::std::string& value);
+  inline void set_contenttype(const char* value);
+  inline void set_contenttype(const char* value, size_t size);
+  inline ::std::string* mutable_contenttype();
+  inline ::std::string* release_contenttype();
+  
+  // optional string uploadTime = 19;
+  inline bool has_uploadtime() const;
+  inline void clear_uploadtime();
+  static const int kUploadTimeFieldNumber = 19;
+  inline const ::std::string& uploadtime() const;
+  inline void set_uploadtime(const ::std::string& value);
+  inline void set_uploadtime(const char* value);
+  inline void set_uploadtime(const char* value, size_t size);
+  inline ::std::string* mutable_uploadtime();
+  inline ::std::string* release_uploadtime();
+  
+  // optional int32 userIdClaimed = 20;
+  inline bool has_useridclaimed() const;
+  inline void clear_useridclaimed();
+  static const int kUserIdClaimedFieldNumber = 20;
+  inline ::google::protobuf::int32 useridclaimed() const;
+  inline void set_useridclaimed(::google::protobuf::int32 value);
+  
+  // optional int32 userIdArchived = 21;
+  inline bool has_useridarchived() const;
+  inline void clear_useridarchived();
+  static const int kUserIdArchivedFieldNumber = 21;
+  inline ::google::protobuf::int32 useridarchived() const;
+  inline void set_useridarchived(::google::protobuf::int32 value);
+  
+  // optional string prerequisites = 22;
+  inline bool has_prerequisites() const;
+  inline void clear_prerequisites();
+  static const int kPrerequisitesFieldNumber = 22;
+  inline const ::std::string& prerequisites() const;
+  inline void set_prerequisites(const ::std::string& value);
+  inline void set_prerequisites(const char* value);
+  inline void set_prerequisites(const char* value, size_t size);
+  inline ::std::string* mutable_prerequisites();
+  inline ::std::string* release_prerequisites();
+  
+  // optional int32 userIdTaskCreator = 23;
+  inline bool has_useridtaskcreator() const;
+  inline void clear_useridtaskcreator();
+  static const int kUserIdTaskCreatorFieldNumber = 23;
+  inline ::google::protobuf::int32 useridtaskcreator() const;
+  inline void set_useridtaskcreator(::google::protobuf::int32 value);
+  
+  // optional string archivedDate = 24;
+  inline bool has_archiveddate() const;
+  inline void clear_archiveddate();
+  static const int kArchivedDateFieldNumber = 24;
+  inline const ::std::string& archiveddate() const;
+  inline void set_archiveddate(const ::std::string& value);
+  inline void set_archiveddate(const char* value);
+  inline void set_archiveddate(const char* value, size_t size);
+  inline ::std::string* mutable_archiveddate();
+  inline ::std::string* release_archiveddate();
   
   // @@protoc_insertion_point(class_scope:ArchivedTask)
  private:
@@ -278,14 +323,10 @@ class ArchivedTask : public ::google::protobuf::Message {
   inline void clear_has_wordcount();
   inline void set_has_createdtime();
   inline void clear_has_createdtime();
-  inline void set_has_sourcelanguagecode();
-  inline void clear_has_sourcelanguagecode();
-  inline void set_has_targetlanguagecode();
-  inline void clear_has_targetlanguagecode();
-  inline void set_has_sourcecountrycode();
-  inline void clear_has_sourcecountrycode();
-  inline void set_has_targetcountrycode();
-  inline void clear_has_targetcountrycode();
+  inline void set_has_sourcelocale();
+  inline void clear_has_sourcelocale();
+  inline void set_has_targetlocale();
+  inline void clear_has_targetlocale();
   inline void set_has_tasktype();
   inline void clear_has_tasktype();
   inline void set_has_taskstatus();
@@ -298,8 +339,24 @@ class ArchivedTask : public ::google::protobuf::Message {
   inline void clear_has_archiveuserid();
   inline void set_has_archivedate();
   inline void clear_has_archivedate();
-  inline void set_has_tags();
-  inline void clear_has_tags();
+  inline void set_has_version();
+  inline void clear_has_version();
+  inline void set_has_filename();
+  inline void clear_has_filename();
+  inline void set_has_contenttype();
+  inline void clear_has_contenttype();
+  inline void set_has_uploadtime();
+  inline void clear_has_uploadtime();
+  inline void set_has_useridclaimed();
+  inline void clear_has_useridclaimed();
+  inline void set_has_useridarchived();
+  inline void clear_has_useridarchived();
+  inline void set_has_prerequisites();
+  inline void clear_has_prerequisites();
+  inline void set_has_useridtaskcreator();
+  inline void clear_has_useridtaskcreator();
+  inline void set_has_archiveddate();
+  inline void clear_has_archiveddate();
   
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
   
@@ -309,21 +366,27 @@ class ArchivedTask : public ::google::protobuf::Message {
   ::std::string* comment_;
   ::std::string* deadline_;
   ::std::string* createdtime_;
-  ::std::string* sourcelanguagecode_;
-  ::std::string* targetlanguagecode_;
-  ::std::string* sourcecountrycode_;
+  ::Locale* sourcelocale_;
+  ::Locale* targetlocale_;
   ::google::protobuf::int32 wordcount_;
   bool published_;
-  ::std::string* targetcountrycode_;
   ::std::string* tasktype_;
   ::std::string* taskstatus_;
   ::google::protobuf::int32 translatorid_;
   ::google::protobuf::int32 archiveuserid_;
   ::std::string* archivedate_;
-  ::std::string* tags_;
+  ::std::string* filename_;
+  ::std::string* contenttype_;
+  ::google::protobuf::int32 version_;
+  ::google::protobuf::int32 useridclaimed_;
+  ::std::string* uploadtime_;
+  ::std::string* prerequisites_;
+  ::google::protobuf::int32 useridarchived_;
+  ::google::protobuf::int32 useridtaskcreator_;
+  ::std::string* archiveddate_;
   
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(18 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(24 + 31) / 32];
   
   friend void  protobuf_AddDesc_ArchivedTask_2eproto();
   friend void protobuf_AssignDesc_ArchivedTask_2eproto();
@@ -339,7 +402,7 @@ class ArchivedTask : public ::google::protobuf::Message {
 
 // ArchivedTask
 
-// required int32 id = 1;
+// optional int32 id = 1;
 inline bool ArchivedTask::has_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -637,247 +700,73 @@ inline ::std::string* ArchivedTask::release_createdtime() {
   }
 }
 
-// optional string sourceLanguageCode = 8;
-inline bool ArchivedTask::has_sourcelanguagecode() const {
+// optional .Locale sourceLocale = 8;
+inline bool ArchivedTask::has_sourcelocale() const {
   return (_has_bits_[0] & 0x00000080u) != 0;
 }
-inline void ArchivedTask::set_has_sourcelanguagecode() {
+inline void ArchivedTask::set_has_sourcelocale() {
   _has_bits_[0] |= 0x00000080u;
 }
-inline void ArchivedTask::clear_has_sourcelanguagecode() {
+inline void ArchivedTask::clear_has_sourcelocale() {
   _has_bits_[0] &= ~0x00000080u;
 }
-inline void ArchivedTask::clear_sourcelanguagecode() {
-  if (sourcelanguagecode_ != &::google::protobuf::internal::kEmptyString) {
-    sourcelanguagecode_->clear();
-  }
-  clear_has_sourcelanguagecode();
+inline void ArchivedTask::clear_sourcelocale() {
+  if (sourcelocale_ != NULL) sourcelocale_->::Locale::Clear();
+  clear_has_sourcelocale();
 }
-inline const ::std::string& ArchivedTask::sourcelanguagecode() const {
-  return *sourcelanguagecode_;
+inline const ::Locale& ArchivedTask::sourcelocale() const {
+  return sourcelocale_ != NULL ? *sourcelocale_ : *default_instance_->sourcelocale_;
 }
-inline void ArchivedTask::set_sourcelanguagecode(const ::std::string& value) {
-  set_has_sourcelanguagecode();
-  if (sourcelanguagecode_ == &::google::protobuf::internal::kEmptyString) {
-    sourcelanguagecode_ = new ::std::string;
-  }
-  sourcelanguagecode_->assign(value);
+inline ::Locale* ArchivedTask::mutable_sourcelocale() {
+  set_has_sourcelocale();
+  if (sourcelocale_ == NULL) sourcelocale_ = new ::Locale;
+  return sourcelocale_;
 }
-inline void ArchivedTask::set_sourcelanguagecode(const char* value) {
-  set_has_sourcelanguagecode();
-  if (sourcelanguagecode_ == &::google::protobuf::internal::kEmptyString) {
-    sourcelanguagecode_ = new ::std::string;
-  }
-  sourcelanguagecode_->assign(value);
-}
-inline void ArchivedTask::set_sourcelanguagecode(const char* value, size_t size) {
-  set_has_sourcelanguagecode();
-  if (sourcelanguagecode_ == &::google::protobuf::internal::kEmptyString) {
-    sourcelanguagecode_ = new ::std::string;
-  }
-  sourcelanguagecode_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* ArchivedTask::mutable_sourcelanguagecode() {
-  set_has_sourcelanguagecode();
-  if (sourcelanguagecode_ == &::google::protobuf::internal::kEmptyString) {
-    sourcelanguagecode_ = new ::std::string;
-  }
-  return sourcelanguagecode_;
-}
-inline ::std::string* ArchivedTask::release_sourcelanguagecode() {
-  clear_has_sourcelanguagecode();
-  if (sourcelanguagecode_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = sourcelanguagecode_;
-    sourcelanguagecode_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
+inline ::Locale* ArchivedTask::release_sourcelocale() {
+  clear_has_sourcelocale();
+  ::Locale* temp = sourcelocale_;
+  sourcelocale_ = NULL;
+  return temp;
 }
 
-// optional string targetLanguageCode = 9;
-inline bool ArchivedTask::has_targetlanguagecode() const {
+// optional .Locale targetLocale = 9;
+inline bool ArchivedTask::has_targetlocale() const {
   return (_has_bits_[0] & 0x00000100u) != 0;
 }
-inline void ArchivedTask::set_has_targetlanguagecode() {
+inline void ArchivedTask::set_has_targetlocale() {
   _has_bits_[0] |= 0x00000100u;
 }
-inline void ArchivedTask::clear_has_targetlanguagecode() {
+inline void ArchivedTask::clear_has_targetlocale() {
   _has_bits_[0] &= ~0x00000100u;
 }
-inline void ArchivedTask::clear_targetlanguagecode() {
-  if (targetlanguagecode_ != &::google::protobuf::internal::kEmptyString) {
-    targetlanguagecode_->clear();
-  }
-  clear_has_targetlanguagecode();
+inline void ArchivedTask::clear_targetlocale() {
+  if (targetlocale_ != NULL) targetlocale_->::Locale::Clear();
+  clear_has_targetlocale();
 }
-inline const ::std::string& ArchivedTask::targetlanguagecode() const {
-  return *targetlanguagecode_;
+inline const ::Locale& ArchivedTask::targetlocale() const {
+  return targetlocale_ != NULL ? *targetlocale_ : *default_instance_->targetlocale_;
 }
-inline void ArchivedTask::set_targetlanguagecode(const ::std::string& value) {
-  set_has_targetlanguagecode();
-  if (targetlanguagecode_ == &::google::protobuf::internal::kEmptyString) {
-    targetlanguagecode_ = new ::std::string;
-  }
-  targetlanguagecode_->assign(value);
+inline ::Locale* ArchivedTask::mutable_targetlocale() {
+  set_has_targetlocale();
+  if (targetlocale_ == NULL) targetlocale_ = new ::Locale;
+  return targetlocale_;
 }
-inline void ArchivedTask::set_targetlanguagecode(const char* value) {
-  set_has_targetlanguagecode();
-  if (targetlanguagecode_ == &::google::protobuf::internal::kEmptyString) {
-    targetlanguagecode_ = new ::std::string;
-  }
-  targetlanguagecode_->assign(value);
-}
-inline void ArchivedTask::set_targetlanguagecode(const char* value, size_t size) {
-  set_has_targetlanguagecode();
-  if (targetlanguagecode_ == &::google::protobuf::internal::kEmptyString) {
-    targetlanguagecode_ = new ::std::string;
-  }
-  targetlanguagecode_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* ArchivedTask::mutable_targetlanguagecode() {
-  set_has_targetlanguagecode();
-  if (targetlanguagecode_ == &::google::protobuf::internal::kEmptyString) {
-    targetlanguagecode_ = new ::std::string;
-  }
-  return targetlanguagecode_;
-}
-inline ::std::string* ArchivedTask::release_targetlanguagecode() {
-  clear_has_targetlanguagecode();
-  if (targetlanguagecode_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = targetlanguagecode_;
-    targetlanguagecode_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
+inline ::Locale* ArchivedTask::release_targetlocale() {
+  clear_has_targetlocale();
+  ::Locale* temp = targetlocale_;
+  targetlocale_ = NULL;
+  return temp;
 }
 
-// optional string sourceCountryCode = 10;
-inline bool ArchivedTask::has_sourcecountrycode() const {
+// optional string taskType = 10;
+inline bool ArchivedTask::has_tasktype() const {
   return (_has_bits_[0] & 0x00000200u) != 0;
 }
-inline void ArchivedTask::set_has_sourcecountrycode() {
+inline void ArchivedTask::set_has_tasktype() {
   _has_bits_[0] |= 0x00000200u;
 }
-inline void ArchivedTask::clear_has_sourcecountrycode() {
-  _has_bits_[0] &= ~0x00000200u;
-}
-inline void ArchivedTask::clear_sourcecountrycode() {
-  if (sourcecountrycode_ != &::google::protobuf::internal::kEmptyString) {
-    sourcecountrycode_->clear();
-  }
-  clear_has_sourcecountrycode();
-}
-inline const ::std::string& ArchivedTask::sourcecountrycode() const {
-  return *sourcecountrycode_;
-}
-inline void ArchivedTask::set_sourcecountrycode(const ::std::string& value) {
-  set_has_sourcecountrycode();
-  if (sourcecountrycode_ == &::google::protobuf::internal::kEmptyString) {
-    sourcecountrycode_ = new ::std::string;
-  }
-  sourcecountrycode_->assign(value);
-}
-inline void ArchivedTask::set_sourcecountrycode(const char* value) {
-  set_has_sourcecountrycode();
-  if (sourcecountrycode_ == &::google::protobuf::internal::kEmptyString) {
-    sourcecountrycode_ = new ::std::string;
-  }
-  sourcecountrycode_->assign(value);
-}
-inline void ArchivedTask::set_sourcecountrycode(const char* value, size_t size) {
-  set_has_sourcecountrycode();
-  if (sourcecountrycode_ == &::google::protobuf::internal::kEmptyString) {
-    sourcecountrycode_ = new ::std::string;
-  }
-  sourcecountrycode_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* ArchivedTask::mutable_sourcecountrycode() {
-  set_has_sourcecountrycode();
-  if (sourcecountrycode_ == &::google::protobuf::internal::kEmptyString) {
-    sourcecountrycode_ = new ::std::string;
-  }
-  return sourcecountrycode_;
-}
-inline ::std::string* ArchivedTask::release_sourcecountrycode() {
-  clear_has_sourcecountrycode();
-  if (sourcecountrycode_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = sourcecountrycode_;
-    sourcecountrycode_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-
-// optional string targetCountryCode = 11;
-inline bool ArchivedTask::has_targetcountrycode() const {
-  return (_has_bits_[0] & 0x00000400u) != 0;
-}
-inline void ArchivedTask::set_has_targetcountrycode() {
-  _has_bits_[0] |= 0x00000400u;
-}
-inline void ArchivedTask::clear_has_targetcountrycode() {
-  _has_bits_[0] &= ~0x00000400u;
-}
-inline void ArchivedTask::clear_targetcountrycode() {
-  if (targetcountrycode_ != &::google::protobuf::internal::kEmptyString) {
-    targetcountrycode_->clear();
-  }
-  clear_has_targetcountrycode();
-}
-inline const ::std::string& ArchivedTask::targetcountrycode() const {
-  return *targetcountrycode_;
-}
-inline void ArchivedTask::set_targetcountrycode(const ::std::string& value) {
-  set_has_targetcountrycode();
-  if (targetcountrycode_ == &::google::protobuf::internal::kEmptyString) {
-    targetcountrycode_ = new ::std::string;
-  }
-  targetcountrycode_->assign(value);
-}
-inline void ArchivedTask::set_targetcountrycode(const char* value) {
-  set_has_targetcountrycode();
-  if (targetcountrycode_ == &::google::protobuf::internal::kEmptyString) {
-    targetcountrycode_ = new ::std::string;
-  }
-  targetcountrycode_->assign(value);
-}
-inline void ArchivedTask::set_targetcountrycode(const char* value, size_t size) {
-  set_has_targetcountrycode();
-  if (targetcountrycode_ == &::google::protobuf::internal::kEmptyString) {
-    targetcountrycode_ = new ::std::string;
-  }
-  targetcountrycode_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* ArchivedTask::mutable_targetcountrycode() {
-  set_has_targetcountrycode();
-  if (targetcountrycode_ == &::google::protobuf::internal::kEmptyString) {
-    targetcountrycode_ = new ::std::string;
-  }
-  return targetcountrycode_;
-}
-inline ::std::string* ArchivedTask::release_targetcountrycode() {
-  clear_has_targetcountrycode();
-  if (targetcountrycode_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = targetcountrycode_;
-    targetcountrycode_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-
-// optional string taskType = 12;
-inline bool ArchivedTask::has_tasktype() const {
-  return (_has_bits_[0] & 0x00000800u) != 0;
-}
-inline void ArchivedTask::set_has_tasktype() {
-  _has_bits_[0] |= 0x00000800u;
-}
 inline void ArchivedTask::clear_has_tasktype() {
-  _has_bits_[0] &= ~0x00000800u;
+  _has_bits_[0] &= ~0x00000200u;
 }
 inline void ArchivedTask::clear_tasktype() {
   if (tasktype_ != &::google::protobuf::internal::kEmptyString) {
@@ -927,15 +816,15 @@ inline ::std::string* ArchivedTask::release_tasktype() {
   }
 }
 
-// optional string taskStatus = 13;
+// optional string taskStatus = 11;
 inline bool ArchivedTask::has_taskstatus() const {
-  return (_has_bits_[0] & 0x00001000u) != 0;
+  return (_has_bits_[0] & 0x00000400u) != 0;
 }
 inline void ArchivedTask::set_has_taskstatus() {
-  _has_bits_[0] |= 0x00001000u;
+  _has_bits_[0] |= 0x00000400u;
 }
 inline void ArchivedTask::clear_has_taskstatus() {
-  _has_bits_[0] &= ~0x00001000u;
+  _has_bits_[0] &= ~0x00000400u;
 }
 inline void ArchivedTask::clear_taskstatus() {
   if (taskstatus_ != &::google::protobuf::internal::kEmptyString) {
@@ -985,15 +874,15 @@ inline ::std::string* ArchivedTask::release_taskstatus() {
   }
 }
 
-// optional bool published = 14;
+// optional bool published = 12;
 inline bool ArchivedTask::has_published() const {
-  return (_has_bits_[0] & 0x00002000u) != 0;
+  return (_has_bits_[0] & 0x00000800u) != 0;
 }
 inline void ArchivedTask::set_has_published() {
-  _has_bits_[0] |= 0x00002000u;
+  _has_bits_[0] |= 0x00000800u;
 }
 inline void ArchivedTask::clear_has_published() {
-  _has_bits_[0] &= ~0x00002000u;
+  _has_bits_[0] &= ~0x00000800u;
 }
 inline void ArchivedTask::clear_published() {
   published_ = false;
@@ -1007,15 +896,15 @@ inline void ArchivedTask::set_published(bool value) {
   published_ = value;
 }
 
-// optional int32 translatorId = 15;
+// optional int32 translatorId = 13;
 inline bool ArchivedTask::has_translatorid() const {
-  return (_has_bits_[0] & 0x00004000u) != 0;
+  return (_has_bits_[0] & 0x00001000u) != 0;
 }
 inline void ArchivedTask::set_has_translatorid() {
-  _has_bits_[0] |= 0x00004000u;
+  _has_bits_[0] |= 0x00001000u;
 }
 inline void ArchivedTask::clear_has_translatorid() {
-  _has_bits_[0] &= ~0x00004000u;
+  _has_bits_[0] &= ~0x00001000u;
 }
 inline void ArchivedTask::clear_translatorid() {
   translatorid_ = 0;
@@ -1029,15 +918,15 @@ inline void ArchivedTask::set_translatorid(::google::protobuf::int32 value) {
   translatorid_ = value;
 }
 
-// optional int32 archiveUserId = 16;
+// optional int32 archiveUserId = 14;
 inline bool ArchivedTask::has_archiveuserid() const {
-  return (_has_bits_[0] & 0x00008000u) != 0;
+  return (_has_bits_[0] & 0x00002000u) != 0;
 }
 inline void ArchivedTask::set_has_archiveuserid() {
-  _has_bits_[0] |= 0x00008000u;
+  _has_bits_[0] |= 0x00002000u;
 }
 inline void ArchivedTask::clear_has_archiveuserid() {
-  _has_bits_[0] &= ~0x00008000u;
+  _has_bits_[0] &= ~0x00002000u;
 }
 inline void ArchivedTask::clear_archiveuserid() {
   archiveuserid_ = 0;
@@ -1051,15 +940,15 @@ inline void ArchivedTask::set_archiveuserid(::google::protobuf::int32 value) {
   archiveuserid_ = value;
 }
 
-// optional string archiveDate = 17;
+// optional string archiveDate = 15;
 inline bool ArchivedTask::has_archivedate() const {
-  return (_has_bits_[0] & 0x00010000u) != 0;
+  return (_has_bits_[0] & 0x00004000u) != 0;
 }
 inline void ArchivedTask::set_has_archivedate() {
-  _has_bits_[0] |= 0x00010000u;
+  _has_bits_[0] |= 0x00004000u;
 }
 inline void ArchivedTask::clear_has_archivedate() {
-  _has_bits_[0] &= ~0x00010000u;
+  _has_bits_[0] &= ~0x00004000u;
 }
 inline void ArchivedTask::clear_archivedate() {
   if (archivedate_ != &::google::protobuf::internal::kEmptyString) {
@@ -1109,60 +998,380 @@ inline ::std::string* ArchivedTask::release_archivedate() {
   }
 }
 
-// optional string tags = 18;
-inline bool ArchivedTask::has_tags() const {
-  return (_has_bits_[0] & 0x00020000u) != 0;
+// optional int32 version = 16;
+inline bool ArchivedTask::has_version() const {
+  return (_has_bits_[0] & 0x00008000u) != 0;
 }
-inline void ArchivedTask::set_has_tags() {
-  _has_bits_[0] |= 0x00020000u;
+inline void ArchivedTask::set_has_version() {
+  _has_bits_[0] |= 0x00008000u;
 }
-inline void ArchivedTask::clear_has_tags() {
-  _has_bits_[0] &= ~0x00020000u;
+inline void ArchivedTask::clear_has_version() {
+  _has_bits_[0] &= ~0x00008000u;
 }
-inline void ArchivedTask::clear_tags() {
-  if (tags_ != &::google::protobuf::internal::kEmptyString) {
-    tags_->clear();
+inline void ArchivedTask::clear_version() {
+  version_ = 0;
+  clear_has_version();
+}
+inline ::google::protobuf::int32 ArchivedTask::version() const {
+  return version_;
+}
+inline void ArchivedTask::set_version(::google::protobuf::int32 value) {
+  set_has_version();
+  version_ = value;
+}
+
+// optional string fileName = 17;
+inline bool ArchivedTask::has_filename() const {
+  return (_has_bits_[0] & 0x00010000u) != 0;
+}
+inline void ArchivedTask::set_has_filename() {
+  _has_bits_[0] |= 0x00010000u;
+}
+inline void ArchivedTask::clear_has_filename() {
+  _has_bits_[0] &= ~0x00010000u;
+}
+inline void ArchivedTask::clear_filename() {
+  if (filename_ != &::google::protobuf::internal::kEmptyString) {
+    filename_->clear();
   }
-  clear_has_tags();
+  clear_has_filename();
 }
-inline const ::std::string& ArchivedTask::tags() const {
-  return *tags_;
+inline const ::std::string& ArchivedTask::filename() const {
+  return *filename_;
 }
-inline void ArchivedTask::set_tags(const ::std::string& value) {
-  set_has_tags();
-  if (tags_ == &::google::protobuf::internal::kEmptyString) {
-    tags_ = new ::std::string;
+inline void ArchivedTask::set_filename(const ::std::string& value) {
+  set_has_filename();
+  if (filename_ == &::google::protobuf::internal::kEmptyString) {
+    filename_ = new ::std::string;
   }
-  tags_->assign(value);
+  filename_->assign(value);
 }
-inline void ArchivedTask::set_tags(const char* value) {
-  set_has_tags();
-  if (tags_ == &::google::protobuf::internal::kEmptyString) {
-    tags_ = new ::std::string;
+inline void ArchivedTask::set_filename(const char* value) {
+  set_has_filename();
+  if (filename_ == &::google::protobuf::internal::kEmptyString) {
+    filename_ = new ::std::string;
   }
-  tags_->assign(value);
+  filename_->assign(value);
 }
-inline void ArchivedTask::set_tags(const char* value, size_t size) {
-  set_has_tags();
-  if (tags_ == &::google::protobuf::internal::kEmptyString) {
-    tags_ = new ::std::string;
+inline void ArchivedTask::set_filename(const char* value, size_t size) {
+  set_has_filename();
+  if (filename_ == &::google::protobuf::internal::kEmptyString) {
+    filename_ = new ::std::string;
   }
-  tags_->assign(reinterpret_cast<const char*>(value), size);
+  filename_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* ArchivedTask::mutable_tags() {
-  set_has_tags();
-  if (tags_ == &::google::protobuf::internal::kEmptyString) {
-    tags_ = new ::std::string;
+inline ::std::string* ArchivedTask::mutable_filename() {
+  set_has_filename();
+  if (filename_ == &::google::protobuf::internal::kEmptyString) {
+    filename_ = new ::std::string;
   }
-  return tags_;
+  return filename_;
 }
-inline ::std::string* ArchivedTask::release_tags() {
-  clear_has_tags();
-  if (tags_ == &::google::protobuf::internal::kEmptyString) {
+inline ::std::string* ArchivedTask::release_filename() {
+  clear_has_filename();
+  if (filename_ == &::google::protobuf::internal::kEmptyString) {
     return NULL;
   } else {
-    ::std::string* temp = tags_;
-    tags_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    ::std::string* temp = filename_;
+    filename_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+
+// optional string contentType = 18;
+inline bool ArchivedTask::has_contenttype() const {
+  return (_has_bits_[0] & 0x00020000u) != 0;
+}
+inline void ArchivedTask::set_has_contenttype() {
+  _has_bits_[0] |= 0x00020000u;
+}
+inline void ArchivedTask::clear_has_contenttype() {
+  _has_bits_[0] &= ~0x00020000u;
+}
+inline void ArchivedTask::clear_contenttype() {
+  if (contenttype_ != &::google::protobuf::internal::kEmptyString) {
+    contenttype_->clear();
+  }
+  clear_has_contenttype();
+}
+inline const ::std::string& ArchivedTask::contenttype() const {
+  return *contenttype_;
+}
+inline void ArchivedTask::set_contenttype(const ::std::string& value) {
+  set_has_contenttype();
+  if (contenttype_ == &::google::protobuf::internal::kEmptyString) {
+    contenttype_ = new ::std::string;
+  }
+  contenttype_->assign(value);
+}
+inline void ArchivedTask::set_contenttype(const char* value) {
+  set_has_contenttype();
+  if (contenttype_ == &::google::protobuf::internal::kEmptyString) {
+    contenttype_ = new ::std::string;
+  }
+  contenttype_->assign(value);
+}
+inline void ArchivedTask::set_contenttype(const char* value, size_t size) {
+  set_has_contenttype();
+  if (contenttype_ == &::google::protobuf::internal::kEmptyString) {
+    contenttype_ = new ::std::string;
+  }
+  contenttype_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ArchivedTask::mutable_contenttype() {
+  set_has_contenttype();
+  if (contenttype_ == &::google::protobuf::internal::kEmptyString) {
+    contenttype_ = new ::std::string;
+  }
+  return contenttype_;
+}
+inline ::std::string* ArchivedTask::release_contenttype() {
+  clear_has_contenttype();
+  if (contenttype_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = contenttype_;
+    contenttype_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+
+// optional string uploadTime = 19;
+inline bool ArchivedTask::has_uploadtime() const {
+  return (_has_bits_[0] & 0x00040000u) != 0;
+}
+inline void ArchivedTask::set_has_uploadtime() {
+  _has_bits_[0] |= 0x00040000u;
+}
+inline void ArchivedTask::clear_has_uploadtime() {
+  _has_bits_[0] &= ~0x00040000u;
+}
+inline void ArchivedTask::clear_uploadtime() {
+  if (uploadtime_ != &::google::protobuf::internal::kEmptyString) {
+    uploadtime_->clear();
+  }
+  clear_has_uploadtime();
+}
+inline const ::std::string& ArchivedTask::uploadtime() const {
+  return *uploadtime_;
+}
+inline void ArchivedTask::set_uploadtime(const ::std::string& value) {
+  set_has_uploadtime();
+  if (uploadtime_ == &::google::protobuf::internal::kEmptyString) {
+    uploadtime_ = new ::std::string;
+  }
+  uploadtime_->assign(value);
+}
+inline void ArchivedTask::set_uploadtime(const char* value) {
+  set_has_uploadtime();
+  if (uploadtime_ == &::google::protobuf::internal::kEmptyString) {
+    uploadtime_ = new ::std::string;
+  }
+  uploadtime_->assign(value);
+}
+inline void ArchivedTask::set_uploadtime(const char* value, size_t size) {
+  set_has_uploadtime();
+  if (uploadtime_ == &::google::protobuf::internal::kEmptyString) {
+    uploadtime_ = new ::std::string;
+  }
+  uploadtime_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ArchivedTask::mutable_uploadtime() {
+  set_has_uploadtime();
+  if (uploadtime_ == &::google::protobuf::internal::kEmptyString) {
+    uploadtime_ = new ::std::string;
+  }
+  return uploadtime_;
+}
+inline ::std::string* ArchivedTask::release_uploadtime() {
+  clear_has_uploadtime();
+  if (uploadtime_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = uploadtime_;
+    uploadtime_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+
+// optional int32 userIdClaimed = 20;
+inline bool ArchivedTask::has_useridclaimed() const {
+  return (_has_bits_[0] & 0x00080000u) != 0;
+}
+inline void ArchivedTask::set_has_useridclaimed() {
+  _has_bits_[0] |= 0x00080000u;
+}
+inline void ArchivedTask::clear_has_useridclaimed() {
+  _has_bits_[0] &= ~0x00080000u;
+}
+inline void ArchivedTask::clear_useridclaimed() {
+  useridclaimed_ = 0;
+  clear_has_useridclaimed();
+}
+inline ::google::protobuf::int32 ArchivedTask::useridclaimed() const {
+  return useridclaimed_;
+}
+inline void ArchivedTask::set_useridclaimed(::google::protobuf::int32 value) {
+  set_has_useridclaimed();
+  useridclaimed_ = value;
+}
+
+// optional int32 userIdArchived = 21;
+inline bool ArchivedTask::has_useridarchived() const {
+  return (_has_bits_[0] & 0x00100000u) != 0;
+}
+inline void ArchivedTask::set_has_useridarchived() {
+  _has_bits_[0] |= 0x00100000u;
+}
+inline void ArchivedTask::clear_has_useridarchived() {
+  _has_bits_[0] &= ~0x00100000u;
+}
+inline void ArchivedTask::clear_useridarchived() {
+  useridarchived_ = 0;
+  clear_has_useridarchived();
+}
+inline ::google::protobuf::int32 ArchivedTask::useridarchived() const {
+  return useridarchived_;
+}
+inline void ArchivedTask::set_useridarchived(::google::protobuf::int32 value) {
+  set_has_useridarchived();
+  useridarchived_ = value;
+}
+
+// optional string prerequisites = 22;
+inline bool ArchivedTask::has_prerequisites() const {
+  return (_has_bits_[0] & 0x00200000u) != 0;
+}
+inline void ArchivedTask::set_has_prerequisites() {
+  _has_bits_[0] |= 0x00200000u;
+}
+inline void ArchivedTask::clear_has_prerequisites() {
+  _has_bits_[0] &= ~0x00200000u;
+}
+inline void ArchivedTask::clear_prerequisites() {
+  if (prerequisites_ != &::google::protobuf::internal::kEmptyString) {
+    prerequisites_->clear();
+  }
+  clear_has_prerequisites();
+}
+inline const ::std::string& ArchivedTask::prerequisites() const {
+  return *prerequisites_;
+}
+inline void ArchivedTask::set_prerequisites(const ::std::string& value) {
+  set_has_prerequisites();
+  if (prerequisites_ == &::google::protobuf::internal::kEmptyString) {
+    prerequisites_ = new ::std::string;
+  }
+  prerequisites_->assign(value);
+}
+inline void ArchivedTask::set_prerequisites(const char* value) {
+  set_has_prerequisites();
+  if (prerequisites_ == &::google::protobuf::internal::kEmptyString) {
+    prerequisites_ = new ::std::string;
+  }
+  prerequisites_->assign(value);
+}
+inline void ArchivedTask::set_prerequisites(const char* value, size_t size) {
+  set_has_prerequisites();
+  if (prerequisites_ == &::google::protobuf::internal::kEmptyString) {
+    prerequisites_ = new ::std::string;
+  }
+  prerequisites_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ArchivedTask::mutable_prerequisites() {
+  set_has_prerequisites();
+  if (prerequisites_ == &::google::protobuf::internal::kEmptyString) {
+    prerequisites_ = new ::std::string;
+  }
+  return prerequisites_;
+}
+inline ::std::string* ArchivedTask::release_prerequisites() {
+  clear_has_prerequisites();
+  if (prerequisites_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = prerequisites_;
+    prerequisites_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+
+// optional int32 userIdTaskCreator = 23;
+inline bool ArchivedTask::has_useridtaskcreator() const {
+  return (_has_bits_[0] & 0x00400000u) != 0;
+}
+inline void ArchivedTask::set_has_useridtaskcreator() {
+  _has_bits_[0] |= 0x00400000u;
+}
+inline void ArchivedTask::clear_has_useridtaskcreator() {
+  _has_bits_[0] &= ~0x00400000u;
+}
+inline void ArchivedTask::clear_useridtaskcreator() {
+  useridtaskcreator_ = 0;
+  clear_has_useridtaskcreator();
+}
+inline ::google::protobuf::int32 ArchivedTask::useridtaskcreator() const {
+  return useridtaskcreator_;
+}
+inline void ArchivedTask::set_useridtaskcreator(::google::protobuf::int32 value) {
+  set_has_useridtaskcreator();
+  useridtaskcreator_ = value;
+}
+
+// optional string archivedDate = 24;
+inline bool ArchivedTask::has_archiveddate() const {
+  return (_has_bits_[0] & 0x00800000u) != 0;
+}
+inline void ArchivedTask::set_has_archiveddate() {
+  _has_bits_[0] |= 0x00800000u;
+}
+inline void ArchivedTask::clear_has_archiveddate() {
+  _has_bits_[0] &= ~0x00800000u;
+}
+inline void ArchivedTask::clear_archiveddate() {
+  if (archiveddate_ != &::google::protobuf::internal::kEmptyString) {
+    archiveddate_->clear();
+  }
+  clear_has_archiveddate();
+}
+inline const ::std::string& ArchivedTask::archiveddate() const {
+  return *archiveddate_;
+}
+inline void ArchivedTask::set_archiveddate(const ::std::string& value) {
+  set_has_archiveddate();
+  if (archiveddate_ == &::google::protobuf::internal::kEmptyString) {
+    archiveddate_ = new ::std::string;
+  }
+  archiveddate_->assign(value);
+}
+inline void ArchivedTask::set_archiveddate(const char* value) {
+  set_has_archiveddate();
+  if (archiveddate_ == &::google::protobuf::internal::kEmptyString) {
+    archiveddate_ = new ::std::string;
+  }
+  archiveddate_->assign(value);
+}
+inline void ArchivedTask::set_archiveddate(const char* value, size_t size) {
+  set_has_archiveddate();
+  if (archiveddate_ == &::google::protobuf::internal::kEmptyString) {
+    archiveddate_ = new ::std::string;
+  }
+  archiveddate_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ArchivedTask::mutable_archiveddate() {
+  set_has_archiveddate();
+  if (archiveddate_ == &::google::protobuf::internal::kEmptyString) {
+    archiveddate_ = new ::std::string;
+  }
+  return archiveddate_;
+}
+inline ::std::string* ArchivedTask::release_archiveddate() {
+  clear_has_archiveddate();
+  if (archiveddate_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = archiveddate_;
+    archiveddate_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
     return temp;
   }
 }

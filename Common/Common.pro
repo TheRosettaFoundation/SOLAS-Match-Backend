@@ -73,7 +73,8 @@ SOURCES += \
     DataAccessObjects/AdminDao.cpp \
     protobufs/emails/OrgCreatedOrgAdmin.pb.cc \
     protobufs/emails/OrgCreatedSiteAdmin.pb.cc \
-    protobufs/models/UserTaskStreamNotification.pb.cc
+    protobufs/models/UserTaskStreamNotification.pb.cc \
+    protobufs/emails/UserReferenceEmail.pb.cc
 
 HEADERS +=\
     MySQLHandler.h \
@@ -130,7 +131,8 @@ HEADERS +=\
     DataAccessObjects/AdminDao.h \
     protobufs/emails/OrgCreatedOrgAdmin.pb.h \
     protobufs/emails/OrgCreatedSiteAdmin.pb.h \
-    protobufs/models/UserTaskStreamNotification.pb.h
+    protobufs/models/UserTaskStreamNotification.pb.h \
+    protobufs/emails/UserReferenceEmail.pb.h
 
 symbian {
     MMP_RULES += EXPORTUNFROZEN

@@ -47,15 +47,30 @@ void ModelGenerator::Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<Archiv
     task->set_deadline(MySQLHandler::getValueFromQuery(fieldMap.value("deadline"), q).toString().toStdString());
     task->set_wordcount(MySQLHandler::getValueFromQuery(fieldMap.value("word-count"), q).toInt());
     task->set_createdtime(MySQLHandler::getValueFromQuery(fieldMap.value("created-time"), q).toString().toStdString());
-    task->set_sourcelanguagecode(MySQLHandler::getValueFromQuery(fieldMap.value("language_id-source"), q).toString().toStdString());
-    task->set_targetlanguagecode(MySQLHandler::getValueFromQuery(fieldMap.value("language_id-target"), q).toString().toStdString());
-    task->set_sourcecountrycode(MySQLHandler::getValueFromQuery(fieldMap.value("country_id-source"), q).toString().toStdString());
-    task->set_targetcountrycode(MySQLHandler::getValueFromQuery(fieldMap.value("country_id-target"), q).toString().toStdString());
+    Locale *sourceLocale = task->mutable_sourcelocale();
+    sourceLocale->set_languagename(MySQLHandler::getValueFromQuery(fieldMap.value("sourceLanguageName"), q).toString().toStdString());
+    sourceLocale->set_languagecode(MySQLHandler::getValueFromQuery(fieldMap.value("sourceLanguageCode"), q).toString().toStdString());
+    sourceLocale->set_countryname(MySQLHandler::getValueFromQuery(fieldMap.value("sourceCountryName"), q).toString().toStdString());
+    sourceLocale->set_countrycode(MySQLHandler::getValueFromQuery(fieldMap.value("sourceCountryCode"), q).toString().toStdString());
+    Locale *targetLocale = task->mutable_targetlocale();
+    targetLocale->set_languagename(MySQLHandler::getValueFromQuery(fieldMap.value("targetLanguageName"), q).toString().toStdString());
+    targetLocale->set_languagecode(MySQLHandler::getValueFromQuery(fieldMap.value("targetLanguageCode"), q).toString().toStdString());
+    targetLocale->set_countryname(MySQLHandler::getValueFromQuery(fieldMap.value("targetCountryName"), q).toString().toStdString());
+    targetLocale->set_countrycode(MySQLHandler::getValueFromQuery(fieldMap.value("targetCountryCode"), q).toString().toStdString());
     task->set_tasktype(MySQLHandler::getValueFromQuery(fieldMap.value("taskType_id"), q).toString().toStdString());
     task->set_taskstatus(MySQLHandler::getValueFromQuery(fieldMap.value("taskStatus_id"), q).toString().toStdString());
     task->set_published(MySQLHandler::getValueFromQuery(fieldMap.value("published"), q).toBool());
     task->set_translatorid(MySQLHandler::getValueFromQuery(fieldMap.value("user_id-claimed"), q).toInt());
     task->set_archiveuserid(MySQLHandler::getValueFromQuery(fieldMap.value("user_id-archived"), q).toInt());
+    task->set_archivedate(MySQLHandler::getValueFromQuery(fieldMap.value("archived-date"), q).toString().toStdString());
+    task->set_version(MySQLHandler::getValueFromQuery(fieldMap.value("version"), q).toInt());
+    task->set_filename(MySQLHandler::getValueFromQuery(fieldMap.value("filename"), q).toString().toStdString());
+    task->set_contenttype(MySQLHandler::getValueFromQuery(fieldMap.value("content-type"), q).toString().toStdString());
+    task->set_uploadtime(MySQLHandler::getValueFromQuery(fieldMap.value("upload-time"), q).toString().toStdString());
+    task->set_useridclaimed(MySQLHandler::getValueFromQuery(fieldMap.value("user_id-claimed"), q).toInt());
+    task->set_useridarchived(MySQLHandler::getValueFromQuery(fieldMap.value("user_id-archived"), q).toInt());
+    task->set_prerequisites(MySQLHandler::getValueFromQuery(fieldMap.value("prerequisites"), q).toString().toStdString());
+    task->set_useridtaskcreator(MySQLHandler::getValueFromQuery(fieldMap.value("user_id-taskCreator"), q).toInt());
     task->set_archivedate(MySQLHandler::getValueFromQuery(fieldMap.value("archived-date"), q).toString().toStdString());
 }
 

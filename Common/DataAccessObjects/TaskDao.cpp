@@ -304,12 +304,20 @@ QSharedPointer<Task> TaskDao::insertAndUpdate(QSharedPointer<MySQLHandler> db, Q
     return task;
 }
 
-QList<QSharedPointer<Task> > TaskDao::getActiveTasks(QSharedPointer<MySQLHandler> db, int limit)
+QList<QSharedPointer<Task> > TaskDao::getActiveTasks(QSharedPointer<MySQLHandler> db, int limit, int offset)
 {
     QList<QSharedPointer<Task> > ret = QList<QSharedPointer<Task> >();
-    QString args = "null";
+    QString args = "";
     if(limit > 0) {
-        args = QString::number(limit);
+        args += QString::number(limit) + ", ";
+    } else {
+        args += "null, ";
+    }
+
+    if (offset > 0) {
+        args += QString::number(offset);
+    } else {
+        args += "null";
     }
 
     QSharedPointer<QSqlQuery> mQuery = db->call("getLatestAvailableTasks", args);
