@@ -75,8 +75,8 @@ void protobuf_AddDesc_EmailMessage_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\022EmailMessage.proto\"\271\004\n\014EmailMessage\022&\n"
-    "\nemail_type\030\001 \002(\0162\022.EmailMessage.Type\"\366\003"
+    "\n\022EmailMessage.proto\"\324\004\n\014EmailMessage\022&\n"
+    "\nemail_type\030\001 \002(\0162\022.EmailMessage.Type\"\221\004"
     "\n\004Type\022\022\n\016TaskScoreEmail\020\001\022\021\n\rUserTaskCl"
     "aim\020\002\022\031\n\025OrgMembershipAccepted\020\003\022\030\n\024OrgM"
     "embershipRefused\020\004\022\026\n\022PasswordResetEmail"
@@ -89,7 +89,8 @@ void protobuf_AddDesc_EmailMessage_2eproto() {
     "\023ClaimedTaskUploaded\020\020\022\034\n\030ClaimedTaskSou"
     "rceUpdated\020\021\022\017\n\013OrgFeedback\020\022\022\027\n\023OrgCrea"
     "tedSiteAdmin\020\023\022\026\n\022OrgCreatedOrgAdmin\020\024\022\026"
-    "\n\022UserReferenceEmail\020\025*\010\010d\020\200\200\200\200\002", 592);
+    "\n\022UserReferenceEmail\020\025\022\031\n\025UserBadgeAward"
+    "edEmail\020\026*\010\010d\020\200\200\200\200\002", 619);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "EmailMessage.proto", &protobuf_RegisterTypes);
   EmailMessage::default_instance_ = new EmailMessage();
@@ -134,6 +135,7 @@ bool EmailMessage_Type_IsValid(int value) {
     case 19:
     case 20:
     case 21:
+    case 22:
       return true;
     default:
       return false;
@@ -162,6 +164,7 @@ const EmailMessage_Type EmailMessage::OrgFeedback;
 const EmailMessage_Type EmailMessage::OrgCreatedSiteAdmin;
 const EmailMessage_Type EmailMessage::OrgCreatedOrgAdmin;
 const EmailMessage_Type EmailMessage::UserReferenceEmail;
+const EmailMessage_Type EmailMessage::UserBadgeAwardedEmail;
 const EmailMessage_Type EmailMessage::Type_MIN;
 const EmailMessage_Type EmailMessage::Type_MAX;
 const int EmailMessage::Type_ARRAYSIZE;

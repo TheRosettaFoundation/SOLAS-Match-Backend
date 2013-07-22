@@ -3,6 +3,14 @@
 #include "Common/MySQLHandler.h"
 #include "Common/protobufs/models/Locale.pb.h"
 
+void ModelGenerator::Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<Badge> badge, QMap<QString, int> fieldMap)
+{
+    badge->set_id(MySQLHandler::getValueFromQuery(fieldMap.value("id"), q).toInt());
+    badge->set_title(MySQLHandler::getValueFromQuery(fieldMap.value("title"), q).toString().toStdString());
+    badge->set_description(MySQLHandler::getValueFromQuery(fieldMap.value("description"), q).toString().toStdString());
+    badge->set_owner_id(MySQLHandler::getValueFromQuery(fieldMap.value("owner_id"), q).toInt());
+}
+
 void ModelGenerator::Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<User> user, QMap<QString, int> fieldMap)
 {
     user->set_id(MySQLHandler::getValueFromQuery(fieldMap.value("id"), q).toInt());

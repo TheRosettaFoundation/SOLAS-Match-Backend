@@ -74,7 +74,10 @@ SOURCES += \
     protobufs/emails/OrgCreatedOrgAdmin.pb.cc \
     protobufs/emails/OrgCreatedSiteAdmin.pb.cc \
     protobufs/models/UserTaskStreamNotification.pb.cc \
-    protobufs/emails/UserReferenceEmail.pb.cc
+    protobufs/emails/UserReferenceEmail.pb.cc \
+    protobufs/emails/UserBadgeAwardedEmail.pb.cc \
+    protobufs/models/Badge.pb.cc \
+    DataAccessObjects/BadgeDao.cpp
 
 HEADERS +=\
     MySQLHandler.h \
@@ -132,7 +135,10 @@ HEADERS +=\
     protobufs/emails/OrgCreatedOrgAdmin.pb.h \
     protobufs/emails/OrgCreatedSiteAdmin.pb.h \
     protobufs/models/UserTaskStreamNotification.pb.h \
-    protobufs/emails/UserReferenceEmail.pb.h
+    protobufs/emails/UserReferenceEmail.pb.h \
+    protobufs/emails/UserBadgeAwardedEmail.pb.h \
+    DataAccessObjects/BadgeDao.h \
+    protobufs/models/Badge.pb.h
 
 symbian {
     MMP_RULES += EXPORTUNFROZEN
