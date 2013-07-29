@@ -15,6 +15,12 @@ consumed a new thread is launched into a locally managed threadpool
 to handle the message while the original thread goes back to polling
 RabbitMQ.
 
+# License notice
+
+This software is licensed under the terms of the GNU LESSER GENERAL PUBLIC LICENSE
+                        Version 3, 29 June 2007
+For full terms see License.txt or http://www.gnu.org/licenses/lgpl-3.0.txt
+
 ## System Requirements
 
 The SOLAS Match Worker Daemon was built using Qt 4.8 on Ubuntu 12.04
