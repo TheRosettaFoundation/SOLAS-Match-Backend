@@ -39,7 +39,7 @@ void DeadlineChecker::run()
         QList<QSharedPointer<Task> > tasks = TaskDao::getOverdueTasks(db);
         foreach(QSharedPointer<Task> task, tasks) {
             qDebug() << "Task " << task->id() << " is pass its deadline of " << QString::fromStdString(task->deadline());
-            QSharedPointer<User> translator = TaskDao::getTaskTranslator(db, task->id());
+            QSharedPointer<User> translator = TaskDao::getUserClaimedTask(db, task->id());
 
             QList<QSharedPointer<User> > users = TaskDao::getSubscribedUsers(db, task->id());
             foreach(QSharedPointer<User> user, users) {

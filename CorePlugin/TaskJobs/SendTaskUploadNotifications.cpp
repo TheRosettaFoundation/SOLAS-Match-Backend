@@ -38,7 +38,7 @@ void SendTaskUploadNotifications::run()
 
         if (!task.isNull()) {
             QList<QSharedPointer<User> > users = TaskDao::getSubscribedUsers(db, task->id());
-            QSharedPointer<User> translator = TaskDao::getTaskTranslator(db, task->id());
+            QSharedPointer<User> translator = TaskDao::getUserClaimedTask(db, task->id());
 
             QString body = "";
             MessagingClient publisher;

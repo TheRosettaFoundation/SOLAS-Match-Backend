@@ -350,7 +350,7 @@ QList<QSharedPointer<Task> > TaskDao::getOverdueTasks(QSharedPointer<MySQLHandle
     return ret;
 }
 
-QSharedPointer<User> TaskDao::getTaskTranslator(QSharedPointer<MySQLHandler> db, int task_id)
+QSharedPointer<User> TaskDao::getUserClaimedTask(QSharedPointer<MySQLHandler> db, int task_id)
 {
     QSharedPointer<User> user;
     QSharedPointer<QSqlQuery> mQuery = db->call("getUserClaimedTask", QString::number(task_id));
