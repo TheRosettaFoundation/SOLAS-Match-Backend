@@ -58,7 +58,7 @@ void UserReferenceEmailGenerator::run()
                     QString taskType;
                     switch (task->tasktype()) {
                     case CHUNKING:
-                        taskType = "Chunking";
+                        taskType = "Segmentation";
                         break;
                     case TRANSLATION:
                         taskType = "Translation";
@@ -67,7 +67,7 @@ void UserReferenceEmailGenerator::run()
                         taskType = "Proofreading";
                         break;
                     case POSTEDITING:
-                        taskType = "Post-Editing";
+                        taskType = "Desegmentation";
                         break;
                     default:
                         taskType = "Invalid Type";
