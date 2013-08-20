@@ -110,7 +110,7 @@ QList<QSharedPointer<ArchivedProject> > ProjectDao::getArchivedProjects(QSharedP
     } else {
         args += "null, ";
     }
-    args += "null, null, null, null, null, null, null, null, null, null";
+    args += "null, null, null, null, null, null, null, null, null, null, null, null";
 
     QSharedPointer<QSqlQuery> mQuery = db->call("getArchivedProject", args);
     if (mQuery->first()) {
