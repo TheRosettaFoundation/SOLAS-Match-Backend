@@ -20,6 +20,7 @@ void UserTaskStreamEmailGenerator::run()
     UserTaskStreamEmail emailRequest;
     emailRequest.ParseFromString(this->protoBody.toStdString());
 
+    bool sendEmail = true;
     QString error = "";
     QSharedPointer<Email> email;
     QList<QSharedPointer<Task> > userTasks;
@@ -29,6 +30,7 @@ void UserTaskStreamEmailGenerator::run()
                                                              emailRequest.user_id());
 
     if (user.isNull() || notifData.isNull() ) {
+        sendEmail = false;
         error = "Failed to generate UserTaskStream email: Unable to find relevant ";
         error += "data in the Database. Searched for User with ID ";
         error += QString::number(emailRequest.user_id()) + " and their notification data";
@@ -40,13 +42,18 @@ void UserTaskStreamEmailGenerator::run()
         }
 
         if (userTasks.count() < 1) {
-            error = "Failed to generate UserTaskStream email: Unable to find relevant ";
-            error += "data in the Database. Searched for User's' top tasks with ID ";
-            error += QString::number(emailRequest.user_id());
+            sendEmail = false;
+            if (notifData->strict()) {
+                qDebug() << "Failed to generate task stream email: No strict tasks found for user "
+                         << QString::number(emailRequest.user_id());
+            } else {
+                qDebug() << "Failed to generate task stream email: No tasks found for user "
+                         << QString::number(emailRequest.user_id());
+            }
         }
     }
 
-    if (error == "") {
+    if (sendEmail) {
         ConfigParser settings;
         email = QSharedPointer<Email>(new Email);
 
@@ -128,18 +135,20 @@ void UserTaskStreamEmailGenerator::run()
         email->addRecipient(QString::fromStdString(user->email()));
         email->setSubject(settings.get("site.name") + ": Task Stream");
         email->setBody(QString::fromStdString(email_body));
-
-        QString sentDateTime = QDateTime::currentDateTime().toString("yyyy-MM-dd HH:mm:ss");
-        if (UserDao::taskStreamNotificationSent(db, emailRequest.user_id(), sentDateTime)) {
-            qDebug() << "UserTaskStreamEmailGenerator: Sending notification request for user " <<
-                        QString::number(emailRequest.user_id());
-        } else {
-            qDebug() << "UserTaskStreamEmailGenerator: Failed to update last sent date for user id "
-                        << emailRequest.user_id();
-        }
+        this->emailQueue->insert(email, this->currentMessage);
     } else {
-        email = this->generateErrorEmail(error);
+        if (error != "") {
+            email = this->generateErrorEmail(error);
+            this->emailQueue->insert(email, this->currentMessage);
+        }
     }
 
-    this->emailQueue->insert(email, this->currentMessage);
+    QString sentDateTime = QDateTime::currentDateTime().toString("yyyy-MM-dd HH:mm:ss");
+    if (UserDao::taskStreamNotificationSent(db, emailRequest.user_id(), sentDateTime)) {
+        qDebug() << "UserTaskStreamEmailGenerator: Sending notification request for user " <<
+                    QString::number(emailRequest.user_id());
+    } else {
+        qDebug() << "UserTaskStreamEmailGenerator: Failed to update last sent date for user id "
+                    << emailRequest.user_id();
+    }
 }
