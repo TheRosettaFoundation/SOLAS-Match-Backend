@@ -19,13 +19,18 @@ void PasswordResetEmailGenerator::run()
     QSharedPointer<User> user = QSharedPointer<User>();
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
 
-
     user = UserDao::getUser(db, email_message.user_id());
-    uuid = UserDao::getPasswordResetUuid(db, email_message.user_id());
 
-    if(user.isNull() || uuid.compare("") == 0) {
+    if(user.isNull()) {
         error = "Password Reset email generation failed. Unable to find ";
-        error += "data in the DB. Looking for user id " + email_message.user_id();
+        error += "data in the DB. Looking for user id " + QString::number(email_message.user_id());
+    } else {
+        uuid = UserDao::getPasswordResetUuid(db, QString::fromStdString(user->email()));
+
+        if (uuid.compare("") == 0) {
+            error = "Password Reset email generation failed. Unable to find ";
+            error += " uuid in the db, searched by email " + QString::fromStdString(user->email());
+        }
     }
 
     if(error.compare("") == 0) {

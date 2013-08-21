@@ -43,7 +43,7 @@ public:
     static QList<QSharedPointer<Task> > getUserTasks(QSharedPointer<MySQLHandler> db, int userId, int limit = RETURN_ALL);
     static QList<QSharedPointer<ArchivedTask> > getUserArchivedTasks(QSharedPointer<MySQLHandler> db, int userId, int limit = RETURN_ALL);
     static QString getRegistrationId(QSharedPointer<MySQLHandler> db, int userId);
-    static QString getPasswordResetUuid(QSharedPointer<MySQLHandler> db, int id);
+    static QString getPasswordResetUuid(QSharedPointer<MySQLHandler> db, QString email);
     static QList<QSharedPointer<Task> > getUserTopTasks(QSharedPointer<MySQLHandler> db, int userId, bool strict = false,
                                                         int limit = 10, int offset = RETURN_ALL, QString filter = "");
     static QList<int> getUserIdsPendingTaskStreamNotification(QSharedPointer<MySQLHandler> db);
