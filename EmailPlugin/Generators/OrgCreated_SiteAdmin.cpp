@@ -42,7 +42,7 @@ void OrgCreate_SiteAdmin::run()
         email->setSender(settings.get("site.system_email_address"));
         email->addRecipient(QString::fromStdString(admin->email()));
         email->setSubject(settings.get("site.name") + ": Organisation Created");
-        email->setBody(QString::fromStdString(email_body));
+        email->setBody(QString::fromUtf8(email_body.c_str()));
     } else {
         email = this->generateErrorEmail(error);
     }

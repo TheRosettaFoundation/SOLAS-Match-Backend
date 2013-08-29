@@ -71,7 +71,7 @@ void UserFeedbackGenerator::run()
             email->setSender(settings.get("site.system_email_address"));;
             email->addRecipient(QString::fromStdString(user->email()));
             email->setSubject(settings.get("site.name") + ": Volunteer Feedback");
-            email->setBody(QString::fromStdString(email_body));
+            email->setBody(QString::fromUtf8(email_body.c_str()));
             this->emailQueue->insert(email, currentMessage);
         }
     } else {

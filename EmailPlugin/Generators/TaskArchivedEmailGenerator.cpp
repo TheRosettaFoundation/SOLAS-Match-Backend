@@ -63,7 +63,7 @@ void TaskArchivedEmailGenerator::run()
         email->setSender(settings.get("site.system_email_address"));
         email->addRecipient(QString::fromStdString(user->display_name()));
         email->setSubject(settings.get("site.name") + ": Task Updated");
-        email->setBody(QString::fromStdString(email_body));
+        email->setBody(QString::fromUtf8(email_body.c_str()));
     } else {
         email = this->generateErrorEmail(error);
     }

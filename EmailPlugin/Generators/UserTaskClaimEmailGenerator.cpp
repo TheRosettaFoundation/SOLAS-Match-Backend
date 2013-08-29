@@ -50,7 +50,7 @@ void UserTaskClaimEmailGenerator::run()
         email->setSender(settings.get("site.system_email_address"));;
         email->addRecipient(QString::fromStdString(user->email()));
         email->setSubject(settings.get("site.name") + ": Task Claim Notification");
-        email->setBody(QString::fromStdString(email_body));
+        email->setBody(QString::fromUtf8(email_body.c_str()));
     } else {
         email = this->generateErrorEmail(error);
     }
