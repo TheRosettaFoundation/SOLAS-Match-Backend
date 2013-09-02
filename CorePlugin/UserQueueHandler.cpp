@@ -9,10 +9,12 @@
 #include "Common/protobufs/requests/StatisticsUpdateRequest.pb.h"
 #include "Common/protobufs/requests/UserTaskStreamNotificationRequest.pb.h"
 #include "Common/protobufs/requests/OrgCreatedNotificationRequest.pb.h"
+#include "Common/protobufs/notifications/TaskRevokedNotification.pb.h"
 
 #include "UserJobs/TaskStreamNotificationHandler.h"
 #include "UserJobs/StatisticsUpdate.h"
 #include "UserJobs/OrgCreatedNotifications.h"
+#include "UserJobs/TaskRevokedNotificationHandler.h"
 
 UserQueueHandler::UserQueueHandler()
 {
@@ -88,4 +90,6 @@ void UserQueueHandler::registerRequestTypes()
     qRegisterMetaType<TaskStreamNotificationHandler>(QString::fromStdString(streamReq.class_name()).toLatin1());
     OrgCreatedNotificationRequest orgCreated = OrgCreatedNotificationRequest();
     qRegisterMetaType<OrgCreatedNotifications>(QString::fromStdString(orgCreated.class_name()).toLatin1());
+    TaskRevokedNotification taskRevoked = TaskRevokedNotification();
+    qRegisterMetaType<TaskRevokedNotificationHandler>(QString::fromStdString(taskRevoked.class_name()).toLatin1());
 }

@@ -40,13 +40,10 @@ void TaskStreamNotificationHandler::run()
             request->set_email_type(EmailMessage::UserTaskStreamEmail);
             QString body = QString::fromStdString(request->SerializeAsString());
             client.publish(exchange, topic, body);
-            qDebug() << "TaskStreamNotificationHandler: publishing to " << topic
-                     << " for user " << id;
         }
     } else {
         qDebug() << "Unable to connect to RabbitMQ. Check conf.ini for settings.";
     }
-    qDebug() << "Finnished sending task stream notifications";
 }
 
 void TaskStreamNotificationHandler::setAMQPMessage(AMQPMessage *message)
