@@ -153,15 +153,16 @@ QList<QSharedPointer<Task> > UserDao::getUserTopTasks(QSharedPointer<MySQLHandle
     return taskList;
 }
 
-QList<QSharedPointer<Task> > UserDao::getUserTasks(QSharedPointer<MySQLHandler> db, int userId, int limit)
+QList<QSharedPointer<Task> > UserDao::getUserTasks(QSharedPointer<MySQLHandler> db, int userId, int limit, int offset)
 {
     QList<QSharedPointer<Task> > taskList = QList<QSharedPointer<Task> >();
     QString args = QString::number(userId) + ", ";
     if (limit > 0) {
-        args += QString::number(limit);
+        args += QString::number(limit) + ", ";
     } else {
-        args += "null";
+        args += "null, ";
     }
+    args += QString::number(offset);
     QSharedPointer<QSqlQuery> mQuery = db->call("getUserTasks", args);
     if (mQuery->first()) {
         QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);

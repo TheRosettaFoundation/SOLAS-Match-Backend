@@ -40,7 +40,7 @@ public:
                          int lang_id = -1,
                          int reg_id = -1);
     static QSharedPointer<BannedUser> getBanData(QSharedPointer<MySQLHandler> db, int userId);
-    static QList<QSharedPointer<Task> > getUserTasks(QSharedPointer<MySQLHandler> db, int userId, int limit = RETURN_ALL);
+    static QList<QSharedPointer<Task> > getUserTasks(QSharedPointer<MySQLHandler> db, int userId, int limit = RETURN_ALL, int offset = 0);
     static QList<QSharedPointer<ArchivedTask> > getUserArchivedTasks(QSharedPointer<MySQLHandler> db, int userId, int limit = RETURN_ALL);
     static QString getRegistrationId(QSharedPointer<MySQLHandler> db, int userId);
     static QString getPasswordResetUuid(QSharedPointer<MySQLHandler> db, QString email);
