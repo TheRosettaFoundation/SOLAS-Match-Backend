@@ -53,7 +53,8 @@ SOURCES += emailplugin.cpp \
     Generators/UserReferenceEmailGenerator.cpp \
     Generators/UserBadgeAwardedGenerator.cpp \
     Generators/UserTaskRevokedGenerator.cpp \
-    Generators/OrgTaskRevokedGenerator.cpp
+    Generators/OrgTaskRevokedGenerator.cpp \
+    Generators/ProjectCreatedGenerator.cpp
 
 HEADERS += emailplugin.h\
         Smtp.h \
@@ -82,4 +83,5 @@ HEADERS += emailplugin.h\
     Generators/UserReferenceEmailGenerator.h \
     Generators/UserBadgeAwardedGenerator.h \
     Generators/UserTaskRevokedGenerator.h \
-    Generators/OrgTaskRevokedGenerator.h
+    Generators/OrgTaskRevokedGenerator.h \
+    Generators/ProjectCreatedGenerator.h

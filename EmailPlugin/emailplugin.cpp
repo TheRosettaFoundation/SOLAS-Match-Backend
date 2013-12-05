@@ -29,6 +29,7 @@
 #include "Generators/UserBadgeAwardedGenerator.h"
 #include "Generators/UserTaskRevokedGenerator.h"
 #include "Generators/OrgTaskRevokedGenerator.h"
+#include "Generators/ProjectCreatedGenerator.h"
 
 #include "Smtp.h"
 #include "IEmailGenerator.h"
@@ -147,6 +148,8 @@ void EmailPlugin::registerEmailTypes()
     qRegisterMetaType<UserTaskRevokedGenerator>(name.toLatin1());
     name = "EmailGenerator_" + QString::number(EmailMessage::OrgTaskRevokedEmail);
     qRegisterMetaType<OrgTaskRevokedGenerator>(name.toLatin1());
+    name = "EmailGenerator_" + QString::number(EmailMessage::ProjectCreated);
+    qRegisterMetaType<ProjectCreatedGenerator>(name.toLatin1());
 }
 
 void EmailPlugin::setThreadPool(QThreadPool *tp)

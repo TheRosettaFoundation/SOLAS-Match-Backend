@@ -2,11 +2,15 @@
 
 #include <QDebug>
 #include <QDateTime>
+#include <QStringList>
 
 #include "Common/GraphBuilder.h"
+#include "Common/ConfigParser.h"
 #include "Common/Definitions.h"
+#include "Common/MessagingClient.h"
 
 #include "Common/protobufs/requests/CalculateProjectDeadlinesRequest.pb.h"
+#include "Common/protobufs/emails/ProjectCreatedEmail.pb.h"
 
 #include "Common/protobufs/models/Task.pb.h"
 #include "Common/protobufs/models/Project.pb.h"
@@ -32,6 +36,20 @@ void CalculateProjectDeadlines::run()
     CalculateProjectDeadlinesRequest request;
     if (length > 0) {
         request.ParseFromString(body);
+
+        // Send email to site admins informing them of the new project
+        ProjectCreatedEmail projectCreatedEmail = ProjectCreatedEmail();
+        projectCreatedEmail.set_email_type(EmailMessage::ProjectCreated);
+        projectCreatedEmail.set_project_id(request.project_id());
+        ConfigParser settings;
+        MessagingClient publisher;
+        publisher.init();
+        QStringList admins = settings.get("mail.admin_emails").split(",");
+        foreach(QString admin, admins) {
+            projectCreatedEmail.set_recipient_email(admin.trimmed().toStdString());
+            publisher.publish(settings.get("messaging.exchange"), "email",
+                              QString::fromStdString(projectCreatedEmail.SerializeAsString()));
+        }
 
         GraphBuilder mBuilder = GraphBuilder();
         if (mBuilder.getProjectGraph(request.project_id()) && mBuilder.isGraphValid()) {

@@ -158,7 +158,7 @@ QVariant MySQLHandler::getValueFromQuery(int field_pos, QSharedPointer<QSqlQuery
 
 std::string MySQLHandler::getStringFromQuery(int field_pos, QSharedPointer<QSqlQuery> mQuery)
 {
-    QByteArray bytes = QByteArray(MySQLHandler::getValueFromQuery(field_pos, mQuery).toString().toUtf8());;
+    QByteArray bytes = QByteArray(MySQLHandler::getValueFromQuery(field_pos, mQuery).toString().toUtf8());
     std::string ret(bytes.constData(), bytes.length());
     return ret;
 }
