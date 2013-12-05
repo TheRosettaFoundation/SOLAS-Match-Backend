@@ -96,7 +96,7 @@ void UserTaskStreamEmailGenerator::run()
                 taskSect->ShowSection("TAGS_SECT");
                 foreach (QSharedPointer<Tag> tag, taskTags) {
                     ctemplate::TemplateDictionary *tagsList = taskSect->AddSectionDictionary("TAGS_LIST");
-                    QString tagDetails = settings.get("site.url") + "tag/" + QString::fromStdString(tag->label());
+                    QString tagDetails = settings.get("site.url") + "tag/" + QString::number(tag->id()) + "/";
                     tagsList->SetValue("TAG_DETAILS", tagDetails.toStdString());
                     tagsList->SetValue("TAG_LABEL", tag->label());
                 }
