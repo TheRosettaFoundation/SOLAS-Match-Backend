@@ -6,6 +6,7 @@
 #include "TaskQueueHandler.h"
 #include "UserQueueHandler.h"
 #include "ProjectQueueHandler.h"
+#include "PootlePlugin.h"
 #include "Common/ConfigParser.h"
 
 Q_EXPORT_PLUGIN2(CorePlugin, CorePlugin)
@@ -38,6 +39,13 @@ void CorePlugin::run()
     thread = new QThread();
     projectListener->connect(thread, SIGNAL(started()), SLOT(run()));
     projectListener->moveToThread(thread);
+    thread->start();
+
+    PootlePlugin *pootlePlugin = new PootlePlugin();
+    pootlePlugin->setThreadPool(this->mThreadPool);
+    thread = new QThread();
+    pootlePlugin->connect(thread, SIGNAL(started()), SLOT(run()));
+    pootlePlugin->moveToThread(thread);
     thread->start();
 }
 

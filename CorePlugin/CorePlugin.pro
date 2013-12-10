@@ -32,7 +32,8 @@ SOURCES += CorePlugin.cpp \
     ProjectQueueHandler.cpp \
     ProjectJobs/CalculateProjectDeadlines.cpp \
     UserJobs/OrgCreatedNotifications.cpp \
-    UserJobs/TaskRevokedNotificationHandler.cpp
+    UserJobs/TaskRevokedNotificationHandler.cpp \
+    PootlePlugin.cpp
 
 HEADERS += CorePlugin.h \
     TaskQueueHandler.h \
@@ -45,4 +46,5 @@ HEADERS += CorePlugin.h \
     ProjectQueueHandler.h \
     ProjectJobs/CalculateProjectDeadlines.h \
     UserJobs/OrgCreatedNotifications.h \
-    UserJobs/TaskRevokedNotificationHandler.h
+    UserJobs/TaskRevokedNotificationHandler.h \
+    PootlePlugin.h
