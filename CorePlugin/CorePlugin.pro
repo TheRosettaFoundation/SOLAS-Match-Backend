@@ -10,6 +10,8 @@
 
 QT       -= gui
 
+QT += network
+
 TARGET = CorePlugin
 
 CONFIG += plugin
@@ -17,7 +19,7 @@ CONFIG += plugin
 DESTDIR = ../plugins
 
 LIBS += -L../Common -lCommon \
-    -L/usr/local/lib -lamqpcpp -lrabbitmq -lctemplate
+    -L/usr/local/lib -lamqpcpp -lrabbitmq -lctemplate -lqjson
 
 DEFINES += COREPLUGIN_LIBRARY
 

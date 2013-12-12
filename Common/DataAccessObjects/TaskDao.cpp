@@ -1,7 +1,11 @@
 #include "TaskDao.h"
 
 #include "../ModelGenerator.h"
+#include "../ConfigParser.h"
 #include "UserDao.h"
+#include "ProjectDao.h"
+
+#include <QDebug>
 
 QList<QSharedPointer<Task> > TaskDao::getTasks(QSharedPointer<MySQLHandler> db, int id, int projectId, QString title,
                              int wc, QString sourceLang, QString targetLangId, QString createdTime,
@@ -447,4 +451,56 @@ QMultiMap<int, int> TaskDao::getTaskTagIds(QSharedPointer<MySQLHandler> db, int 
         } while (mQuery->next());
     }
     return taskTagIds;
+}
+
+QString TaskDao::getTaskFileLocation(QSharedPointer<MySQLHandler> db, int taskId)
+{
+    ConfigParser settings;
+    QString taskFileLocation = settings.get("site.uploads_dir");
+    QSharedPointer<Task> task = TaskDao::getTask(db, taskId);
+    taskFileLocation += "proj-" + QString::number(task->projectid()) + "/";
+    taskFileLocation += "task-" + QString::number(taskId) + "/";
+    QSharedPointer<User> user = TaskDao::getUserClaimedTask(db, taskId);
+    if (!user.isNull()) {
+        int version = TaskDao::getLatestFileVersion(db, taskId, user->id());
+        version++;
+        taskFileLocation += "v-" + QString::number(version) + "/";
+    } else {
+        qDebug() << "getTaskFileLocation: Unable to find user that claimed task " << QString::number(taskId);
+    }
+    return taskFileLocation;
+}
+
+int TaskDao::getLatestFileVersion(QSharedPointer<MySQLHandler> db, int taskId, int userId)
+{
+    int version = 0;
+    QString args = QString::number(taskId) + ", " + QString::number(userId);
+    QSharedPointer<QSqlQuery> mQuery = db->call("getLatestFileVersion", args);
+    if (mQuery->first()) {
+        version = MySQLHandler::getValueFromQuery("latest_version", mQuery).toInt();
+    }
+    return version;
+}
+
+QString TaskDao::getFilename(QSharedPointer<MySQLHandler> db, int taskId)
+{
+    QString filename = "";
+    QString args = QString::number(taskId) + ", null, null, null, null, null";
+    QSharedPointer<QSqlQuery> q = db->call("getTaskFileMetaData", args);
+    if (q->first()) {
+        filename = MySQLHandler::getValueFromQuery("filename", q).toString();
+    }
+    return filename;
+}
+
+QSharedPointer<TaskMetadata> TaskDao::getTaskFileMetadata(QSharedPointer<MySQLHandler> db, int taskId, int version)
+{
+    QSharedPointer<TaskMetadata> metadata;
+    QString args = QString::number(taskId) + ", " + QString::number(version) + ", null, null, null, null";
+    QSharedPointer<QSqlQuery> q = db->call("getTaskFileMetaData", args);
+    if (q->first()) {
+        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(q);
+        ModelGenerator::Generate(q, metadata, fieldMap);
+    }
+    return metadata;
 }

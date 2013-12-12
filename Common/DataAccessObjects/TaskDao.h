@@ -11,6 +11,7 @@
 #include "../protobufs/models/ArchivedTask.pb.h"
 #include "../protobufs/models/User.pb.h"
 #include "../protobufs/models/Task.pb.h"
+#include "../protobufs/models/TaskMetadata.pb.h"
 
 class TaskDao
 {
@@ -23,6 +24,7 @@ public:
                           int wc = -1, QString sourceLang = "", QString targetLangId = "", QString createdTime = "",
                           QString sourceCountry = "", QString targetCountry = "", QString comment = "",
                           int type = -1, int status = -1, int published = -1, QString deadlineTime = "");
+
     static QSharedPointer<Task> insertAndUpdate(QSharedPointer<MySQLHandler> db, QSharedPointer<Task> task);
     static QSharedPointer<Task> insertAndUpdate(QSharedPointer<MySQLHandler> db, Task task);
     static QList<QSharedPointer<Task> > getActiveTasks(QSharedPointer<MySQLHandler> db, int limit = -1, int offset = RETURN_ALL);
@@ -33,6 +35,12 @@ public:
     static QSharedPointer<ArchivedTask> getArchivedTask(QSharedPointer<MySQLHandler> db, int arc_id = -1, int o_id = -1);
     static QList<QSharedPointer<Task> > getTaskPreReqs(QSharedPointer<MySQLHandler> db, int taskId);
     static QMultiMap<int, int> getTaskTagIds(QSharedPointer<MySQLHandler> db, int limit = RETURN_ALL, int offset = RETURN_ALL);
+    static QString getTaskFileLocation(QSharedPointer<MySQLHandler> db, int taskId);
+    static QString getFilename(QSharedPointer<MySQLHandler> db, int taskId);
+    static QSharedPointer<TaskMetadata> getTaskFileMetadata(QSharedPointer<MySQLHandler>, int taskId, int version);
+
+private:
+    static int getLatestFileVersion(QSharedPointer<MySQLHandler> db, int taskId, int userId);
 
 };
 

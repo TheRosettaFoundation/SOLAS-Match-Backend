@@ -75,8 +75,8 @@ void protobuf_AddDesc_EmailMessage_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\022EmailMessage.proto\"\262\005\n\014EmailMessage\022&\n"
-    "\nemail_type\030\001 \002(\0162\022.EmailMessage.Type\"\357\004"
+    "\n\022EmailMessage.proto\"\314\005\n\014EmailMessage\022&\n"
+    "\nemail_type\030\001 \002(\0162\022.EmailMessage.Type\"\211\005"
     "\n\004Type\022\022\n\016TaskScoreEmail\020\001\022\021\n\rUserTaskCl"
     "aim\020\002\022\031\n\025OrgMembershipAccepted\020\003\022\030\n\024OrgM"
     "embershipRefused\020\004\022\026\n\022PasswordResetEmail"
@@ -92,7 +92,8 @@ void protobuf_AddDesc_EmailMessage_2eproto() {
     "\n\022UserReferenceEmail\020\025\022\031\n\025UserBadgeAward"
     "edEmail\020\026\022\025\n\021UserUnclaimedTask\020\027\022\030\n\024User"
     "TaskRevokedEmail\020\030\022\027\n\023OrgTaskRevokedEmai"
-    "l\020\031\022\022\n\016ProjectCreated\020\032*\010\010d\020\200\200\200\200\002", 713);
+    "l\020\031\022\022\n\016ProjectCreated\020\032\022\030\n\024PootleProject"
+    "Created\020\033*\010\010d\020\200\200\200\200\002", 739);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "EmailMessage.proto", &protobuf_RegisterTypes);
   EmailMessage::default_instance_ = new EmailMessage();
@@ -142,6 +143,7 @@ bool EmailMessage_Type_IsValid(int value) {
     case 24:
     case 25:
     case 26:
+    case 27:
       return true;
     default:
       return false;
@@ -175,6 +177,7 @@ const EmailMessage_Type EmailMessage::UserUnclaimedTask;
 const EmailMessage_Type EmailMessage::UserTaskRevokedEmail;
 const EmailMessage_Type EmailMessage::OrgTaskRevokedEmail;
 const EmailMessage_Type EmailMessage::ProjectCreated;
+const EmailMessage_Type EmailMessage::PootleProjectCreated;
 const EmailMessage_Type EmailMessage::Type_MIN;
 const EmailMessage_Type EmailMessage::Type_MAX;
 const int EmailMessage::Type_ARRAYSIZE;

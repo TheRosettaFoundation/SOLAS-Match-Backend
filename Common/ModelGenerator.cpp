@@ -173,3 +173,13 @@ void ModelGenerator::Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<UserTa
     data->set_strict(MySQLHandler::getValueFromQuery(fieldMap.value("strict"), q).toBool());
     data->set_last_sent(MySQLHandler::getStringFromQuery(fieldMap.value("last-sent"), q));
 }
+
+void ModelGenerator::Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<TaskMetadata> metadata, QMap<QString, int> fieldMap)
+{
+    metadata->set_id(MySQLHandler::getValueFromQuery(fieldMap.value("id"), q).toInt());
+    metadata->set_version(MySQLHandler::getValueFromQuery(fieldMap.value("version_id"), q).toInt());
+    metadata->set_filename(MySQLHandler::getStringFromQuery(fieldMap.value("filename"), q));
+    metadata->set_content_type(MySQLHandler::getStringFromQuery(fieldMap.value("content-type"), q));
+    metadata->set_user_id(MySQLHandler::getValueFromQuery(fieldMap.value("user_id"), q).toInt());
+    metadata->set_upload_time(MySQLHandler::getStringFromQuery(fieldMap.value("upload-time"), q));
+}

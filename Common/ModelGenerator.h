@@ -15,6 +15,7 @@
 #include "protobufs/models/Language.pb.h"
 #include "protobufs/models/BannedUser.pb.h"
 #include "protobufs/models/UserTaskStreamNotification.pb.h"
+#include "protobufs/models/TaskMetadata.pb.h"
 
 class ModelGenerator
 {
@@ -31,6 +32,7 @@ public:
     static void Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<BannedUser>, QMap<QString, int> fieldMap);
     static void Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<Locale>, QMap<QString, int> fieldMap);
     static void Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<UserTaskStreamNotification>, QMap<QString, int> fieldMap);
+    static void Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<TaskMetadata>, QMap<QString, int> fieldMap);
 
 };
 
