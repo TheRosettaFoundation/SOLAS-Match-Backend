@@ -29,8 +29,8 @@ public:
     static QList<QSharedPointer<Task> > getOverdueTasks(QSharedPointer<MySQLHandler> db);
     static QSharedPointer<User> getUserClaimedTask(QSharedPointer<MySQLHandler> db, int task_id);
     static QList<QSharedPointer<User> > getSubscribedUsers(QSharedPointer<MySQLHandler> db, int task_id);
-    static QList<QSharedPointer<ArchivedTask> > getArchivedTasks(QSharedPointer<MySQLHandler> db, int arc_id = -1, int o_id = -1);
-    static QSharedPointer<ArchivedTask> getArchivedTask(QSharedPointer<MySQLHandler> db, int arc_id = -1, int o_id = -1);
+    static QList<QSharedPointer<ArchivedTask> > getArchivedTasks(QSharedPointer<MySQLHandler> db, int arc_id = -1);
+    static QSharedPointer<ArchivedTask> getArchivedTask(QSharedPointer<MySQLHandler> db, int arc_id = -1);
     static QList<QSharedPointer<Task> > getTaskPreReqs(QSharedPointer<MySQLHandler> db, int taskId);
     static QMultiMap<int, int> getTaskTagIds(QSharedPointer<MySQLHandler> db, int limit = RETURN_ALL, int offset = RETURN_ALL);
 

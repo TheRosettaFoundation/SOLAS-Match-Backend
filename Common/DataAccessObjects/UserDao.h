@@ -45,7 +45,8 @@ public:
     static QString getRegistrationId(QSharedPointer<MySQLHandler> db, int userId);
     static QString getPasswordResetUuid(QSharedPointer<MySQLHandler> db, QString email);
     static QList<QSharedPointer<Task> > getUserTopTasks(QSharedPointer<MySQLHandler> db, int userId, bool strict = false,
-                                                        int limit = 10, int offset = RETURN_ALL, QString filter = "");
+                                                        int limit = 10, int offset = RETURN_ALL, int taskTypeId = -1,
+                                                        QString sourceLanguageCode = "", QString targetLanguageCode = "");
     static QList<int> getUserIdsPendingTaskStreamNotification(QSharedPointer<MySQLHandler> db);
     static QSharedPointer<UserTaskStreamNotification> getUserTaskStreamNotification(QSharedPointer<MySQLHandler> db,
                                                         int userId);
