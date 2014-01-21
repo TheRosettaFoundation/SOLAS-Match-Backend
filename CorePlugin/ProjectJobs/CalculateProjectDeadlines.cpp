@@ -51,19 +51,23 @@ void CalculateProjectDeadlines::run()
                               QString::fromStdString(projectCreatedEmail.SerializeAsString()));
         }
 
-        GraphBuilder mBuilder = GraphBuilder();
-        if (mBuilder.getProjectGraph(request.project_id()) && mBuilder.isGraphValid()) {
-            QSharedPointer<MySQLHandler> db  = MySQLHandler::getInstance();
-            QSharedPointer<Project> project = ProjectDao::getProject(db, request.project_id());
+        QSharedPointer<MySQLHandler> db  = MySQLHandler::getInstance();
+        QSharedPointer<Project> project = ProjectDao::getProject(db, request.project_id());
 
-            QSharedPointer<WorkflowGraph> graph = mBuilder.getGraph();
-            foreach (::google::protobuf::int32 nodeId, graph->rootnode()) {
-                int index = mBuilder.find(nodeId);
-                WorkflowNode node = graph->allnodes(index);
-                this->calculateSubGraphDeadlines(node, mBuilder, project, db);
+        if (!project.isNull()) {
+            GraphBuilder mBuilder = GraphBuilder();
+            if (mBuilder.getProjectGraph(project->id()) && mBuilder.isGraphValid()) {
+                QSharedPointer<WorkflowGraph> graph = mBuilder.getGraph();
+                foreach (::google::protobuf::int32 nodeId, graph->rootnode()) {
+                    int index = mBuilder.find(nodeId);
+                    WorkflowNode node = graph->allnodes(index);
+                    this->calculateSubGraphDeadlines(node, mBuilder, project, db);
+                }
+            } else {
+                qDebug() << "CalculateProjectDeadlines: failed to construct workflow graph";
             }
         } else {
-            qDebug() << "CalculateProjectDeadlines: failed to construct workflow graph";
+            qDebug() << "CalculateProjectDeadlines: No project found with id " << request.project_id();
         }
     } else {
         qDebug() << "CalculateProjectDeadlines: Processing failed - empty message";
