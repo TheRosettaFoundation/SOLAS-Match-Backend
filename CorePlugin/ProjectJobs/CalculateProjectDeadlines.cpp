@@ -110,32 +110,40 @@ QMap<QString, int> CalculateProjectDeadlines::calculateDeadlineDefaults(QMap<QSt
         estimatedProjectLength += deadlineDefaults.value(period);
     }
 
-    int count = -1;
-    while (created.addDays(estimatedProjectLength + 3) > deadline) {
-        switch (count) {
-            case -1:
-                deadlineDefaults.insert("gracePeriod", deadlineDefaults.value("gracePeriod") - 1);
-                break;
-            case 0:
-                deadlineDefaults.insert("segmentationPeriod", deadlineDefaults.value("segmentationPeriod") - 1);
-                break;
-            case 1:
-                deadlineDefaults.insert("desegmentationPeriod", deadlineDefaults.value("desegmentationPeriod") - 1);
-                break;
-            case 2:
-                deadlineDefaults.insert("proofreadingPeriod", deadlineDefaults.value("proofreadingPeriod") - 1);
-                break;
-            case 3:
-                deadlineDefaults.insert("translationPeriod", deadlineDefaults.value("translationPeriod") - 1);
-                break;
-        }
-        count++;
-        count = count % 4;
+    if (created.daysTo(deadline) > 3) {
+        int count = -1;
+        while (created.addDays(estimatedProjectLength + 3) > deadline) {
+            switch (count) {
+                case -1:
+                    deadlineDefaults.insert("gracePeriod", deadlineDefaults.value("gracePeriod") - 1);
+                    break;
+                case 0:
+                    deadlineDefaults.insert("segmentationPeriod", deadlineDefaults.value("segmentationPeriod") - 1);
+                    break;
+                case 1:
+                    deadlineDefaults.insert("desegmentationPeriod", deadlineDefaults.value("desegmentationPeriod") - 1);
+                    break;
+                case 2:
+                    deadlineDefaults.insert("proofreadingPeriod", deadlineDefaults.value("proofreadingPeriod") - 1);
+                    break;
+                case 3:
+                    deadlineDefaults.insert("translationPeriod", deadlineDefaults.value("translationPeriod") - 1);
+                    break;
+            }
+            count++;
+            count = count % 4;
 
-        estimatedProjectLength = 0;
-        foreach (QString period, deadlineLengths) {
-            estimatedProjectLength += deadlineDefaults.value(period);
+            estimatedProjectLength = 0;
+            foreach (QString period, deadlineLengths) {
+                estimatedProjectLength += deadlineDefaults.value(period);
+            }
         }
+    } else {
+        deadlineDefaults.insert("gracePeriod", 0);
+        deadlineDefaults.insert("segmentationPeriod", 0);
+        deadlineDefaults.insert("desegmentationPeriod", 0);
+        deadlineDefaults.insert("proofreadingPeriod", 0);
+        deadlineDefaults.insert("translationPeriod", 0);
     }
 
     return deadlineDefaults;
