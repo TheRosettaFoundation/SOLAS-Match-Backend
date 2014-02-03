@@ -129,7 +129,7 @@ QString UserDao::getRegistrationId(QSharedPointer<MySQLHandler> db, int userId)
 }
 
 QList<QSharedPointer<Task> > UserDao::getUserTopTasks(QSharedPointer<MySQLHandler> db, int userId, bool strict, int limit,
-                                                      int offset, QString filter)
+                                                      int offset, int taskTypeId, QString sourceLanguageCode, QString targetLanguageCode)
 {
     QList<QSharedPointer<Task> > taskList = QList<QSharedPointer<Task> >();
     QString args = QString::number(userId) + ", ";
@@ -138,9 +138,27 @@ QList<QSharedPointer<Task> > UserDao::getUserTopTasks(QSharedPointer<MySQLHandle
     } else {
         args += "0, ";
     }
-    args = args + QString::number(limit) + ", ";
-    args = args + QString::number(offset) + ", ";
-    args += MySQLHandler::wrapString(filter);
+    args += QString::number(limit) + ", ";
+    args += QString::number(offset) + ", ";
+
+    if (taskTypeId > 0) {
+        args += QString::number(taskTypeId) + ",";
+    } else {
+        args += "null, ";
+    }
+
+    if (sourceLanguageCode != "") {
+        args += MySQLHandler::wrapString(sourceLanguageCode) + ", ";
+    } else {
+        args += "null, ";
+    }
+
+    if (targetLanguageCode != "") {
+        args += MySQLHandler::wrapString(targetLanguageCode);
+    } else {
+        args += "null";
+    }
+
     QSharedPointer<QSqlQuery> mQuery = db->call("getUserTopTasks", args);
     if (mQuery->first()) {
         QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
