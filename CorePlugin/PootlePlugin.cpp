@@ -131,7 +131,8 @@ void PootlePlugin::uploadOutputFile(QString fileDirectory)
         int taskId = this->getTaskIdFromPath(fileDirectory);
         QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
         QSharedPointer<User> user = TaskDao::getUserClaimedTask(db, taskId);
-        QUrl url("http://127.0.0.1/Solas-Match/api/v0/tasks/uploadOutputFile/" + QString::number(taskId) +
+        ConfigParser settings;
+        QUrl url(settings.get("site.api") + "v0/tasks/uploadOutputFile/" + QString::number(taskId) +
                  "/" + QString::number(user->id()) + ".json/");
         QNetworkRequest request(url);
         request.setHeader(QNetworkRequest::ContentTypeHeader, "text/plain");
