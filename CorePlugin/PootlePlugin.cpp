@@ -120,7 +120,7 @@ void PootlePlugin::uploadOutputFile(QString fileDirectory)
     qDebug() << "PootlePlugin: Pootle has completed processing the task, locate and upload the output file.";
     QDir fileDir(fileDirectory);
     QStringList nameFilters;
-    nameFilters << "*.po";
+    nameFilters << "*.po" << "*.xlf" << "*.xliff";
     QStringList files = fileDir.entryList(nameFilters, QDir::Files);
     if (files.length() > 0) {
         QString filename;
@@ -143,7 +143,11 @@ void PootlePlugin::uploadOutputFile(QString fileDirectory)
             file.close();
             qDebug() << "Calling PUT " << url << " with data " << fileData;
             apiClient->put(request, fileData);
+        } else {
+            qDebug() << "Apparently the file does not exist";
         }
+    } else {
+        qDebug() << "Unable to find output file";
     }
 }
 
