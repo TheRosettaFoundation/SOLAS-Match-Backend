@@ -443,3 +443,16 @@ QMultiMap<int, int> TaskDao::getTaskTagIds(QSharedPointer<MySQLHandler> db, int 
     }
     return taskTagIds;
 }
+
+QString TaskDao::getTaskType(QSharedPointer<MySQLHandler> db, int taskTypeId)
+{
+    QString ret = "";
+    QString args = QString::number(taskTypeId);
+    QSharedPointer<QSqlQuery> mQuery = db->call("getTaskType", args);
+    if (mQuery->first()) {
+        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
+        ret = MySQLHandler::getValueFromQuery(fieldMap.value("name"), mQuery).toString();
+    }
+
+    return ret;
+}

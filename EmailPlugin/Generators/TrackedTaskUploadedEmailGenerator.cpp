@@ -55,6 +55,8 @@ void TrackedTaskUploadedEmailGenerator::run()
         dict.SetValue("TASK_TITLE", task->title());
         dict.SetValue("ORG_NAME", org->name());
         dict.SetValue("SITE_NAME", settings.get("site.name").toStdString());
+        QString task_type = TaskDao::getTaskType(db, task->tasktype());
+        dict.SetValue("TASK_TYPE", task_type.toStdString());
 
         QString reviewUrl = settings.get("site.url");
         reviewUrl += "org/" + QString::number(org->id()) + "/task/" + QString::number(task->id()) + "/review";
