@@ -8,6 +8,6 @@
 
 typedef QMap<QSharedPointer<Email>, AMQPMessage *> EmailQueue;
 
-#define TEMPLATE_DIRECTORY "./templates/"
+#define TEMPLATE_DIRECTORY "/etc/SOLAS-Match/templates/"
 
 #endif // EMAILDEFINITIONS_H

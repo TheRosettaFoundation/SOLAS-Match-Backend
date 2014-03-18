@@ -55,7 +55,23 @@ void TrackedTaskUploadedEmailGenerator::run()
         dict.SetValue("TASK_TITLE", task->title());
         dict.SetValue("ORG_NAME", org->name());
         dict.SetValue("SITE_NAME", settings.get("site.name").toStdString());
-        QString task_type = TaskDao::getTaskType(db, task->tasktype());
+
+        QString task_type = "Translation";
+        switch(task->tasktype())
+        {
+            case 1:
+                task_type = "Segmentation";
+                break;
+            case 2:
+                task_type = "Translation";
+                break;
+            case 3:
+                task_type = "Proofreading";
+                break;
+            case 4:
+                task_type = "Desegmentation";
+                break;
+        }
         dict.SetValue("TASK_TYPE", task_type.toStdString());
 
         QString reviewUrl = settings.get("site.url");
