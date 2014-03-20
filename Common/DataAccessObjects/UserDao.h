@@ -56,6 +56,7 @@ public:
     static QMultiMap<int, LCCode> getUserLCCodes(QSharedPointer<MySQLHandler> db, int limit = RETURN_ALL, int offset = RETURN_ALL);
     static QMultiMap<int, int> getUserTagIds(QSharedPointer<MySQLHandler> db, int limit = RETURN_ALL, int offset = RETURN_ALL);
     static QMultiMap<int, LCCode> getUserNativeLCCodes(QSharedPointer<MySQLHandler> db, int limit = RETURN_ALL, int offset = RETURN_ALL);
+    static QString getUserRealName(QSharedPointer<MySQLHandler> db, int userId);
 
 };
 

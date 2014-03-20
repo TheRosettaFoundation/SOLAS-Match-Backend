@@ -319,3 +319,14 @@ QMultiMap<int, LCCode> UserDao::getUserNativeLCCodes(QSharedPointer<MySQLHandler
     }
     return userNativeLCIDs;
 }
+
+QString UserDao::getUserRealName(QSharedPointer<MySQLHandler> db, int userId)
+{
+    QString name = "";
+    QString args = QString::number(userId);
+    QSharedPointer<QSqlQuery> q = db->call("getUserRealName", args);
+    if (q->first()) {
+        name = MySQLHandler::getValueFromQuery("real_name", q).toString();
+    }
+    return name;
+}

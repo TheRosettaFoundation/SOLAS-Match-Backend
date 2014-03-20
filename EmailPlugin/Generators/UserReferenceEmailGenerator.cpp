@@ -28,7 +28,12 @@ void UserReferenceEmailGenerator::run()
 
     if (error == "") {
         ctemplate::TemplateDictionary dict("user_task_claim");
-        dict.SetValue("DISPLAY_NAME", user->display_name());
+        QString realName = UserDao::getUserRealName(db, user->id());
+        std::string displayName = user->display_name();
+        if (realName != "") {
+            displayName = realName.toStdString();
+        }
+        dict.SetValue("DISPLAY_NAME", displayName);
 
         QList<QSharedPointer<Task> > tasks = UserDao::getUserTasks(db, user->id());
         QList<QSharedPointer<ArchivedTask> > archivedTasks = UserDao::getUserArchivedTasks(db, user->id());
