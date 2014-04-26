@@ -3,7 +3,7 @@
 #include <QDebug>
 
 #include "Common/ConfigParser.h"
-#include "../PluginHandler/PluginLoader.h"
+#include "PluginLoader.h"
 
 QSharedPointer<PluginHandler> PluginHandler::m_Instance;
 

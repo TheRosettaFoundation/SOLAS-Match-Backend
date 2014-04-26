@@ -84,7 +84,8 @@ SOURCES += \
     protobufs/emails/ProjectCreatedEmail.pb.cc \
     PluginHandler.cpp \
     protobufs/management/PluginEnabledRequest.pb.cc \
-    protobufs/management/ManagementRequest.pb.cc
+    protobufs/management/ManagementRequest.pb.cc \
+    PluginLoader.cpp
 
 HEADERS +=\
     MySQLHandler.h \
@@ -152,7 +153,8 @@ HEADERS +=\
     protobufs/emails/ProjectCreatedEmail.pb.h \
     PluginHandler.h \
     protobufs/management/PluginEnabledRequest.pb.h \
-    protobufs/management/ManagementRequest.pb.h
+    protobufs/management/ManagementRequest.pb.h \
+    PluginLoader.h
 
 symbian {
     MMP_RULES += EXPORTUNFROZEN

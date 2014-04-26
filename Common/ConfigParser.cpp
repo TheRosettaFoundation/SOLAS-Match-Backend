@@ -7,7 +7,10 @@
 
 ConfigParser::ConfigParser()
 {
-    mSettings = new QSettings(INI_FILE_LOCATION, QSettings::IniFormat);
+    if (QFile::exists(INI_FILE_LOCATION))
+    {
+        mSettings = new QSettings(INI_FILE_LOCATION, QSettings::IniFormat);
+    }
 }
 
 ConfigParser::~ConfigParser()

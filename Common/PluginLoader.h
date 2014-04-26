@@ -6,7 +6,7 @@
 #include <QRunnable>
 #include <QThreadPool>
 
-#include "WorkerInterface.h"
+#include "../PluginHandler/WorkerInterface.h"
 
 class PluginLoader
 {

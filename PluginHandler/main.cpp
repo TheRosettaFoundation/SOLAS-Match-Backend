@@ -10,8 +10,6 @@
 #include "../Common/ConfigParser.h"
 #include "../Common/PluginHandler.h"
 
-#include "PluginLoader.h"
-
 QString logFile = "";
 
 void myMessageHandler(QtMsgType type, const char *msg)

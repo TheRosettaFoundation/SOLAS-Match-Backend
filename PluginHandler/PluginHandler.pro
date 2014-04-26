@@ -19,10 +19,8 @@ LIBS += -L../Common -lCommon \
 
 INCLUDEPATH += /usr/local/include . ..
 
-SOURCES += main.cpp \
-    PluginLoader.cpp
+SOURCES += main.cpp
 
 HEADERS += \
     WorkerInterface.h \
-    PluginLoader.h \
     JobInterface.h

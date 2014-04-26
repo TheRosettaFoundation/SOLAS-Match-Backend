@@ -3,6 +3,10 @@
 
 #include "ICommand.h"
 
+#include "Common/MessagingClient.h"
+
+#include <QTimer>
+
 class PluginEnabledCommand : public ICommand
 {
     Q_OBJECT
@@ -16,12 +20,17 @@ public:
 
 public slots:
     void execute();
+    void receivedResponse(AMQPMessage* message);
+    void responseCanceled(QString error);
+    void responseCanceled(AMQPMessage* message);
 
 signals:
     void finished(QString response);
 
 private:
     QString pluginName;
+    MessagingClient* messagingClient;
+    QTimer* message_queue_read_timer;
 
 };
 
