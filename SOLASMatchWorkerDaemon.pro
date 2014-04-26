@@ -6,4 +6,5 @@ SUBDIRS += \
     EmailPlugin \
     PluginScheduler \
     CorePlugin \
-    ManagementPlugin
+    ManagementPlugin \
+    BackendManagementCLI
