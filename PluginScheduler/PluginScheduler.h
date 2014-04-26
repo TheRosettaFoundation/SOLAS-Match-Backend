@@ -19,7 +19,7 @@ class PluginScheduler : public WorkerInterface
 public:
     PluginScheduler();
     void setThreadPool(QThreadPool *);
-    bool isEnabled();
+    bool isEnabled() const;
 
 public slots:
     void run();

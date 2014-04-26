@@ -157,7 +157,7 @@ void EmailPlugin::setThreadPool(QThreadPool *tp)
     this->mThreadPool = tp;
 }
 
-bool EmailPlugin::isEnabled()
+bool EmailPlugin::isEnabled() const
 {
     return enabled;
 }

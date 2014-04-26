@@ -19,7 +19,7 @@ public:
     UserQueueHandler();
     void setThreadPool(QThreadPool *);
     void registerRequestTypes();
-    bool isEnabled();
+    bool isEnabled() const;
 
 public slots:
     void run();

@@ -2,7 +2,7 @@
 #define PLUGINLOADER_H
 
 #include <QObject>
-#include <QList>
+#include <QMap>
 #include <QRunnable>
 #include <QThreadPool>
 
@@ -13,12 +13,12 @@ class PluginLoader
 public:
     PluginLoader();
     void loadPlugins();
-    QList<WorkerInterface *> *getPlugins();
+    QMap<QString, WorkerInterface *> *getPlugins();
     void addJobToThreadPool(QRunnable *job);
     QThreadPool *getThreadPool();
 
 private:
-    QList<WorkerInterface *> *plugins;
+    QMap<QString, WorkerInterface *> *plugins;
     QThreadPool *threadPool;
 
 };

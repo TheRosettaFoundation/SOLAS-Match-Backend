@@ -15,7 +15,7 @@ class CorePlugin : public WorkerInterface
 public:
     CorePlugin();
     void setThreadPool(QThreadPool *);
-    bool isEnabled();
+    bool isEnabled() const;
 
 public slots:
     void run();

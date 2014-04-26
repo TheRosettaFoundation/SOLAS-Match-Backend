@@ -91,7 +91,7 @@ void TaskQueueHandler::setThreadPool(QThreadPool *tp)
     this->mThreadPool = tp;
 }
 
-bool TaskQueueHandler::isEnabled()
+bool TaskQueueHandler::isEnabled() const
 {
     return true;
 }

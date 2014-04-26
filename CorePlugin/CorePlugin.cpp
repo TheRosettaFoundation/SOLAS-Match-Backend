@@ -46,7 +46,7 @@ void CorePlugin::setThreadPool(QThreadPool *tp)
     this->mThreadPool = tp;
 }
 
-bool CorePlugin::isEnabled()
+bool CorePlugin::isEnabled() const
 {
     return this->enabled;
 }

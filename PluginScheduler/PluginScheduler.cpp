@@ -154,7 +154,7 @@ void PluginScheduler::setThreadPool(QThreadPool *tp)
     this->mThreadPool = tp;
 }
 
-bool PluginScheduler::isEnabled()
+bool PluginScheduler::isEnabled() const
 {
     return this->enabled;
 }

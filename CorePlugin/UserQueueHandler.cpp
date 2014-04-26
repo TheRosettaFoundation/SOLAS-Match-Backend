@@ -77,7 +77,7 @@ void UserQueueHandler::setThreadPool(QThreadPool *tp)
     this->mThreadPool = tp;
 }
 
-bool UserQueueHandler::isEnabled()
+bool UserQueueHandler::isEnabled() const
 {
     return true;
 }

@@ -18,7 +18,7 @@ class TaskQueueHandler : public WorkerInterface
 public:
     TaskQueueHandler();
     void setThreadPool(QThreadPool *);
-    bool isEnabled();
+    bool isEnabled() const;
 
 public slots:
     void run();

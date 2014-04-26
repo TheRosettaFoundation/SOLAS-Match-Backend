@@ -18,7 +18,7 @@ class ProjectQueueHandler : public WorkerInterface
 public:
     ProjectQueueHandler();
     void setThreadPool(QThreadPool *);
-    bool isEnabled();
+    bool isEnabled() const;
 
 public slots:
     void run();

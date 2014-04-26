@@ -81,7 +81,8 @@ SOURCES += \
     protobufs/notifications/TaskRevokedNotification.pb.cc \
     protobufs/emails/OrgTaskRevokedEmail.pb.cc \
     protobufs/emails/UserTaskRevokedEmail.pb.cc \
-    protobufs/emails/ProjectCreatedEmail.pb.cc
+    protobufs/emails/ProjectCreatedEmail.pb.cc \
+    PluginHandler.cpp
 
 HEADERS +=\
     MySQLHandler.h \
@@ -146,7 +147,8 @@ HEADERS +=\
     protobufs/notifications/TaskRevokedNotification.pb.h \
     protobufs/emails/OrgTaskRevokedEmail.pb.h \
     protobufs/emails/UserTaskRevokedEmail.pb.h \
-    protobufs/emails/ProjectCreatedEmail.pb.h
+    protobufs/emails/ProjectCreatedEmail.pb.h \
+    PluginHandler.h
 
 symbian {
     MMP_RULES += EXPORTUNFROZEN

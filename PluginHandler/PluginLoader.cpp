@@ -10,7 +10,7 @@
 PluginLoader::PluginLoader()
 {
     ConfigParser settings;
-    plugins = new QList<WorkerInterface *>();
+    plugins = new QMap<QString, WorkerInterface *>();
     threadPool = new QThreadPool();
     threadPool->setMaxThreadCount(settings.get("site.max_threads").toInt());
 }
@@ -38,9 +38,10 @@ void PluginLoader::loadPlugins()
         if(plugin) {
             WorkerInterface *worker = qobject_cast<WorkerInterface *>(plugin);
             if(worker) {
-                qDebug() << "PluginLoader::Adding plugin " << filename;
                 worker->setThreadPool(this->getThreadPool());
-                plugins->append(worker);
+                QString pluginName = filename.mid(3, filename.length() - 6);
+                qDebug() << "PluginLoader::Adding plugin " << pluginName;
+                plugins->insert(pluginName, worker);
             }
         } else {
             qDebug() << "PluginLoader::Failed to get object instance";
@@ -48,7 +49,7 @@ void PluginLoader::loadPlugins()
     }
 }
 
-QList<WorkerInterface *> *PluginLoader::getPlugins()
+QMap<QString, WorkerInterface *> *PluginLoader::getPlugins()
 {
     return plugins;
 }

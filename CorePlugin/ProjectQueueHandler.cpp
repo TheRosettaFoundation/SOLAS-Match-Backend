@@ -72,7 +72,7 @@ void ProjectQueueHandler::setThreadPool(QThreadPool *tp)
     this->mThreadPool = tp;
 }
 
-bool ProjectQueueHandler::isEnabled()
+bool ProjectQueueHandler::isEnabled() const
 {
     return true;
 }

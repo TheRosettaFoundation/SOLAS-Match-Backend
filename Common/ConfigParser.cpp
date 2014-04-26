@@ -3,6 +3,8 @@
 #include <QStringList>
 #include <QDir>
 
+#include <QDebug>
+
 ConfigParser::ConfigParser()
 {
     mSettings = new QSettings(INI_FILE_LOCATION, QSettings::IniFormat);

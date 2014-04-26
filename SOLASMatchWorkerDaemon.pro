@@ -5,4 +5,5 @@ SUBDIRS += \
     PluginHandler \
     EmailPlugin \
     PluginScheduler \
-    CorePlugin
+    CorePlugin \
+    ManagementPlugin

@@ -15,7 +15,7 @@ class EmailPlugin : public WorkerInterface
 public:
     EmailPlugin();
     void setThreadPool(QThreadPool *);
-    bool isEnabled();
+    bool isEnabled() const;
 
 public slots:
     void messageReveived(AMQPMessage *message);

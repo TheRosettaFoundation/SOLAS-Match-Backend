@@ -8,6 +8,7 @@
 #include <QTextStream>
 
 #include "../Common/ConfigParser.h"
+#include "../Common/PluginHandler.h"
 
 #include "PluginLoader.h"
 
@@ -47,6 +48,8 @@ int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
+    qDebug() << "Starting main thread" << a.thread()->currentThreadId();
+
     ConfigParser parser;
     logFile = parser.get("site.log");
     if (logFile != "") {
@@ -54,27 +57,8 @@ int main(int argc, char *argv[])
         qInstallMsgHandler(myMessageHandler);
     }
 
-    QList<WorkerInterface *> *workers;
-    PluginLoader mLoader = PluginLoader();
-
-    qDebug() << "Starting main thread" << a.thread()->currentThreadId();
-
-    mLoader.loadPlugins();
-    workers = mLoader.getPlugins();
-
-    QThread *thread;
-
-    qDebug() << "Plugins Loaded: starting workers...";
-    foreach(WorkerInterface * worker, *workers) {
-        if(worker->isEnabled()) {
-            thread = new QThread();
-            worker->connect(thread, SIGNAL(started()), SLOT(run()));
-            worker->moveToThread(thread);
-            thread->start();
-        } else {
-            qDebug() << "Worker is not enabled";
-        }
-    }
+    QSharedPointer<PluginHandler> handler = PluginHandler::instance();
+    handler->run();
 
     return a.exec();
 }

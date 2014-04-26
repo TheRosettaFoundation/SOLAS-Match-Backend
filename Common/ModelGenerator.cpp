@@ -65,11 +65,11 @@ void ModelGenerator::Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<Archiv
     targetLocale->set_languagecode(MySQLHandler::getStringFromQuery(fieldMap.value("targetLanguageCode"), q));
     targetLocale->set_countryname(MySQLHandler::getStringFromQuery(fieldMap.value("targetCountryName"), q));
     targetLocale->set_countrycode(MySQLHandler::getStringFromQuery(fieldMap.value("targetCountryCode"), q));
-    task->set_tasktype(MySQLHandler::getStringFromQuery(fieldMap.value("taskType_id"), q));
+    task->set_tasktype(MySQLHandler::getValueFromQuery(fieldMap.value("taskType_id"), q).toInt());
     task->set_taskstatus(MySQLHandler::getStringFromQuery(fieldMap.value("taskStatus_id"), q));
     task->set_published(MySQLHandler::getValueFromQuery(fieldMap.value("published"), q).toBool());
-    task->set_translatorid(MySQLHandler::getValueFromQuery(fieldMap.value("user_id-claimed"), q).toInt());
-    task->set_archiveuserid(MySQLHandler::getValueFromQuery(fieldMap.value("user_id-archived"), q).toInt());
+    task->set_useridclaimed(MySQLHandler::getValueFromQuery(fieldMap.value("user_id-claimed"), q).toInt());
+    task->set_useridarchived(MySQLHandler::getValueFromQuery(fieldMap.value("user_id-archived"), q).toInt());
     task->set_archivedate(MySQLHandler::getStringFromQuery(fieldMap.value("archived-date"), q));
     task->set_version(MySQLHandler::getValueFromQuery(fieldMap.value("version"), q).toInt());
     task->set_filename(MySQLHandler::getStringFromQuery(fieldMap.value("filename"), q));
@@ -136,10 +136,12 @@ void ModelGenerator::Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<Archiv
     project->set_reference(MySQLHandler::getStringFromQuery(fieldMap.value("reference"), q));
     project->set_wordcount(MySQLHandler::getValueFromQuery(fieldMap.value("word-count"), q).toInt());
     project->set_createdtime(MySQLHandler::getStringFromQuery(fieldMap.value("created"), q));
-    project->set_languagecode(MySQLHandler::getStringFromQuery(fieldMap.value("language_id"), q));
-    project->set_countrycode(MySQLHandler::getStringFromQuery(fieldMap.value("country_id"), q));
+
+    Locale* sourceLocale = project->mutable_sourcelocale();
+    sourceLocale->set_languagecode(MySQLHandler::getStringFromQuery(fieldMap.value("language_id"), q));
+    sourceLocale->set_countrycode(MySQLHandler::getStringFromQuery(fieldMap.value("country_id"), q));
+
     project->set_archiveddate(MySQLHandler::getStringFromQuery(fieldMap.value("archived-date"), q));
-    project->set_translatorid(MySQLHandler::getValueFromQuery(fieldMap.value("user_id-archived"), q).toInt());
 }
 
 void ModelGenerator::Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<Language> language, QMap<QString, int> fieldMap)
