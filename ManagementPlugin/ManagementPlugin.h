@@ -21,6 +21,8 @@ public slots:
     void run();
 
 private:
+    void registerCustomTypes();
+
     QThreadPool *mThreadPool;
     bool enabled;
 

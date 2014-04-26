@@ -9,8 +9,9 @@
 #include "PluginActiveRequest.h"
 
 #include "Common/ConfigParser.h"
-
 #include "Common/MessagingClient.h"
+#include "Common/protobufs/management/ManagementRequest.pb.h"
+#include "Common/protobufs/management/PluginEnabledRequest.pb.h"
 
 Q_EXPORT_PLUGIN2(ManagementPlugin, ManagementPlugin)
 
@@ -23,6 +24,9 @@ ManagementPlugin::ManagementPlugin()
 void ManagementPlugin::run()
 {
     qDebug() << "ManagementPlugin::Starting new Thread " << this->thread()->currentThreadId();
+
+    registerCustomTypes();
+
     ConfigParser settings;
     QString exchange = settings.get("messaging.exchange");
     QString topic = "management.#";
@@ -40,8 +44,12 @@ void ManagementPlugin::run()
     connect(message_queue_read_timer, SIGNAL(timeout()), client, SLOT(consumeFromQueue()));
     message_queue_read_timer->start(settings.get("messaging.poll_rate").toInt());
 
-    QSharedPointer<IRequestInterface> request = QSharedPointer<IRequestInterface>(new PluginActiveRequest());
-    request->run();
+    PluginEnabledRequest request;
+    request.set_class_name(request.class_name());
+    request.set_plugin_name("CorePlugin");
+    request.set_response_exchange("exchange");
+    request.set_response_topic("response");
+    client->publish(exchange, "management", QString::fromStdString(request.SerializeAsString()));
 }
 
 void ManagementPlugin::messageReveived(AMQPMessage *message)
@@ -54,8 +62,26 @@ void ManagementPlugin::messageReveived(AMQPMessage *message)
         messageQueue->Ack(message->getDeliveryTag());
     }
 
-    //uint32_t length = 0;
-    //QString message_body = message->getMessage(&length);
+    uint32_t length = 0;
+    QString message_body = message->getMessage(&length);
+
+    ManagementRequest request;
+    request.ParseFromString(message_body.toStdString());
+
+    int classId = QMetaType::type(QString::fromStdString(request.class_name()).toLatin1());
+    if (classId == 0) {
+        qDebug() << "ManagementPlugin: Invalid proto type: " << QString::fromStdString(request.class_name());
+    } else {
+        IRequestInterface* runnable = static_cast<IRequestInterface*>(QMetaType::construct(classId));
+        runnable->setProtoBody(message_body);
+        this->mThreadPool->start(runnable);
+    }
+}
+
+void ManagementPlugin::registerCustomTypes()
+{
+    PluginEnabledRequest pluginEnabledRequest;
+    qRegisterMetaType<PluginActiveRequest>(QString::fromStdString(pluginEnabledRequest.class_name()).toLatin1());
 }
 
 void ManagementPlugin::setThreadPool(QThreadPool *tp)
