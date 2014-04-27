@@ -2,6 +2,7 @@
 
 #include "Common/ConfigParser.h"
 #include "Common/protobufs/management/PluginEnabledRequest.pb.h"
+#include "Common/protobufs/management/ServerResponse.pb.h"
 
 #include <QTimer>
 #include <QDebug>
@@ -66,15 +67,35 @@ void PluginEnabledCommand::execute()
     PluginEnabledRequest request;
     request.set_class_name(request.class_name());
     request.set_response_exchange(exchange.toStdString());
-    request.set_response_topic(topic.toStdString());
+    request.set_response_topic("management_client.plugin.enabled");
     request.set_plugin_name(pluginName.toStdString());
     messagingClient->publish(parser.get("messaging.exchange"), "management.plugin.enabled", QString::fromStdString(request.SerializeAsString()));
 }
 
 void PluginEnabledCommand::receivedResponse(AMQPMessage *message)
 {
-    Q_UNUSED(message);
-    emit finished("Received Response");
+    AMQPQueue *messageQueue = message->getQueue();
+    if(messageQueue != NULL)
+    {
+        messageQueue->Ack(message->getDeliveryTag());
+    }
+
+    uint32_t length = 0;
+    QString message_body = message->getMessage(&length);
+
+    ServerResponse response;
+    response.ParseFromString(message_body.toStdString());
+
+    QString responseMessage;
+    if (response.error_message() == "")
+    {
+        responseMessage = QString::fromStdString(response.response_text());
+    }
+    else
+    {
+        responseMessage = QString::fromStdString(response.error_message());
+    }
+    emit finished(responseMessage);
 }
 
 void PluginEnabledCommand::responseCanceled(AMQPMessage *message)

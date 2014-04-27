@@ -75,7 +75,7 @@ void ManagementApp::printHelp()
 
     qDebug("Welcome to the SOLAS Match Management Interface.");
     qDebug("This tool is used to manage the SOLAS Match back end and query the service");
-    qDebug("The following is a list of commands currently supported by the management tool.");
+    qDebug("The following is a list of commands currently supported by the management tool.\n");
 
     foreach (ICommand* command, commandList) {
         command->printHelp(appName);

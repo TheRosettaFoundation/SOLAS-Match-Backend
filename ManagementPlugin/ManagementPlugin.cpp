@@ -43,13 +43,6 @@ void ManagementPlugin::run()
     QTimer *message_queue_read_timer = new QTimer();
     connect(message_queue_read_timer, SIGNAL(timeout()), client, SLOT(consumeFromQueue()));
     message_queue_read_timer->start(settings.get("messaging.poll_rate").toInt());
-
-    PluginEnabledRequest request;
-    request.set_class_name(request.class_name());
-    request.set_plugin_name("CorePlugin");
-    request.set_response_exchange("exchange");
-    request.set_response_topic("response");
-    client->publish(exchange, "management", QString::fromStdString(request.SerializeAsString()));
 }
 
 void ManagementPlugin::messageReveived(AMQPMessage *message)
