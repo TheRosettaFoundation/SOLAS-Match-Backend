@@ -1,46 +1,38 @@
-#include "PluginEnabledCommand.h"
+#include "PluginListCommand.h"
 
 #include "Common/ConfigParser.h"
-#include "Common/protobufs/management/PluginEnabledRequest.pb.h"
+#include "Common/protobufs/management/ListPluginsRequest.pb.h"
 #include "Common/protobufs/management/ServerResponse.pb.h"
 
-#include <QTimer>
-#include <QDebug>
-
-PluginEnabledCommand::PluginEnabledCommand() :
-    pluginName(""),
-    messagingClient(0),
-    message_queue_read_timer(0)
+PluginListCommand::PluginListCommand() :
+    messagingClient(0)
 {
+    message_queue_read_timer = new QTimer(this);
 }
 
-PluginEnabledCommand::~PluginEnabledCommand()
+PluginListCommand::~PluginListCommand()
 {
     if (messagingClient)
     {
         delete messagingClient;
     }
-
     if (message_queue_read_timer)
     {
         delete message_queue_read_timer;
     }
 }
 
-void PluginEnabledCommand::printHelp(QString appName)
+void PluginListCommand::printHelp(QString appName)
 {
-    qDebug("%s --plugin-enabled <plugin-name>", appName.toStdString().c_str());
-    qDebug("    This command determines if the specified plugin has been enabled");
-    qDebug("    <plugin-name> is the name of the plugin being checked\n");
+    qDebug("%s --list-plugins", appName.toStdString().c_str());
+    qDebug("    This command shows a list of all plugins registered with the system\n");
 }
 
-bool PluginEnabledCommand::isRequested(QStringList args)
+bool PluginListCommand::isRequested(QStringList args)
 {
     bool requested = false;
-    if (args.length() == 3 && args.at(1) == "--plugin-enabled")
+    if (args.length() == 2 && args.at(1) == "--list-plugins")
     {
-        pluginName = args.at(2);
-
         messagingClient = new MessagingClient();
         messagingClient->init();
         connect(messagingClient, SIGNAL(AMQPMessageReceived(AMQPMessage*)), this, SLOT(receivedResponse(AMQPMessage*)));
@@ -52,27 +44,25 @@ bool PluginEnabledCommand::isRequested(QStringList args)
     return requested;
 }
 
-void PluginEnabledCommand::execute()
+void PluginListCommand::execute()
 {
-    ConfigParser parser = ConfigParser();
-    QString exchange = parser.get("management_client.exchange");
-    QString topic = parser.get("management_client.topic");
-    QString queue = parser.get("management_client.queue");
+    ConfigParser settings;
+    QString exchange = settings.get("management_client.exchange");
+    QString topic = settings.get("management_client.topic");
+    QString queue = settings.get("management_client.queue");
     messagingClient->declareQueue(exchange, topic, queue);
 
-    message_queue_read_timer = new QTimer();
     connect(message_queue_read_timer, SIGNAL(timeout()), messagingClient, SLOT(consumeFromQueue()));
-    message_queue_read_timer->start(parser.get("messaging.poll_rate").toInt());
+    message_queue_read_timer->start(settings.get("messaging.poll_rate").toInt());
 
-    PluginEnabledRequest request;
+    ListPluginsRequest request;
     request.set_class_name(request.class_name());
     request.set_response_exchange(exchange.toStdString());
-    request.set_response_topic("management_client.plugin.enabled");
-    request.set_plugin_name(pluginName.toStdString());
-    messagingClient->publish(parser.get("messaging.exchange"), "management.plugin.enabled", QString::fromStdString(request.SerializeAsString()));
+    request.set_response_topic("management_client.list.plugins");
+    messagingClient->publish(exchange, "management.list.plugins", QString::fromStdString(request.SerializeAsString()));
 }
 
-void PluginEnabledCommand::receivedResponse(AMQPMessage *message)
+void PluginListCommand::receivedResponse(AMQPMessage *message)
 {
     AMQPQueue *messageQueue = message->getQueue();
     if(messageQueue != NULL)
@@ -98,13 +88,13 @@ void PluginEnabledCommand::receivedResponse(AMQPMessage *message)
     emit finished(responseMessage);
 }
 
-void PluginEnabledCommand::responseCanceled(AMQPMessage *message)
+void PluginListCommand::responseCanceled(AMQPMessage *message)
 {
     Q_UNUSED(message);
     emit finished("Response Canceled");
 }
 
-void PluginEnabledCommand::responseCanceled(QString error)
+void PluginListCommand::responseCanceled(QString error)
 {
     emit finished("Request failed: " + error);
 }

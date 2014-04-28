@@ -1,6 +1,7 @@
 #include "ManagementApp.h"
 
 #include "PluginEnabledCommand.h"
+#include "PluginListCommand.h"
 
 #include <QTimer>
 #include <QDebug>
@@ -66,6 +67,7 @@ void ManagementApp::registerCommands()
 {
     // Order is important
     commandList.append(new PluginEnabledCommand());
+    commandList.append(new PluginListCommand());
 }
 
 void ManagementApp::printHelp()
@@ -73,9 +75,11 @@ void ManagementApp::printHelp()
     QString appName = parent->arguments().at(0);
     appName = appName.mid(appName.lastIndexOf("/") + 1);
 
-    qDebug("Welcome to the SOLAS Match Management Interface.");
-    qDebug("This tool is used to manage the SOLAS Match back end and query the service");
-    qDebug("The following is a list of commands currently supported by the management tool.\n");
+    qDebug("************************************************************************************");
+    qDebug("* Welcome to the SOLAS Match Management Interface.                                 *");
+    qDebug("* This tool is used to manage the SOLAS Match back end and query the service       *");
+    qDebug("* The following is a list of commands currently supported by the management tool.  *");
+    qDebug("************************************************************************************\n");
 
     foreach (ICommand* command, commandList) {
         command->printHelp(appName);

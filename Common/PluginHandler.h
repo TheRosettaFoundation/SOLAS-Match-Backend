@@ -15,6 +15,7 @@ public:
     void run();
 
     const WorkerInterface* getPlugin(QString name);
+    const QList<QString> getPluginList() const;
 
 private:
     PluginHandler() {}

@@ -86,7 +86,8 @@ SOURCES += \
     protobufs/management/PluginEnabledRequest.pb.cc \
     protobufs/management/ManagementRequest.pb.cc \
     PluginLoader.cpp \
-    protobufs/management/ServerResponse.pb.cc
+    protobufs/management/ServerResponse.pb.cc \
+    protobufs/management/ListPluginsRequest.pb.cc
 
 HEADERS +=\
     MySQLHandler.h \
@@ -156,7 +157,8 @@ HEADERS +=\
     protobufs/management/PluginEnabledRequest.pb.h \
     protobufs/management/ManagementRequest.pb.h \
     PluginLoader.h \
-    protobufs/management/ServerResponse.pb.h
+    protobufs/management/ServerResponse.pb.h \
+    protobufs/management/ListPluginsRequest.pb.h
 
 symbian {
     MMP_RULES += EXPORTUNFROZEN

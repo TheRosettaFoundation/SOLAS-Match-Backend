@@ -1,10 +1,12 @@
 #ifndef MANAGEMENTPLUGIN_H
 #define MANAGEMENTPLUGIN_H
 
-#include <AMQPcpp.h>
-#include <QtPlugin>
+#include "../Common/MessagingClient.h"
 
 #include "../PluginHandler/WorkerInterface.h"
+
+#include <AMQPcpp.h>
+#include <QtPlugin>
 
 class ManagementPlugin : public WorkerInterface
 {
@@ -13,6 +15,7 @@ class ManagementPlugin : public WorkerInterface
 
 public:
     ManagementPlugin();
+    virtual ~ManagementPlugin();
     void setThreadPool(QThreadPool *);
     bool isEnabled() const;
 
@@ -24,6 +27,7 @@ private:
     void registerCustomTypes();
 
     QThreadPool *mThreadPool;
+    MessagingClient *client;
     bool enabled;
 
 };

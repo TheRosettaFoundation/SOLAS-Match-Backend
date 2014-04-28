@@ -7,11 +7,13 @@
 
 #include "IRequestInterface.h"
 #include "PluginActiveRequest.h"
+#include "ListPluginsHandler.h"
 
 #include "Common/ConfigParser.h"
-#include "Common/MessagingClient.h"
 #include "Common/protobufs/management/ManagementRequest.pb.h"
+#include "Common/protobufs/management/ServerResponse.pb.h"
 #include "Common/protobufs/management/PluginEnabledRequest.pb.h"
+#include "Common/protobufs/management/ListPluginsRequest.pb.h"
 
 Q_EXPORT_PLUGIN2(ManagementPlugin, ManagementPlugin)
 
@@ -19,6 +21,12 @@ ManagementPlugin::ManagementPlugin()
 {
     ConfigParser settings;
     enabled = (QString::compare("y", settings.get("management.enabled")) == 0);
+    client = new MessagingClient();
+}
+
+ManagementPlugin::~ManagementPlugin()
+{
+    delete client;
 }
 
 void ManagementPlugin::run()
@@ -31,9 +39,7 @@ void ManagementPlugin::run()
     QString exchange = settings.get("messaging.exchange");
     QString topic = "management.#";
     QString queue = "management_queue";
-    MessagingClient *client;
 
-    client = new MessagingClient();
     client->init();
     connect(client, SIGNAL(AMQPMessageReceived(AMQPMessage*)), this, SLOT(messageReveived(AMQPMessage*)));
 
@@ -64,6 +70,10 @@ void ManagementPlugin::messageReveived(AMQPMessage *message)
     int classId = QMetaType::type(QString::fromStdString(request.class_name()).toLatin1());
     if (classId == 0) {
         qDebug() << "ManagementPlugin: Invalid proto type: " << QString::fromStdString(request.class_name());
+
+        ServerResponse response;
+        response.set_error_message("Invalid command: The server was not able to deserialize the request");
+        client->publish(QString::fromStdString(request.response_exchange()), QString::fromStdString(request.response_topic()), QString::fromStdString(response.SerializeAsString()));
     } else {
         IRequestInterface* runnable = static_cast<IRequestInterface*>(QMetaType::construct(classId));
         runnable->setProtoBody(message_body);
@@ -75,6 +85,8 @@ void ManagementPlugin::registerCustomTypes()
 {
     PluginEnabledRequest pluginEnabledRequest;
     qRegisterMetaType<PluginActiveRequest>(QString::fromStdString(pluginEnabledRequest.class_name()).toLatin1());
+    ListPluginsRequest listPluginsRequest;
+    qRegisterMetaType<ListPluginsHandler>(QString::fromStdString(listPluginsRequest.class_name()).toLatin1());
 }
 
 void ManagementPlugin::setThreadPool(QThreadPool *tp)

@@ -21,9 +21,11 @@ DEFINES += MANAGEMENTPLUGIN_LIBRARY
 HEADERS += \
     ManagementPlugin.h \
     IRequestInterface.h \
-    PluginActiveRequest.h
+    PluginActiveRequest.h \
+    ListPluginsHandler.h
 
 SOURCES += \
     ManagementPlugin.cpp \
     IRequestInterface.cpp \
-    PluginActiveRequest.cpp
+    PluginActiveRequest.cpp \
+    ListPluginsHandler.cpp

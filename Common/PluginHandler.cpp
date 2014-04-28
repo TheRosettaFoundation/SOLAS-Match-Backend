@@ -51,3 +51,8 @@ const WorkerInterface* PluginHandler::getPlugin(QString name)
 {
     return pluginMap->value(name, NULL);
 }
+
+const QList<QString> PluginHandler::getPluginList() const
+{
+    return pluginMap->keys();
+}

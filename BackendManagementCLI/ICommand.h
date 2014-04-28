@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QStringList>
 
+#include "Common/MessagingClient.h"
+
 class ICommand : public QObject
 {
 public:
@@ -13,6 +15,9 @@ public:
 
 public slots:
     virtual void execute() = 0;
+    virtual void receivedResponse(AMQPMessage* message) = 0;
+    virtual void responseCanceled(QString error) = 0;
+    virtual void responseCanceled(AMQPMessage* message) = 0;
 
 signals:
     virtual void finished(QString response) = 0;

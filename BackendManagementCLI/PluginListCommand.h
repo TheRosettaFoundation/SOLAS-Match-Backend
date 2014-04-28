@@ -1,17 +1,17 @@
-#ifndef PLUGINENABLEDCOMMAND_H
-#define PLUGINENABLEDCOMMAND_H
+#ifndef PLUGINLISTCOMMAND_H
+#define PLUGINLISTCOMMAND_H
 
 #include "ICommand.h"
 
 #include <QTimer>
 
-class PluginEnabledCommand : public ICommand
+class PluginListCommand : public ICommand
 {
     Q_OBJECT
 
 public:
-    PluginEnabledCommand();
-    ~PluginEnabledCommand();
+    PluginListCommand();
+    virtual ~PluginListCommand();
 
     void printHelp(QString appName);
     bool isRequested(QStringList args);
@@ -26,10 +26,9 @@ signals:
     void finished(QString response);
 
 private:
-    QString pluginName;
     MessagingClient* messagingClient;
     QTimer* message_queue_read_timer;
 
 };
 
-#endif // PLUGINENABLEDCOMMAND_H
+#endif // PLUGINLISTCOMMAND_H

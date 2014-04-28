@@ -16,9 +16,11 @@ INCLUDEPATH += /usr/local/include . ..
 SOURCES += \
     Main.cpp \
     ManagementApp.cpp \
-    PluginEnabledCommand.cpp
+    PluginEnabledCommand.cpp \
+    PluginListCommand.cpp
 
 HEADERS += \
     ManagementApp.h \
     ICommand.h \
-    PluginEnabledCommand.h
+    PluginEnabledCommand.h \
+    PluginListCommand.h
