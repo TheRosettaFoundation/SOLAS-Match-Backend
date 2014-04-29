@@ -20,6 +20,7 @@ public:
     void setThreadPool(QThreadPool *);
     void registerRequestTypes();
     bool isEnabled() const;
+    const std::string getPluginData() const;
 
 public slots:
     void run();

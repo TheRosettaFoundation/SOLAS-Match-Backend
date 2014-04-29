@@ -16,6 +16,7 @@ public:
 
     const WorkerInterface* getPlugin(QString name);
     const QList<QString> getPluginList() const;
+    int getPendingEmailCount() const;
 
 private:
     PluginHandler() {}

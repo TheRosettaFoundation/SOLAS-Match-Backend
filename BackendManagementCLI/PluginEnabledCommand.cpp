@@ -100,7 +100,12 @@ void PluginEnabledCommand::receivedResponse(AMQPMessage *message)
 
 void PluginEnabledCommand::responseCanceled(AMQPMessage *message)
 {
-    Q_UNUSED(message);
+    AMQPQueue *messageQueue = message->getQueue();
+    if(messageQueue != NULL)
+    {
+        messageQueue->Ack(message->getDeliveryTag());
+    }
+
     emit finished("Response Canceled");
 }
 

@@ -12,6 +12,10 @@ QT       += network sql
 
 QT       -= gui
 
+CONFIG += qxt
+
+QXT += network
+
 TARGET = Common
 
 LIBS += -lprotobuf \
@@ -87,7 +91,10 @@ SOURCES += \
     protobufs/management/ManagementRequest.pb.cc \
     PluginLoader.cpp \
     protobufs/management/ServerResponse.pb.cc \
-    protobufs/management/ListPluginsRequest.pb.cc
+    protobufs/management/ListPluginsRequest.pb.cc \
+    protobufs/management/EmailCountProto.pb.cc \
+    protobufs/plugin_data/EmailPluginData.pb.cc \
+    protobufs/plugin_data/PluginDataProto.pb.cc
 
 HEADERS +=\
     MySQLHandler.h \
@@ -158,7 +165,10 @@ HEADERS +=\
     protobufs/management/ManagementRequest.pb.h \
     PluginLoader.h \
     protobufs/management/ServerResponse.pb.h \
-    protobufs/management/ListPluginsRequest.pb.h
+    protobufs/management/ListPluginsRequest.pb.h \
+    protobufs/management/EmailCountProto.pb.h \
+    protobufs/plugin_data/EmailPluginData.pb.h \
+    protobufs/plugin_data/PluginDataProto.pb.h
 
 symbian {
     MMP_RULES += EXPORTUNFROZEN

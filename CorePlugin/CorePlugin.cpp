@@ -50,3 +50,8 @@ bool CorePlugin::isEnabled() const
 {
     return this->enabled;
 }
+
+const std::string CorePlugin::getPluginData() const
+{
+    return "";      // No data
+}

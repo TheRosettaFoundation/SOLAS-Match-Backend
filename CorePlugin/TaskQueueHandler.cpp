@@ -95,3 +95,8 @@ bool TaskQueueHandler::isEnabled() const
 {
     return true;
 }
+
+const string TaskQueueHandler::getPluginData() const
+{
+    return "";
+}

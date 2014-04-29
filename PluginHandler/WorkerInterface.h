@@ -4,12 +4,15 @@
 #include <QRunnable>
 #include <QThreadPool>
 
+#include <string>
+
 class WorkerInterface : public QObject
 {
 public:
     virtual ~WorkerInterface() {}
     virtual void setThreadPool(QThreadPool *) = 0;
     virtual bool isEnabled() const = 0;
+    virtual const std::string getPluginData() const = 0;
 
 public slots:
     virtual void run() = 0;

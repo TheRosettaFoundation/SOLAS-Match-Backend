@@ -17,10 +17,12 @@ SOURCES += \
     Main.cpp \
     ManagementApp.cpp \
     PluginEnabledCommand.cpp \
-    PluginListCommand.cpp
+    PluginListCommand.cpp \
+    EmailCountCommand.cpp
 
 HEADERS += \
     ManagementApp.h \
     ICommand.h \
     PluginEnabledCommand.h \
-    PluginListCommand.h
+    PluginListCommand.h \
+    EmailCountCommand.h

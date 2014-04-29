@@ -2,6 +2,7 @@
 
 #include "PluginEnabledCommand.h"
 #include "PluginListCommand.h"
+#include "EmailCountCommand.h"
 
 #include <QTimer>
 #include <QDebug>
@@ -68,6 +69,7 @@ void ManagementApp::registerCommands()
     // Order is important
     commandList.append(new PluginEnabledCommand());
     commandList.append(new PluginListCommand());
+    commandList.append(new EmailCountCommand());
 }
 
 void ManagementApp::printHelp()

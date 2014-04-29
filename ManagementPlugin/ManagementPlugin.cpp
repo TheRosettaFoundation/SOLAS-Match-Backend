@@ -8,12 +8,14 @@
 #include "IRequestInterface.h"
 #include "PluginActiveRequest.h"
 #include "ListPluginsHandler.h"
+#include "EmailCountRequest.h"
 
 #include "Common/ConfigParser.h"
 #include "Common/protobufs/management/ManagementRequest.pb.h"
 #include "Common/protobufs/management/ServerResponse.pb.h"
 #include "Common/protobufs/management/PluginEnabledRequest.pb.h"
 #include "Common/protobufs/management/ListPluginsRequest.pb.h"
+#include "Common/protobufs/management/EmailCountProto.pb.h"
 
 Q_EXPORT_PLUGIN2(ManagementPlugin, ManagementPlugin)
 
@@ -87,6 +89,8 @@ void ManagementPlugin::registerCustomTypes()
     qRegisterMetaType<PluginActiveRequest>(QString::fromStdString(pluginEnabledRequest.class_name()).toLatin1());
     ListPluginsRequest listPluginsRequest;
     qRegisterMetaType<ListPluginsHandler>(QString::fromStdString(listPluginsRequest.class_name()).toLatin1());
+    EmailCountProto emailCountProto;
+    qRegisterMetaType<EmailCountRequest>(QString::fromStdString(emailCountProto.class_name()).toLatin1());
 }
 
 void ManagementPlugin::setThreadPool(QThreadPool *tp)
@@ -99,3 +103,7 @@ bool ManagementPlugin::isEnabled() const
     return enabled;
 }
 
+const string ManagementPlugin::getPluginData() const
+{
+    return "";      // No data
+}

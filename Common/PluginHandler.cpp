@@ -1,9 +1,12 @@
 #include "PluginHandler.h"
 
-#include <QDebug>
+#include "PluginLoader.h"
 
 #include "Common/ConfigParser.h"
-#include "PluginLoader.h"
+
+#include "../EmailPlugin/emailplugin.h"
+
+#include <QDebug>
 
 QSharedPointer<PluginHandler> PluginHandler::m_Instance;
 

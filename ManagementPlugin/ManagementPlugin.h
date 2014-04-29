@@ -18,6 +18,7 @@ public:
     virtual ~ManagementPlugin();
     void setThreadPool(QThreadPool *);
     bool isEnabled() const;
+    const std::string getPluginData() const;
 
 public slots:
     void messageReveived(AMQPMessage *message);

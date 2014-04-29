@@ -6,6 +6,7 @@
 #include <qxt/QxtNetwork/qxtmailmessage.h>
 #include <qxt/QxtNetwork/qxtsmtp.h>
 
+// Generators
 #include "Generators/TaskScoreEmailGenerator.h"
 #include "Generators/OrgDeadlinePassedEmailGenerator.h"
 #include "Generators/OrgMembershipAcceptedGenerator.h"
@@ -30,6 +31,9 @@
 #include "Generators/UserTaskRevokedGenerator.h"
 #include "Generators/OrgTaskRevokedGenerator.h"
 #include "Generators/ProjectCreatedGenerator.h"
+
+// plugin data
+#include "../Common/protobufs/plugin_data/EmailPluginData.pb.h"
 
 #include "Smtp.h"
 #include "IEmailGenerator.h"
@@ -160,4 +164,13 @@ void EmailPlugin::setThreadPool(QThreadPool *tp)
 bool EmailPlugin::isEnabled() const
 {
     return enabled;
+}
+
+const string EmailPlugin::getPluginData() const
+{
+    EmailPluginData data;
+    data.set_class_name(data.class_name());
+    data.set_pending_email_count(smtp->getEmailQueue()->keys().length());
+    string serializedData = data.SerializeAsString();
+    return serializedData;
 }

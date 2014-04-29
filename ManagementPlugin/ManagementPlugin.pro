@@ -10,7 +10,7 @@ TEMPLATE = lib
 
 CONFIG += plugin
 
-LIBS += -lprotobuf \
+LIBS += -lprotobuf -L../Common -lCommon \
         -L/usr/local/lib -lamqpcpp -lrabbitmq \
         -lprotobuf
 
@@ -22,10 +22,12 @@ HEADERS += \
     ManagementPlugin.h \
     IRequestInterface.h \
     PluginActiveRequest.h \
-    ListPluginsHandler.h
+    ListPluginsHandler.h \
+    EmailCountRequest.h
 
 SOURCES += \
     ManagementPlugin.cpp \
     IRequestInterface.cpp \
     PluginActiveRequest.cpp \
-    ListPluginsHandler.cpp
+    ListPluginsHandler.cpp \
+    EmailCountRequest.cpp

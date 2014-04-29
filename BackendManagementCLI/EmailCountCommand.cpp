@@ -1,50 +1,45 @@
-#include "PluginListCommand.h"
+#include "EmailCountCommand.h"
 
 #include "Common/ConfigParser.h"
-#include "Common/protobufs/management/ListPluginsRequest.pb.h"
+#include "Common/protobufs/management/EmailCountProto.pb.h"
 #include "Common/protobufs/management/ServerResponse.pb.h"
 
-PluginListCommand::PluginListCommand() :
-    messagingClient(0)
+#include <QDebug>
+
+EmailCountCommand::EmailCountCommand()
 {
-    message_queue_read_timer = new QTimer(this);
+    messagingClient = new MessagingClient();
+    message_queue_read_timer = new QTimer();
 }
 
-PluginListCommand::~PluginListCommand()
+EmailCountCommand::~EmailCountCommand()
 {
-    if (messagingClient)
-    {
-        delete messagingClient;
-    }
-    if (message_queue_read_timer)
-    {
-        delete message_queue_read_timer;
-    }
+    delete messagingClient;
+    delete message_queue_read_timer;
 }
 
-void PluginListCommand::printHelp(QString appName)
+void EmailCountCommand::printHelp(QString appName)
 {
-    qDebug("%s --list-plugins", appName.toStdString().c_str());
-    qDebug("    This command shows a list of all plugins registered with the system\n");
+    qDebug("%s --email-count", appName.toStdString().c_str());
+    qDebug("    Display the number of currently pending emails\n");
 }
 
-bool PluginListCommand::isRequested(QStringList args)
+bool EmailCountCommand::isRequested(QStringList args)
 {
     bool requested = false;
-    if (args.length() == 2 && args.at(1) == "--list-plugins")
+    if (args.length() == 2 && args.at(1) == "--email-count")
     {
-        messagingClient = new MessagingClient();
+        requested = true;
+
         messagingClient->init();
         connect(messagingClient, SIGNAL(AMQPMessageReceived(AMQPMessage*)), this, SLOT(receivedResponse(AMQPMessage*)));
         connect(messagingClient, SIGNAL(AMQPCancel(AMQPMessage*)), this, SLOT(responseCanceled(AMQPMessage*)));
         connect(messagingClient, SIGNAL(AMQPError(QString)), this, SLOT(responseCanceled(QString)));
-
-        requested = true;
     }
     return requested;
 }
 
-void PluginListCommand::execute()
+void EmailCountCommand::execute()
 {
     ConfigParser settings;
     QString exchange = settings.get("management_client.exchange");
@@ -55,14 +50,15 @@ void PluginListCommand::execute()
     connect(message_queue_read_timer, SIGNAL(timeout()), messagingClient, SLOT(consumeFromQueue()));
     message_queue_read_timer->start(settings.get("messaging.poll_rate").toInt());
 
-    ListPluginsRequest request;
+    EmailCountProto request;
     request.set_class_name(request.class_name());
     request.set_response_exchange(exchange.toStdString());
-    request.set_response_topic("management_client.list.plugins");
-    messagingClient->publish(exchange, "management.list.plugins", QString::fromStdString(request.SerializeAsString()));
+    request.set_response_topic("management_client.email.count");
+
+    messagingClient->publish(exchange, "management.email.count", QString::fromStdString(request.SerializeAsString()));
 }
 
-void PluginListCommand::receivedResponse(AMQPMessage *message)
+void EmailCountCommand::receivedResponse(AMQPMessage *message)
 {
     AMQPQueue *messageQueue = message->getQueue();
     if(messageQueue != NULL)
@@ -88,7 +84,7 @@ void PluginListCommand::receivedResponse(AMQPMessage *message)
     emit finished(responseMessage);
 }
 
-void PluginListCommand::responseCanceled(AMQPMessage *message)
+void EmailCountCommand::responseCanceled(AMQPMessage *message)
 {
     AMQPQueue *messageQueue = message->getQueue();
     if(messageQueue != NULL)
@@ -99,7 +95,7 @@ void PluginListCommand::responseCanceled(AMQPMessage *message)
     emit finished("Response Canceled");
 }
 
-void PluginListCommand::responseCanceled(QString error)
+void EmailCountCommand::responseCanceled(QString error)
 {
     emit finished("Request failed: " + error);
 }

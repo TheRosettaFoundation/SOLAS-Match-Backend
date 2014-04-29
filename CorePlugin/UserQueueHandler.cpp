@@ -93,3 +93,8 @@ void UserQueueHandler::registerRequestTypes()
     TaskRevokedNotification taskRevoked = TaskRevokedNotification();
     qRegisterMetaType<TaskRevokedNotificationHandler>(QString::fromStdString(taskRevoked.class_name()).toLatin1());
 }
+
+const std::string UserQueueHandler::getPluginData() const
+{
+    return "";
+}

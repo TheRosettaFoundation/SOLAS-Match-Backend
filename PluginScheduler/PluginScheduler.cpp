@@ -158,3 +158,8 @@ bool PluginScheduler::isEnabled() const
 {
     return this->enabled;
 }
+
+const string PluginScheduler::getPluginData() const
+{
+    return "";      // No data
+}

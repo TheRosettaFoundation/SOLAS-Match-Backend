@@ -76,3 +76,8 @@ bool ProjectQueueHandler::isEnabled() const
 {
     return true;
 }
+
+const string ProjectQueueHandler::getPluginData() const
+{
+    return "";
+}
