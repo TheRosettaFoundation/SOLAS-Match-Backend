@@ -80,7 +80,7 @@ void TrackedTaskUploadedEmailGenerator::run()
 
         QString dash_url = settings.get("site.url");
         dash_url += "org/dashboard";
-        dict["DASHBOARD_URL"] = dash_url.toStdString();
+        dict.SetValue("DASHBOARD_URL", dash_url.toStdString());
 
         QString taskView = settings.get("site.url");
         taskView += "task/" + QString::number(task->id()) + "/view";

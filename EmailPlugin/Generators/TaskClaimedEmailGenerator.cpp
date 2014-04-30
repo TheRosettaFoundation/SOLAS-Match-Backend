@@ -46,7 +46,7 @@ void TaskClaimedEmailGenerator::run()
 
         QString user_profile_url = settings.get("site.url");
         user_profile_url += QString::number(translator->id()) + "/profile";
-        dict["USER_PROFILE_URL"] = user_profile_url.toStdString();
+        dict.SetValue("USER_PROFILE_URL",user_profile_url.toStdString());
 
         std::string email_body;
         QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/task-claimed.tpl";

@@ -124,14 +124,14 @@ void CalculateTaskScore::run()
             } else {
                 qDebug() << "No tasks found";
                 dict.ShowSection("ERROR");
-                dict["ERROR_MESSAGE"] = "No tasks found";
+                dict.SetValue("ERROR_MESSAGE","No tasks found");
             }
 
         }
     } else {
         qDebug() << "No users found";
         dict.ShowSection("ERROR");
-        dict["ERROR_MESSAGE"] = "No users found";
+        dict.SetValue("ERROR_MESSAGE","No users found");
     }
 
     int time_msecs = started.msecsTo(QDateTime::currentDateTime());
