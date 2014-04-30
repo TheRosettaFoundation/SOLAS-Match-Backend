@@ -17,7 +17,7 @@
 {{/COMMENT_GIVEN}}
 
 <p>
-    In the future please refrain from violation any of our terms of use. We value your
+    In the future please refrain from violating any of our terms of use. We value your
     participation.
 </p>
 
