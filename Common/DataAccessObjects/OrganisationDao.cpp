@@ -22,7 +22,7 @@ QList<QSharedPointer<User> > OrganisationDao::getOrgAdmins(QSharedPointer<MySQLH
 {
     QList<QSharedPointer<User> > users = QList<QSharedPointer<User> >();
     QString args = QString::number(orgId);
-    QSharedPointer<QSqlQuery> result = db->call("getAdmin", args);
+    QSharedPointer<QSqlQuery> result = db->call("getAdmins", args);
     if (result->first()) {
         QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(result);
         do {

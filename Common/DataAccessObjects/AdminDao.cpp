@@ -13,7 +13,7 @@ QList<QSharedPointer<User> > AdminDao::getAdmins(QSharedPointer<MySQLHandler> db
         args += "null";
     }
 
-    QSharedPointer<QSqlQuery> q = db->call("getAdmin", args);
+    QSharedPointer<QSqlQuery> q = db->call("getAdmins", args);
     if (q->first()) {
         QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(q);
         do {
