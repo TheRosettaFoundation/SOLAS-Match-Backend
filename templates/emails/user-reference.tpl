@@ -49,3 +49,6 @@
         </tbody>
     </table>
 {{/TASKS_AVAILABLE}}
+
+
+{{>FOOTER}}

@@ -38,6 +38,16 @@ void OrgCreated_OrgEmail::run()
         QString dashboardUrl = settings.get("site.url") + "org/dashboard";
         dict.SetValue("DASHBOARD_URL", dashboardUrl.toStdString());
 
+        bool footer_enabled=(QString::compare("y", settings.get("email-footer.enabled")) == 0);
+        if (footer_enabled)
+        {
+            QString donate_link = settings.get("email-footer.donate_link");
+            ctemplate::TemplateDictionary* footer_dict = dict.AddIncludeDictionary("FOOTER");
+            QString footer_location = QString(TEMPLATE_DIRECTORY) + "emails/footer.tpl";
+            dict.SetGlobalValue("DONATE_LINK",donate_link.toStdString());
+            footer_dict ->SetFilename(footer_location.toStdString());
+        }
+
         std::string email_body;
         QString templateLocation = QString(TEMPLATE_DIRECTORY) + "emails/org-created.org-admin.tpl";
         ctemplate::ExpandTemplate(templateLocation.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
