@@ -41,6 +41,16 @@ void ClaimedTaskSourceUpdatedGenerator::run()
         uploadUrl += "task/" + QString::number(task->id()) + "/id";
         dict.SetValue("TASK_UPLOAD", uploadUrl.toStdString());
 
+        bool footer_enabled=(QString::compare("y", settings.get("email-footer.enabled")) == 0);
+        if (footer_enabled)
+        {
+            QString donate_link = settings.get("email-footer.donate_link");
+            ctemplate::TemplateDictionary* footer_dict = dict.AddIncludeDictionary("FOOTER");
+            QString footer_location = QString(TEMPLATE_DIRECTORY) + "emails/footer.tpl";
+            footer_dict -> SetValue("DONATE_LINK",donate_link.toStdString());
+            footer_dict -> SetFilename(footer_location.toStdString());
+        }
+
         std::string email_body;
         QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/claimed-task-source-updated.tpl";
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);

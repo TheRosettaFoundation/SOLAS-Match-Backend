@@ -149,8 +149,8 @@ void UserReferenceEmailGenerator::run()
             QString donate_link = settings.get("email-footer.donate_link");
             ctemplate::TemplateDictionary* footer_dict = dict.AddIncludeDictionary("FOOTER");
             QString footer_location = QString(TEMPLATE_DIRECTORY) + "emails/footer.tpl";
-            dict.SetGlobalValue("DONATE_LINK",donate_link.toStdString());
-            footer_dict ->SetFilename(footer_location.toStdString());
+            footer_dict -> SetValue("DONATE_LINK",donate_link.toStdString());
+            footer_dict -> SetFilename(footer_location.toStdString());
         }
 
         std::string email_body;

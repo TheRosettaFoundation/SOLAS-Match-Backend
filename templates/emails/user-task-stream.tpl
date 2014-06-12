@@ -27,3 +27,6 @@
 
     <p style="margin-bottom:40px;"/>
 {{/TASK_SECT}}
+
+
+{{>FOOTER}}

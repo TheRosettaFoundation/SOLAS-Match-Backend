@@ -12,3 +12,6 @@
     Sincerely,<br />
     The {{SITE_NAME}} Team
 </p>
+
+
+{{>FOOTER}}

@@ -8,8 +8,8 @@
 </p>
 
 <p>
-    The task "{{TASK_TITLE}}" has passed its deadline. As you have claimed this
-    task you must be sure you have uploaded an output by now.
+    The task "{{TASK_TITLE}}" has passed its deadline. As the task deadline has passed, please ensure to upload your output file. 
+    If you have any questions about the deadline, please contact <a href="info@trommons.org"> info@trommons.org. </a>
 </p>
 
 <p>
@@ -17,3 +17,5 @@
     The {{SITE_NAME}} Team
 </p>
 
+
+{{>FOOTER}}
