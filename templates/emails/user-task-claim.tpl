@@ -8,7 +8,7 @@
 </p>
 
 <p>
-    You have claimed a task on {{SITE_NAME}}.
+    You have claimed a "{{TASK_TYPE}}" task for "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} on {{SITE_NAME}}.
 </p>
 <p>
     Thanks for helping to volunteer.

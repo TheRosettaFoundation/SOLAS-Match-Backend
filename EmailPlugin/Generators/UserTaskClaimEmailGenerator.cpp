@@ -43,6 +43,30 @@ void UserTaskClaimEmailGenerator::run()
         dict.SetValue("TASK_PAGE", task_url.toStdString());
         dict.SetValue("SITE_NAME", settings.get("site.name").toStdString());
 
+        QString task_type = "Translation";
+        switch(task->tasktype())
+        {
+            case 1:
+                task_type = "Segmentation";
+                break;
+            case 2:
+                task_type = "Translation";
+                break;
+            case 3:
+                task_type = "Proofreading";
+                break;
+            case 4:
+                task_type = "Desegmentation";
+                break;
+        }
+
+        dict.SetValue("TASK_TYPE", task_type.toStdString());
+
+        Locale taskSourceLocale =  task->sourcelocale();
+        Locale taskTargetLocale = task->targetlocale();
+        dict.SetValue("SOURCE_LANGUAGE",taskSourceLocale.languagename());
+        dict.SetValue("TARGET_LANGUAGE",taskTargetLocale.languagename());
+
         bool footer_enabled=(QString::compare("y", settings.get("email-footer.enabled")) == 0);
         if (footer_enabled)
         {

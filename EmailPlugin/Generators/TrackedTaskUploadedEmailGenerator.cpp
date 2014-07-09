@@ -72,7 +72,14 @@ void TrackedTaskUploadedEmailGenerator::run()
                 task_type = "Desegmentation";
                 break;
         }
+
         dict.SetValue("TASK_TYPE", task_type.toStdString());
+
+        Locale taskSourceLocale =  task->sourcelocale();
+        Locale taskTargetLocale = task->targetlocale();
+        dict.SetValue("SOURCE_LANGUAGE",taskSourceLocale.languagename());
+        dict.SetValue("TARGET_LANGUAGE",taskTargetLocale.languagename());
+
 
         QString reviewUrl = settings.get("site.url");
         reviewUrl += "org/" + QString::number(org->id()) + "/task/" + QString::number(task->id()) + "/review";
