@@ -6,6 +6,3 @@
  equal access to information and knowledge across the language of the world.</p>
  <p>We need your help to make this happen! <a href="{{DONATE_LINK}}" target="_blank">Support Trommons</a></p>
 </footer>
-
-
-
