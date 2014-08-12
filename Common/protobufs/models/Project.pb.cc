@@ -13,6 +13,11 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 
+namespace SolasMatch {
+namespace Common {
+namespace Protobufs {
+namespace Models {
+
 namespace {
 
 const ::google::protobuf::Descriptor* Project_descriptor_ = NULL;
@@ -29,7 +34,7 @@ void protobuf_AssignDesc_Project_2eproto() {
       "Project.proto");
   GOOGLE_CHECK(file != NULL);
   Project_descriptor_ = file->message_type(0);
-  static const int Project_offsets_[12] = {
+  static const int Project_offsets_[14] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Project, id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Project, title_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Project, description_),
@@ -42,6 +47,8 @@ void protobuf_AssignDesc_Project_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Project, status_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Project, sourcelocale_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Project, tag_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Project, imageuploaded_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Project, imageapproved_),
   };
   Project_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -83,17 +90,20 @@ void protobuf_AddDesc_Project_2eproto() {
   already_here = true;
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-  ::protobuf_AddDesc_Locale_2eproto();
-  ::protobuf_AddDesc_Tag_2eproto();
+  ::SolasMatch::Common::Protobufs::Models::protobuf_AddDesc_Locale_2eproto();
+  ::SolasMatch::Common::Protobufs::Models::protobuf_AddDesc_Tag_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\rProject.proto\032\014Locale.proto\032\tTag.proto"
-    "\"\360\001\n\007Project\022\n\n\002id\030\001 \001(\005\022\r\n\005title\030\002 \001(\t\022"
-    "\023\n\013description\030\003 \001(\t\022\020\n\010deadline\030\004 \001(\t\022\026"
-    "\n\016organisationId\030\005 \001(\005\022\016\n\006impact\030\006 \001(\t\022\021"
-    "\n\treference\030\007 \001(\t\022\021\n\twordCount\030\010 \001(\005\022\023\n\013"
-    "createdTime\030\t \001(\t\022\016\n\006status\030\n \001(\t\022\035\n\014sou"
-    "rceLocale\030\013 \001(\0132\007.Locale\022\021\n\003tag\030\014 \003(\0132\004."
-    "Tag", 283);
+    "\n\rProject.proto\022\"SolasMatch.Common.Proto"
+    "bufs.Models\032\014Locale.proto\032\tTag.proto\"\344\002\n"
+    "\007Project\022\n\n\002id\030\001 \001(\005\022\r\n\005title\030\002 \001(\t\022\023\n\013d"
+    "escription\030\003 \001(\t\022\020\n\010deadline\030\004 \001(\t\022\026\n\016or"
+    "ganisationId\030\005 \001(\005\022\016\n\006impact\030\006 \001(\t\022\021\n\tre"
+    "ference\030\007 \001(\t\022\021\n\twordCount\030\010 \001(\005\022\023\n\013crea"
+    "tedTime\030\t \001(\t\022\016\n\006status\030\n \001(\t\022@\n\014sourceL"
+    "ocale\030\013 \001(\0132*.SolasMatch.Common.Protobuf"
+    "s.Models.Locale\0224\n\003tag\030\014 \003(\0132\'.SolasMatc"
+    "h.Common.Protobufs.Models.Tag\022\025\n\rimageUp"
+    "loaded\030\r \001(\010\022\025\n\rimageApproved\030\016 \001(\010", 435);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "Project.proto", &protobuf_RegisterTypes);
   Project::default_instance_ = new Project();
@@ -124,6 +134,8 @@ const int Project::kCreatedTimeFieldNumber;
 const int Project::kStatusFieldNumber;
 const int Project::kSourceLocaleFieldNumber;
 const int Project::kTagFieldNumber;
+const int Project::kImageUploadedFieldNumber;
+const int Project::kImageApprovedFieldNumber;
 #endif  // !_MSC_VER
 
 Project::Project()
@@ -132,7 +144,7 @@ Project::Project()
 }
 
 void Project::InitAsDefaultInstance() {
-  sourcelocale_ = const_cast< ::Locale*>(&::Locale::default_instance());
+  sourcelocale_ = const_cast< ::SolasMatch::Common::Protobufs::Models::Locale*>(&::SolasMatch::Common::Protobufs::Models::Locale::default_instance());
 }
 
 Project::Project(const Project& from)
@@ -154,6 +166,8 @@ void Project::SharedCtor() {
   createdtime_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   status_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   sourcelocale_ = NULL;
+  imageuploaded_ = false;
+  imageapproved_ = false;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -251,8 +265,10 @@ void Project::Clear() {
       }
     }
     if (has_sourcelocale()) {
-      if (sourcelocale_ != NULL) sourcelocale_->::Locale::Clear();
+      if (sourcelocale_ != NULL) sourcelocale_->::SolasMatch::Common::Protobufs::Models::Locale::Clear();
     }
+    imageuploaded_ = false;
+    imageapproved_ = false;
   }
   tag_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -431,7 +447,7 @@ bool Project::MergePartialFromCodedStream(
         break;
       }
       
-      // optional .Locale sourceLocale = 11;
+      // optional .SolasMatch.Common.Protobufs.Models.Locale sourceLocale = 11;
       case 11: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
@@ -445,7 +461,7 @@ bool Project::MergePartialFromCodedStream(
         break;
       }
       
-      // repeated .Tag tag = 12;
+      // repeated .SolasMatch.Common.Protobufs.Models.Tag tag = 12;
       case 12: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
@@ -456,6 +472,38 @@ bool Project::MergePartialFromCodedStream(
           goto handle_uninterpreted;
         }
         if (input->ExpectTag(98)) goto parse_tag;
+        if (input->ExpectTag(104)) goto parse_imageUploaded;
+        break;
+      }
+      
+      // optional bool imageUploaded = 13;
+      case 13: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_imageUploaded:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &imageuploaded_)));
+          set_has_imageuploaded();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(112)) goto parse_imageApproved;
+        break;
+      }
+      
+      // optional bool imageApproved = 14;
+      case 14: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_imageApproved:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &imageapproved_)));
+          set_has_imageapproved();
+        } else {
+          goto handle_uninterpreted;
+        }
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -556,16 +604,26 @@ void Project::SerializeWithCachedSizes(
       10, this->status(), output);
   }
   
-  // optional .Locale sourceLocale = 11;
+  // optional .SolasMatch.Common.Protobufs.Models.Locale sourceLocale = 11;
   if (has_sourcelocale()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       11, this->sourcelocale(), output);
   }
   
-  // repeated .Tag tag = 12;
+  // repeated .SolasMatch.Common.Protobufs.Models.Tag tag = 12;
   for (int i = 0; i < this->tag_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       12, this->tag(i), output);
+  }
+  
+  // optional bool imageUploaded = 13;
+  if (has_imageuploaded()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(13, this->imageuploaded(), output);
+  }
+  
+  // optional bool imageApproved = 14;
+  if (has_imageapproved()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(14, this->imageapproved(), output);
   }
   
   if (!unknown_fields().empty()) {
@@ -661,18 +719,28 @@ void Project::SerializeWithCachedSizes(
         10, this->status(), target);
   }
   
-  // optional .Locale sourceLocale = 11;
+  // optional .SolasMatch.Common.Protobufs.Models.Locale sourceLocale = 11;
   if (has_sourcelocale()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         11, this->sourcelocale(), target);
   }
   
-  // repeated .Tag tag = 12;
+  // repeated .SolasMatch.Common.Protobufs.Models.Tag tag = 12;
   for (int i = 0; i < this->tag_size(); i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         12, this->tag(i), target);
+  }
+  
+  // optional bool imageUploaded = 13;
+  if (has_imageuploaded()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(13, this->imageuploaded(), target);
+  }
+  
+  // optional bool imageApproved = 14;
+  if (has_imageapproved()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(14, this->imageapproved(), target);
   }
   
   if (!unknown_fields().empty()) {
@@ -758,15 +826,25 @@ int Project::ByteSize() const {
           this->status());
     }
     
-    // optional .Locale sourceLocale = 11;
+    // optional .SolasMatch.Common.Protobufs.Models.Locale sourceLocale = 11;
     if (has_sourcelocale()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->sourcelocale());
     }
     
+    // optional bool imageUploaded = 13;
+    if (has_imageuploaded()) {
+      total_size += 1 + 1;
+    }
+    
+    // optional bool imageApproved = 14;
+    if (has_imageapproved()) {
+      total_size += 1 + 1;
+    }
+    
   }
-  // repeated .Tag tag = 12;
+  // repeated .SolasMatch.Common.Protobufs.Models.Tag tag = 12;
   total_size += 1 * this->tag_size();
   for (int i = 0; i < this->tag_size(); i++) {
     total_size +=
@@ -834,7 +912,13 @@ void Project::MergeFrom(const Project& from) {
       set_status(from.status());
     }
     if (from.has_sourcelocale()) {
-      mutable_sourcelocale()->::Locale::MergeFrom(from.sourcelocale());
+      mutable_sourcelocale()->::SolasMatch::Common::Protobufs::Models::Locale::MergeFrom(from.sourcelocale());
+    }
+    if (from.has_imageuploaded()) {
+      set_imageuploaded(from.imageuploaded());
+    }
+    if (from.has_imageapproved()) {
+      set_imageapproved(from.imageapproved());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -874,6 +958,8 @@ void Project::Swap(Project* other) {
     std::swap(status_, other->status_);
     std::swap(sourcelocale_, other->sourcelocale_);
     tag_.Swap(&other->tag_);
+    std::swap(imageuploaded_, other->imageuploaded_);
+    std::swap(imageapproved_, other->imageapproved_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
@@ -890,5 +976,10 @@ void Project::Swap(Project* other) {
 
 
 // @@protoc_insertion_point(namespace_scope)
+
+}  // namespace Models
+}  // namespace Protobufs
+}  // namespace Common
+}  // namespace SolasMatch
 
 // @@protoc_insertion_point(global_scope)

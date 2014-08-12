@@ -26,6 +26,11 @@
 #include "Locale.pb.h"
 // @@protoc_insertion_point(includes)
 
+namespace SolasMatch {
+namespace Common {
+namespace Protobufs {
+namespace Models {
+
 // Internal implementation detail -- do not call these.
 void  protobuf_AddDesc_Task_2eproto();
 void protobuf_AssignDesc_Task_2eproto();
@@ -154,21 +159,21 @@ class Task : public ::google::protobuf::Message {
   inline ::std::string* mutable_createdtime();
   inline ::std::string* release_createdtime();
   
-  // optional .Locale sourceLocale = 8;
+  // optional .SolasMatch.Common.Protobufs.Models.Locale sourceLocale = 8;
   inline bool has_sourcelocale() const;
   inline void clear_sourcelocale();
   static const int kSourceLocaleFieldNumber = 8;
-  inline const ::Locale& sourcelocale() const;
-  inline ::Locale* mutable_sourcelocale();
-  inline ::Locale* release_sourcelocale();
+  inline const ::SolasMatch::Common::Protobufs::Models::Locale& sourcelocale() const;
+  inline ::SolasMatch::Common::Protobufs::Models::Locale* mutable_sourcelocale();
+  inline ::SolasMatch::Common::Protobufs::Models::Locale* release_sourcelocale();
   
-  // optional .Locale targetLocale = 9;
+  // optional .SolasMatch.Common.Protobufs.Models.Locale targetLocale = 9;
   inline bool has_targetlocale() const;
   inline void clear_targetlocale();
   static const int kTargetLocaleFieldNumber = 9;
-  inline const ::Locale& targetlocale() const;
-  inline ::Locale* mutable_targetlocale();
-  inline ::Locale* release_targetlocale();
+  inline const ::SolasMatch::Common::Protobufs::Models::Locale& targetlocale() const;
+  inline ::SolasMatch::Common::Protobufs::Models::Locale* mutable_targetlocale();
+  inline ::SolasMatch::Common::Protobufs::Models::Locale* release_targetlocale();
   
   // optional int32 taskType = 10;
   inline bool has_tasktype() const;
@@ -191,7 +196,7 @@ class Task : public ::google::protobuf::Message {
   inline bool published() const;
   inline void set_published(bool value);
   
-  // @@protoc_insertion_point(class_scope:Task)
+  // @@protoc_insertion_point(class_scope:SolasMatch.Common.Protobufs.Models.Task)
  private:
   inline void set_has_id();
   inline void clear_has_id();
@@ -226,10 +231,10 @@ class Task : public ::google::protobuf::Message {
   ::std::string* comment_;
   ::std::string* deadline_;
   ::std::string* createdtime_;
-  ::Locale* sourcelocale_;
+  ::SolasMatch::Common::Protobufs::Models::Locale* sourcelocale_;
   ::google::protobuf::int32 wordcount_;
   ::google::protobuf::int32 tasktype_;
-  ::Locale* targetlocale_;
+  ::SolasMatch::Common::Protobufs::Models::Locale* targetlocale_;
   ::google::protobuf::int32 taskstatus_;
   bool published_;
   
@@ -548,7 +553,7 @@ inline ::std::string* Task::release_createdtime() {
   }
 }
 
-// optional .Locale sourceLocale = 8;
+// optional .SolasMatch.Common.Protobufs.Models.Locale sourceLocale = 8;
 inline bool Task::has_sourcelocale() const {
   return (_has_bits_[0] & 0x00000080u) != 0;
 }
@@ -559,25 +564,25 @@ inline void Task::clear_has_sourcelocale() {
   _has_bits_[0] &= ~0x00000080u;
 }
 inline void Task::clear_sourcelocale() {
-  if (sourcelocale_ != NULL) sourcelocale_->::Locale::Clear();
+  if (sourcelocale_ != NULL) sourcelocale_->::SolasMatch::Common::Protobufs::Models::Locale::Clear();
   clear_has_sourcelocale();
 }
-inline const ::Locale& Task::sourcelocale() const {
+inline const ::SolasMatch::Common::Protobufs::Models::Locale& Task::sourcelocale() const {
   return sourcelocale_ != NULL ? *sourcelocale_ : *default_instance_->sourcelocale_;
 }
-inline ::Locale* Task::mutable_sourcelocale() {
+inline ::SolasMatch::Common::Protobufs::Models::Locale* Task::mutable_sourcelocale() {
   set_has_sourcelocale();
-  if (sourcelocale_ == NULL) sourcelocale_ = new ::Locale;
+  if (sourcelocale_ == NULL) sourcelocale_ = new ::SolasMatch::Common::Protobufs::Models::Locale;
   return sourcelocale_;
 }
-inline ::Locale* Task::release_sourcelocale() {
+inline ::SolasMatch::Common::Protobufs::Models::Locale* Task::release_sourcelocale() {
   clear_has_sourcelocale();
-  ::Locale* temp = sourcelocale_;
+  ::SolasMatch::Common::Protobufs::Models::Locale* temp = sourcelocale_;
   sourcelocale_ = NULL;
   return temp;
 }
 
-// optional .Locale targetLocale = 9;
+// optional .SolasMatch.Common.Protobufs.Models.Locale targetLocale = 9;
 inline bool Task::has_targetlocale() const {
   return (_has_bits_[0] & 0x00000100u) != 0;
 }
@@ -588,20 +593,20 @@ inline void Task::clear_has_targetlocale() {
   _has_bits_[0] &= ~0x00000100u;
 }
 inline void Task::clear_targetlocale() {
-  if (targetlocale_ != NULL) targetlocale_->::Locale::Clear();
+  if (targetlocale_ != NULL) targetlocale_->::SolasMatch::Common::Protobufs::Models::Locale::Clear();
   clear_has_targetlocale();
 }
-inline const ::Locale& Task::targetlocale() const {
+inline const ::SolasMatch::Common::Protobufs::Models::Locale& Task::targetlocale() const {
   return targetlocale_ != NULL ? *targetlocale_ : *default_instance_->targetlocale_;
 }
-inline ::Locale* Task::mutable_targetlocale() {
+inline ::SolasMatch::Common::Protobufs::Models::Locale* Task::mutable_targetlocale() {
   set_has_targetlocale();
-  if (targetlocale_ == NULL) targetlocale_ = new ::Locale;
+  if (targetlocale_ == NULL) targetlocale_ = new ::SolasMatch::Common::Protobufs::Models::Locale;
   return targetlocale_;
 }
-inline ::Locale* Task::release_targetlocale() {
+inline ::SolasMatch::Common::Protobufs::Models::Locale* Task::release_targetlocale() {
   clear_has_targetlocale();
-  ::Locale* temp = targetlocale_;
+  ::SolasMatch::Common::Protobufs::Models::Locale* temp = targetlocale_;
   targetlocale_ = NULL;
   return temp;
 }
@@ -674,6 +679,11 @@ inline void Task::set_published(bool value) {
 
 
 // @@protoc_insertion_point(namespace_scope)
+
+}  // namespace Models
+}  // namespace Protobufs
+}  // namespace Common
+}  // namespace SolasMatch
 
 #ifndef SWIG
 namespace google {

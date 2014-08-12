@@ -13,6 +13,11 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 
+namespace SolasMatch {
+namespace Common {
+namespace Protobufs {
+namespace Models {
+
 namespace {
 
 const ::google::protobuf::Descriptor* ArchivedTask_descriptor_ = NULL;
@@ -29,7 +34,7 @@ void protobuf_AssignDesc_ArchivedTask_2eproto() {
       "ArchivedTask.proto");
   GOOGLE_CHECK(file != NULL);
   ArchivedTask_descriptor_ = file->message_type(0);
-  static const int ArchivedTask_offsets_[24] = {
+  static const int ArchivedTask_offsets_[21] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ArchivedTask, id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ArchivedTask, projectid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ArchivedTask, title_),
@@ -42,9 +47,6 @@ void protobuf_AssignDesc_ArchivedTask_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ArchivedTask, tasktype_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ArchivedTask, taskstatus_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ArchivedTask, published_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ArchivedTask, translatorid_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ArchivedTask, archiveuserid_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ArchivedTask, archivedate_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ArchivedTask, version_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ArchivedTask, filename_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ArchivedTask, contenttype_),
@@ -95,22 +97,23 @@ void protobuf_AddDesc_ArchivedTask_2eproto() {
   already_here = true;
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-  ::protobuf_AddDesc_Locale_2eproto();
+  ::SolasMatch::Common::Protobufs::Models::protobuf_AddDesc_Locale_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\022ArchivedTask.proto\032\014Locale.proto\"\203\004\n\014A"
-    "rchivedTask\022\n\n\002id\030\001 \001(\005\022\021\n\tprojectId\030\002 \001"
-    "(\005\022\r\n\005title\030\003 \001(\t\022\017\n\007comment\030\004 \001(\t\022\020\n\010de"
-    "adline\030\005 \001(\t\022\021\n\twordCount\030\006 \001(\005\022\023\n\013creat"
-    "edTime\030\007 \001(\t\022\035\n\014sourceLocale\030\010 \001(\0132\007.Loc"
-    "ale\022\035\n\014targetLocale\030\t \001(\0132\007.Locale\022\020\n\010ta"
-    "skType\030\n \001(\t\022\022\n\ntaskStatus\030\013 \001(\t\022\021\n\tpubl"
-    "ished\030\014 \001(\010\022\024\n\014translatorId\030\r \001(\005\022\025\n\rarc"
-    "hiveUserId\030\016 \001(\005\022\023\n\013archiveDate\030\017 \001(\t\022\017\n"
-    "\007version\030\020 \001(\005\022\020\n\010fileName\030\021 \001(\t\022\023\n\013cont"
-    "entType\030\022 \001(\t\022\022\n\nuploadTime\030\023 \001(\t\022\025\n\ruse"
-    "rIdClaimed\030\024 \001(\005\022\026\n\016userIdArchived\030\025 \001(\005"
-    "\022\025\n\rprerequisites\030\026 \001(\t\022\031\n\021userIdTaskCre"
-    "ator\030\027 \001(\005\022\024\n\014archivedDate\030\030 \001(\t", 552);
+    "\n\022ArchivedTask.proto\022\"SolasMatch.Common."
+    "Protobufs.Models\032\014Locale.proto\"\207\004\n\014Archi"
+    "vedTask\022\n\n\002id\030\001 \001(\005\022\021\n\tprojectId\030\002 \001(\005\022\r"
+    "\n\005title\030\003 \001(\t\022\017\n\007comment\030\004 \001(\t\022\020\n\010deadli"
+    "ne\030\005 \001(\t\022\021\n\twordCount\030\006 \001(\005\022\023\n\013createdTi"
+    "me\030\007 \001(\t\022@\n\014sourceLocale\030\010 \001(\0132*.SolasMa"
+    "tch.Common.Protobufs.Models.Locale\022@\n\014ta"
+    "rgetLocale\030\t \001(\0132*.SolasMatch.Common.Pro"
+    "tobufs.Models.Locale\022\020\n\010taskType\030\n \001(\005\022\022"
+    "\n\ntaskStatus\030\013 \001(\t\022\021\n\tpublished\030\014 \001(\010\022\017\n"
+    "\007version\030\016 \001(\005\022\020\n\010fileName\030\017 \001(\t\022\023\n\013cont"
+    "entType\030\020 \001(\t\022\022\n\nuploadTime\030\021 \001(\t\022\025\n\ruse"
+    "rIdClaimed\030\022 \001(\005\022\026\n\016userIdArchived\030\023 \001(\005"
+    "\022\025\n\rprerequisites\030\024 \001(\t\022\031\n\021userIdTaskCre"
+    "ator\030\025 \001(\005\022\024\n\014archivedDate\030\026 \001(\t", 592);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "ArchivedTask.proto", &protobuf_RegisterTypes);
   ArchivedTask::default_instance_ = new ArchivedTask();
@@ -141,9 +144,6 @@ const int ArchivedTask::kTargetLocaleFieldNumber;
 const int ArchivedTask::kTaskTypeFieldNumber;
 const int ArchivedTask::kTaskStatusFieldNumber;
 const int ArchivedTask::kPublishedFieldNumber;
-const int ArchivedTask::kTranslatorIdFieldNumber;
-const int ArchivedTask::kArchiveUserIdFieldNumber;
-const int ArchivedTask::kArchiveDateFieldNumber;
 const int ArchivedTask::kVersionFieldNumber;
 const int ArchivedTask::kFileNameFieldNumber;
 const int ArchivedTask::kContentTypeFieldNumber;
@@ -161,8 +161,8 @@ ArchivedTask::ArchivedTask()
 }
 
 void ArchivedTask::InitAsDefaultInstance() {
-  sourcelocale_ = const_cast< ::Locale*>(&::Locale::default_instance());
-  targetlocale_ = const_cast< ::Locale*>(&::Locale::default_instance());
+  sourcelocale_ = const_cast< ::SolasMatch::Common::Protobufs::Models::Locale*>(&::SolasMatch::Common::Protobufs::Models::Locale::default_instance());
+  targetlocale_ = const_cast< ::SolasMatch::Common::Protobufs::Models::Locale*>(&::SolasMatch::Common::Protobufs::Models::Locale::default_instance());
 }
 
 ArchivedTask::ArchivedTask(const ArchivedTask& from)
@@ -182,12 +182,9 @@ void ArchivedTask::SharedCtor() {
   createdtime_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   sourcelocale_ = NULL;
   targetlocale_ = NULL;
-  tasktype_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  tasktype_ = 0;
   taskstatus_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   published_ = false;
-  translatorid_ = 0;
-  archiveuserid_ = 0;
-  archivedate_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   version_ = 0;
   filename_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   contenttype_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
@@ -217,14 +214,8 @@ void ArchivedTask::SharedDtor() {
   if (createdtime_ != &::google::protobuf::internal::kEmptyString) {
     delete createdtime_;
   }
-  if (tasktype_ != &::google::protobuf::internal::kEmptyString) {
-    delete tasktype_;
-  }
   if (taskstatus_ != &::google::protobuf::internal::kEmptyString) {
     delete taskstatus_;
-  }
-  if (archivedate_ != &::google::protobuf::internal::kEmptyString) {
-    delete archivedate_;
   }
   if (filename_ != &::google::protobuf::internal::kEmptyString) {
     delete filename_;
@@ -293,34 +284,21 @@ void ArchivedTask::Clear() {
       }
     }
     if (has_sourcelocale()) {
-      if (sourcelocale_ != NULL) sourcelocale_->::Locale::Clear();
+      if (sourcelocale_ != NULL) sourcelocale_->::SolasMatch::Common::Protobufs::Models::Locale::Clear();
     }
   }
   if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
     if (has_targetlocale()) {
-      if (targetlocale_ != NULL) targetlocale_->::Locale::Clear();
+      if (targetlocale_ != NULL) targetlocale_->::SolasMatch::Common::Protobufs::Models::Locale::Clear();
     }
-    if (has_tasktype()) {
-      if (tasktype_ != &::google::protobuf::internal::kEmptyString) {
-        tasktype_->clear();
-      }
-    }
+    tasktype_ = 0;
     if (has_taskstatus()) {
       if (taskstatus_ != &::google::protobuf::internal::kEmptyString) {
         taskstatus_->clear();
       }
     }
     published_ = false;
-    translatorid_ = 0;
-    archiveuserid_ = 0;
-    if (has_archivedate()) {
-      if (archivedate_ != &::google::protobuf::internal::kEmptyString) {
-        archivedate_->clear();
-      }
-    }
     version_ = 0;
-  }
-  if (_has_bits_[16 / 32] & (0xffu << (16 % 32))) {
     if (has_filename()) {
       if (filename_ != &::google::protobuf::internal::kEmptyString) {
         filename_->clear();
@@ -336,6 +314,8 @@ void ArchivedTask::Clear() {
         uploadtime_->clear();
       }
     }
+  }
+  if (_has_bits_[16 / 32] & (0xffu << (16 % 32))) {
     useridclaimed_ = 0;
     useridarchived_ = 0;
     if (has_prerequisites()) {
@@ -475,7 +455,7 @@ bool ArchivedTask::MergePartialFromCodedStream(
         break;
       }
       
-      // optional .Locale sourceLocale = 8;
+      // optional .SolasMatch.Common.Protobufs.Models.Locale sourceLocale = 8;
       case 8: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
@@ -489,7 +469,7 @@ bool ArchivedTask::MergePartialFromCodedStream(
         break;
       }
       
-      // optional .Locale targetLocale = 9;
+      // optional .SolasMatch.Common.Protobufs.Models.Locale targetLocale = 9;
       case 9: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
@@ -499,20 +479,19 @@ bool ArchivedTask::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(82)) goto parse_taskType;
+        if (input->ExpectTag(80)) goto parse_taskType;
         break;
       }
       
-      // optional string taskType = 10;
+      // optional int32 taskType = 10;
       case 10: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_taskType:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_tasktype()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->tasktype().data(), this->tasktype().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &tasktype_)));
+          set_has_tasktype();
         } else {
           goto handle_uninterpreted;
         }
@@ -549,61 +528,12 @@ bool ArchivedTask::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(104)) goto parse_translatorId;
+        if (input->ExpectTag(112)) goto parse_version;
         break;
       }
       
-      // optional int32 translatorId = 13;
-      case 13: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_translatorId:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &translatorid_)));
-          set_has_translatorid();
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(112)) goto parse_archiveUserId;
-        break;
-      }
-      
-      // optional int32 archiveUserId = 14;
+      // optional int32 version = 14;
       case 14: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_archiveUserId:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &archiveuserid_)));
-          set_has_archiveuserid();
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(122)) goto parse_archiveDate;
-        break;
-      }
-      
-      // optional string archiveDate = 15;
-      case 15: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_archiveDate:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_archivedate()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->archivedate().data(), this->archivedate().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(128)) goto parse_version;
-        break;
-      }
-      
-      // optional int32 version = 16;
-      case 16: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_version:
@@ -614,12 +544,12 @@ bool ArchivedTask::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(138)) goto parse_fileName;
+        if (input->ExpectTag(122)) goto parse_fileName;
         break;
       }
       
-      // optional string fileName = 17;
-      case 17: {
+      // optional string fileName = 15;
+      case 15: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_fileName:
@@ -631,12 +561,12 @@ bool ArchivedTask::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(146)) goto parse_contentType;
+        if (input->ExpectTag(130)) goto parse_contentType;
         break;
       }
       
-      // optional string contentType = 18;
-      case 18: {
+      // optional string contentType = 16;
+      case 16: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_contentType:
@@ -648,12 +578,12 @@ bool ArchivedTask::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(154)) goto parse_uploadTime;
+        if (input->ExpectTag(138)) goto parse_uploadTime;
         break;
       }
       
-      // optional string uploadTime = 19;
-      case 19: {
+      // optional string uploadTime = 17;
+      case 17: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_uploadTime:
@@ -665,12 +595,12 @@ bool ArchivedTask::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(160)) goto parse_userIdClaimed;
+        if (input->ExpectTag(144)) goto parse_userIdClaimed;
         break;
       }
       
-      // optional int32 userIdClaimed = 20;
-      case 20: {
+      // optional int32 userIdClaimed = 18;
+      case 18: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_userIdClaimed:
@@ -681,12 +611,12 @@ bool ArchivedTask::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(168)) goto parse_userIdArchived;
+        if (input->ExpectTag(152)) goto parse_userIdArchived;
         break;
       }
       
-      // optional int32 userIdArchived = 21;
-      case 21: {
+      // optional int32 userIdArchived = 19;
+      case 19: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_userIdArchived:
@@ -697,12 +627,12 @@ bool ArchivedTask::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(178)) goto parse_prerequisites;
+        if (input->ExpectTag(162)) goto parse_prerequisites;
         break;
       }
       
-      // optional string prerequisites = 22;
-      case 22: {
+      // optional string prerequisites = 20;
+      case 20: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_prerequisites:
@@ -714,12 +644,12 @@ bool ArchivedTask::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(184)) goto parse_userIdTaskCreator;
+        if (input->ExpectTag(168)) goto parse_userIdTaskCreator;
         break;
       }
       
-      // optional int32 userIdTaskCreator = 23;
-      case 23: {
+      // optional int32 userIdTaskCreator = 21;
+      case 21: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_userIdTaskCreator:
@@ -730,12 +660,12 @@ bool ArchivedTask::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(194)) goto parse_archivedDate;
+        if (input->ExpectTag(178)) goto parse_archivedDate;
         break;
       }
       
-      // optional string archivedDate = 24;
-      case 24: {
+      // optional string archivedDate = 22;
+      case 22: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_archivedDate:
@@ -820,25 +750,21 @@ void ArchivedTask::SerializeWithCachedSizes(
       7, this->createdtime(), output);
   }
   
-  // optional .Locale sourceLocale = 8;
+  // optional .SolasMatch.Common.Protobufs.Models.Locale sourceLocale = 8;
   if (has_sourcelocale()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       8, this->sourcelocale(), output);
   }
   
-  // optional .Locale targetLocale = 9;
+  // optional .SolasMatch.Common.Protobufs.Models.Locale targetLocale = 9;
   if (has_targetlocale()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       9, this->targetlocale(), output);
   }
   
-  // optional string taskType = 10;
+  // optional int32 taskType = 10;
   if (has_tasktype()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->tasktype().data(), this->tasktype().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
-      10, this->tasktype(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(10, this->tasktype(), output);
   }
   
   // optional string taskStatus = 11;
@@ -855,88 +781,69 @@ void ArchivedTask::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteBool(12, this->published(), output);
   }
   
-  // optional int32 translatorId = 13;
-  if (has_translatorid()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(13, this->translatorid(), output);
-  }
-  
-  // optional int32 archiveUserId = 14;
-  if (has_archiveuserid()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(14, this->archiveuserid(), output);
-  }
-  
-  // optional string archiveDate = 15;
-  if (has_archivedate()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->archivedate().data(), this->archivedate().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
-      15, this->archivedate(), output);
-  }
-  
-  // optional int32 version = 16;
+  // optional int32 version = 14;
   if (has_version()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(16, this->version(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(14, this->version(), output);
   }
   
-  // optional string fileName = 17;
+  // optional string fileName = 15;
   if (has_filename()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->filename().data(), this->filename().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     ::google::protobuf::internal::WireFormatLite::WriteString(
-      17, this->filename(), output);
+      15, this->filename(), output);
   }
   
-  // optional string contentType = 18;
+  // optional string contentType = 16;
   if (has_contenttype()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->contenttype().data(), this->contenttype().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     ::google::protobuf::internal::WireFormatLite::WriteString(
-      18, this->contenttype(), output);
+      16, this->contenttype(), output);
   }
   
-  // optional string uploadTime = 19;
+  // optional string uploadTime = 17;
   if (has_uploadtime()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->uploadtime().data(), this->uploadtime().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     ::google::protobuf::internal::WireFormatLite::WriteString(
-      19, this->uploadtime(), output);
+      17, this->uploadtime(), output);
   }
   
-  // optional int32 userIdClaimed = 20;
+  // optional int32 userIdClaimed = 18;
   if (has_useridclaimed()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(20, this->useridclaimed(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(18, this->useridclaimed(), output);
   }
   
-  // optional int32 userIdArchived = 21;
+  // optional int32 userIdArchived = 19;
   if (has_useridarchived()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(21, this->useridarchived(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(19, this->useridarchived(), output);
   }
   
-  // optional string prerequisites = 22;
+  // optional string prerequisites = 20;
   if (has_prerequisites()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->prerequisites().data(), this->prerequisites().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     ::google::protobuf::internal::WireFormatLite::WriteString(
-      22, this->prerequisites(), output);
+      20, this->prerequisites(), output);
   }
   
-  // optional int32 userIdTaskCreator = 23;
+  // optional int32 userIdTaskCreator = 21;
   if (has_useridtaskcreator()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(23, this->useridtaskcreator(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(21, this->useridtaskcreator(), output);
   }
   
-  // optional string archivedDate = 24;
+  // optional string archivedDate = 22;
   if (has_archiveddate()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->archiveddate().data(), this->archiveddate().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     ::google::protobuf::internal::WireFormatLite::WriteString(
-      24, this->archiveddate(), output);
+      22, this->archiveddate(), output);
   }
   
   if (!unknown_fields().empty()) {
@@ -1002,28 +909,23 @@ void ArchivedTask::SerializeWithCachedSizes(
         7, this->createdtime(), target);
   }
   
-  // optional .Locale sourceLocale = 8;
+  // optional .SolasMatch.Common.Protobufs.Models.Locale sourceLocale = 8;
   if (has_sourcelocale()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         8, this->sourcelocale(), target);
   }
   
-  // optional .Locale targetLocale = 9;
+  // optional .SolasMatch.Common.Protobufs.Models.Locale targetLocale = 9;
   if (has_targetlocale()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         9, this->targetlocale(), target);
   }
   
-  // optional string taskType = 10;
+  // optional int32 taskType = 10;
   if (has_tasktype()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->tasktype().data(), this->tasktype().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        10, this->tasktype(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(10, this->tasktype(), target);
   }
   
   // optional string taskStatus = 11;
@@ -1041,94 +943,74 @@ void ArchivedTask::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(12, this->published(), target);
   }
   
-  // optional int32 translatorId = 13;
-  if (has_translatorid()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(13, this->translatorid(), target);
-  }
-  
-  // optional int32 archiveUserId = 14;
-  if (has_archiveuserid()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(14, this->archiveuserid(), target);
-  }
-  
-  // optional string archiveDate = 15;
-  if (has_archivedate()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->archivedate().data(), this->archivedate().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        15, this->archivedate(), target);
-  }
-  
-  // optional int32 version = 16;
+  // optional int32 version = 14;
   if (has_version()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(16, this->version(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(14, this->version(), target);
   }
   
-  // optional string fileName = 17;
+  // optional string fileName = 15;
   if (has_filename()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->filename().data(), this->filename().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        17, this->filename(), target);
+        15, this->filename(), target);
   }
   
-  // optional string contentType = 18;
+  // optional string contentType = 16;
   if (has_contenttype()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->contenttype().data(), this->contenttype().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        18, this->contenttype(), target);
+        16, this->contenttype(), target);
   }
   
-  // optional string uploadTime = 19;
+  // optional string uploadTime = 17;
   if (has_uploadtime()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->uploadtime().data(), this->uploadtime().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        19, this->uploadtime(), target);
+        17, this->uploadtime(), target);
   }
   
-  // optional int32 userIdClaimed = 20;
+  // optional int32 userIdClaimed = 18;
   if (has_useridclaimed()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(20, this->useridclaimed(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(18, this->useridclaimed(), target);
   }
   
-  // optional int32 userIdArchived = 21;
+  // optional int32 userIdArchived = 19;
   if (has_useridarchived()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(21, this->useridarchived(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(19, this->useridarchived(), target);
   }
   
-  // optional string prerequisites = 22;
+  // optional string prerequisites = 20;
   if (has_prerequisites()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->prerequisites().data(), this->prerequisites().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        22, this->prerequisites(), target);
+        20, this->prerequisites(), target);
   }
   
-  // optional int32 userIdTaskCreator = 23;
+  // optional int32 userIdTaskCreator = 21;
   if (has_useridtaskcreator()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(23, this->useridtaskcreator(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(21, this->useridtaskcreator(), target);
   }
   
-  // optional string archivedDate = 24;
+  // optional string archivedDate = 22;
   if (has_archiveddate()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->archiveddate().data(), this->archiveddate().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        24, this->archiveddate(), target);
+        22, this->archiveddate(), target);
   }
   
   if (!unknown_fields().empty()) {
@@ -1191,7 +1073,7 @@ int ArchivedTask::ByteSize() const {
           this->createdtime());
     }
     
-    // optional .Locale sourceLocale = 8;
+    // optional .SolasMatch.Common.Protobufs.Models.Locale sourceLocale = 8;
     if (has_sourcelocale()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -1200,17 +1082,17 @@ int ArchivedTask::ByteSize() const {
     
   }
   if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
-    // optional .Locale targetLocale = 9;
+    // optional .SolasMatch.Common.Protobufs.Models.Locale targetLocale = 9;
     if (has_targetlocale()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->targetlocale());
     }
     
-    // optional string taskType = 10;
+    // optional int32 taskType = 10;
     if (has_tasktype()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->tasktype());
     }
     
@@ -1226,86 +1108,65 @@ int ArchivedTask::ByteSize() const {
       total_size += 1 + 1;
     }
     
-    // optional int32 translatorId = 13;
-    if (has_translatorid()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->translatorid());
-    }
-    
-    // optional int32 archiveUserId = 14;
-    if (has_archiveuserid()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->archiveuserid());
-    }
-    
-    // optional string archiveDate = 15;
-    if (has_archivedate()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->archivedate());
-    }
-    
-    // optional int32 version = 16;
+    // optional int32 version = 14;
     if (has_version()) {
-      total_size += 2 +
+      total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->version());
     }
     
-  }
-  if (_has_bits_[16 / 32] & (0xffu << (16 % 32))) {
-    // optional string fileName = 17;
+    // optional string fileName = 15;
     if (has_filename()) {
-      total_size += 2 +
+      total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
           this->filename());
     }
     
-    // optional string contentType = 18;
+    // optional string contentType = 16;
     if (has_contenttype()) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
           this->contenttype());
     }
     
-    // optional string uploadTime = 19;
+    // optional string uploadTime = 17;
     if (has_uploadtime()) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
           this->uploadtime());
     }
     
-    // optional int32 userIdClaimed = 20;
+  }
+  if (_has_bits_[16 / 32] & (0xffu << (16 % 32))) {
+    // optional int32 userIdClaimed = 18;
     if (has_useridclaimed()) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->useridclaimed());
     }
     
-    // optional int32 userIdArchived = 21;
+    // optional int32 userIdArchived = 19;
     if (has_useridarchived()) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->useridarchived());
     }
     
-    // optional string prerequisites = 22;
+    // optional string prerequisites = 20;
     if (has_prerequisites()) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
           this->prerequisites());
     }
     
-    // optional int32 userIdTaskCreator = 23;
+    // optional int32 userIdTaskCreator = 21;
     if (has_useridtaskcreator()) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->useridtaskcreator());
     }
     
-    // optional string archivedDate = 24;
+    // optional string archivedDate = 22;
     if (has_archiveddate()) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
@@ -1361,12 +1222,12 @@ void ArchivedTask::MergeFrom(const ArchivedTask& from) {
       set_createdtime(from.createdtime());
     }
     if (from.has_sourcelocale()) {
-      mutable_sourcelocale()->::Locale::MergeFrom(from.sourcelocale());
+      mutable_sourcelocale()->::SolasMatch::Common::Protobufs::Models::Locale::MergeFrom(from.sourcelocale());
     }
   }
   if (from._has_bits_[8 / 32] & (0xffu << (8 % 32))) {
     if (from.has_targetlocale()) {
-      mutable_targetlocale()->::Locale::MergeFrom(from.targetlocale());
+      mutable_targetlocale()->::SolasMatch::Common::Protobufs::Models::Locale::MergeFrom(from.targetlocale());
     }
     if (from.has_tasktype()) {
       set_tasktype(from.tasktype());
@@ -1377,20 +1238,9 @@ void ArchivedTask::MergeFrom(const ArchivedTask& from) {
     if (from.has_published()) {
       set_published(from.published());
     }
-    if (from.has_translatorid()) {
-      set_translatorid(from.translatorid());
-    }
-    if (from.has_archiveuserid()) {
-      set_archiveuserid(from.archiveuserid());
-    }
-    if (from.has_archivedate()) {
-      set_archivedate(from.archivedate());
-    }
     if (from.has_version()) {
       set_version(from.version());
     }
-  }
-  if (from._has_bits_[16 / 32] & (0xffu << (16 % 32))) {
     if (from.has_filename()) {
       set_filename(from.filename());
     }
@@ -1400,6 +1250,8 @@ void ArchivedTask::MergeFrom(const ArchivedTask& from) {
     if (from.has_uploadtime()) {
       set_uploadtime(from.uploadtime());
     }
+  }
+  if (from._has_bits_[16 / 32] & (0xffu << (16 % 32))) {
     if (from.has_useridclaimed()) {
       set_useridclaimed(from.useridclaimed());
     }
@@ -1450,9 +1302,6 @@ void ArchivedTask::Swap(ArchivedTask* other) {
     std::swap(tasktype_, other->tasktype_);
     std::swap(taskstatus_, other->taskstatus_);
     std::swap(published_, other->published_);
-    std::swap(translatorid_, other->translatorid_);
-    std::swap(archiveuserid_, other->archiveuserid_);
-    std::swap(archivedate_, other->archivedate_);
     std::swap(version_, other->version_);
     std::swap(filename_, other->filename_);
     std::swap(contenttype_, other->contenttype_);
@@ -1478,5 +1327,10 @@ void ArchivedTask::Swap(ArchivedTask* other) {
 
 
 // @@protoc_insertion_point(namespace_scope)
+
+}  // namespace Models
+}  // namespace Protobufs
+}  // namespace Common
+}  // namespace SolasMatch
 
 // @@protoc_insertion_point(global_scope)

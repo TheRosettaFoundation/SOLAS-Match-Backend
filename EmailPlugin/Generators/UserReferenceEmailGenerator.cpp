@@ -119,14 +119,14 @@ void UserReferenceEmailGenerator::run()
                     taskSect->SetValue("ORG_NAME", orgName.toStdString());
 
                     QString taskType;
-                    QString taskTypeId = QString::fromStdString(task->tasktype());
-                    if (taskTypeId == QString::number(CHUNKING)) {
+                    int taskTypeId = task->tasktype();
+                    if (taskTypeId == CHUNKING) {
                         taskType = "Chunking";
-                    } else if(taskTypeId == QString::number(TRANSLATION)) {
+                    } else if(taskTypeId == TRANSLATION) {
                         taskType = "Translation";
-                    } else if(taskTypeId == QString::number(PROOFREADING)) {
+                    } else if(taskTypeId == PROOFREADING) {
                         taskType = "Proofreading";
-                    } else if(taskTypeId == QString::number(POSTEDITING)) {
+                    } else if(taskTypeId == POSTEDITING) {
                         taskType = "Post-Editing";
                     } else {
                         taskType = "Invalid Type";

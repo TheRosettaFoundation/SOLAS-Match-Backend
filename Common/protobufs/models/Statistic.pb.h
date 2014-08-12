@@ -25,6 +25,11 @@
 #include <google/protobuf/generated_message_reflection.h>
 // @@protoc_insertion_point(includes)
 
+namespace SolasMatch {
+namespace Common {
+namespace Protobufs {
+namespace Models {
+
 // Internal implementation detail -- do not call these.
 void  protobuf_AddDesc_Statistic_2eproto();
 void protobuf_AssignDesc_Statistic_2eproto();
@@ -88,7 +93,7 @@ class Statistic : public ::google::protobuf::Message {
   
   // accessors -------------------------------------------------------
   
-  // required string name = 1;
+  // optional string name = 1;
   inline bool has_name() const;
   inline void clear_name();
   static const int kNameFieldNumber = 1;
@@ -110,7 +115,7 @@ class Statistic : public ::google::protobuf::Message {
   inline ::std::string* mutable_value();
   inline ::std::string* release_value();
   
-  // @@protoc_insertion_point(class_scope:Statistic)
+  // @@protoc_insertion_point(class_scope:SolasMatch.Common.Protobufs.Models.Statistic)
  private:
   inline void set_has_name();
   inline void clear_has_name();
@@ -139,7 +144,7 @@ class Statistic : public ::google::protobuf::Message {
 
 // Statistic
 
-// required string name = 1;
+// optional string name = 1;
 inline bool Statistic::has_name() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -257,6 +262,11 @@ inline ::std::string* Statistic::release_value() {
 
 
 // @@protoc_insertion_point(namespace_scope)
+
+}  // namespace Models
+}  // namespace Protobufs
+}  // namespace Common
+}  // namespace SolasMatch
 
 #ifndef SWIG
 namespace google {

@@ -12,6 +12,8 @@
 #include "../protobufs/models/User.pb.h"
 #include "../protobufs/models/Task.pb.h"
 
+using namespace  SolasMatch::Common::Protobufs::Models;
+
 class TaskDao
 {
 public:

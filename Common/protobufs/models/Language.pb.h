@@ -25,6 +25,11 @@
 #include <google/protobuf/generated_message_reflection.h>
 // @@protoc_insertion_point(includes)
 
+namespace SolasMatch {
+namespace Common {
+namespace Protobufs {
+namespace Models {
+
 // Internal implementation detail -- do not call these.
 void  protobuf_AddDesc_Language_2eproto();
 void protobuf_AssignDesc_Language_2eproto();
@@ -88,14 +93,14 @@ class Language : public ::google::protobuf::Message {
   
   // accessors -------------------------------------------------------
   
-  // required int32 id = 1;
+  // optional int32 id = 1;
   inline bool has_id() const;
   inline void clear_id();
   static const int kIdFieldNumber = 1;
   inline ::google::protobuf::int32 id() const;
   inline void set_id(::google::protobuf::int32 value);
   
-  // required string code = 2;
+  // optional string code = 2;
   inline bool has_code() const;
   inline void clear_code();
   static const int kCodeFieldNumber = 2;
@@ -117,7 +122,7 @@ class Language : public ::google::protobuf::Message {
   inline ::std::string* mutable_name();
   inline ::std::string* release_name();
   
-  // @@protoc_insertion_point(class_scope:Language)
+  // @@protoc_insertion_point(class_scope:SolasMatch.Common.Protobufs.Models.Language)
  private:
   inline void set_has_id();
   inline void clear_has_id();
@@ -149,7 +154,7 @@ class Language : public ::google::protobuf::Message {
 
 // Language
 
-// required int32 id = 1;
+// optional int32 id = 1;
 inline bool Language::has_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -171,7 +176,7 @@ inline void Language::set_id(::google::protobuf::int32 value) {
   id_ = value;
 }
 
-// required string code = 2;
+// optional string code = 2;
 inline bool Language::has_code() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -289,6 +294,11 @@ inline ::std::string* Language::release_name() {
 
 
 // @@protoc_insertion_point(namespace_scope)
+
+}  // namespace Models
+}  // namespace Protobufs
+}  // namespace Common
+}  // namespace SolasMatch
 
 #ifndef SWIG
 namespace google {

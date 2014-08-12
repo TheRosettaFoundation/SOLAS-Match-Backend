@@ -13,6 +13,11 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 
+namespace SolasMatch {
+namespace Common {
+namespace Protobufs {
+namespace Models {
+
 namespace {
 
 const ::google::protobuf::Descriptor* Organisation_descriptor_ = NULL;
@@ -81,11 +86,12 @@ void protobuf_AddDesc_Organisation_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\022Organisation.proto\"\243\001\n\014Organisation\022\n\n"
-    "\002id\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\021\n\tbiography\030\003 \001"
-    "(\t\022\020\n\010homepage\030\004 \001(\t\022\r\n\005email\030\005 \001(\t\022\017\n\007a"
-    "ddress\030\006 \001(\t\022\014\n\004city\030\007 \001(\t\022\017\n\007country\030\010 "
-    "\001(\t\022\025\n\rregionalFocus\030\t \001(\t", 186);
+    "\n\022Organisation.proto\022\"SolasMatch.Common."
+    "Protobufs.Models\"\243\001\n\014Organisation\022\n\n\002id\030"
+    "\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\021\n\tbiography\030\003 \001(\t\022\020"
+    "\n\010homepage\030\004 \001(\t\022\r\n\005email\030\005 \001(\t\022\017\n\007addre"
+    "ss\030\006 \001(\t\022\014\n\004city\030\007 \001(\t\022\017\n\007country\030\010 \001(\t\022"
+    "\025\n\rregionalFocus\030\t \001(\t", 222);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "Organisation.proto", &protobuf_RegisterTypes);
   Organisation::default_instance_ = new Organisation();
@@ -771,5 +777,10 @@ void Organisation::Swap(Organisation* other) {
 
 
 // @@protoc_insertion_point(namespace_scope)
+
+}  // namespace Models
+}  // namespace Protobufs
+}  // namespace Common
+}  // namespace SolasMatch
 
 // @@protoc_insertion_point(global_scope)

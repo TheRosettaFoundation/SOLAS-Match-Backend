@@ -13,6 +13,11 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 
+namespace SolasMatch {
+namespace Common {
+namespace Protobufs {
+namespace Models {
+
 namespace {
 
 const ::google::protobuf::Descriptor* Badge_descriptor_ = NULL;
@@ -76,9 +81,10 @@ void protobuf_AddDesc_Badge_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\013Badge.proto\"I\n\005Badge\022\n\n\002id\030\001 \001(\005\022\r\n\005ti"
-    "tle\030\002 \001(\t\022\023\n\013description\030\003 \001(\t\022\020\n\010owner_"
-    "id\030\004 \001(\005", 88);
+    "\n\013Badge.proto\022\"SolasMatch.Common.Protobu"
+    "fs.Models\"I\n\005Badge\022\n\n\002id\030\001 \001(\005\022\r\n\005title\030"
+    "\002 \001(\t\022\023\n\013description\030\003 \001(\t\022\020\n\010owner_id\030\004"
+    " \001(\005", 124);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "Badge.proto", &protobuf_RegisterTypes);
   Badge::default_instance_ = new Badge();
@@ -456,5 +462,10 @@ void Badge::Swap(Badge* other) {
 
 
 // @@protoc_insertion_point(namespace_scope)
+
+}  // namespace Models
+}  // namespace Protobufs
+}  // namespace Common
+}  // namespace SolasMatch
 
 // @@protoc_insertion_point(global_scope)

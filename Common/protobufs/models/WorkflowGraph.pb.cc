@@ -13,6 +13,11 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 
+namespace SolasMatch {
+namespace Common {
+namespace Protobufs {
+namespace Models {
+
 namespace {
 
 const ::google::protobuf::Descriptor* WorkflowGraph_descriptor_ = NULL;
@@ -74,12 +79,13 @@ void protobuf_AddDesc_WorkflowGraph_2eproto() {
   already_here = true;
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-  ::protobuf_AddDesc_WorkflowNode_2eproto();
+  ::SolasMatch::Common::Protobufs::Models::protobuf_AddDesc_WorkflowNode_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\023WorkflowGraph.proto\032\022WorkflowNode.prot"
-    "o\"U\n\rWorkflowGraph\022\020\n\010rootNode\030\001 \003(\005\022\021\n\t"
-    "projectId\030\002 \001(\005\022\037\n\010allNodes\030\003 \003(\0132\r.Work"
-    "flowNode", 128);
+    "\n\023WorkflowGraph.proto\022\"SolasMatch.Common"
+    ".Protobufs.Models\032\022WorkflowNode.proto\"x\n"
+    "\rWorkflowGraph\022\020\n\010rootNode\030\001 \003(\005\022\021\n\tproj"
+    "ectId\030\002 \001(\005\022B\n\010allNodes\030\003 \003(\01320.SolasMat"
+    "ch.Common.Protobufs.Models.WorkflowNode", 199);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "WorkflowGraph.proto", &protobuf_RegisterTypes);
   WorkflowGraph::default_instance_ = new WorkflowGraph();
@@ -206,7 +212,7 @@ bool WorkflowGraph::MergePartialFromCodedStream(
         break;
       }
       
-      // repeated .WorkflowNode allNodes = 3;
+      // repeated .SolasMatch.Common.Protobufs.Models.WorkflowNode allNodes = 3;
       case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
@@ -250,7 +256,7 @@ void WorkflowGraph::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->projectid(), output);
   }
   
-  // repeated .WorkflowNode allNodes = 3;
+  // repeated .SolasMatch.Common.Protobufs.Models.WorkflowNode allNodes = 3;
   for (int i = 0; i < this->allnodes_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       3, this->allnodes(i), output);
@@ -275,7 +281,7 @@ void WorkflowGraph::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->projectid(), target);
   }
   
-  // repeated .WorkflowNode allNodes = 3;
+  // repeated .SolasMatch.Common.Protobufs.Models.WorkflowNode allNodes = 3;
   for (int i = 0; i < this->allnodes_size(); i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -311,7 +317,7 @@ int WorkflowGraph::ByteSize() const {
     total_size += 1 * this->rootnode_size() + data_size;
   }
   
-  // repeated .WorkflowNode allNodes = 3;
+  // repeated .SolasMatch.Common.Protobufs.Models.WorkflowNode allNodes = 3;
   total_size += 1 * this->allnodes_size();
   for (int i = 0; i < this->allnodes_size(); i++) {
     total_size +=
@@ -395,5 +401,10 @@ void WorkflowGraph::Swap(WorkflowGraph* other) {
 
 
 // @@protoc_insertion_point(namespace_scope)
+
+}  // namespace Models
+}  // namespace Protobufs
+}  // namespace Common
+}  // namespace SolasMatch
 
 // @@protoc_insertion_point(global_scope)

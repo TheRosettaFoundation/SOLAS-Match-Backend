@@ -27,6 +27,11 @@
 #include "Tag.pb.h"
 // @@protoc_insertion_point(includes)
 
+namespace SolasMatch {
+namespace Common {
+namespace Protobufs {
+namespace Models {
+
 // Internal implementation detail -- do not call these.
 void  protobuf_AddDesc_Project_2eproto();
 void protobuf_AssignDesc_Project_2eproto();
@@ -188,27 +193,41 @@ class Project : public ::google::protobuf::Message {
   inline ::std::string* mutable_status();
   inline ::std::string* release_status();
   
-  // optional .Locale sourceLocale = 11;
+  // optional .SolasMatch.Common.Protobufs.Models.Locale sourceLocale = 11;
   inline bool has_sourcelocale() const;
   inline void clear_sourcelocale();
   static const int kSourceLocaleFieldNumber = 11;
-  inline const ::Locale& sourcelocale() const;
-  inline ::Locale* mutable_sourcelocale();
-  inline ::Locale* release_sourcelocale();
+  inline const ::SolasMatch::Common::Protobufs::Models::Locale& sourcelocale() const;
+  inline ::SolasMatch::Common::Protobufs::Models::Locale* mutable_sourcelocale();
+  inline ::SolasMatch::Common::Protobufs::Models::Locale* release_sourcelocale();
   
-  // repeated .Tag tag = 12;
+  // repeated .SolasMatch.Common.Protobufs.Models.Tag tag = 12;
   inline int tag_size() const;
   inline void clear_tag();
   static const int kTagFieldNumber = 12;
-  inline const ::Tag& tag(int index) const;
-  inline ::Tag* mutable_tag(int index);
-  inline ::Tag* add_tag();
-  inline const ::google::protobuf::RepeatedPtrField< ::Tag >&
+  inline const ::SolasMatch::Common::Protobufs::Models::Tag& tag(int index) const;
+  inline ::SolasMatch::Common::Protobufs::Models::Tag* mutable_tag(int index);
+  inline ::SolasMatch::Common::Protobufs::Models::Tag* add_tag();
+  inline const ::google::protobuf::RepeatedPtrField< ::SolasMatch::Common::Protobufs::Models::Tag >&
       tag() const;
-  inline ::google::protobuf::RepeatedPtrField< ::Tag >*
+  inline ::google::protobuf::RepeatedPtrField< ::SolasMatch::Common::Protobufs::Models::Tag >*
       mutable_tag();
   
-  // @@protoc_insertion_point(class_scope:Project)
+  // optional bool imageUploaded = 13;
+  inline bool has_imageuploaded() const;
+  inline void clear_imageuploaded();
+  static const int kImageUploadedFieldNumber = 13;
+  inline bool imageuploaded() const;
+  inline void set_imageuploaded(bool value);
+  
+  // optional bool imageApproved = 14;
+  inline bool has_imageapproved() const;
+  inline void clear_imageapproved();
+  static const int kImageApprovedFieldNumber = 14;
+  inline bool imageapproved() const;
+  inline void set_imageapproved(bool value);
+  
+  // @@protoc_insertion_point(class_scope:SolasMatch.Common.Protobufs.Models.Project)
  private:
   inline void set_has_id();
   inline void clear_has_id();
@@ -232,6 +251,10 @@ class Project : public ::google::protobuf::Message {
   inline void clear_has_status();
   inline void set_has_sourcelocale();
   inline void clear_has_sourcelocale();
+  inline void set_has_imageuploaded();
+  inline void clear_has_imageuploaded();
+  inline void set_has_imageapproved();
+  inline void clear_has_imageapproved();
   
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
   
@@ -244,12 +267,14 @@ class Project : public ::google::protobuf::Message {
   ::std::string* reference_;
   ::std::string* createdtime_;
   ::std::string* status_;
-  ::Locale* sourcelocale_;
-  ::google::protobuf::RepeatedPtrField< ::Tag > tag_;
+  ::SolasMatch::Common::Protobufs::Models::Locale* sourcelocale_;
   ::google::protobuf::int32 wordcount_;
+  bool imageuploaded_;
+  bool imageapproved_;
+  ::google::protobuf::RepeatedPtrField< ::SolasMatch::Common::Protobufs::Models::Tag > tag_;
   
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(12 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(14 + 31) / 32];
   
   friend void  protobuf_AddDesc_Project_2eproto();
   friend void protobuf_AssignDesc_Project_2eproto();
@@ -737,7 +762,7 @@ inline ::std::string* Project::release_status() {
   }
 }
 
-// optional .Locale sourceLocale = 11;
+// optional .SolasMatch.Common.Protobufs.Models.Locale sourceLocale = 11;
 inline bool Project::has_sourcelocale() const {
   return (_has_bits_[0] & 0x00000400u) != 0;
 }
@@ -748,51 +773,100 @@ inline void Project::clear_has_sourcelocale() {
   _has_bits_[0] &= ~0x00000400u;
 }
 inline void Project::clear_sourcelocale() {
-  if (sourcelocale_ != NULL) sourcelocale_->::Locale::Clear();
+  if (sourcelocale_ != NULL) sourcelocale_->::SolasMatch::Common::Protobufs::Models::Locale::Clear();
   clear_has_sourcelocale();
 }
-inline const ::Locale& Project::sourcelocale() const {
+inline const ::SolasMatch::Common::Protobufs::Models::Locale& Project::sourcelocale() const {
   return sourcelocale_ != NULL ? *sourcelocale_ : *default_instance_->sourcelocale_;
 }
-inline ::Locale* Project::mutable_sourcelocale() {
+inline ::SolasMatch::Common::Protobufs::Models::Locale* Project::mutable_sourcelocale() {
   set_has_sourcelocale();
-  if (sourcelocale_ == NULL) sourcelocale_ = new ::Locale;
+  if (sourcelocale_ == NULL) sourcelocale_ = new ::SolasMatch::Common::Protobufs::Models::Locale;
   return sourcelocale_;
 }
-inline ::Locale* Project::release_sourcelocale() {
+inline ::SolasMatch::Common::Protobufs::Models::Locale* Project::release_sourcelocale() {
   clear_has_sourcelocale();
-  ::Locale* temp = sourcelocale_;
+  ::SolasMatch::Common::Protobufs::Models::Locale* temp = sourcelocale_;
   sourcelocale_ = NULL;
   return temp;
 }
 
-// repeated .Tag tag = 12;
+// repeated .SolasMatch.Common.Protobufs.Models.Tag tag = 12;
 inline int Project::tag_size() const {
   return tag_.size();
 }
 inline void Project::clear_tag() {
   tag_.Clear();
 }
-inline const ::Tag& Project::tag(int index) const {
+inline const ::SolasMatch::Common::Protobufs::Models::Tag& Project::tag(int index) const {
   return tag_.Get(index);
 }
-inline ::Tag* Project::mutable_tag(int index) {
+inline ::SolasMatch::Common::Protobufs::Models::Tag* Project::mutable_tag(int index) {
   return tag_.Mutable(index);
 }
-inline ::Tag* Project::add_tag() {
+inline ::SolasMatch::Common::Protobufs::Models::Tag* Project::add_tag() {
   return tag_.Add();
 }
-inline const ::google::protobuf::RepeatedPtrField< ::Tag >&
+inline const ::google::protobuf::RepeatedPtrField< ::SolasMatch::Common::Protobufs::Models::Tag >&
 Project::tag() const {
   return tag_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::Tag >*
+inline ::google::protobuf::RepeatedPtrField< ::SolasMatch::Common::Protobufs::Models::Tag >*
 Project::mutable_tag() {
   return &tag_;
 }
 
+// optional bool imageUploaded = 13;
+inline bool Project::has_imageuploaded() const {
+  return (_has_bits_[0] & 0x00001000u) != 0;
+}
+inline void Project::set_has_imageuploaded() {
+  _has_bits_[0] |= 0x00001000u;
+}
+inline void Project::clear_has_imageuploaded() {
+  _has_bits_[0] &= ~0x00001000u;
+}
+inline void Project::clear_imageuploaded() {
+  imageuploaded_ = false;
+  clear_has_imageuploaded();
+}
+inline bool Project::imageuploaded() const {
+  return imageuploaded_;
+}
+inline void Project::set_imageuploaded(bool value) {
+  set_has_imageuploaded();
+  imageuploaded_ = value;
+}
+
+// optional bool imageApproved = 14;
+inline bool Project::has_imageapproved() const {
+  return (_has_bits_[0] & 0x00002000u) != 0;
+}
+inline void Project::set_has_imageapproved() {
+  _has_bits_[0] |= 0x00002000u;
+}
+inline void Project::clear_has_imageapproved() {
+  _has_bits_[0] &= ~0x00002000u;
+}
+inline void Project::clear_imageapproved() {
+  imageapproved_ = false;
+  clear_has_imageapproved();
+}
+inline bool Project::imageapproved() const {
+  return imageapproved_;
+}
+inline void Project::set_imageapproved(bool value) {
+  set_has_imageapproved();
+  imageapproved_ = value;
+}
+
 
 // @@protoc_insertion_point(namespace_scope)
+
+}  // namespace Models
+}  // namespace Protobufs
+}  // namespace Common
+}  // namespace SolasMatch
 
 #ifndef SWIG
 namespace google {

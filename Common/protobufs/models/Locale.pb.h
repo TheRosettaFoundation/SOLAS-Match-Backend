@@ -25,6 +25,11 @@
 #include <google/protobuf/generated_message_reflection.h>
 // @@protoc_insertion_point(includes)
 
+namespace SolasMatch {
+namespace Common {
+namespace Protobufs {
+namespace Models {
+
 // Internal implementation detail -- do not call these.
 void  protobuf_AddDesc_Locale_2eproto();
 void protobuf_AssignDesc_Locale_2eproto();
@@ -132,7 +137,7 @@ class Locale : public ::google::protobuf::Message {
   inline ::std::string* mutable_countrycode();
   inline ::std::string* release_countrycode();
   
-  // @@protoc_insertion_point(class_scope:Locale)
+  // @@protoc_insertion_point(class_scope:SolasMatch.Common.Protobufs.Models.Locale)
  private:
   inline void set_has_languagename();
   inline void clear_has_languagename();
@@ -401,6 +406,11 @@ inline ::std::string* Locale::release_countrycode() {
 
 
 // @@protoc_insertion_point(namespace_scope)
+
+}  // namespace Models
+}  // namespace Protobufs
+}  // namespace Common
+}  // namespace SolasMatch
 
 #ifndef SWIG
 namespace google {

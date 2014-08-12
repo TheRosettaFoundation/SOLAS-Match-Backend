@@ -26,6 +26,11 @@
 #include "WorkflowNode.pb.h"
 // @@protoc_insertion_point(includes)
 
+namespace SolasMatch {
+namespace Common {
+namespace Protobufs {
+namespace Models {
+
 // Internal implementation detail -- do not call these.
 void  protobuf_AddDesc_WorkflowGraph_2eproto();
 void protobuf_AssignDesc_WorkflowGraph_2eproto();
@@ -108,19 +113,19 @@ class WorkflowGraph : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 projectid() const;
   inline void set_projectid(::google::protobuf::int32 value);
   
-  // repeated .WorkflowNode allNodes = 3;
+  // repeated .SolasMatch.Common.Protobufs.Models.WorkflowNode allNodes = 3;
   inline int allnodes_size() const;
   inline void clear_allnodes();
   static const int kAllNodesFieldNumber = 3;
-  inline const ::WorkflowNode& allnodes(int index) const;
-  inline ::WorkflowNode* mutable_allnodes(int index);
-  inline ::WorkflowNode* add_allnodes();
-  inline const ::google::protobuf::RepeatedPtrField< ::WorkflowNode >&
+  inline const ::SolasMatch::Common::Protobufs::Models::WorkflowNode& allnodes(int index) const;
+  inline ::SolasMatch::Common::Protobufs::Models::WorkflowNode* mutable_allnodes(int index);
+  inline ::SolasMatch::Common::Protobufs::Models::WorkflowNode* add_allnodes();
+  inline const ::google::protobuf::RepeatedPtrField< ::SolasMatch::Common::Protobufs::Models::WorkflowNode >&
       allnodes() const;
-  inline ::google::protobuf::RepeatedPtrField< ::WorkflowNode >*
+  inline ::google::protobuf::RepeatedPtrField< ::SolasMatch::Common::Protobufs::Models::WorkflowNode >*
       mutable_allnodes();
   
-  // @@protoc_insertion_point(class_scope:WorkflowGraph)
+  // @@protoc_insertion_point(class_scope:SolasMatch.Common.Protobufs.Models.WorkflowGraph)
  private:
   inline void set_has_projectid();
   inline void clear_has_projectid();
@@ -128,7 +133,7 @@ class WorkflowGraph : public ::google::protobuf::Message {
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
   
   ::google::protobuf::RepeatedField< ::google::protobuf::int32 > rootnode_;
-  ::google::protobuf::RepeatedPtrField< ::WorkflowNode > allnodes_;
+  ::google::protobuf::RepeatedPtrField< ::SolasMatch::Common::Protobufs::Models::WorkflowNode > allnodes_;
   ::google::protobuf::int32 projectid_;
   
   mutable int _cached_size_;
@@ -195,33 +200,38 @@ inline void WorkflowGraph::set_projectid(::google::protobuf::int32 value) {
   projectid_ = value;
 }
 
-// repeated .WorkflowNode allNodes = 3;
+// repeated .SolasMatch.Common.Protobufs.Models.WorkflowNode allNodes = 3;
 inline int WorkflowGraph::allnodes_size() const {
   return allnodes_.size();
 }
 inline void WorkflowGraph::clear_allnodes() {
   allnodes_.Clear();
 }
-inline const ::WorkflowNode& WorkflowGraph::allnodes(int index) const {
+inline const ::SolasMatch::Common::Protobufs::Models::WorkflowNode& WorkflowGraph::allnodes(int index) const {
   return allnodes_.Get(index);
 }
-inline ::WorkflowNode* WorkflowGraph::mutable_allnodes(int index) {
+inline ::SolasMatch::Common::Protobufs::Models::WorkflowNode* WorkflowGraph::mutable_allnodes(int index) {
   return allnodes_.Mutable(index);
 }
-inline ::WorkflowNode* WorkflowGraph::add_allnodes() {
+inline ::SolasMatch::Common::Protobufs::Models::WorkflowNode* WorkflowGraph::add_allnodes() {
   return allnodes_.Add();
 }
-inline const ::google::protobuf::RepeatedPtrField< ::WorkflowNode >&
+inline const ::google::protobuf::RepeatedPtrField< ::SolasMatch::Common::Protobufs::Models::WorkflowNode >&
 WorkflowGraph::allnodes() const {
   return allnodes_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::WorkflowNode >*
+inline ::google::protobuf::RepeatedPtrField< ::SolasMatch::Common::Protobufs::Models::WorkflowNode >*
 WorkflowGraph::mutable_allnodes() {
   return &allnodes_;
 }
 
 
 // @@protoc_insertion_point(namespace_scope)
+
+}  // namespace Models
+}  // namespace Protobufs
+}  // namespace Common
+}  // namespace SolasMatch
 
 #ifndef SWIG
 namespace google {

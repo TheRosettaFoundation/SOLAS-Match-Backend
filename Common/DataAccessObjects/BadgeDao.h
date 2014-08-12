@@ -6,6 +6,8 @@
 #include "../protobufs/models/Badge.pb.h"
 #include "Common/MySQLHandler.h"
 
+using namespace  SolasMatch::Common::Protobufs::Models;
+
 class BadgeDao
 {
 public:

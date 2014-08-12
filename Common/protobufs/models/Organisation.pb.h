@@ -25,6 +25,11 @@
 #include <google/protobuf/generated_message_reflection.h>
 // @@protoc_insertion_point(includes)
 
+namespace SolasMatch {
+namespace Common {
+namespace Protobufs {
+namespace Models {
+
 // Internal implementation detail -- do not call these.
 void  protobuf_AddDesc_Organisation_2eproto();
 void protobuf_AssignDesc_Organisation_2eproto();
@@ -183,7 +188,7 @@ class Organisation : public ::google::protobuf::Message {
   inline ::std::string* mutable_regionalfocus();
   inline ::std::string* release_regionalfocus();
   
-  // @@protoc_insertion_point(class_scope:Organisation)
+  // @@protoc_insertion_point(class_scope:SolasMatch.Common.Protobufs.Models.Organisation)
  private:
   inline void set_has_id();
   inline void clear_has_id();
@@ -721,6 +726,11 @@ inline ::std::string* Organisation::release_regionalfocus() {
 
 
 // @@protoc_insertion_point(namespace_scope)
+
+}  // namespace Models
+}  // namespace Protobufs
+}  // namespace Common
+}  // namespace SolasMatch
 
 #ifndef SWIG
 namespace google {

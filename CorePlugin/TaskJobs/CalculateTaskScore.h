@@ -9,6 +9,8 @@
 #include "Common/protobufs/models/Task.pb.h"
 #include "Common/MySQLHandler.h"
 
+using namespace  SolasMatch::Common::Protobufs::Models;
+
 class CalculateTaskScore : public JobInterface
 {
     Q_INTERFACES(JobInterface)

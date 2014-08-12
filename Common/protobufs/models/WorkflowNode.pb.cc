@@ -13,6 +13,11 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 
+namespace SolasMatch {
+namespace Common {
+namespace Protobufs {
+namespace Models {
+
 namespace {
 
 const ::google::protobuf::Descriptor* WorkflowNode_descriptor_ = NULL;
@@ -75,11 +80,13 @@ void protobuf_AddDesc_WorkflowNode_2eproto() {
   already_here = true;
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-  ::protobuf_AddDesc_Task_2eproto();
+  ::SolasMatch::Common::Protobufs::Models::protobuf_AddDesc_Task_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\022WorkflowNode.proto\032\nTask.proto\"S\n\014Work"
-    "flowNode\022\016\n\006taskId\030\001 \002(\005\022\023\n\004task\030\002 \001(\0132\005"
-    ".Task\022\014\n\004next\030\003 \003(\005\022\020\n\010previous\030\004 \003(\005", 117);
+    "\n\022WorkflowNode.proto\022\"SolasMatch.Common."
+    "Protobufs.Models\032\nTask.proto\"v\n\014Workflow"
+    "Node\022\016\n\006taskId\030\001 \002(\005\0226\n\004task\030\002 \001(\0132(.Sol"
+    "asMatch.Common.Protobufs.Models.Task\022\014\n\004"
+    "next\030\003 \003(\005\022\020\n\010previous\030\004 \003(\005", 188);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "WorkflowNode.proto", &protobuf_RegisterTypes);
   WorkflowNode::default_instance_ = new WorkflowNode();
@@ -110,7 +117,7 @@ WorkflowNode::WorkflowNode()
 }
 
 void WorkflowNode::InitAsDefaultInstance() {
-  task_ = const_cast< ::Task*>(&::Task::default_instance());
+  task_ = const_cast< ::SolasMatch::Common::Protobufs::Models::Task*>(&::SolasMatch::Common::Protobufs::Models::Task::default_instance());
 }
 
 WorkflowNode::WorkflowNode(const WorkflowNode& from)
@@ -160,7 +167,7 @@ void WorkflowNode::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     taskid_ = 0;
     if (has_task()) {
-      if (task_ != NULL) task_->::Task::Clear();
+      if (task_ != NULL) task_->::SolasMatch::Common::Protobufs::Models::Task::Clear();
     }
   }
   next_.Clear();
@@ -190,7 +197,7 @@ bool WorkflowNode::MergePartialFromCodedStream(
         break;
       }
       
-      // optional .Task task = 2;
+      // optional .SolasMatch.Common.Protobufs.Models.Task task = 2;
       case 2: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
@@ -271,7 +278,7 @@ void WorkflowNode::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->taskid(), output);
   }
   
-  // optional .Task task = 2;
+  // optional .SolasMatch.Common.Protobufs.Models.Task task = 2;
   if (has_task()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       2, this->task(), output);
@@ -302,7 +309,7 @@ void WorkflowNode::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->taskid(), target);
   }
   
-  // optional .Task task = 2;
+  // optional .SolasMatch.Common.Protobufs.Models.Task task = 2;
   if (has_task()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -339,7 +346,7 @@ int WorkflowNode::ByteSize() const {
           this->taskid());
     }
     
-    // optional .Task task = 2;
+    // optional .SolasMatch.Common.Protobufs.Models.Task task = 2;
     if (has_task()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -399,7 +406,7 @@ void WorkflowNode::MergeFrom(const WorkflowNode& from) {
       set_taskid(from.taskid());
     }
     if (from.has_task()) {
-      mutable_task()->::Task::MergeFrom(from.task());
+      mutable_task()->::SolasMatch::Common::Protobufs::Models::Task::MergeFrom(from.task());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -445,5 +452,10 @@ void WorkflowNode::Swap(WorkflowNode* other) {
 
 
 // @@protoc_insertion_point(namespace_scope)
+
+}  // namespace Models
+}  // namespace Protobufs
+}  // namespace Common
+}  // namespace SolasMatch
 
 // @@protoc_insertion_point(global_scope)

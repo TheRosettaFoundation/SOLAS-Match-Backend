@@ -25,6 +25,11 @@
 #include <google/protobuf/generated_message_reflection.h>
 // @@protoc_insertion_point(includes)
 
+namespace SolasMatch {
+namespace Common {
+namespace Protobufs {
+namespace Models {
+
 // Internal implementation detail -- do not call these.
 void  protobuf_AddDesc_UserTaskStreamNotification_2eproto();
 void protobuf_AssignDesc_UserTaskStreamNotification_2eproto();
@@ -120,7 +125,7 @@ class UserTaskStreamNotification : public ::google::protobuf::Message {
   inline bool strict() const;
   inline void set_strict(bool value);
   
-  // @@protoc_insertion_point(class_scope:UserTaskStreamNotification)
+  // @@protoc_insertion_point(class_scope:SolasMatch.Common.Protobufs.Models.UserTaskStreamNotification)
  private:
   inline void set_has_user_id();
   inline void clear_has_user_id();
@@ -281,6 +286,11 @@ inline void UserTaskStreamNotification::set_strict(bool value) {
 
 
 // @@protoc_insertion_point(namespace_scope)
+
+}  // namespace Models
+}  // namespace Protobufs
+}  // namespace Common
+}  // namespace SolasMatch
 
 #ifndef SWIG
 namespace google {

@@ -13,6 +13,11 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 
+namespace SolasMatch {
+namespace Common {
+namespace Protobufs {
+namespace Models {
+
 namespace {
 
 const ::google::protobuf::Descriptor* Task_descriptor_ = NULL;
@@ -83,15 +88,18 @@ void protobuf_AddDesc_Task_2eproto() {
   already_here = true;
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-  ::protobuf_AddDesc_Locale_2eproto();
+  ::SolasMatch::Common::Protobufs::Models::protobuf_AddDesc_Locale_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\nTask.proto\032\014Locale.proto\"\366\001\n\004Task\022\n\n\002i"
-    "d\030\001 \001(\005\022\021\n\tprojectId\030\002 \001(\005\022\r\n\005title\030\003 \001("
-    "\t\022\017\n\007comment\030\004 \001(\t\022\020\n\010deadline\030\005 \001(\t\022\021\n\t"
-    "wordCount\030\006 \001(\005\022\023\n\013createdTime\030\007 \001(\t\022\035\n\014"
-    "sourceLocale\030\010 \001(\0132\007.Locale\022\035\n\014targetLoc"
-    "ale\030\t \001(\0132\007.Locale\022\020\n\010taskType\030\n \001(\005\022\022\n\n"
-    "taskStatus\030\013 \001(\005\022\021\n\tpublished\030\014 \001(\010", 275);
+    "\n\nTask.proto\022\"SolasMatch.Common.Protobuf"
+    "s.Models\032\014Locale.proto\"\274\002\n\004Task\022\n\n\002id\030\001 "
+    "\001(\005\022\021\n\tprojectId\030\002 \001(\005\022\r\n\005title\030\003 \001(\t\022\017\n"
+    "\007comment\030\004 \001(\t\022\020\n\010deadline\030\005 \001(\t\022\021\n\tword"
+    "Count\030\006 \001(\005\022\023\n\013createdTime\030\007 \001(\t\022@\n\014sour"
+    "ceLocale\030\010 \001(\0132*.SolasMatch.Common.Proto"
+    "bufs.Models.Locale\022@\n\014targetLocale\030\t \001(\013"
+    "2*.SolasMatch.Common.Protobufs.Models.Lo"
+    "cale\022\020\n\010taskType\030\n \001(\005\022\022\n\ntaskStatus\030\013 \001"
+    "(\005\022\021\n\tpublished\030\014 \001(\010", 381);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "Task.proto", &protobuf_RegisterTypes);
   Task::default_instance_ = new Task();
@@ -130,8 +138,8 @@ Task::Task()
 }
 
 void Task::InitAsDefaultInstance() {
-  sourcelocale_ = const_cast< ::Locale*>(&::Locale::default_instance());
-  targetlocale_ = const_cast< ::Locale*>(&::Locale::default_instance());
+  sourcelocale_ = const_cast< ::SolasMatch::Common::Protobufs::Models::Locale*>(&::SolasMatch::Common::Protobufs::Models::Locale::default_instance());
+  targetlocale_ = const_cast< ::SolasMatch::Common::Protobufs::Models::Locale*>(&::SolasMatch::Common::Protobufs::Models::Locale::default_instance());
 }
 
 Task::Task(const Task& from)
@@ -226,12 +234,12 @@ void Task::Clear() {
       }
     }
     if (has_sourcelocale()) {
-      if (sourcelocale_ != NULL) sourcelocale_->::Locale::Clear();
+      if (sourcelocale_ != NULL) sourcelocale_->::SolasMatch::Common::Protobufs::Models::Locale::Clear();
     }
   }
   if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
     if (has_targetlocale()) {
-      if (targetlocale_ != NULL) targetlocale_->::Locale::Clear();
+      if (targetlocale_ != NULL) targetlocale_->::SolasMatch::Common::Protobufs::Models::Locale::Clear();
     }
     tasktype_ = 0;
     taskstatus_ = 0;
@@ -362,7 +370,7 @@ bool Task::MergePartialFromCodedStream(
         break;
       }
       
-      // optional .Locale sourceLocale = 8;
+      // optional .SolasMatch.Common.Protobufs.Models.Locale sourceLocale = 8;
       case 8: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
@@ -376,7 +384,7 @@ bool Task::MergePartialFromCodedStream(
         break;
       }
       
-      // optional .Locale targetLocale = 9;
+      // optional .SolasMatch.Common.Protobufs.Models.Locale targetLocale = 9;
       case 9: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
@@ -507,13 +515,13 @@ void Task::SerializeWithCachedSizes(
       7, this->createdtime(), output);
   }
   
-  // optional .Locale sourceLocale = 8;
+  // optional .SolasMatch.Common.Protobufs.Models.Locale sourceLocale = 8;
   if (has_sourcelocale()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       8, this->sourcelocale(), output);
   }
   
-  // optional .Locale targetLocale = 9;
+  // optional .SolasMatch.Common.Protobufs.Models.Locale targetLocale = 9;
   if (has_targetlocale()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       9, this->targetlocale(), output);
@@ -597,14 +605,14 @@ void Task::SerializeWithCachedSizes(
         7, this->createdtime(), target);
   }
   
-  // optional .Locale sourceLocale = 8;
+  // optional .SolasMatch.Common.Protobufs.Models.Locale sourceLocale = 8;
   if (has_sourcelocale()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         8, this->sourcelocale(), target);
   }
   
-  // optional .Locale targetLocale = 9;
+  // optional .SolasMatch.Common.Protobufs.Models.Locale targetLocale = 9;
   if (has_targetlocale()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -686,7 +694,7 @@ int Task::ByteSize() const {
           this->createdtime());
     }
     
-    // optional .Locale sourceLocale = 8;
+    // optional .SolasMatch.Common.Protobufs.Models.Locale sourceLocale = 8;
     if (has_sourcelocale()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -695,7 +703,7 @@ int Task::ByteSize() const {
     
   }
   if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
-    // optional .Locale targetLocale = 9;
+    // optional .SolasMatch.Common.Protobufs.Models.Locale targetLocale = 9;
     if (has_targetlocale()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -770,12 +778,12 @@ void Task::MergeFrom(const Task& from) {
       set_createdtime(from.createdtime());
     }
     if (from.has_sourcelocale()) {
-      mutable_sourcelocale()->::Locale::MergeFrom(from.sourcelocale());
+      mutable_sourcelocale()->::SolasMatch::Common::Protobufs::Models::Locale::MergeFrom(from.sourcelocale());
     }
   }
   if (from._has_bits_[8 / 32] & (0xffu << (8 % 32))) {
     if (from.has_targetlocale()) {
-      mutable_targetlocale()->::Locale::MergeFrom(from.targetlocale());
+      mutable_targetlocale()->::SolasMatch::Common::Protobufs::Models::Locale::MergeFrom(from.targetlocale());
     }
     if (from.has_tasktype()) {
       set_tasktype(from.tasktype());
@@ -837,5 +845,10 @@ void Task::Swap(Task* other) {
 
 
 // @@protoc_insertion_point(namespace_scope)
+
+}  // namespace Models
+}  // namespace Protobufs
+}  // namespace Common
+}  // namespace SolasMatch
 
 // @@protoc_insertion_point(global_scope)

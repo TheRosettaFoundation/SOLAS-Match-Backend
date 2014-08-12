@@ -23,7 +23,13 @@
 #include <google/protobuf/repeated_field.h>
 #include <google/protobuf/extension_set.h>
 #include <google/protobuf/generated_message_reflection.h>
+#include "Locale.pb.h"
 // @@protoc_insertion_point(includes)
+
+namespace SolasMatch {
+namespace Common {
+namespace Protobufs {
+namespace Models {
 
 // Internal implementation detail -- do not call these.
 void  protobuf_AddDesc_ArchivedProject_2eproto();
@@ -88,7 +94,7 @@ class ArchivedProject : public ::google::protobuf::Message {
   
   // accessors -------------------------------------------------------
   
-  // required int32 id = 1;
+  // optional int32 id = 1;
   inline bool has_id() const;
   inline void clear_id();
   static const int kIdFieldNumber = 1;
@@ -175,32 +181,65 @@ class ArchivedProject : public ::google::protobuf::Message {
   inline ::std::string* mutable_createdtime();
   inline ::std::string* release_createdtime();
   
-  // optional string languageCode = 10;
-  inline bool has_languagecode() const;
-  inline void clear_languagecode();
-  static const int kLanguageCodeFieldNumber = 10;
-  inline const ::std::string& languagecode() const;
-  inline void set_languagecode(const ::std::string& value);
-  inline void set_languagecode(const char* value);
-  inline void set_languagecode(const char* value, size_t size);
-  inline ::std::string* mutable_languagecode();
-  inline ::std::string* release_languagecode();
+  // optional .SolasMatch.Common.Protobufs.Models.Locale sourceLocale = 10;
+  inline bool has_sourcelocale() const;
+  inline void clear_sourcelocale();
+  static const int kSourceLocaleFieldNumber = 10;
+  inline const ::SolasMatch::Common::Protobufs::Models::Locale& sourcelocale() const;
+  inline ::SolasMatch::Common::Protobufs::Models::Locale* mutable_sourcelocale();
+  inline ::SolasMatch::Common::Protobufs::Models::Locale* release_sourcelocale();
   
-  // optional string countryCode = 11;
-  inline bool has_countrycode() const;
-  inline void clear_countrycode();
-  static const int kCountryCodeFieldNumber = 11;
-  inline const ::std::string& countrycode() const;
-  inline void set_countrycode(const ::std::string& value);
-  inline void set_countrycode(const char* value);
-  inline void set_countrycode(const char* value, size_t size);
-  inline ::std::string* mutable_countrycode();
-  inline ::std::string* release_countrycode();
+  // optional int32 userIdArchived = 11;
+  inline bool has_useridarchived() const;
+  inline void clear_useridarchived();
+  static const int kUserIdArchivedFieldNumber = 11;
+  inline ::google::protobuf::int32 useridarchived() const;
+  inline void set_useridarchived(::google::protobuf::int32 value);
   
-  // optional string archivedDate = 12;
+  // optional int32 userIdProjectCreator = 12;
+  inline bool has_useridprojectcreator() const;
+  inline void clear_useridprojectcreator();
+  static const int kUserIdProjectCreatorFieldNumber = 12;
+  inline ::google::protobuf::int32 useridprojectcreator() const;
+  inline void set_useridprojectcreator(::google::protobuf::int32 value);
+  
+  // optional string fileName = 13;
+  inline bool has_filename() const;
+  inline void clear_filename();
+  static const int kFileNameFieldNumber = 13;
+  inline const ::std::string& filename() const;
+  inline void set_filename(const ::std::string& value);
+  inline void set_filename(const char* value);
+  inline void set_filename(const char* value, size_t size);
+  inline ::std::string* mutable_filename();
+  inline ::std::string* release_filename();
+  
+  // optional string fileToken = 14;
+  inline bool has_filetoken() const;
+  inline void clear_filetoken();
+  static const int kFileTokenFieldNumber = 14;
+  inline const ::std::string& filetoken() const;
+  inline void set_filetoken(const ::std::string& value);
+  inline void set_filetoken(const char* value);
+  inline void set_filetoken(const char* value, size_t size);
+  inline ::std::string* mutable_filetoken();
+  inline ::std::string* release_filetoken();
+  
+  // optional string mimeType = 15;
+  inline bool has_mimetype() const;
+  inline void clear_mimetype();
+  static const int kMimeTypeFieldNumber = 15;
+  inline const ::std::string& mimetype() const;
+  inline void set_mimetype(const ::std::string& value);
+  inline void set_mimetype(const char* value);
+  inline void set_mimetype(const char* value, size_t size);
+  inline ::std::string* mutable_mimetype();
+  inline ::std::string* release_mimetype();
+  
+  // optional string archivedDate = 16;
   inline bool has_archiveddate() const;
   inline void clear_archiveddate();
-  static const int kArchivedDateFieldNumber = 12;
+  static const int kArchivedDateFieldNumber = 16;
   inline const ::std::string& archiveddate() const;
   inline void set_archiveddate(const ::std::string& value);
   inline void set_archiveddate(const char* value);
@@ -208,14 +247,32 @@ class ArchivedProject : public ::google::protobuf::Message {
   inline ::std::string* mutable_archiveddate();
   inline ::std::string* release_archiveddate();
   
-  // optional int32 translatorId = 13;
-  inline bool has_translatorid() const;
-  inline void clear_translatorid();
-  static const int kTranslatorIdFieldNumber = 13;
-  inline ::google::protobuf::int32 translatorid() const;
-  inline void set_translatorid(::google::protobuf::int32 value);
+  // optional string tags = 17;
+  inline bool has_tags() const;
+  inline void clear_tags();
+  static const int kTagsFieldNumber = 17;
+  inline const ::std::string& tags() const;
+  inline void set_tags(const ::std::string& value);
+  inline void set_tags(const char* value);
+  inline void set_tags(const char* value, size_t size);
+  inline ::std::string* mutable_tags();
+  inline ::std::string* release_tags();
   
-  // @@protoc_insertion_point(class_scope:ArchivedProject)
+  // optional bool imageUploaded = 18;
+  inline bool has_imageuploaded() const;
+  inline void clear_imageuploaded();
+  static const int kImageUploadedFieldNumber = 18;
+  inline bool imageuploaded() const;
+  inline void set_imageuploaded(bool value);
+  
+  // optional bool imageApproved = 19;
+  inline bool has_imageapproved() const;
+  inline void clear_imageapproved();
+  static const int kImageApprovedFieldNumber = 19;
+  inline bool imageapproved() const;
+  inline void set_imageapproved(bool value);
+  
+  // @@protoc_insertion_point(class_scope:SolasMatch.Common.Protobufs.Models.ArchivedProject)
  private:
   inline void set_has_id();
   inline void clear_has_id();
@@ -235,14 +292,26 @@ class ArchivedProject : public ::google::protobuf::Message {
   inline void clear_has_wordcount();
   inline void set_has_createdtime();
   inline void clear_has_createdtime();
-  inline void set_has_languagecode();
-  inline void clear_has_languagecode();
-  inline void set_has_countrycode();
-  inline void clear_has_countrycode();
+  inline void set_has_sourcelocale();
+  inline void clear_has_sourcelocale();
+  inline void set_has_useridarchived();
+  inline void clear_has_useridarchived();
+  inline void set_has_useridprojectcreator();
+  inline void clear_has_useridprojectcreator();
+  inline void set_has_filename();
+  inline void clear_has_filename();
+  inline void set_has_filetoken();
+  inline void clear_has_filetoken();
+  inline void set_has_mimetype();
+  inline void clear_has_mimetype();
   inline void set_has_archiveddate();
   inline void clear_has_archiveddate();
-  inline void set_has_translatorid();
-  inline void clear_has_translatorid();
+  inline void set_has_tags();
+  inline void clear_has_tags();
+  inline void set_has_imageuploaded();
+  inline void clear_has_imageuploaded();
+  inline void set_has_imageapproved();
+  inline void clear_has_imageapproved();
   
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
   
@@ -254,14 +323,20 @@ class ArchivedProject : public ::google::protobuf::Message {
   ::std::string* deadline_;
   ::std::string* reference_;
   ::std::string* createdtime_;
-  ::std::string* languagecode_;
   ::google::protobuf::int32 wordcount_;
-  ::google::protobuf::int32 translatorid_;
-  ::std::string* countrycode_;
+  ::google::protobuf::int32 useridarchived_;
+  ::SolasMatch::Common::Protobufs::Models::Locale* sourcelocale_;
+  ::std::string* filename_;
+  ::std::string* filetoken_;
+  ::std::string* mimetype_;
   ::std::string* archiveddate_;
+  ::google::protobuf::int32 useridprojectcreator_;
+  bool imageuploaded_;
+  bool imageapproved_;
+  ::std::string* tags_;
   
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(13 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(19 + 31) / 32];
   
   friend void  protobuf_AddDesc_ArchivedProject_2eproto();
   friend void protobuf_AssignDesc_ArchivedProject_2eproto();
@@ -277,7 +352,7 @@ class ArchivedProject : public ::google::protobuf::Message {
 
 // ArchivedProject
 
-// required int32 id = 1;
+// optional int32 id = 1;
 inline bool ArchivedProject::has_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -691,131 +766,262 @@ inline ::std::string* ArchivedProject::release_createdtime() {
   }
 }
 
-// optional string languageCode = 10;
-inline bool ArchivedProject::has_languagecode() const {
+// optional .SolasMatch.Common.Protobufs.Models.Locale sourceLocale = 10;
+inline bool ArchivedProject::has_sourcelocale() const {
   return (_has_bits_[0] & 0x00000200u) != 0;
 }
-inline void ArchivedProject::set_has_languagecode() {
+inline void ArchivedProject::set_has_sourcelocale() {
   _has_bits_[0] |= 0x00000200u;
 }
-inline void ArchivedProject::clear_has_languagecode() {
+inline void ArchivedProject::clear_has_sourcelocale() {
   _has_bits_[0] &= ~0x00000200u;
 }
-inline void ArchivedProject::clear_languagecode() {
-  if (languagecode_ != &::google::protobuf::internal::kEmptyString) {
-    languagecode_->clear();
-  }
-  clear_has_languagecode();
+inline void ArchivedProject::clear_sourcelocale() {
+  if (sourcelocale_ != NULL) sourcelocale_->::SolasMatch::Common::Protobufs::Models::Locale::Clear();
+  clear_has_sourcelocale();
 }
-inline const ::std::string& ArchivedProject::languagecode() const {
-  return *languagecode_;
+inline const ::SolasMatch::Common::Protobufs::Models::Locale& ArchivedProject::sourcelocale() const {
+  return sourcelocale_ != NULL ? *sourcelocale_ : *default_instance_->sourcelocale_;
 }
-inline void ArchivedProject::set_languagecode(const ::std::string& value) {
-  set_has_languagecode();
-  if (languagecode_ == &::google::protobuf::internal::kEmptyString) {
-    languagecode_ = new ::std::string;
-  }
-  languagecode_->assign(value);
+inline ::SolasMatch::Common::Protobufs::Models::Locale* ArchivedProject::mutable_sourcelocale() {
+  set_has_sourcelocale();
+  if (sourcelocale_ == NULL) sourcelocale_ = new ::SolasMatch::Common::Protobufs::Models::Locale;
+  return sourcelocale_;
 }
-inline void ArchivedProject::set_languagecode(const char* value) {
-  set_has_languagecode();
-  if (languagecode_ == &::google::protobuf::internal::kEmptyString) {
-    languagecode_ = new ::std::string;
-  }
-  languagecode_->assign(value);
-}
-inline void ArchivedProject::set_languagecode(const char* value, size_t size) {
-  set_has_languagecode();
-  if (languagecode_ == &::google::protobuf::internal::kEmptyString) {
-    languagecode_ = new ::std::string;
-  }
-  languagecode_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* ArchivedProject::mutable_languagecode() {
-  set_has_languagecode();
-  if (languagecode_ == &::google::protobuf::internal::kEmptyString) {
-    languagecode_ = new ::std::string;
-  }
-  return languagecode_;
-}
-inline ::std::string* ArchivedProject::release_languagecode() {
-  clear_has_languagecode();
-  if (languagecode_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = languagecode_;
-    languagecode_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
+inline ::SolasMatch::Common::Protobufs::Models::Locale* ArchivedProject::release_sourcelocale() {
+  clear_has_sourcelocale();
+  ::SolasMatch::Common::Protobufs::Models::Locale* temp = sourcelocale_;
+  sourcelocale_ = NULL;
+  return temp;
 }
 
-// optional string countryCode = 11;
-inline bool ArchivedProject::has_countrycode() const {
+// optional int32 userIdArchived = 11;
+inline bool ArchivedProject::has_useridarchived() const {
   return (_has_bits_[0] & 0x00000400u) != 0;
 }
-inline void ArchivedProject::set_has_countrycode() {
+inline void ArchivedProject::set_has_useridarchived() {
   _has_bits_[0] |= 0x00000400u;
 }
-inline void ArchivedProject::clear_has_countrycode() {
+inline void ArchivedProject::clear_has_useridarchived() {
   _has_bits_[0] &= ~0x00000400u;
 }
-inline void ArchivedProject::clear_countrycode() {
-  if (countrycode_ != &::google::protobuf::internal::kEmptyString) {
-    countrycode_->clear();
+inline void ArchivedProject::clear_useridarchived() {
+  useridarchived_ = 0;
+  clear_has_useridarchived();
+}
+inline ::google::protobuf::int32 ArchivedProject::useridarchived() const {
+  return useridarchived_;
+}
+inline void ArchivedProject::set_useridarchived(::google::protobuf::int32 value) {
+  set_has_useridarchived();
+  useridarchived_ = value;
+}
+
+// optional int32 userIdProjectCreator = 12;
+inline bool ArchivedProject::has_useridprojectcreator() const {
+  return (_has_bits_[0] & 0x00000800u) != 0;
+}
+inline void ArchivedProject::set_has_useridprojectcreator() {
+  _has_bits_[0] |= 0x00000800u;
+}
+inline void ArchivedProject::clear_has_useridprojectcreator() {
+  _has_bits_[0] &= ~0x00000800u;
+}
+inline void ArchivedProject::clear_useridprojectcreator() {
+  useridprojectcreator_ = 0;
+  clear_has_useridprojectcreator();
+}
+inline ::google::protobuf::int32 ArchivedProject::useridprojectcreator() const {
+  return useridprojectcreator_;
+}
+inline void ArchivedProject::set_useridprojectcreator(::google::protobuf::int32 value) {
+  set_has_useridprojectcreator();
+  useridprojectcreator_ = value;
+}
+
+// optional string fileName = 13;
+inline bool ArchivedProject::has_filename() const {
+  return (_has_bits_[0] & 0x00001000u) != 0;
+}
+inline void ArchivedProject::set_has_filename() {
+  _has_bits_[0] |= 0x00001000u;
+}
+inline void ArchivedProject::clear_has_filename() {
+  _has_bits_[0] &= ~0x00001000u;
+}
+inline void ArchivedProject::clear_filename() {
+  if (filename_ != &::google::protobuf::internal::kEmptyString) {
+    filename_->clear();
   }
-  clear_has_countrycode();
+  clear_has_filename();
 }
-inline const ::std::string& ArchivedProject::countrycode() const {
-  return *countrycode_;
+inline const ::std::string& ArchivedProject::filename() const {
+  return *filename_;
 }
-inline void ArchivedProject::set_countrycode(const ::std::string& value) {
-  set_has_countrycode();
-  if (countrycode_ == &::google::protobuf::internal::kEmptyString) {
-    countrycode_ = new ::std::string;
+inline void ArchivedProject::set_filename(const ::std::string& value) {
+  set_has_filename();
+  if (filename_ == &::google::protobuf::internal::kEmptyString) {
+    filename_ = new ::std::string;
   }
-  countrycode_->assign(value);
+  filename_->assign(value);
 }
-inline void ArchivedProject::set_countrycode(const char* value) {
-  set_has_countrycode();
-  if (countrycode_ == &::google::protobuf::internal::kEmptyString) {
-    countrycode_ = new ::std::string;
+inline void ArchivedProject::set_filename(const char* value) {
+  set_has_filename();
+  if (filename_ == &::google::protobuf::internal::kEmptyString) {
+    filename_ = new ::std::string;
   }
-  countrycode_->assign(value);
+  filename_->assign(value);
 }
-inline void ArchivedProject::set_countrycode(const char* value, size_t size) {
-  set_has_countrycode();
-  if (countrycode_ == &::google::protobuf::internal::kEmptyString) {
-    countrycode_ = new ::std::string;
+inline void ArchivedProject::set_filename(const char* value, size_t size) {
+  set_has_filename();
+  if (filename_ == &::google::protobuf::internal::kEmptyString) {
+    filename_ = new ::std::string;
   }
-  countrycode_->assign(reinterpret_cast<const char*>(value), size);
+  filename_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* ArchivedProject::mutable_countrycode() {
-  set_has_countrycode();
-  if (countrycode_ == &::google::protobuf::internal::kEmptyString) {
-    countrycode_ = new ::std::string;
+inline ::std::string* ArchivedProject::mutable_filename() {
+  set_has_filename();
+  if (filename_ == &::google::protobuf::internal::kEmptyString) {
+    filename_ = new ::std::string;
   }
-  return countrycode_;
+  return filename_;
 }
-inline ::std::string* ArchivedProject::release_countrycode() {
-  clear_has_countrycode();
-  if (countrycode_ == &::google::protobuf::internal::kEmptyString) {
+inline ::std::string* ArchivedProject::release_filename() {
+  clear_has_filename();
+  if (filename_ == &::google::protobuf::internal::kEmptyString) {
     return NULL;
   } else {
-    ::std::string* temp = countrycode_;
-    countrycode_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    ::std::string* temp = filename_;
+    filename_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
     return temp;
   }
 }
 
-// optional string archivedDate = 12;
+// optional string fileToken = 14;
+inline bool ArchivedProject::has_filetoken() const {
+  return (_has_bits_[0] & 0x00002000u) != 0;
+}
+inline void ArchivedProject::set_has_filetoken() {
+  _has_bits_[0] |= 0x00002000u;
+}
+inline void ArchivedProject::clear_has_filetoken() {
+  _has_bits_[0] &= ~0x00002000u;
+}
+inline void ArchivedProject::clear_filetoken() {
+  if (filetoken_ != &::google::protobuf::internal::kEmptyString) {
+    filetoken_->clear();
+  }
+  clear_has_filetoken();
+}
+inline const ::std::string& ArchivedProject::filetoken() const {
+  return *filetoken_;
+}
+inline void ArchivedProject::set_filetoken(const ::std::string& value) {
+  set_has_filetoken();
+  if (filetoken_ == &::google::protobuf::internal::kEmptyString) {
+    filetoken_ = new ::std::string;
+  }
+  filetoken_->assign(value);
+}
+inline void ArchivedProject::set_filetoken(const char* value) {
+  set_has_filetoken();
+  if (filetoken_ == &::google::protobuf::internal::kEmptyString) {
+    filetoken_ = new ::std::string;
+  }
+  filetoken_->assign(value);
+}
+inline void ArchivedProject::set_filetoken(const char* value, size_t size) {
+  set_has_filetoken();
+  if (filetoken_ == &::google::protobuf::internal::kEmptyString) {
+    filetoken_ = new ::std::string;
+  }
+  filetoken_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ArchivedProject::mutable_filetoken() {
+  set_has_filetoken();
+  if (filetoken_ == &::google::protobuf::internal::kEmptyString) {
+    filetoken_ = new ::std::string;
+  }
+  return filetoken_;
+}
+inline ::std::string* ArchivedProject::release_filetoken() {
+  clear_has_filetoken();
+  if (filetoken_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = filetoken_;
+    filetoken_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+
+// optional string mimeType = 15;
+inline bool ArchivedProject::has_mimetype() const {
+  return (_has_bits_[0] & 0x00004000u) != 0;
+}
+inline void ArchivedProject::set_has_mimetype() {
+  _has_bits_[0] |= 0x00004000u;
+}
+inline void ArchivedProject::clear_has_mimetype() {
+  _has_bits_[0] &= ~0x00004000u;
+}
+inline void ArchivedProject::clear_mimetype() {
+  if (mimetype_ != &::google::protobuf::internal::kEmptyString) {
+    mimetype_->clear();
+  }
+  clear_has_mimetype();
+}
+inline const ::std::string& ArchivedProject::mimetype() const {
+  return *mimetype_;
+}
+inline void ArchivedProject::set_mimetype(const ::std::string& value) {
+  set_has_mimetype();
+  if (mimetype_ == &::google::protobuf::internal::kEmptyString) {
+    mimetype_ = new ::std::string;
+  }
+  mimetype_->assign(value);
+}
+inline void ArchivedProject::set_mimetype(const char* value) {
+  set_has_mimetype();
+  if (mimetype_ == &::google::protobuf::internal::kEmptyString) {
+    mimetype_ = new ::std::string;
+  }
+  mimetype_->assign(value);
+}
+inline void ArchivedProject::set_mimetype(const char* value, size_t size) {
+  set_has_mimetype();
+  if (mimetype_ == &::google::protobuf::internal::kEmptyString) {
+    mimetype_ = new ::std::string;
+  }
+  mimetype_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ArchivedProject::mutable_mimetype() {
+  set_has_mimetype();
+  if (mimetype_ == &::google::protobuf::internal::kEmptyString) {
+    mimetype_ = new ::std::string;
+  }
+  return mimetype_;
+}
+inline ::std::string* ArchivedProject::release_mimetype() {
+  clear_has_mimetype();
+  if (mimetype_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = mimetype_;
+    mimetype_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+
+// optional string archivedDate = 16;
 inline bool ArchivedProject::has_archiveddate() const {
-  return (_has_bits_[0] & 0x00000800u) != 0;
+  return (_has_bits_[0] & 0x00008000u) != 0;
 }
 inline void ArchivedProject::set_has_archiveddate() {
-  _has_bits_[0] |= 0x00000800u;
+  _has_bits_[0] |= 0x00008000u;
 }
 inline void ArchivedProject::clear_has_archiveddate() {
-  _has_bits_[0] &= ~0x00000800u;
+  _has_bits_[0] &= ~0x00008000u;
 }
 inline void ArchivedProject::clear_archiveddate() {
   if (archiveddate_ != &::google::protobuf::internal::kEmptyString) {
@@ -865,30 +1071,115 @@ inline ::std::string* ArchivedProject::release_archiveddate() {
   }
 }
 
-// optional int32 translatorId = 13;
-inline bool ArchivedProject::has_translatorid() const {
-  return (_has_bits_[0] & 0x00001000u) != 0;
+// optional string tags = 17;
+inline bool ArchivedProject::has_tags() const {
+  return (_has_bits_[0] & 0x00010000u) != 0;
 }
-inline void ArchivedProject::set_has_translatorid() {
-  _has_bits_[0] |= 0x00001000u;
+inline void ArchivedProject::set_has_tags() {
+  _has_bits_[0] |= 0x00010000u;
 }
-inline void ArchivedProject::clear_has_translatorid() {
-  _has_bits_[0] &= ~0x00001000u;
+inline void ArchivedProject::clear_has_tags() {
+  _has_bits_[0] &= ~0x00010000u;
 }
-inline void ArchivedProject::clear_translatorid() {
-  translatorid_ = 0;
-  clear_has_translatorid();
+inline void ArchivedProject::clear_tags() {
+  if (tags_ != &::google::protobuf::internal::kEmptyString) {
+    tags_->clear();
+  }
+  clear_has_tags();
 }
-inline ::google::protobuf::int32 ArchivedProject::translatorid() const {
-  return translatorid_;
+inline const ::std::string& ArchivedProject::tags() const {
+  return *tags_;
 }
-inline void ArchivedProject::set_translatorid(::google::protobuf::int32 value) {
-  set_has_translatorid();
-  translatorid_ = value;
+inline void ArchivedProject::set_tags(const ::std::string& value) {
+  set_has_tags();
+  if (tags_ == &::google::protobuf::internal::kEmptyString) {
+    tags_ = new ::std::string;
+  }
+  tags_->assign(value);
+}
+inline void ArchivedProject::set_tags(const char* value) {
+  set_has_tags();
+  if (tags_ == &::google::protobuf::internal::kEmptyString) {
+    tags_ = new ::std::string;
+  }
+  tags_->assign(value);
+}
+inline void ArchivedProject::set_tags(const char* value, size_t size) {
+  set_has_tags();
+  if (tags_ == &::google::protobuf::internal::kEmptyString) {
+    tags_ = new ::std::string;
+  }
+  tags_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ArchivedProject::mutable_tags() {
+  set_has_tags();
+  if (tags_ == &::google::protobuf::internal::kEmptyString) {
+    tags_ = new ::std::string;
+  }
+  return tags_;
+}
+inline ::std::string* ArchivedProject::release_tags() {
+  clear_has_tags();
+  if (tags_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = tags_;
+    tags_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+
+// optional bool imageUploaded = 18;
+inline bool ArchivedProject::has_imageuploaded() const {
+  return (_has_bits_[0] & 0x00020000u) != 0;
+}
+inline void ArchivedProject::set_has_imageuploaded() {
+  _has_bits_[0] |= 0x00020000u;
+}
+inline void ArchivedProject::clear_has_imageuploaded() {
+  _has_bits_[0] &= ~0x00020000u;
+}
+inline void ArchivedProject::clear_imageuploaded() {
+  imageuploaded_ = false;
+  clear_has_imageuploaded();
+}
+inline bool ArchivedProject::imageuploaded() const {
+  return imageuploaded_;
+}
+inline void ArchivedProject::set_imageuploaded(bool value) {
+  set_has_imageuploaded();
+  imageuploaded_ = value;
+}
+
+// optional bool imageApproved = 19;
+inline bool ArchivedProject::has_imageapproved() const {
+  return (_has_bits_[0] & 0x00040000u) != 0;
+}
+inline void ArchivedProject::set_has_imageapproved() {
+  _has_bits_[0] |= 0x00040000u;
+}
+inline void ArchivedProject::clear_has_imageapproved() {
+  _has_bits_[0] &= ~0x00040000u;
+}
+inline void ArchivedProject::clear_imageapproved() {
+  imageapproved_ = false;
+  clear_has_imageapproved();
+}
+inline bool ArchivedProject::imageapproved() const {
+  return imageapproved_;
+}
+inline void ArchivedProject::set_imageapproved(bool value) {
+  set_has_imageapproved();
+  imageapproved_ = value;
 }
 
 
 // @@protoc_insertion_point(namespace_scope)
+
+}  // namespace Models
+}  // namespace Protobufs
+}  // namespace Common
+}  // namespace SolasMatch
 
 #ifndef SWIG
 namespace google {

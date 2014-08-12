@@ -14,6 +14,8 @@
 #include "Common/protobufs/models/UserTaskStreamNotification.pb.h"
 #include "Common/protobufs/models/ArchivedTask.pb.h"
 
+using namespace  SolasMatch::Common::Protobufs::Models;
+
 class UserDao
 {
 public:

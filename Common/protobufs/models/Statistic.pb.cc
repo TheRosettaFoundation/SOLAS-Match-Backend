@@ -13,6 +13,11 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 
+namespace SolasMatch {
+namespace Common {
+namespace Protobufs {
+namespace Models {
+
 namespace {
 
 const ::google::protobuf::Descriptor* Statistic_descriptor_ = NULL;
@@ -74,8 +79,9 @@ void protobuf_AddDesc_Statistic_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\017Statistic.proto\"(\n\tStatistic\022\014\n\004name\030\001"
-    " \002(\t\022\r\n\005value\030\002 \001(\t", 59);
+    "\n\017Statistic.proto\022\"SolasMatch.Common.Pro"
+    "tobufs.Models\"(\n\tStatistic\022\014\n\004name\030\001 \001(\t"
+    "\022\r\n\005value\030\002 \001(\t", 95);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "Statistic.proto", &protobuf_RegisterTypes);
   Statistic::default_instance_ = new Statistic();
@@ -177,7 +183,7 @@ bool Statistic::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required string name = 1;
+      // optional string name = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
@@ -228,7 +234,7 @@ bool Statistic::MergePartialFromCodedStream(
 
 void Statistic::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required string name = 1;
+  // optional string name = 1;
   if (has_name()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->name().data(), this->name().length(),
@@ -254,7 +260,7 @@ void Statistic::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* Statistic::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required string name = 1;
+  // optional string name = 1;
   if (has_name()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->name().data(), this->name().length(),
@@ -285,7 +291,7 @@ int Statistic::ByteSize() const {
   int total_size = 0;
   
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required string name = 1;
+    // optional string name = 1;
     if (has_name()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
@@ -349,7 +355,6 @@ void Statistic::CopyFrom(const Statistic& from) {
 }
 
 bool Statistic::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
   
   return true;
 }
@@ -374,5 +379,10 @@ void Statistic::Swap(Statistic* other) {
 
 
 // @@protoc_insertion_point(namespace_scope)
+
+}  // namespace Models
+}  // namespace Protobufs
+}  // namespace Common
+}  // namespace SolasMatch
 
 // @@protoc_insertion_point(global_scope)

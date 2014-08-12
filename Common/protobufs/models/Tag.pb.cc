@@ -13,6 +13,11 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 
+namespace SolasMatch {
+namespace Common {
+namespace Protobufs {
+namespace Models {
+
 namespace {
 
 const ::google::protobuf::Descriptor* Tag_descriptor_ = NULL;
@@ -74,8 +79,9 @@ void protobuf_AddDesc_Tag_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\tTag.proto\" \n\003Tag\022\n\n\002id\030\001 \002(\005\022\r\n\005label\030"
-    "\002 \002(\t", 45);
+    "\n\tTag.proto\022\"SolasMatch.Common.Protobufs"
+    ".Models\" \n\003Tag\022\n\n\002id\030\001 \001(\005\022\r\n\005label\030\002 \002("
+    "\t", 81);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "Tag.proto", &protobuf_RegisterTypes);
   Tag::default_instance_ = new Tag();
@@ -170,7 +176,7 @@ bool Tag::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required int32 id = 1;
+      // optional int32 id = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
@@ -220,7 +226,7 @@ bool Tag::MergePartialFromCodedStream(
 
 void Tag::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required int32 id = 1;
+  // optional int32 id = 1;
   if (has_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->id(), output);
   }
@@ -242,7 +248,7 @@ void Tag::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* Tag::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required int32 id = 1;
+  // optional int32 id = 1;
   if (has_id()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->id(), target);
   }
@@ -268,7 +274,7 @@ int Tag::ByteSize() const {
   int total_size = 0;
   
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required int32 id = 1;
+    // optional int32 id = 1;
     if (has_id()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
@@ -332,7 +338,7 @@ void Tag::CopyFrom(const Tag& from) {
 }
 
 bool Tag::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+  if ((_has_bits_[0] & 0x00000002) != 0x00000002) return false;
   
   return true;
 }
@@ -357,5 +363,10 @@ void Tag::Swap(Tag* other) {
 
 
 // @@protoc_insertion_point(namespace_scope)
+
+}  // namespace Models
+}  // namespace Protobufs
+}  // namespace Common
+}  // namespace SolasMatch
 
 // @@protoc_insertion_point(global_scope)

@@ -13,6 +13,11 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 
+namespace SolasMatch {
+namespace Common {
+namespace Protobufs {
+namespace Models {
+
 namespace {
 
 const ::google::protobuf::Descriptor* Language_descriptor_ = NULL;
@@ -75,8 +80,9 @@ void protobuf_AddDesc_Language_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\016Language.proto\"2\n\010Language\022\n\n\002id\030\001 \002(\005"
-    "\022\014\n\004code\030\002 \002(\t\022\014\n\004name\030\003 \001(\t", 68);
+    "\n\016Language.proto\022\"SolasMatch.Common.Prot"
+    "obufs.Models\"2\n\010Language\022\n\n\002id\030\001 \001(\005\022\014\n\004"
+    "code\030\002 \001(\t\022\014\n\004name\030\003 \001(\t", 104);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "Language.proto", &protobuf_RegisterTypes);
   Language::default_instance_ = new Language();
@@ -181,7 +187,7 @@ bool Language::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required int32 id = 1;
+      // optional int32 id = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
@@ -196,7 +202,7 @@ bool Language::MergePartialFromCodedStream(
         break;
       }
       
-      // required string code = 2;
+      // optional string code = 2;
       case 2: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
@@ -248,12 +254,12 @@ bool Language::MergePartialFromCodedStream(
 
 void Language::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required int32 id = 1;
+  // optional int32 id = 1;
   if (has_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->id(), output);
   }
   
-  // required string code = 2;
+  // optional string code = 2;
   if (has_code()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->code().data(), this->code().length(),
@@ -279,12 +285,12 @@ void Language::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* Language::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required int32 id = 1;
+  // optional int32 id = 1;
   if (has_id()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->id(), target);
   }
   
-  // required string code = 2;
+  // optional string code = 2;
   if (has_code()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->code().data(), this->code().length(),
@@ -315,14 +321,14 @@ int Language::ByteSize() const {
   int total_size = 0;
   
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required int32 id = 1;
+    // optional int32 id = 1;
     if (has_id()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->id());
     }
     
-    // required string code = 2;
+    // optional string code = 2;
     if (has_code()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
@@ -389,7 +395,6 @@ void Language::CopyFrom(const Language& from) {
 }
 
 bool Language::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
   
   return true;
 }
@@ -415,5 +420,10 @@ void Language::Swap(Language* other) {
 
 
 // @@protoc_insertion_point(namespace_scope)
+
+}  // namespace Models
+}  // namespace Protobufs
+}  // namespace Common
+}  // namespace SolasMatch
 
 // @@protoc_insertion_point(global_scope)

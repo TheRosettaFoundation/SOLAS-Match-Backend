@@ -4,7 +4,7 @@
 
 QList<QSharedPointer<Project> > ProjectDao::getProjects(QSharedPointer<MySQLHandler> db, int id, QString title, QString desc, QString impact,
                                                         QString deadline, int orgId, QString ref, int wordCount,
-                                                        QString created, QString language, QString country)
+                                                        QString created, QString language, QString country, int imageUploaded, int imageApproved)
 {
     QList<QSharedPointer<Project> > ret = QList<QSharedPointer<Project> >();
     QString args = "";
@@ -72,8 +72,21 @@ QList<QSharedPointer<Project> > ProjectDao::getProjects(QSharedPointer<MySQLHand
     if (country != "") {
         args += MySQLHandler::wrapString(country);
     } else {
+        args += "null, ";
+    }
+
+    if (imageUploaded != -1) {
+        args += QString::number(imageUploaded) + ", ";
+    } else {
+        args += "null, ";
+    }
+
+    if (imageApproved != -1) {
+        args += QString::number(imageApproved) + ", ";
+    } else {
         args += "null";
     }
+
 
     QSharedPointer<QSqlQuery> mQuery = db->call("getProject", args);
     if (mQuery->first()) {
@@ -90,11 +103,11 @@ QList<QSharedPointer<Project> > ProjectDao::getProjects(QSharedPointer<MySQLHand
 
 QSharedPointer<Project> ProjectDao::getProject(QSharedPointer<MySQLHandler> db, int id, QString title, QString desc, QString impact,
                                                QString deadline, int orgId, QString ref, int wordCount,
-                                               QString created, QString language, QString country)
+                                               QString created, QString language, QString country, int imageUploaded, int imageApproved)
 {
     QSharedPointer<Project> project;
     QList<QSharedPointer<Project> > projectList = ProjectDao::getProjects(db, id, title, desc, impact, deadline, orgId,
-                                                                          ref, wordCount, created, language, country);
+                                                                          ref, wordCount, created, language, country, imageUploaded, imageApproved);
     if (projectList.count() > 0) {
         project = projectList.at(0);
     }
@@ -110,7 +123,7 @@ QList<QSharedPointer<ArchivedProject> > ProjectDao::getArchivedProjects(QSharedP
     } else {
         args += "null, ";
     }
-    args += "null, null, null, null, null, null, null, null, null, null, null, null";
+    args += "null, null, null, null, null, null, null, null, null, null, null, null, null, null";
 
     QSharedPointer<QSqlQuery> mQuery = db->call("getArchivedProject", args);
     if (mQuery->first()) {

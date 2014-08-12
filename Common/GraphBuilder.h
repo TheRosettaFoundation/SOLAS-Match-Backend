@@ -6,6 +6,8 @@
 #include "protobufs/models/WorkflowGraph.pb.h"
 #include "protobufs/models/WorkflowNode.pb.h"
 
+using namespace  SolasMatch::Common::Protobufs::Models;
+
 class GraphBuilder
 {
 public:

@@ -7,6 +7,8 @@
 #include "Common/MySQLHandler.h"
 #include "Common/protobufs/models/User.pb.h"
 
+using namespace  SolasMatch::Common::Protobufs::Models;
+
 class AdminDao
 {
 public:

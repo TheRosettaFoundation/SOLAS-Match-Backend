@@ -16,6 +16,8 @@
 #include "protobufs/models/BannedUser.pb.h"
 #include "protobufs/models/UserTaskStreamNotification.pb.h"
 
+using namespace  SolasMatch::Common::Protobufs::Models;
+
 class ModelGenerator
 {
 public:

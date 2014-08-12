@@ -25,6 +25,11 @@
 #include <google/protobuf/generated_message_reflection.h>
 // @@protoc_insertion_point(includes)
 
+namespace SolasMatch {
+namespace Common {
+namespace Protobufs {
+namespace Models {
+
 // Internal implementation detail -- do not call these.
 void  protobuf_AddDesc_Badge_2eproto();
 void protobuf_AssignDesc_Badge_2eproto();
@@ -124,7 +129,7 @@ class Badge : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 owner_id() const;
   inline void set_owner_id(::google::protobuf::int32 value);
   
-  // @@protoc_insertion_point(class_scope:Badge)
+  // @@protoc_insertion_point(class_scope:SolasMatch.Common.Protobufs.Models.Badge)
  private:
   inline void set_has_id();
   inline void clear_has_id();
@@ -321,6 +326,11 @@ inline void Badge::set_owner_id(::google::protobuf::int32 value) {
 
 
 // @@protoc_insertion_point(namespace_scope)
+
+}  // namespace Models
+}  // namespace Protobufs
+}  // namespace Common
+}  // namespace SolasMatch
 
 #ifndef SWIG
 namespace google {

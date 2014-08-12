@@ -7,6 +7,8 @@
 #include "Common/MySQLHandler.h"
 #include "Common/protobufs/models/Language.pb.h"
 
+using namespace SolasMatch::Common::Protobufs::Models;
+
 class LanguageDao
 {
 public:

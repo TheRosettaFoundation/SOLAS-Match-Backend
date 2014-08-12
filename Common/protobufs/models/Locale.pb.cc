@@ -13,6 +13,11 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 
+namespace SolasMatch {
+namespace Common {
+namespace Protobufs {
+namespace Models {
+
 namespace {
 
 const ::google::protobuf::Descriptor* Locale_descriptor_ = NULL;
@@ -76,9 +81,10 @@ void protobuf_AddDesc_Locale_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\014Locale.proto\"^\n\006Locale\022\024\n\014languageName"
-    "\030\001 \001(\t\022\024\n\014languageCode\030\002 \001(\t\022\023\n\013countryN"
-    "ame\030\003 \001(\t\022\023\n\013countryCode\030\004 \001(\t", 110);
+    "\n\014Locale.proto\022\"SolasMatch.Common.Protob"
+    "ufs.Models\"^\n\006Locale\022\024\n\014languageName\030\001 \001"
+    "(\t\022\024\n\014languageCode\030\002 \001(\t\022\023\n\013countryName\030"
+    "\003 \001(\t\022\023\n\013countryCode\030\004 \001(\t", 146);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "Locale.proto", &protobuf_RegisterTypes);
   Locale::default_instance_ = new Locale();
@@ -490,5 +496,10 @@ void Locale::Swap(Locale* other) {
 
 
 // @@protoc_insertion_point(namespace_scope)
+
+}  // namespace Models
+}  // namespace Protobufs
+}  // namespace Common
+}  // namespace SolasMatch
 
 // @@protoc_insertion_point(global_scope)

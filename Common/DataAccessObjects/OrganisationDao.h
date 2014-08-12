@@ -10,6 +10,8 @@
 #include "Common/protobufs/models/User.pb.h"
 #include "Common/MySQLHandler.h"
 
+using namespace  SolasMatch::Common::Protobufs::Models;
+
 class OrganisationDao
 {
 public:

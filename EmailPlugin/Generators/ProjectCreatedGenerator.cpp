@@ -43,7 +43,6 @@ void ProjectCreatedGenerator::run()
         QString orgView = siteLocation + "org/" + QString::number(org->id()) + "/profile/";
         dict.SetValue("ORG_VIEW", orgView.toStdString());
         dict.SetValue("ORG_NAME", org->name());
-
         std::string email_body;
         QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/project-created.tpl";
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);

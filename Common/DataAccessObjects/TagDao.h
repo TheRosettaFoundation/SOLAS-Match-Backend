@@ -9,6 +9,8 @@
 #include "Common/MySQLHandler.h"
 #include "Common/protobufs/models/Tag.pb.h"
 
+using namespace  SolasMatch::Common::Protobufs::Models;
+
 class TagDao
 {
 public:

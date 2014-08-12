@@ -13,6 +13,11 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 
+namespace SolasMatch {
+namespace Common {
+namespace Protobufs {
+namespace Models {
+
 namespace {
 
 const ::google::protobuf::Descriptor* BannedUser_descriptor_ = NULL;
@@ -77,10 +82,10 @@ void protobuf_AddDesc_BannedUser_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\020BannedUser.proto\"g\n\nBannedUser\022\016\n\006user"
-    "Id\030\001 \001(\005\022\023\n\013userIdAdmin\030\002 \001(\005\022\017\n\007banType"
-    "\030\003 \001(\005\022\017\n\007comment\030\004 \001(\t\022\022\n\nbannedDate\030\005 "
-    "\001(\t", 123);
+    "\n\020BannedUser.proto\022\"SolasMatch.Common.Pr"
+    "otobufs.Models\"g\n\nBannedUser\022\016\n\006userId\030\001"
+    " \001(\005\022\023\n\013userIdAdmin\030\002 \001(\005\022\017\n\007banType\030\003 \001"
+    "(\005\022\017\n\007comment\030\004 \001(\t\022\022\n\nbannedDate\030\005 \001(\t", 159);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "BannedUser.proto", &protobuf_RegisterTypes);
   BannedUser::default_instance_ = new BannedUser();
@@ -498,5 +503,10 @@ void BannedUser::Swap(BannedUser* other) {
 
 
 // @@protoc_insertion_point(namespace_scope)
+
+}  // namespace Models
+}  // namespace Protobufs
+}  // namespace Common
+}  // namespace SolasMatch
 
 // @@protoc_insertion_point(global_scope)

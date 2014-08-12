@@ -26,6 +26,11 @@
 #include "Task.pb.h"
 // @@protoc_insertion_point(includes)
 
+namespace SolasMatch {
+namespace Common {
+namespace Protobufs {
+namespace Models {
+
 // Internal implementation detail -- do not call these.
 void  protobuf_AddDesc_WorkflowNode_2eproto();
 void protobuf_AssignDesc_WorkflowNode_2eproto();
@@ -96,13 +101,13 @@ class WorkflowNode : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 taskid() const;
   inline void set_taskid(::google::protobuf::int32 value);
   
-  // optional .Task task = 2;
+  // optional .SolasMatch.Common.Protobufs.Models.Task task = 2;
   inline bool has_task() const;
   inline void clear_task();
   static const int kTaskFieldNumber = 2;
-  inline const ::Task& task() const;
-  inline ::Task* mutable_task();
-  inline ::Task* release_task();
+  inline const ::SolasMatch::Common::Protobufs::Models::Task& task() const;
+  inline ::SolasMatch::Common::Protobufs::Models::Task* mutable_task();
+  inline ::SolasMatch::Common::Protobufs::Models::Task* release_task();
   
   // repeated int32 next = 3;
   inline int next_size() const;
@@ -128,7 +133,7 @@ class WorkflowNode : public ::google::protobuf::Message {
   inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
       mutable_previous();
   
-  // @@protoc_insertion_point(class_scope:WorkflowNode)
+  // @@protoc_insertion_point(class_scope:SolasMatch.Common.Protobufs.Models.WorkflowNode)
  private:
   inline void set_has_taskid();
   inline void clear_has_taskid();
@@ -137,7 +142,7 @@ class WorkflowNode : public ::google::protobuf::Message {
   
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
   
-  ::Task* task_;
+  ::SolasMatch::Common::Protobufs::Models::Task* task_;
   ::google::protobuf::RepeatedField< ::google::protobuf::int32 > next_;
   ::google::protobuf::RepeatedField< ::google::protobuf::int32 > previous_;
   ::google::protobuf::int32 taskid_;
@@ -181,7 +186,7 @@ inline void WorkflowNode::set_taskid(::google::protobuf::int32 value) {
   taskid_ = value;
 }
 
-// optional .Task task = 2;
+// optional .SolasMatch.Common.Protobufs.Models.Task task = 2;
 inline bool WorkflowNode::has_task() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -192,20 +197,20 @@ inline void WorkflowNode::clear_has_task() {
   _has_bits_[0] &= ~0x00000002u;
 }
 inline void WorkflowNode::clear_task() {
-  if (task_ != NULL) task_->::Task::Clear();
+  if (task_ != NULL) task_->::SolasMatch::Common::Protobufs::Models::Task::Clear();
   clear_has_task();
 }
-inline const ::Task& WorkflowNode::task() const {
+inline const ::SolasMatch::Common::Protobufs::Models::Task& WorkflowNode::task() const {
   return task_ != NULL ? *task_ : *default_instance_->task_;
 }
-inline ::Task* WorkflowNode::mutable_task() {
+inline ::SolasMatch::Common::Protobufs::Models::Task* WorkflowNode::mutable_task() {
   set_has_task();
-  if (task_ == NULL) task_ = new ::Task;
+  if (task_ == NULL) task_ = new ::SolasMatch::Common::Protobufs::Models::Task;
   return task_;
 }
-inline ::Task* WorkflowNode::release_task() {
+inline ::SolasMatch::Common::Protobufs::Models::Task* WorkflowNode::release_task() {
   clear_has_task();
-  ::Task* temp = task_;
+  ::SolasMatch::Common::Protobufs::Models::Task* temp = task_;
   task_ = NULL;
   return temp;
 }
@@ -262,6 +267,11 @@ WorkflowNode::mutable_previous() {
 
 
 // @@protoc_insertion_point(namespace_scope)
+
+}  // namespace Models
+}  // namespace Protobufs
+}  // namespace Common
+}  // namespace SolasMatch
 
 #ifndef SWIG
 namespace google {

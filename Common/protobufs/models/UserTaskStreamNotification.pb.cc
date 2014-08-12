@@ -13,6 +13,11 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 
+namespace SolasMatch {
+namespace Common {
+namespace Protobufs {
+namespace Models {
+
 namespace {
 
 const ::google::protobuf::Descriptor* UserTaskStreamNotification_descriptor_ = NULL;
@@ -76,10 +81,11 @@ void protobuf_AddDesc_UserTaskStreamNotification_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n UserTaskStreamNotification.proto\"b\n\032Us"
-    "erTaskStreamNotification\022\017\n\007user_id\030\001 \001("
-    "\005\022\020\n\010interval\030\002 \001(\005\022\021\n\tlast_sent\030\003 \001(\t\022\016"
-    "\n\006strict\030\004 \001(\010", 134);
+    "\n UserTaskStreamNotification.proto\022\"Sola"
+    "sMatch.Common.Protobufs.Models\"b\n\032UserTa"
+    "skStreamNotification\022\017\n\007user_id\030\001 \001(\005\022\020\n"
+    "\010interval\030\002 \001(\005\022\021\n\tlast_sent\030\003 \001(\t\022\016\n\006st"
+    "rict\030\004 \001(\010", 170);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "UserTaskStreamNotification.proto", &protobuf_RegisterTypes);
   UserTaskStreamNotification::default_instance_ = new UserTaskStreamNotification();
@@ -438,5 +444,10 @@ void UserTaskStreamNotification::Swap(UserTaskStreamNotification* other) {
 
 
 // @@protoc_insertion_point(namespace_scope)
+
+}  // namespace Models
+}  // namespace Protobufs
+}  // namespace Common
+}  // namespace SolasMatch
 
 // @@protoc_insertion_point(global_scope)

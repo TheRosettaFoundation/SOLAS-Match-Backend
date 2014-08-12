@@ -26,6 +26,11 @@
 #include "Locale.pb.h"
 // @@protoc_insertion_point(includes)
 
+namespace SolasMatch {
+namespace Common {
+namespace Protobufs {
+namespace Models {
+
 // Internal implementation detail -- do not call these.
 void  protobuf_AddDesc_User_2eproto();
 void protobuf_AssignDesc_User_2eproto();
@@ -162,27 +167,27 @@ class User : public ::google::protobuf::Message {
   inline ::std::string* mutable_created_time();
   inline ::std::string* release_created_time();
   
-  // optional .Locale nativeLocale = 8;
+  // optional .SolasMatch.Common.Protobufs.Models.Locale nativeLocale = 8;
   inline bool has_nativelocale() const;
   inline void clear_nativelocale();
   static const int kNativeLocaleFieldNumber = 8;
-  inline const ::Locale& nativelocale() const;
-  inline ::Locale* mutable_nativelocale();
-  inline ::Locale* release_nativelocale();
+  inline const ::SolasMatch::Common::Protobufs::Models::Locale& nativelocale() const;
+  inline ::SolasMatch::Common::Protobufs::Models::Locale* mutable_nativelocale();
+  inline ::SolasMatch::Common::Protobufs::Models::Locale* release_nativelocale();
   
-  // repeated .Locale secondaryLocales = 9;
+  // repeated .SolasMatch.Common.Protobufs.Models.Locale secondaryLocales = 9;
   inline int secondarylocales_size() const;
   inline void clear_secondarylocales();
   static const int kSecondaryLocalesFieldNumber = 9;
-  inline const ::Locale& secondarylocales(int index) const;
-  inline ::Locale* mutable_secondarylocales(int index);
-  inline ::Locale* add_secondarylocales();
-  inline const ::google::protobuf::RepeatedPtrField< ::Locale >&
+  inline const ::SolasMatch::Common::Protobufs::Models::Locale& secondarylocales(int index) const;
+  inline ::SolasMatch::Common::Protobufs::Models::Locale* mutable_secondarylocales(int index);
+  inline ::SolasMatch::Common::Protobufs::Models::Locale* add_secondarylocales();
+  inline const ::google::protobuf::RepeatedPtrField< ::SolasMatch::Common::Protobufs::Models::Locale >&
       secondarylocales() const;
-  inline ::google::protobuf::RepeatedPtrField< ::Locale >*
+  inline ::google::protobuf::RepeatedPtrField< ::SolasMatch::Common::Protobufs::Models::Locale >*
       mutable_secondarylocales();
   
-  // @@protoc_insertion_point(class_scope:User)
+  // @@protoc_insertion_point(class_scope:SolasMatch.Common.Protobufs.Models.User)
  private:
   inline void set_has_id();
   inline void clear_has_id();
@@ -209,8 +214,8 @@ class User : public ::google::protobuf::Message {
   ::std::string* biography_;
   ::std::string* nonce_;
   ::std::string* created_time_;
-  ::Locale* nativelocale_;
-  ::google::protobuf::RepeatedPtrField< ::Locale > secondarylocales_;
+  ::SolasMatch::Common::Protobufs::Models::Locale* nativelocale_;
+  ::google::protobuf::RepeatedPtrField< ::SolasMatch::Common::Protobufs::Models::Locale > secondarylocales_;
   ::google::protobuf::int32 id_;
   
   mutable int _cached_size_;
@@ -600,7 +605,7 @@ inline ::std::string* User::release_created_time() {
   }
 }
 
-// optional .Locale nativeLocale = 8;
+// optional .SolasMatch.Common.Protobufs.Models.Locale nativeLocale = 8;
 inline bool User::has_nativelocale() const {
   return (_has_bits_[0] & 0x00000080u) != 0;
 }
@@ -611,51 +616,56 @@ inline void User::clear_has_nativelocale() {
   _has_bits_[0] &= ~0x00000080u;
 }
 inline void User::clear_nativelocale() {
-  if (nativelocale_ != NULL) nativelocale_->::Locale::Clear();
+  if (nativelocale_ != NULL) nativelocale_->::SolasMatch::Common::Protobufs::Models::Locale::Clear();
   clear_has_nativelocale();
 }
-inline const ::Locale& User::nativelocale() const {
+inline const ::SolasMatch::Common::Protobufs::Models::Locale& User::nativelocale() const {
   return nativelocale_ != NULL ? *nativelocale_ : *default_instance_->nativelocale_;
 }
-inline ::Locale* User::mutable_nativelocale() {
+inline ::SolasMatch::Common::Protobufs::Models::Locale* User::mutable_nativelocale() {
   set_has_nativelocale();
-  if (nativelocale_ == NULL) nativelocale_ = new ::Locale;
+  if (nativelocale_ == NULL) nativelocale_ = new ::SolasMatch::Common::Protobufs::Models::Locale;
   return nativelocale_;
 }
-inline ::Locale* User::release_nativelocale() {
+inline ::SolasMatch::Common::Protobufs::Models::Locale* User::release_nativelocale() {
   clear_has_nativelocale();
-  ::Locale* temp = nativelocale_;
+  ::SolasMatch::Common::Protobufs::Models::Locale* temp = nativelocale_;
   nativelocale_ = NULL;
   return temp;
 }
 
-// repeated .Locale secondaryLocales = 9;
+// repeated .SolasMatch.Common.Protobufs.Models.Locale secondaryLocales = 9;
 inline int User::secondarylocales_size() const {
   return secondarylocales_.size();
 }
 inline void User::clear_secondarylocales() {
   secondarylocales_.Clear();
 }
-inline const ::Locale& User::secondarylocales(int index) const {
+inline const ::SolasMatch::Common::Protobufs::Models::Locale& User::secondarylocales(int index) const {
   return secondarylocales_.Get(index);
 }
-inline ::Locale* User::mutable_secondarylocales(int index) {
+inline ::SolasMatch::Common::Protobufs::Models::Locale* User::mutable_secondarylocales(int index) {
   return secondarylocales_.Mutable(index);
 }
-inline ::Locale* User::add_secondarylocales() {
+inline ::SolasMatch::Common::Protobufs::Models::Locale* User::add_secondarylocales() {
   return secondarylocales_.Add();
 }
-inline const ::google::protobuf::RepeatedPtrField< ::Locale >&
+inline const ::google::protobuf::RepeatedPtrField< ::SolasMatch::Common::Protobufs::Models::Locale >&
 User::secondarylocales() const {
   return secondarylocales_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::Locale >*
+inline ::google::protobuf::RepeatedPtrField< ::SolasMatch::Common::Protobufs::Models::Locale >*
 User::mutable_secondarylocales() {
   return &secondarylocales_;
 }
 
 
 // @@protoc_insertion_point(namespace_scope)
+
+}  // namespace Models
+}  // namespace Protobufs
+}  // namespace Common
+}  // namespace SolasMatch
 
 #ifndef SWIG
 namespace google {

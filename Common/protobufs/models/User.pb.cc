@@ -13,6 +13,11 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 
+namespace SolasMatch {
+namespace Common {
+namespace Protobufs {
+namespace Models {
+
 namespace {
 
 const ::google::protobuf::Descriptor* User_descriptor_ = NULL;
@@ -80,14 +85,17 @@ void protobuf_AddDesc_User_2eproto() {
   already_here = true;
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-  ::protobuf_AddDesc_Locale_2eproto();
+  ::SolasMatch::Common::Protobufs::Models::protobuf_AddDesc_Locale_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\nUser.proto\032\014Locale.proto\"\303\001\n\004User\022\n\n\002i"
-    "d\030\001 \001(\005\022\024\n\014display_name\030\002 \001(\t\022\r\n\005email\030\003"
-    " \001(\t\022\020\n\010password\030\004 \001(\t\022\021\n\tbiography\030\005 \001("
-    "\t\022\r\n\005nonce\030\006 \001(\t\022\024\n\014created_time\030\007 \001(\t\022\035"
-    "\n\014nativeLocale\030\010 \001(\0132\007.Locale\022!\n\020seconda"
-    "ryLocales\030\t \003(\0132\007.Locale", 224);
+    "\n\nUser.proto\022\"SolasMatch.Common.Protobuf"
+    "s.Models\032\014Locale.proto\"\211\002\n\004User\022\n\n\002id\030\001 "
+    "\001(\005\022\024\n\014display_name\030\002 \001(\t\022\r\n\005email\030\003 \001(\t"
+    "\022\020\n\010password\030\004 \001(\t\022\021\n\tbiography\030\005 \001(\t\022\r\n"
+    "\005nonce\030\006 \001(\t\022\024\n\014created_time\030\007 \001(\t\022@\n\014na"
+    "tiveLocale\030\010 \001(\0132*.SolasMatch.Common.Pro"
+    "tobufs.Models.Locale\022D\n\020secondaryLocales"
+    "\030\t \003(\0132*.SolasMatch.Common.Protobufs.Mod"
+    "els.Locale", 330);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "User.proto", &protobuf_RegisterTypes);
   User::default_instance_ = new User();
@@ -123,7 +131,7 @@ User::User()
 }
 
 void User::InitAsDefaultInstance() {
-  nativelocale_ = const_cast< ::Locale*>(&::Locale::default_instance());
+  nativelocale_ = const_cast< ::SolasMatch::Common::Protobufs::Models::Locale*>(&::SolasMatch::Common::Protobufs::Models::Locale::default_instance());
 }
 
 User::User(const User& from)
@@ -227,7 +235,7 @@ void User::Clear() {
       }
     }
     if (has_nativelocale()) {
-      if (nativelocale_ != NULL) nativelocale_->::Locale::Clear();
+      if (nativelocale_ != NULL) nativelocale_->::SolasMatch::Common::Protobufs::Models::Locale::Clear();
     }
   }
   secondarylocales_.Clear();
@@ -358,7 +366,7 @@ bool User::MergePartialFromCodedStream(
         break;
       }
       
-      // optional .Locale nativeLocale = 8;
+      // optional .SolasMatch.Common.Protobufs.Models.Locale nativeLocale = 8;
       case 8: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
@@ -372,7 +380,7 @@ bool User::MergePartialFromCodedStream(
         break;
       }
       
-      // repeated .Locale secondaryLocales = 9;
+      // repeated .SolasMatch.Common.Protobufs.Models.Locale secondaryLocales = 9;
       case 9: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
@@ -464,13 +472,13 @@ void User::SerializeWithCachedSizes(
       7, this->created_time(), output);
   }
   
-  // optional .Locale nativeLocale = 8;
+  // optional .SolasMatch.Common.Protobufs.Models.Locale nativeLocale = 8;
   if (has_nativelocale()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       8, this->nativelocale(), output);
   }
   
-  // repeated .Locale secondaryLocales = 9;
+  // repeated .SolasMatch.Common.Protobufs.Models.Locale secondaryLocales = 9;
   for (int i = 0; i < this->secondarylocales_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       9, this->secondarylocales(i), output);
@@ -549,14 +557,14 @@ void User::SerializeWithCachedSizes(
         7, this->created_time(), target);
   }
   
-  // optional .Locale nativeLocale = 8;
+  // optional .SolasMatch.Common.Protobufs.Models.Locale nativeLocale = 8;
   if (has_nativelocale()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         8, this->nativelocale(), target);
   }
   
-  // repeated .Locale secondaryLocales = 9;
+  // repeated .SolasMatch.Common.Protobufs.Models.Locale secondaryLocales = 9;
   for (int i = 0; i < this->secondarylocales_size(); i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -623,7 +631,7 @@ int User::ByteSize() const {
           this->created_time());
     }
     
-    // optional .Locale nativeLocale = 8;
+    // optional .SolasMatch.Common.Protobufs.Models.Locale nativeLocale = 8;
     if (has_nativelocale()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -631,7 +639,7 @@ int User::ByteSize() const {
     }
     
   }
-  // repeated .Locale secondaryLocales = 9;
+  // repeated .SolasMatch.Common.Protobufs.Models.Locale secondaryLocales = 9;
   total_size += 1 * this->secondarylocales_size();
   for (int i = 0; i < this->secondarylocales_size(); i++) {
     total_size +=
@@ -688,7 +696,7 @@ void User::MergeFrom(const User& from) {
       set_created_time(from.created_time());
     }
     if (from.has_nativelocale()) {
-      mutable_nativelocale()->::Locale::MergeFrom(from.nativelocale());
+      mutable_nativelocale()->::SolasMatch::Common::Protobufs::Models::Locale::MergeFrom(from.nativelocale());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -738,5 +746,10 @@ void User::Swap(User* other) {
 
 
 // @@protoc_insertion_point(namespace_scope)
+
+}  // namespace Models
+}  // namespace Protobufs
+}  // namespace Common
+}  // namespace SolasMatch
 
 // @@protoc_insertion_point(global_scope)
