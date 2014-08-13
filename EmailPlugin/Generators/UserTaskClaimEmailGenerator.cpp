@@ -1,4 +1,5 @@
 #include "UserTaskClaimEmailGenerator.h"
+using namespace  SolasMatch::Common::Protobufs::Emails;
 
 UserTaskClaimEmailGenerator::UserTaskClaimEmailGenerator()
 {

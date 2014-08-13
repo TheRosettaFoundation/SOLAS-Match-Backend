@@ -37,6 +37,8 @@
 
 #include "Common/MessagingClient.h"
 
+using namespace SolasMatch::Common::Protobufs::Emails;
+
 Q_EXPORT_PLUGIN2(EmailPlugin, EmailPlugin)
 
 EmailPlugin::EmailPlugin()

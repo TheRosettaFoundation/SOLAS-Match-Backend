@@ -14,6 +14,10 @@
 #include "Common/protobufs/emails/OrgCreatedSiteAdmin.pb.h"
 #include "Common/protobufs/requests/OrgCreatedNotificationRequest.pb.h"
 
+using namespace SolasMatch::Common::Protobufs::Emails;
+using namespace SolasMatch::Common::Protobufs::Requests;
+using namespace SolasMatch::Common::Protobufs::Models;
+
 OrgCreatedNotifications::OrgCreatedNotifications()
 {
     // Default Constructor

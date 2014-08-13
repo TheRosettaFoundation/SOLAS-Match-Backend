@@ -1,8 +1,7 @@
 #include "UserFeedbackGenerator.h"
-
 #include <QDebug>
-
 #include "Common/protobufs/emails/UserFeedback.pb.h"
+using namespace  SolasMatch::Common::Protobufs::Emails;
 
 UserFeedbackGenerator::UserFeedbackGenerator()
 {

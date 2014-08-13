@@ -1,4 +1,5 @@
 #include "UserTaskDeadlineEmailGenerator.h"
+using namespace  SolasMatch::Common::Protobufs::Emails;
 
 UserTaskDeadlineEmailGenerator::UserTaskDeadlineEmailGenerator()
 {

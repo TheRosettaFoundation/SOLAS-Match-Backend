@@ -1,4 +1,5 @@
 #include "EmailVerificationGenerator.h"
+using namespace  SolasMatch::Common::Protobufs::Emails;
 
 EmailVerificationGenerator::EmailVerificationGenerator()
 {

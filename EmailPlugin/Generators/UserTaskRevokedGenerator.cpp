@@ -1,4 +1,5 @@
 #include "UserTaskRevokedGenerator.h"
+using namespace  SolasMatch::Common::Protobufs::Emails;
 
 UserTaskRevokedGenerator::UserTaskRevokedGenerator()
 {

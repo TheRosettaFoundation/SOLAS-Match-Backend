@@ -12,6 +12,10 @@
 #include "Common/protobufs/emails/UserTaskRevokedEmail.pb.h"
 #include "Common/protobufs/emails/OrgTaskRevokedEmail.pb.h"
 
+using namespace SolasMatch::Common::Protobufs::Notifications;
+using namespace SolasMatch::Common::Protobufs::Emails;
+using namespace SolasMatch::Common::Protobufs::Models;
+
 TaskRevokedNotificationHandler::TaskRevokedNotificationHandler()
 {
     this->message = NULL;

@@ -7,6 +7,7 @@
 #include "Common/protobufs/requests/UserTaskStreamNotificationRequest.pb.h"
 
 #include <QSharedPointer>
+using namespace SolasMatch::Common::Protobufs::Requests;
 
 class RequestGenerator
 {

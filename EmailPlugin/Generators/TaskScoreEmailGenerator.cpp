@@ -1,4 +1,5 @@
 #include "TaskScoreEmailGenerator.h"
+using namespace  SolasMatch::Common::Protobufs::Emails;
 
 void TaskScoreEmailGenerator::run()
 {

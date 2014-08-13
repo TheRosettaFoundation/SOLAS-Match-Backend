@@ -10,6 +10,8 @@
 
 #include "ProjectJobs/CalculateProjectDeadlines.h"
 
+using namespace SolasMatch::Common::Protobufs::Requests;
+
 ProjectQueueHandler::ProjectQueueHandler()
 {
     // Default Constructor

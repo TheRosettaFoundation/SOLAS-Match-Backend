@@ -14,6 +14,8 @@
 #include "Common/protobufs/emails/OrgTaskDeadlinePassed.pb.h"
 #include "Common/protobufs/emails/UserClaimedTaskDeadlinePassed.pb.h"
 
+using namespace SolasMatch::Common::Protobufs::Emails;
+
 DeadlineChecker::DeadlineChecker()
 {
     //Default Constructor

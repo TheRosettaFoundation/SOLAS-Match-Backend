@@ -1,4 +1,5 @@
 #include "OrgTaskRevokedGenerator.h"
+using namespace  SolasMatch::Common::Protobufs::Emails;
 
 OrgTaskRevokedGenerator::OrgTaskRevokedGenerator()
 {

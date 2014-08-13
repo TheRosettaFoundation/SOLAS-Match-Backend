@@ -25,6 +25,9 @@
 #include "Common/protobufs/emails/TaskScoreEmail.pb.h"
 
 #define TEMPLATE_DIRECTORY "/etc/SOLAS-Match/templates/"
+using namespace SolasMatch::Common::Protobufs::Emails;
+using namespace SolasMatch::Common::Protobufs::Requests;
+using namespace SolasMatch::Common::Protobufs::Models;
 
 CalculateTaskScore::CalculateTaskScore()
 {

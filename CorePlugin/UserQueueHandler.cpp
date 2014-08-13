@@ -16,6 +16,9 @@
 #include "UserJobs/OrgCreatedNotifications.h"
 #include "UserJobs/TaskRevokedNotificationHandler.h"
 
+using namespace SolasMatch::Common::Protobufs::Requests;
+using namespace SolasMatch::Common::Protobufs::Notifications;
+
 UserQueueHandler::UserQueueHandler()
 {
     // Default Constructor

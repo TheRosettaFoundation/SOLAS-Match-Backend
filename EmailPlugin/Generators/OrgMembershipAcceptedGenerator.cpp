@@ -21,7 +21,7 @@
 #include "Common/protobufs/models/ArchivedTask.pb.h"
 #include "Common/protobufs/models/Organisation.pb.h"
 
-
+using namespace  SolasMatch::Common::Protobufs::Emails;
 
 OrgMembershipAcceptedGenerator::OrgMembershipAcceptedGenerator()
 {

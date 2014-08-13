@@ -13,6 +13,7 @@
 #include "TaskJobs/CalculateTaskScore.h"
 #include "TaskJobs/DeadlineChecker.h"
 #include "TaskJobs/SendTaskUploadNotifications.h"
+using namespace SolasMatch::Common::Protobufs::Requests;
 
 TaskQueueHandler::TaskQueueHandler()
 {

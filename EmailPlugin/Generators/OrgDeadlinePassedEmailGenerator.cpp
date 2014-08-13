@@ -1,4 +1,5 @@
 #include "OrgDeadlinePassedEmailGenerator.h"
+using namespace  SolasMatch::Common::Protobufs::Emails;
 
 OrgDeadlinePassedMailGenerator::OrgDeadlinePassedMailGenerator()
 {

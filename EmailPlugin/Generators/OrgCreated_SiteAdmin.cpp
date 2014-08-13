@@ -1,6 +1,6 @@
 #include "OrgCreated_SiteAdmin.h"
-
 #include "Common/protobufs/emails/OrgCreatedSiteAdmin.pb.h"
+using namespace  SolasMatch::Common::Protobufs::Emails;
 
 OrgCreate_SiteAdmin::OrgCreate_SiteAdmin()
 {

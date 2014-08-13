@@ -8,6 +8,8 @@
 #include "Common/DataAccessObjects/LanguageDao.h"
 #include "Common/DataAccessObjects/TagDao.h"
 
+using namespace  SolasMatch::Common::Protobufs::Emails;
+
 UserTaskStreamEmailGenerator::UserTaskStreamEmailGenerator()
 {
     //Default Constructor

@@ -1,4 +1,5 @@
 #include "TaskArchivedEmailGenerator.h"
+using namespace  SolasMatch::Common::Protobufs::Emails;
 
 TaskArchivedEmailGenerator::TaskArchivedEmailGenerator()
 {

@@ -16,6 +16,10 @@
 #include "Common/MySQLHandler.h"
 #include "Common/MessagingClient.h"
 
+using namespace SolasMatch::Common::Protobufs::Requests;
+using namespace SolasMatch::Common::Protobufs::Emails;
+using namespace SolasMatch::Common::Protobufs::Models;
+
 SendTaskUploadNotifications::SendTaskUploadNotifications()
 {
     //Default Constructor

@@ -1,7 +1,7 @@
 #include "UserReferenceEmailGenerator.h"
-
 #include "Common/protobufs/emails/UserReferenceEmail.pb.h"
 #include "Common/protobufs/models/ArchivedProject.pb.h"
+using namespace  SolasMatch::Common::Protobufs::Emails;
 
 UserReferenceEmailGenerator::UserReferenceEmailGenerator()
 {

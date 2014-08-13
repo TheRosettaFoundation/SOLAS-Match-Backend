@@ -1,4 +1,5 @@
 #include "TrackedTaskUploadedEmailGenerator.h"
+using namespace  SolasMatch::Common::Protobufs::Emails;
 
 TrackedTaskUploadedEmailGenerator::TrackedTaskUploadedEmailGenerator()
 {

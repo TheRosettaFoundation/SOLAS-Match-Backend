@@ -1,4 +1,5 @@
 #include "OrgMembershipRefusedEmailGenerator.h"
+using namespace  SolasMatch::Common::Protobufs::Emails;
 
 OrgMembershipRefusedEmailGenerator::OrgMembershipRefusedEmailGenerator()
 {

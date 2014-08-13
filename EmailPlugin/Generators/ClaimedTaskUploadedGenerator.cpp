@@ -1,6 +1,6 @@
 #include "ClaimedTaskUploadedGenerator.h"
-
 #include "Common/protobufs/emails/ClaimedTaskUploaded.pb.h"
+using namespace  SolasMatch::Common::Protobufs::Emails;
 
 ClaimedTaskUploadedGenerator::ClaimedTaskUploadedGenerator()
 {

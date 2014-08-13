@@ -9,6 +9,8 @@
 #include "Common/DataAccessObjects/UserDao.h"
 #include "Common/protobufs/emails/UserTaskStreamEmail.pb.h"
 
+using namespace SolasMatch::Common::Protobufs::Emails;
+
 TaskStreamNotificationHandler::TaskStreamNotificationHandler()
 {
     message = NULL;

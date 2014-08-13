@@ -1,7 +1,6 @@
 #include "ClaimedTaskSourceUpdatedGenerator.h"
-
 #include "Common/protobufs/emails/ClaimedTaskSourceUpdated.pb.h"
-
+using namespace  SolasMatch::Common::Protobufs::Emails;
 ClaimedTaskSourceUpdatedGenerator::ClaimedTaskSourceUpdatedGenerator()
 {
     // Default Constructor

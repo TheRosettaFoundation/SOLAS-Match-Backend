@@ -1,8 +1,7 @@
 #include "OrgFeedbackGenerator.h"
-
 #include <QDebug>
-
 #include "Common/protobufs/emails/OrgFeedback.pb.h"
+using namespace  SolasMatch::Common::Protobufs::Emails;
 
 OrgFeedbackGenerator::OrgFeedbackGenerator()
 {

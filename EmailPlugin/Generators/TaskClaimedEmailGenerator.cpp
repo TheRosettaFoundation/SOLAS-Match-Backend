@@ -1,4 +1,5 @@
 #include "TaskClaimedEmailGenerator.h"
+using namespace  SolasMatch::Common::Protobufs::Emails;
 
 TaskClaimedEmailGenerator::TaskClaimedEmailGenerator()
 {

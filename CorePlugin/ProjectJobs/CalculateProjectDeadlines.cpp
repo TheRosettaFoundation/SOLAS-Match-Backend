@@ -18,6 +18,9 @@
 #include "Common/DataAccessObjects/ProjectDao.h"
 #include "Common/DataAccessObjects/TaskDao.h"
 
+using namespace SolasMatch::Common::Protobufs::Requests;
+using namespace SolasMatch::Common::Protobufs::Emails;
+
 CalculateProjectDeadlines::CalculateProjectDeadlines()
 {
     // Default Constructor

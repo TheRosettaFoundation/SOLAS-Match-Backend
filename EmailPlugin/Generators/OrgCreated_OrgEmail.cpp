@@ -1,7 +1,7 @@
 #include "OrgCreated_OrgEmail.h"
-
 #include "Common/protobufs/emails/OrgCreatedOrgAdmin.pb.h"
 #include "Common/MySQLHandler.h"
+using namespace  SolasMatch::Common::Protobufs::Emails;
 
 OrgCreated_OrgEmail::OrgCreated_OrgEmail()
 {

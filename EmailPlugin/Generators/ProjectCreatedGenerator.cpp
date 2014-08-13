@@ -1,4 +1,5 @@
 #include "ProjectCreatedGenerator.h"
+using namespace  SolasMatch::Common::Protobufs::Emails;
 
 ProjectCreatedGenerator::ProjectCreatedGenerator()
 {

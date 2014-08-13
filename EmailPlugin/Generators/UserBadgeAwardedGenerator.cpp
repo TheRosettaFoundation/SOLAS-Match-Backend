@@ -1,8 +1,7 @@
 #include "UserBadgeAwardedGenerator.h"
-
 #include "Common/protobufs/emails/UserBadgeAwardedEmail.pb.h"
-
 #include "Common/DataAccessObjects/BadgeDao.h"
+using namespace  SolasMatch::Common::Protobufs::Emails;
 
 UserBadgeAwardedGenerator::UserBadgeAwardedGenerator()
 {

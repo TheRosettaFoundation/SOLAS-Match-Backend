@@ -1,4 +1,5 @@
 #include "PasswordResetEmailGenerator.h"
+using namespace  SolasMatch::Common::Protobufs::Emails;
 
 PasswordResetEmailGenerator::PasswordResetEmailGenerator()
 {

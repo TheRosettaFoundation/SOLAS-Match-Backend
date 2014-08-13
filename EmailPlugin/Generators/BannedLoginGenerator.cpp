@@ -4,6 +4,7 @@
 
 #include "Common/Definitions.h"
 #include "Common/protobufs/models/BannedUser.pb.h"
+using namespace  SolasMatch::Common::Protobufs::Emails;
 
 BannedLoginGenerator::BannedLoginGenerator()
 {
