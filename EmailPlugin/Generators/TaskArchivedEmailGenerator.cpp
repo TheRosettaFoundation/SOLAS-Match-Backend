@@ -72,7 +72,7 @@ void TaskArchivedEmailGenerator::run()
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
         email->setSender(settings.get("site.system_email_address"));
-        email->addRecipient(QString::fromStdString(user->display_name()));
+        email->addRecipient(QString::fromStdString(user->email()));
         email->setSubject(settings.get("site.name") + ": Task Updated");
         email->setBody(QString::fromUtf8(email_body.c_str()));
     } else {

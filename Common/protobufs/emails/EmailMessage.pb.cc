@@ -84,9 +84,9 @@ void protobuf_AddDesc_EmailMessage_2eproto() {
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\022EmailMessage.proto\022\"SolasMatch.Common."
-    "Protobufs.Emails\"\211\006\n\014EmailMessage\022I\n\nema"
+    "Protobufs.Emails\"\352\006\n\014EmailMessage\022I\n\nema"
     "il_type\030\001 \002(\01625.SolasMatch.Common.Protob"
-    "ufs.Emails.EmailMessage.Type\"\243\005\n\004Type\022\022\n"
+    "ufs.Emails.EmailMessage.Type\"\204\006\n\004Type\022\022\n"
     "\016TaskScoreEmail\020\001\022\021\n\rUserTaskClaim\020\002\022\031\n\025"
     "OrgMembershipAccepted\020\003\022\030\n\024OrgMembership"
     "Refused\020\004\022\026\n\022PasswordResetEmail\020\005\022\020\n\014Tas"
@@ -103,7 +103,10 @@ void protobuf_AddDesc_EmailMessage_2eproto() {
     "\022\025\n\021UserUnclaimedTask\020\027\022\030\n\024UserTaskRevok"
     "edEmail\020\030\022\027\n\023OrgTaskRevokedEmail\020\031\022\022\n\016Pr"
     "ojectCreated\020\032\022\021\n\rBannedFromOrg\020\033\022\037\n\033Use"
-    "rBannedNotificationToOrg\020\034*\010\010d\020\200\200\200\200\002", 836);
+    "rBannedNotificationToOrg\020\034\022\035\n\031ProjectIma"
+    "geUploadedEmail\020\035\022\034\n\030ProjectImageRemoved"
+    "Email\020\036\022\"\n\036ProjectImageStatusChangedEmai"
+    "l\020\037*\010\010d\020\200\200\200\200\002", 933);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "EmailMessage.proto", &protobuf_RegisterTypes);
   EmailMessage::default_instance_ = new EmailMessage();
@@ -154,6 +157,9 @@ bool EmailMessage_Type_IsValid(int value) {
     case 26:
     case 27:
     case 28:
+    case 29:
+    case 30:
+    case 31:
       return true;
     default:
       return false;
@@ -189,6 +195,9 @@ const EmailMessage_Type EmailMessage::OrgTaskRevokedEmail;
 const EmailMessage_Type EmailMessage::ProjectCreated;
 const EmailMessage_Type EmailMessage::BannedFromOrg;
 const EmailMessage_Type EmailMessage::UserBannedNotificationToOrg;
+const EmailMessage_Type EmailMessage::ProjectImageUploadedEmail;
+const EmailMessage_Type EmailMessage::ProjectImageRemovedEmail;
+const EmailMessage_Type EmailMessage::ProjectImageStatusChangedEmail;
 const EmailMessage_Type EmailMessage::Type_MIN;
 const EmailMessage_Type EmailMessage::Type_MAX;
 const int EmailMessage::Type_ARRAYSIZE;
