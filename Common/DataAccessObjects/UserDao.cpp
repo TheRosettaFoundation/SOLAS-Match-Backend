@@ -202,6 +202,7 @@ QList<QSharedPointer<ArchivedTask> > UserDao::getUserArchivedTasks(QSharedPointe
     } else {
         args += "null";
     }
+    args += "null"; //for offset
     QSharedPointer<QSqlQuery> mQuery = db->call("getUserArchivedTasks", args);
     if (mQuery->first()) {
         QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
