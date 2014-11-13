@@ -200,7 +200,7 @@ QList<QSharedPointer<ArchivedTask> > UserDao::getUserArchivedTasks(QSharedPointe
     if (limit > 0) {
         args += QString::number(limit);
     } else {
-        args += "null";
+        args += "null,";
     }
     args += "null"; //for offset
     QSharedPointer<QSqlQuery> mQuery = db->call("getUserArchivedTasks", args);

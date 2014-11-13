@@ -17,8 +17,7 @@ void ProjectImageStatusChangedEmailGenerator::run()
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
     QSharedPointer<Project> project = ProjectDao::getProject(db, email_message.project_id());
     QSharedPointer<Organisation> org = QSharedPointer<Organisation>();
-    QSharedPointer<Email> email = QSharedPointer<Email>(new Email);
-    QString error = "";
+       QString error = "";
 
     if (project.isNull()) {
         error = "Project image approval status updated email generation failed. Unable to find  project with id " +
@@ -38,12 +37,12 @@ void ProjectImageStatusChangedEmailGenerator::run()
     }
 
     if (error.compare("") == 0) {
-        QList<QSharedPointer<User> > users = OrganisationDao::getOrgAdmins(db, org->id());
+        QList<QSharedPointer<User> > users = OrganisationDao::getOrgAdmins(db, project->organisationid());
 
         QString siteLocation = settings.get("site.url");
         QString siteName = settings.get("site.name");
         foreach (QSharedPointer<User> user, users) {
-            email = QSharedPointer<Email>(new Email);
+            QSharedPointer<Email> email = QSharedPointer<Email>(new Email);
             ctemplate::TemplateDictionary dict("projectImageStatusUpdated");
             dict.SetValue("SITE_NAME", siteName.toStdString());
             QString projectView = siteLocation + "project/" + QString::number(project->id()) + "/view/";
@@ -56,8 +55,7 @@ void ProjectImageStatusChangedEmailGenerator::run()
             QString approved;
             const char* projectTitle = project->title().c_str();
 
-            bool imageApproved = project->imageapproved();
-            if (imageApproved) {
+            if (project->imageapproved()) {
                 approved = "Approved";
                 template_location = QString(TEMPLATE_DIRECTORY) + "emails/project-image-approved.tpl";
             } else {
@@ -68,13 +66,14 @@ void ProjectImageStatusChangedEmailGenerator::run()
             ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
             email->setSender(settings.get("site.system_email_address"));
             email->addRecipient(QString::fromStdString(user->email()));
-            email->setSubject(settings.get("site.name") + ": Project Image Has Been " + approved + "[" + projectTitle + "]");
+            email->setSubject(settings.get("site.name") + ": Project Image Has Been " + approved + " [Project - " + projectTitle + "]");
             email->setBody(QString::fromUtf8(email_body.c_str()));
             this->emailQueue->insert(email, currentMessage);
         }
 
 
     }	else {
+        QSharedPointer<Email> email = QSharedPointer<Email>(new Email);
         email = this->generateErrorEmail(error);
         this->emailQueue->insert(email, currentMessage);
     }

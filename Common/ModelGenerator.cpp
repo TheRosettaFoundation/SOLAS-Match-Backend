@@ -2,6 +2,7 @@
 
 #include "Common/MySQLHandler.h"
 #include "Common/protobufs/models/Locale.pb.h"
+#include <QDebug>
 
 void ModelGenerator::Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<Badge> badge, QMap<QString, int> fieldMap)
 {
@@ -15,8 +16,8 @@ void ModelGenerator::Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<User> 
 {
     user->set_id(MySQLHandler::getValueFromQuery(fieldMap.value("id"), q).toInt());
     user->set_biography(MySQLHandler::getStringFromQuery(fieldMap.value("biography"), q));
-    user->set_created_time(MySQLHandler::getStringFromQuery(fieldMap.value("created-time"), q));
-    user->set_display_name(MySQLHandler::getStringFromQuery(fieldMap.value("display-name"), q));
+    user->set_created_time(MySQLHandler::getStringFromQuery(fieldMap.value("created_time"), q));
+    user->set_display_name(MySQLHandler::getStringFromQuery(fieldMap.value("display_name"), q));
     user->set_email(MySQLHandler::getStringFromQuery(fieldMap.value("email"), q));
     user->set_nonce(MySQLHandler::getStringFromQuery(fieldMap.value("nonce"), q));
     user->set_password(MySQLHandler::getStringFromQuery(fieldMap.value("password"), q));
@@ -38,23 +39,23 @@ void ModelGenerator::Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<Organi
     org->set_id(MySQLHandler::getValueFromQuery(fieldMap.value("id"), q).toInt());
     org->set_name(MySQLHandler::getStringFromQuery(fieldMap.value("name"), q));
     org->set_biography(MySQLHandler::getStringFromQuery(fieldMap.value("biography"), q));
-    org->set_homepage(MySQLHandler::getStringFromQuery(fieldMap.value("home-page"), q));
-    org->set_email(MySQLHandler::getStringFromQuery(fieldMap.value("e-mail"), q));
+    org->set_homepage(MySQLHandler::getStringFromQuery(fieldMap.value("homepage"), q));
+    org->set_email(MySQLHandler::getStringFromQuery(fieldMap.value("email"), q));
     org->set_address(MySQLHandler::getStringFromQuery(fieldMap.value("address"), q));
     org->set_city(MySQLHandler::getStringFromQuery(fieldMap.value("city"), q));
     org->set_country(MySQLHandler::getStringFromQuery(fieldMap.value("country"), q));
-    org->set_regionalfocus(MySQLHandler::getStringFromQuery(fieldMap.value("regional-focus"), q));
+    org->set_regionalfocus(MySQLHandler::getStringFromQuery(fieldMap.value("regionalFocus"), q));
 }
 
 void ModelGenerator::Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<ArchivedTask> task, QMap<QString, int> fieldMap)
 {
     task->set_id(MySQLHandler::getValueFromQuery(fieldMap.value("id"), q).toInt());
-    task->set_projectid(MySQLHandler::getValueFromQuery(fieldMap.value("project_id"), q).toInt());
+    task->set_projectid(MySQLHandler::getValueFromQuery(fieldMap.value("projectId"), q).toInt());
     task->set_title(MySQLHandler::getStringFromQuery(fieldMap.value("title"), q));
     task->set_comment(MySQLHandler::getStringFromQuery(fieldMap.value("comment"), q));
     task->set_deadline(MySQLHandler::getStringFromQuery(fieldMap.value("deadline"), q));
-    task->set_wordcount(MySQLHandler::getValueFromQuery(fieldMap.value("word-count"), q).toInt());
-    task->set_createdtime(MySQLHandler::getStringFromQuery(fieldMap.value("created-time"), q));
+    task->set_wordcount(MySQLHandler::getValueFromQuery(fieldMap.value("wordCount"), q).toInt());
+    task->set_createdtime(MySQLHandler::getStringFromQuery(fieldMap.value("createdTime"), q));
     Locale *sourceLocale = task->mutable_sourcelocale();
     sourceLocale->set_languagename(MySQLHandler::getStringFromQuery(fieldMap.value("sourceLanguageName"), q));
     sourceLocale->set_languagecode(MySQLHandler::getStringFromQuery(fieldMap.value("sourceLanguageCode"), q));
@@ -65,30 +66,31 @@ void ModelGenerator::Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<Archiv
     targetLocale->set_languagecode(MySQLHandler::getStringFromQuery(fieldMap.value("targetLanguageCode"), q));
     targetLocale->set_countryname(MySQLHandler::getStringFromQuery(fieldMap.value("targetCountryName"), q));
     targetLocale->set_countrycode(MySQLHandler::getStringFromQuery(fieldMap.value("targetCountryCode"), q));
-    task->set_tasktype(MySQLHandler::getValueFromQuery(fieldMap.value("taskType_id"), q).toInt());
-    task->set_taskstatus(MySQLHandler::getStringFromQuery(fieldMap.value("taskStatus_id"), q));
+    task->set_tasktype(MySQLHandler::getValueFromQuery(fieldMap.value("taskType"), q).toInt());
+    task->set_taskstatus(MySQLHandler::getStringFromQuery(fieldMap.value("taskStatus"), q));
     task->set_published(MySQLHandler::getValueFromQuery(fieldMap.value("published"), q).toBool());
     task->set_version(MySQLHandler::getValueFromQuery(fieldMap.value("version"), q).toInt());
     task->set_filename(MySQLHandler::getStringFromQuery(fieldMap.value("filename"), q));
-    task->set_contenttype(MySQLHandler::getStringFromQuery(fieldMap.value("content-type"), q));
-    task->set_uploadtime(MySQLHandler::getStringFromQuery(fieldMap.value("upload-time"), q));
-    task->set_useridclaimed(MySQLHandler::getValueFromQuery(fieldMap.value("user_id-claimed"), q).toInt());
-    task->set_useridarchived(MySQLHandler::getValueFromQuery(fieldMap.value("user_id-archived"), q).toInt());
+    task->set_contenttype(MySQLHandler::getStringFromQuery(fieldMap.value("contentType"), q));
+    task->set_uploadtime(MySQLHandler::getStringFromQuery(fieldMap.value("uploadTime"), q));
+    task->set_useridclaimed(MySQLHandler::getValueFromQuery(fieldMap.value("useridClaimed"), q).toInt());
+    task->set_useridarchived(MySQLHandler::getValueFromQuery(fieldMap.value("userIdArchived"), q).toInt());
     task->set_prerequisites(MySQLHandler::getStringFromQuery(fieldMap.value("prerequisites"), q));
-    task->set_useridtaskcreator(MySQLHandler::getValueFromQuery(fieldMap.value("user_id-taskCreator"), q).toInt());
+    task->set_useridtaskcreator(MySQLHandler::getValueFromQuery(fieldMap.value("userIdTaskCreator"), q).toInt());
+    task->set_archiveddate(MySQLHandler::getStringFromQuery(fieldMap.value("archivedDate"), q));
 }
 
 void ModelGenerator::Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<Task> task, QMap<QString, int> fieldMap)
 {
     task->set_id(MySQLHandler::getValueFromQuery(fieldMap.value("id"), q).toInt());
-    task->set_projectid(MySQLHandler::getValueFromQuery(fieldMap.value("project_id"), q).toInt());
+    task->set_projectid(MySQLHandler::getValueFromQuery(fieldMap.value("projectId"), q).toInt());
     task->set_title(MySQLHandler::getStringFromQuery(fieldMap.value("title"), q));
     task->set_comment(MySQLHandler::getStringFromQuery(fieldMap.value("comment"), q));
     task->set_deadline(MySQLHandler::getStringFromQuery(fieldMap.value("deadline"), q));
-    task->set_wordcount(MySQLHandler::getValueFromQuery(fieldMap.value("word-count"), q).toInt());
-    task->set_createdtime(MySQLHandler::getStringFromQuery(fieldMap.value("created-time"), q));
-    task->set_tasktype(MySQLHandler::getValueFromQuery(fieldMap.value("task-type_id"), q).toInt());
-    task->set_taskstatus(MySQLHandler::getValueFromQuery(fieldMap.value("task-status_id"), q).toInt());
+    task->set_wordcount(MySQLHandler::getValueFromQuery(fieldMap.value("wordCount"), q).toInt());
+    task->set_createdtime(MySQLHandler::getStringFromQuery(fieldMap.value("createdTime"), q));
+    task->set_tasktype(MySQLHandler::getValueFromQuery(fieldMap.value("taskType"), q).toInt());
+    task->set_taskstatus(MySQLHandler::getValueFromQuery(fieldMap.value("taskStatus"), q).toInt());
     task->set_published(MySQLHandler::getValueFromQuery(fieldMap.value("published"), q).toBool());
     Locale *sourceLocale = task->mutable_sourcelocale();
     sourceLocale->set_countrycode(MySQLHandler::getStringFromQuery(fieldMap.value("sourceCountryCode"), q));
@@ -108,19 +110,19 @@ void ModelGenerator::Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<Projec
     project->set_title(MySQLHandler::getStringFromQuery(fieldMap.value("title"), q));
     project->set_description(MySQLHandler::getStringFromQuery(fieldMap.value("description"), q));
     project->set_deadline(MySQLHandler::getStringFromQuery(fieldMap.value("deadline"), q));
-    project->set_organisationid(MySQLHandler::getValueFromQuery(fieldMap.value("organisation_id"), q).toInt());
+    project->set_organisationid(MySQLHandler::getValueFromQuery(fieldMap.value("organisationId"), q).toInt());
     project->set_impact(MySQLHandler::getStringFromQuery(fieldMap.value("impact"), q));
     project->set_reference(MySQLHandler::getStringFromQuery(fieldMap.value("reference"), q));
-    project->set_wordcount(MySQLHandler::getValueFromQuery(fieldMap.value("word-count"), q).toInt());
-    project->set_createdtime(MySQLHandler::getStringFromQuery(fieldMap.value("created"), q));
+    project->set_wordcount(MySQLHandler::getValueFromQuery(fieldMap.value("wordCount"), q).toInt());
+    project->set_createdtime(MySQLHandler::getStringFromQuery(fieldMap.value("createdTime"), q));
     project->set_status(MySQLHandler::getStringFromQuery(fieldMap.value("status"), q));
-    project->set_imageuploaded(MySQLHandler::getValueFromQuery(fieldMap.value("image_uploaded"), q).toBool());
-    project->set_imageapproved(MySQLHandler::getValueFromQuery(fieldMap.value("image_approved"), q).toBool());
+    project->set_imageuploaded(MySQLHandler::getValueFromQuery(fieldMap.value("imageUploaded"), q).toBool());
+    project->set_imageapproved(MySQLHandler::getValueFromQuery(fieldMap.value("imageApproved"), q).toBool());
     Locale *sourceLocale = project->mutable_sourcelocale();
-    sourceLocale->set_countrycode(MySQLHandler::getStringFromQuery(fieldMap.value("sourceCountryCode"), q));
-    sourceLocale->set_countryname(MySQLHandler::getStringFromQuery(fieldMap.value("sourceCountryName"), q));
-    sourceLocale->set_languagecode(MySQLHandler::getStringFromQuery(fieldMap.value("sourceLanguageCode"), q));
-    sourceLocale->set_languagename(MySQLHandler::getStringFromQuery(fieldMap.value("sourceLanguageName"), q));
+    sourceLocale->set_countrycode(MySQLHandler::getStringFromQuery(fieldMap.value("countryCode"), q));
+    sourceLocale->set_countryname(MySQLHandler::getStringFromQuery(fieldMap.value("countryName"), q));
+    sourceLocale->set_languagecode(MySQLHandler::getStringFromQuery(fieldMap.value("languageCode"), q));
+    sourceLocale->set_languagename(MySQLHandler::getStringFromQuery(fieldMap.value("languageName"), q));
 
 }
 
@@ -129,13 +131,26 @@ void ModelGenerator::Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<Archiv
     project->set_id(MySQLHandler::getValueFromQuery(fieldMap.value("id"), q).toInt());
     project->set_title(MySQLHandler::getStringFromQuery(fieldMap.value("title"), q));
     project->set_description(MySQLHandler::getStringFromQuery(fieldMap.value("description"), q));
-    project->set_deadline(MySQLHandler::getStringFromQuery(fieldMap.value("deadline"), q));
-    project->set_organisationid(MySQLHandler::getValueFromQuery(fieldMap.value("organisation_id"), q).toInt());
     project->set_impact(MySQLHandler::getStringFromQuery(fieldMap.value("impact"), q));
+    project->set_deadline(MySQLHandler::getStringFromQuery(fieldMap.value("deadline"), q));
+    project->set_organisationid(MySQLHandler::getValueFromQuery(fieldMap.value("organisationId"), q).toInt());
     project->set_reference(MySQLHandler::getStringFromQuery(fieldMap.value("reference"), q));
-    project->set_wordcount(MySQLHandler::getValueFromQuery(fieldMap.value("word-count"), q).toInt());
+    project->set_wordcount(MySQLHandler::getValueFromQuery(fieldMap.value("wordCount"), q).toInt());
     project->set_createdtime(MySQLHandler::getStringFromQuery(fieldMap.value("created"), q));
-    project->set_archiveddate(MySQLHandler::getStringFromQuery(fieldMap.value("archived-date"), q));
+    Locale *sourceLocale = project->mutable_sourcelocale();
+    sourceLocale->set_countrycode(MySQLHandler::getStringFromQuery(fieldMap.value("sourceCountryCode"), q));
+    sourceLocale->set_countryname(MySQLHandler::getStringFromQuery(fieldMap.value("sourceCountryName"), q));
+    sourceLocale->set_languagecode(MySQLHandler::getStringFromQuery(fieldMap.value("sourceLanguageCode"), q));
+    sourceLocale->set_languagename(MySQLHandler::getStringFromQuery(fieldMap.value("sourceLanguageName"), q));
+    project->set_useridarchived(MySQLHandler::getValueFromQuery(fieldMap.value("userIdArchived"), q).toInt());
+    project->set_useridarchived(MySQLHandler::getValueFromQuery(fieldMap.value("userIdProjectCreator"), q).toInt());
+    project->set_filename(MySQLHandler::getStringFromQuery(fieldMap.value("filename"), q));
+    project->set_filetoken(MySQLHandler::getStringFromQuery(fieldMap.value("fileToken"), q));
+    project->set_mimetype(MySQLHandler::getStringFromQuery(fieldMap.value("mimeType"), q));
+    project->set_archiveddate(MySQLHandler::getStringFromQuery(fieldMap.value("archivedDate"), q));
+    project->set_tags(MySQLHandler::getStringFromQuery(fieldMap.value("tags"), q));
+    project->set_imageuploaded(MySQLHandler::getValueFromQuery(fieldMap.value("imageUploaded"), q).toBool());
+    project->set_imageapproved(MySQLHandler::getValueFromQuery(fieldMap.value("imageApproved"), q).toBool());
 }
 
 void ModelGenerator::Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<Language> language, QMap<QString, int> fieldMap)
@@ -147,11 +162,11 @@ void ModelGenerator::Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<Langua
 
 void ModelGenerator::Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<BannedUser> banData, QMap<QString, int> fieldMap)
 {
-    banData->set_userid(MySQLHandler::getValueFromQuery(fieldMap.value("user_id"), q).toInt());
-    banData->set_useridadmin(MySQLHandler::getValueFromQuery(fieldMap.value("user_id-admin"), q).toInt());
-    banData->set_bantype(MySQLHandler::getValueFromQuery(fieldMap.value("bannedtype_id"), q).toInt());
+    banData->set_userid(MySQLHandler::getValueFromQuery(fieldMap.value("userId"), q).toInt());
+    banData->set_useridadmin(MySQLHandler::getValueFromQuery(fieldMap.value("userIdAdmin"), q).toInt());
+    banData->set_bantype(MySQLHandler::getValueFromQuery(fieldMap.value("banType"), q).toInt());
     banData->set_comment(MySQLHandler::getStringFromQuery(fieldMap.value("comment"), q));
-    banData->set_banneddate(MySQLHandler::getStringFromQuery(fieldMap.value("banned-date"), q));
+    banData->set_banneddate(MySQLHandler::getStringFromQuery(fieldMap.value("bannedDate"), q));
 }
 
 void ModelGenerator::Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<Locale> localeData, QMap<QString, int> fieldMap)
@@ -167,5 +182,5 @@ void ModelGenerator::Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<UserTa
     data->set_user_id(MySQLHandler::getValueFromQuery(fieldMap.value("user_id"), q).toInt());
     data->set_interval(MySQLHandler::getValueFromQuery(fieldMap.value("interval"), q).toInt());
     data->set_strict(MySQLHandler::getValueFromQuery(fieldMap.value("strict"), q).toBool());
-    data->set_last_sent(MySQLHandler::getStringFromQuery(fieldMap.value("last-sent"), q));
+    data->set_last_sent(MySQLHandler::getStringFromQuery(fieldMap.value("last_sent"), q));
 }

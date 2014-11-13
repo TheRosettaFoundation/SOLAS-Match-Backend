@@ -24,6 +24,7 @@ void ProjectCreatedGenerator::run()
         error = "Project created generation failed. Unable to find  project with id " +
                 QString::number(email_message.project_id());
     } else {
+        qDebug() << "EmailGenerator: Project Created Email Debugging: " << QString::number(email_message.project_id());
         org = OrganisationDao::getOrg(db, project->organisationid());
 
         if (org.isNull()) {

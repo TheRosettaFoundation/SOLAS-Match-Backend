@@ -31,7 +31,7 @@ void NewImageUploadedEmailGenerator::run()
                     QString::number(project->organisationid());
         }
 
-        if (project->imageuploaded()) {
+        if (!project->imageuploaded()) {
             error = "New image uploaded email generation failed. Invalid project image upload status :" +
                     QString::number(project->imageuploaded());
         }
@@ -59,7 +59,7 @@ void NewImageUploadedEmailGenerator::run()
         }
 
         email->setSender(settings.get("site.system_email_address"));
-        email->setSubject(settings.get("site.name") + ": Project Image Uploaded [" + projectTitle + "]");
+        email->setSubject(settings.get("site.name") + ": Project Image Uploaded [Project - " + projectTitle + "]");
         email->setBody(QString::fromUtf8(email_body.c_str()));
 
     }	else {

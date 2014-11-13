@@ -59,7 +59,7 @@ void ProjectImageRemovedEmailGenerator::run()
         }
 
         email->setSender(settings.get("site.system_email_address"));
-        email->setSubject(settings.get("site.name") + ": Project Image Removed [" + projectTitle + "]");
+        email->setSubject(settings.get("site.name") + ": Project Image Removed [Project - " + projectTitle + "]");
         email->setBody(QString::fromUtf8(email_body.c_str()));
 
     }	else {
