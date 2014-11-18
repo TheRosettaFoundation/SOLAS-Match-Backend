@@ -70,11 +70,12 @@ enum EmailMessage_Type {
   EmailMessage_Type_UserBannedNotificationToOrg = 28,
   EmailMessage_Type_ProjectImageUploadedEmail = 29,
   EmailMessage_Type_ProjectImageRemovedEmail = 30,
-  EmailMessage_Type_ProjectImageStatusChangedEmail = 31
+  EmailMessage_Type_ProjectImageApprovedEmail = 31,
+  EmailMessage_Type_ProjectImageDisapprovedEmail = 32
 };
 bool EmailMessage_Type_IsValid(int value);
 const EmailMessage_Type EmailMessage_Type_Type_MIN = EmailMessage_Type_TaskScoreEmail;
-const EmailMessage_Type EmailMessage_Type_Type_MAX = EmailMessage_Type_ProjectImageStatusChangedEmail;
+const EmailMessage_Type EmailMessage_Type_Type_MAX = EmailMessage_Type_ProjectImageDisapprovedEmail;
 const int EmailMessage_Type_Type_ARRAYSIZE = EmailMessage_Type_Type_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* EmailMessage_Type_descriptor();
@@ -172,7 +173,8 @@ class EmailMessage : public ::google::protobuf::Message {
   static const Type UserBannedNotificationToOrg = EmailMessage_Type_UserBannedNotificationToOrg;
   static const Type ProjectImageUploadedEmail = EmailMessage_Type_ProjectImageUploadedEmail;
   static const Type ProjectImageRemovedEmail = EmailMessage_Type_ProjectImageRemovedEmail;
-  static const Type ProjectImageStatusChangedEmail = EmailMessage_Type_ProjectImageStatusChangedEmail;
+  static const Type ProjectImageApprovedEmail = EmailMessage_Type_ProjectImageApprovedEmail;
+  static const Type ProjectImageDisapprovedEmail = EmailMessage_Type_ProjectImageDisapprovedEmail;
   static inline bool Type_IsValid(int value) {
     return EmailMessage_Type_IsValid(value);
   }

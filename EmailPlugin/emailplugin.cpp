@@ -32,7 +32,9 @@
 #include "Generators/ProjectCreatedGenerator.h"
 #include "Generators/NewImageUploadedEmailGenerator.h"
 #include "Generators/ProjectImageRemovedEmailGenerator.h"
-#include "Generators/ProjectImageStatusChangedEmailGenerator.h"
+#include "Generators/NewImageUploadedEmailGenerator.h"
+#include "Generators/ProjectImageApprovedEmailGenerator.h"
+#include "Generators/ProjectImageDisapprovedEmailGenerator.h"
 
 #include "Smtp.h"
 #include "IEmailGenerator.h"
@@ -159,9 +161,10 @@ void EmailPlugin::registerEmailTypes()
     qRegisterMetaType<NewImageUploadedEmailGenerator>(name.toLatin1());
     name = "EmailGenerator_" + QString::number(EmailMessage::ProjectImageRemovedEmail);
     qRegisterMetaType<ProjectImageRemovedEmailGenerator>(name.toLatin1());
-    name = "EmailGenerator_" + QString::number(EmailMessage::ProjectImageStatusChangedEmail);
-    qRegisterMetaType<ProjectImageStatusChangedEmailGenerator>(name.toLatin1());
-
+    name = "EmailGenerator_" + QString::number(EmailMessage::ProjectImageApprovedEmail);
+    qRegisterMetaType<ProjectImageApprovedEmailGenerator>(name.toLatin1());
+    name = "EmailGenerator_" + QString::number(EmailMessage::ProjectImageDisapprovedEmail);
+    qRegisterMetaType<ProjectImageDisapprovedEmailGenerator>(name.toLatin1());
 }
 
 void EmailPlugin::setThreadPool(QThreadPool *tp)

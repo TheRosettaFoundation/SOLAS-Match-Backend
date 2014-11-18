@@ -57,7 +57,8 @@ SOURCES += emailplugin.cpp \
     Generators/ProjectCreatedGenerator.cpp \
     Generators/NewImageUploadedEmailGenerator.cpp \
     Generators/ProjectImageRemovedEmailGenerator.cpp \
-    Generators/ProjectImageStatusChangedEmailGenerator.cpp
+    Generators/ProjectImageApprovedEmailGenerator.cpp \
+    Generators/ProjectImageDisapprovedEmailGenerator.cpp
 
 HEADERS += emailplugin.h\
         Smtp.h \
@@ -90,4 +91,5 @@ HEADERS += emailplugin.h\
     Generators/ProjectCreatedGenerator.h \
     Generators/NewImageUploadedEmailGenerator.h \
     Generators/ProjectImageRemovedEmailGenerator.h \
-    Generators/ProjectImageStatusChangedEmailGenerator.h
+    Generators/ProjectImageApprovedEmailGenerator.h \
+    Generators/ProjectImageDisapprovedEmailGenerator.h

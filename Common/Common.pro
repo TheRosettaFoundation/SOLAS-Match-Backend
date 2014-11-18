@@ -84,7 +84,8 @@ SOURCES += \
     protobufs/emails/ProjectCreatedEmail.pb.cc \
     protobufs/emails/ProjectImageRemovedEmail.pb.cc \
     protobufs/emails/ProjectImageUploadedEmail.pb.cc \
-    protobufs/emails/ProjectImageStatusChangedEmail.pb.cc
+    protobufs/emails/ProjectImageApprovedEmail.pb.cc \
+    protobufs/emails/ProjectImageDisapprovedEmail.pb.cc
 
 HEADERS +=\
     MySQLHandler.h \
@@ -151,8 +152,9 @@ HEADERS +=\
     protobufs/emails/UserTaskRevokedEmail.pb.h \
     protobufs/emails/ProjectCreatedEmail.pb.h \
     protobufs/emails/ProjectImageUploadedEmail.pb.h \
-    protobufs/emails/ProjectImageStatusChangedEmail.pb.h \
-    protobufs/emails/ProjectImageRemovedEmail.pb.h
+    protobufs/emails/ProjectImageRemovedEmail.pb.h \
+    protobufs/emails/ProjectImageApprovedEmail.pb.h \
+    protobufs/emails/ProjectImageDisapprovedEmail.pb.h
 
 symbian {
     MMP_RULES += EXPORTUNFROZEN

@@ -84,9 +84,9 @@ void protobuf_AddDesc_EmailMessage_2eproto() {
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\022EmailMessage.proto\022\"SolasMatch.Common."
-    "Protobufs.Emails\"\352\006\n\014EmailMessage\022I\n\nema"
+    "Protobufs.Emails\"\207\007\n\014EmailMessage\022I\n\nema"
     "il_type\030\001 \002(\01625.SolasMatch.Common.Protob"
-    "ufs.Emails.EmailMessage.Type\"\204\006\n\004Type\022\022\n"
+    "ufs.Emails.EmailMessage.Type\"\241\006\n\004Type\022\022\n"
     "\016TaskScoreEmail\020\001\022\021\n\rUserTaskClaim\020\002\022\031\n\025"
     "OrgMembershipAccepted\020\003\022\030\n\024OrgMembership"
     "Refused\020\004\022\026\n\022PasswordResetEmail\020\005\022\020\n\014Tas"
@@ -105,8 +105,9 @@ void protobuf_AddDesc_EmailMessage_2eproto() {
     "ojectCreated\020\032\022\021\n\rBannedFromOrg\020\033\022\037\n\033Use"
     "rBannedNotificationToOrg\020\034\022\035\n\031ProjectIma"
     "geUploadedEmail\020\035\022\034\n\030ProjectImageRemoved"
-    "Email\020\036\022\"\n\036ProjectImageStatusChangedEmai"
-    "l\020\037*\010\010d\020\200\200\200\200\002", 933);
+    "Email\020\036\022\035\n\031ProjectImageApprovedEmail\020\037\022 "
+    "\n\034ProjectImageDisapprovedEmail\020 *\010\010d\020\200\200\200"
+    "\200\002", 962);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "EmailMessage.proto", &protobuf_RegisterTypes);
   EmailMessage::default_instance_ = new EmailMessage();
@@ -160,6 +161,7 @@ bool EmailMessage_Type_IsValid(int value) {
     case 29:
     case 30:
     case 31:
+    case 32:
       return true;
     default:
       return false;
@@ -197,7 +199,8 @@ const EmailMessage_Type EmailMessage::BannedFromOrg;
 const EmailMessage_Type EmailMessage::UserBannedNotificationToOrg;
 const EmailMessage_Type EmailMessage::ProjectImageUploadedEmail;
 const EmailMessage_Type EmailMessage::ProjectImageRemovedEmail;
-const EmailMessage_Type EmailMessage::ProjectImageStatusChangedEmail;
+const EmailMessage_Type EmailMessage::ProjectImageApprovedEmail;
+const EmailMessage_Type EmailMessage::ProjectImageDisapprovedEmail;
 const EmailMessage_Type EmailMessage::Type_MIN;
 const EmailMessage_Type EmailMessage::Type_MAX;
 const int EmailMessage::Type_ARRAYSIZE;
