@@ -18,6 +18,10 @@
     please upload the output file on the following page: <br />
     {{TASK_PAGE}}
 </p>
+<p> 
+    You can then request a reference letter on your Profile page. 
+</p>
+
 <p>
     Sincerely,<br />
     The {{SITE_NAME}} Team
