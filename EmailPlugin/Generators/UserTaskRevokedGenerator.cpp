@@ -57,7 +57,7 @@ void UserTaskRevokedGenerator::run()
         dict.SetValue("SOURCE_LANGUAGE",taskSourceLocale.languagename());
         dict.SetValue("TARGET_LANGUAGE",taskTargetLocale.languagename());
 
-        bool footer_enabled=(QString::compare("y", settings.get("email-footer.enabled")) == 0);
+        bool footer_enabled = (QString::compare("y", settings.get("email-footer.enabled")) == 0);
         if (footer_enabled)
         {
             QString donate_link = settings.get("email-footer.donate_link");
