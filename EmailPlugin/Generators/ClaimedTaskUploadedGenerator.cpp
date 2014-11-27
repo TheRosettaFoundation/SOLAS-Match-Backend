@@ -51,8 +51,12 @@ void ClaimedTaskUploadedGenerator::run()
         dict.SetValue("TASK_TITLE", task->title());
         dict.SetValue("ORG_NAME", org->name());
         QString uploadUrl = settings.get("site.url");
+        QString profileUrl = settings.get("site.url");
         uploadUrl += "task/" + QString::number(task->id()) + "/id";
+        profileUrl += QString::number(user->id()) + "/profile/";
+
         dict.SetValue("TASK_UPLOAD", uploadUrl.toStdString());
+        dict.SetValue("USER_PROFILE", profileUrl.toStdString());
 
         QString task_type = "Translation";
         switch(task->tasktype())
