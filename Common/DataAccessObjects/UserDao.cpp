@@ -109,7 +109,7 @@ QString UserDao::getPasswordResetUuid(QSharedPointer<MySQLHandler> db, QString e
     QSharedPointer<QSqlQuery> mQuery = db->call("getPasswordResetRequests", args);
     if(mQuery->first()) {
         QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
-        ret = MySQLHandler::getValueFromQuery(fieldMap.value("uid"), mQuery).toString();
+        ret = MySQLHandler::getValueFromQuery(fieldMap.value("key"), mQuery).toString();
     }
 
     return ret;
