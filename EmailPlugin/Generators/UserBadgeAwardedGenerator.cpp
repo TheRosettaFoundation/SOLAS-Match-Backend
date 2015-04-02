@@ -29,8 +29,36 @@ void UserBadgeAwardedGenerator::run()
 
     if (error.length() == 0) {
         ctemplate::TemplateDictionary dict("user_badge_awarded");
+
+        //workaround until the code is properly internationalized
+        QString badge_title = "";
+        switch(badge->id())
+        {
+            case 3:
+                badge_title = "Profile-Filler";
+                break;
+            case 4:
+                badge_title = "Registered";
+                break;
+            case 5:
+                badge_title = "Native-Language";
+                break;
+            case 6:
+                badge_title = "Translator";
+                break;
+            case 7:
+                badge_title = "Proofreader";
+                break;
+            case 8:
+                badge_title = "Interpreter";
+                break;
+            case 9:
+                badge_title = "Polyglot";
+                break;
+        }
+
         dict.SetValue("USERNAME", user->display_name());
-        dict.SetValue("BADGE_NAME", badge->title());
+        dict.SetValue("BADGE_NAME", badge_title.toStdString());
         dict.SetValue("SITE_NAME", settings.get("site.name").toStdString());
 
         bool footer_enabled=(QString::compare("y", settings.get("email-footer.enabled")) == 0);
