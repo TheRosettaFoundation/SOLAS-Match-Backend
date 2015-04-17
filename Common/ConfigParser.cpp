@@ -5,12 +5,13 @@
 
 ConfigParser::ConfigParser()
 {
-    mSettings = new QSettings(INI_FILE_LOCATION, QSettings::IniFormat);
+    static QSettings singleton(INI_FILE_LOCATION, QSettings::IniFormat);
+    mSettings = &singleton;
 }
 
 ConfigParser::~ConfigParser()
 {
-    delete mSettings;
+    //delete mSettings;
 }
 
 QString ConfigParser::get(QString key)
