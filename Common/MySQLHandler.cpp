@@ -175,10 +175,13 @@ QMap<QString, int> MySQLHandler::getFieldMap(QSharedPointer<QSqlQuery> q)
 
 QString MySQLHandler::wrapString(QString str)
 {
+    str.replace("\\", "\\\\");
+    str.replace("'", "\\'");
+
     return "'" + str + "'";
 }
 
 QString MySQLHandler::wrapStdString(const std::string str)
 {
-    return MySQLHandler::wrapString(QString::fromStdString(str));
+    return MySQLHandler::wrapString(QString::fromUtf8(str));
 }
