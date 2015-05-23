@@ -183,5 +183,5 @@ QString MySQLHandler::wrapString(QString str)
 
 QString MySQLHandler::wrapStdString(const std::string str)
 {
-    return MySQLHandler::wrapString(QString::fromUtf8(str));
+    return MySQLHandler::wrapString(QString::fromUtf8(str.c_str(), str.length()));
 }
