@@ -27,6 +27,8 @@ LIBS += -L../Common -lCommon \
 
 DEFINES += EMAILPLUGIN_LIBRARY
 
+INCLUDEPATH += /usr/include/qxt/QxtNetwork /usr/include/qxt/QxtCore
+
 SOURCES += emailplugin.cpp \
     Smtp.cpp \
     Email.cpp \
