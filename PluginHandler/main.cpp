@@ -30,9 +30,6 @@ void myMessageHandler(QtMsgType type, const QMessageLogContext &context, const Q
         case QtCriticalMsg:
             txt = QString("[%1] Critical: %2").arg(time, msg);
             break;
-        case QtSystemMsg:
-            txt = QString("[%1] System: %2").arg(time, msg);
-            break;
         case QtFatalMsg:
             txt = QString("[%1] Fatal: %2").arg(time, msg);
             abort();
