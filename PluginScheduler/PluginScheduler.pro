@@ -1,5 +1,5 @@
 ! include( ../Common.pri ) {
-    error( Couldn't find the Common.pri file! )
+    error( "Couldn't find the Common.pri file!" )
 }
 
 QT       -= gui
