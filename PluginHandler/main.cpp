@@ -13,7 +13,7 @@
 
 QString logFile = "";
 
-void myMessageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
+void myMessageHandler(QtMsgType type, const char *msg)
 {
     QString txt;
     QString time = QDateTime::currentDateTime().toString("dd/MM/yyyy hh:mm:ss:zzz");
@@ -21,17 +21,11 @@ void myMessageHandler(QtMsgType type, const QMessageLogContext &context, const Q
         case QtDebugMsg:
             txt = QString("[%1] Debug: %2").arg(time, msg);
             break;
-        case QtInfoMsg:
-            txt = QString("[%1] Info: %2").arg(time, msg);
-            break;
         case QtWarningMsg:
             txt = QString("[%1] Warning: %2").arg(time, msg);
             break;
         case QtCriticalMsg:
             txt = QString("[%1] Critical: %2").arg(time, msg);
-            break;
-        case QtSystemMsg:
-            txt = QString("[%1] System: %2").arg(time, msg);
             break;
         case QtFatalMsg:
             txt = QString("[%1] Fatal: %2").arg(time, msg);
@@ -57,7 +51,7 @@ int main(int argc, char *argv[])
     logFile = parser.get("site.log");
     if (logFile != "") {
         qDebug() << "Redirecting output to " << logFile;
-        qInstallMessageHandler(myMessageHandler);
+        qInstallMsgHandler(myMessageHandler);
     }
 
     QList<WorkerInterface *> *workers;
