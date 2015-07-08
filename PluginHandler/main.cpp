@@ -13,7 +13,7 @@
 
 QString logFile = "";
 
-void myMessageHandler(QtMsgType type, const char *msg)
+void myMessageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
     QString txt;
     QString time = QDateTime::currentDateTime().toString("dd/MM/yyyy hh:mm:ss:zzz");
@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
     logFile = parser.get("site.log");
     if (logFile != "") {
         qDebug() << "Redirecting output to " << logFile;
-        qInstallMsgHandler(myMessageHandler);
+        qInstallMessageHandler(myMessageHandler);
     }
 
     QList<WorkerInterface *> *workers;
