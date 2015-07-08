@@ -21,11 +21,17 @@ void myMessageHandler(QtMsgType type, const char *msg)
         case QtDebugMsg:
             txt = QString("[%1] Debug: %2").arg(time, msg);
             break;
+        case QtInfoMsg:
+            txt = QString("[%1] Info: %2").arg(time, msg);
+            break;
         case QtWarningMsg:
             txt = QString("[%1] Warning: %2").arg(time, msg);
             break;
         case QtCriticalMsg:
             txt = QString("[%1] Critical: %2").arg(time, msg);
+            break;
+        case QtSystemMsg:
+            txt = QString("[%1] System: %2").arg(time, msg);
             break;
         case QtFatalMsg:
             txt = QString("[%1] Fatal: %2").arg(time, msg);
