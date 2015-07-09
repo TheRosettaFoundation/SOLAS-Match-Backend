@@ -14,6 +14,7 @@
 class PluginScheduler : public WorkerInterface
 {
     Q_OBJECT
+    Q_PLUGIN_METADATA(IID "org.therosettafoundation.solas" FILE "PluginScheduler.json")
     Q_INTERFACES(WorkerInterface)
 
 public:

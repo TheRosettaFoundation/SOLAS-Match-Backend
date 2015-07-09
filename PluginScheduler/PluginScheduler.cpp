@@ -18,7 +18,7 @@
 #include "Common/ConfigParser.h"
 #include "Common/MessagingClient.h"
 
-Q_EXPORT_PLUGIN2(PluginScheduler, PluginScheduler)
+//QT4.8 (see Q_PLUGIN_METADATA for QT5) Q_EXPORT_PLUGIN2(PluginScheduler, PluginScheduler)
 
 #define SCHEDULE_LOCATION "./schedule.xml"
 

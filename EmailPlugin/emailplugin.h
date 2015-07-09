@@ -10,6 +10,7 @@
 class EmailPlugin : public WorkerInterface
 {
     Q_OBJECT
+    Q_PLUGIN_METADATA(IID "org.therosettafoundation.solas" FILE "emailplugin.json")
     Q_INTERFACES(WorkerInterface)
 
 public:

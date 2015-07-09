@@ -8,7 +8,7 @@
 #include "ProjectQueueHandler.h"
 #include "Common/ConfigParser.h"
 
-Q_EXPORT_PLUGIN2(CorePlugin, CorePlugin)
+//QT4.8 (see Q_PLUGIN_METADATA for QT5) Q_EXPORT_PLUGIN2(CorePlugin, CorePlugin)
 
 CorePlugin::CorePlugin()
 {

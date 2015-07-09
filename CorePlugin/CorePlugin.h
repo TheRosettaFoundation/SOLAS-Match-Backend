@@ -10,6 +10,7 @@
 class CorePlugin : public WorkerInterface
 {
     Q_OBJECT
+    Q_PLUGIN_METADATA(IID "org.therosettafoundation.solas" FILE "CorePlugin.json")
     Q_INTERFACES(WorkerInterface)
 
 public:

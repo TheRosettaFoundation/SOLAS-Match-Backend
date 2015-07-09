@@ -44,7 +44,7 @@
 
 using namespace SolasMatch::Common::Protobufs::Emails;
 
-Q_EXPORT_PLUGIN2(EmailPlugin, EmailPlugin)
+//QT4.8 (see Q_PLUGIN_METADATA for QT5) Q_EXPORT_PLUGIN2(EmailPlugin, EmailPlugin)
 
 EmailPlugin::EmailPlugin()
 {
