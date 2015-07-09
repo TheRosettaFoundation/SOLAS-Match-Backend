@@ -64,7 +64,7 @@ void TaskQueueHandler::messageReceived(AMQPMessage *message)
     if (classId == 0) {
         qDebug() << "TaskQueueHandler: Invalid proto type: " << QString::fromStdString(requestMessage.class_name());
     } else {
-        JobInterface *runnable = static_cast<JobInterface *>(QMetaType::construct(classId));
+        JobInterface *runnable = static_cast<JobInterface *>(QMetaType::create(classId));
         runnable->setAMQPMessage(message);
         this->mThreadPool->start(runnable);
     }

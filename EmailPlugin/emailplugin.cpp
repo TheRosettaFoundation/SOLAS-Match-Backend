@@ -98,7 +98,7 @@ void EmailPlugin::messageReveived(AMQPMessage *message)
     if (classId == 0) {
         qDebug() << "EmailGenerator: Invalid proto type: " << QString::number(email_message.email_type());
     } else {
-        IEmailGenerator *emailGen = static_cast<IEmailGenerator *>(QMetaType::construct(classId));
+        IEmailGenerator *emailGen = static_cast<IEmailGenerator *>(QMetaType::create(classId));
         emailGen->setEmailQueue(smtp->getEmailQueue());
         emailGen->setProtoBody(message_body);
         emailGen->setAMQPMessage(message);
