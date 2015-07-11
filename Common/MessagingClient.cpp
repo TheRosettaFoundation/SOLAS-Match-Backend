@@ -34,8 +34,15 @@ bool MessagingClient::openConnection()
 {
     bool ret = false;
     try {
+        //QString connectionString = this->pass+ ":" +
+        //        this->user + "@" + this->hostname + ":" + QString::number(this->port) + "/";
         QString connectionString = this->pass+ ":" +
-                this->user + "@" + this->hostname + ":" + QString::number(this->port) + "/";
+                this->user + "@" + this->hostname + ":" + QString::number(this->port);
+        // Trailing slash implies an empty vhost, we want a default vhost ("/"), so remove the /
+        // Note although AMQP follows that part of the spec, it does not follow other parts (e.g. it reverses username:password)!
+        // see https://github.com/TheRosettaFoundation/amqpcpp.git src/AMQP.cpp
+        // spec: https://www.rabbitmq.com/uri-spec.html
+
         this->conn = new AMQP(connectionString.toStdString());
         ret = true;
     } catch(AMQPException error) {
