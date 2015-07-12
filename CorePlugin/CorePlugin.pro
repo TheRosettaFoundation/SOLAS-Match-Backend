@@ -17,7 +17,7 @@ CONFIG += plugin
 DESTDIR = ../plugins
 
 LIBS += -L../Common -lCommon \
-    -L/usr/local/lib -lamqpcpp -lrabbitmq -lctemplate
+    -L/usr/local/lib -lamqpcpp -lrabbitmq -lctemplate -lqsqlmysql
 
 DEFINES += COREPLUGIN_LIBRARY
 

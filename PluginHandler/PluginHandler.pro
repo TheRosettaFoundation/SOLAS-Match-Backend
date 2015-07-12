@@ -15,7 +15,7 @@ CONFIG   -= app_bundle
 TEMPLATE = app
 
 LIBS += -L../Common -lCommon \
-    -L/usr/local/lib -lamqpcpp -lrabbitmq
+    -L/usr/local/lib -lamqpcpp -lrabbitmq -lqsqlmysql
 
 INCLUDEPATH += /usr/local/include . ..
 
