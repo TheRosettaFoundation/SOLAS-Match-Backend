@@ -8,6 +8,7 @@
     error( "Couldn't find the Common.pri file!" )
 }
 
+QT       += core
 QT       += network
 
 QT       -= gui
@@ -16,8 +17,6 @@ TARGET = EmailPlugin
 TEMPLATE = lib
 
 CONFIG += plugin
-
-QXT    += network
 
 DESTDIR = ../plugins
 
