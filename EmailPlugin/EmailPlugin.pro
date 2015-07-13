@@ -15,7 +15,7 @@ QT       -= gui
 TARGET = EmailPlugin
 TEMPLATE = lib
 
-CONFIG += plugin qxt
+CONFIG += plugin
 
 QXT    += network
 
@@ -24,15 +24,18 @@ DESTDIR = ../plugins
 LIBS += -L../Common -lCommon \
     -L/usr/local/lib -lamqpcpp -lrabbitmq \
     -lprotobuf -lctemplate \
-    -L/usr/lib -lQxtCore -lQxtNetwork
+    -L/usr/lib
 
 DEFINES += EMAILPLUGIN_LIBRARY
-
-INCLUDEPATH += /usr/include/qxt/QxtNetwork /usr/include/qxt/QxtCore
 
 SOURCES += emailplugin.cpp \
     Smtp.cpp \
     Email.cpp \
+    qxtglobal.cpp \
+    qxtsmtp.cpp \
+    qxtmailmessage.cpp \
+    qxtmailattachment.cpp \
+    qxthmac.cpp \
     IEmailGenerator.cpp \
     Generators/OrgMembershipAcceptedGenerator.cpp \
     Generators/OrgMembershipRefusedEmailGenerator.cpp \
@@ -64,8 +67,15 @@ SOURCES += emailplugin.cpp \
     Generators/ProjectImageDisapprovedEmailGenerator.cpp
 
 HEADERS += emailplugin.h\
-        Smtp.h \
+    Smtp.h \
     Email.h \
+    qxtglobal.h
+    qxtsmtp.h \
+    qxtsmtp_p.h \
+    qxtmail_p.h \
+    qxtmailmessage.h \
+    qxtmailattachment.h \
+    qxthmac.h \
     Generators/TaskScoreEmailGenerator.h \
     IEmailGenerator.h \
     Generators/OrgMembershipAcceptedGenerator.h \

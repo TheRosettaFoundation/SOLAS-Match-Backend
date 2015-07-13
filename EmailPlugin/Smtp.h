@@ -7,8 +7,8 @@
 #include <QSharedPointer>
 #include <QQueue>
 
-#include <qxt/QxtNetwork/qxtsmtp.h>
-#include <qxt/QxtNetwork/qxtmailmessage.h>
+#include "qxtsmtp.h"
+#include "qxtmailmessage.h"
 
 #include "Email.h"
 #include "EmailDefinitions.h"

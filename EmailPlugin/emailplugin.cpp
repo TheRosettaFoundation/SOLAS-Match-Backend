@@ -3,8 +3,8 @@
 #include <QDebug>
 #include <QTimer>
 
-#include <qxt/QxtNetwork/qxtmailmessage.h>
-#include <qxt/QxtNetwork/qxtsmtp.h>
+#include "qxtmailmessage.h"
+#include "qxtsmtp.h"
 
 #include "Generators/TaskScoreEmailGenerator.h"
 #include "Generators/OrgDeadlinePassedEmailGenerator.h"
