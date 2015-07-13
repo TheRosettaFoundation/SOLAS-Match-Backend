@@ -166,12 +166,12 @@ void QxtSmtpPrivate::socketError(QAbstractSocket::SocketError err)
     if (err == QAbstractSocket::SslHandshakeFailedError)
     {
         emit qxt_p().encryptionFailed();
-        emit qxt_p().encryptionFailed( socket->errorString().toAscii() );
+        emit qxt_p().encryptionFailed( socket->errorString().toLatin1() );
     }
     else if (state == StartState)
     {
         emit qxt_p().connectionFailed();
-        emit qxt_p().connectionFailed( socket->errorString().toAscii() );
+        emit qxt_p().connectionFailed( socket->errorString().toLatin1() );
     }
 }
 
@@ -241,8 +241,8 @@ void QxtSmtpPrivate::socketRead()
                 emit qxt_p().mailFailed( pending.first().first, code.toInt() );
                 emit qxt_p().mailFailed(pending.first().first, code.toInt(), line);
 				// pending.removeFirst();
-				// DO NOT remove it, the body sent state needs this message to assigned the next mail failed message that will 
-				// the sendNext 
+				// DO NOT remove it, the body sent state needs this message to assigned the next mail failed message that will
+				// the sendNext
 				// a reset will be sent to clear things out
                 sendNext();
                 state = BodySent;
@@ -256,7 +256,7 @@ void QxtSmtpPrivate::socketRead()
         case BodySent:
 			if ( pending.count() )
 			{
-				// if you removeFirst in RcpActpending/MailToSent on an error, and the queue is now empty, 
+				// if you removeFirst in RcpActpending/MailToSent on an error, and the queue is now empty,
 				// you will get into this state and then crash because no check is done.  CHeck added but shouldnt
 				// be necessary since I commented out the removeFirst
 				if (code[0] != '2')
@@ -291,7 +291,7 @@ void QxtSmtpPrivate::ehlo()
     {
         if (addr == QHostAddress::LocalHost || addr == QHostAddress::LocalHostIPv6)
             continue;
-        address = addr.toString().toAscii();
+        address = addr.toString().toLatin1();
         break;
     }
     socket->write("ehlo " + address + "\r\n");
@@ -467,7 +467,7 @@ static QByteArray qxt_extract_address(const QString& address)
         else if (addrStart != -1)
         {
             if (ch == '>')
-                return address.mid(addrStart, (i - addrStart)).toAscii();
+                return address.mid(addrStart, (i - addrStart)).toLatin1();
         }
         else if (ch == '(')
         {
@@ -489,7 +489,7 @@ static QByteArray qxt_extract_address(const QString& address)
                 addrStart = i + 1;
         }
     }
-    return address.toAscii();
+    return address.toLatin1();
 }
 
 void QxtSmtpPrivate::sendNext()
