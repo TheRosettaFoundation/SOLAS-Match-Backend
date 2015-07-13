@@ -66,10 +66,10 @@ SOURCES += emailplugin.cpp \
     Generators/ProjectImageApprovedEmailGenerator.cpp \
     Generators/ProjectImageDisapprovedEmailGenerator.cpp
 
-HEADERS += emailplugin.h\
+HEADERS += emailplugin.h \
     Smtp.h \
     Email.h \
-    qxtglobal.h
+    qxtglobal.h \
     qxtsmtp.h \
     qxtsmtp_p.h \
     qxtmail_p.h \
