@@ -45,6 +45,8 @@ SOURCES += \
     protobufs/requests/DeadlineCheckRequest.pb.cc \
     protobufs/emails/OrgTaskDeadlinePassed.pb.cc \
     protobufs/emails/UserClaimedTaskDeadlinePassed.pb.cc \
+    protobufs/emails/UserClaimedTaskEarlyWarningDeadlinePassed.pb.cc \
+    protobufs/emails/UserClaimedTaskLateWarningDeadlinePassed.pb.cc \
     protobufs/models/ArchivedProject.pb.cc \
     protobufs/models/Project.pb.cc \
     DataAccessObjects/ProjectDao.cpp \
@@ -113,6 +115,8 @@ HEADERS +=\
     protobufs/requests/DeadlineCheckRequest.pb.h \
     protobufs/emails/OrgTaskDeadlinePassed.pb.h \
     protobufs/emails/UserClaimedTaskDeadlinePassed.pb.h \
+    protobufs/emails/UserClaimedTaskEarlyWarningDeadlinePassed.pb.h \
+    protobufs/emails/UserClaimedTaskLateWarningDeadlinePassed.pb.h \
     protobufs/models/ArchivedProject.pb.h \
     protobufs/models/Project.pb.h \
     DataAccessObjects/ProjectDao.h \
