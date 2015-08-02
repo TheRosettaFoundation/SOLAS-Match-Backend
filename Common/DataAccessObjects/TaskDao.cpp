@@ -390,7 +390,7 @@ void TaskDao::taskNotificationSentInsertAndUpdate(QSharedPointer<MySQLHandler> d
     args += QString::number(task_id) + ", ";
     args += QString::number(notification);
 
-    db->call("taskInsertAndUpdate", args);
+    db->call("taskNotificationSentInsertAndUpdate", args);
 }
 
 QSharedPointer<User> TaskDao::getUserClaimedTask(QSharedPointer<MySQLHandler> db, int task_id)
