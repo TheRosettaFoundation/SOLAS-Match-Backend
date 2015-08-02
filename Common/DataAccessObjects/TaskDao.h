@@ -29,6 +29,9 @@ public:
     static QSharedPointer<Task> insertAndUpdate(QSharedPointer<MySQLHandler> db, Task task);
     static QList<QSharedPointer<Task> > getActiveTasks(QSharedPointer<MySQLHandler> db, int limit = -1, int offset = RETURN_ALL);
     static QList<QSharedPointer<Task> > getOverdueTasks(QSharedPointer<MySQLHandler> db);
+    static QList<QSharedPointer<Task> > getEarlyWarningTasks(QSharedPointer<MySQLHandler> db);
+    static QList<QSharedPointer<Task> > getLateWarningTasks(QSharedPointer<MySQLHandler> db);
+    static void taskNotificationSentInsertAndUpdate(QSharedPointer<MySQLHandler> db, int task_id, int notification);
     static QSharedPointer<User> getUserClaimedTask(QSharedPointer<MySQLHandler> db, int task_id);
     static QList<QSharedPointer<User> > getSubscribedUsers(QSharedPointer<MySQLHandler> db, int task_id);
     static QList<QSharedPointer<ArchivedTask> > getArchivedTasks(QSharedPointer<MySQLHandler> db, int arc_id = -1);
