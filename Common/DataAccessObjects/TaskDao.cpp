@@ -350,6 +350,49 @@ QList<QSharedPointer<Task> > TaskDao::getOverdueTasks(QSharedPointer<MySQLHandle
     return ret;
 }
 
+QList<QSharedPointer<Task> > TaskDao::getEarlyWarningTasks(QSharedPointer<MySQLHandler> db)
+{
+    QList<QSharedPointer<Task> > ret = QList<QSharedPointer<Task> >();
+
+    QSharedPointer<QSqlQuery> mQuery = db->call("getEarlyWarningTasks", "");
+    if (mQuery->first()) {
+        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
+        do {
+            QSharedPointer<Task> task = QSharedPointer<Task>(new Task());
+            ModelGenerator::Generate(mQuery, task, fieldMap);
+            ret.append(task);
+        } while (mQuery->next());
+    }
+
+    return ret;
+}
+
+QList<QSharedPointer<Task> > TaskDao::getLateWarningTasks(QSharedPointer<MySQLHandler> db)
+{
+    QList<QSharedPointer<Task> > ret = QList<QSharedPointer<Task> >();
+
+    QSharedPointer<QSqlQuery> mQuery = db->call("getLateWarningTasks", "");
+    if (mQuery->first()) {
+        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
+        do {
+            QSharedPointer<Task> task = QSharedPointer<Task>(new Task());
+            ModelGenerator::Generate(mQuery, task, fieldMap);
+            ret.append(task);
+        } while (mQuery->next());
+    }
+
+    return ret;
+}
+
+void TaskDao::taskNotificationSentInsertAndUpdate(QSharedPointer<MySQLHandler> db, int task_id, int notification)
+{
+    QString args = "";
+    args += QString::number(task_id) + ", ";
+    args += QString::number(notification);
+
+    db->call("taskNotificationSentInsertAndUpdate", args);
+}
+
 QSharedPointer<User> TaskDao::getUserClaimedTask(QSharedPointer<MySQLHandler> db, int task_id)
 {
     QSharedPointer<User> user;

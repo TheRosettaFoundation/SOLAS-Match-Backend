@@ -13,6 +13,8 @@
 #include "Common/protobufs/emails/EmailMessage.pb.h"
 #include "Common/protobufs/emails/OrgTaskDeadlinePassed.pb.h"
 #include "Common/protobufs/emails/UserClaimedTaskDeadlinePassed.pb.h"
+#include "Common/protobufs/emails/UserClaimedTaskEarlyWarningDeadlinePassed.pb.h"
+#include "Common/protobufs/emails/UserClaimedTaskLateWarningDeadlinePassed.pb.h"
 
 using namespace SolasMatch::Common::Protobufs::Emails;
 
@@ -74,6 +76,44 @@ void DeadlineChecker::run()
             qDebug() << "DeadlineChecker::Finished processing task, unpublishing it now";
             task->set_published(false);
             TaskDao::insertAndUpdate(db, task);
+        }
+
+        tasks = TaskDao::getEarlyWarningTasks(db);
+        foreach(QSharedPointer<Task> task, tasks) {
+            qDebug() << "Task " << task->id() << " is within a week of its deadline of " << QString::fromStdString(task->deadline());
+            QSharedPointer<User> translator = TaskDao::getUserClaimedTask(db, task->id());
+
+            if(!translator.isNull()) {
+                UserClaimedTaskEarlyWarningDeadlinePassed userEmail;
+                userEmail.set_email_type(EmailMessage::UserClaimedTaskEarlyWarningDeadlinePassed);
+                userEmail.set_task_id(task->id());
+                userEmail.set_translator_id(translator->id());
+
+                client.publish(exchange, "email.user.early.deadline.passed",
+                               QString::fromStdString(userEmail.SerializeAsString()));
+            }
+
+            TaskDao::taskNotificationSentInsertAndUpdate(db, task->id(), 1);
+            qDebug() << "DeadlineChecker::Task early warning email queued";
+        }
+
+        tasks = TaskDao::getLateWarningTasks(db);
+        foreach(QSharedPointer<Task> task, tasks) {
+            qDebug() << "Task " << task->id() << " is a week late on its deadline of " << QString::fromStdString(task->deadline());
+            QSharedPointer<User> translator = TaskDao::getUserClaimedTask(db, task->id());
+
+            if(!translator.isNull()) {
+                UserClaimedTaskLateWarningDeadlinePassed userEmail;
+                userEmail.set_email_type(EmailMessage::UserClaimedTaskLateWarningDeadlinePassed);
+                userEmail.set_task_id(task->id());
+                userEmail.set_translator_id(translator->id());
+
+                client.publish(exchange, "email.user.late.deadline.passed",
+                               QString::fromStdString(userEmail.SerializeAsString()));
+            }
+
+            TaskDao::taskNotificationSentInsertAndUpdate(db, task->id(), 2);
+            qDebug() << "DeadlineChecker::Task late warning email queued";
         }
     } else {
         qDebug() << "Unable to connect to RabbitMQ. Check conf.ini for settings.";
