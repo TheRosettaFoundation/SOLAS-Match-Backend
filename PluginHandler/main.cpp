@@ -21,9 +21,10 @@ void myMessageHandler(QtMsgType type, const QMessageLogContext &context, const Q
         case QtDebugMsg:
             txt = QString("[%1] Debug: %2").arg(time, msg);
             break;
-        case QtInfoMsg:
-            txt = QString("[%1] Info: %2").arg(time, msg);
-            break;
+// QT version 5.21 (< 5.5) does not support this case; QT5.21 is used by Ubuntu 14.04 which is used by Docker (because we do not explicitly compile QT5.5)
+//        case QtInfoMsg:
+//            txt = QString("[%1] Info: %2").arg(time, msg);
+//            break;
         case QtWarningMsg:
             txt = QString("[%1] Warning: %2").arg(time, msg);
             break;
