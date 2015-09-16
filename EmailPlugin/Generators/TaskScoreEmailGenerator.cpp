@@ -5,7 +5,7 @@ void TaskScoreEmailGenerator::run()
 {
     qDebug() << "EmailGenerator - Generating TaskScoreEmail";
     TaskScoreEmail email_message;
-    email_message.ParseFromString(this->protoBody.toStdString());
+    email_message.ParseFromString(this->protoBody);
 
     QSharedPointer<Email> email = QSharedPointer<Email>(new Email());
     ConfigParser settings;

@@ -11,7 +11,7 @@ void UserTaskClaimEmailGenerator::run()
     qDebug() << "EmailGenerator - Generating UserTaskClaim";
 
     UserTaskClaim email_message;
-    email_message.ParseFromString(this->protoBody.toStdString());
+    email_message.ParseFromString(this->protoBody);
 
     ConfigParser settings;
     QString error = "";

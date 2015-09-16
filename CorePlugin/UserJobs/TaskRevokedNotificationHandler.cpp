@@ -53,7 +53,7 @@ void TaskRevokedNotificationHandler::run()
                     subscriberNotification.set_email_type(subscriberNotification.email_type());
                     foreach (QSharedPointer<User> user, subscribedUsers) {
                         subscriberNotification.set_user_id(user->id());
-                        client.publish(exchange, topic, QString::fromStdString(subscriberNotification.SerializeAsString()));
+                        client.publish(exchange, topic, subscriberNotification.SerializeAsString());
                     }
                 } else {
                     qDebug() << "TaskRevokedNotification: No users subscribed to task";
@@ -63,7 +63,7 @@ void TaskRevokedNotificationHandler::run()
                 userNotification.set_task_id(notification.task_id());
                 userNotification.set_user_id(notification.claimant_id());
                 userNotification.set_email_type(userNotification.email_type());
-                client.publish(exchange, topic, QString::fromStdString(userNotification.SerializeAsString()));
+                client.publish(exchange, topic, userNotification.SerializeAsString());
             } else {
                 qDebug() << "TaskRevokedNotificationHandler: Failed to parse message body";
             }

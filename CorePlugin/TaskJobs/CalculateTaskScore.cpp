@@ -157,7 +157,7 @@ void CalculateTaskScore::run()
     try {
         QString exchange_name = settings.get("messaging.exchange");
         QString exchange_topic = "email.task.score";
-        QString body = QString::fromStdString(message_body.SerializeAsString());
+        std::string body = message_body.SerializeAsString();
 
         MessagingClient publisher;
         publisher.init();

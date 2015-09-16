@@ -11,7 +11,7 @@ void UserClaimedTaskEarlyWarningDeadlinePassedEmailGenerator::run()
     qDebug() << "EmailGenerator: Generating UserClaimedTaskEarlyWarningDeadlinePassed email";
 
     UserClaimedTaskEarlyWarningDeadlinePassed email_message;
-    email_message.ParseFromString(this->protoBody.toStdString());
+    email_message.ParseFromString(this->protoBody);
 
     ConfigParser settings;
     QString error = "";

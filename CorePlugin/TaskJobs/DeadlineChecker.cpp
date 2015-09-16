@@ -60,7 +60,7 @@ void DeadlineChecker::run()
                 }
 
                 client.publish(exchange, "email.org.task.deadline",
-                               QString::fromStdString(orgEmail.SerializeAsString()));
+                               orgEmail.SerializeAsString());
             }
 
             if(!translator.isNull()) {
@@ -70,7 +70,7 @@ void DeadlineChecker::run()
                 userEmail.set_translator_id(translator->id());
 
                 client.publish(exchange, "email.user.deadline.passed",
-                               QString::fromStdString(userEmail.SerializeAsString()));
+                               userEmail.SerializeAsString());
             }
 
             qDebug() << "DeadlineChecker::Finished processing task, unpublishing it now";
@@ -90,7 +90,7 @@ void DeadlineChecker::run()
                 userEmail.set_translator_id(translator->id());
 
                 client.publish(exchange, "email.user.early.deadline.passed",
-                               QString::fromStdString(userEmail.SerializeAsString()));
+                               userEmail.SerializeAsString());
             }
 
             TaskDao::taskNotificationSentInsertAndUpdate(db, task->id(), 1);
@@ -109,7 +109,7 @@ void DeadlineChecker::run()
                 userEmail.set_translator_id(translator->id());
 
                 client.publish(exchange, "email.user.late.deadline.passed",
-                               QString::fromStdString(userEmail.SerializeAsString()));
+                               userEmail.SerializeAsString());
             }
 
             TaskDao::taskNotificationSentInsertAndUpdate(db, task->id(), 2);

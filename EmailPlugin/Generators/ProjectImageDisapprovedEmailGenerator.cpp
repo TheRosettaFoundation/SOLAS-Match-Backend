@@ -9,7 +9,7 @@ void ProjectImageDisapprovedEmailGenerator::run()
 {
     qDebug() << "EmailGenerator: Generating Project Image Disapproved Email";
     ProjectImageDisapprovedEmail email_message;
-    email_message.ParseFromString(this->protoBody.toStdString());
+    email_message.ParseFromString(this->protoBody);
 
     ConfigParser settings;
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();

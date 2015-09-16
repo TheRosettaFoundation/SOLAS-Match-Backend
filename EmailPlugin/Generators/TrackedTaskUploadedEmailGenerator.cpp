@@ -11,7 +11,7 @@ void TrackedTaskUploadedEmailGenerator::run()
     qDebug() << "EmailGenerator - Generating TrackedTaskUploaded email";
 
     TrackedTaskUploaded email_message;
-    email_message.ParseFromString(this->protoBody.toStdString());
+    email_message.ParseFromString(this->protoBody);
 
     ConfigParser settings;
     QString error = "";

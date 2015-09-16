@@ -90,10 +90,10 @@ void EmailPlugin::messageReveived(AMQPMessage *message)
     }
 
     uint32_t length = 0;
-    QString message_body = message->getMessage(&length);
+    std::string message_body = message->getMessage(&length);
 
     EmailMessage email_message;
-    email_message.ParseFromString(message_body.toStdString());
+    email_message.ParseFromString(message_body);
 
     QString type = "EmailGenerator_" + QString::number(email_message.email_type());
     int classId = QMetaType::type(type.toLatin1());

@@ -31,7 +31,7 @@ class IEmailGenerator : public QRunnable
 public:
     IEmailGenerator();
     virtual void run() = 0;
-    void setProtoBody(QString proto);
+    void setProtoBody(std::string proto);
     void setAMQPMessage(AMQPMessage *mess);
     void setEmailQueue(QSharedPointer<EmailQueue> emailQueue);
     QSharedPointer<Email> generateErrorEmail(QString error);
@@ -40,7 +40,7 @@ signals:
     void emailSent(bool success);
 
 protected:
-    QString protoBody;
+    std::string protoBody;
     QSharedPointer<EmailQueue> emailQueue;
     AMQPMessage *currentMessage;
 

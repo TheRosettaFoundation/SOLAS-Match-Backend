@@ -11,7 +11,7 @@ void OrgDeadlinePassedMailGenerator::run()
     qDebug() << "EmailGenerator - Generating OrgTaskDeadlinePassed";
 
     OrgTaskDeadlinePassed email_message;
-    email_message.ParseFromString(this->protoBody.toStdString());
+    email_message.ParseFromString(this->protoBody);
 
     ConfigParser settings;
     QString error = "";

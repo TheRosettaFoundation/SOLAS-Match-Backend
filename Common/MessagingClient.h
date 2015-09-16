@@ -13,7 +13,7 @@ public:
     ~MessagingClient();
     bool init();
     void declareQueue(QString exchange, QString topic, QString queue);
-    void publish(QString exchange, QString topic, QString message);
+    void publish(QString exchange, QString topic, std::string message);
     void republish(AMQPMessage *);
 
 public slots:

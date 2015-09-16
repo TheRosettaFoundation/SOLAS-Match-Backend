@@ -10,7 +10,7 @@ void NewImageUploadedEmailGenerator::run()
 {
     qDebug() << "EmailGenerator: Generating Project Image Uploaded Email";
     ProjectImageUploadedEmail email_message;
-    email_message.ParseFromString(this->protoBody.toStdString());
+    email_message.ParseFromString(this->protoBody);
 
 
     ConfigParser settings;

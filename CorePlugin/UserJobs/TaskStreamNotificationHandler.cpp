@@ -40,7 +40,7 @@ void TaskStreamNotificationHandler::run()
                     QSharedPointer<UserTaskStreamEmail>(new UserTaskStreamEmail());
             request->set_user_id(id);
             request->set_email_type(EmailMessage::UserTaskStreamEmail);
-            QString body = QString::fromStdString(request->SerializeAsString());
+            std::string body = request->SerializeAsString();
             client.publish(exchange, topic, body);
         }
     } else {
