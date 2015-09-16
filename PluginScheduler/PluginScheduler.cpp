@@ -143,7 +143,7 @@ void PluginScheduler::processTask(QPointer<TimedTask> task)
         MessagingClient client;
         client.init();
         client.publish(task->getExchange(), task->getTopic(),
-                       QString::fromStdString(request->SerializeAsString()));
+                       request->SerializeAsString());
     } else {
         qDebug() << "PluginScheduler: Invalid request type";
     }

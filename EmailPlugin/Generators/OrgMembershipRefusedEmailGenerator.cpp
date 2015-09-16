@@ -10,7 +10,7 @@ void OrgMembershipRefusedEmailGenerator::run()
 {
     qDebug() << "EmailGenerator - Generating OrgMembershipRefused";
     OrgMembershipRefused email_message;
-    email_message.ParseFromString(this->protoBody.toStdString());
+    email_message.ParseFromString(this->protoBody);
 
     ConfigParser settings;
     QSharedPointer<Email> email = QSharedPointer<Email>(new Email());

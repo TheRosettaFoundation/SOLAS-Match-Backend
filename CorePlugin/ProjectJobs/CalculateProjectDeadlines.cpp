@@ -51,7 +51,7 @@ void CalculateProjectDeadlines::run()
         foreach(QString admin, admins) {
             projectCreatedEmail.set_recipient_email(admin.trimmed().toStdString());
             publisher.publish(settings.get("messaging.exchange"), "email",
-                              QString::fromStdString(projectCreatedEmail.SerializeAsString()));
+                              projectCreatedEmail.SerializeAsString());
         }
 
         QSharedPointer<MySQLHandler> db  = MySQLHandler::getInstance();

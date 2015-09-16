@@ -12,7 +12,7 @@ void UserBadgeAwardedGenerator::run()
 {
     qDebug() << "EmailGenerator: generating user badge awarded email";
     UserBadgeAwardedEmail emailMessage;
-    emailMessage.ParseFromString(this->protoBody.toStdString());
+    emailMessage.ParseFromString(this->protoBody);
 
     ConfigParser settings;
     QString error = "";

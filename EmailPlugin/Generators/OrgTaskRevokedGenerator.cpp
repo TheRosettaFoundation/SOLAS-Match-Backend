@@ -10,7 +10,7 @@ void OrgTaskRevokedGenerator::run()
 {
     qDebug() << "Email Generator - Generating OrgTaskRevokedEmail";
     OrgTaskRevokedEmail emailMessage;
-    emailMessage.ParseFromString(this->protoBody.toStdString());
+    emailMessage.ParseFromString(this->protoBody);
 
     ConfigParser settings;
     QSharedPointer<Email> email = QSharedPointer<Email>(new Email());

@@ -29,7 +29,7 @@ void IEmailGenerator::setEmailQueue(QSharedPointer<EmailQueue> emailQueue)
     this->emailQueue = emailQueue;
 }
 
-void IEmailGenerator::setProtoBody(QString proto)
+void IEmailGenerator::setProtoBody(std::string proto)
 {
     this->protoBody = proto;
 }

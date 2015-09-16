@@ -32,7 +32,7 @@ void OrgMembershipAcceptedGenerator::run()
 {
     qDebug() << "EmailGenerator - Generating OrgMembershipAccepted";
     OrgMembershipAccepted email_message;
-    email_message.ParseFromString(protoBody.toStdString());
+    email_message.ParseFromString(protoBody);
 
     ConfigParser settings;
     QSharedPointer<Email> email = QSharedPointer<Email>(new Email());

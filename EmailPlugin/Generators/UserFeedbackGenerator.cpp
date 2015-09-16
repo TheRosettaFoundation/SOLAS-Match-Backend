@@ -13,7 +13,7 @@ void UserFeedbackGenerator::run()
     qDebug() << "EmailGenerator: Generating user feedback email";
 
     UserFeedback emailMessage;
-    emailMessage.ParseFromString(this->protoBody.toStdString());
+    emailMessage.ParseFromString(this->protoBody);
 
     ConfigParser settings;
     QString error = "";

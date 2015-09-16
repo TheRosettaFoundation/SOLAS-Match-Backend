@@ -48,10 +48,10 @@ void ProjectQueueHandler::messageReceived(AMQPMessage *message)
     }
 
     uint32_t length = 0;
-    QString message_body = message->getMessage(&length);
+    std::string message_body = message->getMessage(&length);
 
     RequestMessage requestMessage;
-    requestMessage.ParseFromString(message_body.toStdString());
+    requestMessage.ParseFromString(message_body);
 
     int classId = QMetaType::type(QString::fromStdString(requestMessage.class_name()).toLatin1());
     if (classId == 0) {

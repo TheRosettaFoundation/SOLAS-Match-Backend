@@ -11,7 +11,7 @@ void TaskArchivedEmailGenerator::run()
     qDebug() << "EmailGenerator - Generating TaskArchived";
 
     TaskArchived email_message;
-    email_message.ParseFromString(this->protoBody.toStdString());
+    email_message.ParseFromString(this->protoBody);
 
     ConfigParser settings;
     QString error = "";

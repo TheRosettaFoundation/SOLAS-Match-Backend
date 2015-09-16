@@ -63,14 +63,14 @@ void MessagingClient::declareQueue(QString exchange, QString topic, QString queu
     mQueue->Bind(exchange.toStdString(), topic.toStdString());
 }
 
-void MessagingClient::publish(QString exchange, QString topic, QString message)
+void MessagingClient::publish(QString exchange, QString topic, std::string message)
 {
     qDebug() << "Publishing to exchnage " << exchange << " on " << topic;
     if(this->conn) {
         try {
             mExchange = this->conn->createExchange(exchange.toStdString());
             mExchange->Declare(exchange.toStdString(), "topic", AMQP_DURABLE);
-            mExchange->Publish(message.toStdString(), topic.toStdString());
+            mExchange->Publish(message, topic.toStdString());
         } catch (AMQPException e) {
             qDebug() << "Caught exception";
         }
@@ -84,7 +84,7 @@ void MessagingClient::republish(AMQPMessage *message)
     uint32_t length = 0;
     this->publish(QString::fromStdString(message->getExchange()),
                   QString::fromStdString(message->getRoutingKey()),
-                  QString::fromStdString(message->getMessage(&length)));
+                  message->getMessage(&length));
 }
 
 void MessagingClient::consumeFromQueue()

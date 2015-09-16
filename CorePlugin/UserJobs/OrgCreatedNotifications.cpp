@@ -45,12 +45,12 @@ void OrgCreatedNotifications::run()
             if (publisher.init()) {
                 if (orgAdmins.size() > 0) {
                     foreach (QSharedPointer<User> admin, orgAdmins) {
-                        QString body = "";
+                        std::string body = "";
                         OrgCreatedOrgAdmin email;
                         email.set_org_admin_id(admin->id());
                         email.set_org_id(request.org_id());
                         email.set_email_type(email.email_type());
-                        body = QString::fromStdString(email.SerializeAsString());
+                        body = email.SerializeAsString();
                         publisher.publish(exchange, topic, body);
                     }
                 } else {
@@ -59,12 +59,12 @@ void OrgCreatedNotifications::run()
 
                 if (siteAdmins.size() > 0) {
                     foreach (QSharedPointer<User> admin, siteAdmins) {
-                        QString body = "";
+                        std::string body = "";
                         OrgCreatedSiteAdmin email;
                         email.set_org_id(request.org_id());
                         email.set_email_type(email.email_type());
                         email.set_site_admin_id(admin->id());
-                        body = QString::fromStdString(email.SerializeAsString());
+                        body = email.SerializeAsString();
                         publisher.publish(exchange, topic, body);
                     }
                 } else {

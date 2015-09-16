@@ -11,7 +11,7 @@ void EmailVerificationGenerator::run()
     qDebug() << "EmailGenerator::Generating Email Verification email";
 
     EmailVerification emailMessage;
-    emailMessage.ParseFromString(this->protoBody.toStdString());
+    emailMessage.ParseFromString(this->protoBody);
 
     ConfigParser settings;
     QString error = "";

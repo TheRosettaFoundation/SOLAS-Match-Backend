@@ -11,7 +11,7 @@ void ClaimedTaskSourceUpdatedGenerator::run()
     qDebug() << "EmailGenerator: Starting new thread for tracked task source updated email";
 
     ClaimedTaskSourceUpdated emailMessage;
-    emailMessage.ParseFromString(this->protoBody.toStdString());
+    emailMessage.ParseFromString(this->protoBody);
 
     ConfigParser settings;
     QString error = "";

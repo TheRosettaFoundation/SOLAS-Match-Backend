@@ -11,7 +11,7 @@ void ProjectCreatedGenerator::run()
     qDebug() << "EmailGenerator: Generating Project Created Email";
 
     ProjectCreatedEmail email_message;
-    email_message.ParseFromString(this->protoBody.toStdString());
+    email_message.ParseFromString(this->protoBody);
 
     ConfigParser settings;
     QString error = "";

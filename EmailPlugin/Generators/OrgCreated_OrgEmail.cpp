@@ -13,7 +13,7 @@ void OrgCreated_OrgEmail::run()
     qDebug() << "IEmailGenerator: Generating OrgCreated_Org email";
 
     OrgCreatedOrgAdmin emailMessage;
-    emailMessage.ParseFromString(this->protoBody.toStdString());
+    emailMessage.ParseFromString(this->protoBody);
 
     ConfigParser settings;
     QString error = "";

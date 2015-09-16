@@ -10,7 +10,7 @@ void ProjectImageRemovedEmailGenerator::run()
 {
     qDebug() << "EmailGenerator: Generating Project Image Removed Email";
     ProjectImageRemovedEmail email_message;
-    email_message.ParseFromString(this->protoBody.toStdString());
+    email_message.ParseFromString(this->protoBody);
 
 
     ConfigParser settings;

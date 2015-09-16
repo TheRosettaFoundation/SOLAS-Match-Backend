@@ -20,7 +20,7 @@ void UserTaskStreamEmailGenerator::run()
     qDebug() << "EmailGenerator: Generating UserTaskStreamEmailGenerator";
 
     UserTaskStreamEmail emailRequest;
-    emailRequest.ParseFromString(this->protoBody.toStdString());
+    emailRequest.ParseFromString(this->protoBody);
 
     bool sendEmail = true;
     QString error = "";

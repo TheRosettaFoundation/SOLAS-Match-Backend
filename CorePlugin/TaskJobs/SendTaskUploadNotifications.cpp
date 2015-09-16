@@ -44,7 +44,7 @@ void SendTaskUploadNotifications::run()
             QList<QSharedPointer<User> > users = TaskDao::getSubscribedUsers(db, task->id());
             QSharedPointer<User> translator = TaskDao::getUserClaimedTask(db, task->id());
 
-            QString body = "";
+            std::string body = "";
             MessagingClient publisher;
             if (publisher.init()) {
                 if (request.file_version() == 0) {
@@ -53,7 +53,7 @@ void SendTaskUploadNotifications::run()
                         claimedUpdate.set_email_type(claimedUpdate.email_type());
                         claimedUpdate.set_task_id(task->id());
                         claimedUpdate.set_user_id(translator->id());
-                        body = QString::fromStdString(claimedUpdate.SerializeAsString());
+                        body = claimedUpdate.SerializeAsString();
                         publisher.publish(exchange, topic, body);
                     }
                 } else {
@@ -63,7 +63,7 @@ void SendTaskUploadNotifications::run()
                         trackedUpload.set_task_id(task->id());
                         trackedUpload.set_translator_id(translator->id());
                         trackedUpload.set_user_id(user->id());
-                        body = QString::fromStdString(trackedUpload.SerializeAsString());
+                        body = trackedUpload.SerializeAsString();
                         publisher.publish(exchange, topic, body);
                     }
 
@@ -71,7 +71,7 @@ void SendTaskUploadNotifications::run()
                     claimedUpload.set_email_type(claimedUpload.email_type());
                     claimedUpload.set_task_id(task->id());
                     claimedUpload.set_user_id(translator->id());
-                    body = QString::fromStdString(claimedUpload.SerializeAsString());
+                    body = claimedUpload.SerializeAsString();
                     publisher.publish(exchange, topic, body);
                 }
             } else {
