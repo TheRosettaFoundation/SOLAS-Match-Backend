@@ -86,7 +86,7 @@ QSharedPointer<QSqlQuery> MySQLHandler::call(QString proc_name, QString args)
         QString query = "Call " + proc_name + " (" + args + ")";
         ret = QSharedPointer<QSqlQuery>(new QSqlQuery(query, *(this->conn)));
         if (ret->lastError().isValid()) {
-            qDebug() << "MySQLHandler: ERROR - " << ret->lastError().text();
+            qDebug() << "MySQLHandler: ERROR - call " << proc_name << "()-" << ret->lastError().text();
         }
     } else {
         qDebug() << "MySQLHandler::call - Initialization failed";
