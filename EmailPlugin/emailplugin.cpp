@@ -90,10 +90,10 @@ void EmailPlugin::messageReveived(AMQPMessage *message)
     }
 
     uint32_t length = 0;
-    std::string message_body = message->getMessage(&length);
+    char *body = message->getMessage(&length);
 
     EmailMessage email_message;
-    email_message.ParseFromString(message_body);
+    email_message.ParseFromString(std::string(body, length));
 
     QString type = "EmailGenerator_" + QString::number(email_message.email_type());
     int classId = QMetaType::type(type.toLatin1());
@@ -102,7 +102,7 @@ void EmailPlugin::messageReveived(AMQPMessage *message)
     } else {
         IEmailGenerator *emailGen = static_cast<IEmailGenerator *>(QMetaType::create(classId));
         emailGen->setEmailQueue(smtp->getEmailQueue());
-        emailGen->setProtoBody(message_body);
+        emailGen->setProtoBody(std::string(body, length);
         emailGen->setAMQPMessage(message);
         this->mThreadPool->start(emailGen);
     }

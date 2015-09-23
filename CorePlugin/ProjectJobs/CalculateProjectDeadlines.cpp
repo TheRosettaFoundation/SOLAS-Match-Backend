@@ -38,7 +38,7 @@ void CalculateProjectDeadlines::run()
     char *body = this->message->getMessage(&length);
     CalculateProjectDeadlinesRequest request;
     if (length > 0) {
-        request.ParseFromString(body);
+        request.ParseFromString(std::string(body, length));
 
         // Send email to site admins informing them of the new project
         ProjectCreatedEmail projectCreatedEmail = ProjectCreatedEmail();

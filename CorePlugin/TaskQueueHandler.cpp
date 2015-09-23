@@ -55,10 +55,10 @@ void TaskQueueHandler::messageReceived(AMQPMessage *message)
     }
 
     uint32_t length = 0;
-    std::string message_body = message->getMessage(&length);
+    char *body = message->getMessage(&length);
 
     RequestMessage requestMessage;
-    requestMessage.ParseFromString(message_body);
+    requestMessage.ParseFromString(std::string(body, length));
 
     int classId = QMetaType::type(QString::fromStdString(requestMessage.class_name()).toLatin1());
     if (classId == 0) {

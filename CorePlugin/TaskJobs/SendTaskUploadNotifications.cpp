@@ -35,7 +35,7 @@ void SendTaskUploadNotifications::run()
 
     if (length > 0) {
         TaskUploadNotificationRequest request;
-        request.ParseFromString(body);
+        request.ParseFromString(std::string(body, length));
 
         QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
         QSharedPointer<Task> task = TaskDao::getTask(db, request.task_id());
