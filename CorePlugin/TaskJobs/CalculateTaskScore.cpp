@@ -194,7 +194,7 @@ int CalculateTaskScore::getTaskIdFromMessage()
 
     if(length > 0) {
         UserTaskScoreRequest request;
-        request.ParseFromString(body);
+        request.ParseFromString(std::string(body, length));
         if(request.has_task_id()) {
             ret = request.task_id();
         }

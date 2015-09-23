@@ -33,7 +33,7 @@ void OrgCreatedNotifications::run()
 
     if (length > 0) {
         OrgCreatedNotificationRequest request;
-        request.ParseFromString(body);
+        request.ParseFromString(std::string(body, length));
 
         QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
         QSharedPointer<Organisation> org = OrganisationDao::getOrg(db, request.org_id());

@@ -44,7 +44,7 @@ void TaskRevokedNotificationHandler::run()
         char *body = this->message->getMessage(&length);
         if (length > 0) {
             TaskRevokedNotification notification;
-            if (notification.ParseFromString(body)) {
+            if (notification.ParseFromString(std::string(body, length))) {
                 QList<QSharedPointer<User> > subscribedUsers = TaskDao::getSubscribedUsers(db, notification.task_id());
                 if (subscribedUsers.length() > 0) {
                     OrgTaskRevokedEmail subscriberNotification;
@@ -67,6 +67,16 @@ void TaskRevokedNotificationHandler::run()
             } else {
                 qDebug() << "TaskRevokedNotificationHandler: Failed to parse message body";
             }
+qDebug() << "TaskRevokedNotificationHandler length: " << QString::number(length);
+uint32_t charvalue;
+for (uint32_t indexstr=0; indexstr<length; indexstr++) {
+  charvalue = body[indexstr];
+  if (charvalue >= 128) {
+    qDebug() << "Value: (" << QString::number(indexstr) << ") " << QString::number(charvalue-4294967040);
+  } else {
+    qDebug() << "Value: (" << QString::number(indexstr) << ") " << QString::number(charvalue);
+  }
+}
         } else {
             qDebug() << "TaskRevokedNotificationHandler: Unable to parse message body, length is 0";
         }
