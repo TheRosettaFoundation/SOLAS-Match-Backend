@@ -17,8 +17,8 @@
 <p>
     You are currently receiving email notifications for this task. If you would like 
     to stop receiving these notifications then you can un-track it on the
-    <a href="{{TASK_VIEW}}">task view page</a> or the <a href="{{PROJECT_VIEW}}">
-    project view page</a>.
+    <a href="{{TASK_VIEW}}">task view page</a>
+    or the <a href="{{PROJECT_VIEW}}">project view page</a>.
 <p>
 
 <p>
