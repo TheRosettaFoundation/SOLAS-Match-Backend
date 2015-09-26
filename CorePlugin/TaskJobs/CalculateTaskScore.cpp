@@ -46,6 +46,10 @@ CalculateTaskScore::~CalculateTaskScore()
 static int countx = 0;
 void CalculateTaskScore::run()
 {
+    if (this->calculationStillRunning()) {
+        qDebug() << "CalculateTaskScore: Previous Calculation is Still Running (returning)";
+        return;
+    }
 
     qDebug() << "CalculateTaskScore: Starting new thread";
 
@@ -60,6 +64,9 @@ void CalculateTaskScore::run()
     QMultiMap<int, int> userTags = UserDao::getUserTagIds(db);
     QMultiMap<int, int> taskTags = TaskDao::getTaskTagIds(db);
 
+//uint32_t ucount = users.count();
+//uint32_t tlength = tasks.length();
+//qDebug() << "FOR UserTaskStreamEmailGenerator: #users: " << ucount << ", #tasks: " << tlength;
     if(users.count() > 0) {
         for(QMultiMap<int, LCCode>::ConstIterator usersIter = users.constBegin(); usersIter != users.constEnd(); ++usersIter) {
             if(tasks.length() > 0) {
@@ -124,12 +131,16 @@ void CalculateTaskScore::run()
 
                     this->saveUserTaskScore(usersIter.key(),taskScores);
 
+//uint32_t user_id_iterator = usersIter.key();
+//qDebug() << "FOR UserTaskStreamEmailGenerator: After save, user_id: " << user_id_iterator;
             } else {
                 qDebug() << "No tasks found";
                 dict.ShowSection("ERROR");
                 dict.SetValue("ERROR_MESSAGE","No tasks found");
             }
 
+            // Record the last Time that any Tasks were processed for any user (saveUserTaskScore)
+            db->call("recordUserTaskScoresUpdatedTime", QString::number(QDateTime::currentMSecsSinceEpoch()));
         }
     } else {
         qDebug() << "No users found";
@@ -234,4 +245,23 @@ int CalculateTaskScore::getCurrentScore(int user_id, int task_id)
 void CalculateTaskScore::setAMQPMessage(AMQPMessage *message)
 {
     this->message = message;
+}
+
+bool CalculateTaskScore::calculationStillRunning()
+{
+    QSharedPointer<QSqlQuery> q = db->call("getUserTaskScore", "");
+    if (q->first()) {
+        qint64 unixEpoch = db->getValueFromQuery("unixEpoch", q).toLongLong();
+qint64 delta = QDateTime::currentMSecsSinceEpoch() - unixEpoch;
+        if ((QDateTime::currentMSecsSinceEpoch() - unixEpoch) < 30*60*1000) { // Half an hour
+qDebug() << "calculationStillRunning ms (SKIP): " << delta;
+            return true; // Skip calculation
+        } else {
+qDebug() << "calculationStillRunning ms (not skip): " << delta;
+            return false;
+        }
+    } else {
+qDebug() << "calculationStillRunning (NO RECORD)";
+        return false;
+    }
 }

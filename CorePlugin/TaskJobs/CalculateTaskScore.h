@@ -30,7 +30,7 @@ private:
     void saveUserTaskScore(int user_id, QList<TaskScore> scores);
     AMQPMessage *message;
     QSharedPointer<MySQLHandler> db;
-
+    bool calculationStillRunning();
 };
 
 #endif // CALCULATETASKSCOREJOB_H
