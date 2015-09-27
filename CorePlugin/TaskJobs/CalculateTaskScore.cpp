@@ -249,7 +249,7 @@ void CalculateTaskScore::setAMQPMessage(AMQPMessage *message)
 
 bool CalculateTaskScore::calculationStillRunning()
 {
-    QSharedPointer<QSqlQuery> q = db->call("getUserTaskScore", "");
+    QSharedPointer<QSqlQuery> q = db->call("getUserTaskScoresUpdatedTime", "");
     if (q->first()) {
         qint64 unixEpoch = db->getValueFromQuery("unixEpoch", q).toLongLong();
 qint64 delta = QDateTime::currentMSecsSinceEpoch() - unixEpoch;
