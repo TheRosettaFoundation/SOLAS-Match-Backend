@@ -251,7 +251,7 @@ bool CalculateTaskScore::calculationStillRunning()
 {
     QSharedPointer<QSqlQuery> q = db->call("getUserTaskScoresUpdatedTime", "");
     if (q->first()) {
-        qint64 unixEpoch = db->getValueFromQuery("unixEpoch", q).toLongLong();
+        qint64 unixEpoch = db->getValueFromQuery("unix_epoch", q).toLongLong();
 qint64 delta = QDateTime::currentMSecsSinceEpoch() - unixEpoch;
         if ((QDateTime::currentMSecsSinceEpoch() - unixEpoch) < 30*60*1000) { // Half an hour
 qDebug() << "calculationStillRunning ms (SKIP): " << delta;
