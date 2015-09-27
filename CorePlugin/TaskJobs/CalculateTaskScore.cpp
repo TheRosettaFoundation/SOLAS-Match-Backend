@@ -46,17 +46,18 @@ CalculateTaskScore::~CalculateTaskScore()
 static int countx = 0;
 void CalculateTaskScore::run()
 {
-    if (this->calculationStillRunning()) {
-        qDebug() << "CalculateTaskScore: Previous Calculation is Still Running (returning)";
-        return;
-    }
-
     qDebug() << "CalculateTaskScore: Starting new thread";
 
     ConfigParser settings;
     QDateTime started = QDateTime::currentDateTime();
     ctemplate::TemplateDictionary dict("user_task_score");
     db = MySQLHandler::getInstance();
+
+    if (this->calculationStillRunning()) {
+        qDebug() << "CalculateTaskScore: Previous calculation is still running, so skipping this iteration";
+        return;
+    }
+
     QMultiMap<int, LCCode> users = UserDao::getUserNativeLCCodes(db);
     QList<QSharedPointer<Task> > tasks = this->getTasks();  //Must use custom function to check message for task id
 
