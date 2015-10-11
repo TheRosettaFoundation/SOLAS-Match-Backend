@@ -8,15 +8,15 @@
 </p>
 
 <p>
-    A task you are following on {{SITE_NAME}} has passed its deadline. The task
-    "{{TASK_TITLE}}" has passed its deadline.
+A task you are following on {{SITE_NAME}} has passed its deadline. The task<br />
+<a href="{{TASK_VIEW}}">{{TASK_TITLE}}</a> has passed its deadline.
 </p>
 
 <p>
-    From,
+From,
 </p>
 <p>
-    The {{SITE_NAME}} Team
+The {{SITE_NAME}} Team
 </p>
 
 

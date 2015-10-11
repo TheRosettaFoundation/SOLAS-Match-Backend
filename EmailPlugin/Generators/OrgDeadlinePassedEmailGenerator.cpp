@@ -41,6 +41,8 @@ void OrgDeadlinePassedMailGenerator::run()
             dict.ShowSection("NO_USER_NAME");
         }
         dict.SetValue("TASK_TITLE", task->title());
+        QString taskView = settings.get("site.url") + "task/" + QString::number(task->id()) + "/view";
+        dict.SetValue("TASK_VIEW", taskView.toStdString());
         dict.SetValue("SITE_NAME", settings.get("site.name").toStdString());
 
         bool footer_enabled=(QString::compare("y", settings.get("email-footer.enabled")) == 0);
