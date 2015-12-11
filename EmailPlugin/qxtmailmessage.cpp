@@ -431,6 +431,7 @@ QByteArray QxtMailMessage::rfc2822() const
                     i++;
                 }
                 line = word;
+                word = "";
             }
             else if (b[i] == ' ')
             {
