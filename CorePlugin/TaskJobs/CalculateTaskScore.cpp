@@ -126,7 +126,16 @@ void CalculateTaskScore::run()
                     QDateTime created_time = QDateTime::fromString(
                                             QString::fromStdString(task->createdtime()), Qt::ISODate);
                     //increase score by one per day since created time
-                    score += created_time.daysTo(QDateTime::currentDateTime());
+                    // 20160123...
+                    // Updating the score every day causes every single row of UserTaskScores to be updated
+                    // Unfortunately a row update is very expensive (23ms when last measured & growing?)
+                    // I have tried removing foreign key constraints form the table and this does not help.
+                    // There are three other keys but at least two of them are needed.
+                    // Maybe a different database configuration or different engine for the table might help?
+                    // So I am moving the "daysTo" calculation to the database procedure "getUserTopTasks"
+                    // where it is inexpensively calculated as part of the ORDER BY clause (with a maximum value of 700)
+                    // "ORDER BY (uts.score+LEAST(DATEDIFF(CURDATE(), t.`created-time`), 700))"
+                    // score += created_time.daysTo(QDateTime::currentDateTime());
                     taskScores.append(TaskScore(task->id(), score));
                 }
 
