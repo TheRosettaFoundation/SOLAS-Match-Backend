@@ -361,6 +361,7 @@ QByteArray QxtMailMessage::rfc2822() const
         }
     }
 
+    QString listUnsubscribe = "List-Unsubscribe";
     foreach(const QString& r, qxt_d->extraHeaders.keys())
     {
         if ((r.toLower() == "content-type" || r.toLower() == "content-transfer-encoding") && attach.count())
@@ -368,7 +369,14 @@ QByteArray QxtMailMessage::rfc2822() const
             // Since we're in multipart mode, we'll be outputting this later
             continue;
         }
-        rv += qxt_fold_mime_header(r.toLatin1(), extraHeader(r), latin1);
+
+        if (r.toLower() == "list-unsubscribe")
+        {
+            rv += qxt_fold_mime_header(listUnsubscribe.toLatin1(), extraHeader(r), latin1);
+        }
+        else {
+            rv += qxt_fold_mime_header(r.toLatin1(), extraHeader(r), latin1);
+        }
     }
 
     rv += "\r\n";
