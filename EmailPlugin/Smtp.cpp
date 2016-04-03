@@ -50,10 +50,14 @@ void Smtp::send(QSharedPointer<Email> email)
 {
     QxtMailMessage mail_message;
     mail_message.setSender(email->getSender());
+    QString recipientString = "";
     foreach(QString recipient, email->getRecipients())
     {
         mail_message.addRecipient(recipient);
+        recipientString += "%20" + recipient;
     }
+    recipientString.replace("@", "%40");
+    mail_message.setExtraHeader("List-Unsubscribe", "<mailto:info@trommons.org?subject=Unsubscribe%20from%20Trommons%3A" + recipientString  + ">");
     mail_message.setSubject(email->getSubject());
     mail_message.setExtraHeader("Content-Type", "text/html");
     mail_message.setBody(email->getBody());
