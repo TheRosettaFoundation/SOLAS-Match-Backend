@@ -41,7 +41,7 @@ void TaskQueueHandler::run()
     connect(message_queue_read_timer, SIGNAL(timeout()), client, SLOT(consumeFromQueue()));
     message_queue_read_timer->start(settings.get("messaging.poll_rate").toInt());
 
-    QTimer::singleShot(1000, this, SLOT(calculateAllTasksScore()));   //Run on startup
+    // QTimer::singleShot(1000, this, SLOT(calculateAllTasksScore()));   //Run on startup
 }
 
 void TaskQueueHandler::messageReceived(AMQPMessage *message)
