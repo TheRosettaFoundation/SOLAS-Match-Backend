@@ -1,10 +1,4 @@
 <tasks>
-    <task startTime="12:15">
-        <interval days="0" hours="1" mins="0" secs="0"></interval>
-        <message exchange="SOLAS_MATCH" topic="tasks.score">
-            UserTaskScoreRequest
-        </message>
-    </task>
     <task startTime="07:05">
         <interval days="1" hours="0" mins="0" secs="0"></interval>
         <message exchange="SOLAS_MATCH" topic="tasks.deadline.check">
