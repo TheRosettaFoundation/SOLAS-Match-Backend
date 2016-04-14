@@ -9,11 +9,17 @@
 
 <p>
     I regret to inform you that your request to become a member of the organisation,
-    {{ORG_NAME}}, on {{SITE_NAME}} has been rejected. Feel free to apply again another 
-    time or start your own organisation so that you can upload files.
+    {{ORG_NAME}}, on {{SITE_NAME}} has not been approved.
+    Organisation membership is restricted to staff members of {{ORG_NAME}}.
+    You do not need to be a member of an organisation to translate their files.
+    You may choose a task and click "Download Task" in order to decide if you wish
+    to translate a document for the organisation {{ORG_NAME}}.
+</p>
+
+<p>
+    You also can create your own organisation so that you can upload documents. Reply to this email if you wish to get help.
 </p>
 
 <p>
     The {{SITE_NAME}} Team
 </p>
-
