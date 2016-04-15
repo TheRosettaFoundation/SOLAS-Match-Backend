@@ -17,7 +17,7 @@
 </p>
 
 <p>
-    You also can create your own organisation so that you can upload documents. Reply to this email if you wish to get help.
+    Reply to this email if you wish to get help.
 </p>
 
 <p>
