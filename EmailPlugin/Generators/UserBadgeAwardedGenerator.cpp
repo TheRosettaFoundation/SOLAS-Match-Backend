@@ -73,11 +73,17 @@ void UserBadgeAwardedGenerator::run()
 
         std::string email_body;
         QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/user-badge-awarded.tpl";
+        if (badge_title == "Registered") {
+            template_location = QString(TEMPLATE_DIRECTORY) + "emails/user-badge-awarded-registration.tpl";
+        }
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
         email->setSender(settings.get("site.system_email_address"));;
         email->addRecipient(QString::fromStdString(user->email()));
         email->setSubject(settings.get("site.name") + ": Badge Awarded");
+        if (badge_title == "Registered") {
+            email->setSubject(settings.get("site.name") + ": Registration Successful");
+        }
         email->setBody(QString::fromUtf8(email_body.c_str()));
     } else {
         email = this->generateErrorEmail(error);
