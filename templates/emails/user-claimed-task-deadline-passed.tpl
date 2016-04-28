@@ -10,7 +10,7 @@
 <p>
     The "{{TASK_TYPE}}" task for "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} has passed its deadline. 
     As the task deadline has passed, please ensure to upload your output file. 
-    If you have any questions about the deadline, please contact <a href="info@trommons.org"> info@trommons.org. </a>
+    If you have any questions about the deadline, please contact <a href="mailto:info@trommons.org">info@trommons.org</a>
 </p>
 
 <p>
