@@ -23,7 +23,7 @@ much information as possible about your organisation/project. This will encourag
 volunteers to help you.
 </p>
 <p>
-If you have any more questions, do not hesitate to contact us at info@trommons.org<br />
+If you have any more questions, do not hesitate to contact us at <a href="mailto:info@trommons.org">info@trommons.org</a><br />
 You can also follow us on...<br />
 Facebook: <a href="https://www.facebook.com/therosettafoundation">https://www.facebook.com/therosettafoundation</a><br />
 Twitter: <a href="https://twitter.com/TheRosettaFound">https://twitter.com/TheRosettaFound</a><br />
