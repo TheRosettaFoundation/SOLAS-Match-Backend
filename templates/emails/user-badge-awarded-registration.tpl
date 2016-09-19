@@ -2,17 +2,17 @@
 {{USERNAME}}, welcome to {{SITE_NAME}}!
 </p>
 <p>
-Thank you for your registration on <a href="http://trommons.org/">Trommons</a>, the open translation space maintained by
-<a href="http://www.therosettafoundation.org/">The Rosetta Foundation</a>
+Thank you for your registration on <a href="https://trommons.org/">Trommons</a>, the open translation space maintained by
+<a href="https://www.therosettafoundation.org/">The Rosetta Foundation</a>
 to match non-profit translation projects and organisations with
 the skills and interests of volunteer translators.
 </p>
 <p>
-If you are a volunteer, we encourage you to check <a href="http://trommons.org/">Trommons</a> to see if there are any
+If you are a volunteer, we encourage you to check <a href="https://trommons.org/">Trommons</a> to see if there are any
 projects available in your language combination. You can filter tasks according to source
 and/or target language. For more information on how to volunteer on Trommons, please check our
-<a href="http://trommons.org/static/faq/">FAQ</a> and
-<a href="http://trommons.org/static/videos/">Volunteer videos</a>
+<a href="https://trommons.org/static/faq/">FAQ</a> and
+<a href="https://trommons.org/static/videos/">Volunteer videos</a>
 </p>
 <p>
 If you are a member of a non-profit organisation, go to your personal Profile page and
