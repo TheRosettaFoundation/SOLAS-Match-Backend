@@ -7,6 +7,7 @@
 #include <QtSql/QSqlDriver>
 #include <QtSql/QSqlError>
 #include <QtSql/QSqlRecord>
+#include <QThread>
 
 #include "ConfigParser.h"
 
@@ -55,7 +56,28 @@ bool MySQLHandler::openConnection()
 
     if (!this->conn->isOpen()) {
         if (!this->conn->open()) {
-            qDebug() << "MySQLHandler: Failed to connect to database: " << this->conn->lastError().text();
+            qDebug() << "MySQLHandler: Failed to connect to database on 1st attempt: " << this->conn->lastError().text();
+
+            // https://github.com/TheRosettaFoundation/SOLAS-Match-Backend/issues/44
+            // Give it one more chance...
+            this->close();         // Should probably not be issued, but mimics existing code path after a failure
+            delete this->conn;     // Try a complete restart of connection for safety
+            this->conn = 0;        // For extra extra safety only
+
+            QThread::msleep(3000); // Give socket/MySQL server some time to stabilise
+
+            this->conn = new QSqlDatabase(QSqlDatabase::addDatabase("QMYSQL", this->connName));
+            this->conn->setHostName(this->host);
+            this->conn->setDatabaseName(this->database);
+            this->conn->setUserName(this->user);
+            this->conn->setPassword(this->pass);
+
+            if (!this->conn->open()) {
+                qDebug() << "MySQLHandler: Failed to connect to database on 2nd attempt: " << this->conn->lastError().text();
+            } else {
+                qDebug() << this->connName << " MySQL connection established";
+                ret = true;
+            }
         } else {
             qDebug() << this->connName << " MySQL connection established";
             ret = true;
