@@ -73,9 +73,10 @@ void DeadlineChecker::run()
                                userEmail.SerializeAsString());
             }
 
-            qDebug() << "DeadlineChecker::Finished processing task, unpublishing it now";
-            task->set_published(false);
-            TaskDao::insertAndUpdate(db, task);
+            // https://github.com/TheRosettaFoundation/SOLAS-Match-Backend/issues/45
+            // qDebug() << "DeadlineChecker::Finished processing task, unpublishing it now";
+            // task->set_published(false);
+            // TaskDao::insertAndUpdate(db, task);
         }
 
         tasks = TaskDao::getEarlyWarningTasks(db);
