@@ -34,6 +34,7 @@
             <th>Source</th>
             <th>Target</th>
             <th>Word Count</th>
+            <th>Created Date</th>
         </thead>
         <tbody>
             {{#TASKS}}
@@ -44,6 +45,7 @@
                     <td>{{SOURCE}}</td>
                     <td>{{TARGET}}</td>
                     <td>{{WORD_COUNT}}</td>
+                    <td>{{CREATED_TIME}}</td>
                 <tr>
             {{/TASKS}}
         </tbody>

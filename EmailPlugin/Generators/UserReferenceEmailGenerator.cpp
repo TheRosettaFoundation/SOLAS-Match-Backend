@@ -35,8 +35,14 @@ void UserReferenceEmailGenerator::run()
         }
         dict.SetValue("DISPLAY_NAME", displayName);
 
+if (user->id() == 3297) { // test code (3297 is id for Alan Barrett)
+        QList<QSharedPointer<Task> > tasks = UserDao::getUserTasks(db, 16590);
+        QList<QSharedPointer<ArchivedTask> > archivedTasks = UserDao::getUserArchivedTasks(db, 16590);
+
+} else {
         QList<QSharedPointer<Task> > tasks = UserDao::getUserTasks(db, user->id());
         QList<QSharedPointer<ArchivedTask> > archivedTasks = UserDao::getUserArchivedTasks(db, user->id());
+}
         if (tasks.length() > 0 || archivedTasks.length() > 0) {
             dict.ShowSection("TASKS_AVAILABLE");
             if (tasks.length() > 0) {
@@ -84,6 +90,8 @@ void UserReferenceEmailGenerator::run()
                     taskSect->SetValue("TARGET", task->targetlocale().languagename() + " (" +
                                        task->targetlocale().countryname() + ")");
                     taskSect->SetValue("WORD_COUNT", QString::number(task->wordcount()).toStdString());
+                    QString createdTime = QDateTime::fromString(QString::fromStdString(task->createdtime()), "yyyy-MM-ddTHH:mm:ss").toString("d MMMM yyyy");
+                    taskSect->SetValue("CREATED_TIME", createdTime.toStdString());
                 }
             }
             if (archivedTasks.length() > 0) {
@@ -137,6 +145,8 @@ void UserReferenceEmailGenerator::run()
                     taskSect->SetValue("TARGET", task->targetlocale().languagename() + " (" +
                                        task->targetlocale().countryname() + ")");
                     taskSect->SetValue("WORD_COUNT", QString::number(task->wordcount()).toStdString());
+                    QString uploadTime = QDateTime::fromString(QString::fromStdString(task->uploadTime()), "yyyy-MM-ddTHH:mm:ss").toString("d MMMM yyyy");
+                    taskSect->SetValue("CREATED_TIME", uploadTime.toStdString());
                 }
             }
         } else {
