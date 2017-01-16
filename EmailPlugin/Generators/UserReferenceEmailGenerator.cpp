@@ -1,4 +1,7 @@
 #include "UserReferenceEmailGenerator.h"
+
+#include <QDateTime>
+
 #include "Common/protobufs/emails/UserReferenceEmail.pb.h"
 #include "Common/protobufs/models/ArchivedProject.pb.h"
 using namespace  SolasMatch::Common::Protobufs::Emails;
@@ -145,7 +148,7 @@ if (user->id() == 3297) { // test code (3297 is id for Alan Barrett)
                     taskSect->SetValue("TARGET", task->targetlocale().languagename() + " (" +
                                        task->targetlocale().countryname() + ")");
                     taskSect->SetValue("WORD_COUNT", QString::number(task->wordcount()).toStdString());
-                    QString uploadTime = QDateTime::fromString(QString::fromStdString(task->uploadTime()), "yyyy-MM-ddTHH:mm:ss").toString("d MMMM yyyy");
+                    QString uploadTime = QDateTime::fromString(QString::fromStdString(task->uploadtime()), "yyyy-MM-ddTHH:mm:ss").toString("d MMMM yyyy");
                     taskSect->SetValue("CREATED_TIME", uploadTime.toStdString());
                 }
             }
