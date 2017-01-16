@@ -35,14 +35,14 @@ void UserReferenceEmailGenerator::run()
         }
         dict.SetValue("DISPLAY_NAME", displayName);
 
-if (user->id() == 3297) { // test code (3297 is id for Alan Barrett)
-        QList<QSharedPointer<Task> > tasks = UserDao::getUserTasks(db, 16590);
-        QList<QSharedPointer<ArchivedTask> > archivedTasks = UserDao::getUserArchivedTasks(db, 16590);
-
-} else {
         QList<QSharedPointer<Task> > tasks = UserDao::getUserTasks(db, user->id());
         QList<QSharedPointer<ArchivedTask> > archivedTasks = UserDao::getUserArchivedTasks(db, user->id());
+
+if (user->id() == 3297) { // test code (3297 is id for Alan Barrett)
+        tasks = UserDao::getUserTasks(db, 16590);
+        archivedTasks = UserDao::getUserArchivedTasks(db, 16590);
 }
+
         if (tasks.length() > 0 || archivedTasks.length() > 0) {
             dict.ShowSection("TASKS_AVAILABLE");
             if (tasks.length() > 0) {
