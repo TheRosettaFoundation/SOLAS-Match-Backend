@@ -91,7 +91,14 @@ void ModelGenerator::Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<Task> 
     task->set_createdtime(MySQLHandler::getStringFromQuery(fieldMap.value("createdTime"), q));
     task->set_tasktype(MySQLHandler::getValueFromQuery(fieldMap.value("taskType"), q).toInt());
     task->set_taskstatus(MySQLHandler::getValueFromQuery(fieldMap.value("taskStatus"), q).toInt());
-    task->set_published(MySQLHandler::getValueFromQuery(fieldMap.value("published"), q).toBool());
+    // task->set_published(MySQLHandler::getValueFromQuery(fieldMap.value("published"), q).toBool());
+    // The above is always true!
+    // Note that other cases of toBool() do not cause a real issue because...
+    // (a) The database has an INT(1) not a BIT(1) [strict in UserTaskStreamNotification]
+    // (b) The bool is not used [published in ArchivedTask]
+    // (c) Would only generate an error email if the bool turned out to be false because of some unexpected failure [imageUploaded, imageApproved]
+    // The database system actually returns a string of one character/byte with the BIT in it...
+    task->set_published((bool)(MySQLHandler::getValueFromQuery(fieldMap.value("published"), q).toString().toStdString().at(0)));
     Locale *sourceLocale = task->mutable_sourcelocale();
     sourceLocale->set_countrycode(MySQLHandler::getStringFromQuery(fieldMap.value("sourceCountryCode"), q));
     sourceLocale->set_countryname(MySQLHandler::getStringFromQuery(fieldMap.value("sourceCountryName"), q));
