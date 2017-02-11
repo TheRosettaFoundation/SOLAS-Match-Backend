@@ -70,7 +70,7 @@ void UserBadgeAwardedGenerator::run()
                         orgView = siteLocation + "org/" + QString::number(org->id()) + "/profile/";
                         orgName = org->name();
                     }
-			    }
+                }
         }
 
         dict.SetValue("USERNAME", user->display_name());
