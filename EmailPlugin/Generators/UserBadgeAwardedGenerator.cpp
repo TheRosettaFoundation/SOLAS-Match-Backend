@@ -61,7 +61,7 @@ void UserBadgeAwardedGenerator::run()
                 break;
             default:
                 if (badge->owner_id() != 0) {
-                    badge_title = QString(badge->title());
+                    badge_title = QString::fromStdString(badge->title());
 
                     org = OrganisationDao::getOrg(db, badge->owner_id());
 
