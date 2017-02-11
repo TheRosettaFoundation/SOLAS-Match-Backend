@@ -68,7 +68,7 @@ void UserBadgeAwardedGenerator::run()
                     if (!org.isNull()) {
                         QString siteLocation = settings.get("site.url");
                         orgView = siteLocation + "org/" + QString::number(org->id()) + "/profile/";
-                        orgName = org->name();
+                        orgName = QString::fromStdString(org->name());
                     }
                 }
         }
