@@ -52,6 +52,26 @@ void Email::setBody(QString body)
     this->body = body;
 }
 
+std::string Email::htmlspecialchars(const std::string& in)
+{
+    std::string out;
+    out.reserve(in.length());
+    for(std::string::size_type i = 0; i < in.length(); i++) {
+        switch(in[i]) {
+            case '<':
+                out.append("&lt;");
+                break;
+            case '>':
+                out.append("&gt;");
+                break;
+            default:
+                out.append(&in[i], 1);
+                break;
+        }
+    }
+    return out;
+}
+
 /*
  *  Used to print email details when testing
  */
