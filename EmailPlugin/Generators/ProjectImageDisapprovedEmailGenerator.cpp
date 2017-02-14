@@ -51,11 +51,11 @@ void ProjectImageDisapprovedEmailGenerator::run()
         dict.SetValue("SITE_NAME", siteName.toStdString());
         QString projectView = siteLocation + "project/" + QString::number(project->id()) + "/view/";
         dict.SetValue("PROJECT_VIEW", projectView.toStdString());
-        dict.SetValue("PROJECT_TITLE", project->title());
+        dict.SetValue("PROJECT_TITLE", Email::htmlspecialchars(project->title()));
 
         if(user->display_name() != "") {
             dict.ShowSection("USER_HAS_NAME");
-            dict.SetValue("USERNAME", user->display_name());
+            dict.SetValue("USERNAME", Email::htmlspecialchars(user->display_name()));
         } else {
             dict.ShowSection("NO_USER_NAME");
         }

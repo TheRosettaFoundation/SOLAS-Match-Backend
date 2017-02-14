@@ -34,7 +34,7 @@ void OrgMembershipRefusedEmailGenerator::run()
         ctemplate::TemplateDictionary dict("org_membershipt_refused");
         if(user->display_name() != "") {
             dict.ShowSection("USER_HAS_NAME");
-            dict.SetValue("USERNAME", user->display_name());
+            dict.SetValue("USERNAME", Email::htmlspecialchars(user->display_name()));
         } else {
             dict.ShowSection("NO_USER_NAME");
         }

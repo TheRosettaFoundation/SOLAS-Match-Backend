@@ -65,7 +65,7 @@ void UserTaskStreamEmailGenerator::run()
             ctemplate::TemplateDictionary *taskSect = dict.AddSectionDictionary("TASK_SECT");
             QString taskView = settings.get("site.url") + "task/" + QString::number(task->id()) + "/view";
             taskSect->SetValue("TASK_VIEW", taskView.toStdString());
-            taskSect->SetValue("TASK_TITLE", task->title());
+            taskSect->SetValue("TASK_TITLE", Email::htmlspecialchars(task->title()));
 
             QString taskType;
             switch (task->tasktype()) {
@@ -100,7 +100,7 @@ void UserTaskStreamEmailGenerator::run()
                     ctemplate::TemplateDictionary *tagsList = taskSect->AddSectionDictionary("TAGS_LIST");
                     QString tagDetails = settings.get("site.url") + "tag/" + QString::number(tag->id()) + "/";
                     tagsList->SetValue("TAG_DETAILS", tagDetails.toStdString());
-                    tagsList->SetValue("TAG_LABEL", tag->label());
+                    tagsList->SetValue("TAG_LABEL", Email::htmlspecialchars(tag->label()));
                 }
             }
 
@@ -117,7 +117,7 @@ void UserTaskStreamEmailGenerator::run()
                 QString projectView = settings.get("site.url") + "project/" + QString::number(task->projectid()) +
                                         "/view";
                 taskSect->SetValue("PROJECT_VIEW", projectView.toStdString());
-                taskSect->SetValue("PROJECT_TITLE", project->title());
+                taskSect->SetValue("PROJECT_TITLE", Email::htmlspecialchars(project->title()));
 
                 QSharedPointer<Organisation> org = OrganisationDao::getOrg(db, project->organisationid());
                 if (!org.isNull()) {

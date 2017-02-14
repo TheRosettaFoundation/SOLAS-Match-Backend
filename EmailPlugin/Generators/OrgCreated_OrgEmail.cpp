@@ -30,7 +30,7 @@ void OrgCreated_OrgEmail::run()
 
     if (error == "") {
         ctemplate::TemplateDictionary dict("org-create.org-admin");
-        dict.SetValue("USERNAME", admin->display_name());
+        dict.SetValue("USERNAME", Email::htmlspecialchars(admin->display_name()));
         dict.SetValue("ORG_NAME", org->name());
         dict.SetValue("SITE_NAME", settings.get("site.name").toStdString());
         QString orgUrl = settings.get("site.url") + "org/" + QString::number(org->id()) + "/profile";

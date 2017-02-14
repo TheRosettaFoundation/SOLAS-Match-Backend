@@ -20,6 +20,7 @@ void UserBadgeAwardedGenerator::run()
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
     QSharedPointer<User> user = UserDao::getUser(db, emailMessage.user_id());
     QSharedPointer<Badge> badge = BadgeDao::getBadge(db, emailMessage.badge_id());
+    QSharedPointer<Organisation> org = QSharedPointer<Organisation>();
 
     if (user.isNull() || badge.isNull()) {
         error = "Failed to generate user awarded badge email, unable to find relevant data in the ";
@@ -32,6 +33,9 @@ void UserBadgeAwardedGenerator::run()
 
         //workaround until the code is properly internationalized
         QString badge_title = "";
+        QString orgView = "";
+        QString orgName = "";
+
         switch(badge->id())
         {
             case 3:
@@ -55,11 +59,25 @@ void UserBadgeAwardedGenerator::run()
             case 9:
                 badge_title = "Polyglot";
                 break;
+            default:
+                if (badge->owner_id() != 0) {
+                    badge_title = QString::fromStdString(badge->title());
+
+                    org = OrganisationDao::getOrg(db, badge->owner_id());
+
+                    if (!org.isNull()) {
+                        QString siteLocation = settings.get("site.url");
+                        orgView = siteLocation + "org/" + QString::number(org->id()) + "/profile/";
+                        orgName = QString::fromStdString(org->name());
+                    }
+                }
         }
 
-        dict.SetValue("USERNAME", user->display_name());
-        dict.SetValue("BADGE_NAME", badge_title.toStdString());
+        dict.SetValue("USERNAME", Email::htmlspecialchars(user->display_name()));
+        dict.SetValue("BADGE_NAME", Email::htmlspecialchars(badge_title.toStdString()));
         dict.SetValue("SITE_NAME", settings.get("site.name").toStdString());
+        dict.SetValue("ORG_VIEW", orgView.toStdString());
+        dict.SetValue("ORG_NAME", orgName.toStdString());
 
         bool footer_enabled=(QString::compare("y", settings.get("email-footer.enabled")) == 0);
         if (footer_enabled)
@@ -76,6 +94,10 @@ void UserBadgeAwardedGenerator::run()
         if (badge_title == "Registered") {
             template_location = QString(TEMPLATE_DIRECTORY) + "emails/user-badge-awarded-registration.tpl";
         }
+        if (badge->owner_id() != 0) {
+            template_location = QString(TEMPLATE_DIRECTORY) + "emails/user-badge-awarded-organisation.tpl";
+        }
+
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
         email->setSender(settings.get("site.system_email_address"));;

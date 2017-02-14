@@ -51,9 +51,9 @@ void TrackedTaskUploadedEmailGenerator::run()
     if(error.compare("") == 0) {
         ctemplate::TemplateDictionary dict("tracked-task-uploaded");
 
-        dict.SetValue("USERNAME", user->display_name());
-        dict.SetValue("TRANSLATOR_NAME", translator->display_name());
-        dict.SetValue("TASK_TITLE", task->title());
+        dict.SetValue("USERNAME", Email::htmlspecialchars(user->display_name()));
+        dict.SetValue("TRANSLATOR_NAME", Email::htmlspecialchars(translator->display_name()));
+        dict.SetValue("TASK_TITLE", Email::htmlspecialchars(task->title()));
         dict.SetValue("ORG_NAME", org->name());
         dict.SetValue("SITE_NAME", settings.get("site.name").toStdString());
 

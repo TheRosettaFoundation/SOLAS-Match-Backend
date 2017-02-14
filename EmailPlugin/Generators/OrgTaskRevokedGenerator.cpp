@@ -29,13 +29,13 @@ void OrgTaskRevokedGenerator::run()
 
     if (error.compare("") == 0) {
         ctemplate::TemplateDictionary dict("OrgTaskRevoked");
-        dict.SetValue("USERNAME", user->display_name());
-        dict.SetValue("TASK_TITLE", task->title());
+        dict.SetValue("USERNAME", Email::htmlspecialchars(user->display_name()));
+        dict.SetValue("TASK_TITLE", Email::htmlspecialchars(task->title()));
         QString taskView = settings.get("site.url") + "task/" + QString::number(task->id()) + "/view";
         dict.SetValue("TASK_VIEW", taskView.toStdString());
         QString userProfile = settings.get("site.url") + QString::number(claimant->id()) + "/profile";
         dict.SetValue("USER_PROFILE", userProfile.toStdString());
-        dict.SetValue("CLAIMANT_NAME", claimant->display_name());
+        dict.SetValue("CLAIMANT_NAME", Email::htmlspecialchars(claimant->display_name()));
         dict.SetValue("SITE_NAME", settings.get("site.name").toStdString());
         QString task_type = "Translation";
 

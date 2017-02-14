@@ -36,11 +36,11 @@ void OrgDeadlinePassedMailGenerator::run()
         ctemplate::TemplateDictionary dict("OrgTaskDeadlinePassed");
         if(user->display_name() != "") {
             dict.ShowSection("USER_HAS_NAME");
-            dict.SetValue("USERNAME", user->display_name());
+            dict.SetValue("USERNAME", Email::htmlspecialchars(user->display_name()));
         } else {
             dict.ShowSection("NO_USER_NAME");
         }
-        dict.SetValue("TASK_TITLE", task->title());
+        dict.SetValue("TASK_TITLE", Email::htmlspecialchars(task->title()));
         QString taskView = settings.get("site.url") + "task/" + QString::number(task->id()) + "/view";
         dict.SetValue("TASK_VIEW", taskView.toStdString());
         dict.SetValue("SITE_NAME", settings.get("site.name").toStdString());

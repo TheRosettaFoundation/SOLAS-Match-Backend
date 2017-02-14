@@ -46,9 +46,9 @@ void ClaimedTaskUploadedGenerator::run()
     if (error == "") {
         ctemplate::TemplateDictionary dict("claimed-task-uploaded");
 
-        dict.SetValue("USERNAME", user->display_name());
+        dict.SetValue("USERNAME", Email::htmlspecialchars(user->display_name()));
         dict.SetValue("SITE_NAME", settings.get("site.name").toStdString());
-        dict.SetValue("TASK_TITLE", task->title());
+        dict.SetValue("TASK_TITLE", Email::htmlspecialchars(task->title()));
         dict.SetValue("ORG_NAME", org->name());
         QString uploadUrl = settings.get("site.url");
         QString profileUrl = settings.get("site.url");

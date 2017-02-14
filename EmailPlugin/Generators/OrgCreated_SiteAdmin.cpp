@@ -29,7 +29,7 @@ void OrgCreate_SiteAdmin::run()
 
     if (error == "") {
         ctemplate::TemplateDictionary dict("org-created.site-admin");
-        dict.SetValue("USERNAME", admin->display_name());
+        dict.SetValue("USERNAME", Email::htmlspecialchars(admin->display_name()));
         dict.SetValue("ORG_NAME", org->name());
         QString orgUrl = settings.get("site.url") + "org/" + QString::number(org->id()) + "/profile";
         dict.SetValue("ORG_URL", orgUrl.toStdString());

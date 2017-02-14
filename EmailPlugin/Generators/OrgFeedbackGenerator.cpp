@@ -52,12 +52,12 @@ void OrgFeedbackGenerator::run()
 
     if(error.compare("") == 0) {
         ctemplate::TemplateDictionary dict("feedbackEmail");
-        dict.SetValue("USERNAME", claimant->display_name());
+        dict.SetValue("USERNAME", Email::htmlspecialchars(claimant->display_name()));
         dict.SetValue("ORG_NAME", org->name());
         QString taskView = settings.get("site.url") + "task/" + QString::number(task->id()) + "/view";
         dict.SetValue("TASK_VIEW", taskView.toStdString());
-        dict.SetValue("TASKTITLE", task->title());
-        dict.SetValue("FEEDBACK", feedback.toStdString());
+        dict.SetValue("TASKTITLE", Email::htmlspecialchars(task->title()));
+        dict.SetValue("FEEDBACK", Email::htmlspecialchars(feedback.toStdString()));
         dict.SetValue("SITE_NAME", settings.get("site.name").toStdString());
 
         bool footer_enabled=(QString::compare("y", settings.get("email-footer.enabled")) == 0);

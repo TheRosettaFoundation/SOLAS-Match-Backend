@@ -54,14 +54,14 @@ void UserFeedbackGenerator::run()
         foreach (QSharedPointer<User> user, users) {
             email = QSharedPointer<Email>(new Email);
             ctemplate::TemplateDictionary dict("userFeedback");
-            dict.SetValue("USERNAME", user->display_name());
-            dict.SetValue("FEEDBACK", feedback.toStdString());
+            dict.SetValue("USERNAME", Email::htmlspecialchars(user->display_name()));
+            dict.SetValue("FEEDBACK", Email::htmlspecialchars(feedback.toStdString()));
             dict.SetValue("ORG_NAME", org->name());
             QString taskView = settings.get("site.url") + "task/" + QString::number(task->id()) + "/view";
             dict.SetValue("TASK_VIEW", taskView.toStdString());
-            dict.SetValue("TASK_TITLE", task->title());
+            dict.SetValue("TASK_TITLE", Email::htmlspecialchars(task->title()));
             dict.SetValue("SITE_NAME", settings.get("site.name").toStdString());
-            dict.SetValue("CLAIMANT_NAME", claimant->display_name());
+            dict.SetValue("CLAIMANT_NAME", Email::htmlspecialchars(claimant->display_name()));
 
             bool footer_enabled=(QString::compare("y", settings.get("email-footer.enabled")) == 0);
             if (footer_enabled)
