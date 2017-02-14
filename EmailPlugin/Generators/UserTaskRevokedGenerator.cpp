@@ -27,9 +27,9 @@ void UserTaskRevokedGenerator::run()
 
     if (error.compare("") == 0) {
         ctemplate::TemplateDictionary dict("UserTaskRevokedEmail");
-        dict.SetValue("USERNAME", user->display_name());
+        dict.SetValue("USERNAME", Email::htmlspecialchars(user->display_name()));
         dict.SetValue("SITE_NAME", settings.get("site.name").toStdString());
-        dict.SetValue("TASK_TITLE", task->title());
+        dict.SetValue("TASK_TITLE", Email::htmlspecialchars(task->title()));
         QString taskView = settings.get("site.url") + "task/" + QString::number(task->id()) + "/view";
         dict.SetValue("TASK_VIEW", taskView.toStdString());
 

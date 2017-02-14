@@ -37,12 +37,12 @@ void TaskClaimedEmailGenerator::run()
         ctemplate::TemplateDictionary dict("task_claimed");
         if(user->display_name() != "") {
             dict.ShowSection("USER_HAS_NAME");
-            dict.SetValue("USERNAME", user->display_name());
+            dict.SetValue("USERNAME", Email::htmlspecialchars(user->display_name()));
         } else {
             dict.ShowSection("NO_USER_NAME");
         }
-        dict.SetValue("TASK_TITLE", task->title());
-        dict.SetValue("TRANSLATOR_NAME", translator->display_name());
+        dict.SetValue("TASK_TITLE", Email::htmlspecialchars(task->title()));
+        dict.SetValue("TRANSLATOR_NAME", Email::htmlspecialchars(translator->display_name()));
         dict.SetValue("SITE_NAME", settings.get("site.name").toStdString());
 
         QString user_profile_url = settings.get("site.url");

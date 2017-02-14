@@ -36,7 +36,7 @@ void UserReferenceEmailGenerator::run()
         if (realName != "") {
             displayName = realName.toStdString();
         }
-        dict.SetValue("DISPLAY_NAME", displayName);
+        dict.SetValue("DISPLAY_NAME", Email::htmlspecialchars(displayName));
 
         QList<QSharedPointer<Task> > tasks = UserDao::getUserTasks(db, user->id());
         QList<QSharedPointer<ArchivedTask> > archivedTasks = UserDao::getUserArchivedTasks(db, user->id());
@@ -51,7 +51,7 @@ if (user->id() == 3297) { // test code (3297 is id for Alan Barrett)
             if (tasks.length() > 0) {
                 foreach (QSharedPointer<Task> task, tasks) {
                     ctemplate::TemplateDictionary *taskSect = dict.AddSectionDictionary("TASKS");
-                    taskSect->SetValue("TASK_TITLE", task->title());
+                    taskSect->SetValue("TASK_TITLE", Email::htmlspecialchars(task->title()));
 
                     QString orgName;
                     QSharedPointer<Project> project = ProjectDao::getProject(db, task->projectid());
@@ -100,7 +100,7 @@ if (user->id() == 3297) { // test code (3297 is id for Alan Barrett)
             if (archivedTasks.length() > 0) {
                 foreach (QSharedPointer<ArchivedTask> task, archivedTasks) {
                     ctemplate::TemplateDictionary *taskSect = dict.AddSectionDictionary("TASKS");
-                    taskSect->SetValue("TASK_TITLE", task->title());
+                    taskSect->SetValue("TASK_TITLE", Email::htmlspecialchars(task->title()));
 
                     QString orgName;
                     QSharedPointer<ArchivedProject> archivedProject = ProjectDao::getArchivedProject(db, task->projectid());

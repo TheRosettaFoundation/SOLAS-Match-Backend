@@ -35,11 +35,11 @@ void UserTaskDeadlineEmailGenerator::run()
         ctemplate::TemplateDictionary dict("user_claimed_task_deadline_exceeded");
         if(user->display_name() != "") {
             dict.ShowSection("USER_HAS_NAME");
-            dict.SetValue("USERNAME", user->display_name());
+            dict.SetValue("USERNAME", Email::htmlspecialchars(user->display_name()));
         } else {
             dict.ShowSection("NO_USER_NAME");
         }
-        dict.SetValue("TASK_TITLE", task->title());
+        dict.SetValue("TASK_TITLE", Email::htmlspecialchars(task->title()));
         dict.SetValue("SITE_NAME", settings.get("site.name").toStdString());
 
         QString task_type = "Translation";

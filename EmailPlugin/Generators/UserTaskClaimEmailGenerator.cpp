@@ -34,7 +34,7 @@ void UserTaskClaimEmailGenerator::run()
         ctemplate::TemplateDictionary dict("user_task_claim");
         if(user->display_name() != "") {
             dict.ShowSection("USER_HAS_NAME");
-            dict.SetValue("USERNAME", user->display_name());
+            dict.SetValue("USERNAME", Email::htmlspecialchars(user->display_name()));
         } else {
             dict.ShowSection("NO_USER_NAME");
         }
@@ -43,7 +43,7 @@ void UserTaskClaimEmailGenerator::run()
         task_url += "task/" + QString::number(task->id()) + "/id";
         dict.SetValue("TASK_PAGE", task_url.toStdString());
         dict.SetValue("SITE_NAME", settings.get("site.name").toStdString());
-        dict.SetValue("TASK_TITLE", task->title());
+        dict.SetValue("TASK_TITLE", Email::htmlspecialchars(task->title()));
 
         QString task_type = "Translation";
         switch(task->tasktype())

@@ -45,7 +45,7 @@ void ProjectImageRemovedEmailGenerator::run()
         dict.SetValue("SITE_NAME", siteName.toStdString());
         QString projectView = siteLocation + "project/" + QString::number(project->id()) + "/view/";
         dict.SetValue("PROJECT_VIEW", projectView.toStdString());
-        dict.SetValue("PROJECT_TITLE", project->title());
+        dict.SetValue("PROJECT_TITLE", Email::htmlspecialchars(project->title()));
         QString orgView = siteLocation + "org/" + QString::number(org->id()) + "/profile/";
         dict.SetValue("ORG_VIEW", orgView.toStdString());
         dict.SetValue("ORG_NAME", org->name());
