@@ -9,11 +9,9 @@
 
 <p>
     Congratulations! The organisation "{{ORG_NAME}}" has added you to their
-    members list on {{SITE_NAME}}, the open translation space for volunteers 
-    and non-profits. You can now upload files on behalf of the organisation as 
+    members list on {{SITE_NAME}}. You can now upload files on behalf of the organisation as
     well as alter existing tasks' details. You can also view any translations 
-    that have been uploaded for tasks related to this organisation or archive 
-    tasks that are no longer required.
+    that have been uploaded for tasks related to this organisation.
 </p>
 
 <p>

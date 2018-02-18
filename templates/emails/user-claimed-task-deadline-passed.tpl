@@ -9,8 +9,8 @@
 
 <p>
     The "{{TASK_TYPE}}" task for "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} has passed its deadline. 
-    As the task deadline has passed, please ensure to upload your output file. 
-    If you have any questions about the deadline, please contact <a href="mailto:info@trommons.org">info@trommons.org</a>
+    As the task deadline has passed, please ensure to finish and copy your file from Kató TM or upload your output file.
+    If you have any questions about the deadline, please contact <a href="mailto:translators@translatorswithoutborders.org">translators@translatorswithoutborders.org</a>
 </p>
 
 <p>

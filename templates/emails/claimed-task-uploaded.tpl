@@ -11,8 +11,6 @@
 
 <p>
     You can now request a reference on <a href="{{USER_PROFILE}}">your profile page</a>.
-    If you'd like to receive a recommendation on other platforms, 
-    please email <a href="mailto:info@trommons.org">info@trommons.org</a>.
 </p>
 
 <p>

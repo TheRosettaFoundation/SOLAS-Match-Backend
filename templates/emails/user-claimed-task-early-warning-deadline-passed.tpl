@@ -8,10 +8,10 @@
 </p>
 
 <p>
-    Thank you for claiming a volunteering task on Trommons!
+    Thank you for claiming a volunteering task on Kató Trommons!
     You have one week to complete the "{{TASK_TYPE}}" task for "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}}. 
-    Please ensure to upload your file before the deadline passes.
-    If you have any questions about the deadline, please contact <a href="mailto:info@trommons.org">info@trommons.org</a>
+    Please ensure to finish and copy your file from Kató TM or upload your file before the deadline passes.
+    If you have any questions about the deadline, please contact <a href="mailto:translators@translatorswithoutborders.org">translators@translatorswithoutborders.org</a>
 </p>
 
 <p>

@@ -2,13 +2,13 @@
 <p>Dear {{DISPLAY_NAME}},</p>
 
 <p>
-    On behalf of The Rosetta Foundation and especially our partner organisations that have 
-    benefited from your work, I would like to thank you for your dedication and enthusiastic 
+    On behalf of our partner organisations that have benefited from your work,
+    I would like to thank you for your dedication and enthusiastic
     support in removing the price tag for access to information and knowledge across languages 
     for those who need it most.
 </p>
 <p>
-    Below, you will find a record of your work with The Rosetta Foundation. We hope that you found 
+    Below, you will find a record of your work on Kató Trommons. We hope that you found
     volunteering your skills rewarding and we look forward to continue working with you in future.
 </p>
 <p>
@@ -16,8 +16,7 @@
 </p>
 
 <p>Kind Regards,</p>
-<p>Reinhard Schäler</p>
-<p>CEO</p>
+<p>The Kató Trommons Team</p>
 
 <h3>Tasks You Contributed To</h3>
 
