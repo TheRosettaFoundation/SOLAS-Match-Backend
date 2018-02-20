@@ -78,7 +78,7 @@ if (user->id() == 3297) { // test code (3297 is id for Alan Barrett)
                         taskType = "Translation";
                         break;
                     case PROOFREADING:
-                        taskType = "Proofreading";
+                        taskType = "Revising";
                         break;
                     case POSTEDITING:
                         taskType = "Desegmentation";
@@ -136,7 +136,7 @@ if (user->id() == 3297) { // test code (3297 is id for Alan Barrett)
                     } else if(taskTypeId == TRANSLATION) {
                         taskType = "Translation";
                     } else if(taskTypeId == PROOFREADING) {
-                        taskType = "Proofreading";
+                        taskType = "Revising";
                     } else if(taskTypeId == POSTEDITING) {
                         taskType = "Post-Editing";
                     } else {

@@ -14,10 +14,10 @@
     Thanks for helping to volunteer.
 </p>
 <p>
-    You can translate or proofread using Kató TM or alternatively edit the file you downloaded on your local PC.
+    You can translate or revise using Kató TM or alternatively edit the file you downloaded on your local PC.
 </p>
 <p>
-    As soon as you have processed the file on Kató TM (and all segments are marked as translated or approved (proofreading)),
+    As soon as you have processed the file on Kató TM (and all segments are marked as translated or approved (revising)),
     please copy it "from Kató TM to Kató Trommons" using the following page:<br />
     {{TASK_PAGE}}
 </p>

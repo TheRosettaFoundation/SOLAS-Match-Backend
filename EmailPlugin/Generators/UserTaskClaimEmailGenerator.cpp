@@ -55,7 +55,7 @@ void UserTaskClaimEmailGenerator::run()
                 task_type = "Translation";
                 break;
             case 3:
-                task_type = "Proofreading";
+                task_type = "Revising";
                 break;
             case 4:
                 task_type = "Desegmentation";
