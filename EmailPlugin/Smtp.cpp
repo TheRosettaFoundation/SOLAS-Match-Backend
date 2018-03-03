@@ -59,7 +59,7 @@ void Smtp::send(QSharedPointer<Email> email)
     recipientString.replace("@", "%40");
     mail_message.setExtraHeader("List-Unsubscribe", "<mailto:info@trommons.org?subject=Unsubscribe%20from%20Trommons%3A" + recipientString  + ">");
     mail_message.setSubject(email->getSubject());
-    mail_message.setExtraHeader("Content-Type", "text/html");
+    mail_message.setExtraHeader("Content-Type", "text/html; charset=utf-8");
     mail_message.setBody(email->getBody());
 
     if(!isConnected) {
