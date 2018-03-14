@@ -7,10 +7,9 @@
     <a href="{{URL}}">Click here to finish registration.</a>
 </p>
 <p>
-Thank you for your interest in volunteering! Please make sure to update your user profile and set notifications on your profile if you want to be notified of new translation projects by email.
+Please make sure to update your user profile and set notifications on your profile
+if you want to be notified of new translation projects by email.
+For more information, please view
+<a href="https://community.translatorswb.org/t/signing-up-for-kato-platform-email-notifications/121">
+Signing up for Kató Platform email notifications</a>.
 </p>
-<p>
-    Sincerely,<br />
-    The {{SITE_NAME}} Team
-</p>
-
