@@ -1,21 +1,13 @@
 <p>
-    {{#USER_HAS_NAME}}
-        {{USERNAME}},
-    {{/USER_HAS_NAME}}
-    {{#NO_USER_NAME}}
-        Hello,
-    {{/NO_USER_NAME}}
+    The deadline for "{{TASK_TYPE}}" task for "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} has expired.
+    If you have completed the task, please make sure it is marked as complete on Kató TM and Kató Platform
+    (click "Copy your translation from Kató TM to Kató").
 </p>
-
 <p>
-    The "{{TASK_TYPE}}" task for "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} has passed its deadline. 
-    As the task deadline has passed, please ensure to finish and copy your file from Kat� TM or upload your output file.
-    If you have any questions about the deadline, please contact <a href="mailto:translators@translatorswithoutborders.org">translators@translatorswithoutborders.org</a>
-</p>
-
-<p>
-    From,<br />
-    The {{SITE_NAME}} Team
+    If you need a deadline extension or are unable to deliver this work,
+    please leave a comment in the Kató Community discussion thread associated with your project.
+    Please note that in some cases we are unable to extend task deadlines and would have to reassign the task to another translator.
+    For more details please see <a href="https://community.translatorswb.org/t/deadlines-on-kato-platform/248">Deadlines on Kató Platform</a>
 </p>
 
 
