@@ -1,25 +1,12 @@
 <p>
-    {{#USER_HAS_NAME}}
-        {{USERNAME}},
-    {{/USER_HAS_NAME}}
-    {{#NO_USER_NAME}}
-        Hello,
-    {{/NO_USER_NAME}}
+    Congratulations! The organization "{{ORG_NAME}}" has added you to their
+    member's list on {{SITE_NAME}}. You can now upload files on behalf of the organization as
+    well as alter details of existing tasks. You can also view any translations
+    that have been uploaded for tasks related to this organization.
 </p>
 
 <p>
-    Congratulations! The organisation "{{ORG_NAME}}" has added you to their
-    members list on {{SITE_NAME}}. You can now upload files on behalf of the organisation as
-    well as alter existing tasks' details. You can also view any translations 
-    that have been uploaded for tasks related to this organisation.
-</p>
-
-<p>
-    To get started with the organisation please visit your client dashboard.
-</p>
-
-<p>
-    The {{SITE_NAME}} Team
+    To get started with the organization account please visit your dashboard.
 </p>
 
 
