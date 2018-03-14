@@ -1,4 +1,4 @@
-<h3>Your {{SITE_NAME}} Task Stream</h3>
+<h3>Tasks available on {{SITE_NAME}}</h3>
 <br />
 <hr />
 
