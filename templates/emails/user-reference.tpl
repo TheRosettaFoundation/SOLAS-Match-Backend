@@ -2,21 +2,22 @@
 <p>Dear {{DISPLAY_NAME}},</p>
 
 <p>
-    On behalf of our partner organisations that have benefited from your work,
-    I would like to thank you for your dedication and enthusiastic
-    support in removing the price tag for access to information and knowledge across languages 
-    for those who need it most.
+    On behalf of our partner organizations that have benefited from your work,
+    I would like to thank you for your dedication and enthusiastic support of
+    our mission to increase access to information and knowledge across all languages.
 </p>
 <p>
-    Below, you will find a record of your work on Kató Trommons. We hope that you found
-    volunteering your skills rewarding and we look forward to continue working with you in future.
+    Below, you will find a record of your work on Kató Platform. We hope that you found
+    your volunteering experience rewarding, and we thank you for your continued support.
 </p>
 <p>
-    Please do not hesitate to contact us with any queries or suggestions you may have.
+    If you have any questions or suggestions, you can get in touch with us at
+    <a href="mailto:translators@translatorswithoutborders.org">
+    translators@translatorswithoutborders.org</a>
 </p>
 
-<p>Kind Regards,</p>
-<p>The Kató Trommons Team</p>
+<p>Warm regards,</p>
+<p>The TWB Community Management Team</p>
 
 <h3>Tasks You Contributed To</h3>
 
@@ -45,7 +46,7 @@
                     <td>{{TARGET}}</td>
                     <td>{{WORD_COUNT}}</td>
                     <td>{{CREATED_TIME}}</td>
-                <tr>
+                </tr>
             {{/TASKS}}
         </tbody>
     </table>
