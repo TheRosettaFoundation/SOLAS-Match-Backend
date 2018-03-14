@@ -1,22 +1,11 @@
 <p>
-    {{#USER_HAS_NAME}}
-        {{USERNAME}},
-    {{/USER_HAS_NAME}}
-    {{#NO_USER_NAME}}
-        Hello,
-    {{/NO_USER_NAME}}
-</p>
-
-<p>
-    Thank you for claiming a volunteering task on Kató Trommons!
+    Thank you for claiming a task on Kató Platform!
     This is to remind you that the "{{TASK_TYPE}}" task for "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} is overdue.
-    Please ensure to finish and copy your file from Kató TM or upload your file as soon as possible.
-    If you have any questions about this task, please contact <a href="mailto:translators@translatorswithoutborders.org">translators@translatorswithoutborders.org</a>
+    Please make sure the task is marked as complete on Kató TM and Kató Platform
+    (click "Copy your translation from Kató TM to Kató").
 </p>
-
 <p>
-    From,<br />
-    The {{SITE_NAME}} Team
+    If you have any questions about this task, please leave a comment in the Kató Community discussion thread associated with your project.
 </p>
 
 
