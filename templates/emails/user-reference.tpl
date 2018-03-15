@@ -2,9 +2,8 @@
 <p>Dear {{DISPLAY_NAME}},</p>
 
 <p>
-    On behalf of our partner organizations that have benefited from your work,
-    I would like to thank you for your dedication and enthusiastic support of
-    our mission to increase access to information and knowledge across all languages.
+    We would like to thank you for your dedication and enthusiastic support of our mission
+    to increase access to information and knowledge across all languages.
 </p>
 <p>
     Below, you will find a record of your work on Kató Platform. We hope that you found
