@@ -11,6 +11,5 @@ Please visit the Kató Community forum topic for this project:<br />
 to answer any questions posed and to interact with the translators.
 </p>
 <p>
-When communicating with the Kató project management team please reference the project URL:<br />
-<a href="{{PROJECT_VIEW}}">{{PROJECT_VIEW}}</a>
+Please also use the Kató Community forum topic to communicate with the Kató project management team.
 </p>
