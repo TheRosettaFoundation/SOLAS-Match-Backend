@@ -23,7 +23,7 @@ public:
                                       int wordCount = -1, QString created = "", QString language = "", QString country = "", int imageUploaded  = -1, int imageApproved = -1);
     static QSharedPointer<ArchivedProject> getArchivedProject(QSharedPointer<MySQLHandler> db, int id = -1);
     static QList<QSharedPointer<ArchivedProject> > getArchivedProjects(QSharedPointer<MySQLHandler> db, int id = -1);
-
+    static std::string discourse_parameterize(const std::string a);
 };
 
 #endif // PROJECTDAO_H
