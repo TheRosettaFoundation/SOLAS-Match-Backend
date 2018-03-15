@@ -15,7 +15,8 @@
     (click "Copy your translation from Kató TM to Kató").
 </p>
 <p>
-    If you have any questions about the deadline, please leave a comment in the Kató Community discussion thread associated with your project.
+    If you have any questions about the deadline, please leave a comment in the Kató Community discussion thread associated with your project:<br />
+    <a href="{{COMMUNITY}}">{{COMMUNITY}}</a>
 </p>
 
 
