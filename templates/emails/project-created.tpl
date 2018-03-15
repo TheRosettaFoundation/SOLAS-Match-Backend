@@ -9,6 +9,6 @@ was created by the organisation:<br />
 <a href="{{ORG_VIEW}}">{{ORG_NAME}}</a>
 </p>
 <p>
-Please visit the Kató Community forum topic for your project
-where translators may be asking you questions.
+Translators may have questions about your project.
+Please visit the Kató Community forum topic for this project to answer any questions posed and to interact with the translators.
 </p>
