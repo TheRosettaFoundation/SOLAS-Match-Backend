@@ -1,7 +1,9 @@
 <p>
-    The deadline for "{{TASK_TYPE}}" task for "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} has expired.
-    If you have completed the task, please make sure it is marked as complete on Kató TM and Kató Platform
-    (click "Copy your translation from Kató TM to Kató").
+    The deadline for the "{{TASK_TYPE}}" task for "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} has expired.
+    If you have completed the task, please make sure it is marked as complete on Kató TM here:<br />
+    <a href="{{MATECAT}}">{{MATECAT}}</a><br />
+    And on the Kató Platform here: <a href="{{TASK_UPLOAD}}" >{{TASK_UPLOAD}}</a><br />
+    click "Copy your translation from Kató TM to Kató".
 </p>
 <p>
     If you need a deadline extension or are unable to deliver this work,
