@@ -38,6 +38,7 @@ public:
     static QSharedPointer<ArchivedTask> getArchivedTask(QSharedPointer<MySQLHandler> db, int arc_id = -1);
     static QList<QSharedPointer<Task> > getTaskPreReqs(QSharedPointer<MySQLHandler> db, int taskId);
     static QMultiMap<int, int> getTaskTagIds(QSharedPointer<MySQLHandler> db, int limit = RETURN_ALL, int offset = RETURN_ALL);
+    static std::string get_matecat_url(QSharedPointer<Task> task);
 };
 
 #endif // TASKDAO_H
