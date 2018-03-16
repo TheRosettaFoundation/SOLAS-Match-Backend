@@ -74,7 +74,7 @@ void UserClaimedTaskEarlyWarningDeadlinePassedEmailGenerator::run()
         uploadUrl += "task/" + QString::number(task->id()) + "/id";
         dict.SetValue("TASK_UPLOAD", uploadUrl.toStdString());
 
-        dict.SetValue("MATECAT", TaskDao::get_matecat_url(task->id()));
+        dict.SetValue("MATECAT", TaskDao::get_matecat_url(task));
 
         QSharedPointer<Project> project = ProjectDao::getProject(db, task->projectid());
         dict.SetValue("COMMUNITY", ProjectDao::discourse_parameterize(project->title()));
