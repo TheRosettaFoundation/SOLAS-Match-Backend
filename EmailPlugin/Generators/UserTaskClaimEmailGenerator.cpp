@@ -69,7 +69,7 @@ void UserTaskClaimEmailGenerator::run()
         dict.SetValue("SOURCE_LANGUAGE",taskSourceLocale.languagename());
         dict.SetValue("TARGET_LANGUAGE",taskTargetLocale.languagename());
 
-        dict.SetValue("MATECAT", TaskDao::get_matecat_url(task->id());
+        dict.SetValue("MATECAT", TaskDao::get_matecat_url(task->id()));
 
         QSharedPointer<Project> project = ProjectDao::getProject(db, task->projectid());
         dict.SetValue("COMMUNITY", ProjectDao::discourse_parameterize(project->title()));
