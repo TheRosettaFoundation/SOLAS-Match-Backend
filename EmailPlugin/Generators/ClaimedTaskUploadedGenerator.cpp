@@ -82,6 +82,8 @@ void ClaimedTaskUploadedGenerator::run()
         dict.SetValue("SOURCE_LANGUAGE",taskSourceLocale.languagename());
         dict.SetValue("TARGET_LANGUAGE",taskTargetLocale.languagename());
 
+        dict.SetValue("COMMUNITY", ProjectDao::discourse_parameterize(project->title()));
+
         bool footer_enabled=(QString::compare("y", settings.get("email-footer.enabled")) == 0);
         if (footer_enabled)
         {
