@@ -47,15 +47,19 @@ void UserTaskDeadlineEmailGenerator::run()
         {
             case 1:
                 task_type = "Segmentation";
+                dict.ShowSection("SEGMENTATION");
                 break;
             case 2:
                 task_type = "Translation";
+                dict.ShowSection("TRANSLATION");
                 break;
             case 3:
                 task_type = "Revising";
+                dict.ShowSection("REVISING");
                 break;
             case 4:
                 task_type = "Desegmentation";
+                dict.ShowSection("SEGMENTATION");
                 break;
         }
 
