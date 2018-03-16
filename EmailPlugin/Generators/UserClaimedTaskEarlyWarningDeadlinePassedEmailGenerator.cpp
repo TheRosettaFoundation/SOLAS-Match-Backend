@@ -66,6 +66,15 @@ void UserClaimedTaskEarlyWarningDeadlinePassedEmailGenerator::run()
         dict.SetValue("SOURCE_LANGUAGE",taskSourceLocale.languagename());
         dict.SetValue("TARGET_LANGUAGE",taskTargetLocale.languagename());
 
+        QString uploadUrl = settings.get("site.url");
+        uploadUrl += "task/" + QString::number(task->id()) + "/id";
+        dict.SetValue("TASK_UPLOAD", uploadUrl.toStdString());
+
+        dict.SetValue("MATECAT", TaskDao::get_matecat_url(task->id());
+
+        QSharedPointer<Project> project = ProjectDao::getProject(db, task->projectid());
+        dict.SetValue("COMMUNITY", ProjectDao::discourse_parameterize(project->title()));
+
         bool footer_enabled=(QString::compare("y", settings.get("email-footer.enabled")) == 0);
         if (footer_enabled)
         {
