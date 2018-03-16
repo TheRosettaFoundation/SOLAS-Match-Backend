@@ -1,9 +1,24 @@
 <p>
+{{#TRANSLATION}}
     The deadline for the "{{TASK_TYPE}}" task for "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} has expired.
-    If you have completed the task, please make sure it is marked as complete on Kató TM here:<br />
+    If you have completed the task, please make sure it is marked as translated (100% complete) on Kató TM here:<br />
     <a href="{{MATECAT}}">{{MATECAT}}</a><br />
     And on the Kató Platform here: <a href="{{TASK_UPLOAD}}" >{{TASK_UPLOAD}}</a><br />
     click "Copy your translation from Kató TM to Kató".
+{{/TRANSLATION}}
+{{#REVISING}}
+    The deadline for the "{{TASK_TYPE}}" task for "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} has expired.
+    If you have completed the task, please make sure it is marked as approved (100% complete) on Kató TM here:<br />
+    <a href="{{MATECAT}}">{{MATECAT}}</a><br />
+    And on the Kató Platform here: <a href="{{TASK_UPLOAD}}" >{{TASK_UPLOAD}}</a><br />
+    click "Copy your revised version from Kató TM to Kató".<br />
+    You will only be able to revise in Kató TM if the translation was done in Kató TM.
+{{/REVISING}}
+{{#SEGMENTATION}}
+    The deadline for the "{{TASK_TYPE}}" task for "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} has expired.
+    If you have completed the task, please make sure to upload it here:<br />
+    <a href="{{TASK_UPLOAD}}" >{{TASK_UPLOAD}}</a>
+{{/SEGMENTATION}}
 </p>
 <p>
     If you need a deadline extension or are unable to deliver this work,
