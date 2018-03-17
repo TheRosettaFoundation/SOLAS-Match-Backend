@@ -64,7 +64,7 @@ void CalculateProjectDeadlines::run()
 
             if (orgAdmins.size() > 0) {
                 foreach (QSharedPointer<User> admin, orgAdmins) {
-                    projectCreatedEmail.set_recipient_email(admin->id());
+                    projectCreatedEmail.set_recipient_email(admin->email());
                     publisher.publish(settings.get("messaging.exchange"), "email", projectCreatedEmail.SerializeAsString());
                 }
             } else {
