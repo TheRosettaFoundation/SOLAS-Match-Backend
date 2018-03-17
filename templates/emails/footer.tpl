@@ -2,7 +2,7 @@
 <br>
 <hr width="25%" align="left">
 <footer>
- <p>If you no longer wish to receive tasks stream notification emails,
+ <p>If you no longer wish to receive task stream notification emails,
  please visit your Profile page to edit your email notification settings.</p>
  <p>To remove your account completely, visit your Profile page and delete your account.</p>
  <p>For more information, please view
