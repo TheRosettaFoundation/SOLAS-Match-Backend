@@ -68,7 +68,7 @@ void ClaimedTaskUploadedGenerator::run()
                 task_type = "Translation";
                 break;
             case 3:
-                task_type = "Proofreading";
+                task_type = "Revising";
                 break;
             case 4:
                 task_type = "Desegmentation";
@@ -81,6 +81,8 @@ void ClaimedTaskUploadedGenerator::run()
         Locale taskTargetLocale = task->targetlocale();
         dict.SetValue("SOURCE_LANGUAGE",taskSourceLocale.languagename());
         dict.SetValue("TARGET_LANGUAGE",taskTargetLocale.languagename());
+
+        dict.SetValue("COMMUNITY", ProjectDao::discourse_parameterize(project->title()));
 
         bool footer_enabled=(QString::compare("y", settings.get("email-footer.enabled")) == 0);
         if (footer_enabled)

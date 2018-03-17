@@ -17,6 +17,7 @@
 
 #include "Common/DataAccessObjects/ProjectDao.h"
 #include "Common/DataAccessObjects/TaskDao.h"
+#include "Common/DataAccessObjects/AdminDao.h"
 
 using namespace SolasMatch::Common::Protobufs::Requests;
 using namespace SolasMatch::Common::Protobufs::Emails;
@@ -58,6 +59,18 @@ void CalculateProjectDeadlines::run()
         QSharedPointer<Project> project = ProjectDao::getProject(db, request.project_id());
 
         if (!project.isNull()) {
+
+            QList<QSharedPointer<User> > orgAdmins = AdminDao::getAdmins(db, project->organisationid());
+
+            if (orgAdmins.size() > 0) {
+                foreach (QSharedPointer<User> admin, orgAdmins) {
+                    projectCreatedEmail.set_recipient_email(admin->id());
+                    publisher.publish(settings.get("messaging.exchange"), "email", projectCreatedEmail.SerializeAsString());
+                }
+            } else {
+                qWarning() << "CalculateProjectDeadlines: No org admins found";
+            }
+
             GraphBuilder mBuilder = GraphBuilder();
             if (mBuilder.getProjectGraph(project->id()) && mBuilder.isGraphValid()) {
                 QSharedPointer<WorkflowGraph> graph = mBuilder.getGraph();

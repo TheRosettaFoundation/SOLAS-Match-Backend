@@ -4,14 +4,14 @@
 
 <p>
     A task that you are following on {{SITE_NAME}} has changed its status.
-    The volunteer {{TRANSLATOR_NAME}} has uploaded the "{{TASK_TYPE}}" task
+    The translator {{TRANSLATOR_NAME}} has completed the "{{TASK_TYPE}}" task
     for "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}}.
-    To download the the latest version of the file
+    To access the the latest version of the file
     click <a href="{{TASK_REVIEW}}">here</a>.
     On this page you can provide a rating for the volunteer's work and download
     the latest output file.
-    You can visit your <a href="{{DASHBOARD_URL}}">client dashboard</a> to check
-    the status of any tasks uploaded by your organisation(s).
+    You can visit your <a href="{{DASHBOARD_URL}}">partner dashboard</a> to check
+    the status of any tasks uploaded by your organisation.
     You will find the project for this task under the {{ORG_NAME}} title.
 </p>
 
@@ -21,11 +21,6 @@
     <a href="{{TASK_VIEW}}">task view page</a>
     or the <a href="{{PROJECT_VIEW}}">project view page</a>.
 <p>
-
-<p>
-    Sincerely,<br />
-    The {{SITE_NAME}} Team
-</p>
 
 
 {{>FOOTER}}

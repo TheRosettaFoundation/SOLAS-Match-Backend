@@ -76,7 +76,7 @@ void UserTaskStreamEmailGenerator::run()
                 taskType = "Translation";
                 break;
             case PROOFREADING:
-                taskType = "Proofreading";
+                taskType = "Revising";
                 break;
             case POSTEDITING:
                 taskType = "Post-Editing";

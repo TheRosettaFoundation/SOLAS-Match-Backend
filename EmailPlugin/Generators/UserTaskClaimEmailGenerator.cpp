@@ -50,15 +50,19 @@ void UserTaskClaimEmailGenerator::run()
         {
             case 1:
                 task_type = "Segmentation";
+                dict.ShowSection("SEGMENTATION");
                 break;
             case 2:
                 task_type = "Translation";
+                dict.ShowSection("TRANSLATION");
                 break;
             case 3:
-                task_type = "Proofreading";
+                task_type = "Revising";
+                dict.ShowSection("REVISING");
                 break;
             case 4:
                 task_type = "Desegmentation";
+                dict.ShowSection("SEGMENTATION");
                 break;
         }
 
@@ -68,6 +72,11 @@ void UserTaskClaimEmailGenerator::run()
         Locale taskTargetLocale = task->targetlocale();
         dict.SetValue("SOURCE_LANGUAGE",taskSourceLocale.languagename());
         dict.SetValue("TARGET_LANGUAGE",taskTargetLocale.languagename());
+
+        dict.SetValue("MATECAT", TaskDao::get_matecat_url(db, task));
+
+        QSharedPointer<Project> project = ProjectDao::getProject(db, task->projectid());
+        dict.SetValue("COMMUNITY", ProjectDao::discourse_parameterize(project->title()));
 
         bool footer_enabled=(QString::compare("y", settings.get("email-footer.enabled")) == 0);
         if (footer_enabled)

@@ -1,15 +1,15 @@
 <p>
-Hello
-</p>
-
-<p>
-A new project has been created on {{SITE_NAME}}:<br />
+A project has been created (or modified) on {{SITE_NAME}}:<br />
 <a href="{{PROJECT_VIEW}}">{{PROJECT_TITLE}}</a><br />
-was created by the organisation:<br />
+by the organisation:<br />
 <a href="{{ORG_VIEW}}">{{ORG_NAME}}</a>
 </p>
-
 <p>
-From,<br />
-The {{SITE_NAME}} Team
+Translators may have questions about your project.<br />
+Please visit the Kató Community forum topic for this project:<br />
+<a href="{{COMMUNITY}}">{{COMMUNITY}}</a><br />
+to answer any questions posed and to interact with the translators.
+</p>
+<p>
+Please also use the Kató Community forum topic to communicate with the Kató project management team.
 </p>
