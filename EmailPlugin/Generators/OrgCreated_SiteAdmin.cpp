@@ -33,7 +33,7 @@ void OrgCreate_SiteAdmin::run()
         dict.SetValue("ORG_NAME", org->name());
         QString orgUrl = settings.get("site.url") + "org/" + QString::number(org->id()) + "/profile";
         dict.SetValue("ORG_URL", orgUrl.toStdString());
-        dict.SetValue("SITE_NAME", settings.get("site.name").toStdString());
+        dict.SetValue("SITE_NAME", std::string(settings.get("site.name").toLatin1().constData(), settings.get("site.name").toLatin1().length()));
 
         std::string email_body;
         QString templateLocation = QString(TEMPLATE_DIRECTORY) + "emails/org-created.site-admin.tpl";

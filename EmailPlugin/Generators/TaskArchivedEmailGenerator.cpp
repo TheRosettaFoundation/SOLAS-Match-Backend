@@ -55,7 +55,7 @@ void TaskArchivedEmailGenerator::run()
         }
         dict.SetValue("TASK_TITLE", Email::htmlspecialchars(task->title()));
         dict.SetValue("ORG_NAME", org->name());
-        dict.SetValue("SITE_NAME", settings.get("site.name").toStdString());
+        dict.SetValue("SITE_NAME", std::string(settings.get("site.name").toLatin1().constData(), settings.get("site.name").toLatin1().length()));
 
         bool footer_enabled=(QString::compare("y", settings.get("email-footer.enabled")) == 0);
         if (footer_enabled)

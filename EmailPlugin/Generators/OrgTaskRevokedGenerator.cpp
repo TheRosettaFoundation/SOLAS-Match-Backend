@@ -36,7 +36,7 @@ void OrgTaskRevokedGenerator::run()
         QString userProfile = settings.get("site.url") + QString::number(claimant->id()) + "/profile";
         dict.SetValue("USER_PROFILE", userProfile.toStdString());
         dict.SetValue("CLAIMANT_NAME", Email::htmlspecialchars(claimant->display_name()));
-        dict.SetValue("SITE_NAME", settings.get("site.name").toStdString());
+        dict.SetValue("SITE_NAME", std::string(settings.get("site.name").toLatin1().constData(), settings.get("site.name").toLatin1().length()));
         QString task_type = "Translation";
 
         switch(task->tasktype())

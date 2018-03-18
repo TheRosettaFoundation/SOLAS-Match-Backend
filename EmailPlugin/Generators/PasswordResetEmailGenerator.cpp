@@ -47,7 +47,7 @@ void PasswordResetEmailGenerator::run()
             dict.ShowSection("NO_USER_NAME");
         }
         dict.SetValue("URL", page_url.toStdString());
-        dict.SetValue("SITE_NAME", settings.get("site.name").toStdString());
+        dict.SetValue("SITE_NAME", std::string(settings.get("site.name").toLatin1().constData(), settings.get("site.name").toLatin1().length()));
         std::string email_body;
         QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/password-reset.tpl";
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);

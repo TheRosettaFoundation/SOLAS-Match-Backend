@@ -75,7 +75,7 @@ void UserBadgeAwardedGenerator::run()
 
         dict.SetValue("USERNAME", Email::htmlspecialchars(user->display_name()));
         dict.SetValue("BADGE_NAME", Email::htmlspecialchars(badge_title.toStdString()));
-        dict.SetValue("SITE_NAME", settings.get("site.name").toStdString());
+        dict.SetValue("SITE_NAME", std::string(settings.get("site.name").toLatin1().constData(), settings.get("site.name").toLatin1().length()));
         dict.SetValue("ORG_VIEW", orgView.toStdString());
         dict.SetValue("ORG_NAME", orgName.toStdString());
 

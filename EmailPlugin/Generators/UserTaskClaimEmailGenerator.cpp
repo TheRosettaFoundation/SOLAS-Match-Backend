@@ -42,7 +42,7 @@ void UserTaskClaimEmailGenerator::run()
         QString task_url = settings.get("site.url");
         task_url += "task/" + QString::number(task->id()) + "/id";
         dict.SetValue("TASK_PAGE", task_url.toStdString());
-        dict.SetValue("SITE_NAME", settings.get("site.name").toStdString());
+        dict.SetValue("SITE_NAME", std::string(settings.get("site.name").toLatin1().constData(), settings.get("site.name").toLatin1().length()));
         dict.SetValue("TASK_TITLE", Email::htmlspecialchars(task->title()));
 
         QString task_type = "Translation";

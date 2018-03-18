@@ -33,7 +33,7 @@ void EmailVerificationGenerator::run()
         QString url = settings.get("site.url");
         url += "user/" + uniqueId + "/verification";
         dict.SetValue("URL", url.toStdString());
-        dict.SetValue("SITE_NAME", settings.get("site.name").toStdString());
+        dict.SetValue("SITE_NAME", std::string(settings.get("site.name").toLatin1().constData(), settings.get("site.name").toLatin1().length()));
 
         std::string email_body;
         QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/registration-email.tpl";

@@ -60,7 +60,7 @@ void UserFeedbackGenerator::run()
             QString taskView = settings.get("site.url") + "task/" + QString::number(task->id()) + "/view";
             dict.SetValue("TASK_VIEW", taskView.toStdString());
             dict.SetValue("TASK_TITLE", Email::htmlspecialchars(task->title()));
-            dict.SetValue("SITE_NAME", settings.get("site.name").toStdString());
+            dict.SetValue("SITE_NAME", std::string(settings.get("site.name").toLatin1().constData(), settings.get("site.name").toLatin1().length()));
             dict.SetValue("CLAIMANT_NAME", Email::htmlspecialchars(claimant->display_name()));
 
             bool footer_enabled=(QString::compare("y", settings.get("email-footer.enabled")) == 0);

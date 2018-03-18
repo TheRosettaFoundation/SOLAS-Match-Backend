@@ -39,7 +39,7 @@ void OrgMembershipRefusedEmailGenerator::run()
             dict.ShowSection("NO_USER_NAME");
         }
         dict.SetValue("ORG_NAME", org->name());
-        dict.SetValue("SITE_NAME", settings.get("site.name").toStdString());
+        dict.SetValue("SITE_NAME", std::string(settings.get("site.name").toLatin1().constData(), settings.get("site.name").toLatin1().length()));
         std::string email_body;
         QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/org-membership-refused.tpl";
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);

@@ -43,7 +43,7 @@ void TaskClaimedEmailGenerator::run()
         }
         dict.SetValue("TASK_TITLE", Email::htmlspecialchars(task->title()));
         dict.SetValue("TRANSLATOR_NAME", Email::htmlspecialchars(translator->display_name()));
-        dict.SetValue("SITE_NAME", settings.get("site.name").toStdString());
+        dict.SetValue("SITE_NAME", std::string(settings.get("site.name").toLatin1().constData(), settings.get("site.name").toLatin1().length()));
 
         QString user_profile_url = settings.get("site.url");
         user_profile_url += QString::number(translator->id()) + "/profile";
