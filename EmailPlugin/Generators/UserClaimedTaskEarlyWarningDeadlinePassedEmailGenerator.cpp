@@ -40,7 +40,7 @@ void UserClaimedTaskEarlyWarningDeadlinePassedEmailGenerator::run()
             dict.ShowSection("NO_USER_NAME");
         }
         dict.SetValue("TASK_TITLE", Email::htmlspecialchars(task->title()));
-        dict.SetValue("SITE_NAME", settings.get("site.name").toStdString());
+        dict.SetValue("SITE_NAME", std::string(settings.get("site.name").toLatin1().constData(), settings.get("site.name").toLatin1().length()));
 
         QString task_type = "Translation";
         switch(task->tasktype())

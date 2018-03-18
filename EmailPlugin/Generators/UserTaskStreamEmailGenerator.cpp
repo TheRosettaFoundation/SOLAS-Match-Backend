@@ -60,7 +60,7 @@ void UserTaskStreamEmailGenerator::run()
         email = QSharedPointer<Email>(new Email);
 
         ctemplate::TemplateDictionary dict("userTaskStreamDict");
-        dict.SetValue("SITE_NAME", settings.get("site.name").toStdString());
+        dict.SetValue("SITE_NAME", std::string(settings.get("site.name").toLatin1().constData(), settings.get("site.name").toLatin1().length()));
         foreach (QSharedPointer<Task> task, userTasks) {
             ctemplate::TemplateDictionary *taskSect = dict.AddSectionDictionary("TASK_SECT");
             QString taskView = settings.get("site.url") + "task/" + QString::number(task->id()) + "/view";

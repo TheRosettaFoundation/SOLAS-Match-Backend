@@ -39,10 +39,9 @@ void NewImageUploadedEmailGenerator::run()
 
     if (error.compare("") == 0) {
         QString siteLocation = settings.get("site.url");
-        QString siteName = settings.get("site.name");
 
         ctemplate::TemplateDictionary dict("projectImageUploaded");
-        dict.SetValue("SITE_NAME", siteName.toStdString());
+        dict.SetValue("SITE_NAME", std::string(settings.get("site.name").toLatin1().constData(), settings.get("site.name").toLatin1().length()));
         QString projectView = siteLocation + "project/" + QString::number(project->id()) + "/view/";
         dict.SetValue("PROJECT_VIEW", projectView.toStdString());
         dict.SetValue("PROJECT_TITLE", Email::htmlspecialchars(project->title()));

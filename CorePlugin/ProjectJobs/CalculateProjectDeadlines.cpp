@@ -60,7 +60,7 @@ void CalculateProjectDeadlines::run()
 
         if (!project.isNull()) {
 
-            QList<QSharedPointer<User> > orgAdmins = AdminDao::getAdmins(db, project->organisationid());
+            QList<QSharedPointer<User> > orgAdmins = AdminDao::getAdminsForOrg(db, project->organisationid());
 
             if (orgAdmins.size() > 0) {
                 foreach (QSharedPointer<User> admin, orgAdmins) {

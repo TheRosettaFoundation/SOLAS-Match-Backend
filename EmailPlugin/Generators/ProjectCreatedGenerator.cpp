@@ -38,7 +38,7 @@ void ProjectCreatedGenerator::run()
         QString siteName = settings.get("site.name");
 
         ctemplate::TemplateDictionary dict("projectCreated");
-        dict.SetValue("SITE_NAME", siteName.toStdString());
+        dict.SetValue("SITE_NAME", std::string(settings.get("site.name").toLatin1().constData(), settings.get("site.name").toLatin1().length()));
         QString projectView = siteLocation + "project/" + QString::number(project->id()) + "/view/";
         dict.SetValue("PROJECT_VIEW", projectView.toStdString());
         dict.SetValue("PROJECT_TITLE", Email::htmlspecialchars(project->title()));
