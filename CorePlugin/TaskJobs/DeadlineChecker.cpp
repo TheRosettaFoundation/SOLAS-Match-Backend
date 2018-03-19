@@ -57,11 +57,10 @@ void DeadlineChecker::run()
                 orgEmail.set_task_id(task->id());
                 if(!translator.isNull()) {
                     orgEmail.set_translator_id(translator->id());
-
-                    client.publish(exchange, "email.org.task.deadline", orgEmail.SerializeAsString());
-                } else {
-                    qDebug() << "Task " << task->id() << " has was not claimed so not sending OrgTaskDeadlinePassed";
                 }
+
+                client.publish(exchange, "email.org.task.deadline",
+                        orgEmail.SerializeAsString());
             }
 
             if(!translator.isNull()) {
