@@ -60,7 +60,7 @@ void DeadlineChecker::run()
                 }
 
                 client.publish(exchange, "email.org.task.deadline",
-                        orgEmail.SerializeAsString());
+                               orgEmail.SerializeAsString());
             }
 
             if(!translator.isNull()) {
