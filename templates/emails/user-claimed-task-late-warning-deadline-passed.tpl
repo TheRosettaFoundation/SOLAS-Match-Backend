@@ -16,6 +16,15 @@
     click "Copy your revised version from Kató TM to Kató".<br />
     You will only be able to revise in Kató TM if the translation was done in Kató TM.
 {{/REVISING}}
+{{#REVISING_NO_MATECAT}}
+    Thank you for claiming a task on Kató Platform!
+    This is to remind you that the "{{TASK_TYPE}}" task for "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} is overdue.
+    Please make sure the task is marked as approved (100% complete) on Kató TM here:<br />
+    <a href="{{MATECAT}}">{{MATECAT}}</a><br />
+    And on the Kató Platform here: <a href="{{TASK_UPLOAD}}" >{{TASK_UPLOAD}}</a><br />
+    click "Copy your revised version from Kató TM to Kató".<br />
+    You will only be able to revise in Kató TM if the translation was done in Kató TM.
+{{/REVISING_NO_MATECAT}}
 {{#SEGMENTATION}}
     Thank you for claiming a task on Kató Platform!
     This is to remind you that the "{{TASK_TYPE}}" task for "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} is overdue.
