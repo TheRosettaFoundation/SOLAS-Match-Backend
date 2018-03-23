@@ -15,11 +15,8 @@
 {{/REVISING}}
 {{#REVISING_NO_MATECAT}}
     The deadline for the "{{TASK_TYPE}}" task for "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} has expired.
-    If you have completed the task, please make sure it is marked as approved (100% complete) on Kató TM here:<br />
-    <a href="{{MATECAT}}">{{MATECAT}}</a><br />
-    And on the Kató Platform here: <a href="{{TASK_UPLOAD}}" >{{TASK_UPLOAD}}</a><br />
-    click "Copy your revised version from Kató TM to Kató".<br />
-    You will only be able to revise in Kató TM if the translation was done in Kató TM.
+    If you have completed the task, upload the revised file on the following page:<br />
+    <a href="{{TASK_UPLOAD}}">{{TASK_UPLOAD}}</a>
 {{/REVISING_NO_MATECAT}}
 {{#SEGMENTATION}}
     The deadline for the "{{TASK_TYPE}}" task for "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} has expired.
