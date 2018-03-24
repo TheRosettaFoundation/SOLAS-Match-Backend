@@ -30,7 +30,6 @@
     As soon as you complete the task on Kató TM and all segments are marked as approved (100% complete),
     please "Copy your revised version from Kató TM to Kató" using the following page:<br />
     <a href="{{TASK_PAGE}}">{{TASK_PAGE}}</a>
-    <br />You will only be able to revise in Kató TM if the translation was done in Kató TM.
 </p>
 <p>
     In the rare instance that you were asked to download the file, rather than working on Kató TM,
@@ -38,6 +37,13 @@
     <a href="{{TASK_PAGE}}">{{TASK_PAGE}}</a>
 </p>
 {{/REVISING}}
+{{#REVISING_NO_MATECAT}}
+<p>
+    As soon as you complete the revision,
+    you can upload the revised file on the following page:<br />
+    <a href="{{TASK_PAGE}}">{{TASK_PAGE}}</a>
+</p>
+{{/REVISING_NO_MATECAT}}
 {{#SEGMENTATION}}
 <p>
      As soon as you complete the segmentation, please upload here:<br />

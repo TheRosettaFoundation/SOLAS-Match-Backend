@@ -55,7 +55,11 @@ void UserClaimedTaskLateWarningDeadlinePassedEmailGenerator::run()
                 break;
             case 3:
                 task_type = "Revising";
+                if (TaskDao::is_task_translated_in_matecat(db, task->id())) {
                 dict.ShowSection("REVISING");
+                } else {
+                    dict.ShowSection("REVISING_NO_MATECAT");
+                }
                 break;
             case 4:
                 task_type = "Desegmentation";
