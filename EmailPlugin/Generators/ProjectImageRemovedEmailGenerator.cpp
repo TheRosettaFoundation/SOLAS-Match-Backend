@@ -51,7 +51,7 @@ void ProjectImageRemovedEmailGenerator::run()
         std::string email_body;
         QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/project-image-removed.tpl";
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
-        const char* projectTitle = project->title().c_str();
+        QString projectTitle = QString::fromLatin1(project->title().c_str());
         QStringList admins = settings.get("mail.admin_emails").split(",");
         foreach(QString admin, admins) {
             email->addRecipient(admin.trimmed());
