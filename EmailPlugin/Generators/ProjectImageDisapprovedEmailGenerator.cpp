@@ -62,7 +62,7 @@ void ProjectImageDisapprovedEmailGenerator::run()
         std::string email_body;
         QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/project-image-disapproved.tpl";
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
-        const char* projectTitle = project->title().c_str();
+        QString projectTitle = QString::fromLatin1(project->title().c_str());
 
         email->setSender(settings.get("site.system_email_address"));;
         email->addRecipient(QString::fromStdString(user->email()));
