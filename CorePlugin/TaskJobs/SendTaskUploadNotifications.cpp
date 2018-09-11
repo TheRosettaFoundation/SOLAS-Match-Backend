@@ -57,6 +57,34 @@ void SendTaskUploadNotifications::run()
                         publisher.publish(exchange, topic, body);
                     }
                 } else {
+                  if (TaskDao::is_chunked_task(db, task->id())) {
+                      QSharedPointer<Task> parentTask = TaskDao::getParentTranslationTask(db, task->id());
+                      QSharedPointer<User> parentClaimer = TaskDao::getUserClaimedTask(db, parentTask->id());
+                      TrackedTaskUploaded trackedUpload;
+                      trackedUpload.set_email_type(trackedUpload.email_type());
+                      trackedUpload.set_task_id(task->id());
+                      trackedUpload.set_translator_id(translator->id());
+                      trackedUpload.set_user_id(parentClaimer->id());
+                      body = trackedUpload.SerializeAsString();
+                      publisher.publish(exchange, topic, body);
+
+                      if (task->tasktype() == TRANSLATION) {
+                          QSharedPointer<Task> revisionTask = TaskDao::getMatchingRevisionTask(db, task->id());
+                          if (!revisionTask.isNull()) {
+                              QSharedPointer<User> revisionClaimer = TaskDao::getUserClaimedTask(db, revisionTask->id());
+                              if (!revisionClaimer.isNull()) {
+                                  trackedUpload.set_email_type(trackedUpload.email_type());
+                                  trackedUpload.set_task_id(task->id());
+                                  trackedUpload.set_translator_id(translator->id());
+                                  trackedUpload.set_user_id(revisionClaimer->id());
+                                  body = trackedUpload.SerializeAsString();
+                                  publisher.publish(exchange, topic, body);
+                              }
+                          } else {
+                              qDebug() << "SendTaskUploadNotifications: getMatchingRevisionTask returned Null";
+                          }
+                      }
+                  } else {
                     foreach (QSharedPointer<User> user, users) {
                         TrackedTaskUploaded trackedUpload;
                         trackedUpload.set_email_type(trackedUpload.email_type());
@@ -73,6 +101,7 @@ void SendTaskUploadNotifications::run()
                     claimedUpload.set_user_id(translator->id());
                     body = claimedUpload.SerializeAsString();
                     publisher.publish(exchange, topic, body);
+                  }
                 }
             } else {
                 qDebug() << "SendTaskUploadNotifications: Failed to initialise messaging client";
