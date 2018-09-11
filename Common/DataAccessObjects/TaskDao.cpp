@@ -506,6 +506,19 @@ std::string TaskDao::get_matecat_url(QSharedPointer<MySQLHandler> db, QSharedPoi
             if (matecat_langpair != "" && matecat_id_job != "" && matecat_id_job_password != "") {
                 matecat_url = translate_url + QString::number(task->projectid()) + "/" + matecat_langpair.replace("|", "-") + "/" + matecat_id_job + "-" + matecat_id_job_password;
             }
+        } else {
+            mQuery = db->call("getTaskChunk", QString::number(task->id()));
+            if (mQuery->first()) {
+                QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
+
+                QString matecat_langpair       (MySQLHandler::getValueFromQuery(fieldMap.value("matecat_langpair"), mQuery).toString());
+                QString matecat_id_job         (MySQLHandler::getValueFromQuery(fieldMap.value("matecat_id_job"), mQuery).toString());
+                QString matecat_id_job_password(MySQLHandler::getValueFromQuery(fieldMap.value("matecat_id_chunk_password"), mQuery).toString());
+
+                if (matecat_langpair != "" && matecat_id_job != "" && matecat_id_job_password != "") {
+                    matecat_url = translate_url + QString::number(task->projectid()) + "/" + matecat_langpair.replace("|", "-") + "/" + matecat_id_job + "-" + matecat_id_job_password;
+                }
+            }
         }
     }
     return matecat_url.toStdString();
