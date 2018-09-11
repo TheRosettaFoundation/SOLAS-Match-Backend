@@ -15,7 +15,7 @@
 {{/TRANSLATION}}
 {{#REVISING}}
 <p>
-    To revise this task, after you receive a notification that it has been translated,
+    To revise this task{{NOTIFICATION_PHRASE}},
     please be sure to use Kató TM:<br />
     <a href="{{MATECAT}}">{{MATECAT}}</a><br />
     For more information, please see
