@@ -19,6 +19,7 @@ void UserTaskDeadlineEmailGenerator::run()
     QSharedPointer<User> user = QSharedPointer<User>();
     QSharedPointer<Task> task = QSharedPointer<Task>();
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
+    bool sendMessage = true;
 
 
     user = UserDao::getUser(db, email_message.translator_id());
@@ -96,6 +97,15 @@ void UserTaskDeadlineEmailGenerator::run()
         std::string email_body;
         QString template_location;
         if (TaskDao::is_chunked_task(db, task->id())) {
+            if (task->tasktype() == 3) {
+                QSharedPointer<Task> translationTask = TaskDao::getMatchingTranslationTask(db, task->id());
+                if (!translationTask.isNull()) {
+                    if (translationTask->taskstatus() != COMPLETE) {
+                        sendMessage = false;
+                    }
+                }
+            }
+
             template_location = QString(TEMPLATE_DIRECTORY) + "emails/user-claimed-task-deadline-passed-chunk.tpl";
         } else {
             template_location = QString(TEMPLATE_DIRECTORY) + "emails/user-claimed-task-deadline-passed.tpl";
@@ -110,5 +120,5 @@ void UserTaskDeadlineEmailGenerator::run()
         email = this->generateErrorEmail(error);
     }
 
-    this->emailQueue->insert(email, currentMessage);
+    if (sendMessage) this->emailQueue->insert(email, currentMessage);
 }
