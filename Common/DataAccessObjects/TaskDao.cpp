@@ -513,6 +513,8 @@ std::string TaskDao::get_matecat_url(QSharedPointer<MySQLHandler> db, QSharedPoi
 
 bool TaskDao::is_task_translated_in_matecat(QSharedPointer<MySQLHandler> db, int taskId)
 {
+    if (TaskDao::is_chunked_task(db, taskId)) return true;
+
     QSharedPointer<QSqlQuery> mQuery = db->call("is_task_translated_in_matecat", QString::number(taskId));
     if (mQuery->first()) {
         return true;
