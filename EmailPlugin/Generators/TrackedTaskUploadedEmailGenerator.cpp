@@ -114,10 +114,11 @@ void TrackedTaskUploadedEmailGenerator::run()
         }
 
         std::string email_body;
+        QString template_location;
         if (TaskDao::is_chunked_task(db, task->id())) {
-            QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/tracked-task-uploaded-chunk.tpl";
+            template_location = QString(TEMPLATE_DIRECTORY) + "emails/tracked-task-uploaded-chunk.tpl";
         } else {
-        QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/tracked-task-uploaded.tpl";
+            template_location = QString(TEMPLATE_DIRECTORY) + "emails/tracked-task-uploaded.tpl";
         }
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
