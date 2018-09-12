@@ -524,6 +524,27 @@ std::string TaskDao::get_matecat_url(QSharedPointer<MySQLHandler> db, QSharedPoi
     return matecat_url.toStdString();
 }
 
+std::string TaskDao::getMatecatRevisionURL(QSharedPointer<MySQLHandler> db, QSharedPointer<Task> task)
+{
+    QString matecat_url("");
+    QString translate_url("https://tm.translatorswb.org/revise/proj-");
+
+    mQuery = db->call("getTaskChunk", QString::number(task->id()));
+    if (mQuery->first()) {
+        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
+
+        QString matecat_langpair       (MySQLHandler::getValueFromQuery(fieldMap.value("matecat_langpair"), mQuery).toString());
+        QString matecat_id_job         (MySQLHandler::getValueFromQuery(fieldMap.value("matecat_id_job"), mQuery).toString());
+        QString matecat_id_job_password(MySQLHandler::getValueFromQuery(fieldMap.value("matecat_id_chunk_password"), mQuery).toString());
+
+        if (matecat_langpair != "" && matecat_id_job != "" && matecat_id_job_password != "") {
+            matecat_url = translate_url + QString::number(task->projectid()) + "/" + matecat_langpair.replace("|", "-") + "/" + matecat_id_job + "-" + matecat_id_job_password;
+        }
+    }
+
+    return matecat_url.toStdString();
+}
+
 bool TaskDao::is_task_translated_in_matecat(QSharedPointer<MySQLHandler> db, int taskId)
 {
     if (TaskDao::is_chunked_task(db, taskId)) return true;
