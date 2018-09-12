@@ -534,3 +534,12 @@ bool TaskDao::is_task_translated_in_matecat(QSharedPointer<MySQLHandler> db, int
     }
     return false;
 }
+
+bool TaskDao::is_chunked_task(QSharedPointer<MySQLHandler> db, int taskId)
+{
+    QSharedPointer<QSqlQuery> mQuery = db->call("getTaskChunk", QString::number(taskId));
+    if (mQuery->first()) {
+        return true;
+    }
+    return false;
+}
