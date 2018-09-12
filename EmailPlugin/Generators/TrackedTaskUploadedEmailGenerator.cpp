@@ -99,7 +99,7 @@ void TrackedTaskUploadedEmailGenerator::run()
         dict.SetValue("PROJECT_VIEW", projectView.toStdString());
 
         if (TaskDao::is_chunked_task(db, task->id())) {
-            dict.SetValue("MATECAT_REVISION", TaskDao::getMatecatRevisionURL(db, task);
+            dict.SetValue("MATECAT_REVISION", TaskDao::getMatecatRevisionURL(db, task));
         }
 
         bool footer_enabled=(QString::compare("y", settings.get("email-footer.enabled")) == 0);
