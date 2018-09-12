@@ -58,7 +58,7 @@ void SendTaskUploadNotifications::run()
                     }
                 } else {
                   if (TaskDao::is_chunked_task(db, task->id())) {
-                      QSharedPointer<Task> parentTask = TaskDao::getParentTranslationTask(db, task->id());
+                      QSharedPointer<Task> parentTask = TaskDao::getParentTask(db, task->id(), TRANSLATION);
                       QSharedPointer<User> parentClaimer = TaskDao::getUserClaimedTask(db, parentTask->id());
                       TrackedTaskUploaded trackedUpload;
                       if (!parentClaimer.isNull()) {
