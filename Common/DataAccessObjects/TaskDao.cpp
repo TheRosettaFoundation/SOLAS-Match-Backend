@@ -529,7 +529,7 @@ std::string TaskDao::getMatecatRevisionURL(QSharedPointer<MySQLHandler> db, QSha
     QString matecat_url("");
     QString translate_url("https://tm.translatorswb.org/revise/proj-");
 
-    mQuery = db->call("getTaskChunk", QString::number(task->id()));
+    QSharedPointer<QSqlQuery> mQuery = db->call("getTaskChunk", QString::number(task->id()));
     if (mQuery->first()) {
         QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
 
