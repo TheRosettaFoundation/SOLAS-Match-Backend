@@ -564,3 +564,45 @@ bool TaskDao::is_chunked_task(QSharedPointer<MySQLHandler> db, int taskId)
     }
     return false;
 }
+
+QSharedPointer<Task> TaskDao::getMatchingTask(QSharedPointer<MySQLHandler> db, int task_id, int type_id)
+{
+    QSharedPointer<Task> task;
+
+    QSharedPointer<QSqlQuery> mQuery = db->call("getTaskChunk", QString::number(task_id));
+    if (mQuery->first()) {
+        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
+
+        QString matecat_id_job         (MySQLHandler::getValueFromQuery(fieldMap.value("matecat_id_job"), mQuery).toString());
+        QString matecat_id_job_password(MySQLHandler::getValueFromQuery(fieldMap.value("matecat_id_chunk_password"), mQuery).toString());
+
+        mQuery = db->call("getMatchingTask", QString::number(matecat_id_job) + "," + MySQLHandler::wrapString(matecat_id_job_password) + "," + QString::number(type_id));
+        if(mQuery->first()) {
+            QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
+                task = QSharedPointer<Task>(new Task());
+                ModelGenerator::Generate(mQuery, task, fieldMap);
+        }
+    }
+    return task;
+}
+
+QSharedPointer<Task> TaskDao::getParentTask(QSharedPointer<MySQLHandler> db, int task_id, int type_id)
+{
+    QSharedPointer<Task> task;
+
+    QSharedPointer<QSqlQuery> mQuery = db->call("getTaskChunk", QString::number(task_id));
+    if (mQuery->first()) {
+        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
+
+        QString project_id    (MySQLHandler::getValueFromQuery(fieldMap.value("project_id"), mQuery).toString());
+        QString matecat_id_job(MySQLHandler::getValueFromQuery(fieldMap.value("matecat_id_job"), mQuery).toString());
+
+        mQuery = db->call("getParentTask", QString::number(project_id) + "," + QString::number(matecat_id_job) + "," + QString::number(type_id));
+        if(mQuery->first()) {
+            QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
+                task = QSharedPointer<Task>(new Task());
+                ModelGenerator::Generate(mQuery, task, fieldMap);
+        }
+    }
+    return task;
+}
