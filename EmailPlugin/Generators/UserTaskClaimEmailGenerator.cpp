@@ -80,11 +80,13 @@ void UserTaskClaimEmailGenerator::run()
         dict.SetValue("MATECAT", TaskDao::get_matecat_url(db, task));
 
         QString notificationPhrase = "";
-        if (task->tasktype() == 3) {
-            QSharedPointer<Task> translationTask = TaskDao::getMatchingTranslationTask(db, task->id());
-            if (!translationTask.isNull()) {
-                if (translationTask->taskstatus() != COMPLETE) {
-                    notificationPhrase = ", after you receive a notification that it has been translated";
+        if (TaskDao::is_chunked_task(db, task->id())) {
+            if (task->tasktype() == 3) {
+                QSharedPointer<Task> translationTask = TaskDao::getMatchingTranslationTask(db, task->id());
+                if (!translationTask.isNull()) {
+                    if (translationTask->taskstatus() != COMPLETE) {
+                        notificationPhrase = ", after you receive a notification that it has been translated";
+                    }
                 }
             }
         }
