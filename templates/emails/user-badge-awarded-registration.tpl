@@ -8,12 +8,13 @@ Thank you for your registration on
 <p>
 Welcome to <a href="https://trommons.org/">Kató Platform</a>.
 As a Kató Translator you can access a limited number of translation tasks.
-To access all translation tasks and serve as a reviser,
+To access all translation and revision tasks,
 you need to qualify as a
 <a href=
 "https://community.translatorswb.org/t/how-to-become-a-kato-verified-translator/262"
 >
 Kató Verified Translator</a>.<br />
+(Please ignore this if you are already verified.)<br /><br />
 How to become verified:<br />
 <ol>
 <li>
@@ -35,8 +36,8 @@ option to become verified based on their translation quality.
 </ol>
 </p>
 <p>
-MISSING PARA
-We encourage you to check <a href="https://trommons.org/">Kató Platform</a>
+We encourage you to check
+<a href="https://trommons.org/">Kató Platform</a>
 to see if there are any projects available in your language combination.
 You can filter tasks according to source and/or target language.
 </p>
