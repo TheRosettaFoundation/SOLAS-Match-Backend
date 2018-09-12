@@ -70,7 +70,7 @@ void SendTaskUploadNotifications::run()
                           publisher.publish(exchange, topic, body);
                       }
                       if (task->tasktype() == TRANSLATION) {
-                          QSharedPointer<Task> revisionTask = TaskDao::getMatchingRevisionTask(db, task->id());
+                          QSharedPointer<Task> revisionTask = TaskDao::getMatchingTask(db, task->id(), PROOFREADING);
                           if (!revisionTask.isNull()) {
                               QSharedPointer<User> revisionClaimer = TaskDao::getUserClaimedTask(db, revisionTask->id());
                               if (!revisionClaimer.isNull()) {

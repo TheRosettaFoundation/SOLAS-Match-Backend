@@ -98,7 +98,7 @@ void UserTaskDeadlineEmailGenerator::run()
         QString template_location;
         if (TaskDao::is_chunked_task(db, task->id())) {
             if (task->tasktype() == 3) {
-                QSharedPointer<Task> translationTask = TaskDao::getMatchingTranslationTask(db, task->id());
+                QSharedPointer<Task> translationTask = TaskDao::getMatchingTask(db, task->id(), TRANSLATION);
                 if (!translationTask.isNull()) {
                     if (translationTask->taskstatus() != COMPLETE) {
                         sendMessage = false;
