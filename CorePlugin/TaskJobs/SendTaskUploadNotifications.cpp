@@ -82,7 +82,7 @@ void SendTaskUploadNotifications::run()
                                   publisher.publish(exchange, topic, body);
                               }
                           } else {
-                              qDebug() << "SendTaskUploadNotifications: getMatchingRevisionTask returned Null";
+                              qDebug() << "SendTaskUploadNotifications: getMatchingTask returned Null";
                           }
                       }
                   } else {
