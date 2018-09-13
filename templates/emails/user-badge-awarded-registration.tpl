@@ -7,14 +7,21 @@ Thank you for your registration on
 </p>
 <p>
 Welcome to <a href="https://trommons.org/">Kató Platform</a>.
-As a Kató Translator you can access a limited number of translation tasks.
+We encourage you to check
+<a href="https://trommons.org/">Kató Platform</a>
+to see if there are any projects available in your language combination.
+You can filter tasks according to source and/or target language.
+</p>
+<p>
 To access all translation and revision tasks,
 you need to qualify as a
 <a href=
 "https://community.translatorswb.org/t/how-to-become-a-kato-verified-translator/262"
 >
 Kató Verified Translator</a>.<br />
-(Please ignore this if you are already verified.)<br /><br />
+(Please ignore this if you are already verified.)<br />
+You can check your translator level on your Kato Platform profile.
+<br /><br />
 How to become verified:<br />
 <ol>
 <li>
@@ -36,13 +43,7 @@ option to become verified based on their translation quality.
 </ol>
 </p>
 <p>
-We encourage you to check
-<a href="https://trommons.org/">Kató Platform</a>
-to see if there are any projects available in your language combination.
-You can filter tasks according to source and/or target language.
-</p>
-<p>
-For more information on how to become a translator on Kató Platform,
+For more information on how to translate on Kató Platform,
 please check the
 <a href="https://community.translatorswb.org/c/kato-q-a">Kató Q&A</a>.
 </p>
