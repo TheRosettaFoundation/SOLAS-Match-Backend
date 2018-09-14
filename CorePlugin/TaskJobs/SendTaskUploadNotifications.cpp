@@ -59,15 +59,17 @@ void SendTaskUploadNotifications::run()
                 } else {
                   if (TaskDao::is_chunked_task(db, task->id())) {
                       QSharedPointer<Task> parentTask = TaskDao::getParentTask(db, task->id(), TRANSLATION);
-                      QSharedPointer<User> parentClaimer = TaskDao::getUserClaimedTask(db, parentTask->id());
-                      TrackedTaskUploaded trackedUpload;
-                      if (!parentClaimer.isNull()) {
-                          trackedUpload.set_email_type(trackedUpload.email_type());
-                          trackedUpload.set_task_id(task->id());
-                          trackedUpload.set_translator_id(translator->id());
-                          trackedUpload.set_user_id(parentClaimer->id());
-                          body = trackedUpload.SerializeAsString();
-                          publisher.publish(exchange, topic, body);
+                      if (!parentTask.isNull()) {
+                          QSharedPointer<User> parentClaimer = TaskDao::getUserClaimedTask(db, parentTask->id());
+                          TrackedTaskUploaded trackedUpload;
+                          if (!parentClaimer.isNull()) {
+                              trackedUpload.set_email_type(trackedUpload.email_type());
+                              trackedUpload.set_task_id(task->id());
+                              trackedUpload.set_translator_id(translator->id());
+                              trackedUpload.set_user_id(parentClaimer->id());
+                              body = trackedUpload.SerializeAsString();
+                              publisher.publish(exchange, topic, body);
+                          }
                       }
                       if (task->tasktype() == TRANSLATION) {
                           QSharedPointer<Task> revisionTask = TaskDao::getMatchingTask(db, task->id(), PROOFREADING);
