@@ -6,7 +6,7 @@
     To translate this task, please be sure to use Kató TM:<br />
     <a href="{{MATECAT}}">{{MATECAT}}</a><br />
     For more information, please see
-    <a href="https://community.translatorswb.org/t/completing-a-task-on-kato-platform/167">Kató Q&A</a>.
+    <a href="https://community.translatorswb.org/t/useful-posts-index/2883">Kató Q&A</a>.
 </p>
 <p>
     As soon as you complete the task on Kató TM and all segments are marked as translated (100% complete),
@@ -24,7 +24,7 @@
     To revise this task, please be sure to use Kató TM:<br />
     <a href="{{MATECAT}}">{{MATECAT}}</a><br />
     For more information, please see
-    <a href="https://community.translatorswb.org/t/completing-a-task-on-kato-platform/167">Kató Q&A</a>.
+    <a href="https://community.translatorswb.org/t/useful-posts-index/2883">Kató Q&A</a>.
 </p>
 <p>
     As soon as you complete the task on Kató TM and all segments are marked as approved (100% complete),
@@ -51,7 +51,7 @@
 </p>
 <p>
     For more information, please see
-    <a href="https://community.translatorswb.org/t/completing-a-task-on-kato-platform/167">Kató Q&A</a>.
+    <a href="https://community.translatorswb.org/t/useful-posts-index/2883">Kató Q&A</a>.
 </p>
 {{/SEGMENTATION}}
 <p>

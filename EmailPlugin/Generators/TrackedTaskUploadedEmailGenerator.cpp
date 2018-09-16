@@ -98,6 +98,9 @@ void TrackedTaskUploadedEmailGenerator::run()
         projectView += "project/" + QString::number(task->projectid()) + "/view";
         dict.SetValue("PROJECT_VIEW", projectView.toStdString());
 
+        if (TaskDao::is_chunked_task(db, task->id())) {
+            dict.SetValue("MATECAT_REVISION", TaskDao::getMatecatRevisionURL(db, task));
+        }
 
         bool footer_enabled=(QString::compare("y", settings.get("email-footer.enabled")) == 0);
         if (footer_enabled)
@@ -110,7 +113,12 @@ void TrackedTaskUploadedEmailGenerator::run()
         }
 
         std::string email_body;
-        QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/tracked-task-uploaded.tpl";
+        QString template_location;
+        if (TaskDao::is_chunked_task(db, task->id())) {
+            template_location = QString(TEMPLATE_DIRECTORY) + "emails/tracked-task-uploaded-chunk.tpl";
+        } else {
+            template_location = QString(TEMPLATE_DIRECTORY) + "emails/tracked-task-uploaded.tpl";
+        }
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
         email->setSender(settings.get("site.system_email_address"));;

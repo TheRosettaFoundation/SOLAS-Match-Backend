@@ -506,16 +506,103 @@ std::string TaskDao::get_matecat_url(QSharedPointer<MySQLHandler> db, QSharedPoi
             if (matecat_langpair != "" && matecat_id_job != "" && matecat_id_job_password != "") {
                 matecat_url = translate_url + QString::number(task->projectid()) + "/" + matecat_langpair.replace("|", "-") + "/" + matecat_id_job + "-" + matecat_id_job_password;
             }
+        } else {
+            mQuery = db->call("getTaskChunk", QString::number(task->id()));
+            if (mQuery->first()) {
+                QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
+
+                QString matecat_langpair       (MySQLHandler::getValueFromQuery(fieldMap.value("matecat_langpair"), mQuery).toString());
+                QString matecat_id_job         (MySQLHandler::getValueFromQuery(fieldMap.value("matecat_id_job"), mQuery).toString());
+                QString matecat_id_job_password(MySQLHandler::getValueFromQuery(fieldMap.value("matecat_id_chunk_password"), mQuery).toString());
+
+                if (matecat_langpair != "" && matecat_id_job != "" && matecat_id_job_password != "") {
+                    matecat_url = translate_url + QString::number(task->projectid()) + "/" + matecat_langpair.replace("|", "-") + "/" + matecat_id_job + "-" + matecat_id_job_password;
+                }
+            }
         }
     }
     return matecat_url.toStdString();
 }
 
+std::string TaskDao::getMatecatRevisionURL(QSharedPointer<MySQLHandler> db, QSharedPointer<Task> task)
+{
+    QString matecat_url("");
+    QString translate_url("https://tm.translatorswb.org/revise/proj-");
+
+    QSharedPointer<QSqlQuery> mQuery = db->call("getTaskChunk", QString::number(task->id()));
+    if (mQuery->first()) {
+        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
+
+        QString matecat_langpair       (MySQLHandler::getValueFromQuery(fieldMap.value("matecat_langpair"), mQuery).toString());
+        QString matecat_id_job         (MySQLHandler::getValueFromQuery(fieldMap.value("matecat_id_job"), mQuery).toString());
+        QString matecat_id_job_password(MySQLHandler::getValueFromQuery(fieldMap.value("matecat_id_chunk_password"), mQuery).toString());
+
+        if (matecat_langpair != "" && matecat_id_job != "" && matecat_id_job_password != "") {
+            matecat_url = translate_url + QString::number(task->projectid()) + "/" + matecat_langpair.replace("|", "-") + "/" + matecat_id_job + "-" + matecat_id_job_password;
+        }
+    }
+
+    return matecat_url.toStdString();
+}
+
 bool TaskDao::is_task_translated_in_matecat(QSharedPointer<MySQLHandler> db, int taskId)
 {
+    if (TaskDao::is_chunked_task(db, taskId)) return true;
+
     QSharedPointer<QSqlQuery> mQuery = db->call("is_task_translated_in_matecat", QString::number(taskId));
     if (mQuery->first()) {
         return true;
     }
     return false;
+}
+
+bool TaskDao::is_chunked_task(QSharedPointer<MySQLHandler> db, int taskId)
+{
+    QSharedPointer<QSqlQuery> mQuery = db->call("getTaskChunk", QString::number(taskId));
+    if (mQuery->first()) {
+        return true;
+    }
+    return false;
+}
+
+QSharedPointer<Task> TaskDao::getMatchingTask(QSharedPointer<MySQLHandler> db, int task_id, int type_id)
+{
+    QSharedPointer<Task> task;
+
+    QSharedPointer<QSqlQuery> mQuery = db->call("getTaskChunk", QString::number(task_id));
+    if (mQuery->first()) {
+        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
+
+        int     matecat_id_job         (MySQLHandler::getValueFromQuery(fieldMap.value("matecat_id_job"), mQuery).toInt());
+        QString matecat_id_job_password(MySQLHandler::getValueFromQuery(fieldMap.value("matecat_id_chunk_password"), mQuery).toString());
+
+        mQuery = db->call("getMatchingTask", QString::number(matecat_id_job) + "," + MySQLHandler::wrapString(matecat_id_job_password) + "," + QString::number(type_id));
+        if(mQuery->first()) {
+            QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
+                task = QSharedPointer<Task>(new Task());
+                ModelGenerator::Generate(mQuery, task, fieldMap);
+        }
+    }
+    return task;
+}
+
+QSharedPointer<Task> TaskDao::getParentTask(QSharedPointer<MySQLHandler> db, int task_id, int type_id)
+{
+    QSharedPointer<Task> task;
+
+    QSharedPointer<QSqlQuery> mQuery = db->call("getTaskChunk", QString::number(task_id));
+    if (mQuery->first()) {
+        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
+
+        int project_id    (MySQLHandler::getValueFromQuery(fieldMap.value("project_id"), mQuery).toInt());
+        int matecat_id_job(MySQLHandler::getValueFromQuery(fieldMap.value("matecat_id_job"), mQuery).toInt());
+
+        mQuery = db->call("getParentTask", QString::number(project_id) + "," + QString::number(matecat_id_job) + "," + QString::number(type_id));
+        if(mQuery->first()) {
+            QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
+                task = QSharedPointer<Task>(new Task());
+                ModelGenerator::Generate(mQuery, task, fieldMap);
+        }
+    }
+    return task;
 }
