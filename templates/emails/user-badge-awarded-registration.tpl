@@ -6,7 +6,6 @@ Thank you for your registration on
 <a href="https://trommons.org/">Kató Platform</a>.
 </p>
 <p>
-Welcome to <a href="https://trommons.org/">Kató Platform</a>.
 We encourage you to check
 <a href="https://trommons.org/">Kató Platform</a>
 to see if there are any projects available in your language combination.
