@@ -4,7 +4,7 @@ Thank you for claiming a task on Kató Platform!
 This is to remind you that the "{{TASK_TYPE}}" task for
 "{{TASK_TITLE}}"
 from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} is overdue.
-Please make sure the task is marked as translated (100% complete)
+Please make sure the task is translated (status bar shows 100%)
 on Kató TM here:<br />
 <a href=
 "{{MATECAT}}"
@@ -17,7 +17,7 @@ on Kató TM here:<br />
     This is to remind you that the "{{TASK_TYPE}}" task for
 "{{TASK_TITLE}}"
 from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} is overdue.
-Please make sure the task is marked as approved (100% complete)
+Please make sure the task is approved (status bar shows fully green)
 on Kató TM here:<br />
 <a href=
 "{{MATECAT}}"

@@ -9,7 +9,7 @@
     <a href="https://community.translatorswb.org/t/useful-posts-index/2883">Kató Q&A</a>.
 </p>
 <p>
-    As soon as you complete the task on Kató TM and all segments are marked as translated (100% complete),
+    As soon as you complete the task on Kató TM and all segments are translated (status bar shows 100%),
     please "Copy your translation from Kató TM to Kató" using the following page:<br />
     <a href="{{TASK_PAGE}}">{{TASK_PAGE}}</a>
 </p>
@@ -27,7 +27,7 @@
     <a href="https://community.translatorswb.org/t/useful-posts-index/2883">Kató Q&A</a>.
 </p>
 <p>
-    As soon as you complete the task on Kató TM and all segments are marked as approved (100% complete),
+    As soon as you complete the task on Kató TM and all segments are approved (status bar shows fully green),
     please "Copy your revised version from Kató TM to Kató" using the following page:<br />
     <a href="{{TASK_PAGE}}">{{TASK_PAGE}}</a>
 </p>
