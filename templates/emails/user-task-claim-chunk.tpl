@@ -20,7 +20,7 @@ Kató Q&A</a>.
 </p>
 <p>
 As soon as you complete the task on Kató TM and
-all segments are marked as translated (100% complete),
+all segments are translated (status bar shows 100%),
 you are finished!
 </p>
 {{/TRANSLATION}}
@@ -40,7 +40,7 @@ please be sure to use Kató TM:<br />
 </p>
 <p>
 As soon as you complete the task on Kató TM and
-all segments are marked as approved (100% complete),
+all segments are approved (status bar shows fully green),
 you are finished!
 </p>
 {{/REVISING}}

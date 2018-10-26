@@ -13,7 +13,7 @@
     You have one week remaining to complete the "{{TASK_TYPE}}" task for
     "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}}.
     Please ensure that you complete the translation before the deadline
-    and mark as translated (100% complete) on Kató TM here:<br />
+    and the status bar shows 100% on Kató TM here:<br />
     <a href="{{MATECAT}}">{{MATECAT}}</a><br />
     And on the Kató Platform here: <a href="{{TASK_UPLOAD}}" >{{TASK_UPLOAD}}</a><br />
     click "Copy your translation from Kató TM to Kató".
@@ -23,7 +23,7 @@
     You have one week remaining to complete the "{{TASK_TYPE}}" task for
     "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}}.
     Please ensure that you complete the revising task before the deadline
-    and mark as approved (100% complete) on Kató TM here:<br />
+    and the task is approved (status bar shows fully green) on Kató TM here:<br />
     <a href="{{MATECAT}}">{{MATECAT}}</a><br />
     And on the Kató Platform here: <a href="{{TASK_UPLOAD}}" >{{TASK_UPLOAD}}</a><br />
     click "Copy your revised version from Kató TM to Kató".
