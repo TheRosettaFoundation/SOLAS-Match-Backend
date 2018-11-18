@@ -16,6 +16,8 @@
 #include "UserJobs/OrgCreatedNotifications.h"
 #include "UserJobs/TaskRevokedNotificationHandler.h"
 
+#include "Common/protobufs/emails/JSON.h"
+
 using namespace SolasMatch::Common::Protobufs::Requests;
 using namespace SolasMatch::Common::Protobufs::Notifications;
 
@@ -57,7 +59,7 @@ void UserQueueHandler::messageReceived(AMQPMessage *message)
     uint32_t length = 0;
     char *body = message->getMessage(&length);
 
-    RequestMessage requestMessage;
+    SolasMatch::Common::Protobufs::Emails::JSON requestMessage;
     requestMessage.ParseFromString(std::string(body, length));
 
     int classId = QMetaType::type(QString::fromStdString(requestMessage.class_name()).toLatin1());

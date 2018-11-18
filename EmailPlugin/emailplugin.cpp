@@ -44,6 +44,8 @@
 
 #include "Common/MessagingClient.h"
 
+#include "Common/protobufs/emails/JSON.h"
+
 using namespace SolasMatch::Common::Protobufs::Emails;
 
 //QT4.8 (see Q_PLUGIN_METADATA for QT5) Q_EXPORT_PLUGIN2(EmailPlugin, EmailPlugin)
@@ -92,7 +94,7 @@ void EmailPlugin::messageReveived(AMQPMessage *message)
     uint32_t length = 0;
     char *body = message->getMessage(&length);
 
-    EmailMessage email_message;
+    JSON email_message;
     email_message.ParseFromString(std::string(body, length));
 
     QString type = "EmailGenerator_" + QString::number(email_message.email_type());

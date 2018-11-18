@@ -4,6 +4,9 @@
 
 #include "Common/protobufs/emails/UserReferenceEmail.pb.h"
 #include "Common/protobufs/models/ArchivedProject.pb.h"
+
+#include "Common/protobufs/emails/JSON.h"
+
 using namespace  SolasMatch::Common::Protobufs::Emails;
 
 UserReferenceEmailGenerator::UserReferenceEmailGenerator()
@@ -14,7 +17,7 @@ UserReferenceEmailGenerator::UserReferenceEmailGenerator()
 void UserReferenceEmailGenerator::run()
 {
     qDebug() << "EmailGenerator: generating user reference email";
-    UserReferenceEmail emailMessage;
+    JSON emailMessage;
     emailMessage.ParseFromString(this->protoBody);
 
     ConfigParser settings;
