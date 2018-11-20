@@ -3,6 +3,7 @@ namespace SolasMatch::Common::Protobufs::Emails {
 class JSON
 {
 public:
+    bool isJSON(std::string json_serialized);
     void ParseFromString(std::string json_serialized);
 
     int email_type();

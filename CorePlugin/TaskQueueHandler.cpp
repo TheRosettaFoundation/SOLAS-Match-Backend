@@ -13,6 +13,9 @@
 #include "TaskJobs/CalculateTaskScore.h"
 #include "TaskJobs/DeadlineChecker.h"
 #include "TaskJobs/SendTaskUploadNotifications.h"
+
+#include "Common/protobufs/emails/JSON.h"
+
 using namespace SolasMatch::Common::Protobufs::Requests;
 
 TaskQueueHandler::TaskQueueHandler()
@@ -57,7 +60,7 @@ void TaskQueueHandler::messageReceived(AMQPMessage *message)
     uint32_t length = 0;
     char *body = message->getMessage(&length);
 
-    RequestMessage requestMessage;
+    SolasMatch::Common::Protobufs::Emails::JSON requestMessage;
     requestMessage.ParseFromString(std::string(body, length));
 
     int classId = QMetaType::type(QString::fromStdString(requestMessage.class_name()).toLatin1());
