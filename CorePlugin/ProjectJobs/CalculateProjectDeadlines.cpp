@@ -19,6 +19,8 @@
 #include "Common/DataAccessObjects/TaskDao.h"
 #include "Common/DataAccessObjects/AdminDao.h"
 
+#include "Common/protobufs/emails/JSON.h"
+
 using namespace SolasMatch::Common::Protobufs::Requests;
 using namespace SolasMatch::Common::Protobufs::Emails;
 
@@ -37,7 +39,7 @@ void CalculateProjectDeadlines::run()
     uint32_t length = 0;
 
     char *body = this->message->getMessage(&length);
-    CalculateProjectDeadlinesRequest request;
+    SolasMatch::Common::Protobufs::Emails::JSON request;
     if (length > 0) {
         request.ParseFromString(std::string(body, length));
 

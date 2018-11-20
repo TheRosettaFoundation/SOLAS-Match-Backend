@@ -10,6 +10,8 @@
 
 #include "ProjectJobs/CalculateProjectDeadlines.h"
 
+#include "Common/protobufs/emails/JSON.h"
+
 using namespace SolasMatch::Common::Protobufs::Requests;
 
 ProjectQueueHandler::ProjectQueueHandler()
@@ -50,7 +52,7 @@ void ProjectQueueHandler::messageReceived(AMQPMessage *message)
     uint32_t length = 0;
     char *body = message->getMessage(&length);
 
-    RequestMessage requestMessage;
+    SolasMatch::Common::Protobufs::Emails::JSON requestMessage;
     requestMessage.ParseFromString(std::string(body, length));
 
     int classId = QMetaType::type(QString::fromStdString(requestMessage.class_name()).toLatin1());
