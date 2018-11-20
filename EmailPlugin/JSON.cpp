@@ -4,7 +4,7 @@
 
 namespace SolasMatch::Common::Protobufs::Emails {
 
-bool JSON::isJSON(std::string json_serialized)
+static bool JSON::isJSON(std::string json_serialized)
 {
     // Not the most efficient way, but simpler and safer to implement
     return !QJsonDocument::fromJson(QByteArray(json_serialized.c_str(), json_serialized.length())).isNull();
