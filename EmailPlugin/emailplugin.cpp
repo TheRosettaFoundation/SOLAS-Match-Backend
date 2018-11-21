@@ -94,7 +94,23 @@ void EmailPlugin::messageReveived(AMQPMessage *message)
     uint32_t length = 0;
     char *body = message->getMessage(&length);
 
+  if (JSON::isJSON(std::string(body, length))) {
     JSON email_message;
+    email_message.ParseFromString(std::string(body, length));
+
+    QString type = "EmailGenerator_" + QString::number(email_message.email_type());
+    int classId = QMetaType::type(type.toLatin1());
+    if (classId == 0) {
+        qDebug() << "EmailGenerator JSON: Invalid proto type: " << QString::number(email_message.email_type());
+    } else {
+        IEmailGenerator *emailGen = static_cast<IEmailGenerator *>(QMetaType::create(classId));
+        emailGen->setEmailQueue(smtp->getEmailQueue());
+        emailGen->setProtoBody(std::string(body, length));
+        emailGen->setAMQPMessage(message);
+        this->mThreadPool->start(emailGen);
+    }
+  } else {
+    EmailMessage email_message;
     email_message.ParseFromString(std::string(body, length));
 
     QString type = "EmailGenerator_" + QString::number(email_message.email_type());
@@ -108,6 +124,7 @@ void EmailPlugin::messageReveived(AMQPMessage *message)
         emailGen->setAMQPMessage(message);
         this->mThreadPool->start(emailGen);
     }
+  }
 }
 
 void EmailPlugin::registerEmailTypes()
