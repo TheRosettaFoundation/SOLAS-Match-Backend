@@ -23,6 +23,7 @@ SOURCES += \
     ConfigParser.cpp \
     MySQLHandler.cpp \
     MessagingClient.cpp \
+    protobufs/emails/JSON.cpp \
     protobufs/emails/EmailMessage.pb.cc \
     protobufs/emails/TaskScoreEmail.pb.cc \
     protobufs/emails/OrgMembershipAccepted.pb.cc \
@@ -93,6 +94,7 @@ HEADERS +=\
     MySQLHandler.h \
     ConfigParser.h \
     MessagingClient.h \
+    protobufs/emails/JSON.h \
     protobufs/emails/EmailMessage.pb.h \
     protobufs/emails/TaskScoreEmail.pb.h \
     protobufs/emails/OrgMembershipAccepted.pb.h \
