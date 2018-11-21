@@ -16,6 +16,8 @@
 #include "Common/MySQLHandler.h"
 #include "Common/MessagingClient.h"
 
+#include "Common/protobufs/emails/JSON.h"
+
 using namespace SolasMatch::Common::Protobufs::Requests;
 using namespace SolasMatch::Common::Protobufs::Emails;
 using namespace SolasMatch::Common::Protobufs::Models;
@@ -34,7 +36,7 @@ void SendTaskUploadNotifications::run()
     char *body = this->message->getMessage(&length);
 
     if (length > 0) {
-        TaskUploadNotificationRequest request;
+        JSON request;
         request.ParseFromString(std::string(body, length));
 
         QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();

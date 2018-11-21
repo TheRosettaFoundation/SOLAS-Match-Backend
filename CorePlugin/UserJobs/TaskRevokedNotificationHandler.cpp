@@ -12,6 +12,8 @@
 #include "Common/protobufs/emails/UserTaskRevokedEmail.pb.h"
 #include "Common/protobufs/emails/OrgTaskRevokedEmail.pb.h"
 
+#include "Common/protobufs/emails/JSON.h"
+
 using namespace SolasMatch::Common::Protobufs::Notifications;
 using namespace SolasMatch::Common::Protobufs::Emails;
 using namespace SolasMatch::Common::Protobufs::Models;
@@ -43,7 +45,7 @@ void TaskRevokedNotificationHandler::run()
         uint32_t length = 0;
         char *body = this->message->getMessage(&length);
         if (length > 0) {
-            TaskRevokedNotification notification;
+            JSON notification;
             if (notification.ParseFromString(std::string(body, length))) {
                 QList<QSharedPointer<User> > subscribedUsers = TaskDao::getSubscribedUsers(db, notification.task_id());
                 if (subscribedUsers.length() > 0) {
