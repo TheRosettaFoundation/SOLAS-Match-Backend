@@ -1,6 +1,9 @@
 #include "UserBadgeAwardedGenerator.h"
 #include "Common/protobufs/emails/UserBadgeAwardedEmail.pb.h"
 #include "Common/DataAccessObjects/BadgeDao.h"
+
+#include "Common/protobufs/emails/JSON.h"
+
 using namespace  SolasMatch::Common::Protobufs::Emails;
 
 UserBadgeAwardedGenerator::UserBadgeAwardedGenerator()
@@ -11,7 +14,7 @@ UserBadgeAwardedGenerator::UserBadgeAwardedGenerator()
 void UserBadgeAwardedGenerator::run()
 {
     qDebug() << "EmailGenerator: generating user badge awarded email";
-    UserBadgeAwardedEmail emailMessage;
+    JSON emailMessage;
     emailMessage.ParseFromString(this->protoBody);
 
     ConfigParser settings;

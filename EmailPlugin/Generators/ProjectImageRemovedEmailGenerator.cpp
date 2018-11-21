@@ -1,4 +1,7 @@
 #include "ProjectImageRemovedEmailGenerator.h"
+
+#include "Common/protobufs/emails/JSON.h"
+
 using namespace  SolasMatch::Common::Protobufs::Emails;
 
 ProjectImageRemovedEmailGenerator::ProjectImageRemovedEmailGenerator()
@@ -9,7 +12,7 @@ ProjectImageRemovedEmailGenerator::ProjectImageRemovedEmailGenerator()
 void ProjectImageRemovedEmailGenerator::run()
 {
     qDebug() << "EmailGenerator: Generating Project Image Removed Email";
-    ProjectImageRemovedEmail email_message;
+    JSON email_message;
     email_message.ParseFromString(this->protoBody);
 
 

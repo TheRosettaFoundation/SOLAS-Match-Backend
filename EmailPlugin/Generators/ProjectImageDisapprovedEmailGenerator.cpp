@@ -1,4 +1,7 @@
 #include "ProjectImageDisapprovedEmailGenerator.h"
+
+#include "Common/protobufs/emails/JSON.h"
+
 using namespace  SolasMatch::Common::Protobufs::Emails;
 
 ProjectImageDisapprovedEmailGenerator::ProjectImageDisapprovedEmailGenerator()
@@ -8,7 +11,7 @@ ProjectImageDisapprovedEmailGenerator::ProjectImageDisapprovedEmailGenerator()
 void ProjectImageDisapprovedEmailGenerator::run()
 {
     qDebug() << "EmailGenerator: Generating Project Image Disapproved Email";
-    ProjectImageDisapprovedEmail email_message;
+    JSON email_message;
     email_message.ParseFromString(this->protoBody);
 
     ConfigParser settings;

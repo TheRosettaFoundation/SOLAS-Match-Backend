@@ -1,4 +1,7 @@
 #include "TaskArchivedEmailGenerator.h"
+
+#include "Common/protobufs/emails/JSON.h"
+
 using namespace  SolasMatch::Common::Protobufs::Emails;
 
 TaskArchivedEmailGenerator::TaskArchivedEmailGenerator()
@@ -10,7 +13,7 @@ void TaskArchivedEmailGenerator::run()
 {
     qDebug() << "EmailGenerator - Generating TaskArchived";
 
-    TaskArchived email_message;
+    JSON email_message;
     email_message.ParseFromString(this->protoBody);
 
     ConfigParser settings;

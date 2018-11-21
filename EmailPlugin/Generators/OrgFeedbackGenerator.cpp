@@ -1,6 +1,9 @@
 #include "OrgFeedbackGenerator.h"
 #include <QDebug>
 #include "Common/protobufs/emails/OrgFeedback.pb.h"
+
+#include "Common/protobufs/emails/JSON.h"
+
 using namespace  SolasMatch::Common::Protobufs::Emails;
 
 OrgFeedbackGenerator::OrgFeedbackGenerator()
@@ -12,7 +15,7 @@ void OrgFeedbackGenerator::run()
 {
     qDebug() << "EmailGenerator: Generating org feedback email";
 
-    OrgFeedback email_message;
+    JSON email_message;
     email_message.ParseFromString(this->protoBody);
 
     ConfigParser settings;

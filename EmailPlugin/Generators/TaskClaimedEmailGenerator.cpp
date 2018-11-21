@@ -1,4 +1,7 @@
 #include "TaskClaimedEmailGenerator.h"
+
+#include "Common/protobufs/emails/JSON.h"
+
 using namespace  SolasMatch::Common::Protobufs::Emails;
 
 TaskClaimedEmailGenerator::TaskClaimedEmailGenerator()
@@ -10,7 +13,7 @@ void TaskClaimedEmailGenerator::run()
 {
     qDebug() << "EmailGenerator - Generating TaskClaimed";
 
-    TaskClaimed email_message;
+    JSON email_message;
     email_message.ParseFromString(this->protoBody);
 
     ConfigParser settings;

@@ -1,4 +1,7 @@
 #include "EmailVerificationGenerator.h"
+
+#include "Common/protobufs/emails/JSON.h"
+
 using namespace  SolasMatch::Common::Protobufs::Emails;
 
 EmailVerificationGenerator::EmailVerificationGenerator()
@@ -10,7 +13,7 @@ void EmailVerificationGenerator::run()
 {
     qDebug() << "EmailGenerator::Generating Email Verification email";
 
-    EmailVerification emailMessage;
+    JSON emailMessage;
     emailMessage.ParseFromString(this->protoBody);
 
     ConfigParser settings;

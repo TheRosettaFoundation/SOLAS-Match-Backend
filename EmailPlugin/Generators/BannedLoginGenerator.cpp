@@ -4,6 +4,9 @@
 
 #include "Common/Definitions.h"
 #include "Common/protobufs/models/BannedUser.pb.h"
+
+#include "Common/protobufs/emails/JSON.h"
+
 using namespace  SolasMatch::Common::Protobufs::Emails;
 
 BannedLoginGenerator::BannedLoginGenerator()
@@ -15,7 +18,7 @@ void BannedLoginGenerator::run()
 {
     qDebug() << "IEmailGenerator: Generating BannedLogin email";
 
-    BannedLogin emailMessage;
+    JSON emailMessage;
     emailMessage.ParseFromString(this->protoBody);
 
     ConfigParser settings;

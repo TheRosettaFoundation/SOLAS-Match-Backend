@@ -21,6 +21,8 @@
 #include "Common/protobufs/models/ArchivedTask.pb.h"
 #include "Common/protobufs/models/Organisation.pb.h"
 
+#include "Common/protobufs/emails/JSON.h"
+
 using namespace  SolasMatch::Common::Protobufs::Emails;
 
 OrgMembershipAcceptedGenerator::OrgMembershipAcceptedGenerator()
@@ -31,7 +33,7 @@ OrgMembershipAcceptedGenerator::OrgMembershipAcceptedGenerator()
 void OrgMembershipAcceptedGenerator::run()
 {
     qDebug() << "EmailGenerator - Generating OrgMembershipAccepted";
-    OrgMembershipAccepted email_message;
+    JSON email_message;
     email_message.ParseFromString(protoBody);
 
     ConfigParser settings;

@@ -1,4 +1,7 @@
 #include "PasswordResetEmailGenerator.h"
+
+#include "Common/protobufs/emails/JSON.h"
+
 using namespace  SolasMatch::Common::Protobufs::Emails;
 
 PasswordResetEmailGenerator::PasswordResetEmailGenerator()
@@ -10,7 +13,7 @@ void PasswordResetEmailGenerator::run()
 {
     qDebug() << "EmailGenerator - Generating PasswordResetEmail";
 
-    PasswordResetEmail email_message;
+    JSON email_message;
     email_message.ParseFromString(this->protoBody);
 
     ConfigParser settings;

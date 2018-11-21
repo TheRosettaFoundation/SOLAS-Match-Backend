@@ -1,4 +1,7 @@
 #include "NewImageUploadedEmailGenerator.h"
+
+#include "Common/protobufs/emails/JSON.h"
+
 using namespace  SolasMatch::Common::Protobufs::Emails;
 
 NewImageUploadedEmailGenerator::NewImageUploadedEmailGenerator()
@@ -9,7 +12,7 @@ NewImageUploadedEmailGenerator::NewImageUploadedEmailGenerator()
 void NewImageUploadedEmailGenerator::run()
 {
     qDebug() << "EmailGenerator: Generating Project Image Uploaded Email";
-    ProjectImageUploadedEmail email_message;
+    JSON email_message;
     email_message.ParseFromString(this->protoBody);
 
 

@@ -1,6 +1,9 @@
 #include "UserFeedbackGenerator.h"
 #include <QDebug>
 #include "Common/protobufs/emails/UserFeedback.pb.h"
+
+#include "Common/protobufs/emails/JSON.h"
+
 using namespace  SolasMatch::Common::Protobufs::Emails;
 
 UserFeedbackGenerator::UserFeedbackGenerator()
@@ -12,7 +15,7 @@ void UserFeedbackGenerator::run()
 {
     qDebug() << "EmailGenerator: Generating user feedback email";
 
-    UserFeedback emailMessage;
+    JSON emailMessage;
     emailMessage.ParseFromString(this->protoBody);
 
     ConfigParser settings;

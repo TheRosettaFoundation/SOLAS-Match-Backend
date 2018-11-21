@@ -1,4 +1,7 @@
 #include "OrgMembershipRefusedEmailGenerator.h"
+
+#include "Common/protobufs/emails/JSON.h"
+
 using namespace  SolasMatch::Common::Protobufs::Emails;
 
 OrgMembershipRefusedEmailGenerator::OrgMembershipRefusedEmailGenerator()
@@ -9,7 +12,7 @@ OrgMembershipRefusedEmailGenerator::OrgMembershipRefusedEmailGenerator()
 void OrgMembershipRefusedEmailGenerator::run()
 {
     qDebug() << "EmailGenerator - Generating OrgMembershipRefused";
-    OrgMembershipRefused email_message;
+    JSON email_message;
     email_message.ParseFromString(this->protoBody);
 
     ConfigParser settings;
