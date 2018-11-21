@@ -59,7 +59,20 @@ void UserQueueHandler::messageReceived(AMQPMessage *message)
     uint32_t length = 0;
     char *body = message->getMessage(&length);
 
+  if (SolasMatch::Common::Protobufs::Emails::JSON::isJSON(std::string(body, length))) {
     SolasMatch::Common::Protobufs::Emails::JSON requestMessage;
+    requestMessage.ParseFromString(std::string(body, length));
+
+    int classId = QMetaType::type(QString::fromStdString(requestMessage.class_name()).toLatin1());
+    if (classId == 0) {
+        qDebug() << "UserQueueHandler JSON: Invalid proto type: " << QString::fromStdString(requestMessage.class_name());
+    } else {
+        JobInterface *runnable = static_cast<JobInterface *>(QMetaType::create(classId));
+        runnable->setAMQPMessage(message);
+        this->mThreadPool->start(runnable);
+    }
+  } else {
+    RequestMessage requestMessage;
     requestMessage.ParseFromString(std::string(body, length));
 
     int classId = QMetaType::type(QString::fromStdString(requestMessage.class_name()).toLatin1());
@@ -70,6 +83,7 @@ void UserQueueHandler::messageReceived(AMQPMessage *message)
         runnable->setAMQPMessage(message);
         this->mThreadPool->start(runnable);
     }
+  }
 }
 
 void UserQueueHandler::handleAMQPError(QString error)
