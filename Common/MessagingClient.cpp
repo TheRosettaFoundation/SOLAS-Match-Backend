@@ -48,7 +48,7 @@ bool MessagingClient::openConnection()
     } catch(AMQPException error) {
         qDebug() << "Error " << error.getReplyCode() << ": "
                  << QString::fromStdString(error.getMessage());
-    } catch (exception e) {
+    } catch (std::exception e) {
         qDebug() << "Unable to connect to rabbitMQ " << e.what();
     }
 
