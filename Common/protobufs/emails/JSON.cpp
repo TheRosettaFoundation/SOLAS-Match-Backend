@@ -4,7 +4,7 @@
 
 namespace SolasMatch::Common::Protobufs::Emails {
 
-static bool JSON::isJSON(std::string json_serialized)
+bool JSON::isJSON(std::string json_serialized)
 {
 if (!QJsonDocument::fromJson(QByteArray(json_serialized.c_str(), json_serialized.length())).isNull()) {
   qDebug() << "isJSON";
