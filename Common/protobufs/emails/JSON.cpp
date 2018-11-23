@@ -94,25 +94,25 @@ qDebug() << "JSON::file_version(): " << QString::number(json_object.value("file_
 
 std::string JSON::class_name()
 {
-qDebug() << "JSON::class_name(): " << QString::number(json_object.value("class_name").toString(""));
+qDebug() << "JSON::class_name(): " << json_object.value("class_name").toString("");
     return json_object.value("class_name").toString("");
 }
 
 std::string JSON::feedback()
 {
-qDebug() << "JSON::feedback(): " << QString::number(json_object.value("feedback").toString(""));
+qDebug() << "JSON::feedback(): " << json_object.value("feedback").toString("");
     return json_object.value("feedback").toString("");
 }
 
 std::string JSON::body()
 {
-qDebug() << "JSON::body(): " << QString::number(json_object.value("body").toString(""));
+qDebug() << "JSON::body(): " << json_object.value("body").toString("");
     return json_object.value("body").toString("");
 }
 
 std::string JSON::recipient_email()
 {
-qDebug() << "JSON::recipient_email(): " << QString::number(json_object.value("recipient_email").toString(""));
+qDebug() << "JSON::recipient_email(): " << json_object.value("recipient_email").toString("");
     return json_object.value("recipient_email").toString("");
 }
 
