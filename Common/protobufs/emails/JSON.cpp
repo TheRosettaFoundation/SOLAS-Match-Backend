@@ -95,25 +95,29 @@ qDebug() << "JSON::file_version(): " << QString::number(json_object.value("file_
 std::string JSON::class_name()
 {
 qDebug() << "JSON::class_name(): " << json_object.value("class_name").toString("");
-    return json_object.value("class_name").toString("");
+    QByteArray bytes = json_object.value("class_name").toString("").toUtf8();
+    return std::string(bytes.constData(), bytes.length());
 }
 
 std::string JSON::feedback()
 {
 qDebug() << "JSON::feedback(): " << json_object.value("feedback").toString("");
-    return json_object.value("feedback").toString("");
+    QByteArray bytes = json_object.value("feedback").toString("").toUtf8();
+    return std::string(bytes.constData(), bytes.length());
 }
 
 std::string JSON::body()
 {
 qDebug() << "JSON::body(): " << json_object.value("body").toString("");
-    return json_object.value("body").toString("");
+    QByteArray bytes = json_object.value("body").toString("").toUtf8();
+    return std::string(bytes.constData(), bytes.length());
 }
 
 std::string JSON::recipient_email()
 {
 qDebug() << "JSON::recipient_email(): " << json_object.value("recipient_email").toString("");
-    return json_object.value("recipient_email").toString("");
+    QByteArray bytes = json_object.value("recipient_email").toString("").toUtf8();
+    return std::string(bytes.constData(), bytes.length());
 }
 
 }
