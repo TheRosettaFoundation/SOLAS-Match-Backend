@@ -185,7 +185,7 @@ void CalculateTaskScore::run()
         publisher.publish(exchange_name, exchange_topic, body);
     } catch (AMQPException e) {
         qDebug() << "Failed to publish email task score: " << QString::fromStdString(e.getMessage());
-    } catch (exception e) {
+    } catch (std::exception e) {
         qDebug() << "Failed to publish message" << QString::fromStdString(e.what());
     }
     countx = 0;
