@@ -1,3 +1,5 @@
+#include <string>
+
 namespace SolasMatch::Common::Protobufs::Emails {
 
 class JSON
