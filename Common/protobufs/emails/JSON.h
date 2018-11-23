@@ -1,4 +1,6 @@
 #include <string>
+#include <QJsonObject>
+#include <QJsonDocument>
 
 namespace SolasMatch::Common::Protobufs::Emails {
 
