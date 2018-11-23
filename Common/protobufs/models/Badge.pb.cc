@@ -7,6 +7,7 @@
 #include <algorithm>
 
 #include <google/protobuf/stubs/common.h>
+#include <google/protobuf/stubs/port.h>
 #include <google/protobuf/stubs/once.h>
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/wire_format_lite_inl.h>
@@ -30,6 +31,7 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 }  // namespace
 
 
+void protobuf_AssignDesc_Badge_2eproto() GOOGLE_ATTRIBUTE_COLD;
 void protobuf_AssignDesc_Badge_2eproto() {
   protobuf_AddDesc_Badge_2eproto();
   const ::google::protobuf::FileDescriptor* file =
@@ -44,16 +46,16 @@ void protobuf_AssignDesc_Badge_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Badge, owner_id_),
   };
   Badge_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
       Badge_descriptor_,
       Badge::default_instance_,
       Badge_offsets_,
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Badge, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Badge, _unknown_fields_),
       -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(Badge));
+      -1,
+      sizeof(Badge),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Badge, _internal_metadata_),
+      -1);
 }
 
 namespace {
@@ -64,10 +66,11 @@ inline void protobuf_AssignDescriptorsOnce() {
                  &protobuf_AssignDesc_Badge_2eproto);
 }
 
+void protobuf_RegisterTypes(const ::std::string&) GOOGLE_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    Badge_descriptor_, &Badge::default_instance());
+      Badge_descriptor_, &Badge::default_instance());
 }
 
 }  // namespace
@@ -77,6 +80,7 @@ void protobuf_ShutdownFile_Badge_2eproto() {
   delete Badge_reflection_;
 }
 
+void protobuf_AddDesc_Badge_2eproto() GOOGLE_ATTRIBUTE_COLD;
 void protobuf_AddDesc_Badge_2eproto() {
   static bool already_here = false;
   if (already_here) return;
@@ -104,47 +108,48 @@ struct StaticDescriptorInitializer_Badge_2eproto {
 
 // ===================================================================
 
-#ifndef _MSC_VER
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int Badge::kIdFieldNumber;
 const int Badge::kTitleFieldNumber;
 const int Badge::kDescriptionFieldNumber;
 const int Badge::kOwnerIdFieldNumber;
-#endif  // !_MSC_VER
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 Badge::Badge()
-  : ::google::protobuf::Message() {
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   SharedCtor();
+  // @@protoc_insertion_point(constructor:SolasMatch.Common.Protobufs.Models.Badge)
 }
 
 void Badge::InitAsDefaultInstance() {
 }
 
 Badge::Badge(const Badge& from)
-  : ::google::protobuf::Message() {
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
   SharedCtor();
   MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:SolasMatch.Common.Protobufs.Models.Badge)
 }
 
 void Badge::SharedCtor() {
+  ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
   id_ = 0;
-  title_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  description_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  title_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  description_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   owner_id_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
 Badge::~Badge() {
+  // @@protoc_insertion_point(destructor:SolasMatch.Common.Protobufs.Models.Badge)
   SharedDtor();
 }
 
 void Badge::SharedDtor() {
-  if (title_ != &::google::protobuf::internal::kEmptyString) {
-    delete title_;
-  }
-  if (description_ != &::google::protobuf::internal::kEmptyString) {
-    delete description_;
-  }
+  title_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  description_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != default_instance_) {
   }
 }
@@ -166,45 +171,70 @@ const Badge& Badge::default_instance() {
 
 Badge* Badge::default_instance_ = NULL;
 
-Badge* Badge::New() const {
-  return new Badge;
+Badge* Badge::New(::google::protobuf::Arena* arena) const {
+  Badge* n = new Badge;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
 }
 
 void Badge::Clear() {
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    id_ = 0;
+// @@protoc_insertion_point(message_clear_start:SolasMatch.Common.Protobufs.Models.Badge)
+#if defined(__clang__)
+#define ZR_HELPER_(f) \
+  _Pragma("clang diagnostic push") \
+  _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
+  __builtin_offsetof(Badge, f) \
+  _Pragma("clang diagnostic pop")
+#else
+#define ZR_HELPER_(f) reinterpret_cast<char*>(\
+  &reinterpret_cast<Badge*>(16)->f)
+#endif
+
+#define ZR_(first, last) do {\
+  ::memset(&first, 0,\
+           ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
+} while (0)
+
+  if (_has_bits_[0 / 32] & 15u) {
+    ZR_(id_, owner_id_);
     if (has_title()) {
-      if (title_ != &::google::protobuf::internal::kEmptyString) {
-        title_->clear();
-      }
+      title_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     }
     if (has_description()) {
-      if (description_ != &::google::protobuf::internal::kEmptyString) {
-        description_->clear();
-      }
+      description_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     }
-    owner_id_ = 0;
   }
+
+#undef ZR_HELPER_
+#undef ZR_
+
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
+  if (_internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->Clear();
+  }
 }
 
 bool Badge::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  while ((tag = input->ReadTag()) != 0) {
+  // @@protoc_insertion_point(parse_start:SolasMatch.Common.Protobufs.Models.Badge)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // optional int32 id = 1;
       case 1: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 8) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &id_)));
           set_has_id();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(18)) goto parse_title;
         break;
@@ -212,16 +242,16 @@ bool Badge::MergePartialFromCodedStream(
 
       // optional string title = 2;
       case 2: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 18) {
          parse_title:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_title()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
             this->title().data(), this->title().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "SolasMatch.Common.Protobufs.Models.Badge.title");
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(26)) goto parse_description;
         break;
@@ -229,16 +259,16 @@ bool Badge::MergePartialFromCodedStream(
 
       // optional string description = 3;
       case 3: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 26) {
          parse_description:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_description()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
             this->description().data(), this->description().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "SolasMatch.Common.Protobufs.Models.Badge.description");
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(32)) goto parse_owner_id;
         break;
@@ -246,25 +276,25 @@ bool Badge::MergePartialFromCodedStream(
 
       // optional int32 owner_id = 4;
       case 4: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 32) {
          parse_owner_id:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &owner_id_)));
           set_has_owner_id();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
-        if (input->ExpectAtEnd()) return true;
+        if (input->ExpectAtEnd()) goto success;
         break;
       }
 
       default: {
-      handle_uninterpreted:
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          return true;
+          goto success;
         }
         DO_(::google::protobuf::internal::WireFormat::SkipField(
               input, tag, mutable_unknown_fields()));
@@ -272,12 +302,18 @@ bool Badge::MergePartialFromCodedStream(
       }
     }
   }
+success:
+  // @@protoc_insertion_point(parse_success:SolasMatch.Common.Protobufs.Models.Badge)
   return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:SolasMatch.Common.Protobufs.Models.Badge)
+  return false;
 #undef DO_
 }
 
 void Badge::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:SolasMatch.Common.Protobufs.Models.Badge)
   // optional int32 id = 1;
   if (has_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->id(), output);
@@ -285,19 +321,21 @@ void Badge::SerializeWithCachedSizes(
 
   // optional string title = 2;
   if (has_title()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->title().data(), this->title().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.Badge.title");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       2, this->title(), output);
   }
 
   // optional string description = 3;
   if (has_description()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->description().data(), this->description().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.Badge.description");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       3, this->description(), output);
   }
 
@@ -306,14 +344,16 @@ void Badge::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->owner_id(), output);
   }
 
-  if (!unknown_fields().empty()) {
+  if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
+  // @@protoc_insertion_point(serialize_end:SolasMatch.Common.Protobufs.Models.Badge)
 }
 
-::google::protobuf::uint8* Badge::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
+::google::protobuf::uint8* Badge::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:SolasMatch.Common.Protobufs.Models.Badge)
   // optional int32 id = 1;
   if (has_id()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->id(), target);
@@ -321,9 +361,10 @@ void Badge::SerializeWithCachedSizes(
 
   // optional string title = 2;
   if (has_title()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->title().data(), this->title().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.Badge.title");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         2, this->title(), target);
@@ -331,9 +372,10 @@ void Badge::SerializeWithCachedSizes(
 
   // optional string description = 3;
   if (has_description()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->description().data(), this->description().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.Badge.description");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         3, this->description(), target);
@@ -344,17 +386,19 @@ void Badge::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->owner_id(), target);
   }
 
-  if (!unknown_fields().empty()) {
+  if (_internal_metadata_.have_unknown_fields()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
+  // @@protoc_insertion_point(serialize_to_array_end:SolasMatch.Common.Protobufs.Models.Badge)
   return target;
 }
 
 int Badge::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:SolasMatch.Common.Protobufs.Models.Badge)
   int total_size = 0;
 
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+  if (_has_bits_[0 / 32] & 15u) {
     // optional int32 id = 1;
     if (has_id()) {
       total_size += 1 +
@@ -384,7 +428,7 @@ int Badge::ByteSize() const {
     }
 
   }
-  if (!unknown_fields().empty()) {
+  if (_internal_metadata_.have_unknown_fields()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         unknown_fields());
@@ -396,43 +440,57 @@ int Badge::ByteSize() const {
 }
 
 void Badge::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const Badge* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const Badge*>(
-      &from);
+// @@protoc_insertion_point(generalized_merge_from_start:SolasMatch.Common.Protobufs.Models.Badge)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  const Badge* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const Badge>(
+          &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:SolasMatch.Common.Protobufs.Models.Badge)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:SolasMatch.Common.Protobufs.Models.Badge)
     MergeFrom(*source);
   }
 }
 
 void Badge::MergeFrom(const Badge& from) {
-  GOOGLE_CHECK_NE(&from, this);
+// @@protoc_insertion_point(class_specific_merge_from_start:SolasMatch.Common.Protobufs.Models.Badge)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_id()) {
       set_id(from.id());
     }
     if (from.has_title()) {
-      set_title(from.title());
+      set_has_title();
+      title_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.title_);
     }
     if (from.has_description()) {
-      set_description(from.description());
+      set_has_description();
+      description_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.description_);
     }
     if (from.has_owner_id()) {
       set_owner_id(from.owner_id());
     }
   }
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  if (from._internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  }
 }
 
 void Badge::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:SolasMatch.Common.Protobufs.Models.Badge)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void Badge::CopyFrom(const Badge& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:SolasMatch.Common.Protobufs.Models.Badge)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -444,15 +502,17 @@ bool Badge::IsInitialized() const {
 }
 
 void Badge::Swap(Badge* other) {
-  if (other != this) {
-    std::swap(id_, other->id_);
-    std::swap(title_, other->title_);
-    std::swap(description_, other->description_);
-    std::swap(owner_id_, other->owner_id_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
+  if (other == this) return;
+  InternalSwap(other);
+}
+void Badge::InternalSwap(Badge* other) {
+  std::swap(id_, other->id_);
+  title_.Swap(&other->title_);
+  description_.Swap(&other->description_);
+  std::swap(owner_id_, other->owner_id_);
+  std::swap(_has_bits_[0], other->_has_bits_[0]);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata Badge::GetMetadata() const {
@@ -463,6 +523,166 @@ void Badge::Swap(Badge* other) {
   return metadata;
 }
 
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// Badge
+
+// optional int32 id = 1;
+bool Badge::has_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+void Badge::set_has_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+void Badge::clear_has_id() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+void Badge::clear_id() {
+  id_ = 0;
+  clear_has_id();
+}
+ ::google::protobuf::int32 Badge::id() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.Badge.id)
+  return id_;
+}
+ void Badge::set_id(::google::protobuf::int32 value) {
+  set_has_id();
+  id_ = value;
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.Badge.id)
+}
+
+// optional string title = 2;
+bool Badge::has_title() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+void Badge::set_has_title() {
+  _has_bits_[0] |= 0x00000002u;
+}
+void Badge::clear_has_title() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+void Badge::clear_title() {
+  title_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_title();
+}
+ const ::std::string& Badge::title() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.Badge.title)
+  return title_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void Badge::set_title(const ::std::string& value) {
+  set_has_title();
+  title_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.Badge.title)
+}
+ void Badge::set_title(const char* value) {
+  set_has_title();
+  title_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:SolasMatch.Common.Protobufs.Models.Badge.title)
+}
+ void Badge::set_title(const char* value, size_t size) {
+  set_has_title();
+  title_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:SolasMatch.Common.Protobufs.Models.Badge.title)
+}
+ ::std::string* Badge::mutable_title() {
+  set_has_title();
+  // @@protoc_insertion_point(field_mutable:SolasMatch.Common.Protobufs.Models.Badge.title)
+  return title_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* Badge::release_title() {
+  // @@protoc_insertion_point(field_release:SolasMatch.Common.Protobufs.Models.Badge.title)
+  clear_has_title();
+  return title_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void Badge::set_allocated_title(::std::string* title) {
+  if (title != NULL) {
+    set_has_title();
+  } else {
+    clear_has_title();
+  }
+  title_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), title);
+  // @@protoc_insertion_point(field_set_allocated:SolasMatch.Common.Protobufs.Models.Badge.title)
+}
+
+// optional string description = 3;
+bool Badge::has_description() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+void Badge::set_has_description() {
+  _has_bits_[0] |= 0x00000004u;
+}
+void Badge::clear_has_description() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+void Badge::clear_description() {
+  description_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_description();
+}
+ const ::std::string& Badge::description() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.Badge.description)
+  return description_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void Badge::set_description(const ::std::string& value) {
+  set_has_description();
+  description_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.Badge.description)
+}
+ void Badge::set_description(const char* value) {
+  set_has_description();
+  description_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:SolasMatch.Common.Protobufs.Models.Badge.description)
+}
+ void Badge::set_description(const char* value, size_t size) {
+  set_has_description();
+  description_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:SolasMatch.Common.Protobufs.Models.Badge.description)
+}
+ ::std::string* Badge::mutable_description() {
+  set_has_description();
+  // @@protoc_insertion_point(field_mutable:SolasMatch.Common.Protobufs.Models.Badge.description)
+  return description_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* Badge::release_description() {
+  // @@protoc_insertion_point(field_release:SolasMatch.Common.Protobufs.Models.Badge.description)
+  clear_has_description();
+  return description_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void Badge::set_allocated_description(::std::string* description) {
+  if (description != NULL) {
+    set_has_description();
+  } else {
+    clear_has_description();
+  }
+  description_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), description);
+  // @@protoc_insertion_point(field_set_allocated:SolasMatch.Common.Protobufs.Models.Badge.description)
+}
+
+// optional int32 owner_id = 4;
+bool Badge::has_owner_id() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+void Badge::set_has_owner_id() {
+  _has_bits_[0] |= 0x00000008u;
+}
+void Badge::clear_has_owner_id() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+void Badge::clear_owner_id() {
+  owner_id_ = 0;
+  clear_has_owner_id();
+}
+ ::google::protobuf::int32 Badge::owner_id() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.Badge.owner_id)
+  return owner_id_;
+}
+ void Badge::set_owner_id(::google::protobuf::int32 value) {
+  set_has_owner_id();
+  owner_id_ = value;
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.Badge.owner_id)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // @@protoc_insertion_point(namespace_scope)
 

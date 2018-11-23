@@ -7,6 +7,7 @@
 #include <algorithm>
 
 #include <google/protobuf/stubs/common.h>
+#include <google/protobuf/stubs/port.h>
 #include <google/protobuf/stubs/once.h>
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/wire_format_lite_inl.h>
@@ -30,6 +31,7 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 }  // namespace
 
 
+void protobuf_AssignDesc_UserTaskStreamNotification_2eproto() GOOGLE_ATTRIBUTE_COLD;
 void protobuf_AssignDesc_UserTaskStreamNotification_2eproto() {
   protobuf_AddDesc_UserTaskStreamNotification_2eproto();
   const ::google::protobuf::FileDescriptor* file =
@@ -44,16 +46,16 @@ void protobuf_AssignDesc_UserTaskStreamNotification_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserTaskStreamNotification, strict_),
   };
   UserTaskStreamNotification_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
       UserTaskStreamNotification_descriptor_,
       UserTaskStreamNotification::default_instance_,
       UserTaskStreamNotification_offsets_,
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserTaskStreamNotification, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserTaskStreamNotification, _unknown_fields_),
       -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(UserTaskStreamNotification));
+      -1,
+      sizeof(UserTaskStreamNotification),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserTaskStreamNotification, _internal_metadata_),
+      -1);
 }
 
 namespace {
@@ -64,10 +66,11 @@ inline void protobuf_AssignDescriptorsOnce() {
                  &protobuf_AssignDesc_UserTaskStreamNotification_2eproto);
 }
 
+void protobuf_RegisterTypes(const ::std::string&) GOOGLE_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    UserTaskStreamNotification_descriptor_, &UserTaskStreamNotification::default_instance());
+      UserTaskStreamNotification_descriptor_, &UserTaskStreamNotification::default_instance());
 }
 
 }  // namespace
@@ -77,6 +80,7 @@ void protobuf_ShutdownFile_UserTaskStreamNotification_2eproto() {
   delete UserTaskStreamNotification_reflection_;
 }
 
+void protobuf_AddDesc_UserTaskStreamNotification_2eproto() GOOGLE_ATTRIBUTE_COLD;
 void protobuf_AddDesc_UserTaskStreamNotification_2eproto() {
   static bool already_here = false;
   if (already_here) return;
@@ -105,44 +109,47 @@ struct StaticDescriptorInitializer_UserTaskStreamNotification_2eproto {
 
 // ===================================================================
 
-#ifndef _MSC_VER
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int UserTaskStreamNotification::kUserIdFieldNumber;
 const int UserTaskStreamNotification::kIntervalFieldNumber;
 const int UserTaskStreamNotification::kLastSentFieldNumber;
 const int UserTaskStreamNotification::kStrictFieldNumber;
-#endif  // !_MSC_VER
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 UserTaskStreamNotification::UserTaskStreamNotification()
-  : ::google::protobuf::Message() {
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   SharedCtor();
+  // @@protoc_insertion_point(constructor:SolasMatch.Common.Protobufs.Models.UserTaskStreamNotification)
 }
 
 void UserTaskStreamNotification::InitAsDefaultInstance() {
 }
 
 UserTaskStreamNotification::UserTaskStreamNotification(const UserTaskStreamNotification& from)
-  : ::google::protobuf::Message() {
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
   SharedCtor();
   MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:SolasMatch.Common.Protobufs.Models.UserTaskStreamNotification)
 }
 
 void UserTaskStreamNotification::SharedCtor() {
+  ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
   user_id_ = 0;
   interval_ = 0;
-  last_sent_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  last_sent_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   strict_ = false;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
 UserTaskStreamNotification::~UserTaskStreamNotification() {
+  // @@protoc_insertion_point(destructor:SolasMatch.Common.Protobufs.Models.UserTaskStreamNotification)
   SharedDtor();
 }
 
 void UserTaskStreamNotification::SharedDtor() {
-  if (last_sent_ != &::google::protobuf::internal::kEmptyString) {
-    delete last_sent_;
-  }
+  last_sent_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != default_instance_) {
   }
 }
@@ -164,41 +171,68 @@ const UserTaskStreamNotification& UserTaskStreamNotification::default_instance()
 
 UserTaskStreamNotification* UserTaskStreamNotification::default_instance_ = NULL;
 
-UserTaskStreamNotification* UserTaskStreamNotification::New() const {
-  return new UserTaskStreamNotification;
+UserTaskStreamNotification* UserTaskStreamNotification::New(::google::protobuf::Arena* arena) const {
+  UserTaskStreamNotification* n = new UserTaskStreamNotification;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
 }
 
 void UserTaskStreamNotification::Clear() {
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    user_id_ = 0;
-    interval_ = 0;
+// @@protoc_insertion_point(message_clear_start:SolasMatch.Common.Protobufs.Models.UserTaskStreamNotification)
+#if defined(__clang__)
+#define ZR_HELPER_(f) \
+  _Pragma("clang diagnostic push") \
+  _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
+  __builtin_offsetof(UserTaskStreamNotification, f) \
+  _Pragma("clang diagnostic pop")
+#else
+#define ZR_HELPER_(f) reinterpret_cast<char*>(\
+  &reinterpret_cast<UserTaskStreamNotification*>(16)->f)
+#endif
+
+#define ZR_(first, last) do {\
+  ::memset(&first, 0,\
+           ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
+} while (0)
+
+  if (_has_bits_[0 / 32] & 15u) {
+    ZR_(user_id_, interval_);
     if (has_last_sent()) {
-      if (last_sent_ != &::google::protobuf::internal::kEmptyString) {
-        last_sent_->clear();
-      }
+      last_sent_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     }
     strict_ = false;
   }
+
+#undef ZR_HELPER_
+#undef ZR_
+
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
+  if (_internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->Clear();
+  }
 }
 
 bool UserTaskStreamNotification::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  while ((tag = input->ReadTag()) != 0) {
+  // @@protoc_insertion_point(parse_start:SolasMatch.Common.Protobufs.Models.UserTaskStreamNotification)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // optional int32 user_id = 1;
       case 1: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 8) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &user_id_)));
           set_has_user_id();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(16)) goto parse_interval;
         break;
@@ -206,15 +240,14 @@ bool UserTaskStreamNotification::MergePartialFromCodedStream(
 
       // optional int32 interval = 2;
       case 2: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 16) {
          parse_interval:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &interval_)));
           set_has_interval();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(26)) goto parse_last_sent;
         break;
@@ -222,16 +255,16 @@ bool UserTaskStreamNotification::MergePartialFromCodedStream(
 
       // optional string last_sent = 3;
       case 3: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 26) {
          parse_last_sent:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_last_sent()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
             this->last_sent().data(), this->last_sent().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "SolasMatch.Common.Protobufs.Models.UserTaskStreamNotification.last_sent");
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(32)) goto parse_strict;
         break;
@@ -239,25 +272,25 @@ bool UserTaskStreamNotification::MergePartialFromCodedStream(
 
       // optional bool strict = 4;
       case 4: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 32) {
          parse_strict:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
                  input, &strict_)));
           set_has_strict();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
-        if (input->ExpectAtEnd()) return true;
+        if (input->ExpectAtEnd()) goto success;
         break;
       }
 
       default: {
-      handle_uninterpreted:
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          return true;
+          goto success;
         }
         DO_(::google::protobuf::internal::WireFormat::SkipField(
               input, tag, mutable_unknown_fields()));
@@ -265,12 +298,18 @@ bool UserTaskStreamNotification::MergePartialFromCodedStream(
       }
     }
   }
+success:
+  // @@protoc_insertion_point(parse_success:SolasMatch.Common.Protobufs.Models.UserTaskStreamNotification)
   return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:SolasMatch.Common.Protobufs.Models.UserTaskStreamNotification)
+  return false;
 #undef DO_
 }
 
 void UserTaskStreamNotification::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:SolasMatch.Common.Protobufs.Models.UserTaskStreamNotification)
   // optional int32 user_id = 1;
   if (has_user_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->user_id(), output);
@@ -283,10 +322,11 @@ void UserTaskStreamNotification::SerializeWithCachedSizes(
 
   // optional string last_sent = 3;
   if (has_last_sent()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->last_sent().data(), this->last_sent().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.UserTaskStreamNotification.last_sent");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       3, this->last_sent(), output);
   }
 
@@ -295,14 +335,16 @@ void UserTaskStreamNotification::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteBool(4, this->strict(), output);
   }
 
-  if (!unknown_fields().empty()) {
+  if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
+  // @@protoc_insertion_point(serialize_end:SolasMatch.Common.Protobufs.Models.UserTaskStreamNotification)
 }
 
-::google::protobuf::uint8* UserTaskStreamNotification::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
+::google::protobuf::uint8* UserTaskStreamNotification::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:SolasMatch.Common.Protobufs.Models.UserTaskStreamNotification)
   // optional int32 user_id = 1;
   if (has_user_id()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->user_id(), target);
@@ -315,9 +357,10 @@ void UserTaskStreamNotification::SerializeWithCachedSizes(
 
   // optional string last_sent = 3;
   if (has_last_sent()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->last_sent().data(), this->last_sent().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.UserTaskStreamNotification.last_sent");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         3, this->last_sent(), target);
@@ -328,17 +371,19 @@ void UserTaskStreamNotification::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(4, this->strict(), target);
   }
 
-  if (!unknown_fields().empty()) {
+  if (_internal_metadata_.have_unknown_fields()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
+  // @@protoc_insertion_point(serialize_to_array_end:SolasMatch.Common.Protobufs.Models.UserTaskStreamNotification)
   return target;
 }
 
 int UserTaskStreamNotification::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:SolasMatch.Common.Protobufs.Models.UserTaskStreamNotification)
   int total_size = 0;
 
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+  if (_has_bits_[0 / 32] & 15u) {
     // optional int32 user_id = 1;
     if (has_user_id()) {
       total_size += 1 +
@@ -366,7 +411,7 @@ int UserTaskStreamNotification::ByteSize() const {
     }
 
   }
-  if (!unknown_fields().empty()) {
+  if (_internal_metadata_.have_unknown_fields()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         unknown_fields());
@@ -378,19 +423,27 @@ int UserTaskStreamNotification::ByteSize() const {
 }
 
 void UserTaskStreamNotification::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const UserTaskStreamNotification* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const UserTaskStreamNotification*>(
-      &from);
+// @@protoc_insertion_point(generalized_merge_from_start:SolasMatch.Common.Protobufs.Models.UserTaskStreamNotification)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  const UserTaskStreamNotification* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const UserTaskStreamNotification>(
+          &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:SolasMatch.Common.Protobufs.Models.UserTaskStreamNotification)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:SolasMatch.Common.Protobufs.Models.UserTaskStreamNotification)
     MergeFrom(*source);
   }
 }
 
 void UserTaskStreamNotification::MergeFrom(const UserTaskStreamNotification& from) {
-  GOOGLE_CHECK_NE(&from, this);
+// @@protoc_insertion_point(class_specific_merge_from_start:SolasMatch.Common.Protobufs.Models.UserTaskStreamNotification)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_user_id()) {
       set_user_id(from.user_id());
@@ -399,22 +452,27 @@ void UserTaskStreamNotification::MergeFrom(const UserTaskStreamNotification& fro
       set_interval(from.interval());
     }
     if (from.has_last_sent()) {
-      set_last_sent(from.last_sent());
+      set_has_last_sent();
+      last_sent_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.last_sent_);
     }
     if (from.has_strict()) {
       set_strict(from.strict());
     }
   }
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  if (from._internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  }
 }
 
 void UserTaskStreamNotification::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:SolasMatch.Common.Protobufs.Models.UserTaskStreamNotification)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void UserTaskStreamNotification::CopyFrom(const UserTaskStreamNotification& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:SolasMatch.Common.Protobufs.Models.UserTaskStreamNotification)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -426,15 +484,17 @@ bool UserTaskStreamNotification::IsInitialized() const {
 }
 
 void UserTaskStreamNotification::Swap(UserTaskStreamNotification* other) {
-  if (other != this) {
-    std::swap(user_id_, other->user_id_);
-    std::swap(interval_, other->interval_);
-    std::swap(last_sent_, other->last_sent_);
-    std::swap(strict_, other->strict_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
+  if (other == this) return;
+  InternalSwap(other);
+}
+void UserTaskStreamNotification::InternalSwap(UserTaskStreamNotification* other) {
+  std::swap(user_id_, other->user_id_);
+  std::swap(interval_, other->interval_);
+  last_sent_.Swap(&other->last_sent_);
+  std::swap(strict_, other->strict_);
+  std::swap(_has_bits_[0], other->_has_bits_[0]);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata UserTaskStreamNotification::GetMetadata() const {
@@ -445,6 +505,136 @@ void UserTaskStreamNotification::Swap(UserTaskStreamNotification* other) {
   return metadata;
 }
 
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// UserTaskStreamNotification
+
+// optional int32 user_id = 1;
+bool UserTaskStreamNotification::has_user_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+void UserTaskStreamNotification::set_has_user_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+void UserTaskStreamNotification::clear_has_user_id() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+void UserTaskStreamNotification::clear_user_id() {
+  user_id_ = 0;
+  clear_has_user_id();
+}
+ ::google::protobuf::int32 UserTaskStreamNotification::user_id() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.UserTaskStreamNotification.user_id)
+  return user_id_;
+}
+ void UserTaskStreamNotification::set_user_id(::google::protobuf::int32 value) {
+  set_has_user_id();
+  user_id_ = value;
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.UserTaskStreamNotification.user_id)
+}
+
+// optional int32 interval = 2;
+bool UserTaskStreamNotification::has_interval() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+void UserTaskStreamNotification::set_has_interval() {
+  _has_bits_[0] |= 0x00000002u;
+}
+void UserTaskStreamNotification::clear_has_interval() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+void UserTaskStreamNotification::clear_interval() {
+  interval_ = 0;
+  clear_has_interval();
+}
+ ::google::protobuf::int32 UserTaskStreamNotification::interval() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.UserTaskStreamNotification.interval)
+  return interval_;
+}
+ void UserTaskStreamNotification::set_interval(::google::protobuf::int32 value) {
+  set_has_interval();
+  interval_ = value;
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.UserTaskStreamNotification.interval)
+}
+
+// optional string last_sent = 3;
+bool UserTaskStreamNotification::has_last_sent() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+void UserTaskStreamNotification::set_has_last_sent() {
+  _has_bits_[0] |= 0x00000004u;
+}
+void UserTaskStreamNotification::clear_has_last_sent() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+void UserTaskStreamNotification::clear_last_sent() {
+  last_sent_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_last_sent();
+}
+ const ::std::string& UserTaskStreamNotification::last_sent() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.UserTaskStreamNotification.last_sent)
+  return last_sent_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void UserTaskStreamNotification::set_last_sent(const ::std::string& value) {
+  set_has_last_sent();
+  last_sent_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.UserTaskStreamNotification.last_sent)
+}
+ void UserTaskStreamNotification::set_last_sent(const char* value) {
+  set_has_last_sent();
+  last_sent_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:SolasMatch.Common.Protobufs.Models.UserTaskStreamNotification.last_sent)
+}
+ void UserTaskStreamNotification::set_last_sent(const char* value, size_t size) {
+  set_has_last_sent();
+  last_sent_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:SolasMatch.Common.Protobufs.Models.UserTaskStreamNotification.last_sent)
+}
+ ::std::string* UserTaskStreamNotification::mutable_last_sent() {
+  set_has_last_sent();
+  // @@protoc_insertion_point(field_mutable:SolasMatch.Common.Protobufs.Models.UserTaskStreamNotification.last_sent)
+  return last_sent_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* UserTaskStreamNotification::release_last_sent() {
+  // @@protoc_insertion_point(field_release:SolasMatch.Common.Protobufs.Models.UserTaskStreamNotification.last_sent)
+  clear_has_last_sent();
+  return last_sent_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void UserTaskStreamNotification::set_allocated_last_sent(::std::string* last_sent) {
+  if (last_sent != NULL) {
+    set_has_last_sent();
+  } else {
+    clear_has_last_sent();
+  }
+  last_sent_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), last_sent);
+  // @@protoc_insertion_point(field_set_allocated:SolasMatch.Common.Protobufs.Models.UserTaskStreamNotification.last_sent)
+}
+
+// optional bool strict = 4;
+bool UserTaskStreamNotification::has_strict() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+void UserTaskStreamNotification::set_has_strict() {
+  _has_bits_[0] |= 0x00000008u;
+}
+void UserTaskStreamNotification::clear_has_strict() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+void UserTaskStreamNotification::clear_strict() {
+  strict_ = false;
+  clear_has_strict();
+}
+ bool UserTaskStreamNotification::strict() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.UserTaskStreamNotification.strict)
+  return strict_;
+}
+ void UserTaskStreamNotification::set_strict(bool value) {
+  set_has_strict();
+  strict_ = value;
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.UserTaskStreamNotification.strict)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // @@protoc_insertion_point(namespace_scope)
 

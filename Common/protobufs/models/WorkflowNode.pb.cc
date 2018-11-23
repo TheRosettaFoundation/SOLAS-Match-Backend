@@ -7,6 +7,7 @@
 #include <algorithm>
 
 #include <google/protobuf/stubs/common.h>
+#include <google/protobuf/stubs/port.h>
 #include <google/protobuf/stubs/once.h>
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/wire_format_lite_inl.h>
@@ -30,6 +31,7 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 }  // namespace
 
 
+void protobuf_AssignDesc_WorkflowNode_2eproto() GOOGLE_ATTRIBUTE_COLD;
 void protobuf_AssignDesc_WorkflowNode_2eproto() {
   protobuf_AddDesc_WorkflowNode_2eproto();
   const ::google::protobuf::FileDescriptor* file =
@@ -44,16 +46,16 @@ void protobuf_AssignDesc_WorkflowNode_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(WorkflowNode, previous_),
   };
   WorkflowNode_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
       WorkflowNode_descriptor_,
       WorkflowNode::default_instance_,
       WorkflowNode_offsets_,
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(WorkflowNode, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(WorkflowNode, _unknown_fields_),
       -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(WorkflowNode));
+      -1,
+      sizeof(WorkflowNode),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(WorkflowNode, _internal_metadata_),
+      -1);
 }
 
 namespace {
@@ -64,10 +66,11 @@ inline void protobuf_AssignDescriptorsOnce() {
                  &protobuf_AssignDesc_WorkflowNode_2eproto);
 }
 
+void protobuf_RegisterTypes(const ::std::string&) GOOGLE_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    WorkflowNode_descriptor_, &WorkflowNode::default_instance());
+      WorkflowNode_descriptor_, &WorkflowNode::default_instance());
 }
 
 }  // namespace
@@ -77,6 +80,7 @@ void protobuf_ShutdownFile_WorkflowNode_2eproto() {
   delete WorkflowNode_reflection_;
 }
 
+void protobuf_AddDesc_WorkflowNode_2eproto() GOOGLE_ATTRIBUTE_COLD;
 void protobuf_AddDesc_WorkflowNode_2eproto() {
   static bool already_here = false;
   if (already_here) return;
@@ -106,16 +110,17 @@ struct StaticDescriptorInitializer_WorkflowNode_2eproto {
 
 // ===================================================================
 
-#ifndef _MSC_VER
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int WorkflowNode::kTaskIdFieldNumber;
 const int WorkflowNode::kTaskFieldNumber;
 const int WorkflowNode::kNextFieldNumber;
 const int WorkflowNode::kPreviousFieldNumber;
-#endif  // !_MSC_VER
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 WorkflowNode::WorkflowNode()
-  : ::google::protobuf::Message() {
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   SharedCtor();
+  // @@protoc_insertion_point(constructor:SolasMatch.Common.Protobufs.Models.WorkflowNode)
 }
 
 void WorkflowNode::InitAsDefaultInstance() {
@@ -123,9 +128,11 @@ void WorkflowNode::InitAsDefaultInstance() {
 }
 
 WorkflowNode::WorkflowNode(const WorkflowNode& from)
-  : ::google::protobuf::Message() {
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
   SharedCtor();
   MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:SolasMatch.Common.Protobufs.Models.WorkflowNode)
 }
 
 void WorkflowNode::SharedCtor() {
@@ -136,6 +143,7 @@ void WorkflowNode::SharedCtor() {
 }
 
 WorkflowNode::~WorkflowNode() {
+  // @@protoc_insertion_point(destructor:SolasMatch.Common.Protobufs.Models.WorkflowNode)
   SharedDtor();
 }
 
@@ -162,12 +170,17 @@ const WorkflowNode& WorkflowNode::default_instance() {
 
 WorkflowNode* WorkflowNode::default_instance_ = NULL;
 
-WorkflowNode* WorkflowNode::New() const {
-  return new WorkflowNode;
+WorkflowNode* WorkflowNode::New(::google::protobuf::Arena* arena) const {
+  WorkflowNode* n = new WorkflowNode;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
 }
 
 void WorkflowNode::Clear() {
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+// @@protoc_insertion_point(message_clear_start:SolasMatch.Common.Protobufs.Models.WorkflowNode)
+  if (_has_bits_[0 / 32] & 3u) {
     taskid_ = 0;
     if (has_task()) {
       if (task_ != NULL) task_->::SolasMatch::Common::Protobufs::Models::Task::Clear();
@@ -176,25 +189,30 @@ void WorkflowNode::Clear() {
   next_.Clear();
   previous_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
+  if (_internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->Clear();
+  }
 }
 
 bool WorkflowNode::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  while ((tag = input->ReadTag()) != 0) {
+  // @@protoc_insertion_point(parse_start:SolasMatch.Common.Protobufs.Models.WorkflowNode)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // required int32 taskId = 1;
       case 1: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 8) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &taskid_)));
           set_has_taskid();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(18)) goto parse_task;
         break;
@@ -202,13 +220,12 @@ bool WorkflowNode::MergePartialFromCodedStream(
 
       // optional .SolasMatch.Common.Protobufs.Models.Task task = 2;
       case 2: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 18) {
          parse_task:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_task()));
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(24)) goto parse_next;
         break;
@@ -216,20 +233,17 @@ bool WorkflowNode::MergePartialFromCodedStream(
 
       // repeated int32 next = 3;
       case 3: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 24) {
          parse_next:
           DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  1, 24, input, this->mutable_next())));
-        } else if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag)
-                   == ::google::protobuf::internal::WireFormatLite::
-                      WIRETYPE_LENGTH_DELIMITED) {
+        } else if (tag == 26) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitiveNoInline<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, this->mutable_next())));
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(24)) goto parse_next;
         if (input->ExpectTag(32)) goto parse_previous;
@@ -238,31 +252,29 @@ bool WorkflowNode::MergePartialFromCodedStream(
 
       // repeated int32 previous = 4;
       case 4: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 32) {
          parse_previous:
           DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  1, 32, input, this->mutable_previous())));
-        } else if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag)
-                   == ::google::protobuf::internal::WireFormatLite::
-                      WIRETYPE_LENGTH_DELIMITED) {
+        } else if (tag == 34) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitiveNoInline<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, this->mutable_previous())));
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(32)) goto parse_previous;
-        if (input->ExpectAtEnd()) return true;
+        if (input->ExpectAtEnd()) goto success;
         break;
       }
 
       default: {
-      handle_uninterpreted:
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          return true;
+          goto success;
         }
         DO_(::google::protobuf::internal::WireFormat::SkipField(
               input, tag, mutable_unknown_fields()));
@@ -270,12 +282,18 @@ bool WorkflowNode::MergePartialFromCodedStream(
       }
     }
   }
+success:
+  // @@protoc_insertion_point(parse_success:SolasMatch.Common.Protobufs.Models.WorkflowNode)
   return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:SolasMatch.Common.Protobufs.Models.WorkflowNode)
+  return false;
 #undef DO_
 }
 
 void WorkflowNode::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:SolasMatch.Common.Protobufs.Models.WorkflowNode)
   // required int32 taskId = 1;
   if (has_taskid()) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->taskid(), output);
@@ -284,7 +302,7 @@ void WorkflowNode::SerializeWithCachedSizes(
   // optional .SolasMatch.Common.Protobufs.Models.Task task = 2;
   if (has_task()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2, this->task(), output);
+      2, *this->task_, output);
   }
 
   // repeated int32 next = 3;
@@ -299,14 +317,16 @@ void WorkflowNode::SerializeWithCachedSizes(
       4, this->previous(i), output);
   }
 
-  if (!unknown_fields().empty()) {
+  if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
+  // @@protoc_insertion_point(serialize_end:SolasMatch.Common.Protobufs.Models.WorkflowNode)
 }
 
-::google::protobuf::uint8* WorkflowNode::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
+::google::protobuf::uint8* WorkflowNode::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:SolasMatch.Common.Protobufs.Models.WorkflowNode)
   // required int32 taskId = 1;
   if (has_taskid()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->taskid(), target);
@@ -315,8 +335,8 @@ void WorkflowNode::SerializeWithCachedSizes(
   // optional .SolasMatch.Common.Protobufs.Models.Task task = 2;
   if (has_task()) {
     target = ::google::protobuf::internal::WireFormatLite::
-      WriteMessageNoVirtualToArray(
-        2, this->task(), target);
+      InternalWriteMessageNoVirtualToArray(
+        2, *this->task_, false, target);
   }
 
   // repeated int32 next = 3;
@@ -331,32 +351,31 @@ void WorkflowNode::SerializeWithCachedSizes(
       WriteInt32ToArray(4, this->previous(i), target);
   }
 
-  if (!unknown_fields().empty()) {
+  if (_internal_metadata_.have_unknown_fields()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
+  // @@protoc_insertion_point(serialize_to_array_end:SolasMatch.Common.Protobufs.Models.WorkflowNode)
   return target;
 }
 
 int WorkflowNode::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:SolasMatch.Common.Protobufs.Models.WorkflowNode)
   int total_size = 0;
 
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required int32 taskId = 1;
-    if (has_taskid()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->taskid());
-    }
-
-    // optional .SolasMatch.Common.Protobufs.Models.Task task = 2;
-    if (has_task()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-          this->task());
-    }
-
+  // required int32 taskId = 1;
+  if (has_taskid()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->taskid());
   }
+  // optional .SolasMatch.Common.Protobufs.Models.Task task = 2;
+  if (has_task()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        *this->task_);
+  }
+
   // repeated int32 next = 3;
   {
     int data_size = 0;
@@ -377,7 +396,7 @@ int WorkflowNode::ByteSize() const {
     total_size += 1 * this->previous_size() + data_size;
   }
 
-  if (!unknown_fields().empty()) {
+  if (_internal_metadata_.have_unknown_fields()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         unknown_fields());
@@ -389,19 +408,27 @@ int WorkflowNode::ByteSize() const {
 }
 
 void WorkflowNode::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const WorkflowNode* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const WorkflowNode*>(
-      &from);
+// @@protoc_insertion_point(generalized_merge_from_start:SolasMatch.Common.Protobufs.Models.WorkflowNode)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  const WorkflowNode* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const WorkflowNode>(
+          &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:SolasMatch.Common.Protobufs.Models.WorkflowNode)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:SolasMatch.Common.Protobufs.Models.WorkflowNode)
     MergeFrom(*source);
   }
 }
 
 void WorkflowNode::MergeFrom(const WorkflowNode& from) {
-  GOOGLE_CHECK_NE(&from, this);
+// @@protoc_insertion_point(class_specific_merge_from_start:SolasMatch.Common.Protobufs.Models.WorkflowNode)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
   next_.MergeFrom(from.next_);
   previous_.MergeFrom(from.previous_);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
@@ -412,16 +439,20 @@ void WorkflowNode::MergeFrom(const WorkflowNode& from) {
       mutable_task()->::SolasMatch::Common::Protobufs::Models::Task::MergeFrom(from.task());
     }
   }
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  if (from._internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  }
 }
 
 void WorkflowNode::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:SolasMatch.Common.Protobufs.Models.WorkflowNode)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void WorkflowNode::CopyFrom(const WorkflowNode& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:SolasMatch.Common.Protobufs.Models.WorkflowNode)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -434,15 +465,17 @@ bool WorkflowNode::IsInitialized() const {
 }
 
 void WorkflowNode::Swap(WorkflowNode* other) {
-  if (other != this) {
-    std::swap(taskid_, other->taskid_);
-    std::swap(task_, other->task_);
-    next_.Swap(&other->next_);
-    previous_.Swap(&other->previous_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
+  if (other == this) return;
+  InternalSwap(other);
+}
+void WorkflowNode::InternalSwap(WorkflowNode* other) {
+  std::swap(taskid_, other->taskid_);
+  std::swap(task_, other->task_);
+  next_.UnsafeArenaSwap(&other->next_);
+  previous_.UnsafeArenaSwap(&other->previous_);
+  std::swap(_has_bits_[0], other->_has_bits_[0]);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata WorkflowNode::GetMetadata() const {
@@ -453,6 +486,138 @@ void WorkflowNode::Swap(WorkflowNode* other) {
   return metadata;
 }
 
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// WorkflowNode
+
+// required int32 taskId = 1;
+bool WorkflowNode::has_taskid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+void WorkflowNode::set_has_taskid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+void WorkflowNode::clear_has_taskid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+void WorkflowNode::clear_taskid() {
+  taskid_ = 0;
+  clear_has_taskid();
+}
+ ::google::protobuf::int32 WorkflowNode::taskid() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.WorkflowNode.taskId)
+  return taskid_;
+}
+ void WorkflowNode::set_taskid(::google::protobuf::int32 value) {
+  set_has_taskid();
+  taskid_ = value;
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.WorkflowNode.taskId)
+}
+
+// optional .SolasMatch.Common.Protobufs.Models.Task task = 2;
+bool WorkflowNode::has_task() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+void WorkflowNode::set_has_task() {
+  _has_bits_[0] |= 0x00000002u;
+}
+void WorkflowNode::clear_has_task() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+void WorkflowNode::clear_task() {
+  if (task_ != NULL) task_->::SolasMatch::Common::Protobufs::Models::Task::Clear();
+  clear_has_task();
+}
+const ::SolasMatch::Common::Protobufs::Models::Task& WorkflowNode::task() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.WorkflowNode.task)
+  return task_ != NULL ? *task_ : *default_instance_->task_;
+}
+::SolasMatch::Common::Protobufs::Models::Task* WorkflowNode::mutable_task() {
+  set_has_task();
+  if (task_ == NULL) {
+    task_ = new ::SolasMatch::Common::Protobufs::Models::Task;
+  }
+  // @@protoc_insertion_point(field_mutable:SolasMatch.Common.Protobufs.Models.WorkflowNode.task)
+  return task_;
+}
+::SolasMatch::Common::Protobufs::Models::Task* WorkflowNode::release_task() {
+  // @@protoc_insertion_point(field_release:SolasMatch.Common.Protobufs.Models.WorkflowNode.task)
+  clear_has_task();
+  ::SolasMatch::Common::Protobufs::Models::Task* temp = task_;
+  task_ = NULL;
+  return temp;
+}
+void WorkflowNode::set_allocated_task(::SolasMatch::Common::Protobufs::Models::Task* task) {
+  delete task_;
+  task_ = task;
+  if (task) {
+    set_has_task();
+  } else {
+    clear_has_task();
+  }
+  // @@protoc_insertion_point(field_set_allocated:SolasMatch.Common.Protobufs.Models.WorkflowNode.task)
+}
+
+// repeated int32 next = 3;
+int WorkflowNode::next_size() const {
+  return next_.size();
+}
+void WorkflowNode::clear_next() {
+  next_.Clear();
+}
+ ::google::protobuf::int32 WorkflowNode::next(int index) const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.WorkflowNode.next)
+  return next_.Get(index);
+}
+ void WorkflowNode::set_next(int index, ::google::protobuf::int32 value) {
+  next_.Set(index, value);
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.WorkflowNode.next)
+}
+ void WorkflowNode::add_next(::google::protobuf::int32 value) {
+  next_.Add(value);
+  // @@protoc_insertion_point(field_add:SolasMatch.Common.Protobufs.Models.WorkflowNode.next)
+}
+ const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+WorkflowNode::next() const {
+  // @@protoc_insertion_point(field_list:SolasMatch.Common.Protobufs.Models.WorkflowNode.next)
+  return next_;
+}
+ ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+WorkflowNode::mutable_next() {
+  // @@protoc_insertion_point(field_mutable_list:SolasMatch.Common.Protobufs.Models.WorkflowNode.next)
+  return &next_;
+}
+
+// repeated int32 previous = 4;
+int WorkflowNode::previous_size() const {
+  return previous_.size();
+}
+void WorkflowNode::clear_previous() {
+  previous_.Clear();
+}
+ ::google::protobuf::int32 WorkflowNode::previous(int index) const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.WorkflowNode.previous)
+  return previous_.Get(index);
+}
+ void WorkflowNode::set_previous(int index, ::google::protobuf::int32 value) {
+  previous_.Set(index, value);
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.WorkflowNode.previous)
+}
+ void WorkflowNode::add_previous(::google::protobuf::int32 value) {
+  previous_.Add(value);
+  // @@protoc_insertion_point(field_add:SolasMatch.Common.Protobufs.Models.WorkflowNode.previous)
+}
+ const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+WorkflowNode::previous() const {
+  // @@protoc_insertion_point(field_list:SolasMatch.Common.Protobufs.Models.WorkflowNode.previous)
+  return previous_;
+}
+ ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+WorkflowNode::mutable_previous() {
+  // @@protoc_insertion_point(field_mutable_list:SolasMatch.Common.Protobufs.Models.WorkflowNode.previous)
+  return &previous_;
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // @@protoc_insertion_point(namespace_scope)
 

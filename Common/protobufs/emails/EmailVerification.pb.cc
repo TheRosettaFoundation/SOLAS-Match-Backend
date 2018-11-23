@@ -7,6 +7,7 @@
 #include <algorithm>
 
 #include <google/protobuf/stubs/common.h>
+#include <google/protobuf/stubs/port.h>
 #include <google/protobuf/stubs/once.h>
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/wire_format_lite_inl.h>
@@ -30,6 +31,7 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 }  // namespace
 
 
+void protobuf_AssignDesc_EmailVerification_2eproto() GOOGLE_ATTRIBUTE_COLD;
 void protobuf_AssignDesc_EmailVerification_2eproto() {
   protobuf_AddDesc_EmailVerification_2eproto();
   const ::google::protobuf::FileDescriptor* file =
@@ -42,16 +44,16 @@ void protobuf_AssignDesc_EmailVerification_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EmailVerification, user_id_),
   };
   EmailVerification_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
       EmailVerification_descriptor_,
       EmailVerification::default_instance_,
       EmailVerification_offsets_,
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EmailVerification, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EmailVerification, _unknown_fields_),
       -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(EmailVerification));
+      -1,
+      sizeof(EmailVerification),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EmailVerification, _internal_metadata_),
+      -1);
 }
 
 namespace {
@@ -62,10 +64,11 @@ inline void protobuf_AssignDescriptorsOnce() {
                  &protobuf_AssignDesc_EmailVerification_2eproto);
 }
 
+void protobuf_RegisterTypes(const ::std::string&) GOOGLE_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    EmailVerification_descriptor_, &EmailVerification::default_instance());
+      EmailVerification_descriptor_, &EmailVerification::default_instance());
 }
 
 }  // namespace
@@ -75,6 +78,7 @@ void protobuf_ShutdownFile_EmailVerification_2eproto() {
   delete EmailVerification_reflection_;
 }
 
+void protobuf_AddDesc_EmailVerification_2eproto() GOOGLE_ATTRIBUTE_COLD;
 void protobuf_AddDesc_EmailVerification_2eproto() {
   static bool already_here = false;
   if (already_here) return;
@@ -105,23 +109,26 @@ struct StaticDescriptorInitializer_EmailVerification_2eproto {
 
 // ===================================================================
 
-#ifndef _MSC_VER
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int EmailVerification::kEmailTypeFieldNumber;
 const int EmailVerification::kUserIdFieldNumber;
-#endif  // !_MSC_VER
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 EmailVerification::EmailVerification()
-  : ::google::protobuf::Message() {
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   SharedCtor();
+  // @@protoc_insertion_point(constructor:SolasMatch.Common.Protobufs.Emails.EmailVerification)
 }
 
 void EmailVerification::InitAsDefaultInstance() {
 }
 
 EmailVerification::EmailVerification(const EmailVerification& from)
-  : ::google::protobuf::Message() {
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
   SharedCtor();
   MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:SolasMatch.Common.Protobufs.Emails.EmailVerification)
 }
 
 void EmailVerification::SharedCtor() {
@@ -132,6 +139,7 @@ void EmailVerification::SharedCtor() {
 }
 
 EmailVerification::~EmailVerification() {
+  // @@protoc_insertion_point(destructor:SolasMatch.Common.Protobufs.Emails.EmailVerification)
   SharedDtor();
 }
 
@@ -157,29 +165,39 @@ const EmailVerification& EmailVerification::default_instance() {
 
 EmailVerification* EmailVerification::default_instance_ = NULL;
 
-EmailVerification* EmailVerification::New() const {
-  return new EmailVerification;
+EmailVerification* EmailVerification::New(::google::protobuf::Arena* arena) const {
+  EmailVerification* n = new EmailVerification;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
 }
 
 void EmailVerification::Clear() {
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+// @@protoc_insertion_point(message_clear_start:SolasMatch.Common.Protobufs.Emails.EmailVerification)
+  if (_has_bits_[0 / 32] & 3u) {
     email_type_ = 13;
     user_id_ = 0;
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
+  if (_internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->Clear();
+  }
 }
 
 bool EmailVerification::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  while ((tag = input->ReadTag()) != 0) {
+  // @@protoc_insertion_point(parse_start:SolasMatch.Common.Protobufs.Emails.EmailVerification)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // required .SolasMatch.Common.Protobufs.Emails.EmailMessage.Type email_type = 1 [default = EmailVerification];
       case 1: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 8) {
           int value;
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
@@ -190,7 +208,7 @@ bool EmailVerification::MergePartialFromCodedStream(
             mutable_unknown_fields()->AddVarint(1, value);
           }
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(16)) goto parse_user_id;
         break;
@@ -198,25 +216,25 @@ bool EmailVerification::MergePartialFromCodedStream(
 
       // optional int32 user_id = 2;
       case 2: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 16) {
          parse_user_id:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &user_id_)));
           set_has_user_id();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
-        if (input->ExpectAtEnd()) return true;
+        if (input->ExpectAtEnd()) goto success;
         break;
       }
 
       default: {
-      handle_uninterpreted:
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          return true;
+          goto success;
         }
         DO_(::google::protobuf::internal::WireFormat::SkipField(
               input, tag, mutable_unknown_fields()));
@@ -224,12 +242,18 @@ bool EmailVerification::MergePartialFromCodedStream(
       }
     }
   }
+success:
+  // @@protoc_insertion_point(parse_success:SolasMatch.Common.Protobufs.Emails.EmailVerification)
   return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:SolasMatch.Common.Protobufs.Emails.EmailVerification)
+  return false;
 #undef DO_
 }
 
 void EmailVerification::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:SolasMatch.Common.Protobufs.Emails.EmailVerification)
   // required .SolasMatch.Common.Protobufs.Emails.EmailMessage.Type email_type = 1 [default = EmailVerification];
   if (has_email_type()) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
@@ -241,14 +265,16 @@ void EmailVerification::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->user_id(), output);
   }
 
-  if (!unknown_fields().empty()) {
+  if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
+  // @@protoc_insertion_point(serialize_end:SolasMatch.Common.Protobufs.Emails.EmailVerification)
 }
 
-::google::protobuf::uint8* EmailVerification::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
+::google::protobuf::uint8* EmailVerification::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:SolasMatch.Common.Protobufs.Emails.EmailVerification)
   // required .SolasMatch.Common.Protobufs.Emails.EmailMessage.Type email_type = 1 [default = EmailVerification];
   if (has_email_type()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
@@ -260,32 +286,31 @@ void EmailVerification::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->user_id(), target);
   }
 
-  if (!unknown_fields().empty()) {
+  if (_internal_metadata_.have_unknown_fields()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
+  // @@protoc_insertion_point(serialize_to_array_end:SolasMatch.Common.Protobufs.Emails.EmailVerification)
   return target;
 }
 
 int EmailVerification::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:SolasMatch.Common.Protobufs.Emails.EmailVerification)
   int total_size = 0;
 
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .SolasMatch.Common.Protobufs.Emails.EmailMessage.Type email_type = 1 [default = EmailVerification];
-    if (has_email_type()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::EnumSize(this->email_type());
-    }
-
-    // optional int32 user_id = 2;
-    if (has_user_id()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->user_id());
-    }
-
+  // required .SolasMatch.Common.Protobufs.Emails.EmailMessage.Type email_type = 1 [default = EmailVerification];
+  if (has_email_type()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->email_type());
   }
-  if (!unknown_fields().empty()) {
+  // optional int32 user_id = 2;
+  if (has_user_id()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->user_id());
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         unknown_fields());
@@ -297,19 +322,27 @@ int EmailVerification::ByteSize() const {
 }
 
 void EmailVerification::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const EmailVerification* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const EmailVerification*>(
-      &from);
+// @@protoc_insertion_point(generalized_merge_from_start:SolasMatch.Common.Protobufs.Emails.EmailVerification)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  const EmailVerification* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const EmailVerification>(
+          &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:SolasMatch.Common.Protobufs.Emails.EmailVerification)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:SolasMatch.Common.Protobufs.Emails.EmailVerification)
     MergeFrom(*source);
   }
 }
 
 void EmailVerification::MergeFrom(const EmailVerification& from) {
-  GOOGLE_CHECK_NE(&from, this);
+// @@protoc_insertion_point(class_specific_merge_from_start:SolasMatch.Common.Protobufs.Emails.EmailVerification)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_email_type()) {
       set_email_type(from.email_type());
@@ -318,16 +351,20 @@ void EmailVerification::MergeFrom(const EmailVerification& from) {
       set_user_id(from.user_id());
     }
   }
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  if (from._internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  }
 }
 
 void EmailVerification::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:SolasMatch.Common.Protobufs.Emails.EmailVerification)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void EmailVerification::CopyFrom(const EmailVerification& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:SolasMatch.Common.Protobufs.Emails.EmailVerification)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -340,13 +377,15 @@ bool EmailVerification::IsInitialized() const {
 }
 
 void EmailVerification::Swap(EmailVerification* other) {
-  if (other != this) {
-    std::swap(email_type_, other->email_type_);
-    std::swap(user_id_, other->user_id_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
+  if (other == this) return;
+  InternalSwap(other);
+}
+void EmailVerification::InternalSwap(EmailVerification* other) {
+  std::swap(email_type_, other->email_type_);
+  std::swap(user_id_, other->user_id_);
+  std::swap(_has_bits_[0], other->_has_bits_[0]);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata EmailVerification::GetMetadata() const {
@@ -357,6 +396,59 @@ void EmailVerification::Swap(EmailVerification* other) {
   return metadata;
 }
 
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// EmailVerification
+
+// required .SolasMatch.Common.Protobufs.Emails.EmailMessage.Type email_type = 1 [default = EmailVerification];
+bool EmailVerification::has_email_type() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+void EmailVerification::set_has_email_type() {
+  _has_bits_[0] |= 0x00000001u;
+}
+void EmailVerification::clear_has_email_type() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+void EmailVerification::clear_email_type() {
+  email_type_ = 13;
+  clear_has_email_type();
+}
+ ::SolasMatch::Common::Protobufs::Emails::EmailMessage_Type EmailVerification::email_type() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Emails.EmailVerification.email_type)
+  return static_cast< ::SolasMatch::Common::Protobufs::Emails::EmailMessage_Type >(email_type_);
+}
+ void EmailVerification::set_email_type(::SolasMatch::Common::Protobufs::Emails::EmailMessage_Type value) {
+  assert(::SolasMatch::Common::Protobufs::Emails::EmailMessage_Type_IsValid(value));
+  set_has_email_type();
+  email_type_ = value;
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Emails.EmailVerification.email_type)
+}
+
+// optional int32 user_id = 2;
+bool EmailVerification::has_user_id() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+void EmailVerification::set_has_user_id() {
+  _has_bits_[0] |= 0x00000002u;
+}
+void EmailVerification::clear_has_user_id() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+void EmailVerification::clear_user_id() {
+  user_id_ = 0;
+  clear_has_user_id();
+}
+ ::google::protobuf::int32 EmailVerification::user_id() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Emails.EmailVerification.user_id)
+  return user_id_;
+}
+ void EmailVerification::set_user_id(::google::protobuf::int32 value) {
+  set_has_user_id();
+  user_id_ = value;
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Emails.EmailVerification.user_id)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // @@protoc_insertion_point(namespace_scope)
 

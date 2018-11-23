@@ -7,6 +7,7 @@
 #include <algorithm>
 
 #include <google/protobuf/stubs/common.h>
+#include <google/protobuf/stubs/port.h>
 #include <google/protobuf/stubs/once.h>
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/wire_format_lite_inl.h>
@@ -31,6 +32,7 @@ const ::google::protobuf::EnumDescriptor* EmailMessage_Type_descriptor_ = NULL;
 }  // namespace
 
 
+void protobuf_AssignDesc_EmailMessage_2eproto() GOOGLE_ATTRIBUTE_COLD;
 void protobuf_AssignDesc_EmailMessage_2eproto() {
   protobuf_AddDesc_EmailMessage_2eproto();
   const ::google::protobuf::FileDescriptor* file =
@@ -42,16 +44,16 @@ void protobuf_AssignDesc_EmailMessage_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EmailMessage, email_type_),
   };
   EmailMessage_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
       EmailMessage_descriptor_,
       EmailMessage::default_instance_,
       EmailMessage_offsets_,
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EmailMessage, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EmailMessage, _unknown_fields_),
+      -1,
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EmailMessage, _extensions_),
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(EmailMessage));
+      sizeof(EmailMessage),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EmailMessage, _internal_metadata_),
+      -1);
   EmailMessage_Type_descriptor_ = EmailMessage_descriptor_->enum_type(0);
 }
 
@@ -63,10 +65,11 @@ inline void protobuf_AssignDescriptorsOnce() {
                  &protobuf_AssignDesc_EmailMessage_2eproto);
 }
 
+void protobuf_RegisterTypes(const ::std::string&) GOOGLE_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    EmailMessage_descriptor_, &EmailMessage::default_instance());
+      EmailMessage_descriptor_, &EmailMessage::default_instance());
 }
 
 }  // namespace
@@ -76,6 +79,7 @@ void protobuf_ShutdownFile_EmailMessage_2eproto() {
   delete EmailMessage_reflection_;
 }
 
+void protobuf_AddDesc_EmailMessage_2eproto() GOOGLE_ATTRIBUTE_COLD;
 void protobuf_AddDesc_EmailMessage_2eproto() {
   static bool already_here = false;
   if (already_here) return;
@@ -172,7 +176,7 @@ bool EmailMessage_Type_IsValid(int value) {
   }
 }
 
-#ifndef _MSC_VER
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
 const EmailMessage_Type EmailMessage::TaskScoreEmail;
 const EmailMessage_Type EmailMessage::UserTaskClaim;
 const EmailMessage_Type EmailMessage::OrgMembershipAccepted;
@@ -210,23 +214,26 @@ const EmailMessage_Type EmailMessage::UserClaimedTaskLateWarningDeadlinePassed;
 const EmailMessage_Type EmailMessage::Type_MIN;
 const EmailMessage_Type EmailMessage::Type_MAX;
 const int EmailMessage::Type_ARRAYSIZE;
-#endif  // _MSC_VER
-#ifndef _MSC_VER
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int EmailMessage::kEmailTypeFieldNumber;
-#endif  // !_MSC_VER
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 EmailMessage::EmailMessage()
-  : ::google::protobuf::Message() {
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   SharedCtor();
+  // @@protoc_insertion_point(constructor:SolasMatch.Common.Protobufs.Emails.EmailMessage)
 }
 
 void EmailMessage::InitAsDefaultInstance() {
 }
 
 EmailMessage::EmailMessage(const EmailMessage& from)
-  : ::google::protobuf::Message() {
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
   SharedCtor();
   MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:SolasMatch.Common.Protobufs.Emails.EmailMessage)
 }
 
 void EmailMessage::SharedCtor() {
@@ -236,6 +243,7 @@ void EmailMessage::SharedCtor() {
 }
 
 EmailMessage::~EmailMessage() {
+  // @@protoc_insertion_point(destructor:SolasMatch.Common.Protobufs.Emails.EmailMessage)
   SharedDtor();
 }
 
@@ -261,29 +269,37 @@ const EmailMessage& EmailMessage::default_instance() {
 
 EmailMessage* EmailMessage::default_instance_ = NULL;
 
-EmailMessage* EmailMessage::New() const {
-  return new EmailMessage;
+EmailMessage* EmailMessage::New(::google::protobuf::Arena* arena) const {
+  EmailMessage* n = new EmailMessage;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
 }
 
 void EmailMessage::Clear() {
+// @@protoc_insertion_point(message_clear_start:SolasMatch.Common.Protobufs.Emails.EmailMessage)
   _extensions_.Clear();
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    email_type_ = 1;
-  }
+  email_type_ = 1;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
+  if (_internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->Clear();
+  }
 }
 
 bool EmailMessage::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  while ((tag = input->ReadTag()) != 0) {
+  // @@protoc_insertion_point(parse_start:SolasMatch.Common.Protobufs.Emails.EmailMessage)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // required .SolasMatch.Common.Protobufs.Emails.EmailMessage.Type email_type = 1;
       case 1: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 8) {
           int value;
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
@@ -294,17 +310,18 @@ bool EmailMessage::MergePartialFromCodedStream(
             mutable_unknown_fields()->AddVarint(1, value);
           }
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
-        if (input->ExpectAtEnd()) return true;
+        if (input->ExpectAtEnd()) goto success;
         break;
       }
 
       default: {
-      handle_uninterpreted:
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          return true;
+          goto success;
         }
         if ((800u <= tag)) {
           DO_(_extensions_.ParseField(tag, input, default_instance_,
@@ -317,12 +334,18 @@ bool EmailMessage::MergePartialFromCodedStream(
       }
     }
   }
+success:
+  // @@protoc_insertion_point(parse_success:SolasMatch.Common.Protobufs.Emails.EmailMessage)
   return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:SolasMatch.Common.Protobufs.Emails.EmailMessage)
+  return false;
 #undef DO_
 }
 
 void EmailMessage::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:SolasMatch.Common.Protobufs.Emails.EmailMessage)
   // required .SolasMatch.Common.Protobufs.Emails.EmailMessage.Type email_type = 1;
   if (has_email_type()) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
@@ -333,14 +356,16 @@ void EmailMessage::SerializeWithCachedSizes(
   _extensions_.SerializeWithCachedSizes(
       100, 536870912, output);
 
-  if (!unknown_fields().empty()) {
+  if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
+  // @@protoc_insertion_point(serialize_end:SolasMatch.Common.Protobufs.Emails.EmailMessage)
 }
 
-::google::protobuf::uint8* EmailMessage::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
+::google::protobuf::uint8* EmailMessage::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:SolasMatch.Common.Protobufs.Emails.EmailMessage)
   // required .SolasMatch.Common.Protobufs.Emails.EmailMessage.Type email_type = 1;
   if (has_email_type()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
@@ -348,30 +373,29 @@ void EmailMessage::SerializeWithCachedSizes(
   }
 
   // Extension range [100, 536870912)
-  target = _extensions_.SerializeWithCachedSizesToArray(
-      100, 536870912, target);
+  target = _extensions_.InternalSerializeWithCachedSizesToArray(
+      100, 536870912, false, target);
 
-  if (!unknown_fields().empty()) {
+  if (_internal_metadata_.have_unknown_fields()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
+  // @@protoc_insertion_point(serialize_to_array_end:SolasMatch.Common.Protobufs.Emails.EmailMessage)
   return target;
 }
 
 int EmailMessage::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:SolasMatch.Common.Protobufs.Emails.EmailMessage)
   int total_size = 0;
 
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .SolasMatch.Common.Protobufs.Emails.EmailMessage.Type email_type = 1;
-    if (has_email_type()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::EnumSize(this->email_type());
-    }
-
+  // required .SolasMatch.Common.Protobufs.Emails.EmailMessage.Type email_type = 1;
+  if (has_email_type()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->email_type());
   }
   total_size += _extensions_.ByteSize();
 
-  if (!unknown_fields().empty()) {
+  if (_internal_metadata_.have_unknown_fields()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         unknown_fields());
@@ -383,35 +407,47 @@ int EmailMessage::ByteSize() const {
 }
 
 void EmailMessage::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const EmailMessage* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const EmailMessage*>(
-      &from);
+// @@protoc_insertion_point(generalized_merge_from_start:SolasMatch.Common.Protobufs.Emails.EmailMessage)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  const EmailMessage* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const EmailMessage>(
+          &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:SolasMatch.Common.Protobufs.Emails.EmailMessage)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:SolasMatch.Common.Protobufs.Emails.EmailMessage)
     MergeFrom(*source);
   }
 }
 
 void EmailMessage::MergeFrom(const EmailMessage& from) {
-  GOOGLE_CHECK_NE(&from, this);
+// @@protoc_insertion_point(class_specific_merge_from_start:SolasMatch.Common.Protobufs.Emails.EmailMessage)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_email_type()) {
       set_email_type(from.email_type());
     }
   }
   _extensions_.MergeFrom(from._extensions_);
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  if (from._internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  }
 }
 
 void EmailMessage::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:SolasMatch.Common.Protobufs.Emails.EmailMessage)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void EmailMessage::CopyFrom(const EmailMessage& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:SolasMatch.Common.Protobufs.Emails.EmailMessage)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -425,13 +461,15 @@ bool EmailMessage::IsInitialized() const {
 }
 
 void EmailMessage::Swap(EmailMessage* other) {
-  if (other != this) {
-    std::swap(email_type_, other->email_type_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-    _extensions_.Swap(&other->_extensions_);
-  }
+  if (other == this) return;
+  InternalSwap(other);
+}
+void EmailMessage::InternalSwap(EmailMessage* other) {
+  std::swap(email_type_, other->email_type_);
+  std::swap(_has_bits_[0], other->_has_bits_[0]);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
+  _extensions_.Swap(&other->_extensions_);
 }
 
 ::google::protobuf::Metadata EmailMessage::GetMetadata() const {
@@ -442,6 +480,35 @@ void EmailMessage::Swap(EmailMessage* other) {
   return metadata;
 }
 
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// EmailMessage
+
+// required .SolasMatch.Common.Protobufs.Emails.EmailMessage.Type email_type = 1;
+bool EmailMessage::has_email_type() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+void EmailMessage::set_has_email_type() {
+  _has_bits_[0] |= 0x00000001u;
+}
+void EmailMessage::clear_has_email_type() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+void EmailMessage::clear_email_type() {
+  email_type_ = 1;
+  clear_has_email_type();
+}
+ ::SolasMatch::Common::Protobufs::Emails::EmailMessage_Type EmailMessage::email_type() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Emails.EmailMessage.email_type)
+  return static_cast< ::SolasMatch::Common::Protobufs::Emails::EmailMessage_Type >(email_type_);
+}
+ void EmailMessage::set_email_type(::SolasMatch::Common::Protobufs::Emails::EmailMessage_Type value) {
+  assert(::SolasMatch::Common::Protobufs::Emails::EmailMessage_Type_IsValid(value));
+  set_has_email_type();
+  email_type_ = value;
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Emails.EmailMessage.email_type)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // @@protoc_insertion_point(namespace_scope)
 

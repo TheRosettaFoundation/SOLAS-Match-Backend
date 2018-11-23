@@ -7,6 +7,7 @@
 #include <algorithm>
 
 #include <google/protobuf/stubs/common.h>
+#include <google/protobuf/stubs/port.h>
 #include <google/protobuf/stubs/once.h>
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/wire_format_lite_inl.h>
@@ -30,6 +31,7 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 }  // namespace
 
 
+void protobuf_AssignDesc_OrgFeedback_2eproto() GOOGLE_ATTRIBUTE_COLD;
 void protobuf_AssignDesc_OrgFeedback_2eproto() {
   protobuf_AddDesc_OrgFeedback_2eproto();
   const ::google::protobuf::FileDescriptor* file =
@@ -45,16 +47,16 @@ void protobuf_AssignDesc_OrgFeedback_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(OrgFeedback, user_id_),
   };
   OrgFeedback_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
       OrgFeedback_descriptor_,
       OrgFeedback::default_instance_,
       OrgFeedback_offsets_,
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(OrgFeedback, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(OrgFeedback, _unknown_fields_),
       -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(OrgFeedback));
+      -1,
+      sizeof(OrgFeedback),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(OrgFeedback, _internal_metadata_),
+      -1);
 }
 
 namespace {
@@ -65,10 +67,11 @@ inline void protobuf_AssignDescriptorsOnce() {
                  &protobuf_AssignDesc_OrgFeedback_2eproto);
 }
 
+void protobuf_RegisterTypes(const ::std::string&) GOOGLE_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    OrgFeedback_descriptor_, &OrgFeedback::default_instance());
+      OrgFeedback_descriptor_, &OrgFeedback::default_instance());
 }
 
 }  // namespace
@@ -78,6 +81,7 @@ void protobuf_ShutdownFile_OrgFeedback_2eproto() {
   delete OrgFeedback_reflection_;
 }
 
+void protobuf_AddDesc_OrgFeedback_2eproto() GOOGLE_ATTRIBUTE_COLD;
 void protobuf_AddDesc_OrgFeedback_2eproto() {
   static bool already_here = false;
   if (already_here) return;
@@ -109,46 +113,49 @@ struct StaticDescriptorInitializer_OrgFeedback_2eproto {
 
 // ===================================================================
 
-#ifndef _MSC_VER
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int OrgFeedback::kEmailTypeFieldNumber;
 const int OrgFeedback::kTaskIdFieldNumber;
 const int OrgFeedback::kClaimantIdFieldNumber;
 const int OrgFeedback::kFeedbackFieldNumber;
 const int OrgFeedback::kUserIdFieldNumber;
-#endif  // !_MSC_VER
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 OrgFeedback::OrgFeedback()
-  : ::google::protobuf::Message() {
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   SharedCtor();
+  // @@protoc_insertion_point(constructor:SolasMatch.Common.Protobufs.Emails.OrgFeedback)
 }
 
 void OrgFeedback::InitAsDefaultInstance() {
 }
 
 OrgFeedback::OrgFeedback(const OrgFeedback& from)
-  : ::google::protobuf::Message() {
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
   SharedCtor();
   MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:SolasMatch.Common.Protobufs.Emails.OrgFeedback)
 }
 
 void OrgFeedback::SharedCtor() {
+  ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
   email_type_ = 18;
   task_id_ = 0;
   claimant_id_ = 0;
-  feedback_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  feedback_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   user_id_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
 OrgFeedback::~OrgFeedback() {
+  // @@protoc_insertion_point(destructor:SolasMatch.Common.Protobufs.Emails.OrgFeedback)
   SharedDtor();
 }
 
 void OrgFeedback::SharedDtor() {
-  if (feedback_ != &::google::protobuf::internal::kEmptyString) {
-    delete feedback_;
-  }
+  feedback_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != default_instance_) {
   }
 }
@@ -170,36 +177,63 @@ const OrgFeedback& OrgFeedback::default_instance() {
 
 OrgFeedback* OrgFeedback::default_instance_ = NULL;
 
-OrgFeedback* OrgFeedback::New() const {
-  return new OrgFeedback;
+OrgFeedback* OrgFeedback::New(::google::protobuf::Arena* arena) const {
+  OrgFeedback* n = new OrgFeedback;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
 }
 
 void OrgFeedback::Clear() {
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+// @@protoc_insertion_point(message_clear_start:SolasMatch.Common.Protobufs.Emails.OrgFeedback)
+#if defined(__clang__)
+#define ZR_HELPER_(f) \
+  _Pragma("clang diagnostic push") \
+  _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
+  __builtin_offsetof(OrgFeedback, f) \
+  _Pragma("clang diagnostic pop")
+#else
+#define ZR_HELPER_(f) reinterpret_cast<char*>(\
+  &reinterpret_cast<OrgFeedback*>(16)->f)
+#endif
+
+#define ZR_(first, last) do {\
+  ::memset(&first, 0,\
+           ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
+} while (0)
+
+  if (_has_bits_[0 / 32] & 31u) {
+    ZR_(claimant_id_, user_id_);
     email_type_ = 18;
     task_id_ = 0;
-    claimant_id_ = 0;
     if (has_feedback()) {
-      if (feedback_ != &::google::protobuf::internal::kEmptyString) {
-        feedback_->clear();
-      }
+      feedback_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     }
-    user_id_ = 0;
   }
+
+#undef ZR_HELPER_
+#undef ZR_
+
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
+  if (_internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->Clear();
+  }
 }
 
 bool OrgFeedback::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  while ((tag = input->ReadTag()) != 0) {
+  // @@protoc_insertion_point(parse_start:SolasMatch.Common.Protobufs.Emails.OrgFeedback)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // required .SolasMatch.Common.Protobufs.Emails.EmailMessage.Type email_type = 1 [default = OrgFeedback];
       case 1: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 8) {
           int value;
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
@@ -210,7 +244,7 @@ bool OrgFeedback::MergePartialFromCodedStream(
             mutable_unknown_fields()->AddVarint(1, value);
           }
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(16)) goto parse_task_id;
         break;
@@ -218,15 +252,14 @@ bool OrgFeedback::MergePartialFromCodedStream(
 
       // required int32 task_id = 2;
       case 2: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 16) {
          parse_task_id:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &task_id_)));
           set_has_task_id();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(24)) goto parse_claimant_id;
         break;
@@ -234,15 +267,14 @@ bool OrgFeedback::MergePartialFromCodedStream(
 
       // required int32 claimant_id = 3;
       case 3: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 24) {
          parse_claimant_id:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &claimant_id_)));
           set_has_claimant_id();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(34)) goto parse_feedback;
         break;
@@ -250,16 +282,16 @@ bool OrgFeedback::MergePartialFromCodedStream(
 
       // required string feedback = 4;
       case 4: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 34) {
          parse_feedback:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_feedback()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
             this->feedback().data(), this->feedback().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "SolasMatch.Common.Protobufs.Emails.OrgFeedback.feedback");
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(40)) goto parse_user_id;
         break;
@@ -267,25 +299,25 @@ bool OrgFeedback::MergePartialFromCodedStream(
 
       // required int32 user_id = 5;
       case 5: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 40) {
          parse_user_id:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &user_id_)));
           set_has_user_id();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
-        if (input->ExpectAtEnd()) return true;
+        if (input->ExpectAtEnd()) goto success;
         break;
       }
 
       default: {
-      handle_uninterpreted:
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          return true;
+          goto success;
         }
         DO_(::google::protobuf::internal::WireFormat::SkipField(
               input, tag, mutable_unknown_fields()));
@@ -293,12 +325,18 @@ bool OrgFeedback::MergePartialFromCodedStream(
       }
     }
   }
+success:
+  // @@protoc_insertion_point(parse_success:SolasMatch.Common.Protobufs.Emails.OrgFeedback)
   return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:SolasMatch.Common.Protobufs.Emails.OrgFeedback)
+  return false;
 #undef DO_
 }
 
 void OrgFeedback::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:SolasMatch.Common.Protobufs.Emails.OrgFeedback)
   // required .SolasMatch.Common.Protobufs.Emails.EmailMessage.Type email_type = 1 [default = OrgFeedback];
   if (has_email_type()) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
@@ -317,10 +355,11 @@ void OrgFeedback::SerializeWithCachedSizes(
 
   // required string feedback = 4;
   if (has_feedback()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->feedback().data(), this->feedback().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Emails.OrgFeedback.feedback");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       4, this->feedback(), output);
   }
 
@@ -329,14 +368,16 @@ void OrgFeedback::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(5, this->user_id(), output);
   }
 
-  if (!unknown_fields().empty()) {
+  if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
+  // @@protoc_insertion_point(serialize_end:SolasMatch.Common.Protobufs.Emails.OrgFeedback)
 }
 
-::google::protobuf::uint8* OrgFeedback::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
+::google::protobuf::uint8* OrgFeedback::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:SolasMatch.Common.Protobufs.Emails.OrgFeedback)
   // required .SolasMatch.Common.Protobufs.Emails.EmailMessage.Type email_type = 1 [default = OrgFeedback];
   if (has_email_type()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
@@ -355,9 +396,10 @@ void OrgFeedback::SerializeWithCachedSizes(
 
   // required string feedback = 4;
   if (has_feedback()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->feedback().data(), this->feedback().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Emails.OrgFeedback.feedback");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         4, this->feedback(), target);
@@ -368,53 +410,87 @@ void OrgFeedback::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(5, this->user_id(), target);
   }
 
-  if (!unknown_fields().empty()) {
+  if (_internal_metadata_.have_unknown_fields()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
+  // @@protoc_insertion_point(serialize_to_array_end:SolasMatch.Common.Protobufs.Emails.OrgFeedback)
   return target;
 }
 
-int OrgFeedback::ByteSize() const {
+int OrgFeedback::RequiredFieldsByteSizeFallback() const {
+// @@protoc_insertion_point(required_fields_byte_size_fallback_start:SolasMatch.Common.Protobufs.Emails.OrgFeedback)
   int total_size = 0;
 
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+  if (has_email_type()) {
     // required .SolasMatch.Common.Protobufs.Emails.EmailMessage.Type email_type = 1 [default = OrgFeedback];
-    if (has_email_type()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::EnumSize(this->email_type());
-    }
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->email_type());
+  }
+
+  if (has_task_id()) {
+    // required int32 task_id = 2;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->task_id());
+  }
+
+  if (has_claimant_id()) {
+    // required int32 claimant_id = 3;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->claimant_id());
+  }
+
+  if (has_feedback()) {
+    // required string feedback = 4;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->feedback());
+  }
+
+  if (has_user_id()) {
+    // required int32 user_id = 5;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->user_id());
+  }
+
+  return total_size;
+}
+int OrgFeedback::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:SolasMatch.Common.Protobufs.Emails.OrgFeedback)
+  int total_size = 0;
+
+  if (((_has_bits_[0] & 0x0000001f) ^ 0x0000001f) == 0) {  // All required fields are present.
+    // required .SolasMatch.Common.Protobufs.Emails.EmailMessage.Type email_type = 1 [default = OrgFeedback];
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->email_type());
 
     // required int32 task_id = 2;
-    if (has_task_id()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->task_id());
-    }
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->task_id());
 
     // required int32 claimant_id = 3;
-    if (has_claimant_id()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->claimant_id());
-    }
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->claimant_id());
 
     // required string feedback = 4;
-    if (has_feedback()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->feedback());
-    }
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->feedback());
 
     // required int32 user_id = 5;
-    if (has_user_id()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->user_id());
-    }
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->user_id());
 
+  } else {
+    total_size += RequiredFieldsByteSizeFallback();
   }
-  if (!unknown_fields().empty()) {
+  if (_internal_metadata_.have_unknown_fields()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         unknown_fields());
@@ -426,19 +502,27 @@ int OrgFeedback::ByteSize() const {
 }
 
 void OrgFeedback::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const OrgFeedback* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const OrgFeedback*>(
-      &from);
+// @@protoc_insertion_point(generalized_merge_from_start:SolasMatch.Common.Protobufs.Emails.OrgFeedback)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  const OrgFeedback* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const OrgFeedback>(
+          &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:SolasMatch.Common.Protobufs.Emails.OrgFeedback)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:SolasMatch.Common.Protobufs.Emails.OrgFeedback)
     MergeFrom(*source);
   }
 }
 
 void OrgFeedback::MergeFrom(const OrgFeedback& from) {
-  GOOGLE_CHECK_NE(&from, this);
+// @@protoc_insertion_point(class_specific_merge_from_start:SolasMatch.Common.Protobufs.Emails.OrgFeedback)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_email_type()) {
       set_email_type(from.email_type());
@@ -450,22 +534,27 @@ void OrgFeedback::MergeFrom(const OrgFeedback& from) {
       set_claimant_id(from.claimant_id());
     }
     if (from.has_feedback()) {
-      set_feedback(from.feedback());
+      set_has_feedback();
+      feedback_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.feedback_);
     }
     if (from.has_user_id()) {
       set_user_id(from.user_id());
     }
   }
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  if (from._internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  }
 }
 
 void OrgFeedback::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:SolasMatch.Common.Protobufs.Emails.OrgFeedback)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void OrgFeedback::CopyFrom(const OrgFeedback& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:SolasMatch.Common.Protobufs.Emails.OrgFeedback)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -478,16 +567,18 @@ bool OrgFeedback::IsInitialized() const {
 }
 
 void OrgFeedback::Swap(OrgFeedback* other) {
-  if (other != this) {
-    std::swap(email_type_, other->email_type_);
-    std::swap(task_id_, other->task_id_);
-    std::swap(claimant_id_, other->claimant_id_);
-    std::swap(feedback_, other->feedback_);
-    std::swap(user_id_, other->user_id_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
+  if (other == this) return;
+  InternalSwap(other);
+}
+void OrgFeedback::InternalSwap(OrgFeedback* other) {
+  std::swap(email_type_, other->email_type_);
+  std::swap(task_id_, other->task_id_);
+  std::swap(claimant_id_, other->claimant_id_);
+  feedback_.Swap(&other->feedback_);
+  std::swap(user_id_, other->user_id_);
+  std::swap(_has_bits_[0], other->_has_bits_[0]);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata OrgFeedback::GetMetadata() const {
@@ -498,6 +589,161 @@ void OrgFeedback::Swap(OrgFeedback* other) {
   return metadata;
 }
 
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// OrgFeedback
+
+// required .SolasMatch.Common.Protobufs.Emails.EmailMessage.Type email_type = 1 [default = OrgFeedback];
+bool OrgFeedback::has_email_type() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+void OrgFeedback::set_has_email_type() {
+  _has_bits_[0] |= 0x00000001u;
+}
+void OrgFeedback::clear_has_email_type() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+void OrgFeedback::clear_email_type() {
+  email_type_ = 18;
+  clear_has_email_type();
+}
+ ::SolasMatch::Common::Protobufs::Emails::EmailMessage_Type OrgFeedback::email_type() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Emails.OrgFeedback.email_type)
+  return static_cast< ::SolasMatch::Common::Protobufs::Emails::EmailMessage_Type >(email_type_);
+}
+ void OrgFeedback::set_email_type(::SolasMatch::Common::Protobufs::Emails::EmailMessage_Type value) {
+  assert(::SolasMatch::Common::Protobufs::Emails::EmailMessage_Type_IsValid(value));
+  set_has_email_type();
+  email_type_ = value;
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Emails.OrgFeedback.email_type)
+}
+
+// required int32 task_id = 2;
+bool OrgFeedback::has_task_id() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+void OrgFeedback::set_has_task_id() {
+  _has_bits_[0] |= 0x00000002u;
+}
+void OrgFeedback::clear_has_task_id() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+void OrgFeedback::clear_task_id() {
+  task_id_ = 0;
+  clear_has_task_id();
+}
+ ::google::protobuf::int32 OrgFeedback::task_id() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Emails.OrgFeedback.task_id)
+  return task_id_;
+}
+ void OrgFeedback::set_task_id(::google::protobuf::int32 value) {
+  set_has_task_id();
+  task_id_ = value;
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Emails.OrgFeedback.task_id)
+}
+
+// required int32 claimant_id = 3;
+bool OrgFeedback::has_claimant_id() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+void OrgFeedback::set_has_claimant_id() {
+  _has_bits_[0] |= 0x00000004u;
+}
+void OrgFeedback::clear_has_claimant_id() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+void OrgFeedback::clear_claimant_id() {
+  claimant_id_ = 0;
+  clear_has_claimant_id();
+}
+ ::google::protobuf::int32 OrgFeedback::claimant_id() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Emails.OrgFeedback.claimant_id)
+  return claimant_id_;
+}
+ void OrgFeedback::set_claimant_id(::google::protobuf::int32 value) {
+  set_has_claimant_id();
+  claimant_id_ = value;
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Emails.OrgFeedback.claimant_id)
+}
+
+// required string feedback = 4;
+bool OrgFeedback::has_feedback() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+void OrgFeedback::set_has_feedback() {
+  _has_bits_[0] |= 0x00000008u;
+}
+void OrgFeedback::clear_has_feedback() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+void OrgFeedback::clear_feedback() {
+  feedback_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_feedback();
+}
+ const ::std::string& OrgFeedback::feedback() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Emails.OrgFeedback.feedback)
+  return feedback_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void OrgFeedback::set_feedback(const ::std::string& value) {
+  set_has_feedback();
+  feedback_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Emails.OrgFeedback.feedback)
+}
+ void OrgFeedback::set_feedback(const char* value) {
+  set_has_feedback();
+  feedback_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:SolasMatch.Common.Protobufs.Emails.OrgFeedback.feedback)
+}
+ void OrgFeedback::set_feedback(const char* value, size_t size) {
+  set_has_feedback();
+  feedback_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:SolasMatch.Common.Protobufs.Emails.OrgFeedback.feedback)
+}
+ ::std::string* OrgFeedback::mutable_feedback() {
+  set_has_feedback();
+  // @@protoc_insertion_point(field_mutable:SolasMatch.Common.Protobufs.Emails.OrgFeedback.feedback)
+  return feedback_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* OrgFeedback::release_feedback() {
+  // @@protoc_insertion_point(field_release:SolasMatch.Common.Protobufs.Emails.OrgFeedback.feedback)
+  clear_has_feedback();
+  return feedback_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void OrgFeedback::set_allocated_feedback(::std::string* feedback) {
+  if (feedback != NULL) {
+    set_has_feedback();
+  } else {
+    clear_has_feedback();
+  }
+  feedback_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), feedback);
+  // @@protoc_insertion_point(field_set_allocated:SolasMatch.Common.Protobufs.Emails.OrgFeedback.feedback)
+}
+
+// required int32 user_id = 5;
+bool OrgFeedback::has_user_id() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+void OrgFeedback::set_has_user_id() {
+  _has_bits_[0] |= 0x00000010u;
+}
+void OrgFeedback::clear_has_user_id() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+void OrgFeedback::clear_user_id() {
+  user_id_ = 0;
+  clear_has_user_id();
+}
+ ::google::protobuf::int32 OrgFeedback::user_id() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Emails.OrgFeedback.user_id)
+  return user_id_;
+}
+ void OrgFeedback::set_user_id(::google::protobuf::int32 value) {
+  set_has_user_id();
+  user_id_ = value;
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Emails.OrgFeedback.user_id)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // @@protoc_insertion_point(namespace_scope)
 

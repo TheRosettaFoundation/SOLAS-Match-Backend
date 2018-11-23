@@ -7,6 +7,7 @@
 #include <algorithm>
 
 #include <google/protobuf/stubs/common.h>
+#include <google/protobuf/stubs/port.h>
 #include <google/protobuf/stubs/once.h>
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/wire_format_lite_inl.h>
@@ -30,6 +31,7 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 }  // namespace
 
 
+void protobuf_AssignDesc_Organisation_2eproto() GOOGLE_ATTRIBUTE_COLD;
 void protobuf_AssignDesc_Organisation_2eproto() {
   protobuf_AddDesc_Organisation_2eproto();
   const ::google::protobuf::FileDescriptor* file =
@@ -49,16 +51,16 @@ void protobuf_AssignDesc_Organisation_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Organisation, regionalfocus_),
   };
   Organisation_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
       Organisation_descriptor_,
       Organisation::default_instance_,
       Organisation_offsets_,
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Organisation, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Organisation, _unknown_fields_),
       -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(Organisation));
+      -1,
+      sizeof(Organisation),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Organisation, _internal_metadata_),
+      -1);
 }
 
 namespace {
@@ -69,10 +71,11 @@ inline void protobuf_AssignDescriptorsOnce() {
                  &protobuf_AssignDesc_Organisation_2eproto);
 }
 
+void protobuf_RegisterTypes(const ::std::string&) GOOGLE_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    Organisation_descriptor_, &Organisation::default_instance());
+      Organisation_descriptor_, &Organisation::default_instance());
 }
 
 }  // namespace
@@ -82,6 +85,7 @@ void protobuf_ShutdownFile_Organisation_2eproto() {
   delete Organisation_reflection_;
 }
 
+void protobuf_AddDesc_Organisation_2eproto() GOOGLE_ATTRIBUTE_COLD;
 void protobuf_AddDesc_Organisation_2eproto() {
   static bool already_here = false;
   if (already_here) return;
@@ -111,7 +115,7 @@ struct StaticDescriptorInitializer_Organisation_2eproto {
 
 // ===================================================================
 
-#ifndef _MSC_VER
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int Organisation::kIdFieldNumber;
 const int Organisation::kNameFieldNumber;
 const int Organisation::kBiographyFieldNumber;
@@ -121,65 +125,54 @@ const int Organisation::kAddressFieldNumber;
 const int Organisation::kCityFieldNumber;
 const int Organisation::kCountryFieldNumber;
 const int Organisation::kRegionalFocusFieldNumber;
-#endif  // !_MSC_VER
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 Organisation::Organisation()
-  : ::google::protobuf::Message() {
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   SharedCtor();
+  // @@protoc_insertion_point(constructor:SolasMatch.Common.Protobufs.Models.Organisation)
 }
 
 void Organisation::InitAsDefaultInstance() {
 }
 
 Organisation::Organisation(const Organisation& from)
-  : ::google::protobuf::Message() {
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
   SharedCtor();
   MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:SolasMatch.Common.Protobufs.Models.Organisation)
 }
 
 void Organisation::SharedCtor() {
+  ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
   id_ = 0;
-  name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  biography_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  homepage_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  email_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  address_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  city_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  country_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  regionalfocus_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  biography_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  homepage_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  email_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  address_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  city_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  country_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  regionalfocus_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
 Organisation::~Organisation() {
+  // @@protoc_insertion_point(destructor:SolasMatch.Common.Protobufs.Models.Organisation)
   SharedDtor();
 }
 
 void Organisation::SharedDtor() {
-  if (name_ != &::google::protobuf::internal::kEmptyString) {
-    delete name_;
-  }
-  if (biography_ != &::google::protobuf::internal::kEmptyString) {
-    delete biography_;
-  }
-  if (homepage_ != &::google::protobuf::internal::kEmptyString) {
-    delete homepage_;
-  }
-  if (email_ != &::google::protobuf::internal::kEmptyString) {
-    delete email_;
-  }
-  if (address_ != &::google::protobuf::internal::kEmptyString) {
-    delete address_;
-  }
-  if (city_ != &::google::protobuf::internal::kEmptyString) {
-    delete city_;
-  }
-  if (country_ != &::google::protobuf::internal::kEmptyString) {
-    delete country_;
-  }
-  if (regionalfocus_ != &::google::protobuf::internal::kEmptyString) {
-    delete regionalfocus_;
-  }
+  name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  biography_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  homepage_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  email_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  address_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  city_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  country_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  regionalfocus_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != default_instance_) {
   }
 }
@@ -201,76 +194,68 @@ const Organisation& Organisation::default_instance() {
 
 Organisation* Organisation::default_instance_ = NULL;
 
-Organisation* Organisation::New() const {
-  return new Organisation;
+Organisation* Organisation::New(::google::protobuf::Arena* arena) const {
+  Organisation* n = new Organisation;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
 }
 
 void Organisation::Clear() {
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+// @@protoc_insertion_point(message_clear_start:SolasMatch.Common.Protobufs.Models.Organisation)
+  if (_has_bits_[0 / 32] & 255u) {
     id_ = 0;
     if (has_name()) {
-      if (name_ != &::google::protobuf::internal::kEmptyString) {
-        name_->clear();
-      }
+      name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     }
     if (has_biography()) {
-      if (biography_ != &::google::protobuf::internal::kEmptyString) {
-        biography_->clear();
-      }
+      biography_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     }
     if (has_homepage()) {
-      if (homepage_ != &::google::protobuf::internal::kEmptyString) {
-        homepage_->clear();
-      }
+      homepage_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     }
     if (has_email()) {
-      if (email_ != &::google::protobuf::internal::kEmptyString) {
-        email_->clear();
-      }
+      email_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     }
     if (has_address()) {
-      if (address_ != &::google::protobuf::internal::kEmptyString) {
-        address_->clear();
-      }
+      address_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     }
     if (has_city()) {
-      if (city_ != &::google::protobuf::internal::kEmptyString) {
-        city_->clear();
-      }
+      city_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     }
     if (has_country()) {
-      if (country_ != &::google::protobuf::internal::kEmptyString) {
-        country_->clear();
-      }
+      country_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     }
   }
-  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
-    if (has_regionalfocus()) {
-      if (regionalfocus_ != &::google::protobuf::internal::kEmptyString) {
-        regionalfocus_->clear();
-      }
-    }
+  if (has_regionalfocus()) {
+    regionalfocus_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
+  if (_internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->Clear();
+  }
 }
 
 bool Organisation::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  while ((tag = input->ReadTag()) != 0) {
+  // @@protoc_insertion_point(parse_start:SolasMatch.Common.Protobufs.Models.Organisation)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // optional int32 id = 1;
       case 1: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 8) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &id_)));
           set_has_id();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(18)) goto parse_name;
         break;
@@ -278,16 +263,16 @@ bool Organisation::MergePartialFromCodedStream(
 
       // optional string name = 2;
       case 2: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 18) {
          parse_name:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_name()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
             this->name().data(), this->name().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "SolasMatch.Common.Protobufs.Models.Organisation.name");
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(26)) goto parse_biography;
         break;
@@ -295,16 +280,16 @@ bool Organisation::MergePartialFromCodedStream(
 
       // optional string biography = 3;
       case 3: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 26) {
          parse_biography:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_biography()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
             this->biography().data(), this->biography().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "SolasMatch.Common.Protobufs.Models.Organisation.biography");
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(34)) goto parse_homepage;
         break;
@@ -312,16 +297,16 @@ bool Organisation::MergePartialFromCodedStream(
 
       // optional string homepage = 4;
       case 4: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 34) {
          parse_homepage:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_homepage()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
             this->homepage().data(), this->homepage().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "SolasMatch.Common.Protobufs.Models.Organisation.homepage");
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(42)) goto parse_email;
         break;
@@ -329,16 +314,16 @@ bool Organisation::MergePartialFromCodedStream(
 
       // optional string email = 5;
       case 5: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 42) {
          parse_email:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_email()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
             this->email().data(), this->email().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "SolasMatch.Common.Protobufs.Models.Organisation.email");
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(50)) goto parse_address;
         break;
@@ -346,16 +331,16 @@ bool Organisation::MergePartialFromCodedStream(
 
       // optional string address = 6;
       case 6: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 50) {
          parse_address:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_address()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
             this->address().data(), this->address().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "SolasMatch.Common.Protobufs.Models.Organisation.address");
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(58)) goto parse_city;
         break;
@@ -363,16 +348,16 @@ bool Organisation::MergePartialFromCodedStream(
 
       // optional string city = 7;
       case 7: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 58) {
          parse_city:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_city()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
             this->city().data(), this->city().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "SolasMatch.Common.Protobufs.Models.Organisation.city");
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(66)) goto parse_country;
         break;
@@ -380,16 +365,16 @@ bool Organisation::MergePartialFromCodedStream(
 
       // optional string country = 8;
       case 8: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 66) {
          parse_country:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_country()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
             this->country().data(), this->country().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "SolasMatch.Common.Protobufs.Models.Organisation.country");
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(74)) goto parse_regionalFocus;
         break;
@@ -397,26 +382,27 @@ bool Organisation::MergePartialFromCodedStream(
 
       // optional string regionalFocus = 9;
       case 9: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 74) {
          parse_regionalFocus:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_regionalfocus()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
             this->regionalfocus().data(), this->regionalfocus().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "SolasMatch.Common.Protobufs.Models.Organisation.regionalFocus");
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
-        if (input->ExpectAtEnd()) return true;
+        if (input->ExpectAtEnd()) goto success;
         break;
       }
 
       default: {
-      handle_uninterpreted:
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          return true;
+          goto success;
         }
         DO_(::google::protobuf::internal::WireFormat::SkipField(
               input, tag, mutable_unknown_fields()));
@@ -424,12 +410,18 @@ bool Organisation::MergePartialFromCodedStream(
       }
     }
   }
+success:
+  // @@protoc_insertion_point(parse_success:SolasMatch.Common.Protobufs.Models.Organisation)
   return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:SolasMatch.Common.Protobufs.Models.Organisation)
+  return false;
 #undef DO_
 }
 
 void Organisation::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:SolasMatch.Common.Protobufs.Models.Organisation)
   // optional int32 id = 1;
   if (has_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->id(), output);
@@ -437,84 +429,94 @@ void Organisation::SerializeWithCachedSizes(
 
   // optional string name = 2;
   if (has_name()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->name().data(), this->name().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.Organisation.name");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       2, this->name(), output);
   }
 
   // optional string biography = 3;
   if (has_biography()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->biography().data(), this->biography().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.Organisation.biography");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       3, this->biography(), output);
   }
 
   // optional string homepage = 4;
   if (has_homepage()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->homepage().data(), this->homepage().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.Organisation.homepage");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       4, this->homepage(), output);
   }
 
   // optional string email = 5;
   if (has_email()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->email().data(), this->email().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.Organisation.email");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       5, this->email(), output);
   }
 
   // optional string address = 6;
   if (has_address()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->address().data(), this->address().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.Organisation.address");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       6, this->address(), output);
   }
 
   // optional string city = 7;
   if (has_city()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->city().data(), this->city().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.Organisation.city");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       7, this->city(), output);
   }
 
   // optional string country = 8;
   if (has_country()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->country().data(), this->country().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.Organisation.country");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       8, this->country(), output);
   }
 
   // optional string regionalFocus = 9;
   if (has_regionalfocus()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->regionalfocus().data(), this->regionalfocus().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.Organisation.regionalFocus");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       9, this->regionalfocus(), output);
   }
 
-  if (!unknown_fields().empty()) {
+  if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
+  // @@protoc_insertion_point(serialize_end:SolasMatch.Common.Protobufs.Models.Organisation)
 }
 
-::google::protobuf::uint8* Organisation::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
+::google::protobuf::uint8* Organisation::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:SolasMatch.Common.Protobufs.Models.Organisation)
   // optional int32 id = 1;
   if (has_id()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->id(), target);
@@ -522,9 +524,10 @@ void Organisation::SerializeWithCachedSizes(
 
   // optional string name = 2;
   if (has_name()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->name().data(), this->name().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.Organisation.name");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         2, this->name(), target);
@@ -532,9 +535,10 @@ void Organisation::SerializeWithCachedSizes(
 
   // optional string biography = 3;
   if (has_biography()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->biography().data(), this->biography().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.Organisation.biography");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         3, this->biography(), target);
@@ -542,9 +546,10 @@ void Organisation::SerializeWithCachedSizes(
 
   // optional string homepage = 4;
   if (has_homepage()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->homepage().data(), this->homepage().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.Organisation.homepage");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         4, this->homepage(), target);
@@ -552,9 +557,10 @@ void Organisation::SerializeWithCachedSizes(
 
   // optional string email = 5;
   if (has_email()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->email().data(), this->email().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.Organisation.email");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         5, this->email(), target);
@@ -562,9 +568,10 @@ void Organisation::SerializeWithCachedSizes(
 
   // optional string address = 6;
   if (has_address()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->address().data(), this->address().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.Organisation.address");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         6, this->address(), target);
@@ -572,9 +579,10 @@ void Organisation::SerializeWithCachedSizes(
 
   // optional string city = 7;
   if (has_city()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->city().data(), this->city().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.Organisation.city");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         7, this->city(), target);
@@ -582,9 +590,10 @@ void Organisation::SerializeWithCachedSizes(
 
   // optional string country = 8;
   if (has_country()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->country().data(), this->country().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.Organisation.country");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         8, this->country(), target);
@@ -592,25 +601,28 @@ void Organisation::SerializeWithCachedSizes(
 
   // optional string regionalFocus = 9;
   if (has_regionalfocus()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->regionalfocus().data(), this->regionalfocus().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.Organisation.regionalFocus");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         9, this->regionalfocus(), target);
   }
 
-  if (!unknown_fields().empty()) {
+  if (_internal_metadata_.have_unknown_fields()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
+  // @@protoc_insertion_point(serialize_to_array_end:SolasMatch.Common.Protobufs.Models.Organisation)
   return target;
 }
 
 int Organisation::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:SolasMatch.Common.Protobufs.Models.Organisation)
   int total_size = 0;
 
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+  if (_has_bits_[0 / 32] & 255u) {
     // optional int32 id = 1;
     if (has_id()) {
       total_size += 1 +
@@ -668,16 +680,14 @@ int Organisation::ByteSize() const {
     }
 
   }
-  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
-    // optional string regionalFocus = 9;
-    if (has_regionalfocus()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->regionalfocus());
-    }
-
+  // optional string regionalFocus = 9;
+  if (has_regionalfocus()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->regionalfocus());
   }
-  if (!unknown_fields().empty()) {
+
+  if (_internal_metadata_.have_unknown_fields()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         unknown_fields());
@@ -689,60 +699,80 @@ int Organisation::ByteSize() const {
 }
 
 void Organisation::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const Organisation* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const Organisation*>(
-      &from);
+// @@protoc_insertion_point(generalized_merge_from_start:SolasMatch.Common.Protobufs.Models.Organisation)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  const Organisation* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const Organisation>(
+          &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:SolasMatch.Common.Protobufs.Models.Organisation)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:SolasMatch.Common.Protobufs.Models.Organisation)
     MergeFrom(*source);
   }
 }
 
 void Organisation::MergeFrom(const Organisation& from) {
-  GOOGLE_CHECK_NE(&from, this);
+// @@protoc_insertion_point(class_specific_merge_from_start:SolasMatch.Common.Protobufs.Models.Organisation)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_id()) {
       set_id(from.id());
     }
     if (from.has_name()) {
-      set_name(from.name());
+      set_has_name();
+      name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
     }
     if (from.has_biography()) {
-      set_biography(from.biography());
+      set_has_biography();
+      biography_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.biography_);
     }
     if (from.has_homepage()) {
-      set_homepage(from.homepage());
+      set_has_homepage();
+      homepage_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.homepage_);
     }
     if (from.has_email()) {
-      set_email(from.email());
+      set_has_email();
+      email_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.email_);
     }
     if (from.has_address()) {
-      set_address(from.address());
+      set_has_address();
+      address_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.address_);
     }
     if (from.has_city()) {
-      set_city(from.city());
+      set_has_city();
+      city_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.city_);
     }
     if (from.has_country()) {
-      set_country(from.country());
+      set_has_country();
+      country_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.country_);
     }
   }
   if (from._has_bits_[8 / 32] & (0xffu << (8 % 32))) {
     if (from.has_regionalfocus()) {
-      set_regionalfocus(from.regionalfocus());
+      set_has_regionalfocus();
+      regionalfocus_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.regionalfocus_);
     }
   }
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  if (from._internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  }
 }
 
 void Organisation::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:SolasMatch.Common.Protobufs.Models.Organisation)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void Organisation::CopyFrom(const Organisation& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:SolasMatch.Common.Protobufs.Models.Organisation)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -754,20 +784,22 @@ bool Organisation::IsInitialized() const {
 }
 
 void Organisation::Swap(Organisation* other) {
-  if (other != this) {
-    std::swap(id_, other->id_);
-    std::swap(name_, other->name_);
-    std::swap(biography_, other->biography_);
-    std::swap(homepage_, other->homepage_);
-    std::swap(email_, other->email_);
-    std::swap(address_, other->address_);
-    std::swap(city_, other->city_);
-    std::swap(country_, other->country_);
-    std::swap(regionalfocus_, other->regionalfocus_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
+  if (other == this) return;
+  InternalSwap(other);
+}
+void Organisation::InternalSwap(Organisation* other) {
+  std::swap(id_, other->id_);
+  name_.Swap(&other->name_);
+  biography_.Swap(&other->biography_);
+  homepage_.Swap(&other->homepage_);
+  email_.Swap(&other->email_);
+  address_.Swap(&other->address_);
+  city_.Swap(&other->city_);
+  country_.Swap(&other->country_);
+  regionalfocus_.Swap(&other->regionalfocus_);
+  std::swap(_has_bits_[0], other->_has_bits_[0]);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata Organisation::GetMetadata() const {
@@ -778,6 +810,466 @@ void Organisation::Swap(Organisation* other) {
   return metadata;
 }
 
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// Organisation
+
+// optional int32 id = 1;
+bool Organisation::has_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+void Organisation::set_has_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+void Organisation::clear_has_id() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+void Organisation::clear_id() {
+  id_ = 0;
+  clear_has_id();
+}
+ ::google::protobuf::int32 Organisation::id() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.Organisation.id)
+  return id_;
+}
+ void Organisation::set_id(::google::protobuf::int32 value) {
+  set_has_id();
+  id_ = value;
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.Organisation.id)
+}
+
+// optional string name = 2;
+bool Organisation::has_name() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+void Organisation::set_has_name() {
+  _has_bits_[0] |= 0x00000002u;
+}
+void Organisation::clear_has_name() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+void Organisation::clear_name() {
+  name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_name();
+}
+ const ::std::string& Organisation::name() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.Organisation.name)
+  return name_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void Organisation::set_name(const ::std::string& value) {
+  set_has_name();
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.Organisation.name)
+}
+ void Organisation::set_name(const char* value) {
+  set_has_name();
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:SolasMatch.Common.Protobufs.Models.Organisation.name)
+}
+ void Organisation::set_name(const char* value, size_t size) {
+  set_has_name();
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:SolasMatch.Common.Protobufs.Models.Organisation.name)
+}
+ ::std::string* Organisation::mutable_name() {
+  set_has_name();
+  // @@protoc_insertion_point(field_mutable:SolasMatch.Common.Protobufs.Models.Organisation.name)
+  return name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* Organisation::release_name() {
+  // @@protoc_insertion_point(field_release:SolasMatch.Common.Protobufs.Models.Organisation.name)
+  clear_has_name();
+  return name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void Organisation::set_allocated_name(::std::string* name) {
+  if (name != NULL) {
+    set_has_name();
+  } else {
+    clear_has_name();
+  }
+  name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name);
+  // @@protoc_insertion_point(field_set_allocated:SolasMatch.Common.Protobufs.Models.Organisation.name)
+}
+
+// optional string biography = 3;
+bool Organisation::has_biography() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+void Organisation::set_has_biography() {
+  _has_bits_[0] |= 0x00000004u;
+}
+void Organisation::clear_has_biography() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+void Organisation::clear_biography() {
+  biography_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_biography();
+}
+ const ::std::string& Organisation::biography() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.Organisation.biography)
+  return biography_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void Organisation::set_biography(const ::std::string& value) {
+  set_has_biography();
+  biography_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.Organisation.biography)
+}
+ void Organisation::set_biography(const char* value) {
+  set_has_biography();
+  biography_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:SolasMatch.Common.Protobufs.Models.Organisation.biography)
+}
+ void Organisation::set_biography(const char* value, size_t size) {
+  set_has_biography();
+  biography_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:SolasMatch.Common.Protobufs.Models.Organisation.biography)
+}
+ ::std::string* Organisation::mutable_biography() {
+  set_has_biography();
+  // @@protoc_insertion_point(field_mutable:SolasMatch.Common.Protobufs.Models.Organisation.biography)
+  return biography_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* Organisation::release_biography() {
+  // @@protoc_insertion_point(field_release:SolasMatch.Common.Protobufs.Models.Organisation.biography)
+  clear_has_biography();
+  return biography_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void Organisation::set_allocated_biography(::std::string* biography) {
+  if (biography != NULL) {
+    set_has_biography();
+  } else {
+    clear_has_biography();
+  }
+  biography_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), biography);
+  // @@protoc_insertion_point(field_set_allocated:SolasMatch.Common.Protobufs.Models.Organisation.biography)
+}
+
+// optional string homepage = 4;
+bool Organisation::has_homepage() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+void Organisation::set_has_homepage() {
+  _has_bits_[0] |= 0x00000008u;
+}
+void Organisation::clear_has_homepage() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+void Organisation::clear_homepage() {
+  homepage_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_homepage();
+}
+ const ::std::string& Organisation::homepage() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.Organisation.homepage)
+  return homepage_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void Organisation::set_homepage(const ::std::string& value) {
+  set_has_homepage();
+  homepage_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.Organisation.homepage)
+}
+ void Organisation::set_homepage(const char* value) {
+  set_has_homepage();
+  homepage_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:SolasMatch.Common.Protobufs.Models.Organisation.homepage)
+}
+ void Organisation::set_homepage(const char* value, size_t size) {
+  set_has_homepage();
+  homepage_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:SolasMatch.Common.Protobufs.Models.Organisation.homepage)
+}
+ ::std::string* Organisation::mutable_homepage() {
+  set_has_homepage();
+  // @@protoc_insertion_point(field_mutable:SolasMatch.Common.Protobufs.Models.Organisation.homepage)
+  return homepage_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* Organisation::release_homepage() {
+  // @@protoc_insertion_point(field_release:SolasMatch.Common.Protobufs.Models.Organisation.homepage)
+  clear_has_homepage();
+  return homepage_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void Organisation::set_allocated_homepage(::std::string* homepage) {
+  if (homepage != NULL) {
+    set_has_homepage();
+  } else {
+    clear_has_homepage();
+  }
+  homepage_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), homepage);
+  // @@protoc_insertion_point(field_set_allocated:SolasMatch.Common.Protobufs.Models.Organisation.homepage)
+}
+
+// optional string email = 5;
+bool Organisation::has_email() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+void Organisation::set_has_email() {
+  _has_bits_[0] |= 0x00000010u;
+}
+void Organisation::clear_has_email() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+void Organisation::clear_email() {
+  email_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_email();
+}
+ const ::std::string& Organisation::email() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.Organisation.email)
+  return email_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void Organisation::set_email(const ::std::string& value) {
+  set_has_email();
+  email_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.Organisation.email)
+}
+ void Organisation::set_email(const char* value) {
+  set_has_email();
+  email_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:SolasMatch.Common.Protobufs.Models.Organisation.email)
+}
+ void Organisation::set_email(const char* value, size_t size) {
+  set_has_email();
+  email_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:SolasMatch.Common.Protobufs.Models.Organisation.email)
+}
+ ::std::string* Organisation::mutable_email() {
+  set_has_email();
+  // @@protoc_insertion_point(field_mutable:SolasMatch.Common.Protobufs.Models.Organisation.email)
+  return email_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* Organisation::release_email() {
+  // @@protoc_insertion_point(field_release:SolasMatch.Common.Protobufs.Models.Organisation.email)
+  clear_has_email();
+  return email_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void Organisation::set_allocated_email(::std::string* email) {
+  if (email != NULL) {
+    set_has_email();
+  } else {
+    clear_has_email();
+  }
+  email_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), email);
+  // @@protoc_insertion_point(field_set_allocated:SolasMatch.Common.Protobufs.Models.Organisation.email)
+}
+
+// optional string address = 6;
+bool Organisation::has_address() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+void Organisation::set_has_address() {
+  _has_bits_[0] |= 0x00000020u;
+}
+void Organisation::clear_has_address() {
+  _has_bits_[0] &= ~0x00000020u;
+}
+void Organisation::clear_address() {
+  address_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_address();
+}
+ const ::std::string& Organisation::address() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.Organisation.address)
+  return address_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void Organisation::set_address(const ::std::string& value) {
+  set_has_address();
+  address_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.Organisation.address)
+}
+ void Organisation::set_address(const char* value) {
+  set_has_address();
+  address_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:SolasMatch.Common.Protobufs.Models.Organisation.address)
+}
+ void Organisation::set_address(const char* value, size_t size) {
+  set_has_address();
+  address_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:SolasMatch.Common.Protobufs.Models.Organisation.address)
+}
+ ::std::string* Organisation::mutable_address() {
+  set_has_address();
+  // @@protoc_insertion_point(field_mutable:SolasMatch.Common.Protobufs.Models.Organisation.address)
+  return address_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* Organisation::release_address() {
+  // @@protoc_insertion_point(field_release:SolasMatch.Common.Protobufs.Models.Organisation.address)
+  clear_has_address();
+  return address_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void Organisation::set_allocated_address(::std::string* address) {
+  if (address != NULL) {
+    set_has_address();
+  } else {
+    clear_has_address();
+  }
+  address_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), address);
+  // @@protoc_insertion_point(field_set_allocated:SolasMatch.Common.Protobufs.Models.Organisation.address)
+}
+
+// optional string city = 7;
+bool Organisation::has_city() const {
+  return (_has_bits_[0] & 0x00000040u) != 0;
+}
+void Organisation::set_has_city() {
+  _has_bits_[0] |= 0x00000040u;
+}
+void Organisation::clear_has_city() {
+  _has_bits_[0] &= ~0x00000040u;
+}
+void Organisation::clear_city() {
+  city_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_city();
+}
+ const ::std::string& Organisation::city() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.Organisation.city)
+  return city_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void Organisation::set_city(const ::std::string& value) {
+  set_has_city();
+  city_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.Organisation.city)
+}
+ void Organisation::set_city(const char* value) {
+  set_has_city();
+  city_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:SolasMatch.Common.Protobufs.Models.Organisation.city)
+}
+ void Organisation::set_city(const char* value, size_t size) {
+  set_has_city();
+  city_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:SolasMatch.Common.Protobufs.Models.Organisation.city)
+}
+ ::std::string* Organisation::mutable_city() {
+  set_has_city();
+  // @@protoc_insertion_point(field_mutable:SolasMatch.Common.Protobufs.Models.Organisation.city)
+  return city_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* Organisation::release_city() {
+  // @@protoc_insertion_point(field_release:SolasMatch.Common.Protobufs.Models.Organisation.city)
+  clear_has_city();
+  return city_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void Organisation::set_allocated_city(::std::string* city) {
+  if (city != NULL) {
+    set_has_city();
+  } else {
+    clear_has_city();
+  }
+  city_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), city);
+  // @@protoc_insertion_point(field_set_allocated:SolasMatch.Common.Protobufs.Models.Organisation.city)
+}
+
+// optional string country = 8;
+bool Organisation::has_country() const {
+  return (_has_bits_[0] & 0x00000080u) != 0;
+}
+void Organisation::set_has_country() {
+  _has_bits_[0] |= 0x00000080u;
+}
+void Organisation::clear_has_country() {
+  _has_bits_[0] &= ~0x00000080u;
+}
+void Organisation::clear_country() {
+  country_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_country();
+}
+ const ::std::string& Organisation::country() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.Organisation.country)
+  return country_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void Organisation::set_country(const ::std::string& value) {
+  set_has_country();
+  country_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.Organisation.country)
+}
+ void Organisation::set_country(const char* value) {
+  set_has_country();
+  country_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:SolasMatch.Common.Protobufs.Models.Organisation.country)
+}
+ void Organisation::set_country(const char* value, size_t size) {
+  set_has_country();
+  country_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:SolasMatch.Common.Protobufs.Models.Organisation.country)
+}
+ ::std::string* Organisation::mutable_country() {
+  set_has_country();
+  // @@protoc_insertion_point(field_mutable:SolasMatch.Common.Protobufs.Models.Organisation.country)
+  return country_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* Organisation::release_country() {
+  // @@protoc_insertion_point(field_release:SolasMatch.Common.Protobufs.Models.Organisation.country)
+  clear_has_country();
+  return country_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void Organisation::set_allocated_country(::std::string* country) {
+  if (country != NULL) {
+    set_has_country();
+  } else {
+    clear_has_country();
+  }
+  country_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), country);
+  // @@protoc_insertion_point(field_set_allocated:SolasMatch.Common.Protobufs.Models.Organisation.country)
+}
+
+// optional string regionalFocus = 9;
+bool Organisation::has_regionalfocus() const {
+  return (_has_bits_[0] & 0x00000100u) != 0;
+}
+void Organisation::set_has_regionalfocus() {
+  _has_bits_[0] |= 0x00000100u;
+}
+void Organisation::clear_has_regionalfocus() {
+  _has_bits_[0] &= ~0x00000100u;
+}
+void Organisation::clear_regionalfocus() {
+  regionalfocus_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_regionalfocus();
+}
+ const ::std::string& Organisation::regionalfocus() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.Organisation.regionalFocus)
+  return regionalfocus_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void Organisation::set_regionalfocus(const ::std::string& value) {
+  set_has_regionalfocus();
+  regionalfocus_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.Organisation.regionalFocus)
+}
+ void Organisation::set_regionalfocus(const char* value) {
+  set_has_regionalfocus();
+  regionalfocus_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:SolasMatch.Common.Protobufs.Models.Organisation.regionalFocus)
+}
+ void Organisation::set_regionalfocus(const char* value, size_t size) {
+  set_has_regionalfocus();
+  regionalfocus_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:SolasMatch.Common.Protobufs.Models.Organisation.regionalFocus)
+}
+ ::std::string* Organisation::mutable_regionalfocus() {
+  set_has_regionalfocus();
+  // @@protoc_insertion_point(field_mutable:SolasMatch.Common.Protobufs.Models.Organisation.regionalFocus)
+  return regionalfocus_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* Organisation::release_regionalfocus() {
+  // @@protoc_insertion_point(field_release:SolasMatch.Common.Protobufs.Models.Organisation.regionalFocus)
+  clear_has_regionalfocus();
+  return regionalfocus_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void Organisation::set_allocated_regionalfocus(::std::string* regionalfocus) {
+  if (regionalfocus != NULL) {
+    set_has_regionalfocus();
+  } else {
+    clear_has_regionalfocus();
+  }
+  regionalfocus_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), regionalfocus);
+  // @@protoc_insertion_point(field_set_allocated:SolasMatch.Common.Protobufs.Models.Organisation.regionalFocus)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // @@protoc_insertion_point(namespace_scope)
 

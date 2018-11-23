@@ -7,6 +7,7 @@
 #include <algorithm>
 
 #include <google/protobuf/stubs/common.h>
+#include <google/protobuf/stubs/port.h>
 #include <google/protobuf/stubs/once.h>
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/wire_format_lite_inl.h>
@@ -30,6 +31,7 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 }  // namespace
 
 
+void protobuf_AssignDesc_Task_2eproto() GOOGLE_ATTRIBUTE_COLD;
 void protobuf_AssignDesc_Task_2eproto() {
   protobuf_AddDesc_Task_2eproto();
   const ::google::protobuf::FileDescriptor* file =
@@ -52,16 +54,16 @@ void protobuf_AssignDesc_Task_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Task, published_),
   };
   Task_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
       Task_descriptor_,
       Task::default_instance_,
       Task_offsets_,
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Task, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Task, _unknown_fields_),
       -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(Task));
+      -1,
+      sizeof(Task),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Task, _internal_metadata_),
+      -1);
 }
 
 namespace {
@@ -72,10 +74,11 @@ inline void protobuf_AssignDescriptorsOnce() {
                  &protobuf_AssignDesc_Task_2eproto);
 }
 
+void protobuf_RegisterTypes(const ::std::string&) GOOGLE_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    Task_descriptor_, &Task::default_instance());
+      Task_descriptor_, &Task::default_instance());
 }
 
 }  // namespace
@@ -85,6 +88,7 @@ void protobuf_ShutdownFile_Task_2eproto() {
   delete Task_reflection_;
 }
 
+void protobuf_AddDesc_Task_2eproto() GOOGLE_ATTRIBUTE_COLD;
 void protobuf_AddDesc_Task_2eproto() {
   static bool already_here = false;
   if (already_here) return;
@@ -119,7 +123,7 @@ struct StaticDescriptorInitializer_Task_2eproto {
 
 // ===================================================================
 
-#ifndef _MSC_VER
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int Task::kIdFieldNumber;
 const int Task::kProjectIdFieldNumber;
 const int Task::kTitleFieldNumber;
@@ -132,11 +136,12 @@ const int Task::kTargetLocaleFieldNumber;
 const int Task::kTaskTypeFieldNumber;
 const int Task::kTaskStatusFieldNumber;
 const int Task::kPublishedFieldNumber;
-#endif  // !_MSC_VER
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 Task::Task()
-  : ::google::protobuf::Message() {
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   SharedCtor();
+  // @@protoc_insertion_point(constructor:SolasMatch.Common.Protobufs.Models.Task)
 }
 
 void Task::InitAsDefaultInstance() {
@@ -145,20 +150,23 @@ void Task::InitAsDefaultInstance() {
 }
 
 Task::Task(const Task& from)
-  : ::google::protobuf::Message() {
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
   SharedCtor();
   MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:SolasMatch.Common.Protobufs.Models.Task)
 }
 
 void Task::SharedCtor() {
+  ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
   id_ = 0;
   projectid_ = 0;
-  title_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  comment_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  deadline_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  title_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  comment_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  deadline_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   wordcount_ = 0;
-  createdtime_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  createdtime_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   sourcelocale_ = NULL;
   targetlocale_ = NULL;
   tasktype_ = 0;
@@ -168,22 +176,15 @@ void Task::SharedCtor() {
 }
 
 Task::~Task() {
+  // @@protoc_insertion_point(destructor:SolasMatch.Common.Protobufs.Models.Task)
   SharedDtor();
 }
 
 void Task::SharedDtor() {
-  if (title_ != &::google::protobuf::internal::kEmptyString) {
-    delete title_;
-  }
-  if (comment_ != &::google::protobuf::internal::kEmptyString) {
-    delete comment_;
-  }
-  if (deadline_ != &::google::protobuf::internal::kEmptyString) {
-    delete deadline_;
-  }
-  if (createdtime_ != &::google::protobuf::internal::kEmptyString) {
-    delete createdtime_;
-  }
+  title_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  comment_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  deadline_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  createdtime_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != default_instance_) {
     delete sourcelocale_;
     delete targetlocale_;
@@ -207,67 +208,87 @@ const Task& Task::default_instance() {
 
 Task* Task::default_instance_ = NULL;
 
-Task* Task::New() const {
-  return new Task;
+Task* Task::New(::google::protobuf::Arena* arena) const {
+  Task* n = new Task;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
 }
 
 void Task::Clear() {
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    id_ = 0;
-    projectid_ = 0;
+// @@protoc_insertion_point(message_clear_start:SolasMatch.Common.Protobufs.Models.Task)
+#if defined(__clang__)
+#define ZR_HELPER_(f) \
+  _Pragma("clang diagnostic push") \
+  _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
+  __builtin_offsetof(Task, f) \
+  _Pragma("clang diagnostic pop")
+#else
+#define ZR_HELPER_(f) reinterpret_cast<char*>(\
+  &reinterpret_cast<Task*>(16)->f)
+#endif
+
+#define ZR_(first, last) do {\
+  ::memset(&first, 0,\
+           ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
+} while (0)
+
+  if (_has_bits_[0 / 32] & 255u) {
+    ZR_(id_, projectid_);
     if (has_title()) {
-      if (title_ != &::google::protobuf::internal::kEmptyString) {
-        title_->clear();
-      }
+      title_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     }
     if (has_comment()) {
-      if (comment_ != &::google::protobuf::internal::kEmptyString) {
-        comment_->clear();
-      }
+      comment_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     }
     if (has_deadline()) {
-      if (deadline_ != &::google::protobuf::internal::kEmptyString) {
-        deadline_->clear();
-      }
+      deadline_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     }
     wordcount_ = 0;
     if (has_createdtime()) {
-      if (createdtime_ != &::google::protobuf::internal::kEmptyString) {
-        createdtime_->clear();
-      }
+      createdtime_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     }
     if (has_sourcelocale()) {
       if (sourcelocale_ != NULL) sourcelocale_->::SolasMatch::Common::Protobufs::Models::Locale::Clear();
     }
   }
-  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
+  if (_has_bits_[8 / 32] & 3840u) {
+    ZR_(taskstatus_, published_);
     if (has_targetlocale()) {
       if (targetlocale_ != NULL) targetlocale_->::SolasMatch::Common::Protobufs::Models::Locale::Clear();
     }
     tasktype_ = 0;
-    taskstatus_ = 0;
-    published_ = false;
   }
+
+#undef ZR_HELPER_
+#undef ZR_
+
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
+  if (_internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->Clear();
+  }
 }
 
 bool Task::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  while ((tag = input->ReadTag()) != 0) {
+  // @@protoc_insertion_point(parse_start:SolasMatch.Common.Protobufs.Models.Task)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // optional int32 id = 1;
       case 1: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 8) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &id_)));
           set_has_id();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(16)) goto parse_projectId;
         break;
@@ -275,15 +296,14 @@ bool Task::MergePartialFromCodedStream(
 
       // optional int32 projectId = 2;
       case 2: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 16) {
          parse_projectId:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &projectid_)));
           set_has_projectid();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(26)) goto parse_title;
         break;
@@ -291,16 +311,16 @@ bool Task::MergePartialFromCodedStream(
 
       // optional string title = 3;
       case 3: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 26) {
          parse_title:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_title()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
             this->title().data(), this->title().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "SolasMatch.Common.Protobufs.Models.Task.title");
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(34)) goto parse_comment;
         break;
@@ -308,16 +328,16 @@ bool Task::MergePartialFromCodedStream(
 
       // optional string comment = 4;
       case 4: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 34) {
          parse_comment:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_comment()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
             this->comment().data(), this->comment().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "SolasMatch.Common.Protobufs.Models.Task.comment");
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(42)) goto parse_deadline;
         break;
@@ -325,16 +345,16 @@ bool Task::MergePartialFromCodedStream(
 
       // optional string deadline = 5;
       case 5: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 42) {
          parse_deadline:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_deadline()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
             this->deadline().data(), this->deadline().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "SolasMatch.Common.Protobufs.Models.Task.deadline");
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(48)) goto parse_wordCount;
         break;
@@ -342,15 +362,14 @@ bool Task::MergePartialFromCodedStream(
 
       // optional int32 wordCount = 6;
       case 6: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 48) {
          parse_wordCount:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &wordcount_)));
           set_has_wordcount();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(58)) goto parse_createdTime;
         break;
@@ -358,16 +377,16 @@ bool Task::MergePartialFromCodedStream(
 
       // optional string createdTime = 7;
       case 7: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 58) {
          parse_createdTime:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_createdtime()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
             this->createdtime().data(), this->createdtime().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "SolasMatch.Common.Protobufs.Models.Task.createdTime");
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(66)) goto parse_sourceLocale;
         break;
@@ -375,13 +394,12 @@ bool Task::MergePartialFromCodedStream(
 
       // optional .SolasMatch.Common.Protobufs.Models.Locale sourceLocale = 8;
       case 8: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 66) {
          parse_sourceLocale:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_sourcelocale()));
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(74)) goto parse_targetLocale;
         break;
@@ -389,13 +407,12 @@ bool Task::MergePartialFromCodedStream(
 
       // optional .SolasMatch.Common.Protobufs.Models.Locale targetLocale = 9;
       case 9: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 74) {
          parse_targetLocale:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_targetlocale()));
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(80)) goto parse_taskType;
         break;
@@ -403,15 +420,14 @@ bool Task::MergePartialFromCodedStream(
 
       // optional int32 taskType = 10;
       case 10: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 80) {
          parse_taskType:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &tasktype_)));
           set_has_tasktype();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(88)) goto parse_taskStatus;
         break;
@@ -419,15 +435,14 @@ bool Task::MergePartialFromCodedStream(
 
       // optional int32 taskStatus = 11;
       case 11: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 88) {
          parse_taskStatus:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &taskstatus_)));
           set_has_taskstatus();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(96)) goto parse_published;
         break;
@@ -435,25 +450,25 @@ bool Task::MergePartialFromCodedStream(
 
       // optional bool published = 12;
       case 12: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 96) {
          parse_published:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
                  input, &published_)));
           set_has_published();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
-        if (input->ExpectAtEnd()) return true;
+        if (input->ExpectAtEnd()) goto success;
         break;
       }
 
       default: {
-      handle_uninterpreted:
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          return true;
+          goto success;
         }
         DO_(::google::protobuf::internal::WireFormat::SkipField(
               input, tag, mutable_unknown_fields()));
@@ -461,12 +476,18 @@ bool Task::MergePartialFromCodedStream(
       }
     }
   }
+success:
+  // @@protoc_insertion_point(parse_success:SolasMatch.Common.Protobufs.Models.Task)
   return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:SolasMatch.Common.Protobufs.Models.Task)
+  return false;
 #undef DO_
 }
 
 void Task::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:SolasMatch.Common.Protobufs.Models.Task)
   // optional int32 id = 1;
   if (has_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->id(), output);
@@ -479,28 +500,31 @@ void Task::SerializeWithCachedSizes(
 
   // optional string title = 3;
   if (has_title()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->title().data(), this->title().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.Task.title");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       3, this->title(), output);
   }
 
   // optional string comment = 4;
   if (has_comment()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->comment().data(), this->comment().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.Task.comment");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       4, this->comment(), output);
   }
 
   // optional string deadline = 5;
   if (has_deadline()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->deadline().data(), this->deadline().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.Task.deadline");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       5, this->deadline(), output);
   }
 
@@ -511,23 +535,24 @@ void Task::SerializeWithCachedSizes(
 
   // optional string createdTime = 7;
   if (has_createdtime()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->createdtime().data(), this->createdtime().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.Task.createdTime");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       7, this->createdtime(), output);
   }
 
   // optional .SolasMatch.Common.Protobufs.Models.Locale sourceLocale = 8;
   if (has_sourcelocale()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      8, this->sourcelocale(), output);
+      8, *this->sourcelocale_, output);
   }
 
   // optional .SolasMatch.Common.Protobufs.Models.Locale targetLocale = 9;
   if (has_targetlocale()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      9, this->targetlocale(), output);
+      9, *this->targetlocale_, output);
   }
 
   // optional int32 taskType = 10;
@@ -545,14 +570,16 @@ void Task::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteBool(12, this->published(), output);
   }
 
-  if (!unknown_fields().empty()) {
+  if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
+  // @@protoc_insertion_point(serialize_end:SolasMatch.Common.Protobufs.Models.Task)
 }
 
-::google::protobuf::uint8* Task::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
+::google::protobuf::uint8* Task::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:SolasMatch.Common.Protobufs.Models.Task)
   // optional int32 id = 1;
   if (has_id()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->id(), target);
@@ -565,9 +592,10 @@ void Task::SerializeWithCachedSizes(
 
   // optional string title = 3;
   if (has_title()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->title().data(), this->title().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.Task.title");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         3, this->title(), target);
@@ -575,9 +603,10 @@ void Task::SerializeWithCachedSizes(
 
   // optional string comment = 4;
   if (has_comment()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->comment().data(), this->comment().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.Task.comment");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         4, this->comment(), target);
@@ -585,9 +614,10 @@ void Task::SerializeWithCachedSizes(
 
   // optional string deadline = 5;
   if (has_deadline()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->deadline().data(), this->deadline().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.Task.deadline");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         5, this->deadline(), target);
@@ -600,9 +630,10 @@ void Task::SerializeWithCachedSizes(
 
   // optional string createdTime = 7;
   if (has_createdtime()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->createdtime().data(), this->createdtime().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.Task.createdTime");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         7, this->createdtime(), target);
@@ -611,15 +642,15 @@ void Task::SerializeWithCachedSizes(
   // optional .SolasMatch.Common.Protobufs.Models.Locale sourceLocale = 8;
   if (has_sourcelocale()) {
     target = ::google::protobuf::internal::WireFormatLite::
-      WriteMessageNoVirtualToArray(
-        8, this->sourcelocale(), target);
+      InternalWriteMessageNoVirtualToArray(
+        8, *this->sourcelocale_, false, target);
   }
 
   // optional .SolasMatch.Common.Protobufs.Models.Locale targetLocale = 9;
   if (has_targetlocale()) {
     target = ::google::protobuf::internal::WireFormatLite::
-      WriteMessageNoVirtualToArray(
-        9, this->targetlocale(), target);
+      InternalWriteMessageNoVirtualToArray(
+        9, *this->targetlocale_, false, target);
   }
 
   // optional int32 taskType = 10;
@@ -637,17 +668,19 @@ void Task::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(12, this->published(), target);
   }
 
-  if (!unknown_fields().empty()) {
+  if (_internal_metadata_.have_unknown_fields()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
+  // @@protoc_insertion_point(serialize_to_array_end:SolasMatch.Common.Protobufs.Models.Task)
   return target;
 }
 
 int Task::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:SolasMatch.Common.Protobufs.Models.Task)
   int total_size = 0;
 
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+  if (_has_bits_[0 / 32] & 255u) {
     // optional int32 id = 1;
     if (has_id()) {
       total_size += 1 +
@@ -701,16 +734,16 @@ int Task::ByteSize() const {
     if (has_sourcelocale()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-          this->sourcelocale());
+          *this->sourcelocale_);
     }
 
   }
-  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
+  if (_has_bits_[8 / 32] & 3840u) {
     // optional .SolasMatch.Common.Protobufs.Models.Locale targetLocale = 9;
     if (has_targetlocale()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-          this->targetlocale());
+          *this->targetlocale_);
     }
 
     // optional int32 taskType = 10;
@@ -733,7 +766,7 @@ int Task::ByteSize() const {
     }
 
   }
-  if (!unknown_fields().empty()) {
+  if (_internal_metadata_.have_unknown_fields()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         unknown_fields());
@@ -745,19 +778,27 @@ int Task::ByteSize() const {
 }
 
 void Task::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const Task* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const Task*>(
-      &from);
+// @@protoc_insertion_point(generalized_merge_from_start:SolasMatch.Common.Protobufs.Models.Task)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  const Task* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const Task>(
+          &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:SolasMatch.Common.Protobufs.Models.Task)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:SolasMatch.Common.Protobufs.Models.Task)
     MergeFrom(*source);
   }
 }
 
 void Task::MergeFrom(const Task& from) {
-  GOOGLE_CHECK_NE(&from, this);
+// @@protoc_insertion_point(class_specific_merge_from_start:SolasMatch.Common.Protobufs.Models.Task)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_id()) {
       set_id(from.id());
@@ -766,19 +807,23 @@ void Task::MergeFrom(const Task& from) {
       set_projectid(from.projectid());
     }
     if (from.has_title()) {
-      set_title(from.title());
+      set_has_title();
+      title_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.title_);
     }
     if (from.has_comment()) {
-      set_comment(from.comment());
+      set_has_comment();
+      comment_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.comment_);
     }
     if (from.has_deadline()) {
-      set_deadline(from.deadline());
+      set_has_deadline();
+      deadline_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.deadline_);
     }
     if (from.has_wordcount()) {
       set_wordcount(from.wordcount());
     }
     if (from.has_createdtime()) {
-      set_createdtime(from.createdtime());
+      set_has_createdtime();
+      createdtime_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.createdtime_);
     }
     if (from.has_sourcelocale()) {
       mutable_sourcelocale()->::SolasMatch::Common::Protobufs::Models::Locale::MergeFrom(from.sourcelocale());
@@ -798,16 +843,20 @@ void Task::MergeFrom(const Task& from) {
       set_published(from.published());
     }
   }
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  if (from._internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  }
 }
 
 void Task::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:SolasMatch.Common.Protobufs.Models.Task)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void Task::CopyFrom(const Task& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:SolasMatch.Common.Protobufs.Models.Task)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -819,23 +868,25 @@ bool Task::IsInitialized() const {
 }
 
 void Task::Swap(Task* other) {
-  if (other != this) {
-    std::swap(id_, other->id_);
-    std::swap(projectid_, other->projectid_);
-    std::swap(title_, other->title_);
-    std::swap(comment_, other->comment_);
-    std::swap(deadline_, other->deadline_);
-    std::swap(wordcount_, other->wordcount_);
-    std::swap(createdtime_, other->createdtime_);
-    std::swap(sourcelocale_, other->sourcelocale_);
-    std::swap(targetlocale_, other->targetlocale_);
-    std::swap(tasktype_, other->tasktype_);
-    std::swap(taskstatus_, other->taskstatus_);
-    std::swap(published_, other->published_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
+  if (other == this) return;
+  InternalSwap(other);
+}
+void Task::InternalSwap(Task* other) {
+  std::swap(id_, other->id_);
+  std::swap(projectid_, other->projectid_);
+  title_.Swap(&other->title_);
+  comment_.Swap(&other->comment_);
+  deadline_.Swap(&other->deadline_);
+  std::swap(wordcount_, other->wordcount_);
+  createdtime_.Swap(&other->createdtime_);
+  std::swap(sourcelocale_, other->sourcelocale_);
+  std::swap(targetlocale_, other->targetlocale_);
+  std::swap(tasktype_, other->tasktype_);
+  std::swap(taskstatus_, other->taskstatus_);
+  std::swap(published_, other->published_);
+  std::swap(_has_bits_[0], other->_has_bits_[0]);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata Task::GetMetadata() const {
@@ -846,6 +897,458 @@ void Task::Swap(Task* other) {
   return metadata;
 }
 
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// Task
+
+// optional int32 id = 1;
+bool Task::has_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+void Task::set_has_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+void Task::clear_has_id() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+void Task::clear_id() {
+  id_ = 0;
+  clear_has_id();
+}
+ ::google::protobuf::int32 Task::id() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.Task.id)
+  return id_;
+}
+ void Task::set_id(::google::protobuf::int32 value) {
+  set_has_id();
+  id_ = value;
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.Task.id)
+}
+
+// optional int32 projectId = 2;
+bool Task::has_projectid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+void Task::set_has_projectid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+void Task::clear_has_projectid() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+void Task::clear_projectid() {
+  projectid_ = 0;
+  clear_has_projectid();
+}
+ ::google::protobuf::int32 Task::projectid() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.Task.projectId)
+  return projectid_;
+}
+ void Task::set_projectid(::google::protobuf::int32 value) {
+  set_has_projectid();
+  projectid_ = value;
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.Task.projectId)
+}
+
+// optional string title = 3;
+bool Task::has_title() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+void Task::set_has_title() {
+  _has_bits_[0] |= 0x00000004u;
+}
+void Task::clear_has_title() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+void Task::clear_title() {
+  title_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_title();
+}
+ const ::std::string& Task::title() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.Task.title)
+  return title_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void Task::set_title(const ::std::string& value) {
+  set_has_title();
+  title_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.Task.title)
+}
+ void Task::set_title(const char* value) {
+  set_has_title();
+  title_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:SolasMatch.Common.Protobufs.Models.Task.title)
+}
+ void Task::set_title(const char* value, size_t size) {
+  set_has_title();
+  title_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:SolasMatch.Common.Protobufs.Models.Task.title)
+}
+ ::std::string* Task::mutable_title() {
+  set_has_title();
+  // @@protoc_insertion_point(field_mutable:SolasMatch.Common.Protobufs.Models.Task.title)
+  return title_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* Task::release_title() {
+  // @@protoc_insertion_point(field_release:SolasMatch.Common.Protobufs.Models.Task.title)
+  clear_has_title();
+  return title_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void Task::set_allocated_title(::std::string* title) {
+  if (title != NULL) {
+    set_has_title();
+  } else {
+    clear_has_title();
+  }
+  title_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), title);
+  // @@protoc_insertion_point(field_set_allocated:SolasMatch.Common.Protobufs.Models.Task.title)
+}
+
+// optional string comment = 4;
+bool Task::has_comment() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+void Task::set_has_comment() {
+  _has_bits_[0] |= 0x00000008u;
+}
+void Task::clear_has_comment() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+void Task::clear_comment() {
+  comment_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_comment();
+}
+ const ::std::string& Task::comment() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.Task.comment)
+  return comment_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void Task::set_comment(const ::std::string& value) {
+  set_has_comment();
+  comment_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.Task.comment)
+}
+ void Task::set_comment(const char* value) {
+  set_has_comment();
+  comment_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:SolasMatch.Common.Protobufs.Models.Task.comment)
+}
+ void Task::set_comment(const char* value, size_t size) {
+  set_has_comment();
+  comment_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:SolasMatch.Common.Protobufs.Models.Task.comment)
+}
+ ::std::string* Task::mutable_comment() {
+  set_has_comment();
+  // @@protoc_insertion_point(field_mutable:SolasMatch.Common.Protobufs.Models.Task.comment)
+  return comment_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* Task::release_comment() {
+  // @@protoc_insertion_point(field_release:SolasMatch.Common.Protobufs.Models.Task.comment)
+  clear_has_comment();
+  return comment_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void Task::set_allocated_comment(::std::string* comment) {
+  if (comment != NULL) {
+    set_has_comment();
+  } else {
+    clear_has_comment();
+  }
+  comment_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), comment);
+  // @@protoc_insertion_point(field_set_allocated:SolasMatch.Common.Protobufs.Models.Task.comment)
+}
+
+// optional string deadline = 5;
+bool Task::has_deadline() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+void Task::set_has_deadline() {
+  _has_bits_[0] |= 0x00000010u;
+}
+void Task::clear_has_deadline() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+void Task::clear_deadline() {
+  deadline_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_deadline();
+}
+ const ::std::string& Task::deadline() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.Task.deadline)
+  return deadline_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void Task::set_deadline(const ::std::string& value) {
+  set_has_deadline();
+  deadline_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.Task.deadline)
+}
+ void Task::set_deadline(const char* value) {
+  set_has_deadline();
+  deadline_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:SolasMatch.Common.Protobufs.Models.Task.deadline)
+}
+ void Task::set_deadline(const char* value, size_t size) {
+  set_has_deadline();
+  deadline_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:SolasMatch.Common.Protobufs.Models.Task.deadline)
+}
+ ::std::string* Task::mutable_deadline() {
+  set_has_deadline();
+  // @@protoc_insertion_point(field_mutable:SolasMatch.Common.Protobufs.Models.Task.deadline)
+  return deadline_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* Task::release_deadline() {
+  // @@protoc_insertion_point(field_release:SolasMatch.Common.Protobufs.Models.Task.deadline)
+  clear_has_deadline();
+  return deadline_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void Task::set_allocated_deadline(::std::string* deadline) {
+  if (deadline != NULL) {
+    set_has_deadline();
+  } else {
+    clear_has_deadline();
+  }
+  deadline_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), deadline);
+  // @@protoc_insertion_point(field_set_allocated:SolasMatch.Common.Protobufs.Models.Task.deadline)
+}
+
+// optional int32 wordCount = 6;
+bool Task::has_wordcount() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+void Task::set_has_wordcount() {
+  _has_bits_[0] |= 0x00000020u;
+}
+void Task::clear_has_wordcount() {
+  _has_bits_[0] &= ~0x00000020u;
+}
+void Task::clear_wordcount() {
+  wordcount_ = 0;
+  clear_has_wordcount();
+}
+ ::google::protobuf::int32 Task::wordcount() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.Task.wordCount)
+  return wordcount_;
+}
+ void Task::set_wordcount(::google::protobuf::int32 value) {
+  set_has_wordcount();
+  wordcount_ = value;
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.Task.wordCount)
+}
+
+// optional string createdTime = 7;
+bool Task::has_createdtime() const {
+  return (_has_bits_[0] & 0x00000040u) != 0;
+}
+void Task::set_has_createdtime() {
+  _has_bits_[0] |= 0x00000040u;
+}
+void Task::clear_has_createdtime() {
+  _has_bits_[0] &= ~0x00000040u;
+}
+void Task::clear_createdtime() {
+  createdtime_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_createdtime();
+}
+ const ::std::string& Task::createdtime() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.Task.createdTime)
+  return createdtime_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void Task::set_createdtime(const ::std::string& value) {
+  set_has_createdtime();
+  createdtime_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.Task.createdTime)
+}
+ void Task::set_createdtime(const char* value) {
+  set_has_createdtime();
+  createdtime_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:SolasMatch.Common.Protobufs.Models.Task.createdTime)
+}
+ void Task::set_createdtime(const char* value, size_t size) {
+  set_has_createdtime();
+  createdtime_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:SolasMatch.Common.Protobufs.Models.Task.createdTime)
+}
+ ::std::string* Task::mutable_createdtime() {
+  set_has_createdtime();
+  // @@protoc_insertion_point(field_mutable:SolasMatch.Common.Protobufs.Models.Task.createdTime)
+  return createdtime_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* Task::release_createdtime() {
+  // @@protoc_insertion_point(field_release:SolasMatch.Common.Protobufs.Models.Task.createdTime)
+  clear_has_createdtime();
+  return createdtime_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void Task::set_allocated_createdtime(::std::string* createdtime) {
+  if (createdtime != NULL) {
+    set_has_createdtime();
+  } else {
+    clear_has_createdtime();
+  }
+  createdtime_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), createdtime);
+  // @@protoc_insertion_point(field_set_allocated:SolasMatch.Common.Protobufs.Models.Task.createdTime)
+}
+
+// optional .SolasMatch.Common.Protobufs.Models.Locale sourceLocale = 8;
+bool Task::has_sourcelocale() const {
+  return (_has_bits_[0] & 0x00000080u) != 0;
+}
+void Task::set_has_sourcelocale() {
+  _has_bits_[0] |= 0x00000080u;
+}
+void Task::clear_has_sourcelocale() {
+  _has_bits_[0] &= ~0x00000080u;
+}
+void Task::clear_sourcelocale() {
+  if (sourcelocale_ != NULL) sourcelocale_->::SolasMatch::Common::Protobufs::Models::Locale::Clear();
+  clear_has_sourcelocale();
+}
+const ::SolasMatch::Common::Protobufs::Models::Locale& Task::sourcelocale() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.Task.sourceLocale)
+  return sourcelocale_ != NULL ? *sourcelocale_ : *default_instance_->sourcelocale_;
+}
+::SolasMatch::Common::Protobufs::Models::Locale* Task::mutable_sourcelocale() {
+  set_has_sourcelocale();
+  if (sourcelocale_ == NULL) {
+    sourcelocale_ = new ::SolasMatch::Common::Protobufs::Models::Locale;
+  }
+  // @@protoc_insertion_point(field_mutable:SolasMatch.Common.Protobufs.Models.Task.sourceLocale)
+  return sourcelocale_;
+}
+::SolasMatch::Common::Protobufs::Models::Locale* Task::release_sourcelocale() {
+  // @@protoc_insertion_point(field_release:SolasMatch.Common.Protobufs.Models.Task.sourceLocale)
+  clear_has_sourcelocale();
+  ::SolasMatch::Common::Protobufs::Models::Locale* temp = sourcelocale_;
+  sourcelocale_ = NULL;
+  return temp;
+}
+void Task::set_allocated_sourcelocale(::SolasMatch::Common::Protobufs::Models::Locale* sourcelocale) {
+  delete sourcelocale_;
+  sourcelocale_ = sourcelocale;
+  if (sourcelocale) {
+    set_has_sourcelocale();
+  } else {
+    clear_has_sourcelocale();
+  }
+  // @@protoc_insertion_point(field_set_allocated:SolasMatch.Common.Protobufs.Models.Task.sourceLocale)
+}
+
+// optional .SolasMatch.Common.Protobufs.Models.Locale targetLocale = 9;
+bool Task::has_targetlocale() const {
+  return (_has_bits_[0] & 0x00000100u) != 0;
+}
+void Task::set_has_targetlocale() {
+  _has_bits_[0] |= 0x00000100u;
+}
+void Task::clear_has_targetlocale() {
+  _has_bits_[0] &= ~0x00000100u;
+}
+void Task::clear_targetlocale() {
+  if (targetlocale_ != NULL) targetlocale_->::SolasMatch::Common::Protobufs::Models::Locale::Clear();
+  clear_has_targetlocale();
+}
+const ::SolasMatch::Common::Protobufs::Models::Locale& Task::targetlocale() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.Task.targetLocale)
+  return targetlocale_ != NULL ? *targetlocale_ : *default_instance_->targetlocale_;
+}
+::SolasMatch::Common::Protobufs::Models::Locale* Task::mutable_targetlocale() {
+  set_has_targetlocale();
+  if (targetlocale_ == NULL) {
+    targetlocale_ = new ::SolasMatch::Common::Protobufs::Models::Locale;
+  }
+  // @@protoc_insertion_point(field_mutable:SolasMatch.Common.Protobufs.Models.Task.targetLocale)
+  return targetlocale_;
+}
+::SolasMatch::Common::Protobufs::Models::Locale* Task::release_targetlocale() {
+  // @@protoc_insertion_point(field_release:SolasMatch.Common.Protobufs.Models.Task.targetLocale)
+  clear_has_targetlocale();
+  ::SolasMatch::Common::Protobufs::Models::Locale* temp = targetlocale_;
+  targetlocale_ = NULL;
+  return temp;
+}
+void Task::set_allocated_targetlocale(::SolasMatch::Common::Protobufs::Models::Locale* targetlocale) {
+  delete targetlocale_;
+  targetlocale_ = targetlocale;
+  if (targetlocale) {
+    set_has_targetlocale();
+  } else {
+    clear_has_targetlocale();
+  }
+  // @@protoc_insertion_point(field_set_allocated:SolasMatch.Common.Protobufs.Models.Task.targetLocale)
+}
+
+// optional int32 taskType = 10;
+bool Task::has_tasktype() const {
+  return (_has_bits_[0] & 0x00000200u) != 0;
+}
+void Task::set_has_tasktype() {
+  _has_bits_[0] |= 0x00000200u;
+}
+void Task::clear_has_tasktype() {
+  _has_bits_[0] &= ~0x00000200u;
+}
+void Task::clear_tasktype() {
+  tasktype_ = 0;
+  clear_has_tasktype();
+}
+ ::google::protobuf::int32 Task::tasktype() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.Task.taskType)
+  return tasktype_;
+}
+ void Task::set_tasktype(::google::protobuf::int32 value) {
+  set_has_tasktype();
+  tasktype_ = value;
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.Task.taskType)
+}
+
+// optional int32 taskStatus = 11;
+bool Task::has_taskstatus() const {
+  return (_has_bits_[0] & 0x00000400u) != 0;
+}
+void Task::set_has_taskstatus() {
+  _has_bits_[0] |= 0x00000400u;
+}
+void Task::clear_has_taskstatus() {
+  _has_bits_[0] &= ~0x00000400u;
+}
+void Task::clear_taskstatus() {
+  taskstatus_ = 0;
+  clear_has_taskstatus();
+}
+ ::google::protobuf::int32 Task::taskstatus() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.Task.taskStatus)
+  return taskstatus_;
+}
+ void Task::set_taskstatus(::google::protobuf::int32 value) {
+  set_has_taskstatus();
+  taskstatus_ = value;
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.Task.taskStatus)
+}
+
+// optional bool published = 12;
+bool Task::has_published() const {
+  return (_has_bits_[0] & 0x00000800u) != 0;
+}
+void Task::set_has_published() {
+  _has_bits_[0] |= 0x00000800u;
+}
+void Task::clear_has_published() {
+  _has_bits_[0] &= ~0x00000800u;
+}
+void Task::clear_published() {
+  published_ = false;
+  clear_has_published();
+}
+ bool Task::published() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.Task.published)
+  return published_;
+}
+ void Task::set_published(bool value) {
+  set_has_published();
+  published_ = value;
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.Task.published)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // @@protoc_insertion_point(namespace_scope)
 

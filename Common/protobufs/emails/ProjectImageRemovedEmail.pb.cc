@@ -7,6 +7,7 @@
 #include <algorithm>
 
 #include <google/protobuf/stubs/common.h>
+#include <google/protobuf/stubs/port.h>
 #include <google/protobuf/stubs/once.h>
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/wire_format_lite_inl.h>
@@ -30,6 +31,7 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 }  // namespace
 
 
+void protobuf_AssignDesc_ProjectImageRemovedEmail_2eproto() GOOGLE_ATTRIBUTE_COLD;
 void protobuf_AssignDesc_ProjectImageRemovedEmail_2eproto() {
   protobuf_AddDesc_ProjectImageRemovedEmail_2eproto();
   const ::google::protobuf::FileDescriptor* file =
@@ -42,16 +44,16 @@ void protobuf_AssignDesc_ProjectImageRemovedEmail_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ProjectImageRemovedEmail, project_id_),
   };
   ProjectImageRemovedEmail_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
       ProjectImageRemovedEmail_descriptor_,
       ProjectImageRemovedEmail::default_instance_,
       ProjectImageRemovedEmail_offsets_,
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ProjectImageRemovedEmail, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ProjectImageRemovedEmail, _unknown_fields_),
       -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(ProjectImageRemovedEmail));
+      -1,
+      sizeof(ProjectImageRemovedEmail),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ProjectImageRemovedEmail, _internal_metadata_),
+      -1);
 }
 
 namespace {
@@ -62,10 +64,11 @@ inline void protobuf_AssignDescriptorsOnce() {
                  &protobuf_AssignDesc_ProjectImageRemovedEmail_2eproto);
 }
 
+void protobuf_RegisterTypes(const ::std::string&) GOOGLE_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    ProjectImageRemovedEmail_descriptor_, &ProjectImageRemovedEmail::default_instance());
+      ProjectImageRemovedEmail_descriptor_, &ProjectImageRemovedEmail::default_instance());
 }
 
 }  // namespace
@@ -75,6 +78,7 @@ void protobuf_ShutdownFile_ProjectImageRemovedEmail_2eproto() {
   delete ProjectImageRemovedEmail_reflection_;
 }
 
+void protobuf_AddDesc_ProjectImageRemovedEmail_2eproto() GOOGLE_ATTRIBUTE_COLD;
 void protobuf_AddDesc_ProjectImageRemovedEmail_2eproto() {
   static bool already_here = false;
   if (already_here) return;
@@ -105,23 +109,26 @@ struct StaticDescriptorInitializer_ProjectImageRemovedEmail_2eproto {
 
 // ===================================================================
 
-#ifndef _MSC_VER
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int ProjectImageRemovedEmail::kEmailTypeFieldNumber;
 const int ProjectImageRemovedEmail::kProjectIdFieldNumber;
-#endif  // !_MSC_VER
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 ProjectImageRemovedEmail::ProjectImageRemovedEmail()
-  : ::google::protobuf::Message() {
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   SharedCtor();
+  // @@protoc_insertion_point(constructor:SolasMatch.Common.Protobufs.Emails.ProjectImageRemovedEmail)
 }
 
 void ProjectImageRemovedEmail::InitAsDefaultInstance() {
 }
 
 ProjectImageRemovedEmail::ProjectImageRemovedEmail(const ProjectImageRemovedEmail& from)
-  : ::google::protobuf::Message() {
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
   SharedCtor();
   MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:SolasMatch.Common.Protobufs.Emails.ProjectImageRemovedEmail)
 }
 
 void ProjectImageRemovedEmail::SharedCtor() {
@@ -132,6 +139,7 @@ void ProjectImageRemovedEmail::SharedCtor() {
 }
 
 ProjectImageRemovedEmail::~ProjectImageRemovedEmail() {
+  // @@protoc_insertion_point(destructor:SolasMatch.Common.Protobufs.Emails.ProjectImageRemovedEmail)
   SharedDtor();
 }
 
@@ -157,29 +165,39 @@ const ProjectImageRemovedEmail& ProjectImageRemovedEmail::default_instance() {
 
 ProjectImageRemovedEmail* ProjectImageRemovedEmail::default_instance_ = NULL;
 
-ProjectImageRemovedEmail* ProjectImageRemovedEmail::New() const {
-  return new ProjectImageRemovedEmail;
+ProjectImageRemovedEmail* ProjectImageRemovedEmail::New(::google::protobuf::Arena* arena) const {
+  ProjectImageRemovedEmail* n = new ProjectImageRemovedEmail;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
 }
 
 void ProjectImageRemovedEmail::Clear() {
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+// @@protoc_insertion_point(message_clear_start:SolasMatch.Common.Protobufs.Emails.ProjectImageRemovedEmail)
+  if (_has_bits_[0 / 32] & 3u) {
     email_type_ = 30;
     project_id_ = 0;
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
+  if (_internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->Clear();
+  }
 }
 
 bool ProjectImageRemovedEmail::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  while ((tag = input->ReadTag()) != 0) {
+  // @@protoc_insertion_point(parse_start:SolasMatch.Common.Protobufs.Emails.ProjectImageRemovedEmail)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // required .SolasMatch.Common.Protobufs.Emails.EmailMessage.Type email_type = 1 [default = ProjectImageRemovedEmail];
       case 1: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 8) {
           int value;
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
@@ -190,7 +208,7 @@ bool ProjectImageRemovedEmail::MergePartialFromCodedStream(
             mutable_unknown_fields()->AddVarint(1, value);
           }
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(16)) goto parse_project_id;
         break;
@@ -198,25 +216,25 @@ bool ProjectImageRemovedEmail::MergePartialFromCodedStream(
 
       // required int32 project_id = 2;
       case 2: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 16) {
          parse_project_id:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &project_id_)));
           set_has_project_id();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
-        if (input->ExpectAtEnd()) return true;
+        if (input->ExpectAtEnd()) goto success;
         break;
       }
 
       default: {
-      handle_uninterpreted:
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          return true;
+          goto success;
         }
         DO_(::google::protobuf::internal::WireFormat::SkipField(
               input, tag, mutable_unknown_fields()));
@@ -224,12 +242,18 @@ bool ProjectImageRemovedEmail::MergePartialFromCodedStream(
       }
     }
   }
+success:
+  // @@protoc_insertion_point(parse_success:SolasMatch.Common.Protobufs.Emails.ProjectImageRemovedEmail)
   return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:SolasMatch.Common.Protobufs.Emails.ProjectImageRemovedEmail)
+  return false;
 #undef DO_
 }
 
 void ProjectImageRemovedEmail::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:SolasMatch.Common.Protobufs.Emails.ProjectImageRemovedEmail)
   // required .SolasMatch.Common.Protobufs.Emails.EmailMessage.Type email_type = 1 [default = ProjectImageRemovedEmail];
   if (has_email_type()) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
@@ -241,14 +265,16 @@ void ProjectImageRemovedEmail::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->project_id(), output);
   }
 
-  if (!unknown_fields().empty()) {
+  if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
+  // @@protoc_insertion_point(serialize_end:SolasMatch.Common.Protobufs.Emails.ProjectImageRemovedEmail)
 }
 
-::google::protobuf::uint8* ProjectImageRemovedEmail::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
+::google::protobuf::uint8* ProjectImageRemovedEmail::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:SolasMatch.Common.Protobufs.Emails.ProjectImageRemovedEmail)
   // required .SolasMatch.Common.Protobufs.Emails.EmailMessage.Type email_type = 1 [default = ProjectImageRemovedEmail];
   if (has_email_type()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
@@ -260,32 +286,51 @@ void ProjectImageRemovedEmail::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->project_id(), target);
   }
 
-  if (!unknown_fields().empty()) {
+  if (_internal_metadata_.have_unknown_fields()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
+  // @@protoc_insertion_point(serialize_to_array_end:SolasMatch.Common.Protobufs.Emails.ProjectImageRemovedEmail)
   return target;
 }
 
-int ProjectImageRemovedEmail::ByteSize() const {
+int ProjectImageRemovedEmail::RequiredFieldsByteSizeFallback() const {
+// @@protoc_insertion_point(required_fields_byte_size_fallback_start:SolasMatch.Common.Protobufs.Emails.ProjectImageRemovedEmail)
   int total_size = 0;
 
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+  if (has_email_type()) {
     // required .SolasMatch.Common.Protobufs.Emails.EmailMessage.Type email_type = 1 [default = ProjectImageRemovedEmail];
-    if (has_email_type()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::EnumSize(this->email_type());
-    }
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->email_type());
+  }
+
+  if (has_project_id()) {
+    // required int32 project_id = 2;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->project_id());
+  }
+
+  return total_size;
+}
+int ProjectImageRemovedEmail::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:SolasMatch.Common.Protobufs.Emails.ProjectImageRemovedEmail)
+  int total_size = 0;
+
+  if (((_has_bits_[0] & 0x00000003) ^ 0x00000003) == 0) {  // All required fields are present.
+    // required .SolasMatch.Common.Protobufs.Emails.EmailMessage.Type email_type = 1 [default = ProjectImageRemovedEmail];
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->email_type());
 
     // required int32 project_id = 2;
-    if (has_project_id()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->project_id());
-    }
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->project_id());
 
+  } else {
+    total_size += RequiredFieldsByteSizeFallback();
   }
-  if (!unknown_fields().empty()) {
+  if (_internal_metadata_.have_unknown_fields()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         unknown_fields());
@@ -297,19 +342,27 @@ int ProjectImageRemovedEmail::ByteSize() const {
 }
 
 void ProjectImageRemovedEmail::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const ProjectImageRemovedEmail* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const ProjectImageRemovedEmail*>(
-      &from);
+// @@protoc_insertion_point(generalized_merge_from_start:SolasMatch.Common.Protobufs.Emails.ProjectImageRemovedEmail)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  const ProjectImageRemovedEmail* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const ProjectImageRemovedEmail>(
+          &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:SolasMatch.Common.Protobufs.Emails.ProjectImageRemovedEmail)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:SolasMatch.Common.Protobufs.Emails.ProjectImageRemovedEmail)
     MergeFrom(*source);
   }
 }
 
 void ProjectImageRemovedEmail::MergeFrom(const ProjectImageRemovedEmail& from) {
-  GOOGLE_CHECK_NE(&from, this);
+// @@protoc_insertion_point(class_specific_merge_from_start:SolasMatch.Common.Protobufs.Emails.ProjectImageRemovedEmail)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_email_type()) {
       set_email_type(from.email_type());
@@ -318,16 +371,20 @@ void ProjectImageRemovedEmail::MergeFrom(const ProjectImageRemovedEmail& from) {
       set_project_id(from.project_id());
     }
   }
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  if (from._internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  }
 }
 
 void ProjectImageRemovedEmail::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:SolasMatch.Common.Protobufs.Emails.ProjectImageRemovedEmail)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void ProjectImageRemovedEmail::CopyFrom(const ProjectImageRemovedEmail& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:SolasMatch.Common.Protobufs.Emails.ProjectImageRemovedEmail)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -340,13 +397,15 @@ bool ProjectImageRemovedEmail::IsInitialized() const {
 }
 
 void ProjectImageRemovedEmail::Swap(ProjectImageRemovedEmail* other) {
-  if (other != this) {
-    std::swap(email_type_, other->email_type_);
-    std::swap(project_id_, other->project_id_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
+  if (other == this) return;
+  InternalSwap(other);
+}
+void ProjectImageRemovedEmail::InternalSwap(ProjectImageRemovedEmail* other) {
+  std::swap(email_type_, other->email_type_);
+  std::swap(project_id_, other->project_id_);
+  std::swap(_has_bits_[0], other->_has_bits_[0]);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata ProjectImageRemovedEmail::GetMetadata() const {
@@ -357,6 +416,59 @@ void ProjectImageRemovedEmail::Swap(ProjectImageRemovedEmail* other) {
   return metadata;
 }
 
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// ProjectImageRemovedEmail
+
+// required .SolasMatch.Common.Protobufs.Emails.EmailMessage.Type email_type = 1 [default = ProjectImageRemovedEmail];
+bool ProjectImageRemovedEmail::has_email_type() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+void ProjectImageRemovedEmail::set_has_email_type() {
+  _has_bits_[0] |= 0x00000001u;
+}
+void ProjectImageRemovedEmail::clear_has_email_type() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+void ProjectImageRemovedEmail::clear_email_type() {
+  email_type_ = 30;
+  clear_has_email_type();
+}
+ ::SolasMatch::Common::Protobufs::Emails::EmailMessage_Type ProjectImageRemovedEmail::email_type() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Emails.ProjectImageRemovedEmail.email_type)
+  return static_cast< ::SolasMatch::Common::Protobufs::Emails::EmailMessage_Type >(email_type_);
+}
+ void ProjectImageRemovedEmail::set_email_type(::SolasMatch::Common::Protobufs::Emails::EmailMessage_Type value) {
+  assert(::SolasMatch::Common::Protobufs::Emails::EmailMessage_Type_IsValid(value));
+  set_has_email_type();
+  email_type_ = value;
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Emails.ProjectImageRemovedEmail.email_type)
+}
+
+// required int32 project_id = 2;
+bool ProjectImageRemovedEmail::has_project_id() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+void ProjectImageRemovedEmail::set_has_project_id() {
+  _has_bits_[0] |= 0x00000002u;
+}
+void ProjectImageRemovedEmail::clear_has_project_id() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+void ProjectImageRemovedEmail::clear_project_id() {
+  project_id_ = 0;
+  clear_has_project_id();
+}
+ ::google::protobuf::int32 ProjectImageRemovedEmail::project_id() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Emails.ProjectImageRemovedEmail.project_id)
+  return project_id_;
+}
+ void ProjectImageRemovedEmail::set_project_id(::google::protobuf::int32 value) {
+  set_has_project_id();
+  project_id_ = value;
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Emails.ProjectImageRemovedEmail.project_id)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // @@protoc_insertion_point(namespace_scope)
 

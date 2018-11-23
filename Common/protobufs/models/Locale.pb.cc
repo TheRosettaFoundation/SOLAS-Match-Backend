@@ -7,6 +7,7 @@
 #include <algorithm>
 
 #include <google/protobuf/stubs/common.h>
+#include <google/protobuf/stubs/port.h>
 #include <google/protobuf/stubs/once.h>
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/wire_format_lite_inl.h>
@@ -30,6 +31,7 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 }  // namespace
 
 
+void protobuf_AssignDesc_Locale_2eproto() GOOGLE_ATTRIBUTE_COLD;
 void protobuf_AssignDesc_Locale_2eproto() {
   protobuf_AddDesc_Locale_2eproto();
   const ::google::protobuf::FileDescriptor* file =
@@ -44,16 +46,16 @@ void protobuf_AssignDesc_Locale_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Locale, countrycode_),
   };
   Locale_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
       Locale_descriptor_,
       Locale::default_instance_,
       Locale_offsets_,
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Locale, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Locale, _unknown_fields_),
       -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(Locale));
+      -1,
+      sizeof(Locale),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Locale, _internal_metadata_),
+      -1);
 }
 
 namespace {
@@ -64,10 +66,11 @@ inline void protobuf_AssignDescriptorsOnce() {
                  &protobuf_AssignDesc_Locale_2eproto);
 }
 
+void protobuf_RegisterTypes(const ::std::string&) GOOGLE_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    Locale_descriptor_, &Locale::default_instance());
+      Locale_descriptor_, &Locale::default_instance());
 }
 
 }  // namespace
@@ -77,6 +80,7 @@ void protobuf_ShutdownFile_Locale_2eproto() {
   delete Locale_reflection_;
 }
 
+void protobuf_AddDesc_Locale_2eproto() GOOGLE_ATTRIBUTE_COLD;
 void protobuf_AddDesc_Locale_2eproto() {
   static bool already_here = false;
   if (already_here) return;
@@ -104,53 +108,50 @@ struct StaticDescriptorInitializer_Locale_2eproto {
 
 // ===================================================================
 
-#ifndef _MSC_VER
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int Locale::kLanguageNameFieldNumber;
 const int Locale::kLanguageCodeFieldNumber;
 const int Locale::kCountryNameFieldNumber;
 const int Locale::kCountryCodeFieldNumber;
-#endif  // !_MSC_VER
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 Locale::Locale()
-  : ::google::protobuf::Message() {
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   SharedCtor();
+  // @@protoc_insertion_point(constructor:SolasMatch.Common.Protobufs.Models.Locale)
 }
 
 void Locale::InitAsDefaultInstance() {
 }
 
 Locale::Locale(const Locale& from)
-  : ::google::protobuf::Message() {
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
   SharedCtor();
   MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:SolasMatch.Common.Protobufs.Models.Locale)
 }
 
 void Locale::SharedCtor() {
+  ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
-  languagename_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  languagecode_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  countryname_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  countrycode_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  languagename_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  languagecode_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  countryname_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  countrycode_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
 Locale::~Locale() {
+  // @@protoc_insertion_point(destructor:SolasMatch.Common.Protobufs.Models.Locale)
   SharedDtor();
 }
 
 void Locale::SharedDtor() {
-  if (languagename_ != &::google::protobuf::internal::kEmptyString) {
-    delete languagename_;
-  }
-  if (languagecode_ != &::google::protobuf::internal::kEmptyString) {
-    delete languagecode_;
-  }
-  if (countryname_ != &::google::protobuf::internal::kEmptyString) {
-    delete countryname_;
-  }
-  if (countrycode_ != &::google::protobuf::internal::kEmptyString) {
-    delete countrycode_;
-  }
+  languagename_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  languagecode_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  countryname_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  countrycode_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != default_instance_) {
   }
 }
@@ -172,54 +173,57 @@ const Locale& Locale::default_instance() {
 
 Locale* Locale::default_instance_ = NULL;
 
-Locale* Locale::New() const {
-  return new Locale;
+Locale* Locale::New(::google::protobuf::Arena* arena) const {
+  Locale* n = new Locale;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
 }
 
 void Locale::Clear() {
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+// @@protoc_insertion_point(message_clear_start:SolasMatch.Common.Protobufs.Models.Locale)
+  if (_has_bits_[0 / 32] & 15u) {
     if (has_languagename()) {
-      if (languagename_ != &::google::protobuf::internal::kEmptyString) {
-        languagename_->clear();
-      }
+      languagename_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     }
     if (has_languagecode()) {
-      if (languagecode_ != &::google::protobuf::internal::kEmptyString) {
-        languagecode_->clear();
-      }
+      languagecode_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     }
     if (has_countryname()) {
-      if (countryname_ != &::google::protobuf::internal::kEmptyString) {
-        countryname_->clear();
-      }
+      countryname_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     }
     if (has_countrycode()) {
-      if (countrycode_ != &::google::protobuf::internal::kEmptyString) {
-        countrycode_->clear();
-      }
+      countrycode_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
+  if (_internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->Clear();
+  }
 }
 
 bool Locale::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  while ((tag = input->ReadTag()) != 0) {
+  // @@protoc_insertion_point(parse_start:SolasMatch.Common.Protobufs.Models.Locale)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // optional string languageName = 1;
       case 1: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 10) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_languagename()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
             this->languagename().data(), this->languagename().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "SolasMatch.Common.Protobufs.Models.Locale.languageName");
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(18)) goto parse_languageCode;
         break;
@@ -227,16 +231,16 @@ bool Locale::MergePartialFromCodedStream(
 
       // optional string languageCode = 2;
       case 2: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 18) {
          parse_languageCode:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_languagecode()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
             this->languagecode().data(), this->languagecode().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "SolasMatch.Common.Protobufs.Models.Locale.languageCode");
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(26)) goto parse_countryName;
         break;
@@ -244,16 +248,16 @@ bool Locale::MergePartialFromCodedStream(
 
       // optional string countryName = 3;
       case 3: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 26) {
          parse_countryName:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_countryname()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
             this->countryname().data(), this->countryname().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "SolasMatch.Common.Protobufs.Models.Locale.countryName");
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(34)) goto parse_countryCode;
         break;
@@ -261,26 +265,27 @@ bool Locale::MergePartialFromCodedStream(
 
       // optional string countryCode = 4;
       case 4: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 34) {
          parse_countryCode:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_countrycode()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
             this->countrycode().data(), this->countrycode().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "SolasMatch.Common.Protobufs.Models.Locale.countryCode");
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
-        if (input->ExpectAtEnd()) return true;
+        if (input->ExpectAtEnd()) goto success;
         break;
       }
 
       default: {
-      handle_uninterpreted:
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          return true;
+          goto success;
         }
         DO_(::google::protobuf::internal::WireFormat::SkipField(
               input, tag, mutable_unknown_fields()));
@@ -288,61 +293,74 @@ bool Locale::MergePartialFromCodedStream(
       }
     }
   }
+success:
+  // @@protoc_insertion_point(parse_success:SolasMatch.Common.Protobufs.Models.Locale)
   return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:SolasMatch.Common.Protobufs.Models.Locale)
+  return false;
 #undef DO_
 }
 
 void Locale::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:SolasMatch.Common.Protobufs.Models.Locale)
   // optional string languageName = 1;
   if (has_languagename()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->languagename().data(), this->languagename().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.Locale.languageName");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       1, this->languagename(), output);
   }
 
   // optional string languageCode = 2;
   if (has_languagecode()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->languagecode().data(), this->languagecode().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.Locale.languageCode");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       2, this->languagecode(), output);
   }
 
   // optional string countryName = 3;
   if (has_countryname()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->countryname().data(), this->countryname().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.Locale.countryName");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       3, this->countryname(), output);
   }
 
   // optional string countryCode = 4;
   if (has_countrycode()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->countrycode().data(), this->countrycode().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.Locale.countryCode");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       4, this->countrycode(), output);
   }
 
-  if (!unknown_fields().empty()) {
+  if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
+  // @@protoc_insertion_point(serialize_end:SolasMatch.Common.Protobufs.Models.Locale)
 }
 
-::google::protobuf::uint8* Locale::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
+::google::protobuf::uint8* Locale::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:SolasMatch.Common.Protobufs.Models.Locale)
   // optional string languageName = 1;
   if (has_languagename()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->languagename().data(), this->languagename().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.Locale.languageName");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         1, this->languagename(), target);
@@ -350,9 +368,10 @@ void Locale::SerializeWithCachedSizes(
 
   // optional string languageCode = 2;
   if (has_languagecode()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->languagecode().data(), this->languagecode().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.Locale.languageCode");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         2, this->languagecode(), target);
@@ -360,9 +379,10 @@ void Locale::SerializeWithCachedSizes(
 
   // optional string countryName = 3;
   if (has_countryname()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->countryname().data(), this->countryname().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.Locale.countryName");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         3, this->countryname(), target);
@@ -370,25 +390,28 @@ void Locale::SerializeWithCachedSizes(
 
   // optional string countryCode = 4;
   if (has_countrycode()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->countrycode().data(), this->countrycode().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.Locale.countryCode");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         4, this->countrycode(), target);
   }
 
-  if (!unknown_fields().empty()) {
+  if (_internal_metadata_.have_unknown_fields()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
+  // @@protoc_insertion_point(serialize_to_array_end:SolasMatch.Common.Protobufs.Models.Locale)
   return target;
 }
 
 int Locale::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:SolasMatch.Common.Protobufs.Models.Locale)
   int total_size = 0;
 
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+  if (_has_bits_[0 / 32] & 15u) {
     // optional string languageName = 1;
     if (has_languagename()) {
       total_size += 1 +
@@ -418,7 +441,7 @@ int Locale::ByteSize() const {
     }
 
   }
-  if (!unknown_fields().empty()) {
+  if (_internal_metadata_.have_unknown_fields()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         unknown_fields());
@@ -430,43 +453,59 @@ int Locale::ByteSize() const {
 }
 
 void Locale::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const Locale* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const Locale*>(
-      &from);
+// @@protoc_insertion_point(generalized_merge_from_start:SolasMatch.Common.Protobufs.Models.Locale)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  const Locale* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const Locale>(
+          &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:SolasMatch.Common.Protobufs.Models.Locale)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:SolasMatch.Common.Protobufs.Models.Locale)
     MergeFrom(*source);
   }
 }
 
 void Locale::MergeFrom(const Locale& from) {
-  GOOGLE_CHECK_NE(&from, this);
+// @@protoc_insertion_point(class_specific_merge_from_start:SolasMatch.Common.Protobufs.Models.Locale)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_languagename()) {
-      set_languagename(from.languagename());
+      set_has_languagename();
+      languagename_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.languagename_);
     }
     if (from.has_languagecode()) {
-      set_languagecode(from.languagecode());
+      set_has_languagecode();
+      languagecode_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.languagecode_);
     }
     if (from.has_countryname()) {
-      set_countryname(from.countryname());
+      set_has_countryname();
+      countryname_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.countryname_);
     }
     if (from.has_countrycode()) {
-      set_countrycode(from.countrycode());
+      set_has_countrycode();
+      countrycode_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.countrycode_);
     }
   }
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  if (from._internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  }
 }
 
 void Locale::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:SolasMatch.Common.Protobufs.Models.Locale)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void Locale::CopyFrom(const Locale& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:SolasMatch.Common.Protobufs.Models.Locale)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -478,15 +517,17 @@ bool Locale::IsInitialized() const {
 }
 
 void Locale::Swap(Locale* other) {
-  if (other != this) {
-    std::swap(languagename_, other->languagename_);
-    std::swap(languagecode_, other->languagecode_);
-    std::swap(countryname_, other->countryname_);
-    std::swap(countrycode_, other->countrycode_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
+  if (other == this) return;
+  InternalSwap(other);
+}
+void Locale::InternalSwap(Locale* other) {
+  languagename_.Swap(&other->languagename_);
+  languagecode_.Swap(&other->languagecode_);
+  countryname_.Swap(&other->countryname_);
+  countrycode_.Swap(&other->countrycode_);
+  std::swap(_has_bits_[0], other->_has_bits_[0]);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata Locale::GetMetadata() const {
@@ -497,6 +538,226 @@ void Locale::Swap(Locale* other) {
   return metadata;
 }
 
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// Locale
+
+// optional string languageName = 1;
+bool Locale::has_languagename() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+void Locale::set_has_languagename() {
+  _has_bits_[0] |= 0x00000001u;
+}
+void Locale::clear_has_languagename() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+void Locale::clear_languagename() {
+  languagename_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_languagename();
+}
+ const ::std::string& Locale::languagename() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.Locale.languageName)
+  return languagename_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void Locale::set_languagename(const ::std::string& value) {
+  set_has_languagename();
+  languagename_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.Locale.languageName)
+}
+ void Locale::set_languagename(const char* value) {
+  set_has_languagename();
+  languagename_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:SolasMatch.Common.Protobufs.Models.Locale.languageName)
+}
+ void Locale::set_languagename(const char* value, size_t size) {
+  set_has_languagename();
+  languagename_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:SolasMatch.Common.Protobufs.Models.Locale.languageName)
+}
+ ::std::string* Locale::mutable_languagename() {
+  set_has_languagename();
+  // @@protoc_insertion_point(field_mutable:SolasMatch.Common.Protobufs.Models.Locale.languageName)
+  return languagename_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* Locale::release_languagename() {
+  // @@protoc_insertion_point(field_release:SolasMatch.Common.Protobufs.Models.Locale.languageName)
+  clear_has_languagename();
+  return languagename_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void Locale::set_allocated_languagename(::std::string* languagename) {
+  if (languagename != NULL) {
+    set_has_languagename();
+  } else {
+    clear_has_languagename();
+  }
+  languagename_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), languagename);
+  // @@protoc_insertion_point(field_set_allocated:SolasMatch.Common.Protobufs.Models.Locale.languageName)
+}
+
+// optional string languageCode = 2;
+bool Locale::has_languagecode() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+void Locale::set_has_languagecode() {
+  _has_bits_[0] |= 0x00000002u;
+}
+void Locale::clear_has_languagecode() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+void Locale::clear_languagecode() {
+  languagecode_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_languagecode();
+}
+ const ::std::string& Locale::languagecode() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.Locale.languageCode)
+  return languagecode_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void Locale::set_languagecode(const ::std::string& value) {
+  set_has_languagecode();
+  languagecode_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.Locale.languageCode)
+}
+ void Locale::set_languagecode(const char* value) {
+  set_has_languagecode();
+  languagecode_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:SolasMatch.Common.Protobufs.Models.Locale.languageCode)
+}
+ void Locale::set_languagecode(const char* value, size_t size) {
+  set_has_languagecode();
+  languagecode_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:SolasMatch.Common.Protobufs.Models.Locale.languageCode)
+}
+ ::std::string* Locale::mutable_languagecode() {
+  set_has_languagecode();
+  // @@protoc_insertion_point(field_mutable:SolasMatch.Common.Protobufs.Models.Locale.languageCode)
+  return languagecode_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* Locale::release_languagecode() {
+  // @@protoc_insertion_point(field_release:SolasMatch.Common.Protobufs.Models.Locale.languageCode)
+  clear_has_languagecode();
+  return languagecode_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void Locale::set_allocated_languagecode(::std::string* languagecode) {
+  if (languagecode != NULL) {
+    set_has_languagecode();
+  } else {
+    clear_has_languagecode();
+  }
+  languagecode_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), languagecode);
+  // @@protoc_insertion_point(field_set_allocated:SolasMatch.Common.Protobufs.Models.Locale.languageCode)
+}
+
+// optional string countryName = 3;
+bool Locale::has_countryname() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+void Locale::set_has_countryname() {
+  _has_bits_[0] |= 0x00000004u;
+}
+void Locale::clear_has_countryname() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+void Locale::clear_countryname() {
+  countryname_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_countryname();
+}
+ const ::std::string& Locale::countryname() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.Locale.countryName)
+  return countryname_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void Locale::set_countryname(const ::std::string& value) {
+  set_has_countryname();
+  countryname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.Locale.countryName)
+}
+ void Locale::set_countryname(const char* value) {
+  set_has_countryname();
+  countryname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:SolasMatch.Common.Protobufs.Models.Locale.countryName)
+}
+ void Locale::set_countryname(const char* value, size_t size) {
+  set_has_countryname();
+  countryname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:SolasMatch.Common.Protobufs.Models.Locale.countryName)
+}
+ ::std::string* Locale::mutable_countryname() {
+  set_has_countryname();
+  // @@protoc_insertion_point(field_mutable:SolasMatch.Common.Protobufs.Models.Locale.countryName)
+  return countryname_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* Locale::release_countryname() {
+  // @@protoc_insertion_point(field_release:SolasMatch.Common.Protobufs.Models.Locale.countryName)
+  clear_has_countryname();
+  return countryname_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void Locale::set_allocated_countryname(::std::string* countryname) {
+  if (countryname != NULL) {
+    set_has_countryname();
+  } else {
+    clear_has_countryname();
+  }
+  countryname_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), countryname);
+  // @@protoc_insertion_point(field_set_allocated:SolasMatch.Common.Protobufs.Models.Locale.countryName)
+}
+
+// optional string countryCode = 4;
+bool Locale::has_countrycode() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+void Locale::set_has_countrycode() {
+  _has_bits_[0] |= 0x00000008u;
+}
+void Locale::clear_has_countrycode() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+void Locale::clear_countrycode() {
+  countrycode_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_countrycode();
+}
+ const ::std::string& Locale::countrycode() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.Locale.countryCode)
+  return countrycode_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void Locale::set_countrycode(const ::std::string& value) {
+  set_has_countrycode();
+  countrycode_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.Locale.countryCode)
+}
+ void Locale::set_countrycode(const char* value) {
+  set_has_countrycode();
+  countrycode_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:SolasMatch.Common.Protobufs.Models.Locale.countryCode)
+}
+ void Locale::set_countrycode(const char* value, size_t size) {
+  set_has_countrycode();
+  countrycode_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:SolasMatch.Common.Protobufs.Models.Locale.countryCode)
+}
+ ::std::string* Locale::mutable_countrycode() {
+  set_has_countrycode();
+  // @@protoc_insertion_point(field_mutable:SolasMatch.Common.Protobufs.Models.Locale.countryCode)
+  return countrycode_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* Locale::release_countrycode() {
+  // @@protoc_insertion_point(field_release:SolasMatch.Common.Protobufs.Models.Locale.countryCode)
+  clear_has_countrycode();
+  return countrycode_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void Locale::set_allocated_countrycode(::std::string* countrycode) {
+  if (countrycode != NULL) {
+    set_has_countrycode();
+  } else {
+    clear_has_countrycode();
+  }
+  countrycode_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), countrycode);
+  // @@protoc_insertion_point(field_set_allocated:SolasMatch.Common.Protobufs.Models.Locale.countryCode)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // @@protoc_insertion_point(namespace_scope)
 

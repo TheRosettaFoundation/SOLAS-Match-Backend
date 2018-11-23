@@ -7,6 +7,7 @@
 #include <algorithm>
 
 #include <google/protobuf/stubs/common.h>
+#include <google/protobuf/stubs/port.h>
 #include <google/protobuf/stubs/once.h>
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/wire_format_lite_inl.h>
@@ -30,6 +31,7 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 }  // namespace
 
 
+void protobuf_AssignDesc_BannedUser_2eproto() GOOGLE_ATTRIBUTE_COLD;
 void protobuf_AssignDesc_BannedUser_2eproto() {
   protobuf_AddDesc_BannedUser_2eproto();
   const ::google::protobuf::FileDescriptor* file =
@@ -45,16 +47,16 @@ void protobuf_AssignDesc_BannedUser_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BannedUser, banneddate_),
   };
   BannedUser_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
       BannedUser_descriptor_,
       BannedUser::default_instance_,
       BannedUser_offsets_,
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BannedUser, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BannedUser, _unknown_fields_),
       -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(BannedUser));
+      -1,
+      sizeof(BannedUser),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BannedUser, _internal_metadata_),
+      -1);
 }
 
 namespace {
@@ -65,10 +67,11 @@ inline void protobuf_AssignDescriptorsOnce() {
                  &protobuf_AssignDesc_BannedUser_2eproto);
 }
 
+void protobuf_RegisterTypes(const ::std::string&) GOOGLE_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    BannedUser_descriptor_, &BannedUser::default_instance());
+      BannedUser_descriptor_, &BannedUser::default_instance());
 }
 
 }  // namespace
@@ -78,6 +81,7 @@ void protobuf_ShutdownFile_BannedUser_2eproto() {
   delete BannedUser_reflection_;
 }
 
+void protobuf_AddDesc_BannedUser_2eproto() GOOGLE_ATTRIBUTE_COLD;
 void protobuf_AddDesc_BannedUser_2eproto() {
   static bool already_here = false;
   if (already_here) return;
@@ -105,49 +109,50 @@ struct StaticDescriptorInitializer_BannedUser_2eproto {
 
 // ===================================================================
 
-#ifndef _MSC_VER
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int BannedUser::kUserIdFieldNumber;
 const int BannedUser::kUserIdAdminFieldNumber;
 const int BannedUser::kBanTypeFieldNumber;
 const int BannedUser::kCommentFieldNumber;
 const int BannedUser::kBannedDateFieldNumber;
-#endif  // !_MSC_VER
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 BannedUser::BannedUser()
-  : ::google::protobuf::Message() {
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   SharedCtor();
+  // @@protoc_insertion_point(constructor:SolasMatch.Common.Protobufs.Models.BannedUser)
 }
 
 void BannedUser::InitAsDefaultInstance() {
 }
 
 BannedUser::BannedUser(const BannedUser& from)
-  : ::google::protobuf::Message() {
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
   SharedCtor();
   MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:SolasMatch.Common.Protobufs.Models.BannedUser)
 }
 
 void BannedUser::SharedCtor() {
+  ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
   userid_ = 0;
   useridadmin_ = 0;
   bantype_ = 0;
-  comment_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  banneddate_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  comment_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  banneddate_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
 BannedUser::~BannedUser() {
+  // @@protoc_insertion_point(destructor:SolasMatch.Common.Protobufs.Models.BannedUser)
   SharedDtor();
 }
 
 void BannedUser::SharedDtor() {
-  if (comment_ != &::google::protobuf::internal::kEmptyString) {
-    delete comment_;
-  }
-  if (banneddate_ != &::google::protobuf::internal::kEmptyString) {
-    delete banneddate_;
-  }
+  comment_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  banneddate_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != default_instance_) {
   }
 }
@@ -169,46 +174,71 @@ const BannedUser& BannedUser::default_instance() {
 
 BannedUser* BannedUser::default_instance_ = NULL;
 
-BannedUser* BannedUser::New() const {
-  return new BannedUser;
+BannedUser* BannedUser::New(::google::protobuf::Arena* arena) const {
+  BannedUser* n = new BannedUser;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
 }
 
 void BannedUser::Clear() {
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    userid_ = 0;
-    useridadmin_ = 0;
+// @@protoc_insertion_point(message_clear_start:SolasMatch.Common.Protobufs.Models.BannedUser)
+#if defined(__clang__)
+#define ZR_HELPER_(f) \
+  _Pragma("clang diagnostic push") \
+  _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
+  __builtin_offsetof(BannedUser, f) \
+  _Pragma("clang diagnostic pop")
+#else
+#define ZR_HELPER_(f) reinterpret_cast<char*>(\
+  &reinterpret_cast<BannedUser*>(16)->f)
+#endif
+
+#define ZR_(first, last) do {\
+  ::memset(&first, 0,\
+           ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
+} while (0)
+
+  if (_has_bits_[0 / 32] & 31u) {
+    ZR_(userid_, useridadmin_);
     bantype_ = 0;
     if (has_comment()) {
-      if (comment_ != &::google::protobuf::internal::kEmptyString) {
-        comment_->clear();
-      }
+      comment_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     }
     if (has_banneddate()) {
-      if (banneddate_ != &::google::protobuf::internal::kEmptyString) {
-        banneddate_->clear();
-      }
+      banneddate_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     }
   }
+
+#undef ZR_HELPER_
+#undef ZR_
+
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
+  if (_internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->Clear();
+  }
 }
 
 bool BannedUser::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  while ((tag = input->ReadTag()) != 0) {
+  // @@protoc_insertion_point(parse_start:SolasMatch.Common.Protobufs.Models.BannedUser)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // optional int32 userId = 1;
       case 1: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 8) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &userid_)));
           set_has_userid();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(16)) goto parse_userIdAdmin;
         break;
@@ -216,15 +246,14 @@ bool BannedUser::MergePartialFromCodedStream(
 
       // optional int32 userIdAdmin = 2;
       case 2: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 16) {
          parse_userIdAdmin:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &useridadmin_)));
           set_has_useridadmin();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(24)) goto parse_banType;
         break;
@@ -232,15 +261,14 @@ bool BannedUser::MergePartialFromCodedStream(
 
       // optional int32 banType = 3;
       case 3: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 24) {
          parse_banType:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &bantype_)));
           set_has_bantype();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(34)) goto parse_comment;
         break;
@@ -248,16 +276,16 @@ bool BannedUser::MergePartialFromCodedStream(
 
       // optional string comment = 4;
       case 4: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 34) {
          parse_comment:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_comment()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
             this->comment().data(), this->comment().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "SolasMatch.Common.Protobufs.Models.BannedUser.comment");
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(42)) goto parse_bannedDate;
         break;
@@ -265,26 +293,27 @@ bool BannedUser::MergePartialFromCodedStream(
 
       // optional string bannedDate = 5;
       case 5: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 42) {
          parse_bannedDate:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_banneddate()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
             this->banneddate().data(), this->banneddate().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "SolasMatch.Common.Protobufs.Models.BannedUser.bannedDate");
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
-        if (input->ExpectAtEnd()) return true;
+        if (input->ExpectAtEnd()) goto success;
         break;
       }
 
       default: {
-      handle_uninterpreted:
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          return true;
+          goto success;
         }
         DO_(::google::protobuf::internal::WireFormat::SkipField(
               input, tag, mutable_unknown_fields()));
@@ -292,12 +321,18 @@ bool BannedUser::MergePartialFromCodedStream(
       }
     }
   }
+success:
+  // @@protoc_insertion_point(parse_success:SolasMatch.Common.Protobufs.Models.BannedUser)
   return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:SolasMatch.Common.Protobufs.Models.BannedUser)
+  return false;
 #undef DO_
 }
 
 void BannedUser::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:SolasMatch.Common.Protobufs.Models.BannedUser)
   // optional int32 userId = 1;
   if (has_userid()) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->userid(), output);
@@ -315,30 +350,34 @@ void BannedUser::SerializeWithCachedSizes(
 
   // optional string comment = 4;
   if (has_comment()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->comment().data(), this->comment().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.BannedUser.comment");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       4, this->comment(), output);
   }
 
   // optional string bannedDate = 5;
   if (has_banneddate()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->banneddate().data(), this->banneddate().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.BannedUser.bannedDate");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       5, this->banneddate(), output);
   }
 
-  if (!unknown_fields().empty()) {
+  if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
+  // @@protoc_insertion_point(serialize_end:SolasMatch.Common.Protobufs.Models.BannedUser)
 }
 
-::google::protobuf::uint8* BannedUser::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
+::google::protobuf::uint8* BannedUser::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:SolasMatch.Common.Protobufs.Models.BannedUser)
   // optional int32 userId = 1;
   if (has_userid()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->userid(), target);
@@ -356,9 +395,10 @@ void BannedUser::SerializeWithCachedSizes(
 
   // optional string comment = 4;
   if (has_comment()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->comment().data(), this->comment().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.BannedUser.comment");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         4, this->comment(), target);
@@ -366,25 +406,28 @@ void BannedUser::SerializeWithCachedSizes(
 
   // optional string bannedDate = 5;
   if (has_banneddate()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->banneddate().data(), this->banneddate().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.BannedUser.bannedDate");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         5, this->banneddate(), target);
   }
 
-  if (!unknown_fields().empty()) {
+  if (_internal_metadata_.have_unknown_fields()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
+  // @@protoc_insertion_point(serialize_to_array_end:SolasMatch.Common.Protobufs.Models.BannedUser)
   return target;
 }
 
 int BannedUser::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:SolasMatch.Common.Protobufs.Models.BannedUser)
   int total_size = 0;
 
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+  if (_has_bits_[0 / 32] & 31u) {
     // optional int32 userId = 1;
     if (has_userid()) {
       total_size += 1 +
@@ -421,7 +464,7 @@ int BannedUser::ByteSize() const {
     }
 
   }
-  if (!unknown_fields().empty()) {
+  if (_internal_metadata_.have_unknown_fields()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         unknown_fields());
@@ -433,19 +476,27 @@ int BannedUser::ByteSize() const {
 }
 
 void BannedUser::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const BannedUser* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const BannedUser*>(
-      &from);
+// @@protoc_insertion_point(generalized_merge_from_start:SolasMatch.Common.Protobufs.Models.BannedUser)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  const BannedUser* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const BannedUser>(
+          &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:SolasMatch.Common.Protobufs.Models.BannedUser)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:SolasMatch.Common.Protobufs.Models.BannedUser)
     MergeFrom(*source);
   }
 }
 
 void BannedUser::MergeFrom(const BannedUser& from) {
-  GOOGLE_CHECK_NE(&from, this);
+// @@protoc_insertion_point(class_specific_merge_from_start:SolasMatch.Common.Protobufs.Models.BannedUser)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_userid()) {
       set_userid(from.userid());
@@ -457,22 +508,28 @@ void BannedUser::MergeFrom(const BannedUser& from) {
       set_bantype(from.bantype());
     }
     if (from.has_comment()) {
-      set_comment(from.comment());
+      set_has_comment();
+      comment_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.comment_);
     }
     if (from.has_banneddate()) {
-      set_banneddate(from.banneddate());
+      set_has_banneddate();
+      banneddate_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.banneddate_);
     }
   }
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  if (from._internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  }
 }
 
 void BannedUser::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:SolasMatch.Common.Protobufs.Models.BannedUser)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void BannedUser::CopyFrom(const BannedUser& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:SolasMatch.Common.Protobufs.Models.BannedUser)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -484,16 +541,18 @@ bool BannedUser::IsInitialized() const {
 }
 
 void BannedUser::Swap(BannedUser* other) {
-  if (other != this) {
-    std::swap(userid_, other->userid_);
-    std::swap(useridadmin_, other->useridadmin_);
-    std::swap(bantype_, other->bantype_);
-    std::swap(comment_, other->comment_);
-    std::swap(banneddate_, other->banneddate_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
+  if (other == this) return;
+  InternalSwap(other);
+}
+void BannedUser::InternalSwap(BannedUser* other) {
+  std::swap(userid_, other->userid_);
+  std::swap(useridadmin_, other->useridadmin_);
+  std::swap(bantype_, other->bantype_);
+  comment_.Swap(&other->comment_);
+  banneddate_.Swap(&other->banneddate_);
+  std::swap(_has_bits_[0], other->_has_bits_[0]);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata BannedUser::GetMetadata() const {
@@ -504,6 +563,190 @@ void BannedUser::Swap(BannedUser* other) {
   return metadata;
 }
 
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// BannedUser
+
+// optional int32 userId = 1;
+bool BannedUser::has_userid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+void BannedUser::set_has_userid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+void BannedUser::clear_has_userid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+void BannedUser::clear_userid() {
+  userid_ = 0;
+  clear_has_userid();
+}
+ ::google::protobuf::int32 BannedUser::userid() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.BannedUser.userId)
+  return userid_;
+}
+ void BannedUser::set_userid(::google::protobuf::int32 value) {
+  set_has_userid();
+  userid_ = value;
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.BannedUser.userId)
+}
+
+// optional int32 userIdAdmin = 2;
+bool BannedUser::has_useridadmin() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+void BannedUser::set_has_useridadmin() {
+  _has_bits_[0] |= 0x00000002u;
+}
+void BannedUser::clear_has_useridadmin() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+void BannedUser::clear_useridadmin() {
+  useridadmin_ = 0;
+  clear_has_useridadmin();
+}
+ ::google::protobuf::int32 BannedUser::useridadmin() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.BannedUser.userIdAdmin)
+  return useridadmin_;
+}
+ void BannedUser::set_useridadmin(::google::protobuf::int32 value) {
+  set_has_useridadmin();
+  useridadmin_ = value;
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.BannedUser.userIdAdmin)
+}
+
+// optional int32 banType = 3;
+bool BannedUser::has_bantype() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+void BannedUser::set_has_bantype() {
+  _has_bits_[0] |= 0x00000004u;
+}
+void BannedUser::clear_has_bantype() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+void BannedUser::clear_bantype() {
+  bantype_ = 0;
+  clear_has_bantype();
+}
+ ::google::protobuf::int32 BannedUser::bantype() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.BannedUser.banType)
+  return bantype_;
+}
+ void BannedUser::set_bantype(::google::protobuf::int32 value) {
+  set_has_bantype();
+  bantype_ = value;
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.BannedUser.banType)
+}
+
+// optional string comment = 4;
+bool BannedUser::has_comment() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+void BannedUser::set_has_comment() {
+  _has_bits_[0] |= 0x00000008u;
+}
+void BannedUser::clear_has_comment() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+void BannedUser::clear_comment() {
+  comment_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_comment();
+}
+ const ::std::string& BannedUser::comment() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.BannedUser.comment)
+  return comment_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void BannedUser::set_comment(const ::std::string& value) {
+  set_has_comment();
+  comment_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.BannedUser.comment)
+}
+ void BannedUser::set_comment(const char* value) {
+  set_has_comment();
+  comment_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:SolasMatch.Common.Protobufs.Models.BannedUser.comment)
+}
+ void BannedUser::set_comment(const char* value, size_t size) {
+  set_has_comment();
+  comment_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:SolasMatch.Common.Protobufs.Models.BannedUser.comment)
+}
+ ::std::string* BannedUser::mutable_comment() {
+  set_has_comment();
+  // @@protoc_insertion_point(field_mutable:SolasMatch.Common.Protobufs.Models.BannedUser.comment)
+  return comment_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* BannedUser::release_comment() {
+  // @@protoc_insertion_point(field_release:SolasMatch.Common.Protobufs.Models.BannedUser.comment)
+  clear_has_comment();
+  return comment_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void BannedUser::set_allocated_comment(::std::string* comment) {
+  if (comment != NULL) {
+    set_has_comment();
+  } else {
+    clear_has_comment();
+  }
+  comment_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), comment);
+  // @@protoc_insertion_point(field_set_allocated:SolasMatch.Common.Protobufs.Models.BannedUser.comment)
+}
+
+// optional string bannedDate = 5;
+bool BannedUser::has_banneddate() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+void BannedUser::set_has_banneddate() {
+  _has_bits_[0] |= 0x00000010u;
+}
+void BannedUser::clear_has_banneddate() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+void BannedUser::clear_banneddate() {
+  banneddate_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_banneddate();
+}
+ const ::std::string& BannedUser::banneddate() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.BannedUser.bannedDate)
+  return banneddate_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void BannedUser::set_banneddate(const ::std::string& value) {
+  set_has_banneddate();
+  banneddate_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.BannedUser.bannedDate)
+}
+ void BannedUser::set_banneddate(const char* value) {
+  set_has_banneddate();
+  banneddate_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:SolasMatch.Common.Protobufs.Models.BannedUser.bannedDate)
+}
+ void BannedUser::set_banneddate(const char* value, size_t size) {
+  set_has_banneddate();
+  banneddate_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:SolasMatch.Common.Protobufs.Models.BannedUser.bannedDate)
+}
+ ::std::string* BannedUser::mutable_banneddate() {
+  set_has_banneddate();
+  // @@protoc_insertion_point(field_mutable:SolasMatch.Common.Protobufs.Models.BannedUser.bannedDate)
+  return banneddate_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* BannedUser::release_banneddate() {
+  // @@protoc_insertion_point(field_release:SolasMatch.Common.Protobufs.Models.BannedUser.bannedDate)
+  clear_has_banneddate();
+  return banneddate_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void BannedUser::set_allocated_banneddate(::std::string* banneddate) {
+  if (banneddate != NULL) {
+    set_has_banneddate();
+  } else {
+    clear_has_banneddate();
+  }
+  banneddate_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), banneddate);
+  // @@protoc_insertion_point(field_set_allocated:SolasMatch.Common.Protobufs.Models.BannedUser.bannedDate)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // @@protoc_insertion_point(namespace_scope)
 

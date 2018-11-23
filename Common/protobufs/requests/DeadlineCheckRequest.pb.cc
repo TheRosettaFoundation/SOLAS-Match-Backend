@@ -7,6 +7,7 @@
 #include <algorithm>
 
 #include <google/protobuf/stubs/common.h>
+#include <google/protobuf/stubs/port.h>
 #include <google/protobuf/stubs/once.h>
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/wire_format_lite_inl.h>
@@ -30,6 +31,7 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 }  // namespace
 
 
+void protobuf_AssignDesc_DeadlineCheckRequest_2eproto() GOOGLE_ATTRIBUTE_COLD;
 void protobuf_AssignDesc_DeadlineCheckRequest_2eproto() {
   protobuf_AddDesc_DeadlineCheckRequest_2eproto();
   const ::google::protobuf::FileDescriptor* file =
@@ -44,16 +46,16 @@ void protobuf_AssignDesc_DeadlineCheckRequest_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DeadlineCheckRequest, user_id_),
   };
   DeadlineCheckRequest_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
       DeadlineCheckRequest_descriptor_,
       DeadlineCheckRequest::default_instance_,
       DeadlineCheckRequest_offsets_,
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DeadlineCheckRequest, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DeadlineCheckRequest, _unknown_fields_),
       -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(DeadlineCheckRequest));
+      -1,
+      sizeof(DeadlineCheckRequest),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DeadlineCheckRequest, _internal_metadata_),
+      -1);
 }
 
 namespace {
@@ -64,10 +66,11 @@ inline void protobuf_AssignDescriptorsOnce() {
                  &protobuf_AssignDesc_DeadlineCheckRequest_2eproto);
 }
 
+void protobuf_RegisterTypes(const ::std::string&) GOOGLE_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    DeadlineCheckRequest_descriptor_, &DeadlineCheckRequest::default_instance());
+      DeadlineCheckRequest_descriptor_, &DeadlineCheckRequest::default_instance());
 }
 
 }  // namespace
@@ -78,6 +81,7 @@ void protobuf_ShutdownFile_DeadlineCheckRequest_2eproto() {
   delete DeadlineCheckRequest::_default_class_name_;
 }
 
+void protobuf_AddDesc_DeadlineCheckRequest_2eproto() GOOGLE_ATTRIBUTE_COLD;
 void protobuf_AddDesc_DeadlineCheckRequest_2eproto() {
   static bool already_here = false;
   if (already_here) return;
@@ -109,30 +113,34 @@ struct StaticDescriptorInitializer_DeadlineCheckRequest_2eproto {
 // ===================================================================
 
 ::std::string* DeadlineCheckRequest::_default_class_name_ = NULL;
-#ifndef _MSC_VER
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int DeadlineCheckRequest::kClassNameFieldNumber;
 const int DeadlineCheckRequest::kTaskIdFieldNumber;
 const int DeadlineCheckRequest::kOrgIdFieldNumber;
 const int DeadlineCheckRequest::kUserIdFieldNumber;
-#endif  // !_MSC_VER
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 DeadlineCheckRequest::DeadlineCheckRequest()
-  : ::google::protobuf::Message() {
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   SharedCtor();
+  // @@protoc_insertion_point(constructor:SolasMatch.Common.Protobufs.Requests.DeadlineCheckRequest)
 }
 
 void DeadlineCheckRequest::InitAsDefaultInstance() {
 }
 
 DeadlineCheckRequest::DeadlineCheckRequest(const DeadlineCheckRequest& from)
-  : ::google::protobuf::Message() {
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
   SharedCtor();
   MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:SolasMatch.Common.Protobufs.Requests.DeadlineCheckRequest)
 }
 
 void DeadlineCheckRequest::SharedCtor() {
+  ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
-  class_name_ = const_cast< ::std::string*>(_default_class_name_);
+  class_name_.UnsafeSetDefault(_default_class_name_);
   task_id_ = 0;
   org_id_ = 0;
   user_id_ = 0;
@@ -140,13 +148,12 @@ void DeadlineCheckRequest::SharedCtor() {
 }
 
 DeadlineCheckRequest::~DeadlineCheckRequest() {
+  // @@protoc_insertion_point(destructor:SolasMatch.Common.Protobufs.Requests.DeadlineCheckRequest)
   SharedDtor();
 }
 
 void DeadlineCheckRequest::SharedDtor() {
-  if (class_name_ != _default_class_name_) {
-    delete class_name_;
-  }
+  class_name_.DestroyNoArena(_default_class_name_);
   if (this != default_instance_) {
   }
 }
@@ -168,42 +175,69 @@ const DeadlineCheckRequest& DeadlineCheckRequest::default_instance() {
 
 DeadlineCheckRequest* DeadlineCheckRequest::default_instance_ = NULL;
 
-DeadlineCheckRequest* DeadlineCheckRequest::New() const {
-  return new DeadlineCheckRequest;
+DeadlineCheckRequest* DeadlineCheckRequest::New(::google::protobuf::Arena* arena) const {
+  DeadlineCheckRequest* n = new DeadlineCheckRequest;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
 }
 
 void DeadlineCheckRequest::Clear() {
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+// @@protoc_insertion_point(message_clear_start:SolasMatch.Common.Protobufs.Requests.DeadlineCheckRequest)
+#if defined(__clang__)
+#define ZR_HELPER_(f) \
+  _Pragma("clang diagnostic push") \
+  _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
+  __builtin_offsetof(DeadlineCheckRequest, f) \
+  _Pragma("clang diagnostic pop")
+#else
+#define ZR_HELPER_(f) reinterpret_cast<char*>(\
+  &reinterpret_cast<DeadlineCheckRequest*>(16)->f)
+#endif
+
+#define ZR_(first, last) do {\
+  ::memset(&first, 0,\
+           ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
+} while (0)
+
+  if (_has_bits_[0 / 32] & 15u) {
+    ZR_(task_id_, user_id_);
     if (has_class_name()) {
-      if (class_name_ != _default_class_name_) {
-        class_name_->assign(*_default_class_name_);
-      }
+      class_name_.ClearToDefaultNoArena(_default_class_name_);
     }
-    task_id_ = 0;
-    org_id_ = 0;
-    user_id_ = 0;
   }
+
+#undef ZR_HELPER_
+#undef ZR_
+
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
+  if (_internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->Clear();
+  }
 }
 
 bool DeadlineCheckRequest::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  while ((tag = input->ReadTag()) != 0) {
+  // @@protoc_insertion_point(parse_start:SolasMatch.Common.Protobufs.Requests.DeadlineCheckRequest)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // required string class_name = 1 [default = "DeadlineCheckRequest"];
       case 1: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 10) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_class_name()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
             this->class_name().data(), this->class_name().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "SolasMatch.Common.Protobufs.Requests.DeadlineCheckRequest.class_name");
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(16)) goto parse_task_id;
         break;
@@ -211,15 +245,14 @@ bool DeadlineCheckRequest::MergePartialFromCodedStream(
 
       // optional int32 task_id = 2;
       case 2: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 16) {
          parse_task_id:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &task_id_)));
           set_has_task_id();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(24)) goto parse_org_id;
         break;
@@ -227,15 +260,14 @@ bool DeadlineCheckRequest::MergePartialFromCodedStream(
 
       // optional int32 org_id = 3;
       case 3: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 24) {
          parse_org_id:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &org_id_)));
           set_has_org_id();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(32)) goto parse_user_id;
         break;
@@ -243,25 +275,25 @@ bool DeadlineCheckRequest::MergePartialFromCodedStream(
 
       // optional int32 user_id = 4;
       case 4: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 32) {
          parse_user_id:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &user_id_)));
           set_has_user_id();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
-        if (input->ExpectAtEnd()) return true;
+        if (input->ExpectAtEnd()) goto success;
         break;
       }
 
       default: {
-      handle_uninterpreted:
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          return true;
+          goto success;
         }
         DO_(::google::protobuf::internal::WireFormat::SkipField(
               input, tag, mutable_unknown_fields()));
@@ -269,18 +301,25 @@ bool DeadlineCheckRequest::MergePartialFromCodedStream(
       }
     }
   }
+success:
+  // @@protoc_insertion_point(parse_success:SolasMatch.Common.Protobufs.Requests.DeadlineCheckRequest)
   return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:SolasMatch.Common.Protobufs.Requests.DeadlineCheckRequest)
+  return false;
 #undef DO_
 }
 
 void DeadlineCheckRequest::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:SolasMatch.Common.Protobufs.Requests.DeadlineCheckRequest)
   // required string class_name = 1 [default = "DeadlineCheckRequest"];
   if (has_class_name()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->class_name().data(), this->class_name().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Requests.DeadlineCheckRequest.class_name");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       1, this->class_name(), output);
   }
 
@@ -299,19 +338,22 @@ void DeadlineCheckRequest::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->user_id(), output);
   }
 
-  if (!unknown_fields().empty()) {
+  if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
+  // @@protoc_insertion_point(serialize_end:SolasMatch.Common.Protobufs.Requests.DeadlineCheckRequest)
 }
 
-::google::protobuf::uint8* DeadlineCheckRequest::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
+::google::protobuf::uint8* DeadlineCheckRequest::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:SolasMatch.Common.Protobufs.Requests.DeadlineCheckRequest)
   // required string class_name = 1 [default = "DeadlineCheckRequest"];
   if (has_class_name()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->class_name().data(), this->class_name().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Requests.DeadlineCheckRequest.class_name");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         1, this->class_name(), target);
@@ -332,24 +374,25 @@ void DeadlineCheckRequest::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->user_id(), target);
   }
 
-  if (!unknown_fields().empty()) {
+  if (_internal_metadata_.have_unknown_fields()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
+  // @@protoc_insertion_point(serialize_to_array_end:SolasMatch.Common.Protobufs.Requests.DeadlineCheckRequest)
   return target;
 }
 
 int DeadlineCheckRequest::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:SolasMatch.Common.Protobufs.Requests.DeadlineCheckRequest)
   int total_size = 0;
 
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required string class_name = 1 [default = "DeadlineCheckRequest"];
-    if (has_class_name()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->class_name());
-    }
-
+  // required string class_name = 1 [default = "DeadlineCheckRequest"];
+  if (has_class_name()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->class_name());
+  }
+  if (_has_bits_[1 / 32] & 14u) {
     // optional int32 task_id = 2;
     if (has_task_id()) {
       total_size += 1 +
@@ -372,7 +415,7 @@ int DeadlineCheckRequest::ByteSize() const {
     }
 
   }
-  if (!unknown_fields().empty()) {
+  if (_internal_metadata_.have_unknown_fields()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         unknown_fields());
@@ -384,22 +427,31 @@ int DeadlineCheckRequest::ByteSize() const {
 }
 
 void DeadlineCheckRequest::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const DeadlineCheckRequest* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const DeadlineCheckRequest*>(
-      &from);
+// @@protoc_insertion_point(generalized_merge_from_start:SolasMatch.Common.Protobufs.Requests.DeadlineCheckRequest)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  const DeadlineCheckRequest* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const DeadlineCheckRequest>(
+          &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:SolasMatch.Common.Protobufs.Requests.DeadlineCheckRequest)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:SolasMatch.Common.Protobufs.Requests.DeadlineCheckRequest)
     MergeFrom(*source);
   }
 }
 
 void DeadlineCheckRequest::MergeFrom(const DeadlineCheckRequest& from) {
-  GOOGLE_CHECK_NE(&from, this);
+// @@protoc_insertion_point(class_specific_merge_from_start:SolasMatch.Common.Protobufs.Requests.DeadlineCheckRequest)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_class_name()) {
-      set_class_name(from.class_name());
+      set_has_class_name();
+      class_name_.AssignWithDefault(_default_class_name_, from.class_name_);
     }
     if (from.has_task_id()) {
       set_task_id(from.task_id());
@@ -411,16 +463,20 @@ void DeadlineCheckRequest::MergeFrom(const DeadlineCheckRequest& from) {
       set_user_id(from.user_id());
     }
   }
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  if (from._internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  }
 }
 
 void DeadlineCheckRequest::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:SolasMatch.Common.Protobufs.Requests.DeadlineCheckRequest)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void DeadlineCheckRequest::CopyFrom(const DeadlineCheckRequest& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:SolasMatch.Common.Protobufs.Requests.DeadlineCheckRequest)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -433,15 +489,17 @@ bool DeadlineCheckRequest::IsInitialized() const {
 }
 
 void DeadlineCheckRequest::Swap(DeadlineCheckRequest* other) {
-  if (other != this) {
-    std::swap(class_name_, other->class_name_);
-    std::swap(task_id_, other->task_id_);
-    std::swap(org_id_, other->org_id_);
-    std::swap(user_id_, other->user_id_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
+  if (other == this) return;
+  InternalSwap(other);
+}
+void DeadlineCheckRequest::InternalSwap(DeadlineCheckRequest* other) {
+  class_name_.Swap(&other->class_name_);
+  std::swap(task_id_, other->task_id_);
+  std::swap(org_id_, other->org_id_);
+  std::swap(user_id_, other->user_id_);
+  std::swap(_has_bits_[0], other->_has_bits_[0]);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata DeadlineCheckRequest::GetMetadata() const {
@@ -452,6 +510,136 @@ void DeadlineCheckRequest::Swap(DeadlineCheckRequest* other) {
   return metadata;
 }
 
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// DeadlineCheckRequest
+
+// required string class_name = 1 [default = "DeadlineCheckRequest"];
+bool DeadlineCheckRequest::has_class_name() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+void DeadlineCheckRequest::set_has_class_name() {
+  _has_bits_[0] |= 0x00000001u;
+}
+void DeadlineCheckRequest::clear_has_class_name() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+void DeadlineCheckRequest::clear_class_name() {
+  class_name_.ClearToDefaultNoArena(_default_class_name_);
+  clear_has_class_name();
+}
+ const ::std::string& DeadlineCheckRequest::class_name() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Requests.DeadlineCheckRequest.class_name)
+  return class_name_.GetNoArena(_default_class_name_);
+}
+ void DeadlineCheckRequest::set_class_name(const ::std::string& value) {
+  set_has_class_name();
+  class_name_.SetNoArena(_default_class_name_, value);
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Requests.DeadlineCheckRequest.class_name)
+}
+ void DeadlineCheckRequest::set_class_name(const char* value) {
+  set_has_class_name();
+  class_name_.SetNoArena(_default_class_name_, ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:SolasMatch.Common.Protobufs.Requests.DeadlineCheckRequest.class_name)
+}
+ void DeadlineCheckRequest::set_class_name(const char* value, size_t size) {
+  set_has_class_name();
+  class_name_.SetNoArena(_default_class_name_,
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:SolasMatch.Common.Protobufs.Requests.DeadlineCheckRequest.class_name)
+}
+ ::std::string* DeadlineCheckRequest::mutable_class_name() {
+  set_has_class_name();
+  // @@protoc_insertion_point(field_mutable:SolasMatch.Common.Protobufs.Requests.DeadlineCheckRequest.class_name)
+  return class_name_.MutableNoArena(_default_class_name_);
+}
+ ::std::string* DeadlineCheckRequest::release_class_name() {
+  // @@protoc_insertion_point(field_release:SolasMatch.Common.Protobufs.Requests.DeadlineCheckRequest.class_name)
+  clear_has_class_name();
+  return class_name_.ReleaseNoArena(_default_class_name_);
+}
+ void DeadlineCheckRequest::set_allocated_class_name(::std::string* class_name) {
+  if (class_name != NULL) {
+    set_has_class_name();
+  } else {
+    clear_has_class_name();
+  }
+  class_name_.SetAllocatedNoArena(_default_class_name_, class_name);
+  // @@protoc_insertion_point(field_set_allocated:SolasMatch.Common.Protobufs.Requests.DeadlineCheckRequest.class_name)
+}
+
+// optional int32 task_id = 2;
+bool DeadlineCheckRequest::has_task_id() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+void DeadlineCheckRequest::set_has_task_id() {
+  _has_bits_[0] |= 0x00000002u;
+}
+void DeadlineCheckRequest::clear_has_task_id() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+void DeadlineCheckRequest::clear_task_id() {
+  task_id_ = 0;
+  clear_has_task_id();
+}
+ ::google::protobuf::int32 DeadlineCheckRequest::task_id() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Requests.DeadlineCheckRequest.task_id)
+  return task_id_;
+}
+ void DeadlineCheckRequest::set_task_id(::google::protobuf::int32 value) {
+  set_has_task_id();
+  task_id_ = value;
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Requests.DeadlineCheckRequest.task_id)
+}
+
+// optional int32 org_id = 3;
+bool DeadlineCheckRequest::has_org_id() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+void DeadlineCheckRequest::set_has_org_id() {
+  _has_bits_[0] |= 0x00000004u;
+}
+void DeadlineCheckRequest::clear_has_org_id() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+void DeadlineCheckRequest::clear_org_id() {
+  org_id_ = 0;
+  clear_has_org_id();
+}
+ ::google::protobuf::int32 DeadlineCheckRequest::org_id() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Requests.DeadlineCheckRequest.org_id)
+  return org_id_;
+}
+ void DeadlineCheckRequest::set_org_id(::google::protobuf::int32 value) {
+  set_has_org_id();
+  org_id_ = value;
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Requests.DeadlineCheckRequest.org_id)
+}
+
+// optional int32 user_id = 4;
+bool DeadlineCheckRequest::has_user_id() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+void DeadlineCheckRequest::set_has_user_id() {
+  _has_bits_[0] |= 0x00000008u;
+}
+void DeadlineCheckRequest::clear_has_user_id() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+void DeadlineCheckRequest::clear_user_id() {
+  user_id_ = 0;
+  clear_has_user_id();
+}
+ ::google::protobuf::int32 DeadlineCheckRequest::user_id() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Requests.DeadlineCheckRequest.user_id)
+  return user_id_;
+}
+ void DeadlineCheckRequest::set_user_id(::google::protobuf::int32 value) {
+  set_has_user_id();
+  user_id_ = value;
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Requests.DeadlineCheckRequest.user_id)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // @@protoc_insertion_point(namespace_scope)
 

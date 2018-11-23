@@ -7,6 +7,7 @@
 #include <algorithm>
 
 #include <google/protobuf/stubs/common.h>
+#include <google/protobuf/stubs/port.h>
 #include <google/protobuf/stubs/once.h>
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/wire_format_lite_inl.h>
@@ -30,6 +31,7 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 }  // namespace
 
 
+void protobuf_AssignDesc_ArchivedProject_2eproto() GOOGLE_ATTRIBUTE_COLD;
 void protobuf_AssignDesc_ArchivedProject_2eproto() {
   protobuf_AddDesc_ArchivedProject_2eproto();
   const ::google::protobuf::FileDescriptor* file =
@@ -59,16 +61,16 @@ void protobuf_AssignDesc_ArchivedProject_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ArchivedProject, imageapproved_),
   };
   ArchivedProject_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
       ArchivedProject_descriptor_,
       ArchivedProject::default_instance_,
       ArchivedProject_offsets_,
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ArchivedProject, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ArchivedProject, _unknown_fields_),
       -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(ArchivedProject));
+      -1,
+      sizeof(ArchivedProject),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ArchivedProject, _internal_metadata_),
+      -1);
 }
 
 namespace {
@@ -79,10 +81,11 @@ inline void protobuf_AssignDescriptorsOnce() {
                  &protobuf_AssignDesc_ArchivedProject_2eproto);
 }
 
+void protobuf_RegisterTypes(const ::std::string&) GOOGLE_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    ArchivedProject_descriptor_, &ArchivedProject::default_instance());
+      ArchivedProject_descriptor_, &ArchivedProject::default_instance());
 }
 
 }  // namespace
@@ -92,6 +95,7 @@ void protobuf_ShutdownFile_ArchivedProject_2eproto() {
   delete ArchivedProject_reflection_;
 }
 
+void protobuf_AddDesc_ArchivedProject_2eproto() GOOGLE_ATTRIBUTE_COLD;
 void protobuf_AddDesc_ArchivedProject_2eproto() {
   static bool already_here = false;
   if (already_here) return;
@@ -129,7 +133,7 @@ struct StaticDescriptorInitializer_ArchivedProject_2eproto {
 
 // ===================================================================
 
-#ifndef _MSC_VER
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int ArchivedProject::kIdFieldNumber;
 const int ArchivedProject::kTitleFieldNumber;
 const int ArchivedProject::kDescriptionFieldNumber;
@@ -149,11 +153,12 @@ const int ArchivedProject::kArchivedDateFieldNumber;
 const int ArchivedProject::kTagsFieldNumber;
 const int ArchivedProject::kImageUploadedFieldNumber;
 const int ArchivedProject::kImageApprovedFieldNumber;
-#endif  // !_MSC_VER
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 ArchivedProject::ArchivedProject()
-  : ::google::protobuf::Message() {
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   SharedCtor();
+  // @@protoc_insertion_point(constructor:SolasMatch.Common.Protobufs.Models.ArchivedProject)
 }
 
 void ArchivedProject::InitAsDefaultInstance() {
@@ -161,73 +166,55 @@ void ArchivedProject::InitAsDefaultInstance() {
 }
 
 ArchivedProject::ArchivedProject(const ArchivedProject& from)
-  : ::google::protobuf::Message() {
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
   SharedCtor();
   MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:SolasMatch.Common.Protobufs.Models.ArchivedProject)
 }
 
 void ArchivedProject::SharedCtor() {
+  ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
   id_ = 0;
-  title_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  description_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  impact_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  deadline_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  title_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  description_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  impact_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  deadline_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   organisationid_ = 0;
-  reference_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  reference_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   wordcount_ = 0;
-  createdtime_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  createdtime_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   sourcelocale_ = NULL;
   useridarchived_ = 0;
   useridprojectcreator_ = 0;
-  filename_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  filetoken_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  mimetype_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  archiveddate_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  tags_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  filename_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  filetoken_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  mimetype_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  archiveddate_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  tags_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   imageuploaded_ = false;
   imageapproved_ = false;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
 ArchivedProject::~ArchivedProject() {
+  // @@protoc_insertion_point(destructor:SolasMatch.Common.Protobufs.Models.ArchivedProject)
   SharedDtor();
 }
 
 void ArchivedProject::SharedDtor() {
-  if (title_ != &::google::protobuf::internal::kEmptyString) {
-    delete title_;
-  }
-  if (description_ != &::google::protobuf::internal::kEmptyString) {
-    delete description_;
-  }
-  if (impact_ != &::google::protobuf::internal::kEmptyString) {
-    delete impact_;
-  }
-  if (deadline_ != &::google::protobuf::internal::kEmptyString) {
-    delete deadline_;
-  }
-  if (reference_ != &::google::protobuf::internal::kEmptyString) {
-    delete reference_;
-  }
-  if (createdtime_ != &::google::protobuf::internal::kEmptyString) {
-    delete createdtime_;
-  }
-  if (filename_ != &::google::protobuf::internal::kEmptyString) {
-    delete filename_;
-  }
-  if (filetoken_ != &::google::protobuf::internal::kEmptyString) {
-    delete filetoken_;
-  }
-  if (mimetype_ != &::google::protobuf::internal::kEmptyString) {
-    delete mimetype_;
-  }
-  if (archiveddate_ != &::google::protobuf::internal::kEmptyString) {
-    delete archiveddate_;
-  }
-  if (tags_ != &::google::protobuf::internal::kEmptyString) {
-    delete tags_;
-  }
+  title_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  description_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  impact_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  deadline_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  reference_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  createdtime_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  filename_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  filetoken_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  mimetype_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  archiveddate_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  tags_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != default_instance_) {
     delete sourcelocale_;
   }
@@ -250,46 +237,54 @@ const ArchivedProject& ArchivedProject::default_instance() {
 
 ArchivedProject* ArchivedProject::default_instance_ = NULL;
 
-ArchivedProject* ArchivedProject::New() const {
-  return new ArchivedProject;
+ArchivedProject* ArchivedProject::New(::google::protobuf::Arena* arena) const {
+  ArchivedProject* n = new ArchivedProject;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
 }
 
 void ArchivedProject::Clear() {
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    id_ = 0;
+// @@protoc_insertion_point(message_clear_start:SolasMatch.Common.Protobufs.Models.ArchivedProject)
+#if defined(__clang__)
+#define ZR_HELPER_(f) \
+  _Pragma("clang diagnostic push") \
+  _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
+  __builtin_offsetof(ArchivedProject, f) \
+  _Pragma("clang diagnostic pop")
+#else
+#define ZR_HELPER_(f) reinterpret_cast<char*>(\
+  &reinterpret_cast<ArchivedProject*>(16)->f)
+#endif
+
+#define ZR_(first, last) do {\
+  ::memset(&first, 0,\
+           ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
+} while (0)
+
+  if (_has_bits_[0 / 32] & 255u) {
+    ZR_(id_, organisationid_);
     if (has_title()) {
-      if (title_ != &::google::protobuf::internal::kEmptyString) {
-        title_->clear();
-      }
+      title_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     }
     if (has_description()) {
-      if (description_ != &::google::protobuf::internal::kEmptyString) {
-        description_->clear();
-      }
+      description_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     }
     if (has_impact()) {
-      if (impact_ != &::google::protobuf::internal::kEmptyString) {
-        impact_->clear();
-      }
+      impact_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     }
     if (has_deadline()) {
-      if (deadline_ != &::google::protobuf::internal::kEmptyString) {
-        deadline_->clear();
-      }
+      deadline_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     }
-    organisationid_ = 0;
     if (has_reference()) {
-      if (reference_ != &::google::protobuf::internal::kEmptyString) {
-        reference_->clear();
-      }
+      reference_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     }
     wordcount_ = 0;
   }
-  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
+  if (_has_bits_[8 / 32] & 65280u) {
     if (has_createdtime()) {
-      if (createdtime_ != &::google::protobuf::internal::kEmptyString) {
-        createdtime_->clear();
-      }
+      createdtime_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     }
     if (has_sourcelocale()) {
       if (sourcelocale_ != NULL) sourcelocale_->::SolasMatch::Common::Protobufs::Models::Locale::Clear();
@@ -297,55 +292,53 @@ void ArchivedProject::Clear() {
     useridarchived_ = 0;
     useridprojectcreator_ = 0;
     if (has_filename()) {
-      if (filename_ != &::google::protobuf::internal::kEmptyString) {
-        filename_->clear();
-      }
+      filename_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     }
     if (has_filetoken()) {
-      if (filetoken_ != &::google::protobuf::internal::kEmptyString) {
-        filetoken_->clear();
-      }
+      filetoken_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     }
     if (has_mimetype()) {
-      if (mimetype_ != &::google::protobuf::internal::kEmptyString) {
-        mimetype_->clear();
-      }
+      mimetype_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     }
     if (has_archiveddate()) {
-      if (archiveddate_ != &::google::protobuf::internal::kEmptyString) {
-        archiveddate_->clear();
-      }
+      archiveddate_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     }
   }
-  if (_has_bits_[16 / 32] & (0xffu << (16 % 32))) {
+  if (_has_bits_[16 / 32] & 458752u) {
+    ZR_(imageuploaded_, imageapproved_);
     if (has_tags()) {
-      if (tags_ != &::google::protobuf::internal::kEmptyString) {
-        tags_->clear();
-      }
+      tags_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     }
-    imageuploaded_ = false;
-    imageapproved_ = false;
   }
+
+#undef ZR_HELPER_
+#undef ZR_
+
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
+  if (_internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->Clear();
+  }
 }
 
 bool ArchivedProject::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  while ((tag = input->ReadTag()) != 0) {
+  // @@protoc_insertion_point(parse_start:SolasMatch.Common.Protobufs.Models.ArchivedProject)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(16383);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // optional int32 id = 1;
       case 1: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 8) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &id_)));
           set_has_id();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(18)) goto parse_title;
         break;
@@ -353,16 +346,16 @@ bool ArchivedProject::MergePartialFromCodedStream(
 
       // optional string title = 2;
       case 2: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 18) {
          parse_title:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_title()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
             this->title().data(), this->title().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "SolasMatch.Common.Protobufs.Models.ArchivedProject.title");
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(26)) goto parse_description;
         break;
@@ -370,16 +363,16 @@ bool ArchivedProject::MergePartialFromCodedStream(
 
       // optional string description = 3;
       case 3: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 26) {
          parse_description:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_description()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
             this->description().data(), this->description().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "SolasMatch.Common.Protobufs.Models.ArchivedProject.description");
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(34)) goto parse_impact;
         break;
@@ -387,16 +380,16 @@ bool ArchivedProject::MergePartialFromCodedStream(
 
       // optional string impact = 4;
       case 4: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 34) {
          parse_impact:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_impact()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
             this->impact().data(), this->impact().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "SolasMatch.Common.Protobufs.Models.ArchivedProject.impact");
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(42)) goto parse_deadline;
         break;
@@ -404,16 +397,16 @@ bool ArchivedProject::MergePartialFromCodedStream(
 
       // optional string deadline = 5;
       case 5: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 42) {
          parse_deadline:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_deadline()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
             this->deadline().data(), this->deadline().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "SolasMatch.Common.Protobufs.Models.ArchivedProject.deadline");
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(48)) goto parse_organisationId;
         break;
@@ -421,15 +414,14 @@ bool ArchivedProject::MergePartialFromCodedStream(
 
       // optional int32 organisationId = 6;
       case 6: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 48) {
          parse_organisationId:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &organisationid_)));
           set_has_organisationid();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(58)) goto parse_reference;
         break;
@@ -437,16 +429,16 @@ bool ArchivedProject::MergePartialFromCodedStream(
 
       // optional string reference = 7;
       case 7: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 58) {
          parse_reference:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_reference()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
             this->reference().data(), this->reference().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "SolasMatch.Common.Protobufs.Models.ArchivedProject.reference");
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(64)) goto parse_wordCount;
         break;
@@ -454,15 +446,14 @@ bool ArchivedProject::MergePartialFromCodedStream(
 
       // optional int32 wordCount = 8;
       case 8: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 64) {
          parse_wordCount:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &wordcount_)));
           set_has_wordcount();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(74)) goto parse_createdTime;
         break;
@@ -470,16 +461,16 @@ bool ArchivedProject::MergePartialFromCodedStream(
 
       // optional string createdTime = 9;
       case 9: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 74) {
          parse_createdTime:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_createdtime()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
             this->createdtime().data(), this->createdtime().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "SolasMatch.Common.Protobufs.Models.ArchivedProject.createdTime");
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(82)) goto parse_sourceLocale;
         break;
@@ -487,13 +478,12 @@ bool ArchivedProject::MergePartialFromCodedStream(
 
       // optional .SolasMatch.Common.Protobufs.Models.Locale sourceLocale = 10;
       case 10: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 82) {
          parse_sourceLocale:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_sourcelocale()));
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(88)) goto parse_userIdArchived;
         break;
@@ -501,15 +491,14 @@ bool ArchivedProject::MergePartialFromCodedStream(
 
       // optional int32 userIdArchived = 11;
       case 11: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 88) {
          parse_userIdArchived:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &useridarchived_)));
           set_has_useridarchived();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(96)) goto parse_userIdProjectCreator;
         break;
@@ -517,15 +506,14 @@ bool ArchivedProject::MergePartialFromCodedStream(
 
       // optional int32 userIdProjectCreator = 12;
       case 12: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 96) {
          parse_userIdProjectCreator:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &useridprojectcreator_)));
           set_has_useridprojectcreator();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(106)) goto parse_fileName;
         break;
@@ -533,16 +521,16 @@ bool ArchivedProject::MergePartialFromCodedStream(
 
       // optional string fileName = 13;
       case 13: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 106) {
          parse_fileName:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_filename()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
             this->filename().data(), this->filename().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "SolasMatch.Common.Protobufs.Models.ArchivedProject.fileName");
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(114)) goto parse_fileToken;
         break;
@@ -550,16 +538,16 @@ bool ArchivedProject::MergePartialFromCodedStream(
 
       // optional string fileToken = 14;
       case 14: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 114) {
          parse_fileToken:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_filetoken()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
             this->filetoken().data(), this->filetoken().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "SolasMatch.Common.Protobufs.Models.ArchivedProject.fileToken");
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(122)) goto parse_mimeType;
         break;
@@ -567,16 +555,16 @@ bool ArchivedProject::MergePartialFromCodedStream(
 
       // optional string mimeType = 15;
       case 15: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 122) {
          parse_mimeType:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_mimetype()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
             this->mimetype().data(), this->mimetype().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "SolasMatch.Common.Protobufs.Models.ArchivedProject.mimeType");
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(130)) goto parse_archivedDate;
         break;
@@ -584,16 +572,16 @@ bool ArchivedProject::MergePartialFromCodedStream(
 
       // optional string archivedDate = 16;
       case 16: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 130) {
          parse_archivedDate:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_archiveddate()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
             this->archiveddate().data(), this->archiveddate().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "SolasMatch.Common.Protobufs.Models.ArchivedProject.archivedDate");
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(138)) goto parse_tags;
         break;
@@ -601,16 +589,16 @@ bool ArchivedProject::MergePartialFromCodedStream(
 
       // optional string tags = 17;
       case 17: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 138) {
          parse_tags:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_tags()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
             this->tags().data(), this->tags().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "SolasMatch.Common.Protobufs.Models.ArchivedProject.tags");
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(144)) goto parse_imageUploaded;
         break;
@@ -618,15 +606,14 @@ bool ArchivedProject::MergePartialFromCodedStream(
 
       // optional bool imageUploaded = 18;
       case 18: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 144) {
          parse_imageUploaded:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
                  input, &imageuploaded_)));
           set_has_imageuploaded();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(152)) goto parse_imageApproved;
         break;
@@ -634,25 +621,25 @@ bool ArchivedProject::MergePartialFromCodedStream(
 
       // optional bool imageApproved = 19;
       case 19: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 152) {
          parse_imageApproved:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
                  input, &imageapproved_)));
           set_has_imageapproved();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
-        if (input->ExpectAtEnd()) return true;
+        if (input->ExpectAtEnd()) goto success;
         break;
       }
 
       default: {
-      handle_uninterpreted:
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          return true;
+          goto success;
         }
         DO_(::google::protobuf::internal::WireFormat::SkipField(
               input, tag, mutable_unknown_fields()));
@@ -660,12 +647,18 @@ bool ArchivedProject::MergePartialFromCodedStream(
       }
     }
   }
+success:
+  // @@protoc_insertion_point(parse_success:SolasMatch.Common.Protobufs.Models.ArchivedProject)
   return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:SolasMatch.Common.Protobufs.Models.ArchivedProject)
+  return false;
 #undef DO_
 }
 
 void ArchivedProject::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:SolasMatch.Common.Protobufs.Models.ArchivedProject)
   // optional int32 id = 1;
   if (has_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->id(), output);
@@ -673,37 +666,41 @@ void ArchivedProject::SerializeWithCachedSizes(
 
   // optional string title = 2;
   if (has_title()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->title().data(), this->title().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.ArchivedProject.title");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       2, this->title(), output);
   }
 
   // optional string description = 3;
   if (has_description()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->description().data(), this->description().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.ArchivedProject.description");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       3, this->description(), output);
   }
 
   // optional string impact = 4;
   if (has_impact()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->impact().data(), this->impact().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.ArchivedProject.impact");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       4, this->impact(), output);
   }
 
   // optional string deadline = 5;
   if (has_deadline()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->deadline().data(), this->deadline().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.ArchivedProject.deadline");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       5, this->deadline(), output);
   }
 
@@ -714,10 +711,11 @@ void ArchivedProject::SerializeWithCachedSizes(
 
   // optional string reference = 7;
   if (has_reference()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->reference().data(), this->reference().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.ArchivedProject.reference");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       7, this->reference(), output);
   }
 
@@ -728,17 +726,18 @@ void ArchivedProject::SerializeWithCachedSizes(
 
   // optional string createdTime = 9;
   if (has_createdtime()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->createdtime().data(), this->createdtime().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.ArchivedProject.createdTime");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       9, this->createdtime(), output);
   }
 
   // optional .SolasMatch.Common.Protobufs.Models.Locale sourceLocale = 10;
   if (has_sourcelocale()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      10, this->sourcelocale(), output);
+      10, *this->sourcelocale_, output);
   }
 
   // optional int32 userIdArchived = 11;
@@ -753,46 +752,51 @@ void ArchivedProject::SerializeWithCachedSizes(
 
   // optional string fileName = 13;
   if (has_filename()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->filename().data(), this->filename().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.ArchivedProject.fileName");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       13, this->filename(), output);
   }
 
   // optional string fileToken = 14;
   if (has_filetoken()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->filetoken().data(), this->filetoken().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.ArchivedProject.fileToken");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       14, this->filetoken(), output);
   }
 
   // optional string mimeType = 15;
   if (has_mimetype()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->mimetype().data(), this->mimetype().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.ArchivedProject.mimeType");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       15, this->mimetype(), output);
   }
 
   // optional string archivedDate = 16;
   if (has_archiveddate()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->archiveddate().data(), this->archiveddate().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.ArchivedProject.archivedDate");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       16, this->archiveddate(), output);
   }
 
   // optional string tags = 17;
   if (has_tags()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->tags().data(), this->tags().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.ArchivedProject.tags");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       17, this->tags(), output);
   }
 
@@ -806,14 +810,16 @@ void ArchivedProject::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteBool(19, this->imageapproved(), output);
   }
 
-  if (!unknown_fields().empty()) {
+  if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
+  // @@protoc_insertion_point(serialize_end:SolasMatch.Common.Protobufs.Models.ArchivedProject)
 }
 
-::google::protobuf::uint8* ArchivedProject::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
+::google::protobuf::uint8* ArchivedProject::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:SolasMatch.Common.Protobufs.Models.ArchivedProject)
   // optional int32 id = 1;
   if (has_id()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->id(), target);
@@ -821,9 +827,10 @@ void ArchivedProject::SerializeWithCachedSizes(
 
   // optional string title = 2;
   if (has_title()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->title().data(), this->title().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.ArchivedProject.title");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         2, this->title(), target);
@@ -831,9 +838,10 @@ void ArchivedProject::SerializeWithCachedSizes(
 
   // optional string description = 3;
   if (has_description()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->description().data(), this->description().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.ArchivedProject.description");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         3, this->description(), target);
@@ -841,9 +849,10 @@ void ArchivedProject::SerializeWithCachedSizes(
 
   // optional string impact = 4;
   if (has_impact()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->impact().data(), this->impact().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.ArchivedProject.impact");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         4, this->impact(), target);
@@ -851,9 +860,10 @@ void ArchivedProject::SerializeWithCachedSizes(
 
   // optional string deadline = 5;
   if (has_deadline()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->deadline().data(), this->deadline().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.ArchivedProject.deadline");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         5, this->deadline(), target);
@@ -866,9 +876,10 @@ void ArchivedProject::SerializeWithCachedSizes(
 
   // optional string reference = 7;
   if (has_reference()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->reference().data(), this->reference().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.ArchivedProject.reference");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         7, this->reference(), target);
@@ -881,9 +892,10 @@ void ArchivedProject::SerializeWithCachedSizes(
 
   // optional string createdTime = 9;
   if (has_createdtime()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->createdtime().data(), this->createdtime().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.ArchivedProject.createdTime");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         9, this->createdtime(), target);
@@ -892,8 +904,8 @@ void ArchivedProject::SerializeWithCachedSizes(
   // optional .SolasMatch.Common.Protobufs.Models.Locale sourceLocale = 10;
   if (has_sourcelocale()) {
     target = ::google::protobuf::internal::WireFormatLite::
-      WriteMessageNoVirtualToArray(
-        10, this->sourcelocale(), target);
+      InternalWriteMessageNoVirtualToArray(
+        10, *this->sourcelocale_, false, target);
   }
 
   // optional int32 userIdArchived = 11;
@@ -908,9 +920,10 @@ void ArchivedProject::SerializeWithCachedSizes(
 
   // optional string fileName = 13;
   if (has_filename()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->filename().data(), this->filename().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.ArchivedProject.fileName");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         13, this->filename(), target);
@@ -918,9 +931,10 @@ void ArchivedProject::SerializeWithCachedSizes(
 
   // optional string fileToken = 14;
   if (has_filetoken()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->filetoken().data(), this->filetoken().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.ArchivedProject.fileToken");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         14, this->filetoken(), target);
@@ -928,9 +942,10 @@ void ArchivedProject::SerializeWithCachedSizes(
 
   // optional string mimeType = 15;
   if (has_mimetype()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->mimetype().data(), this->mimetype().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.ArchivedProject.mimeType");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         15, this->mimetype(), target);
@@ -938,9 +953,10 @@ void ArchivedProject::SerializeWithCachedSizes(
 
   // optional string archivedDate = 16;
   if (has_archiveddate()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->archiveddate().data(), this->archiveddate().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.ArchivedProject.archivedDate");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         16, this->archiveddate(), target);
@@ -948,9 +964,10 @@ void ArchivedProject::SerializeWithCachedSizes(
 
   // optional string tags = 17;
   if (has_tags()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->tags().data(), this->tags().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Models.ArchivedProject.tags");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         17, this->tags(), target);
@@ -966,17 +983,19 @@ void ArchivedProject::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(19, this->imageapproved(), target);
   }
 
-  if (!unknown_fields().empty()) {
+  if (_internal_metadata_.have_unknown_fields()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
+  // @@protoc_insertion_point(serialize_to_array_end:SolasMatch.Common.Protobufs.Models.ArchivedProject)
   return target;
 }
 
 int ArchivedProject::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:SolasMatch.Common.Protobufs.Models.ArchivedProject)
   int total_size = 0;
 
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+  if (_has_bits_[0 / 32] & 255u) {
     // optional int32 id = 1;
     if (has_id()) {
       total_size += 1 +
@@ -1034,7 +1053,7 @@ int ArchivedProject::ByteSize() const {
     }
 
   }
-  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
+  if (_has_bits_[8 / 32] & 65280u) {
     // optional string createdTime = 9;
     if (has_createdtime()) {
       total_size += 1 +
@@ -1046,7 +1065,7 @@ int ArchivedProject::ByteSize() const {
     if (has_sourcelocale()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-          this->sourcelocale());
+          *this->sourcelocale_);
     }
 
     // optional int32 userIdArchived = 11;
@@ -1092,7 +1111,7 @@ int ArchivedProject::ByteSize() const {
     }
 
   }
-  if (_has_bits_[16 / 32] & (0xffu << (16 % 32))) {
+  if (_has_bits_[16 / 32] & 458752u) {
     // optional string tags = 17;
     if (has_tags()) {
       total_size += 2 +
@@ -1111,7 +1130,7 @@ int ArchivedProject::ByteSize() const {
     }
 
   }
-  if (!unknown_fields().empty()) {
+  if (_internal_metadata_.have_unknown_fields()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         unknown_fields());
@@ -1123,40 +1142,53 @@ int ArchivedProject::ByteSize() const {
 }
 
 void ArchivedProject::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const ArchivedProject* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const ArchivedProject*>(
-      &from);
+// @@protoc_insertion_point(generalized_merge_from_start:SolasMatch.Common.Protobufs.Models.ArchivedProject)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  const ArchivedProject* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const ArchivedProject>(
+          &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:SolasMatch.Common.Protobufs.Models.ArchivedProject)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:SolasMatch.Common.Protobufs.Models.ArchivedProject)
     MergeFrom(*source);
   }
 }
 
 void ArchivedProject::MergeFrom(const ArchivedProject& from) {
-  GOOGLE_CHECK_NE(&from, this);
+// @@protoc_insertion_point(class_specific_merge_from_start:SolasMatch.Common.Protobufs.Models.ArchivedProject)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_id()) {
       set_id(from.id());
     }
     if (from.has_title()) {
-      set_title(from.title());
+      set_has_title();
+      title_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.title_);
     }
     if (from.has_description()) {
-      set_description(from.description());
+      set_has_description();
+      description_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.description_);
     }
     if (from.has_impact()) {
-      set_impact(from.impact());
+      set_has_impact();
+      impact_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.impact_);
     }
     if (from.has_deadline()) {
-      set_deadline(from.deadline());
+      set_has_deadline();
+      deadline_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.deadline_);
     }
     if (from.has_organisationid()) {
       set_organisationid(from.organisationid());
     }
     if (from.has_reference()) {
-      set_reference(from.reference());
+      set_has_reference();
+      reference_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.reference_);
     }
     if (from.has_wordcount()) {
       set_wordcount(from.wordcount());
@@ -1164,7 +1196,8 @@ void ArchivedProject::MergeFrom(const ArchivedProject& from) {
   }
   if (from._has_bits_[8 / 32] & (0xffu << (8 % 32))) {
     if (from.has_createdtime()) {
-      set_createdtime(from.createdtime());
+      set_has_createdtime();
+      createdtime_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.createdtime_);
     }
     if (from.has_sourcelocale()) {
       mutable_sourcelocale()->::SolasMatch::Common::Protobufs::Models::Locale::MergeFrom(from.sourcelocale());
@@ -1176,21 +1209,26 @@ void ArchivedProject::MergeFrom(const ArchivedProject& from) {
       set_useridprojectcreator(from.useridprojectcreator());
     }
     if (from.has_filename()) {
-      set_filename(from.filename());
+      set_has_filename();
+      filename_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.filename_);
     }
     if (from.has_filetoken()) {
-      set_filetoken(from.filetoken());
+      set_has_filetoken();
+      filetoken_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.filetoken_);
     }
     if (from.has_mimetype()) {
-      set_mimetype(from.mimetype());
+      set_has_mimetype();
+      mimetype_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.mimetype_);
     }
     if (from.has_archiveddate()) {
-      set_archiveddate(from.archiveddate());
+      set_has_archiveddate();
+      archiveddate_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.archiveddate_);
     }
   }
   if (from._has_bits_[16 / 32] & (0xffu << (16 % 32))) {
     if (from.has_tags()) {
-      set_tags(from.tags());
+      set_has_tags();
+      tags_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.tags_);
     }
     if (from.has_imageuploaded()) {
       set_imageuploaded(from.imageuploaded());
@@ -1199,16 +1237,20 @@ void ArchivedProject::MergeFrom(const ArchivedProject& from) {
       set_imageapproved(from.imageapproved());
     }
   }
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  if (from._internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  }
 }
 
 void ArchivedProject::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:SolasMatch.Common.Protobufs.Models.ArchivedProject)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void ArchivedProject::CopyFrom(const ArchivedProject& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:SolasMatch.Common.Protobufs.Models.ArchivedProject)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -1220,30 +1262,32 @@ bool ArchivedProject::IsInitialized() const {
 }
 
 void ArchivedProject::Swap(ArchivedProject* other) {
-  if (other != this) {
-    std::swap(id_, other->id_);
-    std::swap(title_, other->title_);
-    std::swap(description_, other->description_);
-    std::swap(impact_, other->impact_);
-    std::swap(deadline_, other->deadline_);
-    std::swap(organisationid_, other->organisationid_);
-    std::swap(reference_, other->reference_);
-    std::swap(wordcount_, other->wordcount_);
-    std::swap(createdtime_, other->createdtime_);
-    std::swap(sourcelocale_, other->sourcelocale_);
-    std::swap(useridarchived_, other->useridarchived_);
-    std::swap(useridprojectcreator_, other->useridprojectcreator_);
-    std::swap(filename_, other->filename_);
-    std::swap(filetoken_, other->filetoken_);
-    std::swap(mimetype_, other->mimetype_);
-    std::swap(archiveddate_, other->archiveddate_);
-    std::swap(tags_, other->tags_);
-    std::swap(imageuploaded_, other->imageuploaded_);
-    std::swap(imageapproved_, other->imageapproved_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
+  if (other == this) return;
+  InternalSwap(other);
+}
+void ArchivedProject::InternalSwap(ArchivedProject* other) {
+  std::swap(id_, other->id_);
+  title_.Swap(&other->title_);
+  description_.Swap(&other->description_);
+  impact_.Swap(&other->impact_);
+  deadline_.Swap(&other->deadline_);
+  std::swap(organisationid_, other->organisationid_);
+  reference_.Swap(&other->reference_);
+  std::swap(wordcount_, other->wordcount_);
+  createdtime_.Swap(&other->createdtime_);
+  std::swap(sourcelocale_, other->sourcelocale_);
+  std::swap(useridarchived_, other->useridarchived_);
+  std::swap(useridprojectcreator_, other->useridprojectcreator_);
+  filename_.Swap(&other->filename_);
+  filetoken_.Swap(&other->filetoken_);
+  mimetype_.Swap(&other->mimetype_);
+  archiveddate_.Swap(&other->archiveddate_);
+  tags_.Swap(&other->tags_);
+  std::swap(imageuploaded_, other->imageuploaded_);
+  std::swap(imageapproved_, other->imageapproved_);
+  std::swap(_has_bits_[0], other->_has_bits_[0]);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata ArchivedProject::GetMetadata() const {
@@ -1254,6 +1298,816 @@ void ArchivedProject::Swap(ArchivedProject* other) {
   return metadata;
 }
 
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// ArchivedProject
+
+// optional int32 id = 1;
+bool ArchivedProject::has_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+void ArchivedProject::set_has_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+void ArchivedProject::clear_has_id() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+void ArchivedProject::clear_id() {
+  id_ = 0;
+  clear_has_id();
+}
+ ::google::protobuf::int32 ArchivedProject::id() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.ArchivedProject.id)
+  return id_;
+}
+ void ArchivedProject::set_id(::google::protobuf::int32 value) {
+  set_has_id();
+  id_ = value;
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.ArchivedProject.id)
+}
+
+// optional string title = 2;
+bool ArchivedProject::has_title() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+void ArchivedProject::set_has_title() {
+  _has_bits_[0] |= 0x00000002u;
+}
+void ArchivedProject::clear_has_title() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+void ArchivedProject::clear_title() {
+  title_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_title();
+}
+ const ::std::string& ArchivedProject::title() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.ArchivedProject.title)
+  return title_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void ArchivedProject::set_title(const ::std::string& value) {
+  set_has_title();
+  title_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.ArchivedProject.title)
+}
+ void ArchivedProject::set_title(const char* value) {
+  set_has_title();
+  title_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:SolasMatch.Common.Protobufs.Models.ArchivedProject.title)
+}
+ void ArchivedProject::set_title(const char* value, size_t size) {
+  set_has_title();
+  title_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:SolasMatch.Common.Protobufs.Models.ArchivedProject.title)
+}
+ ::std::string* ArchivedProject::mutable_title() {
+  set_has_title();
+  // @@protoc_insertion_point(field_mutable:SolasMatch.Common.Protobufs.Models.ArchivedProject.title)
+  return title_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* ArchivedProject::release_title() {
+  // @@protoc_insertion_point(field_release:SolasMatch.Common.Protobufs.Models.ArchivedProject.title)
+  clear_has_title();
+  return title_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void ArchivedProject::set_allocated_title(::std::string* title) {
+  if (title != NULL) {
+    set_has_title();
+  } else {
+    clear_has_title();
+  }
+  title_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), title);
+  // @@protoc_insertion_point(field_set_allocated:SolasMatch.Common.Protobufs.Models.ArchivedProject.title)
+}
+
+// optional string description = 3;
+bool ArchivedProject::has_description() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+void ArchivedProject::set_has_description() {
+  _has_bits_[0] |= 0x00000004u;
+}
+void ArchivedProject::clear_has_description() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+void ArchivedProject::clear_description() {
+  description_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_description();
+}
+ const ::std::string& ArchivedProject::description() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.ArchivedProject.description)
+  return description_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void ArchivedProject::set_description(const ::std::string& value) {
+  set_has_description();
+  description_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.ArchivedProject.description)
+}
+ void ArchivedProject::set_description(const char* value) {
+  set_has_description();
+  description_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:SolasMatch.Common.Protobufs.Models.ArchivedProject.description)
+}
+ void ArchivedProject::set_description(const char* value, size_t size) {
+  set_has_description();
+  description_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:SolasMatch.Common.Protobufs.Models.ArchivedProject.description)
+}
+ ::std::string* ArchivedProject::mutable_description() {
+  set_has_description();
+  // @@protoc_insertion_point(field_mutable:SolasMatch.Common.Protobufs.Models.ArchivedProject.description)
+  return description_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* ArchivedProject::release_description() {
+  // @@protoc_insertion_point(field_release:SolasMatch.Common.Protobufs.Models.ArchivedProject.description)
+  clear_has_description();
+  return description_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void ArchivedProject::set_allocated_description(::std::string* description) {
+  if (description != NULL) {
+    set_has_description();
+  } else {
+    clear_has_description();
+  }
+  description_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), description);
+  // @@protoc_insertion_point(field_set_allocated:SolasMatch.Common.Protobufs.Models.ArchivedProject.description)
+}
+
+// optional string impact = 4;
+bool ArchivedProject::has_impact() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+void ArchivedProject::set_has_impact() {
+  _has_bits_[0] |= 0x00000008u;
+}
+void ArchivedProject::clear_has_impact() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+void ArchivedProject::clear_impact() {
+  impact_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_impact();
+}
+ const ::std::string& ArchivedProject::impact() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.ArchivedProject.impact)
+  return impact_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void ArchivedProject::set_impact(const ::std::string& value) {
+  set_has_impact();
+  impact_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.ArchivedProject.impact)
+}
+ void ArchivedProject::set_impact(const char* value) {
+  set_has_impact();
+  impact_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:SolasMatch.Common.Protobufs.Models.ArchivedProject.impact)
+}
+ void ArchivedProject::set_impact(const char* value, size_t size) {
+  set_has_impact();
+  impact_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:SolasMatch.Common.Protobufs.Models.ArchivedProject.impact)
+}
+ ::std::string* ArchivedProject::mutable_impact() {
+  set_has_impact();
+  // @@protoc_insertion_point(field_mutable:SolasMatch.Common.Protobufs.Models.ArchivedProject.impact)
+  return impact_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* ArchivedProject::release_impact() {
+  // @@protoc_insertion_point(field_release:SolasMatch.Common.Protobufs.Models.ArchivedProject.impact)
+  clear_has_impact();
+  return impact_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void ArchivedProject::set_allocated_impact(::std::string* impact) {
+  if (impact != NULL) {
+    set_has_impact();
+  } else {
+    clear_has_impact();
+  }
+  impact_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), impact);
+  // @@protoc_insertion_point(field_set_allocated:SolasMatch.Common.Protobufs.Models.ArchivedProject.impact)
+}
+
+// optional string deadline = 5;
+bool ArchivedProject::has_deadline() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+void ArchivedProject::set_has_deadline() {
+  _has_bits_[0] |= 0x00000010u;
+}
+void ArchivedProject::clear_has_deadline() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+void ArchivedProject::clear_deadline() {
+  deadline_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_deadline();
+}
+ const ::std::string& ArchivedProject::deadline() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.ArchivedProject.deadline)
+  return deadline_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void ArchivedProject::set_deadline(const ::std::string& value) {
+  set_has_deadline();
+  deadline_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.ArchivedProject.deadline)
+}
+ void ArchivedProject::set_deadline(const char* value) {
+  set_has_deadline();
+  deadline_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:SolasMatch.Common.Protobufs.Models.ArchivedProject.deadline)
+}
+ void ArchivedProject::set_deadline(const char* value, size_t size) {
+  set_has_deadline();
+  deadline_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:SolasMatch.Common.Protobufs.Models.ArchivedProject.deadline)
+}
+ ::std::string* ArchivedProject::mutable_deadline() {
+  set_has_deadline();
+  // @@protoc_insertion_point(field_mutable:SolasMatch.Common.Protobufs.Models.ArchivedProject.deadline)
+  return deadline_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* ArchivedProject::release_deadline() {
+  // @@protoc_insertion_point(field_release:SolasMatch.Common.Protobufs.Models.ArchivedProject.deadline)
+  clear_has_deadline();
+  return deadline_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void ArchivedProject::set_allocated_deadline(::std::string* deadline) {
+  if (deadline != NULL) {
+    set_has_deadline();
+  } else {
+    clear_has_deadline();
+  }
+  deadline_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), deadline);
+  // @@protoc_insertion_point(field_set_allocated:SolasMatch.Common.Protobufs.Models.ArchivedProject.deadline)
+}
+
+// optional int32 organisationId = 6;
+bool ArchivedProject::has_organisationid() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+void ArchivedProject::set_has_organisationid() {
+  _has_bits_[0] |= 0x00000020u;
+}
+void ArchivedProject::clear_has_organisationid() {
+  _has_bits_[0] &= ~0x00000020u;
+}
+void ArchivedProject::clear_organisationid() {
+  organisationid_ = 0;
+  clear_has_organisationid();
+}
+ ::google::protobuf::int32 ArchivedProject::organisationid() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.ArchivedProject.organisationId)
+  return organisationid_;
+}
+ void ArchivedProject::set_organisationid(::google::protobuf::int32 value) {
+  set_has_organisationid();
+  organisationid_ = value;
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.ArchivedProject.organisationId)
+}
+
+// optional string reference = 7;
+bool ArchivedProject::has_reference() const {
+  return (_has_bits_[0] & 0x00000040u) != 0;
+}
+void ArchivedProject::set_has_reference() {
+  _has_bits_[0] |= 0x00000040u;
+}
+void ArchivedProject::clear_has_reference() {
+  _has_bits_[0] &= ~0x00000040u;
+}
+void ArchivedProject::clear_reference() {
+  reference_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_reference();
+}
+ const ::std::string& ArchivedProject::reference() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.ArchivedProject.reference)
+  return reference_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void ArchivedProject::set_reference(const ::std::string& value) {
+  set_has_reference();
+  reference_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.ArchivedProject.reference)
+}
+ void ArchivedProject::set_reference(const char* value) {
+  set_has_reference();
+  reference_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:SolasMatch.Common.Protobufs.Models.ArchivedProject.reference)
+}
+ void ArchivedProject::set_reference(const char* value, size_t size) {
+  set_has_reference();
+  reference_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:SolasMatch.Common.Protobufs.Models.ArchivedProject.reference)
+}
+ ::std::string* ArchivedProject::mutable_reference() {
+  set_has_reference();
+  // @@protoc_insertion_point(field_mutable:SolasMatch.Common.Protobufs.Models.ArchivedProject.reference)
+  return reference_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* ArchivedProject::release_reference() {
+  // @@protoc_insertion_point(field_release:SolasMatch.Common.Protobufs.Models.ArchivedProject.reference)
+  clear_has_reference();
+  return reference_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void ArchivedProject::set_allocated_reference(::std::string* reference) {
+  if (reference != NULL) {
+    set_has_reference();
+  } else {
+    clear_has_reference();
+  }
+  reference_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), reference);
+  // @@protoc_insertion_point(field_set_allocated:SolasMatch.Common.Protobufs.Models.ArchivedProject.reference)
+}
+
+// optional int32 wordCount = 8;
+bool ArchivedProject::has_wordcount() const {
+  return (_has_bits_[0] & 0x00000080u) != 0;
+}
+void ArchivedProject::set_has_wordcount() {
+  _has_bits_[0] |= 0x00000080u;
+}
+void ArchivedProject::clear_has_wordcount() {
+  _has_bits_[0] &= ~0x00000080u;
+}
+void ArchivedProject::clear_wordcount() {
+  wordcount_ = 0;
+  clear_has_wordcount();
+}
+ ::google::protobuf::int32 ArchivedProject::wordcount() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.ArchivedProject.wordCount)
+  return wordcount_;
+}
+ void ArchivedProject::set_wordcount(::google::protobuf::int32 value) {
+  set_has_wordcount();
+  wordcount_ = value;
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.ArchivedProject.wordCount)
+}
+
+// optional string createdTime = 9;
+bool ArchivedProject::has_createdtime() const {
+  return (_has_bits_[0] & 0x00000100u) != 0;
+}
+void ArchivedProject::set_has_createdtime() {
+  _has_bits_[0] |= 0x00000100u;
+}
+void ArchivedProject::clear_has_createdtime() {
+  _has_bits_[0] &= ~0x00000100u;
+}
+void ArchivedProject::clear_createdtime() {
+  createdtime_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_createdtime();
+}
+ const ::std::string& ArchivedProject::createdtime() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.ArchivedProject.createdTime)
+  return createdtime_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void ArchivedProject::set_createdtime(const ::std::string& value) {
+  set_has_createdtime();
+  createdtime_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.ArchivedProject.createdTime)
+}
+ void ArchivedProject::set_createdtime(const char* value) {
+  set_has_createdtime();
+  createdtime_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:SolasMatch.Common.Protobufs.Models.ArchivedProject.createdTime)
+}
+ void ArchivedProject::set_createdtime(const char* value, size_t size) {
+  set_has_createdtime();
+  createdtime_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:SolasMatch.Common.Protobufs.Models.ArchivedProject.createdTime)
+}
+ ::std::string* ArchivedProject::mutable_createdtime() {
+  set_has_createdtime();
+  // @@protoc_insertion_point(field_mutable:SolasMatch.Common.Protobufs.Models.ArchivedProject.createdTime)
+  return createdtime_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* ArchivedProject::release_createdtime() {
+  // @@protoc_insertion_point(field_release:SolasMatch.Common.Protobufs.Models.ArchivedProject.createdTime)
+  clear_has_createdtime();
+  return createdtime_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void ArchivedProject::set_allocated_createdtime(::std::string* createdtime) {
+  if (createdtime != NULL) {
+    set_has_createdtime();
+  } else {
+    clear_has_createdtime();
+  }
+  createdtime_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), createdtime);
+  // @@protoc_insertion_point(field_set_allocated:SolasMatch.Common.Protobufs.Models.ArchivedProject.createdTime)
+}
+
+// optional .SolasMatch.Common.Protobufs.Models.Locale sourceLocale = 10;
+bool ArchivedProject::has_sourcelocale() const {
+  return (_has_bits_[0] & 0x00000200u) != 0;
+}
+void ArchivedProject::set_has_sourcelocale() {
+  _has_bits_[0] |= 0x00000200u;
+}
+void ArchivedProject::clear_has_sourcelocale() {
+  _has_bits_[0] &= ~0x00000200u;
+}
+void ArchivedProject::clear_sourcelocale() {
+  if (sourcelocale_ != NULL) sourcelocale_->::SolasMatch::Common::Protobufs::Models::Locale::Clear();
+  clear_has_sourcelocale();
+}
+const ::SolasMatch::Common::Protobufs::Models::Locale& ArchivedProject::sourcelocale() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.ArchivedProject.sourceLocale)
+  return sourcelocale_ != NULL ? *sourcelocale_ : *default_instance_->sourcelocale_;
+}
+::SolasMatch::Common::Protobufs::Models::Locale* ArchivedProject::mutable_sourcelocale() {
+  set_has_sourcelocale();
+  if (sourcelocale_ == NULL) {
+    sourcelocale_ = new ::SolasMatch::Common::Protobufs::Models::Locale;
+  }
+  // @@protoc_insertion_point(field_mutable:SolasMatch.Common.Protobufs.Models.ArchivedProject.sourceLocale)
+  return sourcelocale_;
+}
+::SolasMatch::Common::Protobufs::Models::Locale* ArchivedProject::release_sourcelocale() {
+  // @@protoc_insertion_point(field_release:SolasMatch.Common.Protobufs.Models.ArchivedProject.sourceLocale)
+  clear_has_sourcelocale();
+  ::SolasMatch::Common::Protobufs::Models::Locale* temp = sourcelocale_;
+  sourcelocale_ = NULL;
+  return temp;
+}
+void ArchivedProject::set_allocated_sourcelocale(::SolasMatch::Common::Protobufs::Models::Locale* sourcelocale) {
+  delete sourcelocale_;
+  sourcelocale_ = sourcelocale;
+  if (sourcelocale) {
+    set_has_sourcelocale();
+  } else {
+    clear_has_sourcelocale();
+  }
+  // @@protoc_insertion_point(field_set_allocated:SolasMatch.Common.Protobufs.Models.ArchivedProject.sourceLocale)
+}
+
+// optional int32 userIdArchived = 11;
+bool ArchivedProject::has_useridarchived() const {
+  return (_has_bits_[0] & 0x00000400u) != 0;
+}
+void ArchivedProject::set_has_useridarchived() {
+  _has_bits_[0] |= 0x00000400u;
+}
+void ArchivedProject::clear_has_useridarchived() {
+  _has_bits_[0] &= ~0x00000400u;
+}
+void ArchivedProject::clear_useridarchived() {
+  useridarchived_ = 0;
+  clear_has_useridarchived();
+}
+ ::google::protobuf::int32 ArchivedProject::useridarchived() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.ArchivedProject.userIdArchived)
+  return useridarchived_;
+}
+ void ArchivedProject::set_useridarchived(::google::protobuf::int32 value) {
+  set_has_useridarchived();
+  useridarchived_ = value;
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.ArchivedProject.userIdArchived)
+}
+
+// optional int32 userIdProjectCreator = 12;
+bool ArchivedProject::has_useridprojectcreator() const {
+  return (_has_bits_[0] & 0x00000800u) != 0;
+}
+void ArchivedProject::set_has_useridprojectcreator() {
+  _has_bits_[0] |= 0x00000800u;
+}
+void ArchivedProject::clear_has_useridprojectcreator() {
+  _has_bits_[0] &= ~0x00000800u;
+}
+void ArchivedProject::clear_useridprojectcreator() {
+  useridprojectcreator_ = 0;
+  clear_has_useridprojectcreator();
+}
+ ::google::protobuf::int32 ArchivedProject::useridprojectcreator() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.ArchivedProject.userIdProjectCreator)
+  return useridprojectcreator_;
+}
+ void ArchivedProject::set_useridprojectcreator(::google::protobuf::int32 value) {
+  set_has_useridprojectcreator();
+  useridprojectcreator_ = value;
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.ArchivedProject.userIdProjectCreator)
+}
+
+// optional string fileName = 13;
+bool ArchivedProject::has_filename() const {
+  return (_has_bits_[0] & 0x00001000u) != 0;
+}
+void ArchivedProject::set_has_filename() {
+  _has_bits_[0] |= 0x00001000u;
+}
+void ArchivedProject::clear_has_filename() {
+  _has_bits_[0] &= ~0x00001000u;
+}
+void ArchivedProject::clear_filename() {
+  filename_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_filename();
+}
+ const ::std::string& ArchivedProject::filename() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.ArchivedProject.fileName)
+  return filename_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void ArchivedProject::set_filename(const ::std::string& value) {
+  set_has_filename();
+  filename_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.ArchivedProject.fileName)
+}
+ void ArchivedProject::set_filename(const char* value) {
+  set_has_filename();
+  filename_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:SolasMatch.Common.Protobufs.Models.ArchivedProject.fileName)
+}
+ void ArchivedProject::set_filename(const char* value, size_t size) {
+  set_has_filename();
+  filename_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:SolasMatch.Common.Protobufs.Models.ArchivedProject.fileName)
+}
+ ::std::string* ArchivedProject::mutable_filename() {
+  set_has_filename();
+  // @@protoc_insertion_point(field_mutable:SolasMatch.Common.Protobufs.Models.ArchivedProject.fileName)
+  return filename_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* ArchivedProject::release_filename() {
+  // @@protoc_insertion_point(field_release:SolasMatch.Common.Protobufs.Models.ArchivedProject.fileName)
+  clear_has_filename();
+  return filename_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void ArchivedProject::set_allocated_filename(::std::string* filename) {
+  if (filename != NULL) {
+    set_has_filename();
+  } else {
+    clear_has_filename();
+  }
+  filename_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), filename);
+  // @@protoc_insertion_point(field_set_allocated:SolasMatch.Common.Protobufs.Models.ArchivedProject.fileName)
+}
+
+// optional string fileToken = 14;
+bool ArchivedProject::has_filetoken() const {
+  return (_has_bits_[0] & 0x00002000u) != 0;
+}
+void ArchivedProject::set_has_filetoken() {
+  _has_bits_[0] |= 0x00002000u;
+}
+void ArchivedProject::clear_has_filetoken() {
+  _has_bits_[0] &= ~0x00002000u;
+}
+void ArchivedProject::clear_filetoken() {
+  filetoken_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_filetoken();
+}
+ const ::std::string& ArchivedProject::filetoken() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.ArchivedProject.fileToken)
+  return filetoken_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void ArchivedProject::set_filetoken(const ::std::string& value) {
+  set_has_filetoken();
+  filetoken_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.ArchivedProject.fileToken)
+}
+ void ArchivedProject::set_filetoken(const char* value) {
+  set_has_filetoken();
+  filetoken_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:SolasMatch.Common.Protobufs.Models.ArchivedProject.fileToken)
+}
+ void ArchivedProject::set_filetoken(const char* value, size_t size) {
+  set_has_filetoken();
+  filetoken_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:SolasMatch.Common.Protobufs.Models.ArchivedProject.fileToken)
+}
+ ::std::string* ArchivedProject::mutable_filetoken() {
+  set_has_filetoken();
+  // @@protoc_insertion_point(field_mutable:SolasMatch.Common.Protobufs.Models.ArchivedProject.fileToken)
+  return filetoken_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* ArchivedProject::release_filetoken() {
+  // @@protoc_insertion_point(field_release:SolasMatch.Common.Protobufs.Models.ArchivedProject.fileToken)
+  clear_has_filetoken();
+  return filetoken_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void ArchivedProject::set_allocated_filetoken(::std::string* filetoken) {
+  if (filetoken != NULL) {
+    set_has_filetoken();
+  } else {
+    clear_has_filetoken();
+  }
+  filetoken_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), filetoken);
+  // @@protoc_insertion_point(field_set_allocated:SolasMatch.Common.Protobufs.Models.ArchivedProject.fileToken)
+}
+
+// optional string mimeType = 15;
+bool ArchivedProject::has_mimetype() const {
+  return (_has_bits_[0] & 0x00004000u) != 0;
+}
+void ArchivedProject::set_has_mimetype() {
+  _has_bits_[0] |= 0x00004000u;
+}
+void ArchivedProject::clear_has_mimetype() {
+  _has_bits_[0] &= ~0x00004000u;
+}
+void ArchivedProject::clear_mimetype() {
+  mimetype_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_mimetype();
+}
+ const ::std::string& ArchivedProject::mimetype() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.ArchivedProject.mimeType)
+  return mimetype_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void ArchivedProject::set_mimetype(const ::std::string& value) {
+  set_has_mimetype();
+  mimetype_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.ArchivedProject.mimeType)
+}
+ void ArchivedProject::set_mimetype(const char* value) {
+  set_has_mimetype();
+  mimetype_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:SolasMatch.Common.Protobufs.Models.ArchivedProject.mimeType)
+}
+ void ArchivedProject::set_mimetype(const char* value, size_t size) {
+  set_has_mimetype();
+  mimetype_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:SolasMatch.Common.Protobufs.Models.ArchivedProject.mimeType)
+}
+ ::std::string* ArchivedProject::mutable_mimetype() {
+  set_has_mimetype();
+  // @@protoc_insertion_point(field_mutable:SolasMatch.Common.Protobufs.Models.ArchivedProject.mimeType)
+  return mimetype_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* ArchivedProject::release_mimetype() {
+  // @@protoc_insertion_point(field_release:SolasMatch.Common.Protobufs.Models.ArchivedProject.mimeType)
+  clear_has_mimetype();
+  return mimetype_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void ArchivedProject::set_allocated_mimetype(::std::string* mimetype) {
+  if (mimetype != NULL) {
+    set_has_mimetype();
+  } else {
+    clear_has_mimetype();
+  }
+  mimetype_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), mimetype);
+  // @@protoc_insertion_point(field_set_allocated:SolasMatch.Common.Protobufs.Models.ArchivedProject.mimeType)
+}
+
+// optional string archivedDate = 16;
+bool ArchivedProject::has_archiveddate() const {
+  return (_has_bits_[0] & 0x00008000u) != 0;
+}
+void ArchivedProject::set_has_archiveddate() {
+  _has_bits_[0] |= 0x00008000u;
+}
+void ArchivedProject::clear_has_archiveddate() {
+  _has_bits_[0] &= ~0x00008000u;
+}
+void ArchivedProject::clear_archiveddate() {
+  archiveddate_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_archiveddate();
+}
+ const ::std::string& ArchivedProject::archiveddate() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.ArchivedProject.archivedDate)
+  return archiveddate_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void ArchivedProject::set_archiveddate(const ::std::string& value) {
+  set_has_archiveddate();
+  archiveddate_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.ArchivedProject.archivedDate)
+}
+ void ArchivedProject::set_archiveddate(const char* value) {
+  set_has_archiveddate();
+  archiveddate_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:SolasMatch.Common.Protobufs.Models.ArchivedProject.archivedDate)
+}
+ void ArchivedProject::set_archiveddate(const char* value, size_t size) {
+  set_has_archiveddate();
+  archiveddate_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:SolasMatch.Common.Protobufs.Models.ArchivedProject.archivedDate)
+}
+ ::std::string* ArchivedProject::mutable_archiveddate() {
+  set_has_archiveddate();
+  // @@protoc_insertion_point(field_mutable:SolasMatch.Common.Protobufs.Models.ArchivedProject.archivedDate)
+  return archiveddate_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* ArchivedProject::release_archiveddate() {
+  // @@protoc_insertion_point(field_release:SolasMatch.Common.Protobufs.Models.ArchivedProject.archivedDate)
+  clear_has_archiveddate();
+  return archiveddate_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void ArchivedProject::set_allocated_archiveddate(::std::string* archiveddate) {
+  if (archiveddate != NULL) {
+    set_has_archiveddate();
+  } else {
+    clear_has_archiveddate();
+  }
+  archiveddate_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), archiveddate);
+  // @@protoc_insertion_point(field_set_allocated:SolasMatch.Common.Protobufs.Models.ArchivedProject.archivedDate)
+}
+
+// optional string tags = 17;
+bool ArchivedProject::has_tags() const {
+  return (_has_bits_[0] & 0x00010000u) != 0;
+}
+void ArchivedProject::set_has_tags() {
+  _has_bits_[0] |= 0x00010000u;
+}
+void ArchivedProject::clear_has_tags() {
+  _has_bits_[0] &= ~0x00010000u;
+}
+void ArchivedProject::clear_tags() {
+  tags_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_tags();
+}
+ const ::std::string& ArchivedProject::tags() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.ArchivedProject.tags)
+  return tags_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void ArchivedProject::set_tags(const ::std::string& value) {
+  set_has_tags();
+  tags_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.ArchivedProject.tags)
+}
+ void ArchivedProject::set_tags(const char* value) {
+  set_has_tags();
+  tags_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:SolasMatch.Common.Protobufs.Models.ArchivedProject.tags)
+}
+ void ArchivedProject::set_tags(const char* value, size_t size) {
+  set_has_tags();
+  tags_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:SolasMatch.Common.Protobufs.Models.ArchivedProject.tags)
+}
+ ::std::string* ArchivedProject::mutable_tags() {
+  set_has_tags();
+  // @@protoc_insertion_point(field_mutable:SolasMatch.Common.Protobufs.Models.ArchivedProject.tags)
+  return tags_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* ArchivedProject::release_tags() {
+  // @@protoc_insertion_point(field_release:SolasMatch.Common.Protobufs.Models.ArchivedProject.tags)
+  clear_has_tags();
+  return tags_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void ArchivedProject::set_allocated_tags(::std::string* tags) {
+  if (tags != NULL) {
+    set_has_tags();
+  } else {
+    clear_has_tags();
+  }
+  tags_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), tags);
+  // @@protoc_insertion_point(field_set_allocated:SolasMatch.Common.Protobufs.Models.ArchivedProject.tags)
+}
+
+// optional bool imageUploaded = 18;
+bool ArchivedProject::has_imageuploaded() const {
+  return (_has_bits_[0] & 0x00020000u) != 0;
+}
+void ArchivedProject::set_has_imageuploaded() {
+  _has_bits_[0] |= 0x00020000u;
+}
+void ArchivedProject::clear_has_imageuploaded() {
+  _has_bits_[0] &= ~0x00020000u;
+}
+void ArchivedProject::clear_imageuploaded() {
+  imageuploaded_ = false;
+  clear_has_imageuploaded();
+}
+ bool ArchivedProject::imageuploaded() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.ArchivedProject.imageUploaded)
+  return imageuploaded_;
+}
+ void ArchivedProject::set_imageuploaded(bool value) {
+  set_has_imageuploaded();
+  imageuploaded_ = value;
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.ArchivedProject.imageUploaded)
+}
+
+// optional bool imageApproved = 19;
+bool ArchivedProject::has_imageapproved() const {
+  return (_has_bits_[0] & 0x00040000u) != 0;
+}
+void ArchivedProject::set_has_imageapproved() {
+  _has_bits_[0] |= 0x00040000u;
+}
+void ArchivedProject::clear_has_imageapproved() {
+  _has_bits_[0] &= ~0x00040000u;
+}
+void ArchivedProject::clear_imageapproved() {
+  imageapproved_ = false;
+  clear_has_imageapproved();
+}
+ bool ArchivedProject::imageapproved() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Models.ArchivedProject.imageApproved)
+  return imageapproved_;
+}
+ void ArchivedProject::set_imageapproved(bool value) {
+  set_has_imageapproved();
+  imageapproved_ = value;
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Models.ArchivedProject.imageApproved)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // @@protoc_insertion_point(namespace_scope)
 

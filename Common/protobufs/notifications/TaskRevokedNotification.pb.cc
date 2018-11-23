@@ -7,6 +7,7 @@
 #include <algorithm>
 
 #include <google/protobuf/stubs/common.h>
+#include <google/protobuf/stubs/port.h>
 #include <google/protobuf/stubs/once.h>
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/wire_format_lite_inl.h>
@@ -30,6 +31,7 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 }  // namespace
 
 
+void protobuf_AssignDesc_TaskRevokedNotification_2eproto() GOOGLE_ATTRIBUTE_COLD;
 void protobuf_AssignDesc_TaskRevokedNotification_2eproto() {
   protobuf_AddDesc_TaskRevokedNotification_2eproto();
   const ::google::protobuf::FileDescriptor* file =
@@ -43,16 +45,16 @@ void protobuf_AssignDesc_TaskRevokedNotification_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TaskRevokedNotification, claimant_id_),
   };
   TaskRevokedNotification_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
       TaskRevokedNotification_descriptor_,
       TaskRevokedNotification::default_instance_,
       TaskRevokedNotification_offsets_,
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TaskRevokedNotification, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TaskRevokedNotification, _unknown_fields_),
       -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(TaskRevokedNotification));
+      -1,
+      sizeof(TaskRevokedNotification),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TaskRevokedNotification, _internal_metadata_),
+      -1);
 }
 
 namespace {
@@ -63,10 +65,11 @@ inline void protobuf_AssignDescriptorsOnce() {
                  &protobuf_AssignDesc_TaskRevokedNotification_2eproto);
 }
 
+void protobuf_RegisterTypes(const ::std::string&) GOOGLE_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    TaskRevokedNotification_descriptor_, &TaskRevokedNotification::default_instance());
+      TaskRevokedNotification_descriptor_, &TaskRevokedNotification::default_instance());
 }
 
 }  // namespace
@@ -77,6 +80,7 @@ void protobuf_ShutdownFile_TaskRevokedNotification_2eproto() {
   delete TaskRevokedNotification::_default_class_name_;
 }
 
+void protobuf_AddDesc_TaskRevokedNotification_2eproto() GOOGLE_ATTRIBUTE_COLD;
 void protobuf_AddDesc_TaskRevokedNotification_2eproto() {
   static bool already_here = false;
   if (already_here) return;
@@ -108,42 +112,45 @@ struct StaticDescriptorInitializer_TaskRevokedNotification_2eproto {
 // ===================================================================
 
 ::std::string* TaskRevokedNotification::_default_class_name_ = NULL;
-#ifndef _MSC_VER
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int TaskRevokedNotification::kClassNameFieldNumber;
 const int TaskRevokedNotification::kTaskIdFieldNumber;
 const int TaskRevokedNotification::kClaimantIdFieldNumber;
-#endif  // !_MSC_VER
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 TaskRevokedNotification::TaskRevokedNotification()
-  : ::google::protobuf::Message() {
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   SharedCtor();
+  // @@protoc_insertion_point(constructor:SolasMatch.Common.Protobufs.Notifications.TaskRevokedNotification)
 }
 
 void TaskRevokedNotification::InitAsDefaultInstance() {
 }
 
 TaskRevokedNotification::TaskRevokedNotification(const TaskRevokedNotification& from)
-  : ::google::protobuf::Message() {
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
   SharedCtor();
   MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:SolasMatch.Common.Protobufs.Notifications.TaskRevokedNotification)
 }
 
 void TaskRevokedNotification::SharedCtor() {
+  ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
-  class_name_ = const_cast< ::std::string*>(_default_class_name_);
+  class_name_.UnsafeSetDefault(_default_class_name_);
   task_id_ = 0;
   claimant_id_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
 TaskRevokedNotification::~TaskRevokedNotification() {
+  // @@protoc_insertion_point(destructor:SolasMatch.Common.Protobufs.Notifications.TaskRevokedNotification)
   SharedDtor();
 }
 
 void TaskRevokedNotification::SharedDtor() {
-  if (class_name_ != _default_class_name_) {
-    delete class_name_;
-  }
+  class_name_.DestroyNoArena(_default_class_name_);
   if (this != default_instance_) {
   }
 }
@@ -165,41 +172,69 @@ const TaskRevokedNotification& TaskRevokedNotification::default_instance() {
 
 TaskRevokedNotification* TaskRevokedNotification::default_instance_ = NULL;
 
-TaskRevokedNotification* TaskRevokedNotification::New() const {
-  return new TaskRevokedNotification;
+TaskRevokedNotification* TaskRevokedNotification::New(::google::protobuf::Arena* arena) const {
+  TaskRevokedNotification* n = new TaskRevokedNotification;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
 }
 
 void TaskRevokedNotification::Clear() {
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+// @@protoc_insertion_point(message_clear_start:SolasMatch.Common.Protobufs.Notifications.TaskRevokedNotification)
+#if defined(__clang__)
+#define ZR_HELPER_(f) \
+  _Pragma("clang diagnostic push") \
+  _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
+  __builtin_offsetof(TaskRevokedNotification, f) \
+  _Pragma("clang diagnostic pop")
+#else
+#define ZR_HELPER_(f) reinterpret_cast<char*>(\
+  &reinterpret_cast<TaskRevokedNotification*>(16)->f)
+#endif
+
+#define ZR_(first, last) do {\
+  ::memset(&first, 0,\
+           ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
+} while (0)
+
+  if (_has_bits_[0 / 32] & 7u) {
+    ZR_(task_id_, claimant_id_);
     if (has_class_name()) {
-      if (class_name_ != _default_class_name_) {
-        class_name_->assign(*_default_class_name_);
-      }
+      class_name_.ClearToDefaultNoArena(_default_class_name_);
     }
-    task_id_ = 0;
-    claimant_id_ = 0;
   }
+
+#undef ZR_HELPER_
+#undef ZR_
+
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
+  if (_internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->Clear();
+  }
 }
 
 bool TaskRevokedNotification::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  while ((tag = input->ReadTag()) != 0) {
+  // @@protoc_insertion_point(parse_start:SolasMatch.Common.Protobufs.Notifications.TaskRevokedNotification)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // required string class_name = 1 [default = "TaskRevokedNotification"];
       case 1: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 10) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_class_name()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
             this->class_name().data(), this->class_name().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "SolasMatch.Common.Protobufs.Notifications.TaskRevokedNotification.class_name");
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(16)) goto parse_task_id;
         break;
@@ -207,15 +242,14 @@ bool TaskRevokedNotification::MergePartialFromCodedStream(
 
       // required int32 task_id = 2;
       case 2: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 16) {
          parse_task_id:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &task_id_)));
           set_has_task_id();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(24)) goto parse_claimant_id;
         break;
@@ -223,25 +257,25 @@ bool TaskRevokedNotification::MergePartialFromCodedStream(
 
       // required int32 claimant_id = 3;
       case 3: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 24) {
          parse_claimant_id:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &claimant_id_)));
           set_has_claimant_id();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
-        if (input->ExpectAtEnd()) return true;
+        if (input->ExpectAtEnd()) goto success;
         break;
       }
 
       default: {
-      handle_uninterpreted:
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          return true;
+          goto success;
         }
         DO_(::google::protobuf::internal::WireFormat::SkipField(
               input, tag, mutable_unknown_fields()));
@@ -249,18 +283,25 @@ bool TaskRevokedNotification::MergePartialFromCodedStream(
       }
     }
   }
+success:
+  // @@protoc_insertion_point(parse_success:SolasMatch.Common.Protobufs.Notifications.TaskRevokedNotification)
   return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:SolasMatch.Common.Protobufs.Notifications.TaskRevokedNotification)
+  return false;
 #undef DO_
 }
 
 void TaskRevokedNotification::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:SolasMatch.Common.Protobufs.Notifications.TaskRevokedNotification)
   // required string class_name = 1 [default = "TaskRevokedNotification"];
   if (has_class_name()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->class_name().data(), this->class_name().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Notifications.TaskRevokedNotification.class_name");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       1, this->class_name(), output);
   }
 
@@ -274,19 +315,22 @@ void TaskRevokedNotification::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->claimant_id(), output);
   }
 
-  if (!unknown_fields().empty()) {
+  if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
+  // @@protoc_insertion_point(serialize_end:SolasMatch.Common.Protobufs.Notifications.TaskRevokedNotification)
 }
 
-::google::protobuf::uint8* TaskRevokedNotification::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
+::google::protobuf::uint8* TaskRevokedNotification::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:SolasMatch.Common.Protobufs.Notifications.TaskRevokedNotification)
   // required string class_name = 1 [default = "TaskRevokedNotification"];
   if (has_class_name()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->class_name().data(), this->class_name().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SolasMatch.Common.Protobufs.Notifications.TaskRevokedNotification.class_name");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         1, this->class_name(), target);
@@ -302,40 +346,65 @@ void TaskRevokedNotification::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->claimant_id(), target);
   }
 
-  if (!unknown_fields().empty()) {
+  if (_internal_metadata_.have_unknown_fields()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
+  // @@protoc_insertion_point(serialize_to_array_end:SolasMatch.Common.Protobufs.Notifications.TaskRevokedNotification)
   return target;
 }
 
-int TaskRevokedNotification::ByteSize() const {
+int TaskRevokedNotification::RequiredFieldsByteSizeFallback() const {
+// @@protoc_insertion_point(required_fields_byte_size_fallback_start:SolasMatch.Common.Protobufs.Notifications.TaskRevokedNotification)
   int total_size = 0;
 
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+  if (has_class_name()) {
     // required string class_name = 1 [default = "TaskRevokedNotification"];
-    if (has_class_name()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->class_name());
-    }
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->class_name());
+  }
+
+  if (has_task_id()) {
+    // required int32 task_id = 2;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->task_id());
+  }
+
+  if (has_claimant_id()) {
+    // required int32 claimant_id = 3;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->claimant_id());
+  }
+
+  return total_size;
+}
+int TaskRevokedNotification::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:SolasMatch.Common.Protobufs.Notifications.TaskRevokedNotification)
+  int total_size = 0;
+
+  if (((_has_bits_[0] & 0x00000007) ^ 0x00000007) == 0) {  // All required fields are present.
+    // required string class_name = 1 [default = "TaskRevokedNotification"];
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->class_name());
 
     // required int32 task_id = 2;
-    if (has_task_id()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->task_id());
-    }
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->task_id());
 
     // required int32 claimant_id = 3;
-    if (has_claimant_id()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->claimant_id());
-    }
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->claimant_id());
 
+  } else {
+    total_size += RequiredFieldsByteSizeFallback();
   }
-  if (!unknown_fields().empty()) {
+  if (_internal_metadata_.have_unknown_fields()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         unknown_fields());
@@ -347,22 +416,31 @@ int TaskRevokedNotification::ByteSize() const {
 }
 
 void TaskRevokedNotification::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const TaskRevokedNotification* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const TaskRevokedNotification*>(
-      &from);
+// @@protoc_insertion_point(generalized_merge_from_start:SolasMatch.Common.Protobufs.Notifications.TaskRevokedNotification)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  const TaskRevokedNotification* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const TaskRevokedNotification>(
+          &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:SolasMatch.Common.Protobufs.Notifications.TaskRevokedNotification)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:SolasMatch.Common.Protobufs.Notifications.TaskRevokedNotification)
     MergeFrom(*source);
   }
 }
 
 void TaskRevokedNotification::MergeFrom(const TaskRevokedNotification& from) {
-  GOOGLE_CHECK_NE(&from, this);
+// @@protoc_insertion_point(class_specific_merge_from_start:SolasMatch.Common.Protobufs.Notifications.TaskRevokedNotification)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_class_name()) {
-      set_class_name(from.class_name());
+      set_has_class_name();
+      class_name_.AssignWithDefault(_default_class_name_, from.class_name_);
     }
     if (from.has_task_id()) {
       set_task_id(from.task_id());
@@ -371,16 +449,20 @@ void TaskRevokedNotification::MergeFrom(const TaskRevokedNotification& from) {
       set_claimant_id(from.claimant_id());
     }
   }
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  if (from._internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  }
 }
 
 void TaskRevokedNotification::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:SolasMatch.Common.Protobufs.Notifications.TaskRevokedNotification)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void TaskRevokedNotification::CopyFrom(const TaskRevokedNotification& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:SolasMatch.Common.Protobufs.Notifications.TaskRevokedNotification)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -393,14 +475,16 @@ bool TaskRevokedNotification::IsInitialized() const {
 }
 
 void TaskRevokedNotification::Swap(TaskRevokedNotification* other) {
-  if (other != this) {
-    std::swap(class_name_, other->class_name_);
-    std::swap(task_id_, other->task_id_);
-    std::swap(claimant_id_, other->claimant_id_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
+  if (other == this) return;
+  InternalSwap(other);
+}
+void TaskRevokedNotification::InternalSwap(TaskRevokedNotification* other) {
+  class_name_.Swap(&other->class_name_);
+  std::swap(task_id_, other->task_id_);
+  std::swap(claimant_id_, other->claimant_id_);
+  std::swap(_has_bits_[0], other->_has_bits_[0]);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata TaskRevokedNotification::GetMetadata() const {
@@ -411,6 +495,112 @@ void TaskRevokedNotification::Swap(TaskRevokedNotification* other) {
   return metadata;
 }
 
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// TaskRevokedNotification
+
+// required string class_name = 1 [default = "TaskRevokedNotification"];
+bool TaskRevokedNotification::has_class_name() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+void TaskRevokedNotification::set_has_class_name() {
+  _has_bits_[0] |= 0x00000001u;
+}
+void TaskRevokedNotification::clear_has_class_name() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+void TaskRevokedNotification::clear_class_name() {
+  class_name_.ClearToDefaultNoArena(_default_class_name_);
+  clear_has_class_name();
+}
+ const ::std::string& TaskRevokedNotification::class_name() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Notifications.TaskRevokedNotification.class_name)
+  return class_name_.GetNoArena(_default_class_name_);
+}
+ void TaskRevokedNotification::set_class_name(const ::std::string& value) {
+  set_has_class_name();
+  class_name_.SetNoArena(_default_class_name_, value);
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Notifications.TaskRevokedNotification.class_name)
+}
+ void TaskRevokedNotification::set_class_name(const char* value) {
+  set_has_class_name();
+  class_name_.SetNoArena(_default_class_name_, ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:SolasMatch.Common.Protobufs.Notifications.TaskRevokedNotification.class_name)
+}
+ void TaskRevokedNotification::set_class_name(const char* value, size_t size) {
+  set_has_class_name();
+  class_name_.SetNoArena(_default_class_name_,
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:SolasMatch.Common.Protobufs.Notifications.TaskRevokedNotification.class_name)
+}
+ ::std::string* TaskRevokedNotification::mutable_class_name() {
+  set_has_class_name();
+  // @@protoc_insertion_point(field_mutable:SolasMatch.Common.Protobufs.Notifications.TaskRevokedNotification.class_name)
+  return class_name_.MutableNoArena(_default_class_name_);
+}
+ ::std::string* TaskRevokedNotification::release_class_name() {
+  // @@protoc_insertion_point(field_release:SolasMatch.Common.Protobufs.Notifications.TaskRevokedNotification.class_name)
+  clear_has_class_name();
+  return class_name_.ReleaseNoArena(_default_class_name_);
+}
+ void TaskRevokedNotification::set_allocated_class_name(::std::string* class_name) {
+  if (class_name != NULL) {
+    set_has_class_name();
+  } else {
+    clear_has_class_name();
+  }
+  class_name_.SetAllocatedNoArena(_default_class_name_, class_name);
+  // @@protoc_insertion_point(field_set_allocated:SolasMatch.Common.Protobufs.Notifications.TaskRevokedNotification.class_name)
+}
+
+// required int32 task_id = 2;
+bool TaskRevokedNotification::has_task_id() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+void TaskRevokedNotification::set_has_task_id() {
+  _has_bits_[0] |= 0x00000002u;
+}
+void TaskRevokedNotification::clear_has_task_id() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+void TaskRevokedNotification::clear_task_id() {
+  task_id_ = 0;
+  clear_has_task_id();
+}
+ ::google::protobuf::int32 TaskRevokedNotification::task_id() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Notifications.TaskRevokedNotification.task_id)
+  return task_id_;
+}
+ void TaskRevokedNotification::set_task_id(::google::protobuf::int32 value) {
+  set_has_task_id();
+  task_id_ = value;
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Notifications.TaskRevokedNotification.task_id)
+}
+
+// required int32 claimant_id = 3;
+bool TaskRevokedNotification::has_claimant_id() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+void TaskRevokedNotification::set_has_claimant_id() {
+  _has_bits_[0] |= 0x00000004u;
+}
+void TaskRevokedNotification::clear_has_claimant_id() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+void TaskRevokedNotification::clear_claimant_id() {
+  claimant_id_ = 0;
+  clear_has_claimant_id();
+}
+ ::google::protobuf::int32 TaskRevokedNotification::claimant_id() const {
+  // @@protoc_insertion_point(field_get:SolasMatch.Common.Protobufs.Notifications.TaskRevokedNotification.claimant_id)
+  return claimant_id_;
+}
+ void TaskRevokedNotification::set_claimant_id(::google::protobuf::int32 value) {
+  set_has_claimant_id();
+  claimant_id_ = value;
+  // @@protoc_insertion_point(field_set:SolasMatch.Common.Protobufs.Notifications.TaskRevokedNotification.claimant_id)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // @@protoc_insertion_point(namespace_scope)
 
