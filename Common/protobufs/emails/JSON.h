@@ -8,7 +8,7 @@ class JSON
 {
 public:
     static bool isJSON(std::string json_serialized);
-    void ParseFromString(std::string json_serialized);
+    bool ParseFromString(std::string json_serialized);
 
     int email_type();
     int user_id();

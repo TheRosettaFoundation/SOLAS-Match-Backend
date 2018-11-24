@@ -15,9 +15,13 @@ if (!QJsonDocument::fromJson(QByteArray(json_serialized.c_str(), json_serialized
     return !QJsonDocument::fromJson(QByteArray(json_serialized.c_str(), json_serialized.length())).isNull();
 }
 
-void JSON::ParseFromString(std::string json_serialized)
+bool JSON::ParseFromString(std::string json_serialized)
 {
-    json_object = QJsonDocument::fromJson(QByteArray(json_serialized.c_str(), json_serialized.length())).object();
+    QJsonDocument json_document = QJsonDocument::fromJson(QByteArray(json_serialized.c_str(), json_serialized.length()));
+
+    json_object = json_document.object();
+
+    return !json_document.isNull();
 }
 
 int JSON::email_type()
