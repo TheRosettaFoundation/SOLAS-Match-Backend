@@ -30,10 +30,7 @@ int JSON::getInt(QString key)
     QJsonValue value = json_object.value(key);
     if (value.type() == QJsonValue::String && value.toString("") != "") {
 qDebug() << "JSON::" << key << "(): " << value.toString("");
-[[
-        QByteArray bytes = json_object.value("recipient_email").toString("").toUtf8();
-        return std::string(bytes.constData(), bytes.length());
-]]
+        return value.toString("").toInt();
     } else {
 qDebug() << "JSON::" << key << "(): " << QString::number(value.toInt(0));
         return value.toInt(0);
@@ -48,7 +45,7 @@ qDebug() << "JSON::email_type(): " << QString::number(json_object.value("email_t
 
 int JSON::user_id()
 {
-    return getInt("user_id");
+    return getInt("zxcv");
 qDebug() << "JSON::user_id(): " << QString::number(json_object.value("user_id").toInt(0));
     return json_object.value("user_id").toInt(0);
 }
