@@ -25,6 +25,21 @@ qDebug() << QString::fromLatin1(json_serialized.c_str(), json_serialized.length(
     return !json_document.isNull();
 }
 
+int JSON::getInt(QString key)
+{
+    QJsonValue value = json_object.value(key);
+    if (value.type() == QJsonValue::String && value.toString("") != "") {
+qDebug() << "JSON::" << key << "(): " << value.toString("");
+[[
+        QByteArray bytes = json_object.value("recipient_email").toString("").toUtf8();
+        return std::string(bytes.constData(), bytes.length());
+]]
+    } else {
+qDebug() << "JSON::" << key << "(): " << QString::number(value.toInt(0));
+        return value.toInt(0);
+    }
+}
+
 int JSON::email_type()
 {
 qDebug() << "JSON::email_type(): " << QString::number(json_object.value("email_type").toInt(0));
@@ -33,6 +48,7 @@ qDebug() << "JSON::email_type(): " << QString::number(json_object.value("email_t
 
 int JSON::user_id()
 {
+    return getInt("user_id");
 qDebug() << "JSON::user_id(): " << QString::number(json_object.value("user_id").toInt(0));
     return json_object.value("user_id").toInt(0);
 }
