@@ -17,7 +17,7 @@ if (!QJsonDocument::fromJson(QByteArray(json_serialized.c_str(), json_serialized
 
 bool JSON::ParseFromString(std::string json_serialized)
 {
-qDebug() << QString(json_serialized);
+qDebug() << QString::fromLatin1(json_serialized.c_str(), json_serialized.length());
     QJsonDocument json_document = QJsonDocument::fromJson(QByteArray(json_serialized.c_str(), json_serialized.length()));
 
     json_object = json_document.object();
