@@ -31,6 +31,7 @@ private:
     QJsonObject json_object;
 
     int getInt(QString key);
+    std::string getString(QString key);
 };
 
 }
