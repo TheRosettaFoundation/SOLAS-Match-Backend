@@ -6,18 +6,13 @@ namespace SolasMatch::Common::Protobufs::Emails {
 
 bool JSON::isJSON(std::string json_serialized)
 {
-if (!QJsonDocument::fromJson(QByteArray(json_serialized.c_str(), json_serialized.length())).isNull()) {
-  qDebug() << "isJSON";
-} else {
-  qDebug() << "NOT isJSON";
-}
     // Not the most efficient way, but simpler and safer to implement
     return !QJsonDocument::fromJson(QByteArray(json_serialized.c_str(), json_serialized.length())).isNull();
 }
 
 bool JSON::ParseFromString(std::string json_serialized)
 {
-qDebug() << QString::fromLatin1(json_serialized.c_str(), json_serialized.length());
+    //qDebug() << QString::fromLatin1(json_serialized.c_str(), json_serialized.length());
     QJsonDocument json_document = QJsonDocument::fromJson(QByteArray(json_serialized.c_str(), json_serialized.length()));
 
     json_object = json_document.object();
@@ -29,10 +24,10 @@ int JSON::getInt(QString key)
 {
     QJsonValue value = json_object.value(key);
     if (value.type() == QJsonValue::String && value.toString("") != "") {
-qDebug() << "JSON::" << key << "()String: " << value.toString("");
+        //qDebug() << "JSON::" << key << "()String: " << value.toString("");
         return value.toString("").toInt();
     } else {
-qDebug() << "JSON::" << key << "(): " << QString::number(value.toInt(0));
+        //qDebug() << "JSON::" << key << "(): " << QString::number(value.toInt(0));
         return value.toInt(0);
     }
 }
@@ -40,7 +35,7 @@ qDebug() << "JSON::" << key << "(): " << QString::number(value.toInt(0));
 std::string JSON::getString(QString key)
 {
     QJsonValue value = json_object.value(key);
-qDebug() << "JSON::" << key << "(): " << value.toString("");
+    //qDebug() << "JSON::" << key << "(): " << value.toString("");
     QByteArray bytes = value.toString("").toUtf8();
     return std::string(bytes.constData(), bytes.length());
 }
