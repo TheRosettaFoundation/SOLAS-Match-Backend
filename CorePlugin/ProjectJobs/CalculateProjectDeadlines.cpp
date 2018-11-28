@@ -254,7 +254,7 @@ void CalculateProjectDeadlines::setProjectDeadlines(QList<QString> deadlineLengt
             WorkflowNode currentNode = builder.getGraph()->allnodes(index);
             Task task = currentNode.task();
 
-            if (task.taskstatus() < IN_PROGRESS) {
+            if (!TaskDao::is_chunked_task(db, task.id()) && task.taskstatus() < IN_PROGRESS) {
                 int taskDeadlinePeriod = 0;
                 for (int i = count; i < deadlineLengths.size(); i++) {
                     taskDeadlinePeriod += defaults.value(deadlineLengths.at(i));
