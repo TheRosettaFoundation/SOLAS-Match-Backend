@@ -49,7 +49,7 @@ private:
     int port;
     bool isConnected;
     bool busy;
-
+    bool test;
 };
 
 #endif // SMTP_H

@@ -30,6 +30,8 @@ Smtp::Smtp()
     connect(smtp, SIGNAL(senderRejected(int,QString)), this, SLOT(connected()));
 
     ConfigParser settings;
+    test = (QString::compare("y", settings.get("mail.test")) == 0);
+
     host = settings.get("mail.server");
     port = settings.get("mail.port").toInt();
     smtp->setUsername(settings.get("mail.user").toLatin1());
@@ -53,10 +55,12 @@ void Smtp::send(QSharedPointer<Email> email)
     QString recipientString = "";
     foreach(QString recipient, email->getRecipients())
     {
-//        mail_message.addRecipient(recipient);
+        if (!test) mail_message.addRecipient(recipient);
         recipientString += "%20" + recipient;
     }
-mail_message.addRecipient("alanabarrett0@gmail.com"); // TEST CODE
+
+    if (test) mail_message.addRecipient("alanabarrett0@gmail.com"); // TEST CODE
+
     recipientString.replace("@", "%40");
     mail_message.setExtraHeader("List-Unsubscribe", "<mailto:info@trommons.org?subject=Unsubscribe%20from%20Trommons%3A" + recipientString  + ">");
     mail_message.setSubject(email->getSubject());
