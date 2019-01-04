@@ -17,6 +17,7 @@ public:
     void setSubject(QString sub);
     void setBody(QString body);
     static std::string htmlspecialchars(const std::string& in);
+    static std::string uiCleanseHTMLNewlineAndTabs(const std::string& in);
     void printEmail();
 
 private:

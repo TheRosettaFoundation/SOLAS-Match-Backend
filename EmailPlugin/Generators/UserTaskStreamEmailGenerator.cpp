@@ -118,6 +118,10 @@ void UserTaskStreamEmailGenerator::run()
                                         "/view";
                 taskSect->SetValue("PROJECT_VIEW", projectView.toStdString());
                 taskSect->SetValue("PROJECT_TITLE", Email::htmlspecialchars(project->title()));
+                taskSect->SetValue("PROJECT_DESCRIPTION", Email::uiCleanseHTMLNewlineAndTabs(project->description()));
+                taskSect->SetValue("PROJECT_IMPACT", Email::uiCleanseHTMLNewlineAndTabs(project->impact()));
+                QString projectImage = QString("<img src=\"") + settings.get("site.url") + "project/" + QString::number(task->projectid()) + "/image\" width=\"300\">";
+                taskSect->SetValue("PROJECT_IMAGE", projectImage.toStdString());
 
                 QSharedPointer<Organisation> org = OrganisationDao::getOrg(db, project->organisationid());
                 if (!org.isNull()) {
