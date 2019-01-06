@@ -61,6 +61,8 @@ void UserTaskStreamEmailGenerator::run()
 
         ctemplate::TemplateDictionary dict("userTaskStreamDict");
         dict.SetValue("SITE_NAME", std::string(settings.get("site.name").toLatin1().constData(), settings.get("site.name").toLatin1().length()));
+
+        int project_id = 0;
         foreach (QSharedPointer<Task> task, userTasks) {
             ctemplate::TemplateDictionary *taskSect = dict.AddSectionDictionary("TASK_SECT");
             QString taskView = settings.get("site.url") + "task/" + QString::number(task->id()) + "/view";
@@ -93,17 +95,6 @@ void UserTaskStreamEmailGenerator::run()
             Locale taskTargetLocale = task->targetlocale();
             taskSect->SetValue("TARGET_LANGUAGE", taskTargetLocale.languagename());
 
-            QList<QSharedPointer<Tag> > taskTags = TagDao::getTaskTags(db, task->id());
-            if (taskTags.count() > 0) {
-                taskSect->ShowSection("TAGS_SECT");
-                foreach (QSharedPointer<Tag> tag, taskTags) {
-                    ctemplate::TemplateDictionary *tagsList = taskSect->AddSectionDictionary("TAGS_LIST");
-                    QString tagDetails = settings.get("site.url") + "tag/" + QString::number(tag->id()) + "/";
-                    tagsList->SetValue("TAG_DETAILS", tagDetails.toStdString());
-                    tagsList->SetValue("TAG_LABEL", Email::htmlspecialchars(tag->label()));
-                }
-            }
-
             taskSect->SetValue("WORD_COUNT", QString::number(task->wordcount()).toStdString());
             QString createdTime = QDateTime::fromString(QString::fromStdString(task->createdtime()),
                        "yyyy-MM-ddTHH:mm:ss").toString("d MMMM yyyy - hh:mm");
@@ -114,24 +105,46 @@ void UserTaskStreamEmailGenerator::run()
 
             QSharedPointer<Project> project = ProjectDao::getProject(db, task->projectid());
             if (!project.isNull()) {
-                QString projectView = settings.get("site.url") + "project/" + QString::number(task->projectid()) +
-                                        "/view";
-                taskSect->SetValue("PROJECT_VIEW", projectView.toStdString());
-                taskSect->SetValue("PROJECT_TITLE", Email::htmlspecialchars(project->title()));
-                taskSect->SetValue("PROJECT_DESCRIPTION", Email::uiCleanseHTMLNewlineAndTabs(project->description()));
-                taskSect->SetValue("PROJECT_IMPACT", Email::uiCleanseHTMLNewlineAndTabs(project->impact()));
-                QString projectImage = QString("<img src=\"") + settings.get("site.url") + "project/" + QString::number(task->projectid()) + "/image\" width=\"300\">";
-                if (project->imageuploaded() && project->imageapproved()) taskSect->SetValue("PROJECT_IMAGE", projectImage.toStdString());
-                else                                                      taskSect->SetValue("PROJECT_IMAGE", "");
+                if (task->projectid() != project_id) { // Display first time only
+                    taskSect->ShowSection("DESCRIPTION_SECT");
+                    taskSect->SetValue("PROJECT_DESCRIPTION", Email::uiCleanseHTMLNewlineAndTabs(project->description()));
+                    taskSect->SetValue("PROJECT_IMPACT", Email::uiCleanseHTMLNewlineAndTabs(project->impact()));
+                }
 
-                QSharedPointer<Organisation> org = OrganisationDao::getOrg(db, project->organisationid());
-                if (!org.isNull()) {
-                    QString orgView = settings.get("site.url") + "org/" + QString::number(project->organisationid()) +
-                                    "/profile";
-                    taskSect->SetValue("ORG_VIEW", orgView.toStdString());
-                    taskSect->SetValue("ORG_NAME", org->name());
+                if (task->projectid() != project_id) { // Display first time only
+                    QList<QSharedPointer<Tag> > taskTags = TagDao::getTaskTags(db, task->id());
+                    if (taskTags.count() > 0) {
+                        taskSect->ShowSection("TAGS_SECT");
+                        foreach (QSharedPointer<Tag> tag, taskTags) {
+                            ctemplate::TemplateDictionary *tagsList = taskSect->AddSectionDictionary("TAGS_LIST");
+                            QString tagDetails = settings.get("site.url") + "tag/" + QString::number(tag->id()) + "/";
+                            tagsList->SetValue("TAG_DETAILS", tagDetails.toStdString());
+                            tagsList->SetValue("TAG_LABEL", Email::htmlspecialchars(tag->label()));
+                        }
+                    }
+                }
+
+                if (task->projectid() != project_id) { // Display first time only
+                    taskSect->ShowSection("PARTOF_SECT");
+                    QString projectView = settings.get("site.url") + "project/" + QString::number(task->projectid()) + "/view";
+                    taskSect->SetValue("PROJECT_VIEW", projectView.toStdString());
+                    taskSect->SetValue("PROJECT_TITLE", Email::htmlspecialchars(project->title()));
+                    QSharedPointer<Organisation> org = OrganisationDao::getOrg(db, project->organisationid());
+                    if (!org.isNull()) {
+                        QString orgView = settings.get("site.url") + "org/" + QString::number(project->organisationid()) + "/profile";
+                        taskSect->SetValue("ORG_VIEW", orgView.toStdString());
+                        taskSect->SetValue("ORG_NAME", org->name());
+                    }
+
+                    if (project->imageuploaded() && project->imageapproved()) {
+                        taskSect->ShowSection("IMAGE_SECT");
+                        QString projectImage = settings.get("site.url") + "project/" + QString::number(task->projectid()) + "/image";
+                        taskSect->SetValue("PROJECT_IMAGE", projectImage.toStdString());
+                    }
                 }
             }
+
+            project_id = task->projectid();
         }
 
         bool footer_enabled=(QString::compare("y", settings.get("email-footer.enabled")) == 0);

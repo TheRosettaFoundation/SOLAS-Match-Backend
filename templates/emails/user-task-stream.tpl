@@ -12,8 +12,10 @@
     <p>Word Count: <strong>{{WORD_COUNT}}</strong></p>
     <p>Added: <strong>{{CREATED_TIME}}</strong></p>
     <p>Due by: <strong>{{DEADLINE_TIME}}</strong></p>
+    {{#DESCRIPTION_SECT}}
     <p>Project Description: <i>{{PROJECT_DESCRIPTION}}</i></p>
     <p>Project Impact: <i>{{PROJECT_IMPACT}}</i></p>
+    {{/DESCRIPTION_SECT}}
     {{#TAGS_SECT}}
         <p>
             Tags:
@@ -22,12 +24,15 @@
             {{/TAGS_LIST}}
         </p>
     {{/TAGS_SECT}}
+    {{#PARTOF_SECT}}
     <p>
         Part of: <a href="{{PROJECT_VIEW}}">{{PROJECT_TITLE}}</a>
         for <a href="{{ORG_VIEW}}">{{ORG_NAME}}</a>
     </p>
-    {{PROJECT_IMAGE}}
-
+    {{/PARTOF_SECT}}
+    {{#IMAGE_SECT}}
+        <img src="{{PROJECT_IMAGE}}" width="300">
+    {{/IMAGE_SECT}}
     <p style="margin-bottom:40px;"/>
 {{/TASK_SECT}}
 
