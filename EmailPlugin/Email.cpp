@@ -77,7 +77,7 @@ std::string Email::uiCleanseHTMLNewlineAndTabs(const std::string& in)
     std::string out;
     out.reserve(in.length() + 50);
 
-    bool crEncountered;
+    bool crEncountered = false;
     for (std::string::size_type i = 0; i < in.length(); i++) {
         switch(in[i]) {
             case '<':
