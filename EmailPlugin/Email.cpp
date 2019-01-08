@@ -106,6 +106,13 @@ std::string Email::uiCleanseHTMLNewlineAndTabs(const std::string& in)
                 break;
         }
     }
+
+    // This set of replacements is what is needed and not the code above which may not be exercised except for '<' and '>'
+    out = std::regex_replace(out, std::regex(R"(\\r\\n)"), "<br/>");
+    out = std::regex_replace(out, std::regex(R"(\\n)"),    "<br/>");
+    out = std::regex_replace(out, std::regex(R"(\\r)"),    "<br/>");
+    out = std::regex_replace(out, std::regex(R"(\\t)"),    "&nbsp;&nbsp;&nbsp;&nbsp;");
+
     return out;
 }
 
