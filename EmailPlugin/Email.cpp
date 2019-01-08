@@ -2,6 +2,8 @@
 
 #include <QDebug>
 
+#include <regex>
+
 Email::Email(QString to, QString from, QString subject, QString body)
 {
     if(to.compare("") != 0) {
