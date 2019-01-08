@@ -123,8 +123,9 @@ void ModelGenerator::Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<Projec
     project->set_wordcount(MySQLHandler::getValueFromQuery(fieldMap.value("wordCount"), q).toInt());
     project->set_createdtime(MySQLHandler::getStringFromQuery(fieldMap.value("createdTime"), q));
     project->set_status(MySQLHandler::getStringFromQuery(fieldMap.value("status"), q));
-    project->set_imageuploaded(MySQLHandler::getValueFromQuery(fieldMap.value("imageUploaded"), q).toBool());
-    project->set_imageapproved(MySQLHandler::getValueFromQuery(fieldMap.value("imageApproved"), q).toBool());
+    // The database system actually returns a string of one character/byte with the BIT in it...
+    project->set_imageuploaded((bool)(MySQLHandler::getValueFromQuery(fieldMap.value("imageUploaded"), q).toString().toStdString().at(0)));
+    project->set_imageapproved((bool)(MySQLHandler::getValueFromQuery(fieldMap.value("imageApproved"), q).toString().toStdString().at(0)));
     Locale *sourceLocale = project->mutable_sourcelocale();
     sourceLocale->set_countrycode(MySQLHandler::getStringFromQuery(fieldMap.value("countryCode"), q));
     sourceLocale->set_countryname(MySQLHandler::getStringFromQuery(fieldMap.value("countryName"), q));
