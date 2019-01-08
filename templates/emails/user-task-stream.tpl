@@ -13,8 +13,8 @@
     <p>Added: <strong>{{CREATED_TIME}}</strong></p>
     <p>Due by: <strong>{{DEADLINE_TIME}}</strong></p>
     {{#DESCRIPTION_SECT}}
-    <p>Project Description: <i>{{PROJECT_DESCRIPTION}}</i></p>
-    <p>Project Impact: <i>{{PROJECT_IMPACT}}</i></p>
+    <p><strong>Project Description</strong>: <i>{{PROJECT_DESCRIPTION}}</i></p>
+    <p><strong>Project Impact</strong>: <i>{{PROJECT_IMPACT}}</i></p>
     {{/DESCRIPTION_SECT}}
     {{#TAGS_SECT}}
         <p>
