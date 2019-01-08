@@ -31,7 +31,7 @@
     </p>
     {{/PARTOF_SECT}}
     {{#IMAGE_SECT}}
-        <img src="{{PROJECT_IMAGE}}" width="300">
+        <img src="{{PROJECT_IMAGE}}" width="300" />
     {{/IMAGE_SECT}}
     <p style="margin-bottom:40px;"/>
 {{/TASK_SECT}}
