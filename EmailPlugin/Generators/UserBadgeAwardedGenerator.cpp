@@ -105,7 +105,7 @@ void UserBadgeAwardedGenerator::run()
 
         email->setSender(settings.get("site.system_email_address"));;
         email->addRecipient(QString::fromStdString(user->email()));
-        email->setSubject(settings.get("site.name") + ": Badge Awarded");
+        email->setSubject(settings.get("site.name") + ": Achievement Awarded");
         if (badge_title == "Registered") {
             email->setSubject(settings.get("site.name") + ": Registration Successful");
         }

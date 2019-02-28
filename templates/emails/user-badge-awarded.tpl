@@ -3,7 +3,7 @@
 </p>
 
 <p>
-    Congratulations! You&#8217;ve been awarded the {{BADGE_NAME}} badge on {{SITE_NAME}}.  
+    Congratulations! You&#8217;ve been awarded the {{BADGE_NAME}} achievement on {{SITE_NAME}}.
 </p>
 
 <p>
