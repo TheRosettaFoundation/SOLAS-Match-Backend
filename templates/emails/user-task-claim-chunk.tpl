@@ -19,9 +19,9 @@ on {{SITE_NAME}}.
 Kató Q&A</a>.
 </p>
 <p>
-As soon as you complete the task on Kató TM and
-all segments are translated (status bar shows 100%),
-you are finished!
+    As soon as you complete the task on Kató TM and all segments are translated (status bar shows 100%),
+    please "Copy your translation from Kató TM to Kató" using the following page:<br />
+    <a href="{{TASK_PAGE}}">{{TASK_PAGE}}</a>
 </p>
 {{/TRANSLATION}}
 {{#REVISING}}
@@ -39,9 +39,9 @@ please be sure to use Kató TM:<br />
 >Kató Q&A</a>.
 </p>
 <p>
-As soon as you complete the task on Kató TM and
-all segments are approved (status bar shows fully green),
-you are finished!
+    As soon as you complete the task on Kató TM and all segments are approved (status bar shows fully green),
+    please "Copy your revised version from Kató TM to Kató" using the following page:<br />
+    <a href="{{TASK_PAGE}}">{{TASK_PAGE}}</a>
 </p>
 {{/REVISING}}
 <p>
