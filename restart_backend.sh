@@ -1,6 +1,6 @@
 # restart_backend.sh
 # Stop C++ gracefully (i.e. first stop consuming messages from rabbitmq) and restart
-# Ideally this should not be done between 7 and 7:20 UTC because main deadline check is just time based
+# Ideally this should not be done between 7 and 7:20 UTC because main deadline check (cron 7:05 UTC) is just time based
 
 cd /repo/SOLAS-Match-Backend
 touch /repo/SOLAS-Match-Backend/STOP_consumeFromQueue
