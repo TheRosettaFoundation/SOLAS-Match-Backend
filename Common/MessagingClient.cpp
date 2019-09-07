@@ -2,6 +2,7 @@
 #include "ConfigParser.h"
 
 #include <QDebug>
+#include <QFileInfo>
 
 MessagingClient::MessagingClient()
 {
@@ -90,6 +91,7 @@ void MessagingClient::republish(AMQPMessage *message)
 
 void MessagingClient::consumeFromQueue()
 {
+  if (!QFileInfo::exists("/repo/SOLAS-Match-Backend/STOP_consumeFromQueue")) {
     try {
         mQueue->Get();
 
@@ -101,4 +103,5 @@ void MessagingClient::consumeFromQueue()
         qDebug() << "ERROR: Consuming from Queue";
         emit AMQPError(QString::fromStdString(e.getMessage()));
     }
+  }
 }
