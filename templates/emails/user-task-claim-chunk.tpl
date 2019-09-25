@@ -26,7 +26,7 @@ Kató Q&A</a>.
 {{/TRANSLATION}}
 {{#REVISING}}
 <p>
-To revise this task{{NOTIFICATION_PHRASE}},
+To revise this task<strong>{{NOTIFICATION_PHRASE}}</strong>,
 please be sure to use Kató TM:<br />
 <a href=
 "{{MATECAT}}"
