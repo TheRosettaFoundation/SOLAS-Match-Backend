@@ -514,9 +514,10 @@ std::string TaskDao::get_matecat_url(QSharedPointer<MySQLHandler> db, QSharedPoi
                 QString matecat_langpair       (MySQLHandler::getValueFromQuery(fieldMap.value("matecat_langpair"), mQuery).toString());
                 QString matecat_id_job         (MySQLHandler::getValueFromQuery(fieldMap.value("matecat_id_job"), mQuery).toString());
                 QString matecat_id_job_password(MySQLHandler::getValueFromQuery(fieldMap.value("matecat_id_chunk_password"), mQuery).toString());
+                QString job_first_segment      (MySQLHandler::getValueFromQuery(fieldMap.value("job_first_segment"), mQuery).toString());
 
                 if (matecat_langpair != "" && matecat_id_job != "" && matecat_id_job_password != "") {
-                    matecat_url = translate_url + QString::number(task->projectid()) + "/" + matecat_langpair.replace("|", "-") + "/" + matecat_id_job + "-" + matecat_id_job_password;
+                    matecat_url = translate_url + QString::number(task->projectid()) + "/" + matecat_langpair.replace("|", "-") + "/" + matecat_id_job + "-" + matecat_id_job_password + job_first_segment;
                 }
             }
         }
@@ -536,9 +537,10 @@ std::string TaskDao::getMatecatRevisionURL(QSharedPointer<MySQLHandler> db, QSha
         QString matecat_langpair       (MySQLHandler::getValueFromQuery(fieldMap.value("matecat_langpair"), mQuery).toString());
         QString matecat_id_job         (MySQLHandler::getValueFromQuery(fieldMap.value("matecat_id_job"), mQuery).toString());
         QString matecat_id_job_password(MySQLHandler::getValueFromQuery(fieldMap.value("matecat_id_chunk_password"), mQuery).toString());
+        QString job_first_segment      (MySQLHandler::getValueFromQuery(fieldMap.value("job_first_segment"), mQuery).toString());
 
         if (matecat_langpair != "" && matecat_id_job != "" && matecat_id_job_password != "") {
-            matecat_url = translate_url + QString::number(task->projectid()) + "/" + matecat_langpair.replace("|", "-") + "/" + matecat_id_job + "-" + matecat_id_job_password;
+            matecat_url = translate_url + QString::number(task->projectid()) + "/" + matecat_langpair.replace("|", "-") + "/" + matecat_id_job + "-" + matecat_id_job_password + job_first_segment;
         }
     }
 
