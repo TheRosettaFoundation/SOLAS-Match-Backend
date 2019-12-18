@@ -14,7 +14,6 @@ For more information, please view
 Signing up for Kató Platform email notifications</a>.
 </p>
 <p>
-If you are a partner organization, please discard the above information as it does not apply to you. 
-You will be redirected to a page to accept our Terms and Conditions.
+If you are a partner organization, please disregard the last paragraph as it does not apply to you.
+You will eventually be redirected to a page to accept our Terms and Conditions.
 </p>
-
