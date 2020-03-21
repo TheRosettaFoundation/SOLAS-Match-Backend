@@ -58,6 +58,7 @@ void UserQueueHandler::messageReceived(AMQPMessage *message)
 
     uint32_t length = 0;
     char *body = message->getMessage(&length);
+ if (length > 0) {
 
   if (SolasMatch::Common::Protobufs::Emails::JSON::isJSON(std::string(body, length))) {
     SolasMatch::Common::Protobufs::Emails::JSON requestMessage;
@@ -84,6 +85,9 @@ void UserQueueHandler::messageReceived(AMQPMessage *message)
         this->mThreadPool->start(runnable);
     }
   }
+ } else {
+     qDebug() << "UserQueueHandler: Unable to parse message body, length is 0";
+ }
 }
 
 void UserQueueHandler::handleAMQPError(QString error)
