@@ -35,16 +35,17 @@ TaskRevokedNotificationHandler::~TaskRevokedNotificationHandler()
 void TaskRevokedNotificationHandler::run()
 {
     qDebug() << "Starting new thread to handle task revoked notifications";
-    ConfigParser settings;
-    QString exchange = settings.get("messaging.exchange");
+    QString exchange = "SOLAS_MATCH";
     QString topic = "email.task.revoked";
+    uint32_t length = 0;
+    char *body = this->message->getMessage(&length);
+
+    if (length > 0) {
+
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
 
     MessagingClient client;
     if (client.init()) {
-        uint32_t length = 0;
-        char *body = this->message->getMessage(&length);
-        if (length > 0) {
             JSON notification;
             if (notification.ParseFromString(std::string(body, length))) {
                 QList<QSharedPointer<User> > subscribedUsers = TaskDao::getSubscribedUsers(db, notification.task_id());
@@ -79,12 +80,12 @@ for (uint32_t indexstr=0; indexstr<length; indexstr++) {
     qDebug() << "Value: (" << QString::number(indexstr) << ") " << QString::number(charvalue);
   }
 }
-        } else {
-            qDebug() << "TaskRevokedNotificationHandler: Unable to parse message body, length is 0";
-        }
     } else {
         qDebug() << "TaskRevokedNotificationHandler: Failed to initialise RabbitMQ Client";
     }
+  } else {
+    qDebug() << "TaskRevokedNotificationHandler: Unable to parse message body, length is 0";
+  }
 }
 
 void TaskRevokedNotificationHandler::setAMQPMessage(AMQPMessage *message)
