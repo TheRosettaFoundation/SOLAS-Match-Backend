@@ -31,6 +31,7 @@ Smtp::Smtp()
 
     ConfigParser settings;
     test = (QString::compare("y", settings.get("mail.test")) == 0);
+    if (test) only_send = settings.get("mail.only_send")
 
     host = settings.get("mail.server");
     port = settings.get("mail.port").toInt();
@@ -61,6 +62,7 @@ void Smtp::send(QSharedPointer<Email> email)
 
     if (test) mail_message.addRecipient("alanabarrett0@gmail.com"); // TEST CODE
 
+  if (!test || (QString::compare(only_send, email->getSubject()) == 0)) {
     recipientString.replace("@", "%40");
     mail_message.setExtraHeader("List-Unsubscribe", "<mailto:info@trommons.org?subject=Unsubscribe%20from%20Trommons%3A" + recipientString  + ">");
     mail_message.setSubject(email->getSubject());
@@ -72,6 +74,7 @@ void Smtp::send(QSharedPointer<Email> email)
     }
     busy = true;
     smtp->send(mail_message);
+  }
 }
 
 QSharedPointer<EmailQueue> Smtp::getEmailQueue()

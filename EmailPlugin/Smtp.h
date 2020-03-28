@@ -50,6 +50,7 @@ private:
     bool isConnected;
     bool busy;
     bool test;
+    QString only_send;
 };
 
 #endif // SMTP_H
