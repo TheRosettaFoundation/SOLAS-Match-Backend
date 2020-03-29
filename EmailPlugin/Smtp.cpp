@@ -31,7 +31,7 @@ Smtp::Smtp()
 
     ConfigParser settings;
     test = (QString::compare("y", settings.get("mail.test")) == 0);
-    if (test) only_send = settings.get("mail.only_send")
+    if (test) only_send = settings.get("mail.only_send");
 
     host = settings.get("mail.server");
     port = settings.get("mail.port").toInt();
