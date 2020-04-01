@@ -61,6 +61,9 @@ void Smtp::send(QSharedPointer<Email> email)
     }
 
     if (test) mail_message.addRecipient("alanabarrett0@gmail.com"); // TEST CODE
+    if (test) mail_message.addRecipient("eric.paquin@live.ie"); // TEST CODE
+    if (test) mail_message.addRecipient("info@trommons.org"); // TEST CODE
+    if (test) mail_message.addRecipient("alanabarrett0@yahoo.com"); // TEST CODE
 
   if (!test || (QString::compare(only_send, email->getSubject()) == 0)) {
     recipientString.replace("@", "%40");
