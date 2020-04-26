@@ -14,6 +14,8 @@ Smtp::Smtp()
     currentMessage = NULL;
     emailQueue = QSharedPointer<EmailQueue>(new EmailQueue());
 
+    mail_text_hashes = new QList<QByteArray>();
+
     QTimer *emailQueueReadTimer  = new QTimer();
     connect(emailQueueReadTimer, SIGNAL(timeout()), this, SLOT(checkEmailQueue()));
     emailQueueReadTimer->start(100);
@@ -82,14 +84,27 @@ QSharedPointer<EmailQueue> Smtp::getEmailQueue()
 void Smtp::checkEmailQueue()
 {
     if (!busy && !emailQueue->isEmpty()) {
-        qDebug() << "Getting message from queue";
+        //qDebug() << "Getting message from queue";
         EmailQueue::ConstIterator i = emailQueue->constBegin();
         if (i != emailQueue->constEnd()) {
             this->currentMessage = i.value();
             QSharedPointer<Email> email = i.key();
             emailQueue->remove(i.key());
+
+          QString email_for_hash = "";
+          foreach(QString recipient, email->getRecipients()) {
+              email_for_hash += recipient;
+          }
+          email_for_hash += email->getSender();
+          email_for_hash += email->getSubject();
+          email_for_hash += email->getBody();
+          QByteArray hash = QCryptographicHash::hash(email_for_hash.toUtf8(), QCryptographicHash::Md5);
+
+          if (mail_text_hashes->indexOf(hash) == -1) { // Only send if identical mail not already sent
+            mail_text_hashes->append(hash);
             email->printEmail();
             this->send(email);
+          }
         }
     }
 }
