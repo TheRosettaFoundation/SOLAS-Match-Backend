@@ -6,6 +6,7 @@
 #include <QObject>
 #include <QSharedPointer>
 #include <QQueue>
+#include <QCryptographicHash>
 
 #include "qxtsmtp.h"
 #include "qxtmailmessage.h"
@@ -51,6 +52,7 @@ private:
     bool busy;
     bool test;
     QString only_send;
+    QList<QByteArray> *mail_text_hashes;
 };
 
 #endif // SMTP_H
