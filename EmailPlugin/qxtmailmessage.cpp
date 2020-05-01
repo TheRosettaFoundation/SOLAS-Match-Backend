@@ -487,38 +487,36 @@ QByteArray QxtMailMessage::rfc2822() const
         QByteArray b = body().toUtf8();
         int ct = b.length();
         QByteArray line;
-        for (int i = 0; i < ct; i++)
-        {
-            if(b[i] == '\n' || b[i] == '\r')
-            {
-                if(line[0] == '.')
-                    rv += ".";
-                rv += line + "\r\n";
+
+        for (int i = 0; i < ct; i++) {
+            if(b[i] == '\n' || b[i] == '\r') {
+                if(line[0] == '.') rv += "."; // SMTP protocol requires single dot to be doubled at start of line
+                rv += line + "\r\n"; // \r or \n  or \r\n becomes \r\n
                 line = "";
-                if ((b[i+1] == '\n' || b[i+1] == '\r') && b[i] != b[i+1])
-                {
-                    // If we're looking at a CRLF pair, skip the second half
-                    i++;
+                if (i + 1 < ct) { // Don't go past end of array
+                    if ((b[i+1] == '\n' || b[i+1] == '\r') && b[i] != b[i+1]) {
+                        // If we're looking at a CRLF pair, skip the second half
+                        i++;
+                    }
                 }
-            }
-            else if (line.length() > 74)
-            {
-                rv += line + "=\r\n";
-                line = "";
-            }
-            if (QXT_MUST_QP(b[i]))
-            {
-                line += "=" + b.mid(i, 1).toHex().toUpper();
-            }
-            else
-            {
-                line += b[i];
+            } else {
+                if (line.length() >= 75) { // Maximum line size is 76
+                    rv += line + "=\r\n"; // Soft wrap
+                    line = "";
+                }
+
+                if (b[i] == ' ' && line.length() == 74 && (i + 1 >= ct || b[i+1] == '\r' || b[i+1] == '\n')) { // Is this a space at the end of a line (or body)
+                    line += "=20"; // Not allowed ' ' at end of line
+                } else if (QXT_MUST_QP(b[i])) { // Has to be quoted
+                    line += "=" + b.mid(i, 1).toHex().toUpper();
+                } else {
+                    line += b[i]; // Just as is
+                }
             }
         }
         if(!line.isEmpty()) {
-            if(line[0] == '.')
-                rv += ".";
-            rv += line + "\r\n";
+            if(line[0] == '.') rv += "."; // SMTP protocol requires single dot to be doubled at start of line
+            rv += line + "\r\n"; // Last line
         }
     }
     else /* base64 */
