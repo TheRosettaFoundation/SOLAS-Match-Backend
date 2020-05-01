@@ -72,7 +72,8 @@ void Smtp::send(QSharedPointer<Email> email)
     recipientString.replace("@", "%40");
     mail_message.setExtraHeader("List-Unsubscribe", "<mailto:info@kato.translatorswb.org?subject=Unsubscribe%20from%20Kato%3A" + recipientString  + ">");
     mail_message.setSubject(email->getSubject());
-    mail_message.setExtraHeader("Content-Type", "text/html; charset=utf-8");
+    mail_message.setExtraHeader("Content-Type", "text/html; charset=\"UTF-8\"");
+    mail_message.setExtraHeader("Content-Transfer-Encoding", "quoted-printable");
     mail_message.setBody(email->getBody());
 
     if(!isConnected) {
