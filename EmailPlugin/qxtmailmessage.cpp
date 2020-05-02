@@ -500,14 +500,26 @@ QByteArray QxtMailMessage::rfc2822() const
                     }
                 }
             } else {
-                if (line.length() >= 75) { // Maximum line size is 76
+                bool blank  = b[i] == ' ';
+                bool escape = QXT_MUST_QP(b[i]);
+                bool plain  = !blank && !escape;
+                bool next_char_EOL_EOF = (i + 1 >= ct || b[i+1] == '\r' || b[i+1] == '\n');
+                bool add_soft_break =
+                    (line.length() == 73 && escape && !next_char_EOL_EOF) ||
+                    (line.length() == 74 && blank  &&  next_char_EOL_EOF) ||
+                    (line.length() == 74 && escape                      ) ||
+                    (line.length() == 75 && blank                       ) ||
+                    (line.length() == 75 && plain  && !next_char_EOL_EOF) ||
+                    (line.length() == 75 && escape                      );
+                if (add_soft_break) { // Maximum line size is 76
+                    if(line[0] == '.') rv += "."; // SMTP protocol requires single dot to be doubled at start of line
                     rv += line + "=\r\n"; // Soft wrap
                     line = "";
                 }
 
-                if (b[i] == ' ' && line.length() == 74 && (i + 1 >= ct || b[i+1] == '\r' || b[i+1] == '\n')) { // Is this a space at the end of a line (or body)
+                if (blank && next_char_EOL_EOF) { // Is this a space at the end of a line (or body)
                     line += "=20"; // Not allowed ' ' at end of line
-                } else if (QXT_MUST_QP(b[i])) { // Has to be quoted
+                } else if (escape) { // Has to be quoted
                     line += "=" + b.mid(i, 1).toHex().toUpper();
                 } else {
                     line += b[i]; // Just as is
