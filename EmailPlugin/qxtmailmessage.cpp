@@ -210,8 +210,10 @@ QByteArray qxt_fold_mime_header(const QString& key, const QString& value, QTextC
 {
     QByteArray rv = "";
     QByteArray line = key.toLatin1() + ": ";
+
     if (!prefix.isEmpty()) line += prefix;
-    if (!value.contains("=?") && latin1->canEncode(value))
+
+    if (false && !value.contains("=?") && latin1->canEncode(value))
     {
         bool firstWord = true;
         foreach(const QByteArray& word, value.toLatin1().split(' '))
@@ -234,47 +236,68 @@ QByteArray qxt_fold_mime_header(const QString& key, const QString& value, QTextC
         // must use quoted-printable or base64 encoding. This is a quick
         // heuristic based on the first 100 characters to see which
         // encoding to use.
-        QByteArray utf8 = value.toUtf8();
-        int ct = utf8.length();
-        int nonAscii = 0;
-        for (int i = 0; i < ct && i < 100; i++)
+        //QByteArray utf8 = value.toUtf8();
+        //int ct = utf8.length();
+        //int nonAscii = 0;
+        //for (int i = 0; i < ct && i < 100; i++)
+        //{
+        //    if (QXT_MUST_QP(utf8[i])) nonAscii++;
+        //}
+        //if (nonAscii > 20)
+        //{
+        //    // more than 20%-ish non-ASCII characters: use base64
+        //    QByteArray base64 = utf8.toBase64();
+        //    ct = base64.length();
+        //    line += "=?utf-8?b?";
+        //    for (int i = 0; i < ct; i += 4)
+        //    {
+        //        if (line.length() > 72)
+        //        {
+        //            rv += line + "?\r\n";
+        //            line = " =?utf-8?b?";
+        //        }
+        //        line = line + base64.mid(i, 4);
+        //    }
+        //}
+        //else
         {
-            if (QXT_MUST_QP(utf8[i])) nonAscii++;
-        }
-        if (nonAscii > 20)
-        {
-            // more than 20%-ish non-ASCII characters: use base64
-            QByteArray base64 = utf8.toBase64();
-            ct = base64.length();
-            line += "=?utf-8?b?";
-            for (int i = 0; i < ct; i += 4)
+            // Otherwise use Q-encoding
+            line += "=?utf-8?Q?";
+
+            // value is not a proper QString, it is actually a sequence of bytes one per QString element which represents UTF-8
+            QByteArray utf8 = value.toLatin1(); // Now it is proper UTF-8
+
+            // Put it back in a proper QString with valid characters (not each byte broken out from UTF-8)
+            QString qcharacters = QString::fromUtf8(utf8);
+            int count = qcharacters.length();
+            for (int i = 0; i < count; i++)
             {
-                if (line.length() > 72)
+                bool byte_escape = qcharacters[i] <= QChar(32) || qcharacters[i] == QChar(127) || qcharacters[i] == '=' || qcharacters[i] == '?' || qcharacters[i] == '_';
+                bool utf8_escape = qcharacters[i] >= QChar(128);
+                // Byte escape uses =HH and, if at end of line, after that comes ?=
+                // UTF-8 character >= U+0080 could just possibly use encoded 4 bytes =HH=HH=HH=HH and, if at end of line, after that comes ?=
+                if (
+                    (byte_escape && line.length() >= 71) ||
+                    (utf8_escape && line.length() >= 62) ||
+                    (               line.length() >= 73)
+                )
                 {
-                    rv += line + "?\r\n";
-                    line = " =?utf-8?b?";
+                    rv += line + "?=\r\n";
+                    line = " =?utf-8?Q?";
                 }
-                line = line + base64.mid(i, 4);
-            }
-        }
-        else
-        {
-            // otherwise use Q-encoding
-            line += "=?utf-8?q?";
-            for (int i = 0; i < ct; i++)
-            {
-                if (line.length() > 73)
-                {
-                    rv += line + "?\r\n";
-                    line = " =?utf-8?q?";
+
+                if      (byte_escape) {
+                    line += "=" + qcharacters.mid(i, 1).toHex().toUpper();
                 }
-                if (QXT_MUST_QP(utf8[i]) || utf8[i] == ' ')
-                {
-                    line += "=" + utf8.mid(i, 1).toHex().toUpper();
+                else if (utf8_escape) {
+                    QByteArray utf8character = qcharacters.mid(i, 1).toUtf8();
+                    for (int j = 0; j < utf8character.length(); j++)
+                    {
+                        line += "=" + utf8character.mid(j, 1).toHex().toUpper();
+                    }
                 }
-                else
-                {
-                    line += utf8[i];
+                else {
+                    line += qcharacters[i].toLatin1();
                 }
             }
         }
