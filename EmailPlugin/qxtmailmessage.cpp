@@ -287,7 +287,7 @@ QByteArray qxt_fold_mime_header(const QString& key, const QString& value, QTextC
                 }
 
                 if      (byte_escape) {
-                    line += "=" + qcharacters.mid(i, 1).toHex().toUpper();
+                    line += "=" + qcharacters.mid(i, 1).toLatin1().toHex().toUpper();
                 }
                 else if (utf8_escape) {
                     QByteArray utf8character = qcharacters.mid(i, 1).toUtf8();
