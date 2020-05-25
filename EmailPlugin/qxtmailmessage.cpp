@@ -261,6 +261,8 @@ QByteArray qxt_fold_mime_header(const QString& key, const QString& value, QTextC
         //}
         //else
         {
+            int length_outside_encoded-word = line.length();
+
             // Otherwise use Q-encoding
             line += "=?utf-8?Q?";
 
@@ -277,13 +279,14 @@ QByteArray qxt_fold_mime_header(const QString& key, const QString& value, QTextC
                 // Byte escape uses =HH and, if at end of line, after that comes ?=
                 // UTF-8 character >= U+0080 could just possibly use encoded 4 bytes =HH=HH=HH=HH and, if at end of line, after that comes ?=
                 if (
-                    (byte_escape && line.length() >= 71) ||
-                    (utf8_escape && line.length() >= 62) ||
-                    (               line.length() >= 73)
+                    (byte_escape && line.length() >= (71 + length_outside_encoded-word)) ||
+                    (utf8_escape && line.length() >= (62 + length_outside_encoded-word)) ||
+                    (               line.length() >= (73 + length_outside_encoded-word))
                 )
                 {
                     rv += line + "?=\r\n";
                     line = " =?utf-8?Q?";
+                    length_outside_encoded-word = 1;
                 }
 
                 if      (byte_escape) {
