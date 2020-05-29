@@ -213,7 +213,7 @@ QByteArray qxt_fold_mime_header(const QString& key, const QString& value, QTextC
 
     if (!prefix.isEmpty()) line += prefix;
 
-    if ((key != "Subject") && !value.contains("=?") && latin1->canEncode(value))
+    if ((key != "Subject" && key != "From") && !value.contains("=?") && latin1->canEncode(value))
     {
         bool firstWord = true;
         foreach(const QByteArray& word, value.toLatin1().split(' '))
