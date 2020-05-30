@@ -38,6 +38,7 @@
 #include <QUuid>
 #include <QDir>
 #include <QtDebug>
+#include <QDebug> // REMOVE
 
 
 struct QxtMailMessagePrivate : public QSharedData
@@ -213,7 +214,7 @@ QByteArray qxt_fold_mime_header(const QString& key, const QString& value, QTextC
 
     if (!prefix.isEmpty()) line += prefix;
 
-    if ((key != "Subject") && !value.contains("=?") && latin1->canEncode(value))
+    if ((key != "Subject" && key != "From") && !value.contains("=?") && latin1->canEncode(value))
     {
         bool firstWord = true;
         foreach(const QByteArray& word, value.toLatin1().split(' '))
@@ -306,6 +307,8 @@ QByteArray qxt_fold_mime_header(const QString& key, const QString& value, QTextC
         }
         line += "?="; // end encoded-word atom
     }
+qDebug() << "rv: " << rv; //REMOVE
+qDebug() << "line: " << line; //REMOVE
     return rv + line + "\r\n";
 }
 
@@ -324,6 +327,7 @@ QByteArray QxtMailMessage::rfc2822() const
 
     if (!sender().isEmpty() && !hasExtraHeader("From"))
     {
+qDebug() << "HERE111"; //REMOVE
         rv += qxt_fold_mime_header("From", sender(), latin1);
     }
 
@@ -401,6 +405,7 @@ QByteArray QxtMailMessage::rfc2822() const
             rv += qxt_fold_mime_header(listUnsubscribe.toLatin1(), extraHeader(r), latin1);
         }
         else {
+qDebug() << "HERE222" << r << ";" << extraHeader(r); //REMOVE
             rv += qxt_fold_mime_header(r.toLatin1(), extraHeader(r), latin1);
         }
     }
