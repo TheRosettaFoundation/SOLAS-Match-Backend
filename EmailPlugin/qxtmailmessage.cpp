@@ -38,7 +38,6 @@
 #include <QUuid>
 #include <QDir>
 #include <QtDebug>
-#include <QDebug> // REMOVE
 
 
 struct QxtMailMessagePrivate : public QSharedData
@@ -307,8 +306,6 @@ QByteArray qxt_fold_mime_header(const QString& key, const QString& value, QTextC
         }
         line += "?="; // end encoded-word atom
     }
-qDebug() << "rv: " << rv; //REMOVE
-qDebug() << "line: " << line; //REMOVE
     return rv + line + "\r\n";
 }
 
