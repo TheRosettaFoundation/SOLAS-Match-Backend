@@ -256,15 +256,15 @@ void CalculateProjectDeadlines::setProjectDeadlines(QList<QString> deadlineLengt
             WorkflowNode currentNode = builder.getGraph()->allnodes(index);
             Task task = currentNode.task();
 
-            qDebug() << "Task: " << task.id() << "...";
-            qDebug() << "task.title(): " << QString::fromStdString(task.title());
-            qDebug() << "task.title().length(): " << task.title().length();
-            qDebug() << "task.title().find(Test): " << task.title().find("Test");
-            if (!(task.title().length() == 8 && task.title().find("Test") == 0)) {
-                qDebug() << "Not a Verification Task";
-            } else {
-                qDebug() << "IS a Verification Task";
-            }
+            //qDebug() << "Task: " << task.id() << "...";
+            //qDebug() << "task.title(): " << QString::fromStdString(task.title());
+            //qDebug() << "task.title().length(): " << task.title().length();
+            //qDebug() << "task.title().find(Test): " << task.title().find("Test");
+            //if (!(task.title().length() == 8 && task.title().find("Test") == 0)) {
+            //    qDebug() << "Not a Verification Task";
+            //} else {
+            //    qDebug() << "IS a Verification Task";
+            //}
             if (!TaskDao::is_chunked_task(db, task.id()) && task.taskstatus() < IN_PROGRESS && !(task.title().length() == 8 && task.title().find("Test") == 0)) {
                 int taskDeadlinePeriod = 0;
                 for (int i = count; i < deadlineLengths.size(); i++) {
