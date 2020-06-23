@@ -257,7 +257,7 @@ void CalculateProjectDeadlines::setProjectDeadlines(QList<QString> deadlineLengt
             Task task = currentNode.task();
 
             qDebug() << "Task: " << task.id() << "...";
-            qDebug() << "task.title(): " << task.title();
+            qDebug() << "task.title(): " << QString::fromStdString(task.title());
             qDebug() << "task.title().length(): " << task.title().length();
             qDebug() << "task.title().find(Test): " << task.title().find("Test");
             if (!(task.title().length() == 8 && task.title().find("Test") == 0)) {
