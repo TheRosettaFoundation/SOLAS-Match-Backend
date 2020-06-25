@@ -113,7 +113,11 @@ void UserTaskClaimEmailGenerator::run()
         if (TaskDao::is_chunked_task(db, task->id())) {
             template_location = QString(TEMPLATE_DIRECTORY) + "emails/user-task-claim-chunk.tpl";
         } else {
+          if (task->title().length() == 8 && task->title().find("Test") == 0) { // Verification Task
+            template_location = QString(TEMPLATE_DIRECTORY) + "emails/user-task-claim-verification.tpl";
+          } else {
             template_location = QString(TEMPLATE_DIRECTORY) + "emails/user-task-claim.tpl";
+          }
         }
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
