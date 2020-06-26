@@ -123,7 +123,12 @@ void UserTaskClaimEmailGenerator::run()
 
         email->setSender(settings.get("site.system_email_address"));;
         email->addRecipient(QString::fromStdString(user->email()));
+
+        if (task->title().length() == 8 && task->title().find("Test") == 0) { // Verification Task
+            email->setSubject(settings.get("site.name") + ": Test to become a Verified Translator");
+        } else {
         email->setSubject(settings.get("site.name") + ": Task Claim Notification");
+        }
         email->setBody(QString::fromUtf8(email_body.c_str()));
     } else {
         email = this->generateErrorEmail(error);
