@@ -1,43 +1,31 @@
 <p>
-{{USERNAME}}, welcome to Translators without Borders (TWB)!
+Welcome to Translators without Borders (TWB)! Thank you for registering.
 </p>
 <p>
-Next time you log in, you will be asked to confirm that you are over 18 years old, accept the
-<a href=
-"https://translatorswithoutborders.org/wp-content/uploads/2018/05/Code-of-Conduct-for-Translators-May-2018.pdf"
->TWB Code of Conduct for Translators</a> and the
-<a href="https://translatorswithoutborders.org/privacy-policy/"
->TWB Privacy Policy</a>,
-and update your profile with your details, native language, language combinations, and areas of expertise.
+To complete the registration process, please log in at <a href="https://kato.translatorswb.org/login/">https://kato.translatorswb.org/login/</a>
+to <a href="https://drive.google.com/file/d/1XzfzXS8QK8OaGQe4WRhgc-SwAMCUWW4t/view">complete your profile</a>.
 </p>
 <p>
-After that, you will be able to pick up any available tasks that match your language pairs and qualifications.
-You can filter for available tasks in
-<a href="https://trommons.org/">Kató Platform</a>
-according to your working languages.
-<a href="https://youtu.be/waGRDP_EZ7g">Click here</a>
-to learn how to find and claim a task.
+Once you do that, please <a href="https://www.youtube.com/watch?v=1bvUL_SJ0ZI&feature=youtu.be">create a profile in Kató Community</a>.
+<a href="https://community.translatorswb.org/">Kató Community</a> is our forum, where you can meet fellow translators and TWB staff and find the answers to frequently asked questions.
 </p>
 <p>
-We have prepared <a href=
-"https://community.translatorswb.org/t/welcome-pack-for-kato-translators/3138"
->this welcome pack</a> with more information on your first steps in Kató.
+After that, take a look at our <a href="https://community.translatorswb.org/t/welcome-pack-for-kato-translators/3138">Translator's Toolkit</a> for information on how to use Kató Platform.
 </p>
 <p>
-To gain full access to all translation and revision tasks, you need to be a Kató Verified Translator.
-Do you want to become one? Check out this thread in Kató Community:
-<a href=
-"https://community.translatorswb.org/t/how-to-become-a-kato-verified-translator/262"
->How to become a Kató Verified Translator</a>.
+To see available tasks in your language combination, check the <a href="https://kato.translatorswb.org/">Kató Platform homepage</a>.
+Follow <a href="https://community.translatorswb.org/t/signing-up-for-kato-platform-email-notifications/121">these instructions</a> to receive regular email notifications when tasks are available.
 </p>
 <p>
-For more information on how to translate on Kató Platform, please check the
-<a href="https://community.translatorswb.org/c/kato-q-a">Kató Q&A</a>.
+If you would like access to more tasks in your language pair, you can qualify as a Kató Verified Translator.
+Becoming verified increases your chances of finding tasks that match your skills and interests.
+To get verified please visit <a href="https://community.translatorswb.org/t/how-to-become-a-kato-verified-translator/262">this page</a>.
 </p>
 <p>
-If you have any questions or need assistance, please do not hesitate to contact us at
-<a href="mailto:translators@translatorswithoutborders.org">
-translators@translatorswithoutborders.org</a><br />
+You must be 18 or older to register as a volunteer translator with TWB. If you are under 18, please let us know.
+</p>
+<p>
+If you have any questions contact us at <a href="mailto:translators@translatorswithoutborders.org">translators@translatorswithoutborders.org</a><br />
 You can also follow us on<br />
 <a href="https://www.facebook.com/translatorswithoutborders">Facebook</a><br />
 <a href="https://twitter.com/TranslatorsWB">Twitter</a>

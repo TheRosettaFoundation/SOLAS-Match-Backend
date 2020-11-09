@@ -36,5 +36,7 @@
     <p style="margin-bottom:40px;"/>
 {{/TASK_SECT}}
 
+New to TWB? Have a look at our <a href="https://community.translatorswb.org/t/welcome-pack-for-kato-translators/3138">Translator's Toolkit</a> to find out how to get started with us.
+
 
 {{>FOOTER}}
