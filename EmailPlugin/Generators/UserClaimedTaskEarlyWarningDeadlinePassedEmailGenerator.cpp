@@ -82,7 +82,7 @@ void UserClaimedTaskEarlyWarningDeadlinePassedEmailGenerator::run()
         dict.SetValue("MATECAT", TaskDao::get_matecat_url(db, task));
 
         QSharedPointer<Project> project = ProjectDao::getProject(db, task->projectid());
-        dict.SetValue("COMMUNITY", ProjectDao::discourse_parameterize(project->title()));
+        dict.SetValue("COMMUNITY", ProjectDao::discourse_parameterize(project->title(), task->projectid()));
 
         bool footer_enabled=(QString::compare("y", settings.get("email-footer.enabled")) == 0);
         if (footer_enabled)

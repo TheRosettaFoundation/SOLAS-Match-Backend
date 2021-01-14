@@ -96,7 +96,7 @@ void UserTaskClaimEmailGenerator::run()
         dict.SetValue("NOTIFICATION_PHRASE", notificationPhrase.toStdString());
 
         QSharedPointer<Project> project = ProjectDao::getProject(db, task->projectid());
-        dict.SetValue("COMMUNITY", ProjectDao::discourse_parameterize(project->title()));
+        dict.SetValue("COMMUNITY", ProjectDao::discourse_parameterize(project->title(), task->projectid()));
 
         bool footer_enabled=(QString::compare("y", settings.get("email-footer.enabled")) == 0);
         if (footer_enabled)
