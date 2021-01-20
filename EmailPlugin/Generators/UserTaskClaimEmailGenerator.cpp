@@ -116,7 +116,11 @@ void UserTaskClaimEmailGenerator::run()
           if (task->title().length() == 8 && task->title().find("Test") == 0) { // Verification Task
             template_location = QString(TEMPLATE_DIRECTORY) + "emails/user-task-claim-verification.tpl";
           } else {
+           if (TaskDao::get_memsource_task(db, task->id())) {
+            template_location = QString(TEMPLATE_DIRECTORY) + "emails/user-task-claim-memsource.tpl";
+           } else {
             template_location = QString(TEMPLATE_DIRECTORY) + "emails/user-task-claim.tpl";
+           }
           }
         }
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
