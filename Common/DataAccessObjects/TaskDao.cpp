@@ -608,3 +608,86 @@ QSharedPointer<Task> TaskDao::getParentTask(QSharedPointer<MySQLHandler> db, int
     }
     return task;
 }
+
+QMap<QString, QVariant> TaskDao::get_memsource_task(QSharedPointer<MySQLHandler> db, int task_id)
+{
+    QMap<QString, int> fieldMap;
+    QSharedPointer<QSqlQuery> mQuery = db->call("get_memsource_task", QString::number(task_id));
+    if(mQuery->first()) {
+        fieldMap = MySQLHandler::getFieldMap(mQuery);
+        QMap<QString, QVariant> row = QMap::QMap();
+        row["task_id"]            = MySQLHandler::getValueFromQuery(fieldMap.value("task_id"), mQuery);
+        row["memsource_task_id"]  = MySQLHandler::getValueFromQuery(fieldMap.value("memsource_task_id"), mQuery);
+        row["memsource_task_uid"] = MySQLHandler::getValueFromQuery(fieldMap.value("memsource_task_uid"), mQuery);
+        row["task"]               = MySQLHandler::getValueFromQuery(fieldMap.value("task"), mQuery);
+        row["internalId"]         = MySQLHandler::getValueFromQuery(fieldMap.value("internalId"), mQuery);
+        row["workflowLevel"]      = MySQLHandler::getValueFromQuery(fieldMap.value("workflowLevel"), mQuery);
+        row["beginIndex"]         = MySQLHandler::getValueFromQuery(fieldMap.value("beginIndex"), mQuery);
+        row["endIndex"]           = MySQLHandler::getValueFromQuery(fieldMap.value("endIndex"), mQuery);
+        row["prerequisite"]       = MySQLHandler::getValueFromQuery(fieldMap.value("prerequisite"), mQuery);
+    }
+    return row;
+}
+
+QList<QSharedPointer<QMap<QString, QVariant>> > TaskDao::get_tasks_for_project(QSharedPointer<MySQLHandler> db, int project_id)
+{
+    QList<QSharedPointer<QMap<QString, QVariant>> > project_tasks = QList<QSharedPointer<QMap<QString, QVariant>> >();
+    QSharedPointer<QSqlQuery> mQuery = db->call("get_tasks_for_project", QString::number(project_id));
+    if (mQuery->first()) {
+        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
+        do {
+            QMap<QString, QVariant> row = QMap::QMap();
+            row["id"]                 = MySQLHandler::getValueFromQuery(fieldMap.value("id"), mQuery);
+            row["project_id"]         = MySQLHandler::getValueFromQuery(fieldMap.value("project_id"), mQuery);
+            row["title"]              = MySQLHandler::getValueFromQuery(fieldMap.value("title"), mQuery);
+            row["word-count"]         = MySQLHandler::getValueFromQuery(fieldMap.value("word-count"), mQuery);
+            row["language_id-source"] = MySQLHandler::getValueFromQuery(fieldMap.value("language_id-source"), mQuery);
+            row["language_id-target"] = MySQLHandler::getValueFromQuery(fieldMap.value("language_id-target"), mQuery);
+            row["country_id-source"]  = MySQLHandler::getValueFromQuery(fieldMap.value("country_id-source"), mQuery);
+            row["country_id-target"]  = MySQLHandler::getValueFromQuery(fieldMap.value("country_id-target"), mQuery);
+            row["created-time"]       = MySQLHandler::getValueFromQuery(fieldMap.value("created-time"), mQuery);
+            row["deadline"]           = MySQLHandler::getValueFromQuery(fieldMap.value("deadline"), mQuery);
+            row["comment"]            = MySQLHandler::getValueFromQuery(fieldMap.value("comment"), mQuery);
+            row["task-type_id"]       = MySQLHandler::getValueFromQuery(fieldMap.value("task-type_id"), mQuery);
+            row["task-status_id"]     = MySQLHandler::getValueFromQuery(fieldMap.value("task-status_id"), mQuery);
+            row["published"]          = MySQLHandler::getValueFromQuery(fieldMap.value("published"), mQuery);
+            row["task_id"]            = MySQLHandler::getValueFromQuery(fieldMap.value("task_id"), mQuery);
+            row["memsource_task_id"]  = MySQLHandler::getValueFromQuery(fieldMap.value("memsource_task_id"), mQuery);
+            row["memsource_task_uid"] = MySQLHandler::getValueFromQuery(fieldMap.value("memsource_task_uid"), mQuery);
+            row["task"]               = MySQLHandler::getValueFromQuery(fieldMap.value("task"), mQuery);
+            row["internalId"]         = MySQLHandler::getValueFromQuery(fieldMap.value("internalId"), mQuery);
+            row["workflowLevel"]      = MySQLHandler::getValueFromQuery(fieldMap.value("workflowLevel"), mQuery);
+            row["beginIndex"]         = MySQLHandler::getValueFromQuery(fieldMap.value("beginIndex"), mQuery);
+            row["endIndex"]           = MySQLHandler::getValueFromQuery(fieldMap.value("endIndex"), mQuery);
+            row["prerequisite"]       = MySQLHandler::getValueFromQuery(fieldMap.value("prerequisite"), mQuery);
+            project_tasks.append(row);
+        } while (mQuery->next());
+    }
+    return project_tasks;
+}
+
+bool TaskDao::is_task_translated_in_memsource(QSharedPointer<MySQLHandler> db, Task task)
+{
+    QMap<QString, QVariant> memsource_task = get_memsource_task(db, task->id());
+    int top_level = get_top_level(memsource_task["internalId"].toString());
+
+    QList<QSharedPointer<QMap<QString, QVariant>> > project_tasks = get_tasks_for_project(task->projectid());
+    bool translated = true;
+    foreach (QSharedPointer<QMap<QString, QVariant>> project_task, project_tasks) {
+        if (top_level == get_top_level(project_task["internalId"].toString())) {
+           if (memsource_task["workflowLevel"].toInt() > project_task["workflowLevel"].toInt()) { // Dependent on
+                if ((memsource_task["beginIndex"].toInt() <= project_task["endIndex"].toInt()) && (project_task["beginIndex"].toInt() <= memsource_task["endIndex"].toInt())) { // Overlap
+                    if (project_task["task-status_id"].toInt() != 4) translated = false;
+                }
+            }
+        }
+    }
+    return translated;
+}
+
+int TaskDao::get_top_level(QString internal_id)
+{
+    int pos = internal_id.indexOf('.');
+    if (pos == -1) return internal_id.toInt();
+    return internal_id.left(pos).toInt();
+}
