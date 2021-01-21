@@ -677,7 +677,7 @@ bool TaskDao::is_task_translated_in_memsource(QSharedPointer<MySQLHandler> db, T
         if (top_level == get_top_level(project_task["internalId"].toString())) {
            if (memsource_task["workflowLevel"].toInt() > project_task["workflowLevel"].toInt()) { // Dependent on
                 if ((memsource_task["beginIndex"].toInt() <= project_task["endIndex"].toInt()) && (project_task["beginIndex"].toInt() <= memsource_task["endIndex"].toInt())) { // Overlap
-                    if (project_task["task-status_id"].toInt() != 4) translated = false;
+                    if (project_task["task-status_id"].toInt() != COMPLETE) translated = false;
                 }
             }
         }
