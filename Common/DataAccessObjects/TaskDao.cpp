@@ -611,11 +611,11 @@ QSharedPointer<Task> TaskDao::getParentTask(QSharedPointer<MySQLHandler> db, int
 
 QMap<QString, QVariant> TaskDao::get_memsource_task(QSharedPointer<MySQLHandler> db, int task_id)
 {
-    QMap<QString, int> fieldMap;
+    QMap<QString, QVariant> row;
     QSharedPointer<QSqlQuery> mQuery = db->call("get_memsource_task", QString::number(task_id));
     if(mQuery->first()) {
-        fieldMap = MySQLHandler::getFieldMap(mQuery);
-        QMap<QString, QVariant> row = QMap::QMap();
+        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
+        row = QMap::QMap();
         row["task_id"]            = MySQLHandler::getValueFromQuery(fieldMap.value("task_id"), mQuery);
         row["memsource_task_id"]  = MySQLHandler::getValueFromQuery(fieldMap.value("memsource_task_id"), mQuery);
         row["memsource_task_uid"] = MySQLHandler::getValueFromQuery(fieldMap.value("memsource_task_uid"), mQuery);
