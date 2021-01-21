@@ -48,6 +48,8 @@ void UserTaskClaimEmailGenerator::run()
         dict.SetValue("SITE_NAME", std::string(settings.get("site.name").toLatin1().constData(), settings.get("site.name").toLatin1().length()));
         dict.SetValue("TASK_TITLE", Email::htmlspecialchars(task->title()));
 
+        QMap<QString, QVariant> memsource_task = TaskDao::get_memsource_task(db, task->id());
+
         QString task_type = "Translation";
         switch(task->tasktype())
         {
@@ -61,10 +63,18 @@ void UserTaskClaimEmailGenerator::run()
                 break;
             case 3:
                 task_type = "Revising";
+                if (!memsource_task.isNull()) {
+                    if (TaskDao::is_task_translated_in_memsource(db, task)) {
+                        dict.ShowSection("REVISING");
+                    } else {
+                        dict.ShowSection("REVISING_WAIT");
+                    }
+                } else {
                 if (TaskDao::is_task_translated_in_matecat(db, task->id())) {
                 dict.ShowSection("REVISING");
                 } else {
                     dict.ShowSection("REVISING_NO_MATECAT");
+                }
                 }
                 break;
             case 4:
@@ -116,7 +126,7 @@ void UserTaskClaimEmailGenerator::run()
           if (task->title().length() == 8 && task->title().find("Test") == 0) { // Verification Task
             template_location = QString(TEMPLATE_DIRECTORY) + "emails/user-task-claim-verification.tpl";
           } else {
-           if (TaskDao::get_memsource_task(db, task->id())) {
+           if (!memsource_task.isNull()) {
             template_location = QString(TEMPLATE_DIRECTORY) + "emails/user-task-claim-memsource.tpl";
            } else {
             template_location = QString(TEMPLATE_DIRECTORY) + "emails/user-task-claim.tpl";
