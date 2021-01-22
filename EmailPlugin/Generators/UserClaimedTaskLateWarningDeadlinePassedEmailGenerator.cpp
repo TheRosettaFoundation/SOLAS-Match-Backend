@@ -43,6 +43,8 @@ void UserClaimedTaskLateWarningDeadlinePassedEmailGenerator::run()
         dict.SetValue("TASK_TITLE", Email::htmlspecialchars(task->title()));
         dict.SetValue("SITE_NAME", std::string(settings.get("site.name").toLatin1().constData(), settings.get("site.name").toLatin1().length()));
 
+        QMap<QString, QVariant> memsource_task = TaskDao::get_memsource_task(db, task->id());
+
         QString task_type = "Translation";
         switch(task->tasktype())
         {
@@ -56,10 +58,14 @@ void UserClaimedTaskLateWarningDeadlinePassedEmailGenerator::run()
                 break;
             case 3:
                 task_type = "Revising";
+                if (!memsource_task.isNull()) {
+                    dict.ShowSection("REVISING");
+                } else {
                 if (TaskDao::is_task_translated_in_matecat(db, task->id())) {
                 dict.ShowSection("REVISING");
                 } else {
                     dict.ShowSection("REVISING_NO_MATECAT");
+                }
                 }
                 break;
             case 4:
@@ -79,7 +85,7 @@ void UserClaimedTaskLateWarningDeadlinePassedEmailGenerator::run()
         uploadUrl += "task/" + QString::number(task->id()) + "/id";
         dict.SetValue("TASK_UPLOAD", uploadUrl.toStdString());
 
-        dict.SetValue("MATECAT", TaskDao::get_matecat_url(db, task));
+        dict.SetValue("MATECAT", TaskDao::get_matecat_url(db, task, memsource_task));
 
         QSharedPointer<Project> project = ProjectDao::getProject(db, task->projectid());
         dict.SetValue("COMMUNITY", ProjectDao::discourse_parameterize(project->title(), task->projectid()));
@@ -108,7 +114,11 @@ void UserClaimedTaskLateWarningDeadlinePassedEmailGenerator::run()
 
             template_location = QString(TEMPLATE_DIRECTORY) + "emails/user-claimed-task-late-warning-deadline-passed-chunk.tpl";
         } else {
+           if (!memsource_task.isNull()) {
+            template_location = QString(TEMPLATE_DIRECTORY) + "emails/user-claimed-task-late-warning-deadline-passed-memsource.tpl";
+           } else {
             template_location = QString(TEMPLATE_DIRECTORY) + "emails/user-claimed-task-late-warning-deadline-passed.tpl";
+           }
         }
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
