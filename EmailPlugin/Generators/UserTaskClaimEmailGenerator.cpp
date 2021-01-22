@@ -90,7 +90,7 @@ void UserTaskClaimEmailGenerator::run()
         dict.SetValue("SOURCE_LANGUAGE",taskSourceLocale.languagename());
         dict.SetValue("TARGET_LANGUAGE",taskTargetLocale.languagename());
 
-        dict.SetValue("MATECAT", TaskDao::get_matecat_url(db, task));
+        dict.SetValue("MATECAT", TaskDao::get_matecat_url(db, task, memsource_task));
 
         QString notificationPhrase = "";
         if (TaskDao::is_chunked_task(db, task->id())) {

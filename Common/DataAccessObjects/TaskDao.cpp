@@ -487,9 +487,14 @@ QMultiMap<int, int> TaskDao::getTaskTagIds(QSharedPointer<MySQLHandler> db, int 
     return taskTagIds;
 }
 
-std::string TaskDao::get_matecat_url(QSharedPointer<MySQLHandler> db, QSharedPointer<Task> task)
+std::string TaskDao::get_matecat_url(QSharedPointer<MySQLHandler> db, QSharedPointer<Task> task, QMap<QString, QVariant> memsource_task)
 {
     QString matecat_url("");
+
+    if (!memsource_task.isNull()) {
+        matecat_url = QString("https://cloud.memsource.com/web/job/") + memsource_task["memsource_task_uid"] + "/translate";
+        return matecat_url.toStdString();
+    }
 
     if (task->tasktype() == TRANSLATION || task->tasktype() == PROOFREADING) {
         QString translate_url("https://tm.translatorswb.org/translate/proj-");

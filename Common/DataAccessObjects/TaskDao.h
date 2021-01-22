@@ -38,7 +38,7 @@ public:
     static QSharedPointer<ArchivedTask> getArchivedTask(QSharedPointer<MySQLHandler> db, int arc_id = -1);
     static QList<QSharedPointer<Task> > getTaskPreReqs(QSharedPointer<MySQLHandler> db, int taskId);
     static QMultiMap<int, int> getTaskTagIds(QSharedPointer<MySQLHandler> db, int limit = RETURN_ALL, int offset = RETURN_ALL);
-    static std::string get_matecat_url(QSharedPointer<MySQLHandler> db, QSharedPointer<Task> task);
+    static std::string get_matecat_url(QSharedPointer<MySQLHandler> db, QSharedPointer<Task> task, QMap<QString, QVariant> memsource_task);
     static bool is_task_translated_in_matecat(QSharedPointer<MySQLHandler> db, int taskId);
     static bool is_chunked_task(QSharedPointer<MySQLHandler> db, int taskId);
     static std::string getMatecatRevisionURL(QSharedPointer<MySQLHandler> db, QSharedPointer<Task> task);
