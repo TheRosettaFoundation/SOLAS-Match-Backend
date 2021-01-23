@@ -616,11 +616,11 @@ QSharedPointer<Task> TaskDao::getParentTask(QSharedPointer<MySQLHandler> db, int
 
 QMap<QString, QVariant> TaskDao::get_memsource_task(QSharedPointer<MySQLHandler> db, int task_id)
 {
-    QMap<QString, QVariant> row;
+    QMap<QString, QVariant> row = QMap::QMap<QString, QVariant>();
+
     QSharedPointer<QSqlQuery> mQuery = db->call("get_memsource_task", QString::number(task_id));
     if(mQuery->first()) {
         QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
-        row = QMap::QMap();
         row["task_id"]            = MySQLHandler::getValueFromQuery(fieldMap.value("task_id"), mQuery);
         row["memsource_task_id"]  = MySQLHandler::getValueFromQuery(fieldMap.value("memsource_task_id"), mQuery);
         row["memsource_task_uid"] = MySQLHandler::getValueFromQuery(fieldMap.value("memsource_task_uid"), mQuery);
@@ -641,7 +641,7 @@ QList<QSharedPointer<QMap<QString, QVariant>> > TaskDao::get_tasks_for_project(Q
     if (mQuery->first()) {
         QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
         do {
-            QMap<QString, QVariant> row = QMap::QMap();
+            QMap<QString, QVariant> row = QMap::QMap<QString, QVariant>();
             row["id"]                 = MySQLHandler::getValueFromQuery(fieldMap.value("id"), mQuery);
             row["project_id"]         = MySQLHandler::getValueFromQuery(fieldMap.value("project_id"), mQuery);
             row["title"]              = MySQLHandler::getValueFromQuery(fieldMap.value("title"), mQuery);
