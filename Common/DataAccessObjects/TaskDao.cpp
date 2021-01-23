@@ -492,7 +492,7 @@ std::string TaskDao::get_matecat_url(QSharedPointer<MySQLHandler> db, QSharedPoi
     QString matecat_url("");
 
     if (!memsource_task.isEmpty()) {
-        matecat_url = QString("https://cloud.memsource.com/web/job/") + memsource_task["memsource_task_uid"] + "/translate";
+        matecat_url = QString("https://cloud.memsource.com/web/job/") + memsource_task["memsource_task_uid"].toString() + "/translate";
         return matecat_url.toStdString();
     }
 
