@@ -45,7 +45,7 @@ public:
     static QSharedPointer<Task> getMatchingTask(QSharedPointer<MySQLHandler> db, int task_id, int type_id);
     static QSharedPointer<Task> getParentTask(QSharedPointer<MySQLHandler> db, int task_id, int type_id);
     static QMap<QString, QVariant> get_memsource_task(QSharedPointer<MySQLHandler> db, int task_id);
-    static QList<QSharedPointer<QMap<QString, QVariant>> > get_tasks_for_project(QSharedPointer<MySQLHandler> db, int project_id);
+    static QList<QMap<QString, QVariant>> get_tasks_for_project(QSharedPointer<MySQLHandler> db, int project_id);
     static bool is_task_translated_in_memsource(QSharedPointer<MySQLHandler> db, Task task);
     static int get_top_level(QString internal_id);
 };

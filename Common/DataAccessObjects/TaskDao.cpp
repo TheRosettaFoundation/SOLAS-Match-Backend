@@ -634,9 +634,8 @@ QMap<QString, QVariant> TaskDao::get_memsource_task(QSharedPointer<MySQLHandler>
     return row;
 }
 
-QList<QSharedPointer<QMap<QString, QVariant>> > TaskDao::get_tasks_for_project(QSharedPointer<MySQLHandler> db, int project_id)
+QList<QMap<QString, QVariant>> TaskDao::get_tasks_for_project(QSharedPointer<MySQLHandler> db, int project_id)
 {
-    //QList<QSharedPointer<QMap<QString, QVariant>> > project_tasks = QList<QSharedPointer<QMap<QString, QVariant>> >();
     QList<QMap<QString, QVariant>> project_tasks = QList<QMap<QString, QVariant>>();
     QSharedPointer<QSqlQuery> mQuery = db->call("get_tasks_for_project", QString::number(project_id));
     if (mQuery->first()) {
@@ -679,11 +678,11 @@ bool TaskDao::is_task_translated_in_memsource(QSharedPointer<MySQLHandler> db, T
 
     int top_level = get_top_level(memsource_task["internalId"].toString());
 
-    QList<QSharedPointer<QMap<QString, QVariant>> > project_tasks = get_tasks_for_project(task->projectid());
+    QList<QMap<QString, QVariant>> project_tasks = get_tasks_for_project(task->projectid());
     bool translated = true;
 
     for (int i = 0; i < project_tasks.size(); i++) {
-        QSharedPointer<QMap<QString, QVariant>> project_task = project_tasks[i];
+        QMap<QString, QVariant> project_task = project_tasks[i];
         if (top_level == get_top_level(project_task["internalId"].toString())) {
            if (memsource_task["workflowLevel"].toInt() > project_task["workflowLevel"].toInt()) { // Dependent on
                 if ((memsource_task["beginIndex"].toInt() <= project_task["endIndex"].toInt()) && (project_task["beginIndex"].toInt() <= memsource_task["endIndex"].toInt())) { // Overlap
