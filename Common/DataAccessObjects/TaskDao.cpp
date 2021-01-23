@@ -636,7 +636,8 @@ QMap<QString, QVariant> TaskDao::get_memsource_task(QSharedPointer<MySQLHandler>
 
 QList<QSharedPointer<QMap<QString, QVariant>> > TaskDao::get_tasks_for_project(QSharedPointer<MySQLHandler> db, int project_id)
 {
-    QList<QSharedPointer<QMap<QString, QVariant>> > project_tasks = QList<QSharedPointer<QMap<QString, QVariant>> >();
+    //QList<QSharedPointer<QMap<QString, QVariant>> > project_tasks = QList<QSharedPointer<QMap<QString, QVariant>> >();
+    QList<QMap<QString, QVariant>> project_tasks = QList<QMap<QString, QVariant>>();
     QSharedPointer<QSqlQuery> mQuery = db->call("get_tasks_for_project", QString::number(project_id));
     if (mQuery->first()) {
         QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
