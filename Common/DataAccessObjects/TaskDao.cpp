@@ -491,7 +491,7 @@ std::string TaskDao::get_matecat_url(QSharedPointer<MySQLHandler> db, QSharedPoi
 {
     QString matecat_url("");
 
-    if (!memsource_task.isNull()) {
+    if (!memsource_task.isEmpty()) {
         matecat_url = QString("https://cloud.memsource.com/web/job/") + memsource_task["memsource_task_uid"] + "/translate";
         return matecat_url.toStdString();
     }
@@ -674,6 +674,8 @@ QList<QSharedPointer<QMap<QString, QVariant>> > TaskDao::get_tasks_for_project(Q
 bool TaskDao::is_task_translated_in_memsource(QSharedPointer<MySQLHandler> db, Task task)
 {
     QMap<QString, QVariant> memsource_task = get_memsource_task(db, task->id());
+    if (memsource_task.isEmpty()) return true;
+
     int top_level = get_top_level(memsource_task["internalId"].toString());
 
     QList<QSharedPointer<QMap<QString, QVariant>> > project_tasks = get_tasks_for_project(task->projectid());

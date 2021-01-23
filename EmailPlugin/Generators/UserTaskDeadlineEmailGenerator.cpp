@@ -58,7 +58,7 @@ void UserTaskDeadlineEmailGenerator::run()
                 break;
             case 3:
                 task_type = "Revising";
-                if (!memsource_task.isNull()) {
+                if (!memsource_task.isEmpty()) {
                     dict.ShowSection("REVISING");
                 } else {
                 if (TaskDao::is_task_translated_in_matecat(db, task->id())) {
@@ -114,7 +114,7 @@ void UserTaskDeadlineEmailGenerator::run()
 
             template_location = QString(TEMPLATE_DIRECTORY) + "emails/user-claimed-task-deadline-passed-chunk.tpl";
         } else {
-           if (!memsource_task.isNull()) {
+           if (!memsource_task.isEmpty()) {
             template_location = QString(TEMPLATE_DIRECTORY) + "emails/user-claimed-task-deadline-passed-memsource.tpl";
            } else {
             template_location = QString(TEMPLATE_DIRECTORY) + "emails/user-claimed-task-deadline-passed.tpl";

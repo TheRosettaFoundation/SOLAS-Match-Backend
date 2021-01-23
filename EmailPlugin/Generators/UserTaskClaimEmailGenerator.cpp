@@ -63,7 +63,7 @@ void UserTaskClaimEmailGenerator::run()
                 break;
             case 3:
                 task_type = "Revising";
-                if (!memsource_task.isNull()) {
+                if (!memsource_task.isEmpty()) {
                     if (TaskDao::is_task_translated_in_memsource(db, task)) {
                         dict.ShowSection("REVISING");
                     } else {
@@ -126,7 +126,7 @@ void UserTaskClaimEmailGenerator::run()
           if (task->title().length() == 8 && task->title().find("Test") == 0) { // Verification Task
             template_location = QString(TEMPLATE_DIRECTORY) + "emails/user-task-claim-verification.tpl";
           } else {
-           if (!memsource_task.isNull()) {
+           if (!memsource_task.isEmpty()) {
             template_location = QString(TEMPLATE_DIRECTORY) + "emails/user-task-claim-memsource.tpl";
            } else {
             template_location = QString(TEMPLATE_DIRECTORY) + "emails/user-task-claim.tpl";
