@@ -678,7 +678,9 @@ bool TaskDao::is_task_translated_in_memsource(QSharedPointer<MySQLHandler> db, T
 
     QList<QSharedPointer<QMap<QString, QVariant>> > project_tasks = get_tasks_for_project(task->projectid());
     bool translated = true;
-    foreach (QSharedPointer<QMap<QString, QVariant>> project_task, project_tasks) {
+
+    for (int i = 0; i < project_tasks.size(); i++) {
+        QSharedPointer<QMap<QString, QVariant>> project_task = project_tasks[i];
         if (top_level == get_top_level(project_task["internalId"].toString())) {
            if (memsource_task["workflowLevel"].toInt() > project_task["workflowLevel"].toInt()) { // Dependent on
                 if ((memsource_task["beginIndex"].toInt() <= project_task["endIndex"].toInt()) && (project_task["beginIndex"].toInt() <= memsource_task["endIndex"].toInt())) { // Overlap
