@@ -671,7 +671,7 @@ QList<QMap<QString, QVariant>> TaskDao::get_tasks_for_project(QSharedPointer<MyS
     return project_tasks;
 }
 
-bool TaskDao::is_task_translated_in_memsource(QSharedPointer<MySQLHandler> db, Task task)
+bool TaskDao::is_task_translated_in_memsource(QSharedPointer<MySQLHandler> db, QSharedPointer<Task> task)
 {
     QMap<QString, QVariant> memsource_task = get_memsource_task(db, task->id());
     if (memsource_task.isEmpty()) return true;
