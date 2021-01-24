@@ -677,20 +677,34 @@ bool TaskDao::is_task_translated_in_memsource(QSharedPointer<MySQLHandler> db, Q
     if (memsource_task.isEmpty()) return true;
 
     int top_level = get_top_level(memsource_task["internalId"].toString());
+qDebug() << "top_level: " << top_level;//(**)
 
     QList<QMap<QString, QVariant>> project_tasks = get_tasks_for_project(db, task->projectid());
     bool translated = true;
 
     for (int i = 0; i < project_tasks.size(); i++) {
+qDebug() << "++++++++++++++++++++++++++++++++++++++++++++++++++++++++";//(**)
         QMap<QString, QVariant> project_task = project_tasks[i];
+qDebug() << "internalId: " << project_task["internalId"].toString();//(**)
+qDebug() << "project_task top_level: " << get_top_level(project_task["internalId"].toString());//(**)
         if (top_level == get_top_level(project_task["internalId"].toString())) {
+qDebug() << "memsource_task workflowLevel: " << memsource_task["workflowLevel"].toInt();//(**)
+qDebug() << "project_task workflowLevel: " << project_task["workflowLevel"].toInt();//(**)
            if (memsource_task["workflowLevel"].toInt() > project_task["workflowLevel"].toInt()) { // Dependent on
+qDebug() << "memsource_task beginIndex: " << memsource_task["beginIndex"].toInt();//(**)
+qDebug() << "project_task beginIndex: " << project_task["beginIndex"].toInt();//(**)
+qDebug() << "memsource_task endIndex: " << memsource_task["endIndex"].toInt();//(**)
+qDebug() << "project_task endIndex: " << project_task["endIndex"].toInt();//(**)
                 if ((memsource_task["beginIndex"].toInt() <= project_task["endIndex"].toInt()) && (project_task["beginIndex"].toInt() <= memsource_task["endIndex"].toInt())) { // Overlap
+qDebug() << "project_task task-status_id: " << project_task["task-status_id"].toInt();//(**)
                     if (project_task["task-status_id"].toInt() != COMPLETE) translated = false;
                 }
             }
         }
+qDebug() << "++++++++++++++++++++++++++++++++++++++++++++++++++++++++";//(**)
     }
+if (translated) qDebug() << "translated";//(**)
+else qDebug() << "NOT translated";//(**)
     return translated;
 }
 
