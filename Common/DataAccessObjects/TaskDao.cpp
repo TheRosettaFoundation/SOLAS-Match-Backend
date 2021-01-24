@@ -1,3 +1,4 @@
+#include <QDebug> //(**)
 #include "TaskDao.h"
 
 #include "../ModelGenerator.h"
