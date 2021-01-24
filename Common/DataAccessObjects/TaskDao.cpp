@@ -678,7 +678,7 @@ bool TaskDao::is_task_translated_in_memsource(QSharedPointer<MySQLHandler> db, Q
 
     int top_level = get_top_level(memsource_task["internalId"].toString());
 
-    QList<QMap<QString, QVariant>> project_tasks = get_tasks_for_project(task->projectid());
+    QList<QMap<QString, QVariant>> project_tasks = get_tasks_for_project(db, task->projectid());
     bool translated = true;
 
     for (int i = 0; i < project_tasks.size(); i++) {
