@@ -48,6 +48,7 @@ public:
     static QList<QMap<QString, QVariant>> get_tasks_for_project(QSharedPointer<MySQLHandler> db, int project_id);
     static bool is_task_translated_in_memsource(QSharedPointer<MySQLHandler> db, QSharedPointer<Task> task);
     static int get_top_level(QString internal_id);
+    static QList<QSharedPointer<Task> > TaskDao::get_matching_revision_memsource_tasks(QSharedPointer<MySQLHandler> db, QSharedPointer<Task> task);
 };
 
 #endif // TASKDAO_H

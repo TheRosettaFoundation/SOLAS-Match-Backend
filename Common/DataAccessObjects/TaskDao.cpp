@@ -700,3 +700,27 @@ int TaskDao::get_top_level(QString internal_id)
     if (pos == -1) return internal_id.toInt();
     return internal_id.left(pos).toInt();
 }
+
+QList<QSharedPointer<Task> > TaskDao::get_matching_revision_memsource_tasks(QSharedPointer<MySQLHandler> db, QSharedPointer<Task> task)
+{
+    QList<QSharedPointer<Task> > revision_tasks = QList<QSharedPointer<Task> >();
+
+    QMap<QString, QVariant> memsource_task = get_memsource_task(db, task->id());
+    if (memsource_task.isEmpty()) return revision_tasks;
+
+    int top_level = get_top_level(memsource_task["internalId"].toString());
+
+    QList<QMap<QString, QVariant>> project_tasks = get_tasks_for_project(db, task->projectid());
+
+    for (int i = 0; i < project_tasks.size(); i++) {
+        QMap<QString, QVariant> project_task = project_tasks[i];
+        if (top_level == get_top_level(project_task["internalId"].toString())) {
+           if (memsource_task["workflowLevel"].toInt() < project_task["workflowLevel"].toInt()) { // Limit to revision tasks
+                if ((memsource_task["beginIndex"].toInt() <= project_task["endIndex"].toInt()) && (project_task["beginIndex"].toInt() <= memsource_task["endIndex"].toInt())) { // Overlap
+                    revision_tasks.append(getTask(db, project_task["task_id"].toInt()));
+                }
+            }
+        }
+    }
+    return revision_tasks;
+}
