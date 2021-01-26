@@ -67,6 +67,7 @@ qDebug() << "SendTaskUploadNotifications Matching Revision Task IS TRANSLATED:" 
                                     trackedUpload.set_user_id(revisionClaimer->id());
                                     body = trackedUpload.SerializeAsString();
                                     publisher.publish(exchange, topic, body);
+qDebug() << "SendTaskUploadNotifications SENT TO revisionClaimer->id():" << QString::number(revisionClaimer->id());//(**)
                                 }
                             }
                         }
@@ -80,6 +81,7 @@ qDebug() << "SendTaskUploadNotifications Matching Revision Task IS TRANSLATED:" 
                         trackedUpload.set_user_id(user->id());
                         body = trackedUpload.SerializeAsString();
                         publisher.publish(exchange, topic, body);
+qDebug() << "SendTaskUploadNotifications SENT TO tracker/admin user->id():" << QString::number(user->id());//(**)
                     }
 
                     ClaimedTaskUploaded claimedUpload;
