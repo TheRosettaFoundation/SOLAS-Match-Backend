@@ -102,6 +102,14 @@ void UserClaimedTaskEarlyWarningDeadlinePassedEmailGenerator::run()
 
         std::string email_body;
         QString template_location;
+
+      if (!memsource_task.isEmpty()) {
+          if (task->tasktype() == 3) { // Revising
+              if (!TaskDao::is_task_translated_in_memsource(db, task)) sendMessage = false;
+          }
+
+          template_location = QString(TEMPLATE_DIRECTORY) + "emails/user-claimed-task-early-warning-deadline-passed-memsource.tpl";
+      } else {
         if (TaskDao::is_chunked_task(db, task->id())) {
             if (task->tasktype() == 3) {
                 QSharedPointer<Task> translationTask = TaskDao::getMatchingTask(db, task->id(), TRANSLATION);
@@ -114,12 +122,9 @@ void UserClaimedTaskEarlyWarningDeadlinePassedEmailGenerator::run()
 
             template_location = QString(TEMPLATE_DIRECTORY) + "emails/user-claimed-task-early-warning-deadline-passed-chunk.tpl";
         } else {
-           if (!memsource_task.isEmpty()) {
-            template_location = QString(TEMPLATE_DIRECTORY) + "emails/user-claimed-task-early-warning-deadline-passed-memsource.tpl";
-           } else {
             template_location = QString(TEMPLATE_DIRECTORY) + "emails/user-claimed-task-early-warning-deadline-passed.tpl";
-           }
         }
+      }
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
         email->setSender(settings.get("site.system_email_address"));;
