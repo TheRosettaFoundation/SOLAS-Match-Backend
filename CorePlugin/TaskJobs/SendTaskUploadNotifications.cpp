@@ -51,6 +51,28 @@ void SendTaskUploadNotifications::run()
             if (publisher.init()) {
               QMap<QString, QVariant> memsource_task = TaskDao::get_memsource_task(db, task->id());
               if (!memsource_task.isEmpty()) {
+
+
+                  if (!translator.isNull()) {
+
+
+                    foreach (QSharedPointer<User> user, users) {
+                        TrackedTaskUploaded trackedUpload;
+                        trackedUpload.set_email_type(trackedUpload.email_type());
+                        trackedUpload.set_task_id(task->id());
+                        trackedUpload.set_translator_id(translator->id());
+                        trackedUpload.set_user_id(user->id());
+                        body = trackedUpload.SerializeAsString();
+                        publisher.publish(exchange, topic, body);
+                    }
+
+                    ClaimedTaskUploaded claimedUpload;
+                    claimedUpload.set_email_type(claimedUpload.email_type());
+                    claimedUpload.set_task_id(task->id());
+                    claimedUpload.set_user_id(translator->id());
+                    body = claimedUpload.SerializeAsString();
+                    publisher.publish(exchange, topic, body);
+                  }
               } else {
                 if (request.file_version() == 0) {
                     if (!translator.isNull()) {
