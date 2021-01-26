@@ -51,10 +51,22 @@ void SendTaskUploadNotifications::run()
             if (publisher.init()) {
               QMap<QString, QVariant> memsource_task = TaskDao::get_memsource_task(db, task->id());
               if (!memsource_task.isEmpty()) {
-
-
                   if (!translator.isNull()) {
-
+                    QList<QSharedPointer<Task> > revision_tasks = TaskDao::get_matching_revision_memsource_tasks(db, task);
+                    foreach (QSharedPointer<Task> revision_task, revision_tasks) {
+                        if (TaskDao::is_task_translated_in_memsource(db, revision_task)) { // Only notify if all prerequisite tasks are translated
+                            QSharedPointer<User> revisionClaimer = TaskDao::getUserClaimedTask(db, revision_task->id());
+                            if (!revisionClaimer.isNull()) {
+                                TrackedTaskUploaded trackedUpload;
+                                trackedUpload.set_email_type(trackedUpload.email_type());
+                                trackedUpload.set_task_id(task->id());
+                                trackedUpload.set_translator_id(translator->id());
+                                trackedUpload.set_user_id(revisionClaimer->id());
+                                body = trackedUpload.SerializeAsString();
+                                publisher.publish(exchange, topic, body);
+                            }
+                        }
+                    }
 
                     foreach (QSharedPointer<User> user, users) {
                         TrackedTaskUploaded trackedUpload;
