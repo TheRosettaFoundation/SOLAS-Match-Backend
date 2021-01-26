@@ -49,6 +49,9 @@ void SendTaskUploadNotifications::run()
             std::string body = "";
             MessagingClient publisher;
             if (publisher.init()) {
+              QMap<QString, QVariant> memsource_task = TaskDao::get_memsource_task(db, task->id());
+              if (!memsource_task.isEmpty()) {
+              } else {
                 if (request.file_version() == 0) {
                     if (!translator.isNull()) {
                         ClaimedTaskSourceUpdated claimedUpdate;
@@ -108,6 +111,7 @@ void SendTaskUploadNotifications::run()
                     publisher.publish(exchange, topic, body);
                   }
                 }
+              }
             } else {
                 qDebug() << "SendTaskUploadNotifications: Failed to initialise messaging client";
             }
