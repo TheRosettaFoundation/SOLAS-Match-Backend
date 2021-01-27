@@ -123,7 +123,7 @@ void TrackedTaskUploadedEmailGenerator::run()
 
         email->setSender(settings.get("site.system_email_address"));;
         email->addRecipient(QString::fromStdString(user->email()));
-        email->setSubject(settings.get("site.name") + ": Task Translation Uploaded Notification");
+        email->setSubject(settings.get("site.name") + ": Task Completed Notification");
         email->setBody(QString::fromUtf8(email_body.c_str()));
     } else {
         email = this->generateErrorEmail(error);
