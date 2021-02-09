@@ -1,4 +1,7 @@
 #include "UserTaskDeadlineEmailGenerator.h"
+
+#include <QDateTime>
+
 using namespace  SolasMatch::Common::Protobufs::Emails;
 
 UserTaskDeadlineEmailGenerator::UserTaskDeadlineEmailGenerator()
@@ -82,7 +85,7 @@ void UserTaskDeadlineEmailGenerator::run()
         dict.SetValue("TARGET_LANGUAGE",taskTargetLocale.languagename());
 
         QString deadline = QDateTime::fromString(QString::fromStdString(task->deadline()), "yyyy-MM-ddTHH:mm:ss").toString("d MMMM yyyy - hh:mm");
-        taskSect->SetValue("DEADLINE_TIME", deadline.toStdString());
+        dict.SetValue("DEADLINE_TIME", deadline.toStdString());
 
         QString uploadUrl = settings.get("site.url");
         uploadUrl += "task/" + QString::number(task->id()) + "/id";
