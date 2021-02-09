@@ -24,7 +24,7 @@
     <a href="{{MATECAT}}">{{MATECAT}}</a>
 </p>
 <p>
-   When all segments are revised, click "Complete".
+    When all segments are revised, click "Complete".
 </p>
 {{/REVISING}}
 <p>
