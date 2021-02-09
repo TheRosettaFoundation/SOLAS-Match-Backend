@@ -1,31 +1,34 @@
+<p>
+    {{#USER_HAS_NAME}}
+        {{USERNAME}},
+    {{/USER_HAS_NAME}}
+    {{#NO_USER_NAME}}
+        Hello,
+    {{/NO_USER_NAME}}
+</p>
+<p>
+   Thank you for claiming the {{TASK_TYPE}} task for "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}}. The deadline for this task expired on {{DEADLINE}}.
+</p>
 {{#TRANSLATION}}
 <p>
-    The deadline for the "{{TASK_TYPE}}" task for "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} has expired.
+    Please translate this task in Memsource, our CAT tool:<br />
+    <a href="{{MATECAT}}">{{MATECAT}}</a>
 </p>
 <p>
-    To translate this task, please use memsource:<br />
-    <a href="{{MATECAT}}">{{MATECAT}}</a><br />
-    For more information, please see <a href="https://community.translatorswb.org/t/useful-posts-index/2883">Kató Q&A</a>.
-</p>
-<p>
-    When all segments are translated, please ensure you click "Complete".
+    When all segments are translated, click "Complete".
 </p>
 {{/TRANSLATION}}
 {{#REVISING}}
 <p>
-    The deadline for the "{{TASK_TYPE}}" task for "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} has expired.
+    Please revise this task in Memsource, our CAT tool:<br />
+    <a href="{{MATECAT}}">{{MATECAT}}</a>
 </p>
 <p>
-    To revise this task, please use memsource:<br />
-    <a href="{{MATECAT}}">{{MATECAT}}</a><br />
-    For more information, please see <a href="https://community.translatorswb.org/t/useful-posts-index/2883">Kató Q&A</a>.
-</p>
-<p>
-    When all segments are revised, please ensure you click "Complete".
+   When all segments are revised, click "Complete".
 </p>
 {{/REVISING}}
 <p>
-    If you need a deadline extension or are unable to deliver this work,
+    Please complete the task as soon as possible. If you need a deadline extension or are unable to deliver this work,
     please leave a comment in the Kató Community discussion thread associated with your project:<br />
     <a href="{{COMMUNITY}}">{{COMMUNITY}}</a><br />
     Please note that in some cases we are unable to extend task deadlines and would have to reassign the task to another translator.
