@@ -81,6 +81,9 @@ void UserClaimedTaskLateWarningDeadlinePassedEmailGenerator::run()
         dict.SetValue("SOURCE_LANGUAGE",taskSourceLocale.languagename());
         dict.SetValue("TARGET_LANGUAGE",taskTargetLocale.languagename());
 
+        QString deadline = QDateTime::fromString(QString::fromStdString(task->deadline()), "yyyy-MM-ddTHH:mm:ss").toString("d MMMM yyyy - hh:mm");
+        taskSect->SetValue("DEADLINE_TIME", deadline.toStdString());
+
         QString uploadUrl = settings.get("site.url");
         uploadUrl += "task/" + QString::number(task->id()) + "/id";
         dict.SetValue("TASK_UPLOAD", uploadUrl.toStdString());
