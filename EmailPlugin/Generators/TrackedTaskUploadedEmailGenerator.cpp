@@ -98,6 +98,8 @@ void TrackedTaskUploadedEmailGenerator::run()
         projectView += "project/" + QString::number(task->projectid()) + "/view";
         dict.SetValue("PROJECT_VIEW", projectView.toStdString());
 
+        QMap<QString, QVariant> memsource_task = TaskDao::get_memsource_task(db, task->id());
+
         if (TaskDao::is_chunked_task(db, task->id())) {
             dict.SetValue("MATECAT_REVISION", TaskDao::getMatecatRevisionURL(db, task));
         }
@@ -114,10 +116,33 @@ void TrackedTaskUploadedEmailGenerator::run()
 
         std::string email_body;
         QString template_location;
+
+        bool is_revisor_for_split_memsource_task = false;
+        if (!memsource_task.isEmpty()) {
+            if (task->tasktype() == 2) { // Translation
+                QList<QSharedPointer<Task> > revision_tasks = TaskDao::get_matching_revision_memsource_tasks(db, task);
+                foreach (QSharedPointer<Task> revision_task, revision_tasks) {
+qDebug() << "TrackedTaskUploadedEmailGenerator Matching Revision Task:" << QString::number(revision_task->id());//(**)
+                    QSharedPointer<User> revisionClaimer = TaskDao::getUserClaimedTask(db, revision_task->id());
+                    if (!revisionClaimer.isNull()) {
+                        if (user->id() == revisionClaimer->id()) {
+qDebug() << "TrackedTaskUploadedEmailGenerator tracked-task-uploaded-notify-revisor-memsource for revisionClaimer->id():" << QString::number(revisionClaimer->id());//(**)
+                            is_revisor_for_split_memsource_task = true;
+                            dict.SetValue("MATECAT_REVISION", TaskDao::get_matecat_url(db, revision_task, TaskDao::get_memsource_task(db, revision_task->id())));
+                        }
+                    }
+                }
+            }
+        }
+
+        if (is_revisor_for_split_memsource_task) {
+            template_location = QString(TEMPLATE_DIRECTORY) + "emails/tracked-task-uploaded-notify-revisor-memsource.tpl";
+        } else {
         if (TaskDao::is_chunked_task(db, task->id())) {
             template_location = QString(TEMPLATE_DIRECTORY) + "emails/tracked-task-uploaded-chunk.tpl";
         } else {
             template_location = QString(TEMPLATE_DIRECTORY) + "emails/tracked-task-uploaded.tpl";
+        }
         }
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
