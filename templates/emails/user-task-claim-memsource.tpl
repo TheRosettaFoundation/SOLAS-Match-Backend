@@ -29,11 +29,7 @@
 {{/REVISING}}
 {{#REVISING_WAIT}}
 <p>
-    <strong>You will receive a notification when the task is ready for you to revise.</strong> When it is ready, please revise the task using Memsource, our CAT tool:<br />
-    <a href="{{MATECAT}}">{{MATECAT}}</a><br />
-</p>
-<p>
-   When all segments are revised, click "Complete".
+    <strong>You will receive an email notification when the task is ready for you to revise.</strong> The email will include a link to the revision task in Memsource, our CAT tool.
 </p>
 {{/REVISING_WAIT}}
 <p>
