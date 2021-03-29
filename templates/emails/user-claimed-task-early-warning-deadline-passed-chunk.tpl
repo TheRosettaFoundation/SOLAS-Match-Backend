@@ -10,7 +10,7 @@
 <p>
 {{#TRANSLATION}}
 Thank you for claiming a task on Kató Platform!
-You have one week remaining to complete the "{{TASK_TYPE}}" task for
+You have 6 days remaining to complete the "{{TASK_TYPE}}" task for
 "{{TASK_TITLE}}"
 from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}}.
 Please ensure that you complete the translation before the deadline
@@ -23,7 +23,7 @@ and the status bar shows 100% on Kató TM here:<br />
 {{/TRANSLATION}}
 {{#REVISING}}
 Thank you for claiming a task on Kató Platform!
-You have one week remaining to complete the "{{TASK_TYPE}}" task for
+You have 6 days remaining to complete the "{{TASK_TYPE}}" task for
 "{{TASK_TITLE}}"
 from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}}.
 Please ensure that you complete the revising task before the deadline

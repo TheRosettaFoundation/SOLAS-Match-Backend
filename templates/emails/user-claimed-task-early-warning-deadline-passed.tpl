@@ -10,7 +10,7 @@
 <p>
 {{#TRANSLATION}}
     Thank you for claiming a task on Kató Platform!
-    You have one week remaining to complete the "{{TASK_TYPE}}" task for
+    You have 6 days remaining to complete the "{{TASK_TYPE}}" task for
     "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}}.
     Please ensure that you complete the translation before the deadline
     and the status bar shows 100% on Kató TM here:<br />
@@ -20,7 +20,7 @@
 {{/TRANSLATION}}
 {{#REVISING}}
     Thank you for claiming a task on Kató Platform!
-    You have one week remaining to complete the "{{TASK_TYPE}}" task for
+    You have 6 days remaining to complete the "{{TASK_TYPE}}" task for
     "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}}.
     Please ensure that you complete the revising task before the deadline
     and the task is approved (status bar shows fully green) on Kató TM here:<br />
@@ -30,7 +30,7 @@
 {{/REVISING}}
 {{#REVISING_NO_MATECAT}}
     Thank you for claiming a task on Kató Platform!
-    You have one week remaining to complete the "{{TASK_TYPE}}" task for
+    You have 6 days remaining to complete the "{{TASK_TYPE}}" task for
     "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}}.
     Please ensure that you complete the revising task before the deadline
     and upload the revised file on the following page:<br />
@@ -38,7 +38,7 @@
 {{/REVISING_NO_MATECAT}}
 {{#SEGMENTATION}}
     Thank you for claiming a task on Kató Platform!
-    You have one week remaining to complete the "{{TASK_TYPE}}" task for
+    You have 6 days remaining to complete the "{{TASK_TYPE}}" task for
     "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}}.
     Please ensure that you complete the segmentation before the deadline and upload here:<br />
     <a href="{{TASK_UPLOAD}}" >{{TASK_UPLOAD}}</a>
