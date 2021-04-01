@@ -31,7 +31,3 @@ You can also follow us on<br />
 <a href="https://twitter.com/TranslatorsWB">Twitter</a>
 </p>
 {{>FOOTER}}
-<p>
-If you are a partner organization, please disregard this email as it does not apply to you.
-You will be redirected to a page to accept our Terms and Conditions.
-</p>
