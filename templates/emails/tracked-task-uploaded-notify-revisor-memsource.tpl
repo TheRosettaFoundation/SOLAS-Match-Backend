@@ -7,7 +7,7 @@
 </p>
 <p>
     Please revise this task in Memsource, our CAT tool:<br />
-    <a href="{{MATECAT_REVISION}}">{{MATECAT_REVISION}}</a>
+    <a href="{{MATECAT_REVISION}}">Revision URL</a>
 </p>
 <p>
    When all segments are revised, click "Complete".

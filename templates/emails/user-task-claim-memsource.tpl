@@ -12,7 +12,7 @@
 {{#TRANSLATION}}
 <p>
     Please translate this task in Memsource, our CAT tool:<br />
-    <a href="{{MATECAT}}">{{MATECAT}}</a><br />
+    <a href="{{MATECAT}}">Translation URL</a><br />
 </p>
 <p>
     When all segments are translated, click "Complete".
@@ -21,7 +21,7 @@
 {{#REVISING}}
 <p>
     Please revise this task in Memsource, our CAT tool:<br />
-    <a href="{{MATECAT}}">{{MATECAT}}</a><br />
+    <a href="{{MATECAT}}">Revision URL</a><br />
 </p>
 <p>
    When all segments are revised, click "Complete".
