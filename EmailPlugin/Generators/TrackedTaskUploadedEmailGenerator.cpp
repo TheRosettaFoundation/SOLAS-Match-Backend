@@ -122,11 +122,11 @@ void TrackedTaskUploadedEmailGenerator::run()
             if (task->tasktype() == 2) { // Translation
                 QList<QSharedPointer<Task> > revision_tasks = TaskDao::get_matching_revision_memsource_tasks(db, task);
                 foreach (QSharedPointer<Task> revision_task, revision_tasks) {
-qDebug() << "TrackedTaskUploadedEmailGenerator Matching Revision Task:" << QString::number(revision_task->id());//(**)
+//qDebug() << "TrackedTaskUploadedEmailGenerator Matching Revision Task:" << QString::number(revision_task->id());//(**)
                     QSharedPointer<User> revisionClaimer = TaskDao::getUserClaimedTask(db, revision_task->id());
                     if (!revisionClaimer.isNull()) {
                         if (user->id() == revisionClaimer->id()) {
-qDebug() << "TrackedTaskUploadedEmailGenerator tracked-task-uploaded-notify-revisor-memsource for revisionClaimer->id():" << QString::number(revisionClaimer->id());//(**)
+//qDebug() << "TrackedTaskUploadedEmailGenerator tracked-task-uploaded-notify-revisor-memsource for revisionClaimer->id():" << QString::number(revisionClaimer->id());//(**)
                             is_revisor_for_split_memsource_task = true;
                             dict.SetValue("MATECAT_REVISION", TaskDao::get_matecat_url(db, revision_task, TaskDao::get_memsource_task(db, revision_task->id())));
                         }

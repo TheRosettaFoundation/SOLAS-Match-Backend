@@ -55,9 +55,9 @@ void SendTaskUploadNotifications::run()
                     if (task->tasktype() == TRANSLATION) {
                         QList<QSharedPointer<Task> > revision_tasks = TaskDao::get_matching_revision_memsource_tasks(db, task);
                         foreach (QSharedPointer<Task> revision_task, revision_tasks) {
-qDebug() << "SendTaskUploadNotifications Matching Revision Task:" << QString::number(revision_task->id());//(**)
+//qDebug() << "SendTaskUploadNotifications Matching Revision Task:" << QString::number(revision_task->id());//(**)
                             if (TaskDao::is_task_translated_in_memsource(db, revision_task)) { // Only notify if all prerequisite tasks are translated
-qDebug() << "SendTaskUploadNotifications Matching Revision Task IS TRANSLATED:" << QString::number(revision_task->id());//(**)
+//qDebug() << "SendTaskUploadNotifications Matching Revision Task IS TRANSLATED:" << QString::number(revision_task->id());//(**)
                                 QSharedPointer<User> revisionClaimer = TaskDao::getUserClaimedTask(db, revision_task->id());
                                 if (!revisionClaimer.isNull()) {
                                     TrackedTaskUploaded trackedUpload;
@@ -67,7 +67,7 @@ qDebug() << "SendTaskUploadNotifications Matching Revision Task IS TRANSLATED:" 
                                     trackedUpload.set_user_id(revisionClaimer->id());
                                     body = trackedUpload.SerializeAsString();
                                     publisher.publish(exchange, topic, body);
-qDebug() << "SendTaskUploadNotifications SENT TO revisionClaimer->id():" << QString::number(revisionClaimer->id());//(**)
+//qDebug() << "SendTaskUploadNotifications SENT TO revisionClaimer->id():" << QString::number(revisionClaimer->id());//(**)
                                 }
                             }
                         }
@@ -81,7 +81,7 @@ qDebug() << "SendTaskUploadNotifications SENT TO revisionClaimer->id():" << QStr
                         trackedUpload.set_user_id(user->id());
                         body = trackedUpload.SerializeAsString();
                         publisher.publish(exchange, topic, body);
-qDebug() << "SendTaskUploadNotifications SENT TO tracker/admin user->id():" << QString::number(user->id());//(**)
+//qDebug() << "SendTaskUploadNotifications SENT TO tracker/admin user->id():" << QString::number(user->id());//(**)
                     }
 
                     ClaimedTaskUploaded claimedUpload;

@@ -112,8 +112,8 @@ void UserClaimedTaskLateWarningDeadlinePassedEmailGenerator::run()
       if (!memsource_task.isEmpty()) {
           if (task->tasktype() == 3) { // Revising
               if (!TaskDao::is_task_translated_in_memsource(db, task)) sendMessage = false;
-if (!TaskDao::is_task_translated_in_memsource(db, task)) qDebug() << "UserClaimedTaskLate NOT send warning:" << QString::number(task->id());//(**)
-else  qDebug() << "UserClaimedTaskLate send warning:" << QString::number(task->id());//(**)
+//if (!TaskDao::is_task_translated_in_memsource(db, task)) qDebug() << "UserClaimedTaskLate NOT send warning:" << QString::number(task->id());//(**)
+//else  qDebug() << "UserClaimedTaskLate send warning:" << QString::number(task->id());//(**)
           }
 
           template_location = QString(TEMPLATE_DIRECTORY) + "emails/user-claimed-task-late-warning-deadline-passed-memsource.tpl";
