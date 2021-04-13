@@ -151,7 +151,7 @@ std::string ProjectDao::discourse_parameterize(const std::string a, int project_
 {
     QString s = QString::fromUtf8(a.c_str());
 //    if (project_id > 9277) { //(**)[dev project_id server ID] Backwards compatible
-    if (project_id > 9277) { //(**)[KP ID] Backwards compatible
+    if (project_id > 26399) { //(**)[KP ID] Backwards compatible
         s.append(" " + QString::number(project_id));
     }
 
