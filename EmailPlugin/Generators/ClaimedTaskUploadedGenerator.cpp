@@ -72,6 +72,7 @@ void ClaimedTaskUploadedGenerator::run()
                 break;
             case 3:
                 task_type = "Revising";
+                dict.ShowSection("REVISING");
                 break;
             case 4:
                 task_type = "Desegmentation";
