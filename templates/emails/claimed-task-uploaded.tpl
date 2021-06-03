@@ -7,13 +7,7 @@ We would really appreciate it if you could provide some brief constructive feedb
 This will help fellow volunteers improve.
 </p>
 <p>
-Please submit your feedback at this link: {LINK TO REVIEW PAGE}.
-============
-LIKE
-uploadUrl += "task/" + QString::number(task->id()) + "/id";
-dict.SetValue("TASK_UPLOAD", uploadUrl.toStdString());
-So we need to upgrade this to have a link to the review e.g.: https://kato.translatorswb.org/task/133081/review/
-============
+Please submit your feedback at this link: <a href="{{TASK_REVIEW}}">{{TASK_REVIEW}}</a>.
 </p>
 <p>
 You can find our guidelines on leaving constructive feedback here:<br />

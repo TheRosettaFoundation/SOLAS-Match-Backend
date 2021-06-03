@@ -9,7 +9,7 @@ ClaimedTaskUploadedGenerator::ClaimedTaskUploadedGenerator()
 
 void ClaimedTaskUploadedGenerator::run()
 {
-    qDebug() << "EmailGenerator: Starting new thread for tracked task source updated email";
+    qDebug() << "EmailGenerator: Starting new thread for claimed task uploaded email";
 
     ClaimedTaskUploaded emailMessage;
     emailMessage.ParseFromString(this->protoBody);
@@ -51,11 +51,14 @@ void ClaimedTaskUploadedGenerator::run()
         dict.SetValue("TASK_TITLE", Email::htmlspecialchars(task->title()));
         dict.SetValue("ORG_NAME", org->name());
         QString uploadUrl = settings.get("site.url");
+        QString reviewUrl = settings.get("site.url");
         QString profileUrl = settings.get("site.url");
         uploadUrl += "task/" + QString::number(task->id()) + "/id";
+        reviewUrl += "task/" + QString::number(task->id()) + "/review";
         profileUrl += QString::number(user->id()) + "/profile/";
 
         dict.SetValue("TASK_UPLOAD", uploadUrl.toStdString());
+        dict.SetValue("TASK_REVIEW", reviewUrl.toStdString());
         dict.SetValue("USER_PROFILE", profileUrl.toStdString());
 
         QString task_type = "Translation";
