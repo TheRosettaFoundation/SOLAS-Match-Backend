@@ -17,6 +17,7 @@
 #include "Generators/UserTaskDeadlineEmailGenerator.h"
 #include "Generators/UserClaimedTaskEarlyWarningDeadlinePassedEmailGenerator.h"
 #include "Generators/UserClaimedTaskLateWarningDeadlinePassedEmailGenerator.h"
+#include "Generators/UserRecordWarningDeadlinePassedEmailGenerator.h"
 #include "Generators/OrgFeedbackGenerator.h"
 #include "Generators/UserFeedbackGenerator.h"
 #include "Generators/UserTaskStreamEmailGenerator.h"
@@ -154,6 +155,8 @@ void EmailPlugin::registerEmailTypes()
     qRegisterMetaType<UserClaimedTaskEarlyWarningDeadlinePassedEmailGenerator>(name.toLatin1());
     name = "EmailGenerator_" + QString::number(EmailMessage::UserClaimedTaskLateWarningDeadlinePassed);
     qRegisterMetaType<UserClaimedTaskLateWarningDeadlinePassedEmailGenerator>(name.toLatin1());
+    name = "EmailGenerator_" + QString::number(EmailMessage::UserRecordWarningDeadlinePassed);
+    qRegisterMetaType<UserRecordWarningDeadlinePassedEmailGenerator>(name.toLatin1());
     name = "EmailGenerator_" + QString::number(EmailMessage::UserTaskStreamEmail);
     qRegisterMetaType<UserTaskStreamEmailGenerator>(name.toLatin1());
     name = "EmailGenerator_" + QString::number(EmailMessage::EmailVerification);
