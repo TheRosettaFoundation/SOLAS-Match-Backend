@@ -88,9 +88,9 @@ void protobuf_AddDesc_EmailMessage_2eproto() {
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\022EmailMessage.proto\022\"SolasMatch.Common."
-    "Protobufs.Emails\"\344\007\n\014EmailMessage\022I\n\nema"
+    "Protobufs.Emails\"\211\010\n\014EmailMessage\022I\n\nema"
     "il_type\030\001 \002(\01625.SolasMatch.Common.Protob"
-    "ufs.Emails.EmailMessage.Type\"\376\006\n\004Type\022\022\n"
+    "ufs.Emails.EmailMessage.Type\"\243\007\n\004Type\022\022\n"
     "\016TaskScoreEmail\020\001\022\021\n\rUserTaskClaim\020\002\022\031\n\025"
     "OrgMembershipAccepted\020\003\022\030\n\024OrgMembership"
     "Refused\020\004\022\026\n\022PasswordResetEmail\020\005\022\020\n\014Tas"
@@ -113,7 +113,8 @@ void protobuf_AddDesc_EmailMessage_2eproto() {
     "\n\034ProjectImageDisapprovedEmail\020 \022-\n)User"
     "ClaimedTaskEarlyWarningDeadlinePassed\020!\022"
     ",\n(UserClaimedTaskLateWarningDeadlinePas"
-    "sed\020\"*\010\010d\020\200\200\200\200\002", 1055);
+    "sed\020\"\022#\n\037UserRecordWarningDeadlinePassed"
+    "\020#*\010\010d\020\200\200\200\200\002", 1092);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "EmailMessage.proto", &protobuf_RegisterTypes);
   EmailMessage::default_instance_ = new EmailMessage();
@@ -170,6 +171,7 @@ bool EmailMessage_Type_IsValid(int value) {
     case 32:
     case 33:
     case 34:
+    case 35:
       return true;
     default:
       return false;
@@ -211,6 +213,7 @@ const EmailMessage_Type EmailMessage::ProjectImageApprovedEmail;
 const EmailMessage_Type EmailMessage::ProjectImageDisapprovedEmail;
 const EmailMessage_Type EmailMessage::UserClaimedTaskEarlyWarningDeadlinePassed;
 const EmailMessage_Type EmailMessage::UserClaimedTaskLateWarningDeadlinePassed;
+const EmailMessage_Type EmailMessage::UserRecordWarningDeadlinePassed;
 const EmailMessage_Type EmailMessage::Type_MIN;
 const EmailMessage_Type EmailMessage::Type_MAX;
 const int EmailMessage::Type_ARRAYSIZE;
