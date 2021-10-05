@@ -1,15 +1,15 @@
-#ifndef USERCLAIMEDTASKLATEWARNINGDEADLINEPASSEDEMAILGENERATOR_H
-#define USERCLAIMEDTASKLATEWARNINGDEADLINEPASSEDEMAILGENERATOR_H
+#ifndef USERRECORDWARNINGDEADLINEPASSEDEMAILGENERATOR_H
+#define USERRECORDWARNINGDEADLINEPASSEDEMAILGENERATOR_H
 
 #include "../IEmailGenerator.h"
-#include "Common/protobufs/emails/UserClaimedTaskLateWarningDeadlinePassed.pb.h"
+#include "Common/protobufs/emails/UserRecordWarningDeadlinePassed.pb.h"
 
-class UserClaimedTaskLateWarningDeadlinePassedEmailGenerator : IEmailGenerator
+class UserRecordWarningDeadlinePassedEmailGenerator : IEmailGenerator
 {
 public:
-    UserClaimedTaskLateWarningDeadlinePassedEmailGenerator();
+    UserRecordWarningDeadlinePassedEmailGenerator();
     void run();
 
 };
 
-#endif // USERCLAIMEDTASKLATEWARNINGDEADLINEPASSEDEMAILGENERATOR_H
+#endif // USERRECORDWARNINGDEADLINEPASSEDEMAILGENERATOR_H

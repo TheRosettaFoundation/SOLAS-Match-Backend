@@ -1,19 +1,19 @@
-#include "UserClaimedTaskLateWarningDeadlinePassedEmailGenerator.h"
+#include "UserRecordWarningDeadlinePassedEmailGenerator.h"
 
 #include <QDateTime>
 
 using namespace  SolasMatch::Common::Protobufs::Emails;
 
-UserClaimedTaskLateWarningDeadlinePassedEmailGenerator::UserClaimedTaskLateWarningDeadlinePassedEmailGenerator()
+UserRecordWarningDeadlinePassedEmailGenerator::UserRecordWarningDeadlinePassedEmailGenerator()
 {
     //Default Constructor
 }
 
-void UserClaimedTaskLateWarningDeadlinePassedEmailGenerator::run()
+void UserRecordWarningDeadlinePassedEmailGenerator::run()
 {
-    qDebug() << "EmailGenerator: Generating UserClaimedTaskLateWarningDeadlinePassed email";
+    qDebug() << "EmailGenerator: Generating UserRecordWarningDeadlinePassed email";
 
-    UserClaimedTaskLateWarningDeadlinePassed email_message;
+    UserRecordWarningDeadlinePassed email_message;
     email_message.ParseFromString(this->protoBody);
 
     ConfigParser settings;
@@ -29,7 +29,7 @@ void UserClaimedTaskLateWarningDeadlinePassedEmailGenerator::run()
     task = TaskDao::getTask(db, email_message.task_id());
 
     if(!user || !task) {
-        error = "Failed to generate UserClaimedTaskLateWarningDeadlinePassed email: Unable to find relevant ";
+        error = "Failed to generate UserRecordWarningDeadlinePassed email: Unable to find relevant ";
         error += "data in the Database. Searched for User ID ";
         error += QString::number(email_message.translator_id()) + " and Task ID ";
         error += QString::number(email_message.task_id()) + ".";
@@ -112,8 +112,8 @@ void UserClaimedTaskLateWarningDeadlinePassedEmailGenerator::run()
       if (!memsource_task.isEmpty()) {
           if (task->tasktype() == 3) { // Revising
               if (!TaskDao::is_task_translated_in_memsource(db, task)) sendMessage = false;
-//if (!TaskDao::is_task_translated_in_memsource(db, task)) qDebug() << "UserClaimedTaskLate NOT send warning:" << QString::number(task->id());//(**)
-//else  qDebug() << "UserClaimedTaskLate send warning:" << QString::number(task->id());//(**)
+//if (!TaskDao::is_task_translated_in_memsource(db, task)) qDebug() << "UserRecord NOT send warning:" << QString::number(task->id());//(**)
+//else  qDebug() << "UserRecord send warning:" << QString::number(task->id());//(**)
           }
 
           template_location = QString(TEMPLATE_DIRECTORY) + "emails/user-claimed-task-late-warning-deadline-passed-memsource.tpl";
