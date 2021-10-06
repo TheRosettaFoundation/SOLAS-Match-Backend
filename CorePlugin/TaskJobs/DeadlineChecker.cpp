@@ -15,6 +15,7 @@
 #include "Common/protobufs/emails/UserClaimedTaskDeadlinePassed.pb.h"
 #include "Common/protobufs/emails/UserClaimedTaskEarlyWarningDeadlinePassed.pb.h"
 #include "Common/protobufs/emails/UserClaimedTaskLateWarningDeadlinePassed.pb.h"
+#include "Common/protobufs/emails/UserRecordWarningDeadlinePassed.pb.h"
 
 using namespace SolasMatch::Common::Protobufs::Emails;
 
@@ -115,6 +116,16 @@ void DeadlineChecker::run()
 
             TaskDao::taskNotificationSentInsertAndUpdate(db, task->id(), 2);
             qDebug() << "DeadlineChecker::Task late warning email queued";
+        }
+
+        users = UserDao::getRecordWarningUsers(db);
+        foreach (QSharedPointer<User> user, users) {
+            qDebug() << "User " << user->id() << " will be deleted in 24 hours";
+            UserRecordWarningDeadlinePassed userEmail;
+            userEmail.set_email_type(EmailMessage::UserRecordWarningDeadlinePassed);
+            userEmail.set_user_id(user->id());
+            userEmail.set_spare_id(0);
+            client.publish(exchange, "email.user.record.deadline.passed", userEmail.SerializeAsString());
         }
     } else {
         qDebug() << "Unable to connect to RabbitMQ. Check conf.ini for settings.";
