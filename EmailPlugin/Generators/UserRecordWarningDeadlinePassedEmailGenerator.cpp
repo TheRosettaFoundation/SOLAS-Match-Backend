@@ -38,19 +38,6 @@ void UserRecordWarningDeadlinePassedEmailGenerator::run()
         } else {
             dict.ShowSection("NO_USER_NAME");
         }
-        dict.SetValue("SITE_NAME", std::string(settings.get("site.name").toLatin1().constData(), settings.get("site.name").toLatin1().length()));
-
-        QString deadline = QDateTime::fromString(QString::fromStdString(task->deadline()), "yyyy-MM-ddTHH:mm:ss").toString("d MMMM yyyy - hh:mm");
-        dict.SetValue("DEADLINE_TIME", deadline.toStdString());
-
-        bool footer_enabled=(QString::compare("y", settings.get("email-footer.enabled")) == 0);
-        if (footer_enabled) {
-            QString donate_link = settings.get("email-footer.donate_link");
-            ctemplate::TemplateDictionary* footer_dict = dict.AddIncludeDictionary("FOOTER");
-            QString footer_location = QString(TEMPLATE_DIRECTORY) + "emails/footer.tpl";
-            footer_dict -> SetValue("DONATE_LINK",donate_link.toStdString());
-            footer_dict -> SetFilename(footer_location.toStdString());
-        }
 
         std::string email_body;
         QString template_location;
