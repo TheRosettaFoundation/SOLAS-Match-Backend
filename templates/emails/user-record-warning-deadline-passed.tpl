@@ -7,15 +7,9 @@
     {{/NO_USER_NAME}}
 </p>
 <p>
-    Thank you for claiming a task on Kató Platform!
-    This is to remind you that the "{{TASK_TYPE}}" task for "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} is overdue. The deadline for the task was on {{DEADLINE_TIME}}. 
-</p>
-{{#TRANSLATION}}
-<p>
-    Please translate this task in Memsource, our CAT tool:<br />
-    <a href="{{MATECAT}}">Translation URL</a>
+You started the process of creating an account on Kató Platform, but you have not completed your profile. Please Complete this at:<br />
+<a href="{{PROFILE_URL}}">{{PROFILE_URL}}</a>
 </p>
 <p>
-    When all segments are translated, click "Complete".
+If the profile is not completed, the account will be deleted in 12 hours.
 </p>
-{{/TRANSLATION}}

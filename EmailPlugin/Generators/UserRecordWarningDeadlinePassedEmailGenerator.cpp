@@ -38,6 +38,9 @@ void UserRecordWarningDeadlinePassedEmailGenerator::run()
         } else {
             dict.ShowSection("NO_USER_NAME");
         }
+        QString profileUrl = settings.get("site.url");
+        profileUrl += QString::number(user->id()) + "/privateProfile/";
+        dict.SetValue("PROFILE_URL", profileUrl.toStdString());
 
         std::string email_body;
         QString template_location;
