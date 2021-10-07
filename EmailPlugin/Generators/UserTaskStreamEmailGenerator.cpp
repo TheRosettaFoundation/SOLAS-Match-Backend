@@ -61,6 +61,12 @@ void UserTaskStreamEmailGenerator::run()
 
         ctemplate::TemplateDictionary dict("userTaskStreamDict");
         dict.SetValue("SITE_NAME", std::string(settings.get("site.name").toLatin1().constData(), settings.get("site.name").toLatin1().length()));
+        if (user->display_name() != "") {
+            dict.ShowSection("USER_HAS_NAME");
+            dict.SetValue("USERNAME", Email::htmlspecialchars(user->display_name()));
+        } else {
+            dict.ShowSection("NO_USER_NAME");
+        }
 
         int project_id = 0;
         int tasks_within_cutoff = 0;
