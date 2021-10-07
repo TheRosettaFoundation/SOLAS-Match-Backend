@@ -49,7 +49,7 @@ void UserRecordWarningDeadlinePassedEmailGenerator::run()
 
         email->setSender(settings.get("site.system_email_address"));;
         email->addRecipient(QString::fromStdString(user->email()));
-        email->setSubject(settings.get("site.name") + ": Please Complete Your Profile");
+        email->setSubject(settings.get("site.name") + ": Complete your registration");
         email->setBody(QString::fromUtf8(email_body.c_str()));
 
         UserDao::insertWillBeDeletedUser(db, email_message.user_id());
