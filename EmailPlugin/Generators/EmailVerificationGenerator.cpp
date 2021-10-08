@@ -44,7 +44,7 @@ void EmailVerificationGenerator::run()
 
         email->setSender(settings.get("site.system_email_address"));;
         email->addRecipient(QString::fromStdString(user->email()));
-        email->setSubject(settings.get("site.name") + " - Registration");
+        email->setSubject(settings.get("site.name") + ": Your email verification");
         email->setBody(QString::fromUtf8(email_body.c_str()));
     } else {
         email = this->generateErrorEmail(error);
