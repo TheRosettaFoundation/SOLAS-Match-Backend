@@ -59,7 +59,8 @@ public:
     static QMultiMap<int, int> getUserTagIds(QSharedPointer<MySQLHandler> db, int limit = RETURN_ALL, int offset = RETURN_ALL);
     static QMultiMap<int, LCCode> getUserNativeLCCodes(QSharedPointer<MySQLHandler> db, int limit = RETURN_ALL, int offset = RETURN_ALL);
     static QString getUserRealName(QSharedPointer<MySQLHandler> db, int userId);
-
+    static QList<QSharedPointer<User> > getRecordWarningUsers(QSharedPointer<MySQLHandler> db);
+    static void insertWillBeDeletedUser(QSharedPointer<MySQLHandler> db, int user_id);
 };
 
 #endif  //USERDAO_H

@@ -331,3 +331,24 @@ QString UserDao::getUserRealName(QSharedPointer<MySQLHandler> db, int userId)
     }
     return name;
 }
+
+QList<QSharedPointer<User> > UserDao::getRecordWarningUsers(QSharedPointer<MySQLHandler> db)
+{
+    QList<QSharedPointer<User> > users = QList<QSharedPointer<User> >();
+
+    QSharedPointer<QSqlQuery> mQuery = db->call("getRecordWarningUsers");
+    if (mQuery->first()) {
+        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
+        do {
+            QSharedPointer<User> user = QSharedPointer<User>(new User());
+            ModelGenerator::Generate(mQuery, user, fieldMap);
+            users.append(user);
+        } while (mQuery->next());
+    }
+    return users;
+}
+
+void UserDao::insertWillBeDeletedUser(QSharedPointer<MySQLHandler> db, int user_id)
+{
+    db->call("insertWillBeDeletedUser", QString::number(user_id));
+}
