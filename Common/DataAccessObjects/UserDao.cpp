@@ -336,7 +336,7 @@ QList<QSharedPointer<User> > UserDao::getRecordWarningUsers(QSharedPointer<MySQL
 {
     QList<QSharedPointer<User> > users = QList<QSharedPointer<User> >();
 
-    QSharedPointer<QSqlQuery> mQuery = db->call("getRecordWarningUsers");
+    QSharedPointer<QSqlQuery> mQuery = db->call("getRecordWarningUsers", "");
     if (mQuery->first()) {
         QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
         do {
