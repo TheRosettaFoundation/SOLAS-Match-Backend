@@ -120,7 +120,7 @@ void DeadlineChecker::run()
 
         users = UserDao::getRecordWarningUsers(db);
         foreach (QSharedPointer<User> user, users) {
-            qDebug() << "User " << user->id() << " will be deleted in 24+ hours";
+            qDebug() << "User " << user->id() << " will be deleted in 48+ hours";
             UserRecordWarningDeadlinePassed userEmail;
             userEmail.set_email_type(EmailMessage::UserRecordWarningDeadlinePassed);
             userEmail.set_user_id(user->id());
