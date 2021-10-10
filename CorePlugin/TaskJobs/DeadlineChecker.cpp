@@ -7,6 +7,7 @@
 #include "Common/ConfigParser.h"
 #include "Common/DataAccessObjects/TaskDao.h"
 #include "Common/DataAccessObjects/ProjectDao.h"
+#include "Common/DataAccessObjects/UserDao.h"
 #include "Common/protobufs/models/Task.pb.h"
 #include "Common/protobufs/models/Project.pb.h"
 #include "Common/protobufs/requests/DeadlineCheckRequest.pb.h"
@@ -118,7 +119,7 @@ void DeadlineChecker::run()
             qDebug() << "DeadlineChecker::Task late warning email queued";
         }
 
-        users = UserDao::getRecordWarningUsers(db);
+        QList<QSharedPointer<User> > users = UserDao::getRecordWarningUsers(db);
         foreach (QSharedPointer<User> user, users) {
             qDebug() << "User " << user->id() << " will be deleted in 48+ hours";
             UserRecordWarningDeadlinePassed userEmail;
