@@ -18,7 +18,7 @@ If you need any help with your registration process, please check <a href="https
 </p>
 <p>
 We would like you to remember that completing your profile (adding your native language and language pairs) is important to access tasks at TWB.
-If you don’t add this information in the next 48 hours your account will be deleted.
+If you don’t add this information in the next week your account will be deleted.
 </p>
 <p>
 If this happens, you can always re-register.
