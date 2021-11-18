@@ -55,6 +55,7 @@ void OrgFeedbackGenerator::run()
 
     if(error.compare("") == 0) {
         ctemplate::TemplateDictionary dict("feedbackEmail");
+        dict.SetValue("SENDERNAME", Email::htmlspecialchars(sender->display_name()));
         dict.SetValue("USERNAME", Email::htmlspecialchars(claimant->display_name()));
         dict.SetValue("ORG_NAME", org->name());
         QString taskView = settings.get("site.url") + "task/" + QString::number(task->id()) + "/view";
