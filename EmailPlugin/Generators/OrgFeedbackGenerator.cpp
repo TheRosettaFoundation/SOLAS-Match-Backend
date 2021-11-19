@@ -61,7 +61,7 @@ void OrgFeedbackGenerator::run()
         QString taskView = settings.get("site.url") + "task/" + QString::number(task->id()) + "/view";
         dict.SetValue("TASK_VIEW", taskView.toStdString());
         dict.SetValue("TASKTITLE", Email::htmlspecialchars(task->title()));
-        dict.SetValue("FEEDBACK", Email::htmlspecialchars(feedback.toStdString()));
+        dict.SetValue("FEEDBACK", Email::uiCleanseHTMLNewlineAndTabs(feedback.toStdString()));
         dict.SetValue("SITE_NAME", std::string(settings.get("site.name").toLatin1().constData(), settings.get("site.name").toLatin1().length()));
 
         bool footer_enabled=(QString::compare("y", settings.get("email-footer.enabled")) == 0);
