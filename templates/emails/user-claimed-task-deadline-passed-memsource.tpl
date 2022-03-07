@@ -7,7 +7,7 @@
     {{/NO_USER_NAME}}
 </p>
 <p>
-   Thank you for claiming the {{TASK_TYPE}} task for "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}}. The deadline for this task expired on {{DEADLINE_TIME}}.
+   Thank you for claiming the {{TASK_TYPE}} task for "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}}. The deadline for this task expired on {{DEADLINE_TIME}} UTC.
 </p>
 {{#TRANSLATION}}
 <p>

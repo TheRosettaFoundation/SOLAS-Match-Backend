@@ -11,7 +11,7 @@
 <p>
     Thank you for claiming a task on Kató Platform!
     The deadline for the {{TASK_TYPE}} task for
-    "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} is {{DEADLINE_TIME}}.
+    "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} is {{DEADLINE_TIME}} UTC.
     You have 6 days left to complete the translation task. Please make sure you complete it before the deadline.
 </p>
 <p>
@@ -26,7 +26,7 @@
 <p>
     Thank you for claiming a task on Kató Platform!
     The deadline for the {{TASK_TYPE}} task for
-    "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} is {{DEADLINE_TIME}}.
+    "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} is {{DEADLINE_TIME}} UTC.
     You have 6 days left to complete the revision task. Please make sure you complete it before the deadline.
 </p>
 <p>
