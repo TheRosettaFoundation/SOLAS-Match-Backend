@@ -99,10 +99,11 @@ void UserTaskStreamEmailGenerator::run()
                 taskSect->SetValue("TASK_TYPE", taskType.toStdString());
 
                 Locale taskSourceLocale = task->sourcelocale();
-                taskSect->SetValue("SOURCE_LANGUAGE", taskSourceLocale.languagename());
-
+                if (taskSourceLocale.countryname() == 'ANY') taskSect->SetValue("SOURCE_LANGUAGE", taskSourceLocale.languagename());
+                else                                         taskSect->SetValue("SOURCE_LANGUAGE", taskSourceLocale.languagename() + " (" + taskSourceLocale.countryname() + ")");
                 Locale taskTargetLocale = task->targetlocale();
-                taskSect->SetValue("TARGET_LANGUAGE", taskTargetLocale.languagename());
+                if (taskTargetLocale.countryname() == 'ANY') taskSect->SetValue("TARGET_LANGUAGE", taskTargetLocale.languagename());
+                else                                         taskSect->SetValue("TARGET_LANGUAGE", taskTargetLocale.languagename() + " (" + taskTargetLocale.countryname() + ")");
 
                 taskSect->SetValue("WORD_COUNT", QString::number(task->wordcount()).toStdString());
                 QString createdTime = QDateTime::fromString(QString::fromStdString(task->createdtime()),
