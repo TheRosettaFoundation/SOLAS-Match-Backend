@@ -13,7 +13,7 @@
    When all segments are revised, click "Complete".
 </p>
 <p>
-    If you have any questions about this task, please leave a comment in the Kató Community discussion thread associated with your project:<br />
+    If you have any questions about this task, please leave a comment in the TWB Community discussion thread associated with your project:<br />
     <a href="{{COMMUNITY}}">{{COMMUNITY}}</a>
 </p>
 <p>

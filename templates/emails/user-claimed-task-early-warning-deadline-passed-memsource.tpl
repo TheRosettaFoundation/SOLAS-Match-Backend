@@ -9,7 +9,7 @@
 
 {{#TRANSLATION}}
 <p>
-    Thank you for claiming a task on Kató Platform!
+    Thank you for claiming a task on TWB Platform!
     The deadline for the {{TASK_TYPE}} task for
     "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} is {{DEADLINE_TIME}} UTC.
     You have 6 days left to complete the translation task. Please make sure you complete it before the deadline.
@@ -24,7 +24,7 @@
 {{/TRANSLATION}}
 {{#REVISING}}
 <p>
-    Thank you for claiming a task on Kató Platform!
+    Thank you for claiming a task on TWB Platform!
     The deadline for the {{TASK_TYPE}} task for
     "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} is {{DEADLINE_TIME}} UTC.
     You have 6 days left to complete the revision task. Please make sure you complete it before the deadline.
@@ -38,7 +38,7 @@
 </p>
 {{/REVISING}}
 <p>
-    If you have questions about the deadline or any other questions, please leave a comment in the Kató Community discussion thread associated with your project:<br />
+    If you have questions about the deadline or any other questions, please leave a comment in the TWB Community discussion thread associated with your project:<br />
     <a href="{{COMMUNITY}}">{{COMMUNITY}}</a>
 </p>
 

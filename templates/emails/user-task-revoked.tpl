@@ -4,7 +4,7 @@
     You are unable to reclaim this task and it will no longer appear in the list of your available tasks.
 </p>
 <p>
-    If you have any questions about this task, please leave a comment in the Kató Community discussion thread associated with your project.
+    If you have any questions about this task, please leave a comment in the TWB Community discussion thread associated with your project.
 </p>
 
 

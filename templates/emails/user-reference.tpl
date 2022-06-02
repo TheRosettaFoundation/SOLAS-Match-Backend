@@ -6,7 +6,7 @@
     to increase access to information and knowledge across all languages.
 </p>
 <p>
-    Below, you will find a record of your work on Kató Platform. We hope that you found
+    Below, you will find a record of your work on TWB Platform. We hope that you found
     your volunteering experience rewarding, and we thank you for your continued support.
 </p>
 <p>

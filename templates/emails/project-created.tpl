@@ -6,10 +6,10 @@ by the organisation:<br />
 </p>
 <p>
 Translators may have questions about your project.<br />
-Please visit the Kató Community forum topic for this project:<br />
+Please visit the TWB Community forum topic for this project:<br />
 <a href="{{COMMUNITY}}">{{COMMUNITY}}</a><br />
 to answer any questions posed and to interact with the translators.
 </p>
 <p>
-Please also use the Kató Community forum topic to communicate with the Kató project management team.
+Please also use the TWB Community forum topic to communicate with the TWB project management team.
 </p>
