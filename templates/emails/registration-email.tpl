@@ -1,11 +1,9 @@
 <p>Hello,</p>
 <p>
-Thank you for registering yourself on the TWB Platform. You can complete your registration by clicking on the button below.
+Thank you for registering yourself on the TWB Platform. You can complete your registration by clicking on the link below.
 </p>
 <p>
-<form method='post' action="{{URL}}">
-    <input type="submit" name="verify" value="Click here to finish registration" />
-</form>
+<a href="{{URL}}">Click here to finish registration.</a>
 </p>
 <p>
 As a next step, you need to update your profile. Follow the prompts you will be given once you are logged into the TWB Platform.
