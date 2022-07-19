@@ -80,7 +80,7 @@ struct trommons_pair from_neon_to_trommons_pair[] = {
     {"Dari", "prs", "AF"},
     {"Persian", "fa", "IR"},
     {"Polish", "pl", "--"},
-    {"Portuguese", "pt", "PT"},
+    {"Portugueseííí", "pt", "PT"},
     {"Portuguese Brazil", "pt", "BR"},
     {"Quechua", "qu", "--"},
     {"Rohingya (Latin)", "rhg", "90"},
