@@ -7,6 +7,8 @@
 
 #include "Common/protobufs/emails/JSON.h"
 
+#include "from_neon_to_trommons_pair.h"
+
 using namespace  SolasMatch::Common::Protobufs::Emails;
 
 UserReferenceEmailGenerator::UserReferenceEmailGenerator()
@@ -91,10 +93,32 @@ if (user->id() == 3297) { // test code (3297 is id for Alan Barrett)
                         break;
                     }
                     taskSect->SetValue("TASK_TYPE", taskType.toStdString());
+
+                  for (int i = 0; i < from_neon_to_trommons_pair_count; i++) {
+                      if (task->sourcelocale().languagecode() == from_neon_to_trommons_pair[i].language_code && task->sourcelocale().countrycode() == from_neon_to_trommons_pair[i].country_code) {
+                          task->sourcelocale().set_languagename(from_neon_to_trommons_pair[i].language);
+                          task->sourcelocale().set_countryname("ANY");
+                      }
+                      if (task->targetlocale().languagecode() == from_neon_to_trommons_pair[i].language_code && task->targetlocale().countrycode() == from_neon_to_trommons_pair[i].country_code) {
+                          task->targetlocale().set_languagename(from_neon_to_trommons_pair[i].language);
+                          task->targetlocale().set_countryname("ANY");
+                      }
+                  }
+
+                  if (task->sourcelocale().countryname() == "ANY") {
+                    taskSect->SetValue("SOURCE", task->sourcelocale().languagename());
+                  } else {
                     taskSect->SetValue("SOURCE", task->sourcelocale().languagename() + " (" +
                                        task->sourcelocale().countryname() + ")");
+                  }
+
+                  if (task->targetlocale().countryname() == "ANY") {
+                    taskSect->SetValue("TARGET", task->targetlocale().languagename());
+                  } else {
                     taskSect->SetValue("TARGET", task->targetlocale().languagename() + " (" +
                                        task->targetlocale().countryname() + ")");
+                  }
+
                     taskSect->SetValue("WORD_COUNT", QString::number(task->wordcount()).toStdString());
                     QString createdTime = QDateTime::fromString(QString::fromStdString(task->createdtime()), "yyyy-MM-ddTHH:mm:ss").toString("d MMMM yyyy");
                     taskSect->SetValue("CREATED_TIME", createdTime.toStdString());

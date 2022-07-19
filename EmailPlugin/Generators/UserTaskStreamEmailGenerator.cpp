@@ -8,6 +8,8 @@
 #include "Common/DataAccessObjects/LanguageDao.h"
 #include "Common/DataAccessObjects/TagDao.h"
 
+#include "from_neon_to_trommons_pair.h"
+
 using namespace  SolasMatch::Common::Protobufs::Emails;
 
 UserTaskStreamEmailGenerator::UserTaskStreamEmailGenerator()
@@ -97,6 +99,17 @@ void UserTaskStreamEmailGenerator::run()
                     break;
                 }
                 taskSect->SetValue("TASK_TYPE", taskType.toStdString());
+
+                for (int i = 0; i < from_neon_to_trommons_pair_count; i++) {
+                    if (task->sourcelocale().languagecode() == from_neon_to_trommons_pair[i].language_code && task->sourcelocale().countrycode() == from_neon_to_trommons_pair[i].country_code) {
+                        task->sourcelocale().set_languagename(from_neon_to_trommons_pair[i].language);
+                        task->sourcelocale().set_countryname("ANY");
+                    }
+                    if (task->targetlocale().languagecode() == from_neon_to_trommons_pair[i].language_code && task->targetlocale().countrycode() == from_neon_to_trommons_pair[i].country_code) {
+                        task->targetlocale().set_languagename(from_neon_to_trommons_pair[i].language);
+                        task->targetlocale().set_countryname("ANY");
+                    }
+                }
 
                 Locale taskSourceLocale = task->sourcelocale();
                 if (taskSourceLocale.countryname() == "ANY") taskSect->SetValue("SOURCE_LANGUAGE", taskSourceLocale.languagename());

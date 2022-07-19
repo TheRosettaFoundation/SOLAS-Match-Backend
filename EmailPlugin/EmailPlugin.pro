@@ -92,6 +92,7 @@ HEADERS += emailplugin.h \
     Generators/UserRecordWarningDeadlinePassedEmailGenerator.h \
     Generators/UserTaskDeadlineEmailGenerator.h \
     Generators/UserTaskStreamEmailGenerator.h \
+    Generators/from_neon_to_trommons_pair.h \
     Generators/EmailVerificationGenerator.h \
     Generators/BannedLoginGenerator.h \
     Generators/TrackedTaskUploadedEmailGenerator.h \
