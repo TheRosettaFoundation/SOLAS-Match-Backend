@@ -94,30 +94,25 @@ if (user->id() == 3297) { // test code (3297 is id for Alan Barrett)
                     }
                     taskSect->SetValue("TASK_TYPE", taskType.toStdString());
 
-                  for (int i = 0; i < from_neon_to_trommons_pair_count; i++) {
-                      if (task->sourcelocale().languagecode() == from_neon_to_trommons_pair[i].language_code && task->sourcelocale().countrycode() == from_neon_to_trommons_pair[i].country_code) {
-                          task->sourcelocale().set_languagename(from_neon_to_trommons_pair[i].language);
-                          task->sourcelocale().set_countryname("ANY");
-                      }
-                      if (task->targetlocale().languagecode() == from_neon_to_trommons_pair[i].language_code && task->targetlocale().countrycode() == from_neon_to_trommons_pair[i].country_code) {
-                          task->targetlocale().set_languagename(from_neon_to_trommons_pair[i].language);
-                          task->targetlocale().set_countryname("ANY");
-                      }
-                  }
+                    std::string source_languagename = task->sourcelocale().languagename();
+                    std::string source_countryname  = task->sourcelocale().countryname();
+                    std::string target_languagename = task->targetlocale().languagename();
+                    std::string target_countryname  = task->targetlocale().countryname();
+                    for (int i = 0; i < from_neon_to_trommons_pair_count; i++) {
+                        if (task->sourcelocale().languagecode() == from_neon_to_trommons_pair[i].language_code && task->sourcelocale().countrycode() == from_neon_to_trommons_pair[i].country_code) {
+                            source_languagename = from_neon_to_trommons_pair[i].language;
+                            source_countryname  = "ANY";
+                        }
+                        if (task->targetlocale().languagecode() == from_neon_to_trommons_pair[i].language_code && task->targetlocale().countrycode() == from_neon_to_trommons_pair[i].country_code) {
+                            target_languagename = from_neon_to_trommons_pair[i].language;
+                            target_countryname  = "ANY";
+                        }
+                    }
 
-                  if (task->sourcelocale().countryname() == "ANY") {
-                    taskSect->SetValue("SOURCE", task->sourcelocale().languagename());
-                  } else {
-                    taskSect->SetValue("SOURCE", task->sourcelocale().languagename() + " (" +
-                                       task->sourcelocale().countryname() + ")");
-                  }
-
-                  if (task->targetlocale().countryname() == "ANY") {
-                    taskSect->SetValue("TARGET", task->targetlocale().languagename());
-                  } else {
-                    taskSect->SetValue("TARGET", task->targetlocale().languagename() + " (" +
-                                       task->targetlocale().countryname() + ")");
-                  }
+                    if (source_countryname == "ANY") taskSect->SetValue("SOURCE", source_languagename);
+                    else                             taskSect->SetValue("SOURCE", source_languagename + " (" + source_countryname + ")");
+                    if (target_countryname == "ANY") taskSect->SetValue("TARGET", target_languagename);
+                    else                             taskSect->SetValue("TARGET", target_languagename + " (" + target_countryname + ")");
 
                     taskSect->SetValue("WORD_COUNT", QString::number(task->wordcount()).toStdString());
                     QString createdTime = QDateTime::fromString(QString::fromStdString(task->createdtime()), "yyyy-MM-ddTHH:mm:ss").toString("d MMMM yyyy");

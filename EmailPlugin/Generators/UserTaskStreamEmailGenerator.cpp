@@ -100,23 +100,25 @@ void UserTaskStreamEmailGenerator::run()
                 }
                 taskSect->SetValue("TASK_TYPE", taskType.toStdString());
 
+                std::string source_languagename = task->sourcelocale().languagename();
+                std::string source_countryname  = task->sourcelocale().countryname();
+                std::string target_languagename = task->targetlocale().languagename();
+                std::string target_countryname  = task->targetlocale().countryname();
                 for (int i = 0; i < from_neon_to_trommons_pair_count; i++) {
                     if (task->sourcelocale().languagecode() == from_neon_to_trommons_pair[i].language_code && task->sourcelocale().countrycode() == from_neon_to_trommons_pair[i].country_code) {
-                        task->sourcelocale().set_languagename(from_neon_to_trommons_pair[i].language);
-                        task->sourcelocale().set_countryname("ANY");
+                        source_languagename = from_neon_to_trommons_pair[i].language;
+                        source_countryname  = "ANY";
                     }
                     if (task->targetlocale().languagecode() == from_neon_to_trommons_pair[i].language_code && task->targetlocale().countrycode() == from_neon_to_trommons_pair[i].country_code) {
-                        task->targetlocale().set_languagename(from_neon_to_trommons_pair[i].language);
-                        task->targetlocale().set_countryname("ANY");
+                        target_languagename = from_neon_to_trommons_pair[i].language;
+                        target_countryname  = "ANY";
                     }
                 }
 
-                Locale taskSourceLocale = task->sourcelocale();
-                if (taskSourceLocale.countryname() == "ANY") taskSect->SetValue("SOURCE_LANGUAGE", taskSourceLocale.languagename());
-                else                                         taskSect->SetValue("SOURCE_LANGUAGE", taskSourceLocale.languagename() + " (" + taskSourceLocale.countryname() + ")");
-                Locale taskTargetLocale = task->targetlocale();
-                if (taskTargetLocale.countryname() == "ANY") taskSect->SetValue("TARGET_LANGUAGE", taskTargetLocale.languagename());
-                else                                         taskSect->SetValue("TARGET_LANGUAGE", taskTargetLocale.languagename() + " (" + taskTargetLocale.countryname() + ")");
+                if (source_countryname == "ANY") taskSect->SetValue("SOURCE_LANGUAGE", source_languagename);
+                else                             taskSect->SetValue("SOURCE_LANGUAGE", source_languagename + " (" + source_countryname + ")");
+                if (target_countryname == "ANY") taskSect->SetValue("TARGET_LANGUAGE", target_languagename);
+                else                             taskSect->SetValue("TARGET_LANGUAGE", target_languagename + " (" + target_countryname + ")");
 
                 taskSect->SetValue("WORD_COUNT", QString::number(task->wordcount()).toStdString());
                 QString createdTime = QDateTime::fromString(QString::fromStdString(task->createdtime()),
