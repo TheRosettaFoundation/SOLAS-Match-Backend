@@ -7,7 +7,13 @@
 
 #include "Common/protobufs/emails/JSON.h"
 
-#include "from_neon_to_trommons_pair.h"
+struct trommons_pair {
+    std::string language;
+    std::string language_code;
+    std::string country_code;
+};
+extern struct trommons_pair from_neon_to_trommons_pair[];
+extern int from_neon_to_trommons_pair_count;
 
 using namespace  SolasMatch::Common::Protobufs::Emails;
 
