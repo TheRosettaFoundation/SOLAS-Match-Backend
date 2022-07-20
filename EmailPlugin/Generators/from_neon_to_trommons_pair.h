@@ -4,6 +4,8 @@ struct trommons_pair {
     std::string country_code;
 };
 
+#ifndef trommons_pair from_neon_to_trommons_pair
+
 struct trommons_pair from_neon_to_trommons_pair[] = {
     {"Afrikaans", "af", "ZA"},
     {"Albanian", "sq", "--"},
@@ -217,3 +219,5 @@ struct trommons_pair from_neon_to_trommons_pair[] = {
     {"Romani", "rom", "--"}
 };
 int from_neon_to_trommons_pair_count = 210;
+
+#endif
