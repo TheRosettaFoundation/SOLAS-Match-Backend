@@ -106,12 +106,12 @@ void UserTaskStreamEmailGenerator::run()
                 std::string target_countryname  = task->targetlocale().countryname();
                 for (int i = 0; i < selections.size(); i++) {
                     QMap<QString, QVariant> selection = selections[i];
-                    if (task->sourcelocale().languagecode() == selection["language_code"].toString() && task->sourcelocale().countrycode() == selection["country_code"].toString()) {
-                        source_languagename = selection["selection"].toString();
+                    if (task->sourcelocale().languagecode() == selection["language_code"].toStdString() && task->sourcelocale().countrycode() == selection["country_code"].toStdString()) {
+                        source_languagename = selection["selection"].toStdString();
                         source_countryname  = "ANY";
                     }
-                    if (task->targetlocale().languagecode() == selection["language_code"].toString() && task->targetlocale().countrycode() == selection["country_code"].toString()) {
-                        target_languagename = selection["selection"].toString();
+                    if (task->targetlocale().languagecode() == selection["language_code"].toStdString() && task->targetlocale().countrycode() == selection["country_code"].toStdString()) {
+                        target_languagename = selection["selection"].toStdString();
                         target_countryname  = "ANY";
                     }
                 }
