@@ -101,7 +101,7 @@ if (user->id() == 3297) { // test code (3297 is id for Alan Barrett)
                     std::string target_languagename = task->targetlocale().languagename();
                     std::string target_countryname  = task->targetlocale().countryname();
                     for (int i = 0; i < selections.size(); i++) {
-                        QMap<QString, QVariant> selection = selections[i];
+                        QMap<QString, QVariant> selection = LanguageDao::selections[i];
                         if (task->sourcelocale().languagecode() == selection["language_code"].toString() && task->sourcelocale().countrycode() == selection["country_code"].toString()) {
                             source_languagename = selection["selection"].toString();
                             source_countryname  = "ANY";

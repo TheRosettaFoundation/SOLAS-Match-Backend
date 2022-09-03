@@ -56,7 +56,7 @@ void UserTaskStreamEmailGenerator::run()
     }
 
     if (sendEmail) {
-        QList<QMap<QString, QVariant>> selections = get_selections(db);
+        QList<QMap<QString, QVariant>> selections = LanguageDao::get_selections(db);
 
         ConfigParser settings;
         email = QSharedPointer<Email>(new Email);
