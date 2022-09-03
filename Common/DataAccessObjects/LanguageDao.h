@@ -14,7 +14,7 @@ class LanguageDao
 public:
     static QList<QSharedPointer<Language> > getLanguages(QSharedPointer<MySQLHandler> db);
     static QSharedPointer<Language> getLanguage(QSharedPointer<MySQLHandler> db, int id = -1, QString code = "");
-
+    static QList<QMap<QString, QVariant>> get_selections(QSharedPointer<MySQLHandler> db);
 };
 
 #endif // LANGUAGEDAO_H

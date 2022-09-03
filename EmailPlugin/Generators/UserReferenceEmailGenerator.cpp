@@ -7,13 +7,7 @@
 
 #include "Common/protobufs/emails/JSON.h"
 
-struct trommons_pair {
-    std::string language;
-    std::string language_code;
-    std::string country_code;
-};
-extern struct trommons_pair from_neon_to_trommons_pair[];
-extern int from_neon_to_trommons_pair_count;
+#include "Common/DataAccessObjects/LanguageDao.h"
 
 using namespace  SolasMatch::Common::Protobufs::Emails;
 
@@ -41,6 +35,8 @@ void UserReferenceEmailGenerator::run()
     }
 
     if (error == "") {
+        QList<QMap<QString, QVariant>> selections = get_selections(db);
+
         ctemplate::TemplateDictionary dict("user_task_claim");
         QString realName = UserDao::getUserRealName(db, user->id());
         std::string displayName = user->display_name();
@@ -104,13 +100,13 @@ if (user->id() == 3297) { // test code (3297 is id for Alan Barrett)
                     std::string source_countryname  = task->sourcelocale().countryname();
                     std::string target_languagename = task->targetlocale().languagename();
                     std::string target_countryname  = task->targetlocale().countryname();
-                    for (int i = 0; i < from_neon_to_trommons_pair_count; i++) {
-                        if (task->sourcelocale().languagecode() == from_neon_to_trommons_pair[i].language_code && task->sourcelocale().countrycode() == from_neon_to_trommons_pair[i].country_code) {
-                            source_languagename = from_neon_to_trommons_pair[i].language;
+                    for (int i = 0; i < selections.size(); i++) {
+                        if (task->sourcelocale().languagecode() == selection["language_code"].toString() && task->sourcelocale().countrycode() == selection["country_code"].toString()) {
+                            source_languagename = selection["selection"].toString();
                             source_countryname  = "ANY";
                         }
-                        if (task->targetlocale().languagecode() == from_neon_to_trommons_pair[i].language_code && task->targetlocale().countrycode() == from_neon_to_trommons_pair[i].country_code) {
-                            target_languagename = from_neon_to_trommons_pair[i].language;
+                        if (task->targetlocale().languagecode() == selection["language_code"].toString() && task->targetlocale().countrycode() == selection["country_code"].toString()) {
+                            target_languagename = selection["selection"].toString();
                             target_countryname  = "ANY";
                         }
                     }

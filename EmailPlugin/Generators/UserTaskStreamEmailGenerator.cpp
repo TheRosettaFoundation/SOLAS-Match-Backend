@@ -8,8 +8,6 @@
 #include "Common/DataAccessObjects/LanguageDao.h"
 #include "Common/DataAccessObjects/TagDao.h"
 
-#include "from_neon_to_trommons_pair.h"
-
 using namespace  SolasMatch::Common::Protobufs::Emails;
 
 UserTaskStreamEmailGenerator::UserTaskStreamEmailGenerator()
@@ -58,6 +56,8 @@ void UserTaskStreamEmailGenerator::run()
     }
 
     if (sendEmail) {
+        QList<QMap<QString, QVariant>> selections = get_selections(db);
+
         ConfigParser settings;
         email = QSharedPointer<Email>(new Email);
 
@@ -104,13 +104,14 @@ void UserTaskStreamEmailGenerator::run()
                 std::string source_countryname  = task->sourcelocale().countryname();
                 std::string target_languagename = task->targetlocale().languagename();
                 std::string target_countryname  = task->targetlocale().countryname();
-                for (int i = 0; i < from_neon_to_trommons_pair_count; i++) {
-                    if (task->sourcelocale().languagecode() == from_neon_to_trommons_pair[i].language_code && task->sourcelocale().countrycode() == from_neon_to_trommons_pair[i].country_code) {
-                        source_languagename = from_neon_to_trommons_pair[i].language;
+                for (int i = 0; i < selections.size(); i++) {
+                    QMap<QString, QVariant> selection = selections[i];
+                    if (task->sourcelocale().languagecode() == selection["language_code"].toString() && task->sourcelocale().countrycode() == selection["country_code"].toString()) {
+                        source_languagename = selection["selection"].toString();
                         source_countryname  = "ANY";
                     }
-                    if (task->targetlocale().languagecode() == from_neon_to_trommons_pair[i].language_code && task->targetlocale().countrycode() == from_neon_to_trommons_pair[i].country_code) {
-                        target_languagename = from_neon_to_trommons_pair[i].language;
+                    if (task->targetlocale().languagecode() == selection["language_code"].toString() && task->targetlocale().countrycode() == selection["country_code"].toString()) {
+                        target_languagename = selection["selection"].toString();
                         target_countryname  = "ANY";
                     }
                 }
