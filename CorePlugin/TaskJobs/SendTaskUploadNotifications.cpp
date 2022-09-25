@@ -52,7 +52,7 @@ void SendTaskUploadNotifications::run()
               QMap<QString, QVariant> memsource_task = TaskDao::get_memsource_task(db, task->id());
               if (!memsource_task.isEmpty()) {
                   if (!translator.isNull()) {
-                    if (task->tasktype() == TRANSLATION) {
+                        // These are any tasks with a higher workflow...
                         QList<QSharedPointer<Task> > revision_tasks = TaskDao::get_matching_revision_memsource_tasks(db, task);
                         foreach (QSharedPointer<Task> revision_task, revision_tasks) {
 //qDebug() << "SendTaskUploadNotifications Matching Revision Task:" << QString::number(revision_task->id());//(**)
@@ -71,7 +71,6 @@ void SendTaskUploadNotifications::run()
                                 }
                             }
                         }
-                    }
 
                     foreach (QSharedPointer<User> user, users) {
                         TrackedTaskUploaded trackedUpload;
