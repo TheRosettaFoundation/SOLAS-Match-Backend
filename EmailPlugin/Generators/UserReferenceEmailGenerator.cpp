@@ -18,6 +18,8 @@ UserReferenceEmailGenerator::UserReferenceEmailGenerator()
 
 void UserReferenceEmailGenerator::run()
 {
+    extern struct task_type_item task_types[];
+    extern int task_types_count;
     qDebug() << "EmailGenerator: generating user reference email";
     JSON emailMessage;
     emailMessage.ParseFromString(this->protoBody);
@@ -76,25 +78,11 @@ if (user->id() == 3297) { // test code (3297 is id for Alan Barrett)
                     }
                     taskSect->SetValue("ORG_NAME", orgName.toStdString());
 
-                    QString taskType;
-                    switch (task->tasktype()) {
-                    case CHUNKING:
-                        taskType = "Segmentation";
-                        break;
-                    case TRANSLATION:
-                        taskType = "Translation";
-                        break;
-                    case PROOFREADING:
-                        taskType = "Revising";
-                        break;
-                    case POSTEDITING:
-                        taskType = "Desegmentation";
-                        break;
-                    default:
-                        taskType = "Invalid Type";
-                        break;
+                    std::string taskType = "Invalid Type";
+                    for (int i = 0; i < task_types_count; i++) {
+                        if (task->tasktype() == task_types[i].type_enum) taskType = task_types[i].type;
                     }
-                    taskSect->SetValue("TASK_TYPE", taskType.toStdString());
+                    taskSect->SetValue("TASK_TYPE", taskType);
 
                     std::string source_languagename = task->sourcelocale().languagename();
                     std::string source_countryname  = task->sourcelocale().countryname();
@@ -154,20 +142,11 @@ if (user->id() == 3297) { // test code (3297 is id for Alan Barrett)
                     }
                     taskSect->SetValue("ORG_NAME", orgName.toStdString());
 
-                    QString taskType;
-                    int taskTypeId = task->tasktype();
-                    if (taskTypeId == CHUNKING) {
-                        taskType = "Chunking";
-                    } else if(taskTypeId == TRANSLATION) {
-                        taskType = "Translation";
-                    } else if(taskTypeId == PROOFREADING) {
-                        taskType = "Revising";
-                    } else if(taskTypeId == POSTEDITING) {
-                        taskType = "Post-Editing";
-                    } else {
-                        taskType = "Invalid Type";
+                    std::string taskType = "Invalid Type";
+                    for (int i = 0; i < task_types_count; i++) {
+                        if (task->tasktype() == task_types[i].type_enum) taskType = task_types[i].type;
                     }
-                    taskSect->SetValue("TASK_TYPE", taskType.toStdString());
+                    taskSect->SetValue("TASK_TYPE", taskType);
                     taskSect->SetValue("SOURCE", task->sourcelocale().languagename() + " (" +
                                        task->sourcelocale().countryname() + ")");
                     taskSect->SetValue("TARGET", task->targetlocale().languagename() + " (" +

@@ -14,8 +14,8 @@ enum TaskTypes {
 };
 
 struct task_type_item {
-    int enum_type;
-    int enabled;
+    int         type_enum;
+    int         enabled;
     std::string type;
 };
 struct task_type_item task_types[] = {
