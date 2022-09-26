@@ -8,6 +8,8 @@ UserTaskRevokedGenerator::UserTaskRevokedGenerator()
 
 void UserTaskRevokedGenerator::run()
 {
+    extern struct task_type_item task_types[];
+    extern int task_types_count;
     qDebug() << "Email Generator - Generating UserTaskRevokedEmail";
     UserTaskRevokedEmail emailMessage;
     emailMessage.ParseFromString(this->protoBody);

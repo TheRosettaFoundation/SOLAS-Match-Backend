@@ -17,6 +17,8 @@ UserTaskStreamEmailGenerator::UserTaskStreamEmailGenerator()
 
 void UserTaskStreamEmailGenerator::run()
 {
+    extern struct task_type_item task_types[];
+    extern int task_types_count;
     qDebug() << "EmailGenerator: Generating UserTaskStreamEmailGenerator";
 
     UserTaskStreamEmail emailRequest;
@@ -80,25 +82,11 @@ void UserTaskStreamEmailGenerator::run()
                 taskSect->SetValue("TASK_VIEW", taskView.toStdString());
                 taskSect->SetValue("TASK_TITLE", Email::htmlspecialchars(task->title()));
 
-                QString taskType;
-                switch (task->tasktype()) {
-                case CHUNKING:
-                    taskType = "Chunking";
-                    break;
-                case TRANSLATION:
-                    taskType = "Translation";
-                    break;
-                case PROOFREADING:
-                    taskType = "Revising";
-                    break;
-                case POSTEDITING:
-                    taskType = "Post-Editing";
-                    break;
-                default:
-                    taskType = "Invalid Type";
-                    break;
+                std::string task_type = "Invalid Type";
+                for (int i = 0; i < task_types_count; i++) {
+                    if (task->tasktype() == task_types[i].type_enum) task_type = task_types[i].type;
                 }
-                taskSect->SetValue("TASK_TYPE", taskType.toStdString());
+                dict.SetValue("TASK_TYPE", task_type);
 
                 std::string source_languagename = task->sourcelocale().languagename();
                 std::string source_countryname  = task->sourcelocale().countryname();

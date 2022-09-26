@@ -78,11 +78,11 @@ if (user->id() == 3297) { // test code (3297 is id for Alan Barrett)
                     }
                     taskSect->SetValue("ORG_NAME", orgName.toStdString());
 
-                    std::string taskType = "Invalid Type";
+                    std::string task_type = "Invalid Type";
                     for (int i = 0; i < task_types_count; i++) {
-                        if (task->tasktype() == task_types[i].type_enum) taskType = task_types[i].type;
+                        if (task->tasktype() == task_types[i].type_enum) task_type = task_types[i].type;
                     }
-                    taskSect->SetValue("TASK_TYPE", taskType);
+                    taskSect->SetValue("TASK_TYPE", task_type);
 
                     std::string source_languagename = task->sourcelocale().languagename();
                     std::string source_countryname  = task->sourcelocale().countryname();
@@ -142,11 +142,11 @@ if (user->id() == 3297) { // test code (3297 is id for Alan Barrett)
                     }
                     taskSect->SetValue("ORG_NAME", orgName.toStdString());
 
-                    std::string taskType = "Invalid Type";
+                    std::string task_type = "Invalid Type";
                     for (int i = 0; i < task_types_count; i++) {
-                        if (task->tasktype() == task_types[i].type_enum) taskType = task_types[i].type;
+                        if (task->tasktype() == task_types[i].type_enum) task_type = task_types[i].type;
                     }
-                    taskSect->SetValue("TASK_TYPE", taskType);
+                    taskSect->SetValue("TASK_TYPE", task_type);
                     taskSect->SetValue("SOURCE", task->sourcelocale().languagename() + " (" +
                                        task->sourcelocale().countryname() + ")");
                     taskSect->SetValue("TARGET", task->targetlocale().languagename() + " (" +
