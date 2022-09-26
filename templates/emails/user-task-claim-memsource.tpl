@@ -18,6 +18,15 @@
     When all segments are translated, click "Complete".
 </p>
 {{/TRANSLATION}}
+{{#TRANSLATION_WAIT}}
+<p>
+    Please translate this task in Memsource, our CAT tool:<br />
+    <a href="{{MATECAT}}">Translation URL</a><br />
+</p>
+<p>
+    When all segments are translated, click "Complete".
+</p>
+{{/TRANSLATION_WAIT}}
 {{#REVISING}}
 <p>
     Please revise this task in Memsource, our CAT tool:<br />
@@ -32,6 +41,20 @@
     <strong>You will receive an email notification when the task is ready for you to revise.</strong> The email will include a link to the revision task in Memsource, our CAT tool.
 </p>
 {{/REVISING_WAIT}}
+{{#APPROVAL}}
+<p>
+    Please approve this task in Memsource, our CAT tool:<br />
+    <a href="{{MATECAT}}">Approval URL</a><br />
+</p>
+<p>
+   When all segments are approved, click "Complete".
+</p>
+{{/APPROVAL}}
+{{#APPROVAL_WAIT}}
+<p>
+    <strong>You will receive an email notification when the task is ready for you to approve.</strong> The email will include a link to the approval task in Memsource, our CAT tool.
+</p>
+{{/APPROVAL_WAIT}}
 <p>
     If you have any questions about this task, please leave a comment in the TWB Community discussion thread associated with your project:<br />
     <a href="{{COMMUNITY}}">{{COMMUNITY}}</a>

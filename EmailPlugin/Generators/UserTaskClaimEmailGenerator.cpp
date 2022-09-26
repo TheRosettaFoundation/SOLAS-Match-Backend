@@ -11,6 +11,8 @@ UserTaskClaimEmailGenerator::UserTaskClaimEmailGenerator()
 
 void UserTaskClaimEmailGenerator::run()
 {
+    extern struct task_type_item task_types[];
+    extern int task_types_count;
     qDebug() << "EmailGenerator - Generating UserTaskClaim";
 
     JSON email_message;
@@ -50,40 +52,18 @@ void UserTaskClaimEmailGenerator::run()
 
         QMap<QString, QVariant> memsource_task = TaskDao::get_memsource_task(db, task->id());
 
-        QString task_type = "Translation";
-        switch(task->tasktype())
-        {
-            case 1:
-                task_type = "Segmentation";
-                dict.ShowSection("SEGMENTATION");
-                break;
-            case 2:
-                task_type = "Translation";
-                dict.ShowSection("TRANSLATION");
-                break;
-            case 3:
-                task_type = "Revising";
-                if (!memsource_task.isEmpty()) {
-                    if (TaskDao::is_task_translated_in_memsource(db, task)) {
-                        dict.ShowSection("REVISING");
-                    } else {
-                        dict.ShowSection("REVISING_WAIT");
-                    }
+        std::string task_type = "Invalid Type";
+        for (int i = 0; i < task_types_count; i++) {
+            if (task->tasktype() == task_types[i].type_enum) {
+                task_type = task_types[i].type;
+                if (TaskDao::is_task_translated_in_memsource(db, task)) {
+                    dict.ShowSection(task_types[i].show_section);
                 } else {
-                if (TaskDao::is_task_translated_in_matecat(db, task->id())) {
-                dict.ShowSection("REVISING");
-                } else {
-                    dict.ShowSection("REVISING_NO_MATECAT");
+                    dict.ShowSection(task_types[i].show_section + "_WAIT");
                 }
-                }
-                break;
-            case 4:
-                task_type = "Desegmentation";
-                dict.ShowSection("SEGMENTATION");
-                break;
+            }
         }
-
-        dict.SetValue("TASK_TYPE", task_type.toStdString());
+        dict.SetValue("TASK_TYPE", task_type);
 
         Locale taskSourceLocale =  task->sourcelocale();
         Locale taskTargetLocale = task->targetlocale();
