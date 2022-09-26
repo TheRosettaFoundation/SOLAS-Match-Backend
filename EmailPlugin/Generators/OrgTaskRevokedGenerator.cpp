@@ -8,6 +8,8 @@ OrgTaskRevokedGenerator::OrgTaskRevokedGenerator()
 
 void OrgTaskRevokedGenerator::run()
 {
+    extern struct task_type_item task_types[];
+    extern int task_types_count;
     qDebug() << "Email Generator - Generating OrgTaskRevokedEmail";
     OrgTaskRevokedEmail emailMessage;
     emailMessage.ParseFromString(this->protoBody);
@@ -37,25 +39,12 @@ void OrgTaskRevokedGenerator::run()
         dict.SetValue("USER_PROFILE", userProfile.toStdString());
         dict.SetValue("CLAIMANT_NAME", Email::htmlspecialchars(claimant->display_name()));
         dict.SetValue("SITE_NAME", std::string(settings.get("site.name").toLatin1().constData(), settings.get("site.name").toLatin1().length()));
-        QString task_type = "Translation";
 
-        switch(task->tasktype())
-        {
-            case 1:
-                task_type = "Segmentation";
-                break;
-            case 2:
-                task_type = "Translation";
-                break;
-            case 3:
-                task_type = "Revising";
-                break;
-            case 4:
-                task_type = "Desegmentation";
-                break;
+        std::string task_type = "Invalid Type";
+        for (int i = 0; i < task_types_count; i++) {
+            if (task->tasktype() == task_types[i].type_enum) task_type = task_types[i].type;
         }
-
-        dict.SetValue("TASK_TYPE", task_type.toStdString());
+        dict.SetValue("TASK_TYPE", task_type);
 
         Locale taskSourceLocale =  task->sourcelocale();
         Locale taskTargetLocale = task->targetlocale();
