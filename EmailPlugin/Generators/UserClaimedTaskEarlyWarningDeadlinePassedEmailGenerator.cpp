@@ -11,6 +11,8 @@ UserClaimedTaskEarlyWarningDeadlinePassedEmailGenerator::UserClaimedTaskEarlyWar
 
 void UserClaimedTaskEarlyWarningDeadlinePassedEmailGenerator::run()
 {
+    extern struct task_type_item task_types[];
+    extern int task_types_count;
     qDebug() << "EmailGenerator: Generating UserClaimedTaskEarlyWarningDeadlinePassed email";
 
     UserClaimedTaskEarlyWarningDeadlinePassed email_message;
@@ -48,36 +50,14 @@ void UserClaimedTaskEarlyWarningDeadlinePassedEmailGenerator::run()
 
         QMap<QString, QVariant> memsource_task = TaskDao::get_memsource_task(db, task->id());
 
-        QString task_type = "Translation";
-        switch(task->tasktype())
-        {
-            case 1:
-                task_type = "Segmentation";
-                dict.ShowSection("SEGMENTATION");
-                break;
-            case 2:
-                task_type = "Translation";
-                dict.ShowSection("TRANSLATION");
-                break;
-            case 3:
-                task_type = "Revising";
-                if (!memsource_task.isEmpty()) {
-                    dict.ShowSection("REVISING");
-                } else {
-                if (TaskDao::is_task_translated_in_matecat(db, task->id())) {
-                dict.ShowSection("REVISING");
-                } else {
-                    dict.ShowSection("REVISING_NO_MATECAT");
-                }
-                }
-                break;
-            case 4:
-                task_type = "Desegmentation";
-                dict.ShowSection("SEGMENTATION");
-                break;
+        std::string task_type = "Invalid Type";
+        for (int i = 0; i < task_types_count; i++) {
+            if (task->tasktype() == task_types[i].type_enum) {
+                task_type = task_types[i].type;
+                dict.ShowSection(task_types[i].show_section);
+            }
         }
-
-        dict.SetValue("TASK_TYPE", task_type.toStdString());
+        dict.SetValue("TASK_TYPE", task_type);
 
         Locale taskSourceLocale =  task->sourcelocale();
         Locale taskTargetLocale = task->targetlocale();
@@ -110,11 +90,9 @@ void UserClaimedTaskEarlyWarningDeadlinePassedEmailGenerator::run()
         QString template_location;
 
       if (!memsource_task.isEmpty()) {
-          if (task->tasktype() == 3) { // Revising
               if (!TaskDao::is_task_translated_in_memsource(db, task)) sendMessage = false;
 //if (!TaskDao::is_task_translated_in_memsource(db, task)) qDebug() << "UserClaimedTaskEarly NOT send warning:" << QString::number(task->id());//(**)
 //else  qDebug() << "UserClaimedTaskEarly send warning:" << QString::number(task->id());//(**)
-          }
 
           template_location = QString(TEMPLATE_DIRECTORY) + "emails/user-claimed-task-early-warning-deadline-passed-memsource.tpl";
       } else {

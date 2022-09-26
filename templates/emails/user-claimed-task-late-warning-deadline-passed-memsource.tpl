@@ -28,6 +28,15 @@
     When all segments are revised, click "Complete".
 </p>
 {{/REVISING}}
+{{#APPROVAL}}
+<p>
+    Please approve this task in Memsource, our CAT tool:<br />
+    <a href="{{MATECAT}}">Approval URL</a>
+</p>
+<p>
+    When all segments are approved, click "Complete".
+</p>
+{{/APPROVAL}}
 <p>
     Please complete the task as soon as possible. If you need a deadline extension or are unable to deliver this work,
     please leave a comment in the TWB Community discussion thread associated with your project:<br />

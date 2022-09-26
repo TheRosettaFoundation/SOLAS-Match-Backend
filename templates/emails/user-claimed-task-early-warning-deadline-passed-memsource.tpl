@@ -37,6 +37,21 @@
     When all segments are revised, click "Complete".
 </p>
 {{/REVISING}}
+{{#APPROVAL}}
+<p>
+    Thank you for claiming a task on TWB Platform!
+    The deadline for the {{TASK_TYPE}} task for
+    "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} is {{DEADLINE_TIME}} UTC.
+    You have 6 days left to complete the revision task. Please make sure you complete it before the deadline.
+</p>
+<p>
+    Please approve this task in Memsource, our CAT tool:<br />
+    <a href="{{MATECAT}}">Approval URL</a>
+</p>
+<p>
+    When all segments are approved, click "Complete".
+</p>
+{{/APPROVAL}}
 <p>
     If you have questions about the deadline or any other questions, please leave a comment in the TWB Community discussion thread associated with your project:<br />
     <a href="{{COMMUNITY}}">{{COMMUNITY}}</a>

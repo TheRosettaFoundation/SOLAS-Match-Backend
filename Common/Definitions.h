@@ -17,14 +17,15 @@ struct task_type_item {
     int         type_enum;
     int         enabled;
     std::string type;
+    std::string show_section;
 };
 struct task_type_item task_types[] = {
-    {CHUNKING,     0, "Segmentation"},
-    {TRANSLATION,  1, "Translation"},
-    {PROOFREADING, 1, "Revising"},
-    {POSTEDITING,  0, "Desegmentation"},
-    {QUALITY,      0, "QA??"},
-    {APPROVAL,     1, "Approval??"}
+    {CHUNKING,     0, "Segmentation",   "SEGMENTATION"},
+    {TRANSLATION,  1, "Translation",    "TRANSLATION"},
+    {PROOFREADING, 1, "Revising",       "REVISING"},
+    {POSTEDITING,  0, "Desegmentation", "SEGMENTATION"},
+    {QUALITY,      0, "QA??",           "QUALITY"},
+    {APPROVAL,     1, "Approval??",     "APPROVAL"}
 };
 const int task_types_count = 6;
 
