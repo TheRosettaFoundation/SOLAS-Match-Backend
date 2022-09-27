@@ -725,3 +725,23 @@ QList<QSharedPointer<Task> > TaskDao::get_matching_revision_memsource_tasks(QSha
     }
     return revision_tasks;
 }
+
+QList<QMap<QString, QVariant>> TaskDao::get_task_type_details(QSharedPointer<MySQLHandler> db)
+{
+    QList<QMap<QString, QVariant>> task_type_details = QList<QMap<QString, QVariant>>();
+    QSharedPointer<QSqlQuery> mQuery = db->call("get_task_type_details", "");
+    if (mQuery->first()) {
+        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
+        do {
+            QMap<QString, QVariant> row = QMap<QString, QVariant>();
+            row["type_enum"] = MySQLHandler::getValueFromQuery(fieldMap.value("type_enum"), mQuery);
+            row["enabled"] = MySQLHandler::getValueFromQuery(fieldMap.value("enabled"), mQuery);
+            row["type_text"] = MySQLHandler::getValueFromQuery(fieldMap.value("type_text"), mQuery);
+            row["colour"] = MySQLHandler::getValueFromQuery(fieldMap.value("colour"), mQuery);
+            row["claimed_template"] = MySQLHandler::getValueFromQuery(fieldMap.value("claimed_template"), mQuery);
+            row["show_section"] = MySQLHandler::getValueFromQuery(fieldMap.value("show_section"), mQuery);
+            task_type_details.append(row);
+        } while (mQuery->next());
+    }
+    return task_type_details;
+}
