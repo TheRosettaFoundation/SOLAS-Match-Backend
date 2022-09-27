@@ -78,8 +78,9 @@ if (user->id() == 3297) { // test code (3297 is id for Alan Barrett)
                     taskSect->SetValue("ORG_NAME", orgName.toStdString());
 
                     std::string task_type = "Invalid Type";
-                    for (int i = 0; i < task_types_count; i++) {
-                        if (task->tasktype() == task_types[i].type_enum) task_type = task_types[i].type;
+                    for (int i = 0; i < task_type_details.size(); i++) {
+                        QMap<QString, QVariant> task_type_detail = task_type_details[i];
+                        if (task->tasktype() == task_type_detail["type_enum"].toInt()) task_type = task_type_detail["type_text"].toString().toStdString();
                     }
                     taskSect->SetValue("TASK_TYPE", task_type);
 
@@ -142,8 +143,9 @@ if (user->id() == 3297) { // test code (3297 is id for Alan Barrett)
                     taskSect->SetValue("ORG_NAME", orgName.toStdString());
 
                     std::string task_type = "Invalid Type";
-                    for (int i = 0; i < task_types_count; i++) {
-                        if (task->tasktype() == task_types[i].type_enum) task_type = task_types[i].type;
+                    for (int i = 0; i < task_type_details.size(); i++) {
+                        QMap<QString, QVariant> task_type_detail = task_type_details[i];
+                        if (task->tasktype() == task_type_detail["type_enum"].toInt()) task_type = task_type_detail["type_text"].toString().toStdString();
                     }
                     taskSect->SetValue("TASK_TYPE", task_type);
                     taskSect->SetValue("SOURCE", task->sourcelocale().languagename() + " (" +
