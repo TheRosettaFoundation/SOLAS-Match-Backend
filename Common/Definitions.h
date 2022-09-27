@@ -13,22 +13,6 @@ enum TaskTypes {
     APPROVAL     = 6
 };
 
-struct task_type_item {
-    int         type_enum;
-    int         enabled;
-    std::string type;
-    std::string show_section;
-};
-struct task_type_item task_types[] = {
-    {CHUNKING,     0, "Segmentation",   "SEGMENTATION"},
-    {TRANSLATION,  1, "Translation",    "TRANSLATION"},
-    {PROOFREADING, 1, "Revising",       "REVISING"},
-    {POSTEDITING,  0, "Desegmentation", "SEGMENTATION"},
-    {QUALITY,      0, "QA??",           "QUALITY"},
-    {APPROVAL,     1, "Approval??",     "APPROVAL"}
-};
-const int task_types_count = 6;
-
 enum TaskStatus {
     WAITING_FOR_PREREQUISITES = 1,
     PENDING_CLAIM = 2,
