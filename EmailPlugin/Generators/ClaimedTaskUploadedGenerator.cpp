@@ -9,8 +9,6 @@ ClaimedTaskUploadedGenerator::ClaimedTaskUploadedGenerator()
 
 void ClaimedTaskUploadedGenerator::run()
 {
-    extern struct task_type_item task_types[];
-    extern int task_types_count;
     qDebug() << "EmailGenerator: Starting new thread for claimed task uploaded email";
 
     ClaimedTaskUploaded emailMessage;
@@ -20,6 +18,7 @@ void ClaimedTaskUploadedGenerator::run()
     QString error = "";
     QSharedPointer<Email> email = QSharedPointer<Email>(new Email());
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
+    QList<QMap<QString, QVariant>> task_type_details = TaskDao::get_task_type_details(db);
     QSharedPointer<User> user = UserDao::getUser(db, emailMessage.user_id());
     QSharedPointer<Task> task = TaskDao::getTask(db, emailMessage.task_id());
     QSharedPointer<Project> project = QSharedPointer<Project>();

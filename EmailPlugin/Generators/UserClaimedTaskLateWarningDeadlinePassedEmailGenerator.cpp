@@ -11,8 +11,6 @@ UserClaimedTaskLateWarningDeadlinePassedEmailGenerator::UserClaimedTaskLateWarni
 
 void UserClaimedTaskLateWarningDeadlinePassedEmailGenerator::run()
 {
-    extern struct task_type_item task_types[];
-    extern int task_types_count;
     qDebug() << "EmailGenerator: Generating UserClaimedTaskLateWarningDeadlinePassed email";
 
     UserClaimedTaskLateWarningDeadlinePassed email_message;
@@ -24,6 +22,7 @@ void UserClaimedTaskLateWarningDeadlinePassedEmailGenerator::run()
     QSharedPointer<User> user = QSharedPointer<User>();
     QSharedPointer<Task> task = QSharedPointer<Task>();
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
+    QList<QMap<QString, QVariant>> task_type_details = TaskDao::get_task_type_details(db);
     bool sendMessage = true;
 
 

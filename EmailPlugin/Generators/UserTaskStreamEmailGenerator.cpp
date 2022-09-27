@@ -17,8 +17,6 @@ UserTaskStreamEmailGenerator::UserTaskStreamEmailGenerator()
 
 void UserTaskStreamEmailGenerator::run()
 {
-    extern struct task_type_item task_types[];
-    extern int task_types_count;
     qDebug() << "EmailGenerator: Generating UserTaskStreamEmailGenerator";
 
     UserTaskStreamEmail emailRequest;
@@ -29,6 +27,7 @@ void UserTaskStreamEmailGenerator::run()
     QSharedPointer<Email> email;
     QList<QSharedPointer<Task> > userTasks;
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
+    QList<QMap<QString, QVariant>> task_type_details = TaskDao::get_task_type_details(db);
     QSharedPointer<User> user = UserDao::getUser(db, emailRequest.user_id());
     QSharedPointer<UserTaskStreamNotification> notifData = UserDao::getUserTaskStreamNotification(db,
                                                              emailRequest.user_id());

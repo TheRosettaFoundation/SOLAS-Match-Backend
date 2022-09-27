@@ -11,8 +11,6 @@ UserTaskClaimEmailGenerator::UserTaskClaimEmailGenerator()
 
 void UserTaskClaimEmailGenerator::run()
 {
-    extern struct task_type_item task_types[];
-    extern int task_types_count;
     qDebug() << "EmailGenerator - Generating UserTaskClaim";
 
     JSON email_message;
@@ -24,6 +22,7 @@ void UserTaskClaimEmailGenerator::run()
     QSharedPointer<User> user = QSharedPointer<User>();
     QSharedPointer<Task> task = QSharedPointer<Task>();
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
+    QList<QMap<QString, QVariant>> task_type_details = TaskDao::get_task_type_details(db);
 
     user = UserDao::getUser(db, email_message.user_id());
     task = TaskDao::getTask(db, email_message.task_id());

@@ -11,8 +11,6 @@ UserTaskDeadlineEmailGenerator::UserTaskDeadlineEmailGenerator()
 
 void UserTaskDeadlineEmailGenerator::run()
 {
-    extern struct task_type_item task_types[];
-    extern int task_types_count;
     qDebug() << "EmailGenerator: Generating UserClaimedTaskDeadlinePassed email";
 
     UserClaimedTaskDeadlinePassed email_message;
@@ -24,6 +22,7 @@ void UserTaskDeadlineEmailGenerator::run()
     QSharedPointer<User> user = QSharedPointer<User>();
     QSharedPointer<Task> task = QSharedPointer<Task>();
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
+    QList<QMap<QString, QVariant>> task_type_details = TaskDao::get_task_type_details(db);
     bool sendMessage = true;
 
 

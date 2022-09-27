@@ -8,8 +8,6 @@ TrackedTaskUploadedEmailGenerator::TrackedTaskUploadedEmailGenerator()
 
 void TrackedTaskUploadedEmailGenerator::run()
 {
-    extern struct task_type_item task_types[];
-    extern int task_types_count;
     qDebug() << "EmailGenerator - Generating TrackedTaskUploaded email";
 
     TrackedTaskUploaded email_message;
@@ -19,6 +17,7 @@ void TrackedTaskUploadedEmailGenerator::run()
     QString error = "";
     QSharedPointer<Email> email = QSharedPointer<Email>(new Email());
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
+    QList<QMap<QString, QVariant>> task_type_details = TaskDao::get_task_type_details(db);
     QSharedPointer<User> user = UserDao::getUser(db, email_message.user_id());
     QSharedPointer<User> translator = UserDao::getUser(db, email_message.translator_id());
     QSharedPointer<Task> task = TaskDao::getTask(db, email_message.task_id());

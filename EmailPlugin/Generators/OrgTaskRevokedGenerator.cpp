@@ -8,8 +8,6 @@ OrgTaskRevokedGenerator::OrgTaskRevokedGenerator()
 
 void OrgTaskRevokedGenerator::run()
 {
-    extern struct task_type_item task_types[];
-    extern int task_types_count;
     qDebug() << "Email Generator - Generating OrgTaskRevokedEmail";
     OrgTaskRevokedEmail emailMessage;
     emailMessage.ParseFromString(this->protoBody);
@@ -17,6 +15,7 @@ void OrgTaskRevokedGenerator::run()
     ConfigParser settings;
     QSharedPointer<Email> email = QSharedPointer<Email>(new Email());
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
+    QList<QMap<QString, QVariant>> task_type_details = TaskDao::get_task_type_details(db);
     QSharedPointer<User> user = UserDao::getUser(db, emailMessage.user_id());
     QSharedPointer<Task> task = TaskDao::getTask(db, emailMessage.task_id());
     QSharedPointer<User> claimant = UserDao::getUser(db, emailMessage.claimant_id());
