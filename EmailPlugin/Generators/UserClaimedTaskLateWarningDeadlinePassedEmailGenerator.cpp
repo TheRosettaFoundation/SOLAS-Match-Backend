@@ -50,10 +50,11 @@ void UserClaimedTaskLateWarningDeadlinePassedEmailGenerator::run()
         QMap<QString, QVariant> memsource_task = TaskDao::get_memsource_task(db, task->id());
 
         std::string task_type = "Invalid Type";
-        for (int i = 0; i < task_types_count; i++) {
-            if (task->tasktype() == task_types[i].type_enum) {
-                task_type = task_types[i].type;
-                dict.ShowSection(task_types[i].show_section);
+        for (int i = 0; i < task_type_details.size(); i++) {
+            QMap<QString, QVariant> task_type_detail = task_type_details[i];
+            if (task->tasktype() == task_type_detail["type_enum"].toInt()) {
+                task_type = task_type_detail["type_text"].toString().toStdString();
+                dict.ShowSection(task_type_detail["show_section"].toString().toStdString());
             }
         }
         dict.SetValue("TASK_TYPE", task_type);
