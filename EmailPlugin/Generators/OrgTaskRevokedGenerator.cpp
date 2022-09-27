@@ -40,8 +40,9 @@ void OrgTaskRevokedGenerator::run()
         dict.SetValue("SITE_NAME", std::string(settings.get("site.name").toLatin1().constData(), settings.get("site.name").toLatin1().length()));
 
         std::string task_type = "Invalid Type";
-        for (int i = 0; i < task_types_count; i++) {
-            if (task->tasktype() == task_types[i].type_enum) task_type = task_types[i].type;
+        for (int i = 0; i < task_type_details.size(); i++) {
+            QMap<QString, QVariant> task_type_detail = task_type_details[i];
+            if (task->tasktype() == task_type_detail["type_enum"].toInt()) task_type = task_type_detail["type_text"].toString().toStdString();
         }
         dict.SetValue("TASK_TYPE", task_type);
 
