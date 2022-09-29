@@ -14,11 +14,11 @@ We noticed that you started creating an account on the TWB Platform, but you hav
 <a href="{{PROFILE_URL}}">{{PROFILE_URL}}</a>
 </p>
 <p>
-If you need any help with your registration process, please check <a href="https://drive.google.com/file/d/1XzfzXS8QK8OaGQe4WRhgc-SwAMCUWW4t/view">this tutorial</a>. 
+For more guidance on how to complete your profile, please check our <a href="https://docs.google.com/document/d/1ZSflGPROCZa0g-VZwlIujrQAG2nleIY-gdzjXR3O0MA/edit">Translator’s Manual</a>.
 </p>
 <p>
-We would like you to remember that completing your profile (adding your native language and language pairs) is important to access tasks at TWB.
-If you don’t add this information in the next week your account will be deleted.
+We would like you to remember that completing your profile (adding your <strong>native language</strong> and <strong>language pairs</strong>) is important to access tasks at TWB.
+If you don’t add this information in the next few days your account will be automatically deleted.
 </p>
 <p>
 If this happens, you can always re-register.
