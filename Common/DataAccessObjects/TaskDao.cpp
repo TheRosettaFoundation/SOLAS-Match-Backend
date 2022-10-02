@@ -726,7 +726,7 @@ QList<QSharedPointer<Task> > TaskDao::get_matching_revision_memsource_tasks(QSha
     return revision_tasks;
 }
 
-QList<QMap<QString, QVariant>> TaskDao::get_task_type_details(QSharedPointer<MySQLHandler> db)
+QList<QMap<QString, QVariant> > TaskDao::get_task_type_details(QSharedPointer<MySQLHandler> db)
 {
     QList<QMap<QString, QVariant>> task_type_details = QList<QMap<QString, QVariant>>();
     QSharedPointer<QSqlQuery> mQuery = db->call("get_task_type_details", "");
