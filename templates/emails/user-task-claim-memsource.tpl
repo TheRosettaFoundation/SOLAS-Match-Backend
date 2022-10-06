@@ -11,7 +11,7 @@
 </p>
 {{#TRANSLATION}}
 <p>
-    Please translate this task in Memsource, our CAT tool:<br />
+    Please translate this task in Phrase TMS, our CAT tool:<br />
     <a href="{{MATECAT}}">Translation URL</a><br />
 </p>
 <p>
@@ -20,7 +20,7 @@
 {{/TRANSLATION}}
 {{#TRANSLATION_WAIT}}
 <p>
-    Please translate this task in Memsource, our CAT tool:<br />
+    Please translate this task in Phrase TMS, our CAT tool:<br />
     <a href="{{MATECAT}}">Translation URL</a><br />
 </p>
 <p>
@@ -29,7 +29,7 @@
 {{/TRANSLATION_WAIT}}
 {{#REVISING}}
 <p>
-    Please revise this task in Memsource, our CAT tool:<br />
+    Please revise this task in Phrase TMS, our CAT tool:<br />
     <a href="{{MATECAT}}">Revision URL</a><br />
 </p>
 <p>
@@ -38,21 +38,21 @@
 {{/REVISING}}
 {{#REVISING_WAIT}}
 <p>
-    <strong>You will receive an email notification when the task is ready for you to revise.</strong> The email will include a link to the revision task in Memsource, our CAT tool.
+    <strong>You will receive an email notification when the task is ready for you to revise.</strong> The email will include a link to the revision task in Phrase TMS, our CAT tool.
 </p>
 {{/REVISING_WAIT}}
 {{#APPROVAL}}
 <p>
-    Please approve this task in Memsource, our CAT tool:<br />
+    Please proofread and approve this task in Phrase TMS, our CAT tool:<br />
     <a href="{{MATECAT}}">Approval URL</a><br />
 </p>
 <p>
-   When all segments are approved, click "Complete".
+   When all segments are proofread and approved, click "Complete".
 </p>
 {{/APPROVAL}}
 {{#APPROVAL_WAIT}}
 <p>
-    <strong>You will receive an email notification when the task is ready for you to approve.</strong> The email will include a link to the approval task in Memsource, our CAT tool.
+    <strong>You will receive an email notification when the task is ready for you to proofread and approve.</strong> The email will include a link to the proofreading and approval task in Phrase TMS, our CAT tool.
 </p>
 {{/APPROVAL_WAIT}}
 <p>

@@ -10,7 +10,7 @@ this is a summary of all tasks available in your language combinations. You are 
 <p>
 <strong>Please, do not work on the tasks until you have claimed them.
 To claim a task, you just have to click on the blue heading, and then on the button “claim task”.
-After that, click on the button “yes, I promise I will translate/revise/approve this file”.
+After that, click on the button “yes, I promise I will translate/revise this file”.
 You can watch this <a href="https://drive.google.com/file/d/1E7t4BiFDkTi5r4orgteVzJy4QAiehiB3/view">2-minute tutorial</a>,
 if you don’t know how to claim a task.</strong>
 </p>

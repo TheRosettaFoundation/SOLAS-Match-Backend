@@ -15,7 +15,7 @@
     You have 6 days left to complete the translation task. Please make sure you complete it before the deadline.
 </p>
 <p>
-    Please translate this task in Memsource, our CAT tool:<br />
+    Please translate this task in Phrase TMS, our CAT tool:<br />
     <a href="{{MATECAT}}">Translation URL</a>
 </p>
 <p>
@@ -30,7 +30,7 @@
     You have 6 days left to complete the revision task. Please make sure you complete it before the deadline.
 </p>
 <p>
-    Please revise this task in Memsource, our CAT tool:<br />
+    Please revise this task in Phrase TMS, our CAT tool:<br />
     <a href="{{MATECAT}}">Revision URL</a>
 </p>
 <p>
@@ -45,11 +45,11 @@
     You have 6 days left to complete the revision task. Please make sure you complete it before the deadline.
 </p>
 <p>
-    Please approve this task in Memsource, our CAT tool:<br />
-    <a href="{{MATECAT}}">Approval URL</a>
+    Please proofread and approve this task in Phrase TMS, our CAT tool:<br />
+    <a href="{{MATECAT}}">Proofreading and Approval URL</a>
 </p>
 <p>
-    When all segments are approved, click "Complete".
+    When all segments are proofread and approved, click "Complete".
 </p>
 {{/APPROVAL}}
 <p>

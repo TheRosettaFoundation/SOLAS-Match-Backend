@@ -19,7 +19,7 @@ You can find our guidelines on leaving constructive feedback here:<br />
 {{/REVISING}}
 {{#APPROVAL}}
 <p>
-We would really appreciate it if you could provide some brief constructive feedback on the revision task {{TASK_TITLE}} you approved.
+We would really appreciate it if you could provide some brief constructive feedback on the revision task {{TASK_TITLE}} you proofread and approved.
 This will help fellow volunteers improve.
 </p>
 <p>

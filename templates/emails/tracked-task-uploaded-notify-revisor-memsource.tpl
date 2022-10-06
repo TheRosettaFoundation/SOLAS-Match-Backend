@@ -7,7 +7,7 @@
     from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}}.
 </p>
 <p>
-    Please revise this task in Memsource, our CAT tool:<br />
+    Please revise this task in Phrase TMS, our CAT tool:<br />
     <a href="{{MATECAT_REVISION}}">Revision URL</a>
 </p>
 <p>
@@ -20,11 +20,11 @@
     from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}}.
 </p>
 <p>
-    Please approve this task in Memsource, our CAT tool:<br />
+    Please proofread and approve this task in Phrase TMS, our CAT tool:<br />
     <a href="{{MATECAT_REVISION}}">Revision URL</a>
 </p>
 <p>
-   When all segments are approved, click "Complete".
+   When all segments are proofread and approved, click "Complete".
 </p>
 {{/APPROVAL}}
 <p>
