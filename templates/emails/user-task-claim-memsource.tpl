@@ -44,7 +44,7 @@
 {{#APPROVAL}}
 <p>
     Please proofread and approve this task in Phrase TMS, our CAT tool:<br />
-    <a href="{{MATECAT}}">Approval URL</a><br />
+    <a href="{{MATECAT}}">Proofreading and Approval URL</a><br />
 </p>
 <p>
    When all segments are proofread and approved, click "Complete".

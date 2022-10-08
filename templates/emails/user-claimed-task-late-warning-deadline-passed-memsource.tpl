@@ -31,7 +31,7 @@
 {{#APPROVAL}}
 <p>
     Please proofread and approve this task in Phrase TMS, our CAT tool:<br />
-    <a href="{{MATECAT}}">Approval URL</a>
+    <a href="{{MATECAT}}">Proofreading and Approval URL</a>
 </p>
 <p>
     When all segments are proofread and approved, click "Complete".
