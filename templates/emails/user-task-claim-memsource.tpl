@@ -43,16 +43,16 @@
 {{/REVISING_WAIT}}
 {{#APPROVAL}}
 <p>
-    Please proofread and approve this task in Phrase TMS, our CAT tool:<br />
+    Please proofread this task in Phrase TMS, our CAT tool:<br />
     <a href="{{MATECAT}}">Proofreading and Approval URL</a><br />
 </p>
 <p>
-   When all segments are proofread and approved, click "Complete".
+   When all segments are proofread, click "Complete".
 </p>
 {{/APPROVAL}}
 {{#APPROVAL_WAIT}}
 <p>
-    <strong>You will receive an email notification when the task is ready for you to proofread and approve.</strong> The email will include a link to the proofreading and approval task in Phrase TMS, our CAT tool.
+    <strong>You will receive an email notification when the task is ready for you to proofread.</strong> The email will include a link to the proofreading and approval task in Phrase TMS, our CAT tool.
 </p>
 {{/APPROVAL_WAIT}}
 <p>

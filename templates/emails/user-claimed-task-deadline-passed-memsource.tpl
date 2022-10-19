@@ -29,11 +29,11 @@
 {{/REVISING}}
 {{#APPROVAL}}
 <p>
-    Please proofread and approve this task in Phrase TMS, our CAT tool:<br />
+    Please proofread this task in Phrase TMS, our CAT tool:<br />
     <a href="{{MATECAT}}">Proofreading and Approval URL</a>
 </p>
 <p>
-    When all segments are proofread and approved, click "Complete".
+    When all segments are proofread, click "Complete".
 </p>
 {{/APPROVAL}}
 <p>
