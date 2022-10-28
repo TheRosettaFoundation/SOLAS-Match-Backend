@@ -8,6 +8,11 @@
 this is a summary of all tasks available in your language combinations. You are welcome to claim them if they match your interests and schedule.
 </p>
 <p>
+We have added a new task type, called Proofreading and Approval.
+You will see it in this task stream notification if there are tasks available matching your languages.
+If you want to learn more about this task type, check <a href="https://community.translatorswb.org/t/new-proofreading-and-approval-task-type/53469">here</a>.
+</p>
+<p>
 <strong>Please, do not work on the tasks until you have claimed them.
 To claim a task, you just have to click on the blue heading, and then on the button “claim task”.
 After that, click on the button “yes, I promise I will translate/revise/proofread this file”.
