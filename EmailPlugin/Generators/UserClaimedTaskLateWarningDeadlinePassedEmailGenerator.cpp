@@ -68,7 +68,7 @@ void UserClaimedTaskLateWarningDeadlinePassedEmailGenerator::run()
         dict.SetValue("DEADLINE_TIME", deadline.toStdString());
 
         QString uploadUrl = settings.get("site.url");
-        uploadUrl += "task/" + QString::number(task->id()) + "/id";
+        uploadUrl += "task/" + QString::number(task->id()) + "/view";
         dict.SetValue("TASK_UPLOAD", uploadUrl.toStdString());
 
         dict.SetValue("MATECAT", TaskDao::get_matecat_url(db, task, memsource_task));

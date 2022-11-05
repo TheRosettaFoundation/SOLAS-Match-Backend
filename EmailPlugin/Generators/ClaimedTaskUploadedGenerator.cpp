@@ -54,7 +54,7 @@ void ClaimedTaskUploadedGenerator::run()
         QString uploadUrl = settings.get("site.url");
         QString reviewUrl = settings.get("site.url");
         QString profileUrl = settings.get("site.url");
-        uploadUrl += "task/" + QString::number(task->id()) + "/id";
+        uploadUrl += "task/" + QString::number(task->id()) + "/view";
         reviewUrl += "task/" + QString::number(task->id()) + "/review";
         profileUrl += QString::number(user->id()) + "/profile/";
 

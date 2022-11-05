@@ -38,7 +38,7 @@ void ClaimedTaskSourceUpdatedGenerator::run()
         dict.SetValue("SITE_NAME", std::string(settings.get("site.name").toLatin1().constData(), settings.get("site.name").toLatin1().length()));
         dict.SetValue("TASK_TITLE", Email::htmlspecialchars(task->title()));
         QString uploadUrl = settings.get("site.url");
-        uploadUrl += "task/" + QString::number(task->id()) + "/id";
+        uploadUrl += "task/" + QString::number(task->id()) + "/view";
         dict.SetValue("TASK_UPLOAD", uploadUrl.toStdString());
 
         std::string task_type = "Invalid Type";

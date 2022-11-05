@@ -77,7 +77,7 @@ void UserTaskStreamEmailGenerator::run()
             QDateTime deadline_DT = QDateTime::fromString(QString::fromStdString(task->deadline()), "yyyy-MM-ddTHH:mm:ss");
             if (deadline_DT > QDateTime::currentDateTimeUtc().addMonths(-settings.get("mail.task_stream_cutoff_months").toInt())) { // Only notify about tasks with deadline within last (3) months
                 ctemplate::TemplateDictionary *taskSect = dict.AddSectionDictionary("TASK_SECT");
-                QString taskView = settings.get("site.url") + "task/" + QString::number(task->id()) + "/view";
+                QString taskView = settings.get("site.url") + "task/" + QString::number(task->id()) + "/view/?utm_source=email&utm_medium=stream&utm_campaign=task";
                 taskSect->SetValue("TASK_VIEW", taskView.toStdString());
                 taskSect->SetValue("TASK_TITLE", Email::htmlspecialchars(task->title()));
 
@@ -140,12 +140,12 @@ void UserTaskStreamEmailGenerator::run()
 
                     if (task->projectid() != project_id) { // Display first time only
                         taskSect->ShowSection("PARTOF_SECT");
-                        QString projectView = settings.get("site.url") + "project/" + QString::number(task->projectid()) + "/view";
+                        QString projectView = settings.get("site.url") + "project/" + QString::number(task->projectid()) + "/view/?utm_source=email&utm_medium=stream&utm_campaign=project";
                         taskSect->SetValue("PROJECT_VIEW", projectView.toStdString());
                         taskSect->SetValue("PROJECT_TITLE", Email::htmlspecialchars(project->title()));
                         QSharedPointer<Organisation> org = OrganisationDao::getOrg(db, project->organisationid());
                         if (!org.isNull()) {
-                            QString orgView = settings.get("site.url") + "org/" + QString::number(project->organisationid()) + "/profile";
+                            QString orgView = settings.get("site.url") + "org/" + QString::number(project->organisationid()) + "/profile/?utm_source=email&utm_medium=stream&utm_campaign=org";
                             taskSect->SetValue("ORG_VIEW", orgView.toStdString());
                             taskSect->SetValue("ORG_NAME", org->name());
                         }
