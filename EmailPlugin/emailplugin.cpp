@@ -13,6 +13,7 @@
 #include "Generators/PasswordResetEmailGenerator.h"
 #include "Generators/TaskArchivedEmailGenerator.h"
 #include "Generators/TaskClaimedEmailGenerator.h"
+#include "Generators/UserTaskCancelled.h"
 #include "Generators/UserTaskClaimEmailGenerator.h"
 #include "Generators/UserTaskDeadlineEmailGenerator.h"
 #include "Generators/UserClaimedTaskEarlyWarningDeadlinePassedEmailGenerator.h"
@@ -145,6 +146,8 @@ void EmailPlugin::registerEmailTypes()
     qRegisterMetaType<TrackedTaskUploadedEmailGenerator>(name.toLatin1());
     name = "EmailGenerator_" + QString::number(EmailMessage::TaskClaimed);
     qRegisterMetaType<TaskClaimedEmailGenerator>(name.toLatin1());
+    name = "EmailGenerator_" + QString::number(EmailMessage::UserTaskCancelled);
+    qRegisterMetaType<UserTaskCancelledEmailGenerator>(name.toLatin1());
     name = "EmailGenerator_" + QString::number(EmailMessage::UserTaskClaim);
     qRegisterMetaType<UserTaskClaimEmailGenerator>(name.toLatin1());
     name = "EmailGenerator_" + QString::number(EmailMessage::OrgTaskDeadlinePassed);
