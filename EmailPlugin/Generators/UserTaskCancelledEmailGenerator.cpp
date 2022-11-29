@@ -56,6 +56,9 @@ void UserTaskCancelledEmailGenerator::run()
         dict.SetValue("SOURCE_LANGUAGE",taskSourceLocale.languagename());
         dict.SetValue("TARGET_LANGUAGE",taskTargetLocale.languagename());
 
+        if (!TaskDao::is_task_translated_in_memsource(db, task)) dict.ShowSection("CLAIMED");
+        else                                                     dict.ShowSection("IN_PROGRESS");
+
         bool footer_enabled=(QString::compare("y", settings.get("email-footer.enabled")) == 0);
         if (footer_enabled)
         {
