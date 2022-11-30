@@ -43,11 +43,11 @@ SOURCES += emailplugin.cpp \
     Generators/TaskArchivedEmailGenerator.cpp \
     Generators/TaskClaimedEmailGenerator.cpp \
     Generators/UserTaskClaimEmailGenerator.cpp \
+    Generators/UserTaskCancelledEmailGenerator.cpp \
     Generators/OrgDeadlinePassedEmailGenerator.cpp \
     Generators/UserClaimedTaskEarlyWarningDeadlinePassedEmailGenerator.cpp \
     Generators/UserClaimedTaskLateWarningDeadlinePassedEmailGenerator.cpp \
     Generators/UserRecordWarningDeadlinePassedEmailGenerator.cpp \
-    Generators/UserTaskCancelled.cpp \
     Generators/UserTaskDeadlineEmailGenerator.cpp \
     Generators/UserTaskStreamEmailGenerator.cpp \
     Generators/EmailVerificationGenerator.cpp \
