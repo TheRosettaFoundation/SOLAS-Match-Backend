@@ -56,6 +56,9 @@ void UserTaskCancelledEmailGenerator::run()
         dict.SetValue("SOURCE_LANGUAGE",taskSourceLocale.languagename());
         dict.SetValue("TARGET_LANGUAGE",taskTargetLocale.languagename());
 
+        QSharedPointer<Project> project = ProjectDao::getProject(db, task->projectid());
+        dict.SetValue("COMMUNITY", ProjectDao::discourse_parameterize(project->title(), task->projectid()));
+
         if (!TaskDao::is_task_translated_in_memsource(db, task)) dict.ShowSection("CLAIMED");
         else                                                     dict.ShowSection("IN_PROGRESS");
 
@@ -75,7 +78,7 @@ void UserTaskCancelledEmailGenerator::run()
 
         email->setSender(settings.get("site.system_email_address"));;
         email->addRecipient(QString::fromStdString(user->email()));
-        email->setSubject(settings.get("site.name") + ": Task Cancelled Notification");
+        email->setSubject(settings.get("site.name") + ": Your task was cancelled - we are sorry for the inconvenience!");
         email->setBody(QString::fromUtf8(email_body.c_str()));
     } else {
         email = this->generateErrorEmail(error);
