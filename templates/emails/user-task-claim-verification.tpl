@@ -4,7 +4,7 @@
 {{#TRANSLATION}}
 <p>You requested to take a test in order to become a Kató Verified Translator.</p>
 
-<p>You can access the test in <a href="https://kato.translatorswb.org/">Kató Platform</a>, in your <strong>Claimed Tasks</strong> section, which you can find in the upper menu. To start translating, please click on the <strong>Translate using Kató TM button</strong> for your test.<br />
+<p>You can access the test in <a href="https://twbplatform.org/">TWB Platform</a>, in your <strong>Claimed Tasks</strong> section, which you can find in the upper menu. To start translating, please click on the <strong>Translate using Kató TM button</strong> for your test.<br />
 Or click directly here: <a href="{{MATECAT}}">{{MATECAT}}</a></p>
 
 <p>Please complete the translation using Kató TM and submit it by the due date listed in the task.</p>
@@ -15,7 +15,7 @@ Or click directly here: <a href="{{MATECAT}}">{{MATECAT}}</a></p>
 <p>In our forum, <a href="https://community.translatorswb.org/">Kató Community</a>, you will find some resources on how to use Kató TM:</p>
 
 <ul>
-<li><a href="https://community.translatorswb.org/t/completing-a-task-on-kato-platform/167">Completing a task on Kató Platform</a></li>
+<li><a href="https://community.translatorswb.org/t/completing-a-task-on-kato-platform/167">Completing a task on TWB Platform</a></li>
 <li><a href="https://community.translatorswb.org/t/using-the-kato-tm-translation-interface/100">Using the Kató TM translation interface</a></li>
 <li><a href="https://community.translatorswb.org/t/finding-the-next-segment-to-translate-revise-on-kato-tm/539/3">Finding the next segment to translate/revise on Kató TM</a></li>
 <li><a href="https://community.translatorswb.org/t/how-to-tell-if-your-translation-revision-is-complete-on-kato-tm/541">How to tell if your translation/revision is complete on Kató TM</a></li>

@@ -493,7 +493,7 @@ std::string TaskDao::get_matecat_url(QSharedPointer<MySQLHandler> db, QSharedPoi
 
     if (!memsource_task.isEmpty()) {
         //matecat_url = QString("https://cloud.memsource.com/web/job/") + memsource_task["memsource_task_uid"].toString() + "/translate";
-        matecat_url = QString("https://kato.translatorswb.org/simplesaml/saml2/idp/SSOService.php?spentityid=https://cloud.memsource.com/web/saml2Login/metadata/127330&RelayState=https://cloud.memsource.com/web/job/") + memsource_task["memsource_task_uid"].toString() + "/translate";
+        matecat_url = QString("https://twbplatform.org/simplesaml/saml2/idp/SSOService.php?spentityid=https://cloud.memsource.com/web/saml2Login/metadata/127330&RelayState=https://cloud.memsource.com/web/job/") + memsource_task["memsource_task_uid"].toString() + "/translate";
         return matecat_url.toStdString();
     }
 

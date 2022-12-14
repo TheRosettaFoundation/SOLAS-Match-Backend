@@ -13,7 +13,7 @@ where you can meet fellow volunteers and TWB staff and find the answers to frequ
 Once you are there, don’t forget to take a look at our <a href="https://community.translatorswb.org/t/welcome-pack-for-kato-translators/3138">Translator's Toolkit</a>.
 </p>
 <p>
-To see available tasks in your language combination, check the <a href="https://kato.translatorswb.org/">homepage</a>.
+To see available tasks in your language combination, check the <a href="https://twbplatform.org/">homepage</a>.
 Follow <a href="https://community.translatorswb.org/t/signing-up-for-kato-platform-email-notifications/121">these instructions</a>
 to receive regular email notifications when tasks are available.
 </p>
