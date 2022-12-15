@@ -163,113 +163,113 @@ std::string ProjectDao::discourse_parameterize(const std::string a, int project_
 
     QString out("https://community.translatorswb.org/t/");
     for (int i = 0; i < s.length(); i++) {
-        if (s[i] < 0x30) {
+        if (s[i] < (ushort)0x30) {
             out.append('-');
-        } else if (s[i] >  0x017E) {
+        } else if (s[i] >  (ushort)0x017E) {
             out.append('-');
-        } else if (s[i] >= 0x0179) {
+        } else if (s[i] >= (ushort)0x0179) {
             out.append('z');
-        } else if (s[i] >= 0x0176) {
+        } else if (s[i] >= (ushort)0x0176) {
             out.append('y');
-        } else if (s[i] >= 0x0174) {
+        } else if (s[i] >= (ushort)0x0174) {
             out.append('w');
-        } else if (s[i] >= 0x0168) {
+        } else if (s[i] >= (ushort)0x0168) {
             out.append('u');
-        } else if (s[i] >= 0x0162) {
+        } else if (s[i] >= (ushort)0x0162) {
             out.append('t');
-        } else if (s[i] >= 0x015A) {
+        } else if (s[i] >= (ushort)0x015A) {
             out.append('s');
-        } else if (s[i] >= 0x0154) {
+        } else if (s[i] >= (ushort)0x0154) {
             out.append('r');
-        } else if (s[i] >= 0x0152) {
+        } else if (s[i] >= (ushort)0x0152) {
             out.append("oe");
-        } else if (s[i] >= 0x014C) {
+        } else if (s[i] >= (ushort)0x014C) {
             out.append('o');
-        } else if (s[i] >= 0x0143) {
+        } else if (s[i] >= (ushort)0x0143) {
             out.append('n');
-        } else if (s[i] >= 0x0139) {
+        } else if (s[i] >= (ushort)0x0139) {
             out.append('l');
-        } else if (s[i] >= 0x0136) {
+        } else if (s[i] >= (ushort)0x0136) {
             out.append('k');
-        } else if (s[i] >= 0x0134) {
+        } else if (s[i] >= (ushort)0x0134) {
             out.append('j');
-        } else if (s[i] >= 0x0132) {
+        } else if (s[i] >= (ushort)0x0132) {
             out.append("ij");
-        } else if (s[i] >= 0x0128) {
+        } else if (s[i] >= (ushort)0x0128) {
             out.append('i');
-        } else if (s[i] >= 0x0124) {
+        } else if (s[i] >= (ushort)0x0124) {
             out.append('h');
-        } else if (s[i] >= 0x011C) {
+        } else if (s[i] >= (ushort)0x011C) {
             out.append('g');
-        } else if (s[i] >= 0x0112) {
+        } else if (s[i] >= (ushort)0x0112) {
             out.append('e');
-        } else if (s[i] >= 0x010E) {
+        } else if (s[i] >= (ushort)0x010E) {
             out.append('d');
-        } else if (s[i] >= 0x0106) {
+        } else if (s[i] >= (ushort)0x0106) {
             out.append('c');
-        } else if (s[i] >= 0x0100) {
+        } else if (s[i] >= (ushort)0x0100) {
             out.append('a');
-        } else if (s[i] >= 0x007B && s[i] <= 0x00BF) {
+        } else if (s[i] >= (ushort)0x007B && s[i] <= (ushort)0x00BF) {
             out.append('-');
-        } else if (s[i] >= 0x003A && s[i] <= 0x0040) {
+        } else if (s[i] >= (ushort)0x003A && s[i] <= (ushort)0x0040) {
             out.append('-');
-        } else if (s[i] >= 0x005B && s[i] <= 0x0060) {
+        } else if (s[i] >= (ushort)0x005B && s[i] <= (ushort)0x0060) {
             out.append('-');
-        } else if (s[i] >= 0x00FF) {
+        } else if (s[i] >= (ushort)0x00FF) {
             out.append('y');
-        } else if (s[i] >= 0x00FE) {
+        } else if (s[i] >= (ushort)0x00FE) {
             out.append("th");
-        } else if (s[i] >= 0x00FD) {
+        } else if (s[i] >= (ushort)0x00FD) {
             out.append('y');
-        } else if (s[i] >= 0x00F9) {
+        } else if (s[i] >= (ushort)0x00F9) {
             out.append('u');
-        } else if (s[i] >= 0x00F8) {
+        } else if (s[i] >= (ushort)0x00F8) {
             out.append('o');
-        } else if (s[i] >= 0x00F7) {
+        } else if (s[i] >= (ushort)0x00F7) {
             out.append('-');
-        } else if (s[i] >= 0x00F2) {
+        } else if (s[i] >= (ushort)0x00F2) {
             out.append('o');
-        } else if (s[i] >= 0x00F1) {
+        } else if (s[i] >= (ushort)0x00F1) {
             out.append('n');
-        } else if (s[i] >= 0x00F0) {
+        } else if (s[i] >= (ushort)0x00F0) {
             out.append('d');
-        } else if (s[i] >= 0x00EC) {
+        } else if (s[i] >= (ushort)0x00EC) {
             out.append('i');
-        } else if (s[i] >= 0x00E8) {
+        } else if (s[i] >= (ushort)0x00E8) {
             out.append('e');
-        } else if (s[i] >= 0x00E7) {
+        } else if (s[i] >= (ushort)0x00E7) {
             out.append('c');
-        } else if (s[i] >= 0x00E6) {
+        } else if (s[i] >= (ushort)0x00E6) {
             out.append("ae");
-        } else if (s[i] >= 0x00E0) {
+        } else if (s[i] >= (ushort)0x00E0) {
             out.append('a');
-        } else if (s[i] >= 0x00DF) {
+        } else if (s[i] >= (ushort)0x00DF) {
             out.append("ss");
-        } else if (s[i] >= 0x00DE) {
+        } else if (s[i] >= (ushort)0x00DE) {
             out.append("th");
-        } else if (s[i] >= 0x00DD) {
+        } else if (s[i] >= (ushort)0x00DD) {
             out.append('y');
-        } else if (s[i] >= 0x00D9) {
+        } else if (s[i] >= (ushort)0x00D9) {
             out.append('u');
-        } else if (s[i] >= 0x00D8) {
+        } else if (s[i] >= (ushort)0x00D8) {
             out.append('o');
-        } else if (s[i] >= 0x00D7) {
+        } else if (s[i] >= (ushort)0x00D7) {
             out.append('x');
-        } else if (s[i] >= 0x00D2) {
+        } else if (s[i] >= (ushort)0x00D2) {
             out.append('o');
-        } else if (s[i] >= 0x00D1) {
+        } else if (s[i] >= (ushort)0x00D1) {
             out.append('n');
-        } else if (s[i] >= 0x00D0) {
+        } else if (s[i] >= (ushort)0x00D0) {
             out.append('d');
-        } else if (s[i] >= 0x00CC) {
+        } else if (s[i] >= (ushort)0x00CC) {
             out.append('i');
-        } else if (s[i] >= 0x00C8) {
+        } else if (s[i] >= (ushort)0x00C8) {
             out.append('e');
-        } else if (s[i] >= 0x00C7) {
+        } else if (s[i] >= (ushort)0x00C7) {
             out.append('c');
-        } else if (s[i] >= 0x00C6) {
+        } else if (s[i] >= (ushort)0x00C6) {
             out.append("ae");
-        } else if (s[i] >= 0x00C0) {
+        } else if (s[i] >= (ushort)0x00C0) {
             out.append('a');
         } else {
             out.append(s[i]);
