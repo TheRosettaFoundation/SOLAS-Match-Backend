@@ -1,21 +1,19 @@
 <p>
-    {{USERNAME}},
+    Dear {{USERNAME}},
 </p>
 <p>
-    You claimed a {{TASK_TYPE}} task for "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} with Translators without Borders.
+    We had to cancel the the {{TASK_TYPE}} task for "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} due to change in plans. We are sorry for the inconvenience.
 </p>
 {{#CLAIMED}}
-<p>text only displayed for when user has claimed the task (but not yet in progress)</p>
+<p>
+If you have any questions about this task, please leave a comment in the TWB Community discussion thread associated with your project: <a href="{{COMMUNITY}}">{{COMMUNITY}}</a>
+</p>
 {{/CLAIMED}}
 {{#IN_PROGRESS}}
-<p>text only displayed for when the task is in progress (i.e. the translation prerequisites are complete)</p>
+<p>
+All the words you already completed for this task will count towards your recognition points. If you have any questions about this task, please leave a comment in the TWB Community discussion thread associated with your project: <a href="{{COMMUNITY}}">{{COMMUNITY}}</a>
+</p>
 {{/IN_PROGRESS}}
 <p>
-    If you have any questions about this task, please leave a comment in the TWB Community discussion thread associated with your project:<br />
-    <a href="{{COMMUNITY}}">{{COMMUNITY}}</a>
+    We thank you for your interest and hope you'll find other tasks to claim soon.
 </p>
-<p>
-   Thank you for your work on this task and for your continued support!
-</p>
-
-{{>FOOTER}}
