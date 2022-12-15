@@ -37,12 +37,12 @@ void myMessageHandler(QtMsgType type, const QMessageLogContext &context, const Q
     QFile outFile(logFile);
     if (outFile.open(QIODevice::WriteOnly | QIODevice::Append)) {
         QTextStream ts(&outFile);
-        ts << txt << endl;
+        ts << txt << Qt::endl;
     } else {
         //Could not open file write to stdout instead
         outFile.open(stdout, QIODevice::WriteOnly);
         QTextStream ts(&outFile);
-        ts << txt << endl;
+        ts << txt << Qt::endl;
     }
 }
 
