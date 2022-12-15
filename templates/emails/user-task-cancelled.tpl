@@ -17,5 +17,3 @@ All the words you already completed for this task will count towards your recogn
 <p>
     We thank you for your interest and hope you'll find other tasks to claim soon.
 </p>
-
-{{>FOOTER}}
