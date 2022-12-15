@@ -87,11 +87,11 @@ HEADERS += emailplugin.h \
     Generators/TaskArchivedEmailGenerator.h \
     Generators/TaskClaimedEmailGenerator.h \
     Generators/UserTaskClaimEmailGenerator.h \
+    Generators/UserTaskCancelledEmailGenerator.h \
     Generators/OrgDeadlinePassedEmailGenerator.h \
     Generators/UserClaimedTaskEarlyWarningDeadlinePassedEmailGenerator.h \
     Generators/UserClaimedTaskLateWarningDeadlinePassedEmailGenerator.h \
     Generators/UserRecordWarningDeadlinePassedEmailGenerator.h \
-    Generators/UserTaskCancelled.h \
     Generators/UserTaskDeadlineEmailGenerator.h \
     Generators/UserTaskStreamEmailGenerator.h \
     Generators/EmailVerificationGenerator.h \
