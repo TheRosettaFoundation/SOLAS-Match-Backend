@@ -42,7 +42,7 @@ void PluginScheduler::run()
         while(!xmlReader.atEnd()) {
             xmlReader.readNext();
 
-            if(xmlReader.name() == "task") {
+            if(xmlReader.name().toString() == "task") {
                 if(!xmlReader.isEndElement()) {
                     task = QPointer<TimedTask>(new TimedTask());
                     QXmlStreamAttributes atts = xmlReader.attributes();
@@ -58,7 +58,7 @@ void PluginScheduler::run()
                 }
             }
 
-            if(xmlReader.name() == "interval" && !xmlReader.isEndElement()) {
+            if(xmlReader.name().toString() == "interval" && !xmlReader.isEndElement()) {
                 QXmlStreamAttributes atts = xmlReader.attributes();
                 TimeInterval interval;
 
@@ -77,7 +77,7 @@ void PluginScheduler::run()
 
                 task->setInterval(interval);
             }
-            if(xmlReader.name() == "message" && !xmlReader.isEndElement()) {
+            if(xmlReader.name().toString() == "message" && !xmlReader.isEndElement()) {
                 QXmlStreamAttributes atts = xmlReader.attributes();
 
                 if(atts.hasAttribute("exchange")) {
