@@ -412,7 +412,7 @@ QByteArray QxtMailMessage::rfc2822() const
         rv += "This is a message with multiple parts in MIME format.\r\n";
         rv += "--" + qxt_d->boundary + "\r\nContent-Type: ";
         if (hasExtraHeader("Content-Type"))
-            rv += extraHeader("Content-Type") + "\r\n";
+            rv += "" + extraHeader("Content-Type") + "\r\n";
         else
             rv += "text/plain; charset=UTF-8\r\n";
         if (hasExtraHeader("Content-Transfer-Encoding"))
