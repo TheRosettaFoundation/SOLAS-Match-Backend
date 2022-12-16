@@ -34,7 +34,6 @@
 
 #include "qxtmailattachment.h"
 #include "qxtmail_p.h"
-#include <QTextCodec>
 #include <QBuffer>
 #include <QPointer>
 #include <QFile>

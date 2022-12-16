@@ -34,7 +34,6 @@
 
 #include "qxtmailmessage.h"
 #include "qxtmail_p.h"
-#include <QTextCodec>
 #include <QUuid>
 #include <QDir>
 #include <QtDebug>
