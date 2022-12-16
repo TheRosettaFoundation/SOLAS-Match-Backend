@@ -10,6 +10,7 @@
 
 QT       += core
 QT       += network
+QT       += core5compat
 
 QT       -= gui
 
