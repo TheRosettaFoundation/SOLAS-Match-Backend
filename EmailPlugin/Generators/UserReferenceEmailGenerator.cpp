@@ -107,6 +107,10 @@ if (user->id() == 3297) { // test code (3297 is id for Alan Barrett)
 
                     taskSect->SetValue("WORD_COUNT", QString::number(task->wordcount()).toStdString());
                     QString createdTime = QDateTime::fromString(QString::fromStdString(task->createdtime()), "yyyy-MM-dd HH:mm:ss").toString("d MMMM yyyy");
+qDebug() << "createdTime (raw from db model): " << task->createdtime();//(**)
+qDebug() << "createdTime (QString): " << QString::fromStdString(task->createdtime());//(**)
+qDebug() << "createdTime (QDateTime::fromString): " << QDateTime::fromString(QString::fromStdString(task->createdtime()), "yyyy-MM-dd HH:mm:ss");//(**)
+qDebug() << "createdTime (about to display): " << createdTime;//(**)
                     taskSect->SetValue("CREATED_TIME", createdTime.toStdString());
                 }
             }
