@@ -17,7 +17,7 @@ UserTaskStreamEmailGenerator::UserTaskStreamEmailGenerator()
 
 void UserTaskStreamEmailGenerator::run()
 {
-    qDebug() << "EmailGenerator: Generating UserTaskStreamEmailGenerator";
+    //qDebug() << "EmailGenerator: Generating UserTaskStreamEmailGenerator";
 
     UserTaskStreamEmail emailRequest;
     emailRequest.ParseFromString(this->protoBody);
@@ -47,16 +47,17 @@ void UserTaskStreamEmailGenerator::run()
         if (userTasks.count() < 1) {
             sendEmail = false;
             if (notifData->strict()) {
-                qDebug() << "Failed to generate task stream email: No strict tasks found for user "
-                         << QString::number(emailRequest.user_id());
+                //qDebug() << "Failed to generate task stream email: No strict tasks found for user "
+                //         << QString::number(emailRequest.user_id());
             } else {
-                qDebug() << "Failed to generate task stream email: No tasks found for user "
-                         << QString::number(emailRequest.user_id());
+                //qDebug() << "Failed to generate task stream email: No tasks found for user "
+                //         << QString::number(emailRequest.user_id());
             }
         }
     }
 
     if (sendEmail) {
+qDebug() << "Sending?: " << QString::number(emailRequest.user_id());//(**)
         QList<QMap<QString, QVariant>> selections = LanguageDao::get_selections(db);
 
         ConfigParser settings;
@@ -75,6 +76,9 @@ void UserTaskStreamEmailGenerator::run()
         int tasks_within_cutoff = 0;
         foreach (QSharedPointer<Task> task, userTasks) {
             QDateTime deadline_DT = QDateTime::fromString(QString::fromStdString(task->deadline()), "yyyy-MM-ddTHH:mm:ss");
+qDebug() << "Task: " << task->id();//(**)
+qDebug() << "deadline: " << deadline_DT;//(**)
+qDebug() << "limit: " << QDateTime::currentDateTimeUtc().addMonths(-settings.get("mail.task_stream_cutoff_months").toInt());//(**)
             if (deadline_DT > QDateTime::currentDateTimeUtc().addMonths(-settings.get("mail.task_stream_cutoff_months").toInt())) { // Only notify about tasks with deadline within last (3) months
                 ctemplate::TemplateDictionary *taskSect = dict.AddSectionDictionary("TASK_SECT");
                 QString taskView = settings.get("site.url") + "task/" + QString::number(task->id()) + "/view/?utm_source=email&utm_medium=stream&utm_campaign=task";
@@ -184,7 +188,7 @@ void UserTaskStreamEmailGenerator::run()
             email->setBody(QString::fromUtf8(email_body.c_str()));
             this->emailQueue->insert(email, this->currentMessage);
         } else {
-            qDebug() << "UserTaskStreamEmailGenerator: No tasks within cutoff for user " << QString::number(emailRequest.user_id());
+            //qDebug() << "UserTaskStreamEmailGenerator: No tasks within cutoff for user " << QString::number(emailRequest.user_id());
         }
     } else {
         if (error != "") {
@@ -195,8 +199,8 @@ void UserTaskStreamEmailGenerator::run()
 
     QString sentDateTime = QDateTime::currentDateTime().toString("yyyy-MM-dd HH:mm:ss");
     if (UserDao::taskStreamNotificationSent(db, emailRequest.user_id(), sentDateTime)) {
-        qDebug() << "UserTaskStreamEmailGenerator: Sending notification request for user " <<
-                    QString::number(emailRequest.user_id());
+        //qDebug() << "UserTaskStreamEmailGenerator: Sending notification request for user " <<
+        //            QString::number(emailRequest.user_id());
     } else {
         qDebug() << "UserTaskStreamEmailGenerator: Failed to update last sent date for user id "
                     << emailRequest.user_id();

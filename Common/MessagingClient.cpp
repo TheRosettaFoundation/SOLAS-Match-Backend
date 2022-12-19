@@ -66,14 +66,14 @@ void MessagingClient::declareQueue(QString exchange, QString topic, QString queu
 
 void MessagingClient::publish(QString exchange, QString topic, std::string message)
 {
-    qDebug() << "Publishing to exchnage " << exchange << " on " << topic;
+    //qDebug() << "Publishing to exchnage " << exchange << " on " << topic;
     if(this->conn) {
         try {
             mExchange = this->conn->createExchange(exchange.toStdString());
             mExchange->Declare(exchange.toStdString(), "topic", AMQP_DURABLE);
             mExchange->Publish(message, topic.toStdString());
         } catch (AMQPException e) {
-            qDebug() << "Caught exception";
+            qDebug() << "Caught exception " << topic;
         }
     } else {
         qDebug() << "Connection not initialized";

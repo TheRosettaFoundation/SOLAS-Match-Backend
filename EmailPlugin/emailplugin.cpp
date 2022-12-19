@@ -85,7 +85,7 @@ void EmailPlugin::run()
 
 void EmailPlugin::messageReveived(AMQPMessage *message)
 {
-    qDebug() << "EmailPlugin::Received Message";
+    //qDebug() << "EmailPlugin::Received Message";
 
     AMQPQueue *messageQueue = message->getQueue();
     if(messageQueue != NULL)

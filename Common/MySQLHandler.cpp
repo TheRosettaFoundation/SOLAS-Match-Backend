@@ -24,7 +24,7 @@ MySQLHandler::MySQLHandler(QString name)
 
 MySQLHandler::~MySQLHandler()
 {
-    qDebug() << "Deleting MySQLHandler " << this->connName;
+    //qDebug() << "Deleting MySQLHandler " << this->connName;
     this->close();
     delete this->conn;
 }
@@ -75,11 +75,11 @@ bool MySQLHandler::openConnection()
             if (!this->conn->open()) {
                 qDebug() << "MySQLHandler: Failed to connect to database on 2nd attempt: " << this->conn->lastError().text();
             } else {
-                qDebug() << this->connName << " MySQL connection established";
+                //qDebug() << this->connName << " MySQL connection established";
                 ret = true;
             }
         } else {
-            qDebug() << this->connName << " MySQL connection established";
+            //qDebug() << this->connName << " MySQL connection established";
             ret = true;
         }
     } else {
