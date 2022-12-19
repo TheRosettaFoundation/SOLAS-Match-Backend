@@ -106,7 +106,7 @@ if (user->id() == 3297) { // test code (3297 is id for Alan Barrett)
                     else                             taskSect->SetValue("TARGET", target_languagename + " (" + target_countryname + ")");
 
                     taskSect->SetValue("WORD_COUNT", QString::number(task->wordcount()).toStdString());
-                    QString createdTime = QDateTime::fromString(QString::fromStdString(task->createdtime()), "yyyy-MM-ddTHH:mm:ss").toString("d MMMM yyyy");
+                    QString createdTime = QDateTime::fromString(QString::fromStdString(task->createdtime()), "yyyy-MM-dd HH:mm:ss").toString("d MMMM yyyy");
                     taskSect->SetValue("CREATED_TIME", createdTime.toStdString());
                 }
             }
@@ -153,7 +153,7 @@ if (user->id() == 3297) { // test code (3297 is id for Alan Barrett)
                     taskSect->SetValue("TARGET", task->targetlocale().languagename() + " (" +
                                        task->targetlocale().countryname() + ")");
                     taskSect->SetValue("WORD_COUNT", QString::number(task->wordcount()).toStdString());
-                    QString uploadTime = QDateTime::fromString(QString::fromStdString(task->uploadtime()), "yyyy-MM-ddTHH:mm:ss").toString("d MMMM yyyy");
+                    QString uploadTime = QDateTime::fromString(QString::fromStdString(task->uploadtime()), "yyyy-MM-dd HH:mm:ss").toString("d MMMM yyyy");
                     taskSect->SetValue("CREATED_TIME", uploadTime.toStdString());
                 }
             }

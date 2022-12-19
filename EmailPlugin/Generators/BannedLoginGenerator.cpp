@@ -43,7 +43,7 @@ void BannedLoginGenerator::run()
         dict.SetValue("SITE_NAME", std::string(settings.get("site.name").toLatin1().constData(), settings.get("site.name").toLatin1().length()));
 
         QDateTime banDate = QDateTime::fromString(QString::fromStdString(banData->banneddate()),
-                "yyyy-MM-ddTHH:mm:ss");
+                "yyyy-MM-dd HH:mm:ss");
         dict.SetValue("BAN_TIME", banDate.toString("d MMMM yyyy - hh:mm").toStdString());
 
         QString banLength = "";
