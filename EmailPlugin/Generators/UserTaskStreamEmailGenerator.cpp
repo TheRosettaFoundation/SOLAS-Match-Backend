@@ -57,7 +57,6 @@ void UserTaskStreamEmailGenerator::run()
     }
 
     if (sendEmail) {
-qDebug() << "Sending?: " << QString::number(emailRequest.user_id());//(**)
         QList<QMap<QString, QVariant>> selections = LanguageDao::get_selections(db);
 
         ConfigParser settings;
@@ -76,9 +75,6 @@ qDebug() << "Sending?: " << QString::number(emailRequest.user_id());//(**)
         int tasks_within_cutoff = 0;
         foreach (QSharedPointer<Task> task, userTasks) {
             QDateTime deadline_DT = QDateTime::fromString(QString::fromStdString(task->deadline()), "yyyy-MM-ddTHH:mm:ss.zzz");
-qDebug() << "Task: " << task->id();//(**)
-qDebug() << "deadline: " << deadline_DT;//(**)
-qDebug() << "limit: " << QDateTime::currentDateTimeUtc().addMonths(-settings.get("mail.task_stream_cutoff_months").toInt());//(**)
             if (deadline_DT > QDateTime::currentDateTimeUtc().addMonths(-settings.get("mail.task_stream_cutoff_months").toInt())) { // Only notify about tasks with deadline within last (3) months
                 ctemplate::TemplateDictionary *taskSect = dict.AddSectionDictionary("TASK_SECT");
                 QString taskView = settings.get("site.url") + "task/" + QString::number(task->id()) + "/view/?utm_source=email&utm_medium=stream&utm_campaign=task";

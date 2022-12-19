@@ -107,9 +107,6 @@ if (user->id() == 3297) { // test code (3297 is id for Alan Barrett)
 
                     taskSect->SetValue("WORD_COUNT", QString::number(task->wordcount()).toStdString());
                     QString createdTime = QDateTime::fromString(QString::fromStdString(task->createdtime()), "yyyy-MM-ddTHH:mm:ss.zzz").toString("d MMMM yyyy");
-qDebug() << "createdTime (QString from db model): " << QString::fromStdString(task->createdtime());//(**)
-qDebug() << "createdTime (QDateTime::fromString): " << QDateTime::fromString(QString::fromStdString(task->createdtime()), "yyyy-MM-ddTHH:mm:ss.zzz");//(**)
-qDebug() << "createdTime (about to display): " << createdTime;//(**)
                     taskSect->SetValue("CREATED_TIME", createdTime.toStdString());
                 }
             }
@@ -157,9 +154,6 @@ qDebug() << "createdTime (about to display): " << createdTime;//(**)
                                        task->targetlocale().countryname() + ")");
                     taskSect->SetValue("WORD_COUNT", QString::number(task->wordcount()).toStdString());
                     QString uploadTime = QDateTime::fromString(QString::fromStdString(task->uploadtime()), "yyyy-MM-ddTHH:mm:ss.zzz").toString("d MMMM yyyy");
-qDebug() << "uploadtime (QString from db model): " << QString::fromStdString(task->uploadtime());//(**)
-qDebug() << "uploadtime (QDateTime::fromString): " << QDateTime::fromString(QString::fromStdString(task->createdtime()), "yyyy-MM-ddTHH:mm:ss.zzz");//(**)
-qDebug() << "uploadtime (about to display): " << uploadTime;//(**)
                     taskSect->SetValue("CREATED_TIME", uploadTime.toStdString());
                 }
             }
