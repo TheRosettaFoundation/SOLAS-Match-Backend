@@ -158,6 +158,10 @@ qDebug() << "createdTime (about to display): " << createdTime;//(**)
                                        task->targetlocale().countryname() + ")");
                     taskSect->SetValue("WORD_COUNT", QString::number(task->wordcount()).toStdString());
                     QString uploadTime = QDateTime::fromString(QString::fromStdString(task->uploadtime()), "yyyy-MM-dd HH:mm:ss").toString("d MMMM yyyy");
+qDebug() << "uploadtime (raw from db model): " << task->uploadtime();//(**)
+qDebug() << "uploadtime (QString): " << QString::fromStdString(task->uploadtime());//(**)
+qDebug() << "uploadtime (QDateTime::fromString): " << QDateTime::fromString(QString::fromStdString(task->createdtime()), "yyyy-MM-dd HH:mm:ss");//(**)
+qDebug() << "uploadtime (about to display): " << uploadTime;//(**)
                     taskSect->SetValue("CREATED_TIME", uploadTime.toStdString());
                 }
             }
