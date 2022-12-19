@@ -75,7 +75,7 @@ qDebug() << "Sending?: " << QString::number(emailRequest.user_id());//(**)
         int project_id = 0;
         int tasks_within_cutoff = 0;
         foreach (QSharedPointer<Task> task, userTasks) {
-            QDateTime deadline_DT = QDateTime::fromString(QString::fromStdString(task->deadline()), "yyyy-MM-dd HH:mm:ss");
+            QDateTime deadline_DT = QDateTime::fromString(QString::fromStdString(task->deadline()), "yyyy-MM-ddTHH:mm:ss.zzz");
 qDebug() << "Task: " << task->id();//(**)
 qDebug() << "deadline: " << deadline_DT;//(**)
 qDebug() << "limit: " << QDateTime::currentDateTimeUtc().addMonths(-settings.get("mail.task_stream_cutoff_months").toInt());//(**)
@@ -115,10 +115,10 @@ qDebug() << "limit: " << QDateTime::currentDateTimeUtc().addMonths(-settings.get
 
                 taskSect->SetValue("WORD_COUNT", QString::number(task->wordcount()).toStdString());
                 QString createdTime = QDateTime::fromString(QString::fromStdString(task->createdtime()),
-                           "yyyy-MM-dd HH:mm:ss").toString("d MMMM yyyy - hh:mm");
+                           "yyyy-MM-ddTHH:mm:ss.zzz").toString("d MMMM yyyy - hh:mm");
                 taskSect->SetValue("CREATED_TIME", createdTime.toStdString());
                 QString deadline = QDateTime::fromString(QString::fromStdString(task->deadline()),
-                        "yyyy-MM-dd HH:mm:ss").toString("d MMMM yyyy - hh:mm");
+                        "yyyy-MM-ddTHH:mm:ss.zzz").toString("d MMMM yyyy - hh:mm");
                 taskSect->SetValue("DEADLINE_TIME", deadline.toStdString());
 
                 QSharedPointer<Project> project = ProjectDao::getProject(db, task->projectid());

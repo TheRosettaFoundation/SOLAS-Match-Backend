@@ -105,9 +105,9 @@ void CalculateProjectDeadlines::calculateSubGraphDeadlines(WorkflowNode node, Gr
     QList<QString> deadlineLengths = QList<QString>();
 
     QDateTime createdDate = QDateTime::fromString(
-                QString::fromStdString(project->createdtime()), "yyyy-MM-dd HH:mm:ss");
+                QString::fromStdString(project->createdtime()), "yyyy-MM-ddTHH:mm:ss.zzz");
     QDateTime projectDeadline = QDateTime::fromString(
-                QString::fromStdString(project->deadline()), "yyyy-MM-dd HH:mm:ss");
+                QString::fromStdString(project->deadline()), "yyyy-MM-ddTHH:mm:ss.zzz");
 
     ::google::protobuf::RepeatedField< ::google::protobuf::int32> currentLayer =
             ::google::protobuf::RepeatedField< ::google::protobuf::int32>();
