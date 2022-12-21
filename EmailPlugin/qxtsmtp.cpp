@@ -61,7 +61,7 @@ QxtSmtp::QxtSmtp(QObject* parent) : QObject(parent)
 #endif
     QObject::connect(socket(), SIGNAL(connected()), this, SIGNAL(connected()));
     QObject::connect(socket(), SIGNAL(disconnected()), this, SIGNAL(disconnected()));
-    QObject::connect(socket(), SIGNAL(error(QAbstractSocket::SocketError)), &qxt_d(), SLOT(socketError(QAbstractSocket::SocketError)));
+    QObject::connect(socket(), SIGNAL(errorOccurred(QAbstractSocket::SocketError)), &qxt_d(), SLOT(socketError(QAbstractSocket::SocketError)));
     QObject::connect(this, SIGNAL(authenticated()), &qxt_d(), SLOT(sendNext()));
     QObject::connect(socket(), SIGNAL(readyRead()), &qxt_d(), SLOT(socketRead()));
 }
