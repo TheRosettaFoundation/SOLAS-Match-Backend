@@ -46,10 +46,10 @@ bool MessagingClient::openConnection()
 
         this->conn = new AMQP(connectionString.toStdString());
         ret = true;
-    } catch(AMQPException error const&) {
+    } catch(const AMQPException& error) {
         qDebug() << "Error " << error.getReplyCode() << ": "
                  << QString::fromStdString(error.getMessage());
-    } catch (std::exception e const&) {
+    } catch (const std::exception& e) {
         qDebug() << "Unable to connect to rabbitMQ " << e.what();
     }
 
@@ -72,7 +72,7 @@ void MessagingClient::publish(QString exchange, QString topic, std::string messa
             mExchange = this->conn->createExchange(exchange.toStdString());
             mExchange->Declare(exchange.toStdString(), "topic", AMQP_DURABLE);
             mExchange->Publish(message, topic.toStdString());
-        } catch (AMQPException e const&) {
+        } catch (const AMQPException& e) {
             qDebug() << "Caught exception " << topic << " : " << QString::fromStdString(e.getMessage());
         }
     } else {
@@ -99,7 +99,7 @@ void MessagingClient::consumeFromQueue()
         if(message && message->getMessageCount() > -1) {
             emit AMQPMessageReceived(message);
         }
-    } catch (AMQPException e const&) {
+    } catch (const AMQPException& e) {
         qDebug() << "ERROR: Consuming from Queue";
         emit AMQPError(QString::fromStdString(e.getMessage()));
     }
