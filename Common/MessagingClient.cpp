@@ -73,7 +73,7 @@ void MessagingClient::publish(QString exchange, QString topic, std::string messa
             mExchange->Declare(exchange.toStdString(), "topic", AMQP_DURABLE);
             mExchange->Publish(message, topic.toStdString());
         } catch (AMQPException e) {
-            qDebug() << "Caught exception " << topic;
+            qDebug() << "Caught exception " << topic << " : " << QString::fromStdString(e.getMessage());
         }
     } else {
         qDebug() << "Connection not initialized";
