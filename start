@@ -1,0 +1,6 @@
+cd /repo/SOLAS-Match-Backend
+sudo ./run_daemon.sh &disown
+sleep 1
+ps -ef | grep Plugin
+sleep 1
+tail --lines=30 /etc/SOLAS-Match/output.log
