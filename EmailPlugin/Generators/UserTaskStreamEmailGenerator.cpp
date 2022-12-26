@@ -182,7 +182,7 @@ void UserTaskStreamEmailGenerator::run()
             email->addRecipient(QString::fromStdString(user->email()));
             email->setSubject(settings.get("site.name") + ": Task Stream");
             email->setBody(QString::fromUtf8(email_body.c_str()));
-            this->emailQueue->insert(email, this->currentMessage);
+//(**)            this->emailQueue->insert(email, this->currentMessage);
         } else {
             qDebug() << "UserTaskStreamEmailGenerator: No tasks within cutoff for user " << QString::number(emailRequest.user_id());
         }
