@@ -55,7 +55,7 @@ void TaskStreamNotificationHandler::run()
                 }
                 if (userTasks.count() < 1) {
                     sendEmail = false;
-                    qDebug() << "TaskStreamNotificationHandler: Failed to generate task stream email: No tasks found for user " << QString::number(user_id);
+                    // qDebug() << "TaskStreamNotificationHandler: Failed to generate task stream email: No tasks found for user " << QString::number(user_id);
                 }
             } else {
                 sendEmail = false;
@@ -72,14 +72,14 @@ void TaskStreamNotificationHandler::run()
                 if (tasks_within_cutoff > 0) {
                     userIds.append(user_id); // Really send an email to this user_id
                 } else {
-                    qDebug() << "TaskStreamNotificationHandler: No tasks within cutoff for user " << QString::number(user_id);
+                    // qDebug() << "TaskStreamNotificationHandler: No tasks within cutoff for user " << QString::number(user_id);
                     sendEmail = false;
                 }
             }
 
             if (!sendEmail) {
                 if (UserDao::taskStreamNotificationSent(db, user_id, sentDateTime)) {
-                    qDebug() << "TaskStreamNotificationHandler: Updated last sent date for user id " << QString::number(user_id);
+                    // qDebug() << "TaskStreamNotificationHandler: Updated last sent date for user id " << QString::number(user_id);
                 } else {
                     qDebug() << "TaskStreamNotificationHandler: Failed to update last sent date for user id " << QString::number(user_id);
                 }
@@ -91,7 +91,7 @@ void TaskStreamNotificationHandler::run()
         if (max_allowed > 0) {
 int random = rand()%max_allowed;
 //        int random = QRandomGenerator::global()->bounded(max_allowed); // Pick max_allowed elements starting at a random element (circulating back to start, if necessary)
-qDebug() << "count, max_allowed, random: " << QString::number(count) << ", " << QString::number(max_allowed) << ", " << QString::number(random);
+            qDebug() << "count, max_allowed, random: " << QString::number(count) << ", " << QString::number(max_allowed) << ", " << QString::number(random);
             int i = 0;
             foreach (int id, userIds) {
                 if (((i >= random) && (i < random + max_allowed)) || ((i >= (random - count)) && (i < random + max_allowed - count))) {
