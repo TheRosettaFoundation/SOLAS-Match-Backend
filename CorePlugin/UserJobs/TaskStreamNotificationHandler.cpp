@@ -12,6 +12,7 @@
 #include "Common/protobufs/models/UserTaskStreamNotification.pb.h"
 
 #include <QDateTime>
+#include <QRandomGenerator>
 
 using namespace SolasMatch::Common::Protobufs::Emails;
 
