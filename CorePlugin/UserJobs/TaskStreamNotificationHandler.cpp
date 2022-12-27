@@ -64,7 +64,7 @@ void TaskStreamNotificationHandler::run()
             if (sendEmail) {
                 int tasks_within_cutoff = 0;
                 foreach (QSharedPointer<Task> task, userTasks) {
-                    QDateTime deadline_DT = QDateTime::fromString(QString::fromStdString(task->deadline()), "yyyy-MM-ddTHH:mm:ss");
+                    QDateTime deadline_DT = QDateTime::fromString(QString::fromStdString(task->deadline()), "yyyy-MM-ddTHH:mm:ss.zzz");
                     if (deadline_DT > QDateTime::currentDateTimeUtc().addMonths(-settings.get("mail.task_stream_cutoff_months").toInt())) { // Only notify about tasks with deadline within last (3) months
                         tasks_within_cutoff++;
                     }
