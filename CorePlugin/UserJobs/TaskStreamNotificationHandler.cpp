@@ -41,6 +41,8 @@ void TaskStreamNotificationHandler::run()
         QString sentDateTime = QDateTime::currentDateTime().toString("yyyy-MM-dd HH:mm:ss");
         QList<int> full_list_user_ids = UserDao::getUserIdsPendingTaskStreamNotification(db);
         QList<int> userIds = QList<int>(); // This will contain the cut down list of user_id(s) which will actually be sent emails
+qDebug() << "full_list_user_ids.count(): " << QString::number(full_list_user_ids.count());
+qDebug() << "userIds.count(): " << QString::number(userIds.count());
         foreach (int user_id, full_list_user_ids) {
             bool sendEmail = true;
             QList<QSharedPointer<Task> > userTasks;
@@ -52,6 +54,7 @@ void TaskStreamNotificationHandler::run()
                 } else {
                     userTasks = UserDao::getUserTopTasks(db, user_id, false, 25);
                 }
+qDebug() << "userTasks.count(): " << QString::number(userTasks.count()) << " for user_id: " << QString::number(user_id);
                 if (userTasks.count() < 1) {
                     sendEmail = false;
                     qDebug() << "TaskStreamNotificationHandler: Failed to generate task stream email: No tasks found for user " << QString::number(user_id);
@@ -88,6 +91,7 @@ void TaskStreamNotificationHandler::run()
         int max_allowed = 8000; // per hour
         if (count < max_allowed) max_allowed = count;
         int random = QRandomGenerator::global()->bounded(max_allowed); // Pick max_allowed elements starting at a random element (circulating back to start, if necessary)
+qDebug() << "count, max_allowed, random: " << QString::number(count) << ", " << QString::number(max_allowed) << ", " << QString::number(random);
         int i = 0;
         foreach (int id, userIds) {
             if (((i >= random) && (i < random + max_allowed)) || ((i >= (random - count)) && (i < random + max_allowed - count))) {
@@ -96,6 +100,7 @@ void TaskStreamNotificationHandler::run()
                 request->set_email_type(EmailMessage::UserTaskStreamEmail);
                 std::string body = request->SerializeAsString();
                 client.publish(exchange, topic, body);
+qDebug() << "publish user_id " << QString::number(id);
             } else {
                 if (UserDao::taskStreamNotificationSent(db, id, sentDateTime)) {
                     qDebug() << "TaskStreamNotificationHandler: Updated last sent date for user id " << QString::number(id);
