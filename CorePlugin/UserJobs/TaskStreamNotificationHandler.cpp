@@ -12,7 +12,7 @@
 #include "Common/protobufs/models/UserTaskStreamNotification.pb.h"
 
 #include <QDateTime>
-#include <QRandomGenerator>
+//#include <QRandomGenerator>
 
 using namespace SolasMatch::Common::Protobufs::Emails;
 
@@ -91,7 +91,8 @@ qDebug() << "userTasks.count(): " << QString::number(userTasks.count()) << " for
         int count = userIds.count();
         int max_allowed = 8000; // per hour
         if (count < max_allowed) max_allowed = count;
-        int random = QRandomGenerator::global()->bounded(max_allowed); // Pick max_allowed elements starting at a random element (circulating back to start, if necessary)
+int random = rand()%max_allowed;
+//        int random = QRandomGenerator::global()->bounded(max_allowed); // Pick max_allowed elements starting at a random element (circulating back to start, if necessary)
 qDebug() << "count, max_allowed, random: " << QString::number(count) << ", " << QString::number(max_allowed) << ", " << QString::number(random);
         int i = 0;
         foreach (int id, userIds) {
