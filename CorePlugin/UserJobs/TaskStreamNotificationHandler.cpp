@@ -91,27 +91,29 @@ qDebug() << "userTasks.count(): " << QString::number(userTasks.count()) << " for
         int count = userIds.count();
         int max_allowed = 8000; // per hour
         if (count < max_allowed) max_allowed = count;
+        if (max_allowed > 0) {
 int random = rand()%max_allowed;
 //        int random = QRandomGenerator::global()->bounded(max_allowed); // Pick max_allowed elements starting at a random element (circulating back to start, if necessary)
 qDebug() << "count, max_allowed, random: " << QString::number(count) << ", " << QString::number(max_allowed) << ", " << QString::number(random);
-        int i = 0;
-        foreach (int id, userIds) {
-            if (((i >= random) && (i < random + max_allowed)) || ((i >= (random - count)) && (i < random + max_allowed - count))) {
-                QSharedPointer<UserTaskStreamEmail> request = QSharedPointer<UserTaskStreamEmail>(new UserTaskStreamEmail());
-                request->set_user_id(id);
-                request->set_email_type(EmailMessage::UserTaskStreamEmail);
-                std::string body = request->SerializeAsString();
-                client.publish(exchange, topic, body);
+            int i = 0;
+            foreach (int id, userIds) {
+                if (((i >= random) && (i < random + max_allowed)) || ((i >= (random - count)) && (i < random + max_allowed - count))) {
+                    QSharedPointer<UserTaskStreamEmail> request = QSharedPointer<UserTaskStreamEmail>(new UserTaskStreamEmail());
+                    request->set_user_id(id);
+                    request->set_email_type(EmailMessage::UserTaskStreamEmail);
+                    std::string body = request->SerializeAsString();
+                    client.publish(exchange, topic, body);
 qDebug() << "publish user_id " << QString::number(id);
-            } else {
-                if (UserDao::taskStreamNotificationSent(db, id, sentDateTime)) {
-                    qDebug() << "TaskStreamNotificationHandler: Updated last sent date for user id " << QString::number(id);
                 } else {
-                    qDebug() << "TaskStreamNotificationHandler: Failed to update last sent date for user id " << QString::number(id);
+                    if (UserDao::taskStreamNotificationSent(db, id, sentDateTime)) {
+                        qDebug() << "TaskStreamNotificationHandler: Updated last sent date for user id " << QString::number(id);
+                    } else {
+                        qDebug() << "TaskStreamNotificationHandler: Failed to update last sent date for user id " << QString::number(id);
+                    }
+                    qDebug() << "TaskStreamNotificationHandler: Discarded user id " << QString::number(id);
                 }
-                qDebug() << "TaskStreamNotificationHandler: Discarded user id " << QString::number(id);
+                i++;
             }
-            i++;
         }
     } else {
         qDebug() << "Unable to connect to RabbitMQ. Check conf.ini for settings.";
