@@ -89,7 +89,6 @@ void TaskStreamNotificationHandler::run()
         int max_allowed = 8000; // per hour
         if (count < max_allowed) max_allowed = count;
         if (max_allowed > 0) {
-//int random = rand()%max_allowed;
             int random = QRandomGenerator::global()->bounded(max_allowed); // Pick max_allowed elements starting at a random element (circulating back to start, if necessary)
             qDebug() << "count, max_allowed, random: " << QString::number(count) << ", " << QString::number(max_allowed) << ", " << QString::number(random);
             int i = 0;
