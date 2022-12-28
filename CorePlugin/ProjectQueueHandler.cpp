@@ -65,6 +65,11 @@ void ProjectQueueHandler::messageReceived(AMQPMessage *message)
     }
 }
 
+void ProjectQueueHandler::handleAMQPError(QString error)
+{
+    qDebug() << "ProjectQueueHandler: AMQPError: " << error;
+}
+
 void ProjectQueueHandler::registerRequestTypes()
 {
     CalculateProjectDeadlinesRequest projDeadlines = CalculateProjectDeadlinesRequest();

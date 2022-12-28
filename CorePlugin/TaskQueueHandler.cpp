@@ -87,6 +87,11 @@ void TaskQueueHandler::messageReceived(AMQPMessage *message)
   }
 }
 
+void TaskQueueHandler::handleAMQPError(QString error)
+{
+    qDebug() << "TaskQueueHandler: AMQPError: " << error;
+}
+
 void TaskQueueHandler::registerRequestTypes()
 {
     UserTaskScoreRequest scoreReq = UserTaskScoreRequest();
