@@ -17,18 +17,15 @@ void OrgDeadlinePassedMailGenerator::run()
     QString error = "";
     QSharedPointer<Email> email = QSharedPointer<Email>(new Email());
     QSharedPointer<User> user = QSharedPointer<User>();
-    QSharedPointer<User> translator = QSharedPointer<User>();
     QSharedPointer<Task> task = QSharedPointer<Task>();
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
 
-    translator = UserDao::getUser(db, email_message.translator_id());
     task = TaskDao::getTask(db, email_message.task_id());
     user = UserDao::getUser(db, email_message.user_id());
 
-    if(user.isNull() || task.isNull() || translator.isNull()) {
+    if (user.isNull() || task.isNull()) {
         error = "OrgTaskDeadlinePassed generation failed. Data missing from the DB.";
-        error += "Searched for user ID " + QString::number(email_message.translator_id());
-        error += " and " + QString::number(email_message.user_id());
+        error += " Searched for user ID " + QString::number(email_message.user_id());
         error += " and task ID " + QString::number(email_message.task_id());
     }
 
