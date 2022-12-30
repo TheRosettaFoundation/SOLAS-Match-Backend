@@ -24,9 +24,7 @@ void UserTaskRevokedGenerator::run()
         error = "Unable to generate UserTaskRevokedEmail. Unable to find relevant data in the database. ";
         error += "Searched for user id " + QString::number(emailMessage.user_id()) + " and task id ";
         error += QString::number(emailMessage.task_id()) + ".";
-qDebug() << error;
     }
-qDebug() << QString::number(emailMessage.user_id()) << " and task id " << QString::number(emailMessage.task_id());
 
     if (error.compare("") == 0) {
         ctemplate::TemplateDictionary dict("UserTaskRevokedEmail");
@@ -66,7 +64,6 @@ qDebug() << QString::number(emailMessage.user_id()) << " and task id " << QStrin
         email->addRecipient(QString::fromStdString(user->email()));
         email->setSubject(settings.get("site.name") + ": Task Revoked");
         email->setBody(QString::fromUtf8(email_body.c_str()));
-qDebug() << settings.get("site.name") << ": Task Revoked " << QString::fromStdString(user->email());
     } else {
         email = this->generateErrorEmail(error);
     }
