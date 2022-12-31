@@ -53,6 +53,7 @@ QxtSmtp::QxtSmtp(QObject* parent) : QObject(parent)
 {
     QXT_INIT_PRIVATE(QxtSmtp);
     qxt_d().state = QxtSmtpPrivate::Disconnected;
+qDebug() << "QxtSmtp::QxtSmtp set state: Disconnected";//(**)
     qxt_d().nextID = 0;
 #ifndef QT_NO_OPENSSL
     qxt_d().socket = new QSslSocket(this);
@@ -112,6 +113,7 @@ void QxtSmtp::connectToHost(const QString& hostName, quint16 port)
 {
     qxt_d().useSecure = false;
     qxt_d().state = QxtSmtpPrivate::StartState;
+qDebug() << "QxtSmtp::connectToHost set state: StartState";//(**)
     socket()->connectToHost(hostName, port);
 }
 
@@ -145,6 +147,7 @@ void QxtSmtp::connectToSecureHost(const QString& hostName, quint16 port)
 {
     qxt_d().useSecure = true;
     qxt_d().state = QxtSmtpPrivate::StartState;
+qDebug() << "QxtSmtp::connectToSecureHost set state: StartState";//(**)
     sslSocket()->connectToHostEncrypted(hostName, port);
 }
 
@@ -188,6 +191,7 @@ void QxtSmtpPrivate::socketRead()
         QByteArray line = buffer.left(pos);
         buffer = buffer.mid(pos + 2);
         QByteArray code = line.left(3);
+qDebug() << "QxtSmtpPrivate::socketRead state: " << state;//(**)
         switch (state)
         {
         case StartState:
@@ -228,11 +232,13 @@ void QxtSmtpPrivate::socketRead()
             if (code[0] == '2')
             {
                 state = Authenticated;
+qDebug() << "QxtSmtpPrivate::socketRead set state: Authenticated";//(**)
                 emit qxt_p().authenticated();
             }
             else
             {
                 state = Disconnected;
+qDebug() << "QxtSmtpPrivate::socketRead set state: Disconnected";//(**)
                 emit qxt_p().authenticationFailed();
                 emit qxt_p().authenticationFailed( line );
                 emit socket->disconnectFromHost();
@@ -249,6 +255,7 @@ void QxtSmtpPrivate::socketRead()
 				// a reset will be sent to clear things out
                 sendNext();
                 state = BodySent;
+qDebug() << "QxtSmtpPrivate::socketRead set state: BodySent";//(**)
             }
             else
                 sendNextRcpt(code, line);
@@ -280,6 +287,7 @@ void QxtSmtpPrivate::socketRead()
             }
             else {
                 state = Waiting;
+qDebug() << "QxtSmtpPrivate::socketRead set state: Waiting";//(**)
                 sendNext();
             }
             break;
@@ -300,6 +308,7 @@ void QxtSmtpPrivate::ehlo()
     socket->write("ehlo " + address + "\r\n");
     extensions.clear();
     state = EhloSent;
+qDebug() << "QxtSmtpPrivate::ehlo set state: EhloSent";//(**)
 }
 
 void QxtSmtpPrivate::parseEhlo(const QByteArray& code, bool cont, const QString& line)
@@ -312,9 +321,11 @@ void QxtSmtpPrivate::parseEhlo(const QByteArray& code, bool cont, const QString&
             // maybe let's try HELO
             socket->write("helo\r\n");
             state = HeloSent;
+qDebug() << "QxtSmtpPrivate::parseEhlo set state: HeloSent";//(**)
         }
         else
         {
+qDebug() << "QxtSmtpPrivate::parseEhlo NO set state";//(**)
             // nope
             socket->write("QUIT\r\n");
             socket->flush();
@@ -328,11 +339,13 @@ void QxtSmtpPrivate::parseEhlo(const QByteArray& code, bool cont, const QString&
         {
             // greeting only, no extensions
             state = EhloDone;
+qDebug() << "QxtSmtpPrivate::parseEhlo set state: EhloDone";//(**)
         }
         else
         {
             // greeting followed by extensions
             state = EhloGreetReceived;
+qDebug() << "QxtSmtpPrivate::parseEhlo set state: EhloGreetReceived";//(**)
             return;
         }
     }
@@ -341,6 +354,7 @@ void QxtSmtpPrivate::parseEhlo(const QByteArray& code, bool cont, const QString&
         extensions[line.section(' ', 0, 0).toUpper()] = line.section(' ', 1);
         if (!cont)
             state = EhloDone;
+if (!cont) qDebug() << "QxtSmtpPrivate::parseEhlo set state: EhloDone";//(**)
     }
     if (state != EhloDone) return;
     if (extensions.contains("STARTTLS") && !disableStartTLS)
@@ -358,6 +372,7 @@ void QxtSmtpPrivate::startTLS()
 #ifndef QT_NO_OPENSSL
     socket->write("starttls\r\n");
     state = StartTLSSent;
+qDebug() << "QxtSmtpPrivate::parseEhlo set state: StartTLSSent";//(**)
 #else
     authenticate();
 #endif
@@ -368,6 +383,7 @@ void QxtSmtpPrivate::authenticate()
     if (!extensions.contains("AUTH") || username.isEmpty() || password.isEmpty())
     {
         state = Authenticated;
+qDebug() << "QxtSmtpPrivate::authenticate set state: Authenticated";//(**)
         emit qxt_p().authenticated();
     }
     else
@@ -388,6 +404,7 @@ void QxtSmtpPrivate::authenticate()
         else
         {
             state = Authenticated;
+qDebug() << "QxtSmtpPrivate::authenticate set state: Authenticated";//(**)
             emit qxt_p().authenticated();
         }
     }
@@ -400,6 +417,7 @@ void QxtSmtpPrivate::authCramMD5(const QByteArray& challenge)
         socket->write("auth cram-md5\r\n");
         authType = AuthCramMD5;
         state = AuthRequestSent;
+qDebug() << "QxtSmtpPrivate::authCramMD5 set state: AuthRequestSent";//(**)
     }
     else
     {
@@ -409,6 +427,7 @@ void QxtSmtpPrivate::authCramMD5(const QByteArray& challenge)
         QByteArray response = username + ' ' + hmac.result().toHex();
         socket->write(response.toBase64() + "\r\n");
         state = AuthSent;
+qDebug() << "QxtSmtpPrivate::authCramMD5 set state: AuthSent";//(**)
     }
 }
 
@@ -419,6 +438,7 @@ void QxtSmtpPrivate::authPlain()
         socket->write("auth plain\r\n");
         authType = AuthPlain;
         state = AuthRequestSent;
+qDebug() << "QxtSmtpPrivate::authPlain set state: AuthRequestSent";//(**)
     }
     else
     {
@@ -429,6 +449,7 @@ void QxtSmtpPrivate::authPlain()
         auth += password;
         socket->write(auth.toBase64() + "\r\n");
         state = AuthSent;
+qDebug() << "QxtSmtpPrivate::authPlain set state: AuthSent";//(**)
     }
 }
 
@@ -439,16 +460,19 @@ void QxtSmtpPrivate::authLogin()
         socket->write("auth login\r\n");
         authType = AuthLogin;
         state = AuthRequestSent;
+qDebug() << "QxtSmtpPrivate::authLogin set state: AuthRequestSent";//(**)
     }
     else if (state == AuthRequestSent)
     {
         socket->write(username.toBase64() + "\r\n");
         state = AuthUsernameSent;
+qDebug() << "QxtSmtpPrivate::authLogin set state: AuthUsernameSent";//(**)
     }
     else
     {
         socket->write(password.toBase64() + "\r\n");
         state = AuthSent;
+qDebug() << "QxtSmtpPrivate::authLogin set state: AuthSent";//(**)
     }
 }
 
@@ -506,16 +530,18 @@ qDebug() << "QxtSmtpPrivate::sendNext Disconnected state: " << state;//(**)
 
     if (pending.isEmpty())
     {
-qDebug() << "QxtSmtpPrivate::sendNext pending.isEmpty() (set Waiting, emit finished) state: " << state;//(**)
+qDebug() << "QxtSmtpPrivate::sendNext pending.isEmpty() (emit finished) state: " << state;//(**)
         // if there are no additional mails to send, finish up
         state = Waiting;
+qDebug() << "QxtSmtpPrivate::sendNext set state: Waiting";//(**)
         emit qxt_p().finished();
         return;
     }
 
     if(state != Waiting) {
-qDebug() << "QxtSmtpPrivate::sendNext state != Waiting (set Resetting) state: " << state;//(**)
+qDebug() << "QxtSmtpPrivate::sendNext state != Waiting state: " << state;//(**)
         state = Resetting;
+qDebug() << "QxtSmtpPrivate::sendNext set state: Resetting";//(**)
         socket->write("rset\r\n");
         return;
     }
@@ -544,10 +570,12 @@ qDebug() << "QxtSmtpPrivate::sendNext state != Waiting (set Resetting) state: " 
             socket->write("rcpt to:<" + qxt_extract_address(rcpt) + ">\r\n");
         }
         state = RcptAckPending;
+qDebug() << "QxtSmtpPrivate::sendNext set state: RcptAckPending";//(**)
     }
     else
     {
         state = MailToSent;
+qDebug() << "QxtSmtpPrivate::sendNext set state: MailToSent";//(**)
     }
 qDebug() << "QxtSmtpPrivate::sendNext SENDING state: " << state;//(**)
 }
@@ -596,6 +624,7 @@ void QxtSmtpPrivate::sendNextRcpt(const QByteArray& code, const QByteArray&line)
             // at least one recipient was acknowledged, send mail body
             socket->write("data\r\n");
             state = SendingBody;
+qDebug() << "QxtSmtpPrivate::sendNextRcpt set state: SendingBody";//(**)
         }
     }
     else if (state != RcptAckPending)
@@ -628,4 +657,5 @@ void QxtSmtpPrivate::sendBody(const QByteArray& code, const QByteArray & line)
     socket->write(msg.rfc2822());
     socket->write(".\r\n");
     state = BodySent;
+qDebug() << "QxtSmtpPrivate::sendBody set state: BodySent";//(**)
 }
