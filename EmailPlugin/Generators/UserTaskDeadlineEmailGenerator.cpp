@@ -11,7 +11,7 @@ UserTaskDeadlineEmailGenerator::UserTaskDeadlineEmailGenerator()
 
 void UserTaskDeadlineEmailGenerator::run()
 {
-    qDebug() << "EmailGenerator: Generating UserClaimedTaskDeadlinePassed email";
+    // qDebug() << "EmailGenerator: Generating UserClaimedTaskDeadlinePassed email";
 
     UserClaimedTaskDeadlinePassed email_message;
     email_message.ParseFromString(this->protoBody);
@@ -34,9 +34,11 @@ void UserTaskDeadlineEmailGenerator::run()
         error += "data in the Database. Searched for User ID ";
         error += QString::number(email_message.translator_id()) + " and Task ID ";
         error += QString::number(email_message.task_id()) + ".";
+        qDebug() << "EmailGenerator: Generating UserClaimedTaskDeadlinePassed email FAILED, translator_id: " << QString::number(email_message.translator_id()) << ", task_id: "  << QString::number(email_message.task_id());
     }
 
     if(error.compare("") == 0) {
+        qDebug() << "EmailGenerator: Generating UserClaimedTaskDeadlinePassed email, translator_id: " << QString::number(email_message.translator_id()) << " " << QString::fromStdString(user->email()) << ", task_id: "  << QString::number(email_message.task_id());
         ctemplate::TemplateDictionary dict("user_claimed_task_deadline_exceeded");
         if(user->display_name() != "") {
             dict.ShowSection("USER_HAS_NAME");
