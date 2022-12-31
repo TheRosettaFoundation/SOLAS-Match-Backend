@@ -42,6 +42,8 @@
 #    include <QSslSocket>
 #endif
 
+#include <QDebug> //(**)
+
 QxtSmtpPrivate::QxtSmtpPrivate() : QObject(0)
 {
     // empty ctor
@@ -89,6 +91,7 @@ void QxtSmtp::setPassword(const QByteArray& password)
 int QxtSmtp::send(const QxtMailMessage& message)
 {
     int messageID = ++qxt_d().nextID;
+qDebug() << "QxtSmtp::send messageID: " << QString::number(messageID) << ", state: " << qxt_d().state;//(**)
     qxt_d().pending.append(qMakePair(messageID, message));
     if (qxt_d().state == QxtSmtpPrivate::Waiting)
         qxt_d().sendNext();
@@ -496,12 +499,14 @@ void QxtSmtpPrivate::sendNext()
 {
     if (state == Disconnected)
     {
+qDebug() << "QxtSmtpPrivate::sendNext Disconnected state: " << state;//(**)
         // leave the mail in the queue if not ready to send
         return;
     }
 
     if (pending.isEmpty())
     {
+qDebug() << "QxtSmtpPrivate::sendNext pending.isEmpty() (set Waiting, emit finished) state: " << state;//(**)
         // if there are no additional mails to send, finish up
         state = Waiting;
         emit qxt_p().finished();
@@ -509,6 +514,7 @@ void QxtSmtpPrivate::sendNext()
     }
 
     if(state != Waiting) {
+qDebug() << "QxtSmtpPrivate::sendNext state != Waiting (set Resetting) state: " << state;//(**)
         state = Resetting;
         socket->write("rset\r\n");
         return;
@@ -543,6 +549,7 @@ void QxtSmtpPrivate::sendNext()
     {
         state = MailToSent;
     }
+qDebug() << "QxtSmtpPrivate::sendNext SENDING state: " << state;//(**)
 }
 
 void QxtSmtpPrivate::sendNextRcpt(const QByteArray& code, const QByteArray&line)
