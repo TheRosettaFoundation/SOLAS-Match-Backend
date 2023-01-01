@@ -570,27 +570,48 @@ qDebug() << "QxtSmtpPrivate::sendNext mailFailed";//(**)
         sendNext();
         return;
     }
+qDebug() << "QxtSmtpPrivate::sendNext recipients.join: " << recipients.join(", ");//(**)
     // We explicitly use lowercase keywords because for some reason gmail
     // interprets any string starting with an uppercase R as a request
     // to renegotiate the SSL connection.
+    bool disconnect = false;
     qint64 written = socket->write("mail from:<" + qxt_extract_address(msg.sender()) + ">\r\n");
-if (written == -1) {qDebug() << "QxtSmtpPrivate::sendNext socket->write() Failure -1";} //(**)
-qDebug() << "QxtSmtpPrivate::sendNext write: " << written;//(**)
+    if (written == -1) {
+        qDebug() << "QxtSmtpPrivate::sendNext socket->write() FAILURE -1";//(**)
+        disconnect = true;
+    }
 
     if (extensions.contains("PIPELINING"))  // almost all do nowadays
     {
         foreach(const QString& rcpt, recipients)
         {
-            socket->write("rcpt to:<" + qxt_extract_address(rcpt) + ">\r\n");
+            written = socket->write("rcpt to:<" + qxt_extract_address(rcpt) + ">\r\n");
+            if (written == -1) {
+                qDebug() << "QxtSmtpPrivate::sendNext socket->write() 2 FAILURE -1";//(**)
+                disconnect = true;
+            }
         }
         state = RcptAckPending;
-qDebug() << "QxtSmtpPrivate::sendNext set state: RcptAckPending";//(**)
     }
     else
     {
         state = MailToSent;
-qDebug() << "QxtSmtpPrivate::sendNext set state: MailToSent";//(**)
     }
+
+    if (!disconnect) {
+        if (!socket->waitForReadyRead(15000)) { // 15 seconds max wait for SMTP server response, to avoid hang
+            qDebug() << "QxtSmtpPrivate::sendNext socket->waitForReadyRead() FAILURE";//(**)
+            disconnect = true;
+        }
+    }
+    if (disconnect) {
+        qDebug() << "socket->disconnectFromHost()";//(**)
+        state = Disconnected;
+        socket->disconnectFromHost();
+qDebug() << "QxtSmtpPrivate::sendNext set state: Disconnected";//(**)
+        return;
+    }
+
 qDebug() << "QxtSmtpPrivate::sendNext SENDING state: " << state;//(**)
 }
 
