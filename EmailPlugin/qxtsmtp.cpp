@@ -188,9 +188,9 @@ qDebug() << "QxtSmtpPrivate::socketError";//(**)
 
 void QxtSmtpPrivate::socketRead()
 {
-qDebug() << "QxtSmtpPrivate::socketRead, buffer size: " << buffer.size;//(**)
+qDebug() << "QxtSmtpPrivate::socketRead, buffer size(): " << buffer.size();//(**)
     buffer += socket->readAll();
-qDebug() << "QxtSmtpPrivate::socketRead, buffer size: " << buffer.size;//(**)
+qDebug() << "QxtSmtpPrivate::socketRead, buffer size(): " << buffer.size();//(**)
     while (true)
     {
         int pos = buffer.indexOf("\r\n");
