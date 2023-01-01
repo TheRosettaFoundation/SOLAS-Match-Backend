@@ -573,7 +573,10 @@ qDebug() << "QxtSmtpPrivate::sendNext mailFailed";//(**)
     // We explicitly use lowercase keywords because for some reason gmail
     // interprets any string starting with an uppercase R as a request
     // to renegotiate the SSL connection.
-    socket->write("mail from:<" + qxt_extract_address(msg.sender()) + ">\r\n");
+    qint64 written = socket->write("mail from:<" + qxt_extract_address(msg.sender()) + ">\r\n");
+if (written == -1) {qDebug() << "QxtSmtpPrivate::sendNext socket->write() Failure -1";} //(**)
+qDebug() << "QxtSmtpPrivate::sendNext write: " << written;//(**)
+
     if (extensions.contains("PIPELINING"))  // almost all do nowadays
     {
         foreach(const QString& rcpt, recipients)
