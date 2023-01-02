@@ -602,6 +602,10 @@ qDebug() << "QxtSmtpPrivate::sendNext recipients.join: " << recipients.join(", "
         if (!socket->waitForReadyRead(15000)) { // 15 seconds max wait for SMTP server response, to avoid hang
             qDebug() << "QxtSmtpPrivate::sendNext socket->waitForReadyRead() FAILURE";//(**)
             disconnect = true;
+        } else {
+            qDebug() << "QxtSmtpPrivate::sendNext waitForReadyRead() success... RcptAckPending state: " << state;//(**)
+            socketRead();
+            return;
         }
     }
     if (disconnect) {
