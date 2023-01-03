@@ -11,6 +11,7 @@ Smtp::Smtp()
     smtp = new QxtSmtp();
     isConnected = false;
     busy = false;
+    reconnect_count = 0;
     currentMessage = NULL;
     emailQueue = QSharedPointer<EmailQueue>(new EmailQueue());
 
@@ -119,6 +120,7 @@ void Smtp::connected()
 {
     qDebug() << "SMTP::Connected to host successfully";
     this->isConnected = true;
+    this->reconnect_count = 0;
 }
 
 void Smtp::connectionFailed()
@@ -142,6 +144,11 @@ void Smtp::disconnected()
     qDebug() << "SMTP::Disconnected";
     this->isConnected = false;
     this->busy = false;
+
+    if (smtp->pendingMessages() && this->reconnect_count++ < 2) { // Reconnect so can send failed email
+        this->init();
+        this->busy = true;
+    }
 }
 
 void Smtp::finished()

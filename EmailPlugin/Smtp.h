@@ -50,6 +50,7 @@ private:
     int port;
     bool isConnected;
     bool busy;
+    int  reconnect_count;
     bool test;
     QString only_send;
     QList<QByteArray> *mail_text_hashes;
