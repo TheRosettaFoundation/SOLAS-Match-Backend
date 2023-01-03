@@ -148,6 +148,7 @@ void Smtp::disconnected()
     if (smtp->pendingMessages() && this->reconnect_count++ < 2) { // Reconnect so can send failed email
         this->init();
         this->busy = true;
+qDebug() << "SMTP::Disconnected INIT";//(**)
     }
 }
 
