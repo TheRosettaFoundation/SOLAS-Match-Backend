@@ -29,11 +29,9 @@ void PasswordResetEmailGenerator::run()
         error = "Password Reset email generation failed. Unable to find ";
         error += "data in the DB. Looking for user id " + QString::number(email_message.user_id());
     } else {
-        uuid = UserDao::getPasswordResetUuid(db, QString::fromStdString(user->email()));
-
+        uuid = UserDao::get_password_reset_request_uuid(db, email_message.user_id());
         if (uuid.compare("") == 0) {
-            error = "Password Reset email generation failed. Unable to find ";
-            error += " uuid in the db, searched by email " + QString::fromStdString(user->email());
+            error = "Password Reset email generation failed. Unable to find uuid in the db, searched by user_id " + QString::number(email_message.user_id());
         }
     }
 

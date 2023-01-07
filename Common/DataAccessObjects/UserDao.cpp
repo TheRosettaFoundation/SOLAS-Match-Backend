@@ -102,16 +102,14 @@ QSharedPointer<BannedUser> UserDao::getBanData(QSharedPointer<MySQLHandler> db, 
     return data;
 }
 
-QString UserDao::getPasswordResetUuid(QSharedPointer<MySQLHandler> db, QString email)
+QString UserDao::get_password_reset_request_uuid(QSharedPointer<MySQLHandler> db, int user_id)
 {
     QString ret;
-    QString args = "null, " + MySQLHandler::wrapString(email);
-    QSharedPointer<QSqlQuery> mQuery = db->call("getPasswordResetRequests", args);
+    QSharedPointer<QSqlQuery> mQuery = db->call("get_password_reset_request", QString::number(user_id));
     if(mQuery->first()) {
         QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
-        ret = MySQLHandler::getValueFromQuery(fieldMap.value("key"), mQuery).toString();
+        ret = MySQLHandler::getValueFromQuery(fieldMap.value("uuid"), mQuery).toString();
     }
-
     return ret;
 }
 
@@ -124,7 +122,6 @@ QString UserDao::getRegistrationId(QSharedPointer<MySQLHandler> db, int userId)
         QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
         ret = MySQLHandler::getValueFromQuery(fieldMap.value("unique_id"), mQuery).toString();
     }
-
     return ret;
 }
 

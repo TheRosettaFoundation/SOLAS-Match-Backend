@@ -107,7 +107,7 @@ void Smtp::checkEmailQueue()
           email_for_hash += email->getBody();
           QByteArray hash = QCryptographicHash::hash(email_for_hash.toUtf8(), QCryptographicHash::Md5);
 
-          if (mail_text_hashes->indexOf(hash) == -1) { // Only send if identical mail not already sent
+          if (email->getSubject().indexOf("Password Reset") != -1 || mail_text_hashes->indexOf(hash) == -1) { // Only send if identical mail not already sent
             mail_text_hashes->append(hash);
             email->printEmail();
             this->send(email);
