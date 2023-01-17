@@ -63,7 +63,7 @@ void ProjectImageRemovedEmailGenerator::run()
         email->setSender(settings.get("site.system_email_address"));
         email->setSubject(settings.get("site.name") + ": Project Image Removed [Project - " + projectTitle + "]");
         email->setBody(QString::fromUtf8(email_body.c_str()));
-
+        UserDao::log_email_sent(db, 0, 0, email_message.project_id(), project->organisationid(), 0, 0, 0, "image_removed_to_admin_emails_list");
     }	else {
         email = this->generateErrorEmail(error);
     }

@@ -56,6 +56,7 @@ void OrgCreated_OrgEmail::run()
         email->addRecipient(QString::fromStdString(admin->email()));
         email->setSubject(settings.get("site.name") + ": Organisation Created");
         email->setBody(QString::fromUtf8(email_body.c_str()));
+        UserDao::log_email_sent(db, emailMessage.org_admin_id(), 0, 0, emailMessage.org_id(), 0, 0, 0, "org_created_to_org_admin");
     } else {
         email = this->generateErrorEmail(error);
     }

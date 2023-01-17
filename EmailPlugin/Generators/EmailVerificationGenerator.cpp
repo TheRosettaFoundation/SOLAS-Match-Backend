@@ -46,6 +46,7 @@ void EmailVerificationGenerator::run()
         email->addRecipient(QString::fromStdString(user->email()));
         email->setSubject(settings.get("site.name") + ": Your email verification");
         email->setBody(QString::fromUtf8(email_body.c_str()));
+        UserDao::log_email_sent(db, emailMessage.user_id(), 0, 0, 0, 0, 0, 0, "email_verification_to_volunteer");
     } else {
         email = this->generateErrorEmail(error);
     }

@@ -69,6 +69,7 @@ void OrgTaskRevokedGenerator::run()
         email->addRecipient(QString::fromStdString(user->email()));
         email->setSubject(settings.get("site.name") + ": Task Revoked");
         email->setBody(QString::fromUtf8(email_body.c_str()));
+        UserDao::log_email_sent(db, emailMessage.user_id(), emailMessage.task_id(), 0, 0, emailMessage.claimant_id(), 0, 0, "task_revoked_to_subscribed_admin");
     } else {
         email = this->generateErrorEmail(error);
     }

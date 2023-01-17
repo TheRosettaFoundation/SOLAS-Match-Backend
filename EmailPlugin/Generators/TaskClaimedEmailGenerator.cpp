@@ -83,6 +83,7 @@ void TaskClaimedEmailGenerator::run()
         email->addRecipient(QString::fromStdString(user->email()));
         email->setSubject(settings.get("site.name") + ": Task Claim Notification");
         email->setBody(QString::fromUtf8(email_body.c_str()));
+        UserDao::log_email_sent(db, email_message.user_id(), email_message.task_id(), 0, 0, email_message.translator_id(), 0, 0, "task_claimed_to_subscribed_admin");
     } else {
         email = this->generateErrorEmail(error);
     }

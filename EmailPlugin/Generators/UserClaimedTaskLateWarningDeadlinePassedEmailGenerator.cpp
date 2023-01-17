@@ -119,6 +119,7 @@ void UserClaimedTaskLateWarningDeadlinePassedEmailGenerator::run()
         email->addRecipient(QString::fromStdString(user->email()));
         email->setSubject(settings.get("site.name") + ": Task Overdue");
         email->setBody(QString::fromUtf8(email_body.c_str()));
+        if (sendMessage) UserDao::log_email_sent(db, email_message.translator_id(), email_message.task_id(), task->projectid(), 0, 0, 0, 0, "deadline_reminder_late_to_volunteer");
     } else {
         email = this->generateErrorEmail(error);
     }

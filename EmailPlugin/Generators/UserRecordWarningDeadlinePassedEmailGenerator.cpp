@@ -53,6 +53,8 @@ void UserRecordWarningDeadlinePassedEmailGenerator::run()
         email->setBody(QString::fromUtf8(email_body.c_str()));
 
         UserDao::insertWillBeDeletedUser(db, email_message.user_id());
+
+       if (sendMessage) UserDao::log_email_sent(db, email_message.user_id(), 0, 0, 0, 0, 0, 0, "profile_reminder_to_volunteer");
     } else {
         email = this->generateErrorEmail(error);
     }

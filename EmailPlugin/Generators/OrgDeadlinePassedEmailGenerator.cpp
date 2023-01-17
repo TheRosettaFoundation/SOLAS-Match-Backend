@@ -60,6 +60,7 @@ void OrgDeadlinePassedMailGenerator::run()
         email->addRecipient(QString::fromStdString(user->email()));
         email->setSubject(settings.get("site.name") + ": Task Update");
         email->setBody(QString::fromUtf8(email_body.c_str()));
+        UserDao::log_email_sent(db, email_message.user_id(), email_message.task_id(), 0, 0, 0, 0, 0, "deadline_passed_to_subscribed_admin");
     } else {
         email = this->generateErrorEmail(error);
     }

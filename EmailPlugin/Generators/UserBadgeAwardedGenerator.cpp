@@ -108,6 +108,9 @@ void UserBadgeAwardedGenerator::run()
         email->setSubject(settings.get("site.name") + ": Achievement Awarded");
         if (badge_title == "Registered") {
             email->setSubject(settings.get("site.name") + ": Thank you for completing your profile");
+            UserDao::log_email_sent(db, emailMessage.user_id(), 0, 0, 0, 0, 0, emailMessage.badge_id(), "profile_completed_to_volunteer");
+        } else {
+            UserDao::log_email_sent(db, emailMessage.user_id(), 0, 0, badge->owner_id(), 0, 0, emailMessage.badge_id(), "achievement_awarded_to_volunteer");
         }
         email->setBody(QString::fromUtf8(email_body.c_str()));
     } else {

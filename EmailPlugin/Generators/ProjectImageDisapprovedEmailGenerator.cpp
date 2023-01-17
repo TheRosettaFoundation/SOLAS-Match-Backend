@@ -71,6 +71,7 @@ void ProjectImageDisapprovedEmailGenerator::run()
         email->addRecipient(QString::fromStdString(user->email()));
         email->setSubject(settings.get("site.name") + ": Project image has been disapproved [Project - " + projectTitle + "]");
         email->setBody(QString::fromUtf8(email_body.c_str()));
+        UserDao::log_email_sent(db, email_message.user_id(), 0, email_message.project_id(), project->organisationid(), 0, 0, 0, "image_disapproved_to_org_admin");
     }	else {
         email = this->generateErrorEmail(error);
     }

@@ -71,6 +71,7 @@ void BannedLoginGenerator::run()
         email->addRecipient(QString::fromStdString(user->email()));
         email->setSubject(settings.get("site.name") + ": Banned Notification");
         email->setBody(QString::fromUtf8(email_body.c_str()));
+        UserDao::log_email_sent(db, emailMessage.user_id(), 0, 0, 0, 0, 0, 0, "user_banned_to_volunteer");
     } else {
         email = this->generateErrorEmail(error);
     }

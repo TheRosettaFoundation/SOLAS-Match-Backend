@@ -30,7 +30,7 @@ void OrgFeedbackGenerator::run()
     QString feedback = email_message.feedback().data();
 
     if (sender.isNull() || task.isNull() || claimant.isNull()) {
-        error = "Failed to generate UserClaimedTaskDeadlinePassed email: Unable to find relevant ";
+        error = "Failed to generate OrgFeedback email: Unable to find relevant ";
         error += "data in the Database. Searched for claimant ID ";
         error += QString::number(email_message.claimant_id()) + ", Task ID ";
         error += QString::number(email_message.task_id()) + " and user ID ";
@@ -39,14 +39,14 @@ void OrgFeedbackGenerator::run()
         project = ProjectDao::getProject(db, task->projectid());
 
         if (project.isNull()) {
-            error = "Failed to generate UserClaimedTaskDeadlinePassed email: Unable to find relevant ";
+            error = "Failed to generate OrgFeedback email: Unable to find relevant ";
             error += " data in the DB. Searched for project id ";
             error += QString::number(task->projectid());
         } else {
             org = OrganisationDao::getOrg(db, project->organisationid());
 
             if (org.isNull()) {
-                error = "Failed to generate UserClaimedTaskDeadlinePassed email: Unable to find relevant ";
+                error = "Failed to generate OrgFeedback email: Unable to find relevant ";
                 error += " data in the DB. Searched for org id ";
                 error += QString::number(project->organisationid());
             }
@@ -82,6 +82,7 @@ void OrgFeedbackGenerator::run()
         email->addRecipient(QString::fromStdString(claimant->email()));
         email->setSubject(settings.get("site.name") + ": Organisation Feedback");
         email->setBody(QString::fromUtf8(email_body.c_str()));
+        UserDao::log_email_sent(db, email_message.claimant_id(), email_message.task_id(), task->projectid(), project->organisationid(), 0, email_message.user_id(), 0, "admin_feedback_to_volunteer");
     } else {
         email = this->generateErrorEmail(error);
     }

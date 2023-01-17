@@ -349,3 +349,17 @@ void UserDao::insertWillBeDeletedUser(QSharedPointer<MySQLHandler> db, int user_
 {
     db->call("insertWillBeDeletedUser", QString::number(user_id));
 }
+
+void UserDao::log_email_sent(QSharedPointer<MySQLHandler> db, int recipient_id, int task_id, int project_id, int org_id, int translator_id, int admin_id, int badge_id, QString topic);
+{
+    QString args =
+        QString::number(recipient_id) + ", " +
+        QString::number(task_id) + ", " +
+        QString::number(project_id) + ", " +
+        QString::number(org_id) + ", " +
+        QString::number(translator_id) + ", " +
+        QString::number(admin_id) + ", " +
+        QString::number(badge_id) + ", " +
+        MySQLHandler::wrapString(topic);
+    db->call("log_email_sent", args);
+}

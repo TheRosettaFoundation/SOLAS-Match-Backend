@@ -61,6 +61,7 @@ public:
     static QString getUserRealName(QSharedPointer<MySQLHandler> db, int userId);
     static QList<QSharedPointer<User> > getRecordWarningUsers(QSharedPointer<MySQLHandler> db);
     static void insertWillBeDeletedUser(QSharedPointer<MySQLHandler> db, int user_id);
+    static void log_email_sent(QSharedPointer<MySQLHandler> db, int recipient_id, int task_id, int project_id, int org_id, int translator_id, int admin_id, int badge_id, QString topic);
 };
 
 #endif  //USERDAO_H

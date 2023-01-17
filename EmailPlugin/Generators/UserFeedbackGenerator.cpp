@@ -29,7 +29,7 @@ void UserFeedbackGenerator::run()
     QString feedback = emailMessage.feedback().data();
 
     if (task.isNull() || claimant.isNull()) {
-        error = "Failed to generate UserClaimedTaskDeadlinePassed email: Unable to find relevant ";
+        error = "Failed to generate UserFeedback email: Unable to find relevant ";
         error += "data in the Database. Searched for claimant ID ";
         error += QString::number(emailMessage.claimant_id()) + ", Task ID ";
         error += QString::number(emailMessage.task_id());
@@ -37,14 +37,14 @@ void UserFeedbackGenerator::run()
         project = ProjectDao::getProject(db, task->projectid());
 
         if (project.isNull()) {
-            error = "Failed to generate UserClaimedTaskDeadlinePassed email: Unable to find relevant ";
+            error = "Failed to generate UserFeedback email: Unable to find relevant ";
             error += " data in the DB. Searched for project id ";
             error += QString::number(task->projectid());
         } else {
             org = OrganisationDao::getOrg(db, project->organisationid());
 
             if (org.isNull()) {
-                error = "Failed to generate UserClaimedTaskDeadlinePassed email: Unable to find relevant ";
+                error = "Failed to generate UserFeedback email: Unable to find relevant ";
                 error += " data in the DB. Searched for org id ";
                 error += QString::number(project->organisationid());
             }
@@ -84,6 +84,7 @@ void UserFeedbackGenerator::run()
             email->addRecipient(QString::fromStdString(user->email()));
             email->setSubject(settings.get("site.name") + ": Volunteer Feedback");
             email->setBody(QString::fromUtf8(email_body.c_str()));
+            UserDao::log_email_sent(db, user->id(), emailMessage.task_id(), task->projectid(), project->organisationid(), emailMessage.claimant_id(), 0, 0, "volunteer_feedback_to_subscribed_admin");
             this->emailQueue->insert(email, currentMessage);
         }
     } else {

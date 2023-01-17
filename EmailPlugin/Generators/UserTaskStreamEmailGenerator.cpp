@@ -182,6 +182,8 @@ void UserTaskStreamEmailGenerator::run()
             email->addRecipient(QString::fromStdString(user->email()));
             email->setSubject(settings.get("site.name") + ": Task Stream");
             email->setBody(QString::fromUtf8(email_body.c_str()));
+            UserDao::log_email_sent(db, emailRequest.user_id(), 0, 0, 0, 0, 0, 0, "task_stream_to_volunteer");
+
             this->emailQueue->insert(email, this->currentMessage);
         } else {
             //qDebug() << "UserTaskStreamEmailGenerator: No tasks within cutoff for user " << QString::number(emailRequest.user_id());
