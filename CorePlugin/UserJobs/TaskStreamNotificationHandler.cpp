@@ -39,7 +39,7 @@ void TaskStreamNotificationHandler::run()
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
     MessagingClient client;
     if(client.init()) {
-        QString sentDateTime = QDateTime::currentDateTime().toString("yyyy-MM-dd HH:mm:ss");
+        QString sentDateTime = QDateTime::currentDateTime().toString("yyyy-MM-dd HH:59:58");
         QList<int> full_list_user_ids = UserDao::getUserIdsPendingTaskStreamNotification(db);
         QList<int> userIds = QList<int>(); // This will contain the cut down list of user_id(s) which will actually be sent emails
         qDebug() << "full_list_user_ids.count(): " << QString::number(full_list_user_ids.count());

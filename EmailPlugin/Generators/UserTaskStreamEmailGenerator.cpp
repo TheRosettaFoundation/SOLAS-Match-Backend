@@ -195,7 +195,7 @@ void UserTaskStreamEmailGenerator::run()
         }
     }
 
-    QString sentDateTime = QDateTime::currentDateTime().toString("yyyy-MM-dd HH:mm:ss");
+    QString sentDateTime = QDateTime::currentDateTime().toString("yyyy-MM-dd HH:59:59");
     if (UserDao::taskStreamNotificationSent(db, emailRequest.user_id(), sentDateTime)) {
         //qDebug() << "UserTaskStreamEmailGenerator: Sending notification request for user " <<
         //            QString::number(emailRequest.user_id());
