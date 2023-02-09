@@ -88,7 +88,7 @@ void UserTaskStreamEmailGenerator::run()
                     QMap<QString, QVariant> task_type_detail = task_type_details[i];
                     if (task->tasktype() == task_type_detail["type_enum"].toInt()) task_type = task_type_detail["type_text"].toString().toStdString();
                 }
-                dict.SetValue("TASK_TYPE", task_type);
+                taskSect->SetValue("TASK_TYPE", task_type);
 
                 std::string source_languagename = task->sourcelocale().languagename();
                 std::string source_countryname  = task->sourcelocale().countryname();
@@ -243,17 +243,9 @@ void UserTaskStreamEmailGenerator::run()
                 std::string task_type = "Invalid Type";
                 for (int i = 0; i < task_type_details.size(); i++) {
                     QMap<QString, QVariant> task_type_detail = task_type_details[i];
-qDebug() << "i: " << i;
-qDebug() << "task_type_detail[type_enum].toInt(): " << task_type_detail["type_enum"].toInt();
-qDebug() << "task_type_detail[type_text].toString(): " << task_type_detail["type_text"].toString();
-qDebug() << "task->tasktype(): " << task->tasktype();
-qDebug() << QString::fromStdString(task_type);
                     if (task->tasktype() == task_type_detail["type_enum"].toInt()) task_type = task_type_detail["type_text"].toString().toStdString();
-qDebug() << QString::fromStdString(task_type);
                 }
-qDebug() << "End task_type:";
-qDebug() << QString::fromStdString(task_type);
-                dict.SetValue("TASK_TYPE", task_type);
+                taskSect->SetValue("TASK_TYPE", task_type);
 
                 std::string source_languagename = task->sourcelocale().languagename();
                 std::string source_countryname  = task->sourcelocale().countryname();
