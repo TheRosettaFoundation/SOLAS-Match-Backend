@@ -168,6 +168,23 @@ QList<QSharedPointer<Task> > UserDao::getUserTopTasks(QSharedPointer<MySQLHandle
     return taskList;
 }
 
+QList<QSharedPointer<Task> > UserDao::get_user_earthquake_tasks(QSharedPointer<MySQLHandler> db, int userId)
+{
+    QList<QSharedPointer<Task> > taskList = QList<QSharedPointer<Task> >();
+    QString args = QString::number(userId);
+
+    QSharedPointer<QSqlQuery> mQuery = db->call("get_user_earthquake_tasks", args);
+    if (mQuery->first()) {
+        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
+        do {
+            QSharedPointer<Task> task = QSharedPointer<Task>(new Task());
+            ModelGenerator::Generate(mQuery, task, fieldMap);
+            taskList.append(task);
+        } while (mQuery->next());
+    }
+    return taskList;
+}
+
 QList<QSharedPointer<Task> > UserDao::getUserTasks(QSharedPointer<MySQLHandler> db, int userId, int limit, int offset)
 {
     QList<QSharedPointer<Task> > taskList = QList<QSharedPointer<Task> >();
@@ -216,6 +233,18 @@ QList<int> UserDao::getUserIdsPendingTaskStreamNotification(QSharedPointer<MySQL
 {
     QList<int> userIds = QList<int>();
     QSharedPointer<QSqlQuery> mQuery = db->call("getUserIdsPendingTaskStreamNotification", "");
+    if (mQuery->first()) {
+        do {
+            userIds.append(MySQLHandler::getValueFromQuery("user_id", mQuery).toInt());
+        } while (mQuery->next());
+    }
+    return userIds;
+}
+
+QList<int> UserDao::get_users_list_for_earthquake(QSharedPointer<MySQLHandler> db)
+{
+    QList<int> userIds = QList<int>();
+    QSharedPointer<QSqlQuery> mQuery = db->call("get_users_list_for_earthquake", "");
     if (mQuery->first()) {
         do {
             userIds.append(MySQLHandler::getValueFromQuery("user_id", mQuery).toInt());

@@ -110,6 +110,30 @@ void TaskStreamNotificationHandler::run()
                 i++;
             }
         }
+
+        // Earthquake
+        QList<int> users_list_for_earthquake = UserDao::get_users_list_for_earthquake(db);
+        qDebug() << "users_list_for_earthquake.count(): " << QString::number(users_list_for_earthquake.count());
+        count = users_list_for_earthquake.count();
+        max_allowed = 1000; // per hour
+        if (count < max_allowed) max_allowed = count;
+        if (max_allowed > 0) {
+            int random = QRandomGenerator::global()->bounded(max_allowed); // Pick max_allowed elements starting at a random element (circulating back to start, if necessary)
+            qDebug() << "count, max_allowed, random Earthquake: " << QString::number(count) << ", " << QString::number(max_allowed) << ", " << QString::number(random);
+            int i = 0;
+            foreach (int id, users_list_for_earthquake) {
+                if (((i >= random) && (i < random + max_allowed)) || ((i >= (random - count)) && (i < random + max_allowed - count))) {
+                    QSharedPointer<UserTaskStreamEmail> request = QSharedPointer<UserTaskStreamEmail>(new UserTaskStreamEmail());
+                    request->set_user_id(-id); // Negative means Earthquake
+                    request->set_email_type(EmailMessage::UserTaskStreamEmail);
+                    std::string body = request->SerializeAsString();
+                    client.publish(exchange, topic, body);
+                } else {
+                    qDebug() << "TaskStreamNotificationHandler: Discarded user id Earthquake " << QString::number(id);
+                }
+                i++;
+            }
+        }
     } else {
         qDebug() << "Unable to connect to RabbitMQ. Check conf.ini for settings.";
     }
