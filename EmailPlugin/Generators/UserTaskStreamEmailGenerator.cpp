@@ -247,12 +247,12 @@ qDebug() << "i: " << i;
 qDebug() << "task_type_detail[type_enum].toInt(): " << task_type_detail["type_enum"].toInt();
 qDebug() << "task_type_detail[type_text].toString(): " << task_type_detail["type_text"].toString();
 qDebug() << "task->tasktype(): " << task->tasktype();
-qDebug() << task_type;
+qDebug() << QString(task_type);
                     if (task->tasktype() == task_type_detail["type_enum"].toInt()) task_type = task_type_detail["type_text"].toString().toStdString();
-qDebug() << task_type;
+qDebug() << QString(task_type);
                 }
 qDebug() << "End task_type:";
-qDebug() << task_type;
+qDebug() << QString(task_type);
                 dict.SetValue("TASK_TYPE", task_type);
 
                 std::string source_languagename = task->sourcelocale().languagename();
