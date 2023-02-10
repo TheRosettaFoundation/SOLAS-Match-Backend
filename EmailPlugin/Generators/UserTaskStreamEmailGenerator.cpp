@@ -331,14 +331,14 @@ void UserTaskStreamEmailGenerator::run()
             }
 
             std::string email_body;
-            QString templateLocation = QString(TEMPLATE_DIRECTORY) + "emails/user-task-stream.tpl";
+            QString templateLocation = QString(TEMPLATE_DIRECTORY) + "emails/emergency_response.tpl";
             ctemplate::ExpandTemplate(templateLocation.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
             email->setSender(settings.get("site.system_email_address"));;
             email->addRecipient(QString::fromStdString(user->email()));
-            email->setSubject(settings.get("site.name") + ": Task Stream");
+            email->setSubject(settings.get("site.name") + ": Turkey/Syria Emergency Response - Available Tasks");
             email->setBody(QString::fromUtf8(email_body.c_str()));
-            UserDao::log_email_sent(db, -emailRequest.user_id(), 0, 0, 0, 0, 0, 0, "task_stream_to_volunteer");
+            UserDao::log_email_sent(db, -emailRequest.user_id(), 0, 0, 0, 0, 0, 0, "emergency_response_to_volunteer");
 
             this->emailQueue->insert(email, this->currentMessage);
     } else {
