@@ -1,7 +1,7 @@
 cd /repo/SOLAS-Match-Backend
 sudo ls
 sudo touch /repo/SOLAS-Match-Backend/STOP_consumeFromQueue
-sleep 5
+sleep 20
 sudo kill `ps -ef | grep PluginHandler | grep -v grep | grep -Eo '[0-9]+' | head --lines 1`
 sudo rm /repo/SOLAS-Match-Backend/STOP_consumeFromQueue
 ps -ef | grep Plugin
