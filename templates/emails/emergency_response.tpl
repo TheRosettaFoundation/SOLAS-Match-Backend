@@ -59,4 +59,6 @@ Please note that TWB works with a community of volunteers and that these project
 New to TWB? Have a look at our <a href="https://community.translatorswb.org/t/welcome-pack-for-kato-translators/3138">Translator's Toolkit</a> to find out how to get started with us.
 
 
-{{>FOOTER}}
+<p>
+If you wish to unsubscribe from notifications about Türkiye/Syria earthquake response available tasks, visit the <a href="https://twbplatform.org/tag/4868/">tag page</a>, and then click on the black button “Unsubscribe” in the top-right corner of the screen.
+</p>
