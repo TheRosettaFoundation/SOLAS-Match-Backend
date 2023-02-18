@@ -42,7 +42,7 @@
 #    include <QSslSocket>
 #endif
 
-#include <QDebug> //(**)
+#include <QDebug>
 
 QxtSmtpPrivate::QxtSmtpPrivate() : QObject(0)
 {
@@ -91,10 +91,10 @@ void QxtSmtp::setPassword(const QByteArray& password)
 
 int QxtSmtp::send(const QxtMailMessage& message)
 {
-qDebug() << "QxtSmtp::send socket()->state(): " << socket()->state();//(**)
+//qDebug() << "QxtSmtp::send socket()->state(): " << socket()->state();//(**)
 if (!socket()->isOpen()) qDebug() << "QxtSmtp::send NOT OPEN";//(**)
     int messageID = ++qxt_d().nextID;
-qDebug() << "QxtSmtp::send messageID: " << QString::number(messageID) << ", state: " << qxt_d().state;//(**)
+//qDebug() << "QxtSmtp::send messageID: " << QString::number(messageID) << ", state: " << qxt_d().state;//(**)
     qxt_d().pending.append(qMakePair(messageID, message));
     if (qxt_d().state == QxtSmtpPrivate::Waiting)
         qxt_d().sendNext();
@@ -188,9 +188,9 @@ qDebug() << "QxtSmtpPrivate::socketError";//(**)
 
 void QxtSmtpPrivate::socketRead()
 {
-qDebug() << "QxtSmtpPrivate::socketRead, buffer size(): " << buffer.size();//(**)
+//qDebug() << "QxtSmtpPrivate::socketRead, buffer size(): " << buffer.size();//(**)
     buffer += socket->readAll();
-qDebug() << "QxtSmtpPrivate::socketRead, buffer size(): " << buffer.size();//(**)
+//qDebug() << "QxtSmtpPrivate::socketRead, buffer size(): " << buffer.size();//(**)
     while (true)
     {
         int pos = buffer.indexOf("\r\n");
@@ -198,7 +198,7 @@ qDebug() << "QxtSmtpPrivate::socketRead, buffer size(): " << buffer.size();//(**
         QByteArray line = buffer.left(pos);
         buffer = buffer.mid(pos + 2);
         QByteArray code = line.left(3);
-qDebug() << "QxtSmtpPrivate::socketRead state: " << state;//(**)
+//qDebug() << "QxtSmtpPrivate::socketRead state: " << state;//(**)
         switch (state)
         {
         case StartState:
@@ -263,7 +263,7 @@ qDebug() << "QxtSmtpPrivate::socketRead mailFailed";//(**)
 				// a reset will be sent to clear things out
                 sendNext();
                 state = BodySent;
-qDebug() << "QxtSmtpPrivate::socketRead set state: BodySent";//(**)
+//qDebug() << "QxtSmtpPrivate::socketRead set state: BodySent";//(**)
             }
             else
                 sendNextRcpt(code, line);
@@ -284,7 +284,7 @@ qDebug() << "QxtSmtpPrivate::socketRead mailFailed 2";//(**)
 					emit qxt_p().mailFailed(pending.first().first, code.toInt(), line);
 				}
 				else
-qDebug() << "QxtSmtpPrivate::socketRead mailSent";//(**)
+//qDebug() << "QxtSmtpPrivate::socketRead mailSent";//(**)
 					emit qxt_p().mailSent(pending.first().first);
 	            pending.removeFirst();
 			}
@@ -540,10 +540,10 @@ qDebug() << "QxtSmtpPrivate::sendNext Disconnected state: " << state;//(**)
 
     if (pending.isEmpty())
     {
-qDebug() << "QxtSmtpPrivate::sendNext pending.isEmpty() (emit finished) state: " << state;//(**)
+//qDebug() << "QxtSmtpPrivate::sendNext pending.isEmpty() (emit finished) state: " << state;//(**)
         // if there are no additional mails to send, finish up
         state = Waiting;
-qDebug() << "QxtSmtpPrivate::sendNext set state: Waiting";//(**)
+//qDebug() << "QxtSmtpPrivate::sendNext set state: Waiting";//(**)
         emit qxt_p().finished();
         return;
     }
@@ -570,7 +570,7 @@ qDebug() << "QxtSmtpPrivate::sendNext mailFailed";//(**)
         sendNext();
         return;
     }
-qDebug() << "QxtSmtpPrivate::sendNext recipients.join: " << recipients.join(", ");//(**)
+//qDebug() << "QxtSmtpPrivate::sendNext recipients.join: " << recipients.join(", ");//(**)
     // We explicitly use lowercase keywords because for some reason gmail
     // interprets any string starting with an uppercase R as a request
     // to renegotiate the SSL connection.
@@ -603,7 +603,7 @@ qDebug() << "QxtSmtpPrivate::sendNext recipients.join: " << recipients.join(", "
             qDebug() << "QxtSmtpPrivate::sendNext socket->waitForReadyRead() FAILURE";//(**)
             disconnect = true;
         } else {
-            qDebug() << "QxtSmtpPrivate::sendNext waitForReadyRead() success... RcptAckPending state: " << state;//(**)
+            //qDebug() << "QxtSmtpPrivate::sendNext waitForReadyRead() success... RcptAckPending state: " << state;//(**)
             socketRead();
             return;
         }
@@ -621,7 +621,7 @@ qDebug() << "QxtSmtpPrivate::sendNext SENDING state: " << state;//(**)
 
 void QxtSmtpPrivate::sendNextRcpt(const QByteArray& code, const QByteArray&line)
 {
-qDebug() << "QxtSmtpPrivate::sendNextRcpt state: " << state;//(**)
+//qDebug() << "QxtSmtpPrivate::sendNextRcpt state: " << state;//(**)
     int messageID = pending.first().first;
     const QxtMailMessage& msg = pending.first().second;
 
@@ -701,5 +701,5 @@ qDebug() << "QxtSmtpPrivate::sendBody mailFailed";//(**)
     socket->write(msg.rfc2822());
     socket->write(".\r\n");
     state = BodySent;
-qDebug() << "QxtSmtpPrivate::sendBody set state: BodySent";//(**)
+//qDebug() << "QxtSmtpPrivate::sendBody set state: BodySent";//(**)
 }
