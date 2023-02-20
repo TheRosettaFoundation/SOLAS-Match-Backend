@@ -180,7 +180,7 @@ if (user->id() == 3297) { // test code (3297 is id for Alan Barrett)
 
 
 qDebug() << "QString::fromLatin1(ü): " << QString::fromLatin1("ü") << ", length(): " << QString::fromLatin1("ü").length();
-QString bytes = QString::fromLatin1(ü);
+QString bytes = QString::fromLatin1("ü");
 for (int i = 0; i < bytes.length(); i++) qDebug() << "bytes[i]: " << bytes[i] << ", unicode(): " << bytes[i].unicode();
 
 
