@@ -336,7 +336,7 @@ void UserTaskStreamEmailGenerator::run()
 
             email->setSender(settings.get("site.system_email_address"));;
             email->addRecipient(QString::fromStdString(user->email()));
-            email->setSubject(settings.get("site.name") + ": Türkiye/Syria Emergency Response - Available Tasks");
+            email->setSubject(settings.get("site.name") + ": T" + QString::fromLatin1("ü") + "rkiye/Syria Emergency Response - Available Tasks");
             email->setBody(QString::fromUtf8(email_body.c_str()));
             UserDao::log_email_sent(db, -emailRequest.user_id(), 0, 0, 0, 0, 0, 0, "emergency_response_to_volunteer");
 
