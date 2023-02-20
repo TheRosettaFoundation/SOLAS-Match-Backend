@@ -177,7 +177,8 @@ if (user->id() == 3297) { // test code (3297 is id for Alan Barrett)
 
         email->setSender(settings.get("site.system_email_address"));;
         email->addRecipient(QString::fromStdString(user->email()));
-        email->setSubject(settings.get("site.name") + ": User Reference");
+//        email->setSubject(settings.get("site.name") + ": User Reference");
+          email->setSubject(settings.get("site.name") + ": Türkiye/Syria Emergency Response - Available Tasks");
         email->setBody(QString::fromUtf8(email_body.c_str()));
         UserDao::log_email_sent(db, emailMessage.user_id(), 0, 0, 0, 0, 0, 0, "reference_to_volunteer");
     } else {
