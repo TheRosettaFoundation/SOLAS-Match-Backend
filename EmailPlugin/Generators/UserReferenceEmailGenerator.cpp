@@ -177,14 +177,7 @@ if (user->id() == 3297) { // test code (3297 is id for Alan Barrett)
 
         email->setSender(settings.get("site.system_email_address"));;
         email->addRecipient(QString::fromStdString(user->email()));
-
-
-qDebug() << "QString::fromLatin1(ü): " << QString::fromLatin1("ü") << ", length(): " << QString::fromLatin1("ü").length();
-QString bytes = QString::fromLatin1("ü");
-for (int i = 0; i < bytes.length(); i++) qDebug() << "bytes[i]: " << bytes[i] << ", unicode(): " << bytes[i].unicode();
-
-
-        email->setSubject(settings.get("site.name") + ": User Reference");
+        email->setSubject(settings.get("site.name") + ": User Reference" + QString::fromLatin1("ü") + "xyz");
         email->setBody(QString::fromUtf8(email_body.c_str()));
         UserDao::log_email_sent(db, emailMessage.user_id(), 0, 0, 0, 0, 0, 0, "reference_to_volunteer");
     } else {
