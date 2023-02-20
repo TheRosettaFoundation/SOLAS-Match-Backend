@@ -210,7 +210,7 @@ QByteArray qxt_fold_mime_header(const QString& key, const QString& value, QTextC
 {
     QByteArray rv = "";
     QByteArray line = key.toLatin1() + ": ";
-qDebug() << "qxt_fold_mime_header: " << key << ", " << value;
+//qDebug() << "qxt_fold_mime_header: " << key << ", " << value;
 
     if (!prefix.isEmpty()) line += prefix;
 
@@ -275,11 +275,11 @@ qDebug() << "qxt_fold_mime_header: " << key << ", " << value;
             int count = qcharacters.length();
             for (int i = 0; i < count; i++)
             {
-qDebug() << "qxt_fold_mime_heade i: " << i << ", qcharacters[i]: " << qcharacters[i] << ",length_outside_encoded_word: " << length_outside_encoded_word << ",line.length(): " << line.length();
+//qDebug() << "qxt_fold_mime_heade i: " << i << ", qcharacters[i]: " << qcharacters[i] << ",length_outside_encoded_word: " << length_outside_encoded_word << ",line.length(): " << line.length();
                 bool byte_escape = qcharacters[i] <= QChar(32) || qcharacters[i] == QChar(127) || qcharacters[i] == '=' || qcharacters[i] == '?' || qcharacters[i] == '_';
                 bool utf8_escape = qcharacters[i] >= QChar(128);
-if (byte_escape) qDebug() << "byte_escape";
-if (utf8_escape) qDebug() << "utf8_escape";
+//if (byte_escape) qDebug() << "byte_escape";
+//if (utf8_escape) qDebug() << "utf8_escape";
                 // Byte escape uses =HH and, if at end of line, after that comes ?=
                 // UTF-8 character >= U+0080 could just possibly use encoded 4 bytes =HH=HH=HH=HH and, if at end of line, after that comes ?=
                 if (
@@ -306,13 +306,13 @@ if (utf8_escape) qDebug() << "utf8_escape";
                 else {
                     line += qcharacters[i].toLatin1();
                 }
-qDebug() << "rv: " << rv << ", line: " << line;
+//qDebug() << "rv: " << rv << ", line: " << line;
             }
         }
         line += "?="; // end encoded-word atom
-qDebug() << "rv: " << rv << ", line: " << line;
+//qDebug() << "rv: " << rv << ", line: " << line;
     }
-qDebug() << "rv: " << rv << ", line: " << line;
+//qDebug() << "rv: " << rv << ", line: " << line;
     return rv + line + "\r\n";
 }
 
