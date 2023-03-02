@@ -54,6 +54,7 @@ private:
     bool test;
     QString only_send;
     QList<QByteArray> *mail_text_hashes;
+    unsigned int count_checkEmailQueue;
 };
 
 #endif // SMTP_H

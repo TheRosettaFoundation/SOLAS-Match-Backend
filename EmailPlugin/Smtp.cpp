@@ -8,6 +8,7 @@
 
 Smtp::Smtp()
 {
+    count_checkEmailQueue = 0;
     smtp = new QxtSmtp();
     isConnected = false;
     busy = false;
@@ -90,6 +91,13 @@ QSharedPointer<EmailQueue> Smtp::getEmailQueue()
 
 void Smtp::checkEmailQueue()
 {
+if ((count_checkEmailQueue++)%3000 == 0) { // 5 minutes (100ms 3000 times)
+  if (busy) qDebug() << "SMTP::checkEmailQueue busy";
+  if (!busy) {
+    qDebug() << "SMTP::checkEmailQueue NOT busy";
+    if (!emailQueue->isEmpty()) qDebug() << "SMTP::checkEmailQueue: !emailQueue->isEmpty()";
+  }
+}
     if (!busy && !emailQueue->isEmpty()) {
         //qDebug() << "Getting message from queue";
         EmailQueue::ConstIterator i = emailQueue->constBegin();
