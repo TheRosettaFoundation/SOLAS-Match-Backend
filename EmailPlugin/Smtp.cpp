@@ -101,7 +101,7 @@ if ((count_checkEmailQueue++)%3000 == 0) { // 5 minutes (100ms 3000 times)
     if (!busy && !emailQueue->isEmpty()) {
         //qDebug() << "Getting message from queue";
         EmailQueue::ConstIterator i = emailQueue->constBegin();
-qDebug() << "SMTP::checkEmailQueue constBegin(): " << emailQueue->constBegin() << ", i: " << i << ", constEnd(): " << emailQueue->constEnd();
+qDebug() << "SMTP::checkEmailQueue constBegin(): " << emailQueue->constBegin().key() << ", constEnd(): " << emailQueue->constEnd().key();
         if (i != emailQueue->constEnd()) {
             this->currentMessage = i.value();
             QSharedPointer<Email> email = i.key();
