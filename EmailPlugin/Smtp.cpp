@@ -95,15 +95,17 @@ if ((count_checkEmailQueue++)%3000 == 0) { // 5 minutes (100ms 3000 times)
   if (busy) qDebug() << "SMTP::checkEmailQueue busy";
   if (!busy) {
     qDebug() << "SMTP::checkEmailQueue NOT busy";
-    if (!emailQueue->isEmpty()) qDebug() << "SMTP::checkEmailQueue: !emailQueue->isEmpty()";
+    if (!emailQueue->isEmpty()) qDebug() << "SMTP::checkEmailQueue: !emailQueue->isEmpty(), count(): " << emailQueue->count();
   }
 }
     if (!busy && !emailQueue->isEmpty()) {
         //qDebug() << "Getting message from queue";
         EmailQueue::ConstIterator i = emailQueue->constBegin();
+qDebug() << "SMTP::checkEmailQueue constBegin(): " << emailQueue->constBegin() << ", i: " << i << ", constEnd(): " << emailQueue->constEnd();
         if (i != emailQueue->constEnd()) {
             this->currentMessage = i.value();
             QSharedPointer<Email> email = i.key();
+qDebug() << "SMTP::checkEmailQueue Removing from Queue: " << i.key() << ", count(): " << emailQueue->count();
             emailQueue->remove(i.key());
 
           QString email_for_hash = "";
@@ -120,7 +122,9 @@ if ((count_checkEmailQueue++)%3000 == 0) { // 5 minutes (100ms 3000 times)
             email->printEmail();
             this->send(email);
           }
+          else qDebug() << "SMTP::checkEmailQueue Skipped: " << email->getSubject();
         }
+        else qDebug() << "SMTP::checkEmailQueue i == emailQueue->constEnd()";
     }
 }
 
