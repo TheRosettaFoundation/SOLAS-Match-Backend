@@ -101,12 +101,30 @@ if ((count_checkEmailQueue++)%3000 == 0) { // 5 minutes (100ms 3000 times)
     if (!busy && !emailQueue->isEmpty()) {
         //qDebug() << "Getting message from queue";
         EmailQueue::ConstIterator i = emailQueue->constBegin();
-qDebug() << "SMTP::checkEmailQueue constBegin(): " << emailQueue->constBegin().key() << ", constEnd(): " << emailQueue->constEnd().key();
+        QSharedPointer<Email> queue_begin = emailQueue->constBegin().key();
+qDebug() << "SMTP::checkEmailQueue constBegin(): " << queue_begin << ", constEnd(): " << emailQueue->constEnd().key();
         if (i != emailQueue->constEnd()) {
             this->currentMessage = i.value();
             QSharedPointer<Email> email = i.key();
-qDebug() << "SMTP::checkEmailQueue Removing from Queue: " << i.key() << ", count(): " << emailQueue->count();
-            emailQueue->remove(i.key());
+            QMap::size_type queue_count = emailQueue->count();
+qDebug() << "SMTP::checkEmailQueue Removing from Queue: " << i.key() << ", count(): " << queue_count;
+            QMap::size_type number_removed = emailQueue->remove(i.key());
+
+            // Debug (sometimes does not remove?)
+            QMap::size_type queue_count_new = emailQueue->count();
+            bool contains_email = emailQueue->contains(email);
+            QString contains_email_string = "false";
+            if (contains_email) contains_email_string = "true";
+            QSharedPointer<Email> queue_begin_new = emailQueue->constBegin().key();
+            if (number_removed == 0 || contains_email || (queue_count_new + 1) != queue_count || queue_begin == queue_begin_new) {
+qDebug() << "SMTP::checkEmailQueue emailQueue->remove() Failed? number_removed:" << number_removed << ", contains_email:" << contains_email_string << ", queue_count_new:" << queue_count_new << ", queue_begin_new:" << queue_begin_new;
+                if (number_removed == 0) {
+                    emailQueue->clear(); // Try recover
+                    queue_count_new = emailQueue->count();
+                    queue_begin_new = emailQueue->constBegin().key();
+qDebug() << "SMTP::checkEmailQueue emailQueue->clear() queue_count_new:" << queue_count_new << ", queue_begin_new:" << queue_begin_new;
+                }
+            }
 
           QString email_for_hash = "";
           foreach(QString recipient, email->getRecipients()) {
