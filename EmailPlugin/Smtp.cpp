@@ -130,6 +130,7 @@ qDebug() << "SMTP::checkEmailQueue emailQueue->clear() queue_count_new:" << queu
           foreach(QString recipient, email->getRecipients()) {
               email_for_hash += recipient;
           }
+          QString recipients = email_for_hash;
           email_for_hash += email->getSender();
           email_for_hash += email->getSubject();
           email_for_hash += email->getBody();
@@ -140,7 +141,7 @@ qDebug() << "SMTP::checkEmailQueue emailQueue->clear() queue_count_new:" << queu
             email->printEmail();
             this->send(email);
           }
-          else qDebug() << "SMTP::checkEmailQueue Skipped: " << email->getSubject();
+          else qDebug() << "SMTP::checkEmailQueue Skipped: " << email->getSubject() << recipients;
         }
         else qDebug() << "SMTP::checkEmailQueue i == emailQueue->constEnd()";
     }
