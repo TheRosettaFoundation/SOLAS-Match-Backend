@@ -106,12 +106,12 @@ qDebug() << "SMTP::checkEmailQueue constBegin(): " << queue_begin << ", constEnd
         if (i != emailQueue->constEnd()) {
             this->currentMessage = i.value();
             QSharedPointer<Email> email = i.key();
-            QMap::size_type queue_count = emailQueue->count();
+            int queue_count = emailQueue->count();
 qDebug() << "SMTP::checkEmailQueue Removing from Queue: " << i.key() << ", count(): " << queue_count;
-            QMap::size_type number_removed = emailQueue->remove(i.key());
+            int number_removed = emailQueue->remove(i.key());
 
             // Debug (sometimes does not remove?)
-            QMap::size_type queue_count_new = emailQueue->count();
+            int queue_count_new = emailQueue->count();
             bool contains_email = emailQueue->contains(email);
             QString contains_email_string = "false";
             if (contains_email) contains_email_string = "true";
