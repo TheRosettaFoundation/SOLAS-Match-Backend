@@ -112,8 +112,9 @@ qDebug() << "SMTP::checkEmailQueue Removing from Queue: " << i.key() << ", count
 
             // Debug (sometimes does not remove?)
 // BELOW TEST from FAIL to HERE does not fail
-//removed also            int queue_count_new = emailQueue->count();
-            bool contains_email = emailQueue->contains(email);
+//PUT BACK NEXT ONE...
+            int queue_count_new = emailQueue->count();
+//COMMNET OUT            bool contains_email = emailQueue->contains(email);
 /*
             QString contains_email_string = "false";
             if (contains_email) contains_email_string = "true";
