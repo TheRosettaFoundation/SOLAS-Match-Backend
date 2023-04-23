@@ -110,6 +110,7 @@ qDebug() << "SMTP::checkEmailQueue constBegin(): " << queue_begin << ", constEnd
 qDebug() << "SMTP::checkEmailQueue Removing from Queue: " << i.key() << ", count(): " << queue_count;
             int number_removed = emailQueue->remove(i.key());
 
+/*
             // Debug (sometimes does not remove?)
             int queue_count_new = emailQueue->count();
             bool contains_email = emailQueue->contains(email);
@@ -125,6 +126,7 @@ qDebug() << "SMTP::checkEmailQueue emailQueue->remove() Failed? number_removed:"
 qDebug() << "SMTP::checkEmailQueue emailQueue->clear() queue_count_new:" << queue_count_new << ", queue_begin_new:" << queue_begin_new;
                 }
             }
+*/
 
           QString email_for_hash = "";
           foreach(QString recipient, email->getRecipients()) {
