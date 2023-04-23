@@ -117,8 +117,8 @@ qDebug() << "SMTP::checkEmailQueue Removing from Queue: " << i.key() << ", count
             if (contains_email) contains_email_string = "true";
             QSharedPointer<Email> queue_begin_new = emailQueue->constBegin().key();
             if (number_removed == 0 || contains_email || (queue_count_new + 1) != queue_count || queue_begin == queue_begin_new) {
-/*
 qDebug() << "SMTP::checkEmailQueue emailQueue->remove() Failed? number_removed:" << number_removed << ", contains_email:" << contains_email_string << ", queue_count_new:" << queue_count_new << ", queue_begin_new:" << queue_begin_new;
+/*
                 if (number_removed == 0) {
                     emailQueue->clear(); // Try recover
                     queue_count_new = emailQueue->count();
