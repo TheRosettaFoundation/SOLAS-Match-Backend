@@ -709,6 +709,14 @@ QList<QSharedPointer<Task> > TaskDao::get_matching_revision_memsource_tasks(QSha
     QMap<QString, QVariant> memsource_task = get_memsource_task(db, task->id());
     if (memsource_task.isEmpty()) return revision_tasks;
 
+    QList<QMap<QString, QVariant>> task_type_details = get_task_type_details(db);
+    for (int i = 0; i < task_type_details.size(); i++) {
+        QMap<QString, QVariant> task_type_detail = task_type_details[i];
+        if (task->tasktype() == task_type_detail["type_enum"].toInt()) {
+            if (task_type_detail["shell_task"].toInt()) return revision_tasks;
+        }
+    }
+
     int top_level = get_top_level(memsource_task["internalId"].toString());
 
     QList<QMap<QString, QVariant>> project_tasks = get_tasks_for_project(db, task->projectid());
@@ -734,12 +742,26 @@ QList<QMap<QString, QVariant> > TaskDao::get_task_type_details(QSharedPointer<My
         QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
         do {
             QMap<QString, QVariant> row = QMap<QString, QVariant>();
-            row["type_enum"] = MySQLHandler::getValueFromQuery(fieldMap.value("type_enum"), mQuery);
-            row["enabled"] = MySQLHandler::getValueFromQuery(fieldMap.value("enabled"), mQuery);
-            row["type_text"] = MySQLHandler::getValueFromQuery(fieldMap.value("type_text"), mQuery);
-            row["colour"] = MySQLHandler::getValueFromQuery(fieldMap.value("colour"), mQuery);
-            row["claimed_template"] = MySQLHandler::getValueFromQuery(fieldMap.value("claimed_template"), mQuery);
-            row["show_section"] = MySQLHandler::getValueFromQuery(fieldMap.value("show_section"), mQuery);
+            row["type_enum"] =                         MySQLHandler::getValueFromQuery(fieldMap.value("type_enum"), mQuery);
+            row["type_category"] =                     MySQLHandler::getValueFromQuery(fieldMap.value("type_category"), mQuery);
+            row["enabled"] =                           MySQLHandler::getValueFromQuery(fieldMap.value("enabled"), mQuery);
+            row["for_self_managed"] =                  MySQLHandler::getValueFromQuery(fieldMap.value("for_self_managed"), mQuery);
+            row["visible_community"] =                 MySQLHandler::getValueFromQuery(fieldMap.value("visible_community"), mQuery);
+            row["shell_task"] =                        MySQLHandler::getValueFromQuery(fieldMap.value("shell_task"), mQuery);
+            row["source_and_target"] =                 MySQLHandler::getValueFromQuery(fieldMap.value("source_and_target"), mQuery);
+            row["sourcing"] =                          MySQLHandler::getValueFromQuery(fieldMap.value("sourcing"), mQuery);
+            row["type_text"] =                         MySQLHandler::getValueFromQuery(fieldMap.value("type_text"), mQuery);
+            row["type_text_short"] =                   MySQLHandler::getValueFromQuery(fieldMap.value("type_text_short"), mQuery);
+            row["colour"] =                            MySQLHandler::getValueFromQuery(fieldMap.value("colour"), mQuery);
+            row["claimed_template"] =                  MySQLHandler::getValueFromQuery(fieldMap.value("claimed_template"), mQuery);
+            row["show_section"] =                      MySQLHandler::getValueFromQuery(fieldMap.value("show_section"), mQuery);
+            row["memsource_name"] =                    MySQLHandler::getValueFromQuery(fieldMap.value("memsource_name"), mQuery);
+            row["unit_count_text"] =                   MySQLHandler::getValueFromQuery(fieldMap.value("unit_count_text"), mQuery);
+            row["unit_count_text_short"] =             MySQLHandler::getValueFromQuery(fieldMap.value("unit_count_text_short"), mQuery);
+            row["pricing_and_recognition_unit_text"] = MySQLHandler::getValueFromQuery(fieldMap.value("pricing_and_recognition_unit_text"), mQuery);
+            row["source_unit_for_later_stats"] =       MySQLHandler::getValueFromQuery(fieldMap.value("source_unit_for_later_stats"), mQuery);
+            row["unit_rate"] =                         MySQLHandler::getValueFromQuery(fieldMap.value("unit_rate"), mQuery);
+            row["rate_for_recognition"] =              MySQLHandler::getValueFromQuery(fieldMap.value("rate_for_recognition"), mQuery);
             task_type_details.append(row);
         } while (mQuery->next());
     }
