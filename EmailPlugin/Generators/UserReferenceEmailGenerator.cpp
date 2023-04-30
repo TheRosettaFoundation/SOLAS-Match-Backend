@@ -78,9 +78,15 @@ if (user->id() == 3297) { // test code (3297 is id for Alan Barrett)
                     taskSect->SetValue("ORG_NAME", orgName.toStdString());
 
                     std::string task_type = "Invalid Type";
+                    std::string pricing_and_recognition_unit_text = "Words";
+                    int source_and_target = 1;
                     for (int i = 0; i < task_type_details.size(); i++) {
                         QMap<QString, QVariant> task_type_detail = task_type_details[i];
-                        if (task->tasktype() == task_type_detail["type_enum"].toInt()) task_type = task_type_detail["type_text"].toString().toStdString();
+                        if (task->tasktype() == task_type_detail["type_enum"].toInt()) {
+                            task_type = task_type_detail["type_text"].toString().toStdString();
+                            pricing_and_recognition_unit_text = task_type_detail["pricing_and_recognition_unit_text"].toString().toStdString();
+                            source_and_target = task_type_detail["source_and_target"].toInt();
+                        }
                     }
                     taskSect->SetValue("TASK_TYPE", task_type);
 
@@ -100,12 +106,16 @@ if (user->id() == 3297) { // test code (3297 is id for Alan Barrett)
                         }
                     }
 
-                    if (source_countryname == "ANY") taskSect->SetValue("SOURCE", source_languagename);
-                    else                             taskSect->SetValue("SOURCE", source_languagename + " (" + source_countryname + ")");
+                    if (source_and_target) {
+                        if (source_countryname == "ANY") taskSect->SetValue("SOURCE", source_languagename);
+                        else                             taskSect->SetValue("SOURCE", source_languagename + " (" + source_countryname + ")");
+                    } else {
+                        taskSect->SetValue("SOURCE", "");
+                    }
                     if (target_countryname == "ANY") taskSect->SetValue("TARGET", target_languagename);
                     else                             taskSect->SetValue("TARGET", target_languagename + " (" + target_countryname + ")");
 
-                    taskSect->SetValue("WORD_COUNT", QString::number(task->wordcount()).toStdString());
+                    taskSect->SetValue("WORD_COUNT", QString::number(task->wordcount()).toStdString() + " " + pricing_and_recognition_unit_text);
                     QString createdTime = QDateTime::fromString(QString::fromStdString(task->createdtime()), "yyyy-MM-ddTHH:mm:ss.zzz").toString("d MMMM yyyy");
                     taskSect->SetValue("CREATED_TIME", createdTime.toStdString());
                 }
@@ -143,16 +153,25 @@ if (user->id() == 3297) { // test code (3297 is id for Alan Barrett)
                     taskSect->SetValue("ORG_NAME", orgName.toStdString());
 
                     std::string task_type = "Invalid Type";
+                    std::string pricing_and_recognition_unit_text = "Words";
+                    int source_and_target = 1;
                     for (int i = 0; i < task_type_details.size(); i++) {
                         QMap<QString, QVariant> task_type_detail = task_type_details[i];
-                        if (task->tasktype() == task_type_detail["type_enum"].toInt()) task_type = task_type_detail["type_text"].toString().toStdString();
+                        if (task->tasktype() == task_type_detail["type_enum"].toInt()) {
+                            task_type = task_type_detail["type_text"].toString().toStdString();
+                            pricing_and_recognition_unit_text = task_type_detail["pricing_and_recognition_unit_text"].toString().toStdString();
+                            source_and_target = task_type_detail["source_and_target"].toInt();
+                        }
                     }
                     taskSect->SetValue("TASK_TYPE", task_type);
-                    taskSect->SetValue("SOURCE", task->sourcelocale().languagename() + " (" +
-                                       task->sourcelocale().countryname() + ")");
+                    if (source_and_target) {
+                        taskSect->SetValue("SOURCE", task->sourcelocale().languagename() + " (" + task->sourcelocale().countryname() + ")");
+                    } else {
+                        taskSect->SetValue("SOURCE", "");
+                    }
                     taskSect->SetValue("TARGET", task->targetlocale().languagename() + " (" +
                                        task->targetlocale().countryname() + ")");
-                    taskSect->SetValue("WORD_COUNT", QString::number(task->wordcount()).toStdString());
+                    taskSect->SetValue("WORD_COUNT", QString::number(task->wordcount()).toStdString() + " " + pricing_and_recognition_unit_text);
                     QString uploadTime = QDateTime::fromString(QString::fromStdString(task->uploadtime()), "yyyy-MM-ddTHH:mm:ss.zzz").toString("d MMMM yyyy");
                     taskSect->SetValue("CREATED_TIME", uploadTime.toStdString());
                 }

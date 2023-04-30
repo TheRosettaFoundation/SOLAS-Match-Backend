@@ -32,7 +32,7 @@
             <th>Task Type</th>
             <th>Source</th>
             <th>Target</th>
-            <th>Word Count</th>
+            <th>Quantity</th>
             <th>Created Date</th>
         </thead>
         <tbody>
