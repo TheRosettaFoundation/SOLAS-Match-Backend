@@ -8,11 +8,8 @@ OrgTaskRevokedGenerator::OrgTaskRevokedGenerator()
 void OrgTaskRevokedGenerator::run(int task_id, int user_id, int claimant_id)
 {
     qDebug() << "Email Generator - Generating OrgTaskRevokedEmail";
-    OrgTaskRevokedEmail emailMessage;
-    emailMessage.ParseFromString(this->protoBody);
 
     ConfigParser settings;
-    QSharedPointer<Email> email = QSharedPointer<Email>(new Email());
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
     QList<QMap<QString, QVariant>> task_type_details = TaskDao::get_task_type_details(db);
     QSharedPointer<User> user = UserDao::getUser(db, user_id);
@@ -64,13 +61,9 @@ void OrgTaskRevokedGenerator::run(int task_id, int user_id, int claimant_id)
         QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/org-task-revoked.tpl";
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
-        email->setSender(settings.get("site.system_email_address"));
-        email->addRecipient(QString::fromStdString(user->email()));
-        email->setSubject(settings.get("site.name") + ": Task Revoked");
-        email->setBody(QString::fromUtf8(email_body.c_str()));
+        UserDao::queue_email(db, user_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Task Revoked", QString::fromUtf8(email_body.c_str()));
         UserDao::log_email_sent(db, user_id, task_id, 0, 0, claimant_id, 0, 0, "task_revoked_to_subscribed_admin");
     } else {
-        email = this->generateErrorEmail(error);
+        this->generateErrorEmail(error);
     }
-    this->emailQueue->insert(email, currentMessage);
 }
