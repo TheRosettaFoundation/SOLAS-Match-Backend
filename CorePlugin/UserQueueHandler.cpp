@@ -1,25 +1,14 @@
 #include "UserQueueHandler.h"
 
-#include <QThread>
 #include <QTimer>
 #include <QDebug>
 
 #include "Common/ConfigParser.h"
-#include "Common/protobufs/requests/RequestMessage.pb.h"
-#include "Common/protobufs/requests/StatisticsUpdateRequest.pb.h"
-#include "Common/protobufs/requests/UserTaskStreamNotificationRequest.pb.h"
-#include "Common/protobufs/requests/OrgCreatedNotificationRequest.pb.h"
-#include "Common/protobufs/notifications/TaskRevokedNotification.pb.h"
 
 #include "UserJobs/TaskStreamNotificationHandler.h"
 #include "UserJobs/StatisticsUpdate.h"
 #include "UserJobs/OrgCreatedNotifications.h"
 #include "UserJobs/TaskRevokedNotificationHandler.h"
-
-#include "Common/protobufs/emails/JSON.h"
-
-using namespace SolasMatch::Common::Protobufs::Requests;
-using namespace SolasMatch::Common::Protobufs::Notifications;
 
 UserQueueHandler::UserQueueHandler()
 {

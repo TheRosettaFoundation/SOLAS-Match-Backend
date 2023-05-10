@@ -1,12 +1,11 @@
 #include "OrgTaskRevokedGenerator.h"
-using namespace  SolasMatch::Common::Protobufs::Emails;
 
 OrgTaskRevokedGenerator::OrgTaskRevokedGenerator()
 {
     // Default Constructor
 }
 
-void OrgTaskRevokedGenerator::run(task_id, user_id, claimant_id)
+void OrgTaskRevokedGenerator::run(int task_id, int user_id, int claimant_id)
 {
     qDebug() << "Email Generator - Generating OrgTaskRevokedEmail";
     OrgTaskRevokedEmail emailMessage;

@@ -5,17 +5,9 @@
 
 #include "Common/ConfigParser.h"
 #include "Common/MySQLHandler.h"
-#include "Common/MessagingClient.h"
 #include "Common/DataAccessObjects/TaskDao.h"
-#include "Common/protobufs/notifications/TaskRevokedNotification.pb.h"
 #include "Common/protobufs/models/User.pb.h"
-#include "Common/protobufs/emails/UserTaskRevokedEmail.pb.h"
-#include "Common/protobufs/emails/OrgTaskRevokedEmail.pb.h"
 
-#include "Common/protobufs/emails/JSON.h"
-
-using namespace SolasMatch::Common::Protobufs::Notifications;
-using namespace SolasMatch::Common::Protobufs::Emails;
 using namespace SolasMatch::Common::Protobufs::Models;
 
 TaskRevokedNotificationHandler::TaskRevokedNotificationHandler()
