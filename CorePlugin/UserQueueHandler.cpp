@@ -46,10 +46,9 @@ void UserQueueHandler::consumeFromQueue()
 }
 //    StatisticsUpdateRequest statUpdate = StatisticsUpdateRequest();
 //    qRegisterMetaType<StatisticsUpdate>(QString::fromStdString(statUpdate.class_name()).toLatin1());
+
 //    UserTaskStreamNotificationRequest streamReq = UserTaskStreamNotificationRequest();
 //    qRegisterMetaType<TaskStreamNotificationHandler>(QString::fromStdString(streamReq.class_name()).toLatin1());
+
 //    OrgCreatedNotificationRequest orgCreated = OrgCreatedNotificationRequest();
 //    qRegisterMetaType<OrgCreatedNotifications>(QString::fromStdString(orgCreated.class_name()).toLatin1());
-//    TaskRevokedNotification taskRevoked = TaskRevokedNotification();
-//    qRegisterMetaType<TaskRevokedNotificationHandler>(QString::fromStdString(taskRevoked.class_name()).toLatin1());
-
