@@ -33,21 +33,13 @@ void TaskRevokedNotificationHandler::run(task_id, claimant_id)
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
     QList<QSharedPointer<User> > subscribedUsers = TaskDao::getSubscribedUsers(db, task_id);
     if (subscribedUsers.length() > 0) {
-                    OrgTaskRevokedEmail subscriberNotification;
-                    subscriberNotification.set_claimant_id(claimant_id);
-                    subscriberNotification.set_task_id(task_id);
-                    subscriberNotification.set_email_type(subscriberNotification.email_type());
-                    foreach (QSharedPointer<User> user, subscribedUsers) {
-                        subscriberNotification.set_user_id(user->id());
-                        client.publish(exchange, topic, subscriberNotification.SerializeAsString());
-                    }
+        OrgTaskRevokedGenerator = new OrgTaskRevokedGenerator();
+        foreach (QSharedPointer<User> user, subscribedUsers) {
+            OrgTaskRevokedGenerator->run(task_id, user->id(), claimant_id);
+        }
     } else {
         qDebug() << "TaskRevokedNotification: No users subscribed to task";
     }
-
-    UserTaskRevokedEmail userNotification;
-    userNotification.set_task_id(task_id);
-    userNotification.set_user_id(claimant_id);
-    userNotification.set_email_type(userNotification.email_type());
-    client.publish(exchange, topic, userNotification.SerializeAsString());
+    UserTaskRevokedGenerator = new UserTaskRevokedGenerator();
+    UserTaskRevokedGenerator->run(task_id, claimant_id);
 }

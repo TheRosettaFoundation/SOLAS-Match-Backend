@@ -6,7 +6,7 @@ UserTaskRevokedGenerator::UserTaskRevokedGenerator()
     // Default Constructor
 }
 
-void UserTaskRevokedGenerator::run()
+void UserTaskRevokedGenerator::run(task_id, claimant_id)
 {
     qDebug() << "Email Generator - Generating UserTaskRevokedEmail";
     UserTaskRevokedEmail emailMessage;
@@ -16,14 +16,14 @@ void UserTaskRevokedGenerator::run()
     QSharedPointer<Email> email = QSharedPointer<Email>(new Email());
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
     QList<QMap<QString, QVariant>> task_type_details = TaskDao::get_task_type_details(db);
-    QSharedPointer<Task> task = TaskDao::getTask(db, emailMessage.task_id());
-    QSharedPointer<User> user = UserDao::getUser(db, emailMessage.user_id());
+    QSharedPointer<Task> task = TaskDao::getTask(db, task_id);
+    QSharedPointer<User> user = UserDao::getUser(db, claimant_id);
     QString error;
 
     if (task.isNull() || user.isNull()) {
         error = "Unable to generate UserTaskRevokedEmail. Unable to find relevant data in the database. ";
-        error += "Searched for user id " + QString::number(emailMessage.user_id()) + " and task id ";
-        error += QString::number(emailMessage.task_id()) + ".";
+        error += "Searched for user id " + QString::number(claimant_id) + " and task id ";
+        error += QString::number(task_id) + ".";
     }
 
     if (error.compare("") == 0) {
@@ -64,7 +64,7 @@ void UserTaskRevokedGenerator::run()
         email->addRecipient(QString::fromStdString(user->email()));
         email->setSubject(settings.get("site.name") + ": Task Revoked");
         email->setBody(QString::fromUtf8(email_body.c_str()));
-        UserDao::log_email_sent(db, emailMessage.user_id(), emailMessage.task_id(), 0, 0, 0, 0, 0, "task_revoked_to_volunteer");
+        UserDao::log_email_sent(db, claimant_id, task_id, 0, 0, 0, 0, 0, "task_revoked_to_volunteer");
     } else {
         email = this->generateErrorEmail(error);
     }

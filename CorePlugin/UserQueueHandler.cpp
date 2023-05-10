@@ -46,8 +46,8 @@ void UserQueueHandler::consumeFromQueue()
             qDebug() << "UserQueueHandler: Message received";
             switch (queue_request["type"]) {
                 case 3:
-                    UserTaskRevokedGenerator = new UserTaskRevokedGenerator();
-                    UserTaskRevokedGenerator->run(queue_request["task_id"], queue_request["claimant_id"]);
+                    TaskRevokedNotificationHandler = new TaskRevokedNotificationHandler();
+                    TaskRevokedNotificationHandler->run(queue_request["task_id"], queue_request["claimant_id"]);
                 break;
             }
 

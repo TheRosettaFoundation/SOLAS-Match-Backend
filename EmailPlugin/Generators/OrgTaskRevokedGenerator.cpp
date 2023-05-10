@@ -6,7 +6,7 @@ OrgTaskRevokedGenerator::OrgTaskRevokedGenerator()
     // Default Constructor
 }
 
-void OrgTaskRevokedGenerator::run()
+void OrgTaskRevokedGenerator::run(task_id, user_id, claimant_id)
 {
     qDebug() << "Email Generator - Generating OrgTaskRevokedEmail";
     OrgTaskRevokedEmail emailMessage;
@@ -16,16 +16,16 @@ void OrgTaskRevokedGenerator::run()
     QSharedPointer<Email> email = QSharedPointer<Email>(new Email());
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
     QList<QMap<QString, QVariant>> task_type_details = TaskDao::get_task_type_details(db);
-    QSharedPointer<User> user = UserDao::getUser(db, emailMessage.user_id());
-    QSharedPointer<Task> task = TaskDao::getTask(db, emailMessage.task_id());
-    QSharedPointer<User> claimant = UserDao::getUser(db, emailMessage.claimant_id());
+    QSharedPointer<User> user = UserDao::getUser(db, user_id);
+    QSharedPointer<Task> task = TaskDao::getTask(db, task_id);
+    QSharedPointer<User> claimant = UserDao::getUser(db, claimant_id);
     QString error = "";
 
     if (user.isNull() || task.isNull() || claimant.isNull()) {
         error = "Unable to generate OrgTaskRevokedEmail. Unable to find relevant data in the database. ";
-        error += "Searched for user ids " + QString::number(emailMessage.user_id()) + " and ";
-        error += QString::number(emailMessage.claimant_id()) + " and task id ";
-        error += QString::number(emailMessage.task_id()) + ".";
+        error += "Searched for user ids " + QString::number(user_id) + " and ";
+        error += QString::number(claimant_id) + " and task id ";
+        error += QString::number(task_id) + ".";
     }
 
     if (error.compare("") == 0) {
@@ -69,7 +69,7 @@ void OrgTaskRevokedGenerator::run()
         email->addRecipient(QString::fromStdString(user->email()));
         email->setSubject(settings.get("site.name") + ": Task Revoked");
         email->setBody(QString::fromUtf8(email_body.c_str()));
-        UserDao::log_email_sent(db, emailMessage.user_id(), emailMessage.task_id(), 0, 0, emailMessage.claimant_id(), 0, 0, "task_revoked_to_subscribed_admin");
+        UserDao::log_email_sent(db, user_id, task_id, 0, 0, claimant_id, 0, 0, "task_revoked_to_subscribed_admin");
     } else {
         email = this->generateErrorEmail(error);
     }
