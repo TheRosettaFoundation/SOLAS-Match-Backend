@@ -51,6 +51,10 @@ void UserQueueHandler::consumeFromQueue()
 TaskStreamNotificationHandler::run();
                     break;
 
+                    case 3?:
+DeadlineChecker::run()
+                    break;
+
                 }
                 TaskDao::remove_queue_request(db, queue_request["id"]);
             }

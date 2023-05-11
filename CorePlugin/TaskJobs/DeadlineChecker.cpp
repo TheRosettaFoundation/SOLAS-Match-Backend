@@ -3,45 +3,20 @@
 #include <QDebug>
 #include <QThread>
 
-#include "Common/MessagingClient.h"
 #include "Common/ConfigParser.h"
 #include "Common/DataAccessObjects/TaskDao.h"
 #include "Common/DataAccessObjects/ProjectDao.h"
 #include "Common/DataAccessObjects/UserDao.h"
 #include "Common/protobufs/models/Task.pb.h"
 #include "Common/protobufs/models/Project.pb.h"
-#include "Common/protobufs/requests/DeadlineCheckRequest.pb.h"
-#include "Common/protobufs/emails/EmailMessage.pb.h"
-#include "Common/protobufs/emails/OrgTaskDeadlinePassed.pb.h"
-#include "Common/protobufs/emails/UserClaimedTaskDeadlinePassed.pb.h"
-#include "Common/protobufs/emails/UserClaimedTaskEarlyWarningDeadlinePassed.pb.h"
-#include "Common/protobufs/emails/UserClaimedTaskLateWarningDeadlinePassed.pb.h"
-#include "Common/protobufs/emails/UserRecordWarningDeadlinePassed.pb.h"
 
 using namespace SolasMatch::Common::Protobufs::Emails;
 
-DeadlineChecker::DeadlineChecker()
+static void DeadlineChecker::run()
 {
-    //Default Constructor
-}
-
-DeadlineChecker::DeadlineChecker(AMQPMessage *mess)
-{
-    this->message = mess;
-}
-
-DeadlineChecker::~DeadlineChecker()
-{
-}
-
-void DeadlineChecker::run()
-{
-    qDebug() << "Starting new thread to check deadlines";
+    qDebug() << "DeadlineChecker";
     ConfigParser settings;
-    QString exchange = settings.get("messaging.exchange");
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
-    MessagingClient client;
-    if(client.init()) {
         QList<QSharedPointer<Task> > tasks = TaskDao::getOverdueTasks(db);
         foreach(QSharedPointer<Task> task, tasks) {
             qDebug() << "Task " << task->id() << " is pass its deadline of " << QString::fromStdString(task->deadline());
@@ -52,33 +27,16 @@ void DeadlineChecker::run()
 
                 QSharedPointer<Project> project = ProjectDao::getProject(db, task->projectid());
 
-                OrgTaskDeadlinePassed orgEmail;
-                orgEmail.set_email_type(EmailMessage::OrgTaskDeadlinePassed);
-                orgEmail.set_user_id(user->id());
-                orgEmail.set_org_id(project->organisationid());
-                orgEmail.set_task_id(task->id());
+                int translator_id = 0;
                 if(!translator.isNull()) {
-                    orgEmail.set_translator_id(translator->id());
+                    translator_id = translator->id();
                 }
-
-                client.publish(exchange, "email.org.task.deadline",
-                               orgEmail.SerializeAsString());
+                OrgDeadlinePassedMailGenerator::run(user->id(), project->organisationid(), task->id(), translator_id);
             }
 
             if(!translator.isNull()) {
-                UserClaimedTaskDeadlinePassed userEmail;
-                userEmail.set_email_type(EmailMessage::UserClaimedTaskDeadlinePassed);
-                userEmail.set_task_id(task->id());
-                userEmail.set_translator_id(translator->id());
-
-                client.publish(exchange, "email.user.deadline.passed",
-                               userEmail.SerializeAsString());
+                UserTaskDeadlineEmailGenerator::run(task->id(), translator->id());
             }
-
-            // https://github.com/TheRosettaFoundation/SOLAS-Match-Backend/issues/45
-            // qDebug() << "DeadlineChecker::Finished processing task, unpublishing it now";
-            // task->set_published(false);
-            // TaskDao::insertAndUpdate(db, task);
         }
 
         tasks = TaskDao::getEarlyWarningTasks(db);
@@ -87,13 +45,7 @@ void DeadlineChecker::run()
             QSharedPointer<User> translator = TaskDao::getUserClaimedTask(db, task->id());
 
             if(!translator.isNull()) {
-                UserClaimedTaskEarlyWarningDeadlinePassed userEmail;
-                userEmail.set_email_type(EmailMessage::UserClaimedTaskEarlyWarningDeadlinePassed);
-                userEmail.set_task_id(task->id());
-                userEmail.set_translator_id(translator->id());
-
-                client.publish(exchange, "email.user.early.deadline.passed",
-                               userEmail.SerializeAsString());
+                UserClaimedTaskEarlyWarningDeadlinePassedEmailGenerator::run(task->id(), translator->id());
             }
 
             TaskDao::taskNotificationSentInsertAndUpdate(db, task->id(), 1);
@@ -106,13 +58,7 @@ void DeadlineChecker::run()
             QSharedPointer<User> translator = TaskDao::getUserClaimedTask(db, task->id());
 
             if(!translator.isNull()) {
-                UserClaimedTaskLateWarningDeadlinePassed userEmail;
-                userEmail.set_email_type(EmailMessage::UserClaimedTaskLateWarningDeadlinePassed);
-                userEmail.set_task_id(task->id());
-                userEmail.set_translator_id(translator->id());
-
-                client.publish(exchange, "email.user.late.deadline.passed",
-                               userEmail.SerializeAsString());
+                UserClaimedTaskLateWarningDeadlinePassedEmailGenerator::run(task->id(), translator->id());
             }
 
             TaskDao::taskNotificationSentInsertAndUpdate(db, task->id(), 2);
@@ -122,18 +68,15 @@ void DeadlineChecker::run()
         QList<QSharedPointer<User> > users = UserDao::getRecordWarningUsers(db);
         foreach (QSharedPointer<User> user, users) {
             qDebug() << "User " << user->id() << " will be deleted in 168+ hours";
-            UserRecordWarningDeadlinePassed userEmail;
-            userEmail.set_email_type(EmailMessage::UserRecordWarningDeadlinePassed);
-            userEmail.set_user_id(user->id());
-            userEmail.set_spare_id(0);
-            client.publish(exchange, "email.user.record.deadline.passed", userEmail.SerializeAsString());
+            UserRecordWarningDeadlinePassedEmailGenerator::run(user->id());
         }
-    } else {
-        qDebug() << "Unable to connect to RabbitMQ. Check conf.ini for settings.";
-    }
 }
 
-void DeadlineChecker::setAMQPMessage(AMQPMessage *message)
-{
-    this->message = message;
-}
+OrgDeadlinePassedMailGenerator::run(int user_id, int org_id, int task_id, int translator_id);
+
+UserTaskDeadlineEmailGenerator::run(int task_id, int translator_id);
+
+UserClaimedTaskEarlyWarningDeadlinePassedEmailGenerator::run(int task_id, int translator_id);
+UserClaimedTaskLateWarningDeadlinePassedEmailGenerator::run(int task_id, int translator_id);
+
+UserRecordWarningDeadlinePassedEmailGenerator::run(int user_id);
