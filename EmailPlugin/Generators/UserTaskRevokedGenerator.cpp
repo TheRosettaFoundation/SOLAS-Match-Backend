@@ -1,13 +1,8 @@
 #include "UserTaskRevokedGenerator.h"
 
-UserTaskRevokedGenerator::UserTaskRevokedGenerator()
+static void UserTaskRevokedGenerator::run(int task_id, int claimant_id)
 {
-    // Default Constructor
-}
-
-void UserTaskRevokedGenerator::run(int task_id, int claimant_id)
-{
-    qDebug() << "Email Generator - Generating UserTaskRevokedEmail";
+    qDebug() << "UserTaskRevokedGenerator task_id:" << task_id << "claimant_id:" << claimant_id;
 
     ConfigParser settings;
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
@@ -57,7 +52,6 @@ void UserTaskRevokedGenerator::run(int task_id, int claimant_id)
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
         UserDao::queue_email(db, claimant_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Task Revoked", QString::fromUtf8(email_body.c_str()));
-//queue_email (int recipient_id, QString recipient_email, QString subject, QString body) also logged_time; Sender: settings.get("site.system_email_address")
         UserDao::log_email_sent(db, claimant_id, task_id, 0, 0, 0, 0, 0, "task_revoked_to_volunteer");
     } else {
         this->generateErrorEmail(error);

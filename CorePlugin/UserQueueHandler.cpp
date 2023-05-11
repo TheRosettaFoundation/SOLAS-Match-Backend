@@ -33,11 +33,10 @@ void UserQueueHandler::consumeFromQueue()
             QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
             QMap<QString, QVariant> queue_request = TaskDao::get_queue_request(db, 1);
             if (!queue_request.isNull()) {
-                qDebug() << "UserQueueHandler: Message received";
+                qDebug() << "UserQueueHandler type:" << queue_request["type"];
                 switch (queue_request["type"]) {
                     case 3?:
-                        TaskRevokedNotificationHandler = new TaskRevokedNotificationHandler();
-                        TaskRevokedNotificationHandler->run(queue_request["task_id"], queue_request["claimant_id"]);
+                        TaskRevokedNotificationHandler::run(queue_request["task_id"], queue_request["claimant_id"]);
                     break;
                     case 4?:
                         TaskDao::update_statistics(db);
@@ -50,7 +49,7 @@ void UserQueueHandler::consumeFromQueue()
             }
         }
         mutex.unlock();
-    }
+    } else qDebug() << "UserQueueHandler: Skipping consumeFromQueue() invocation";
 }
 //    OrgCreatedNotificationRequest orgCreated = OrgCreatedNotificationRequest();
 //    qRegisterMetaType<OrgCreatedNotifications>(QString::fromStdString(orgCreated.class_name()).toLatin1());

@@ -10,28 +10,18 @@
 
 using namespace SolasMatch::Common::Protobufs::Models;
 
-TaskRevokedNotificationHandler::TaskRevokedNotificationHandler()
+static void TaskRevokedNotificationHandler::run(task_id, claimant_id)
 {
-}
-
-TaskRevokedNotificationHandler::~TaskRevokedNotificationHandler()
-{
-}
-
-void TaskRevokedNotificationHandler::run(task_id, claimant_id)
-{
-    qDebug() << "Starting new thread to handle task revoked notifications";
+    qDebug() << "TaskRevokedNotificationHandler task_id:" << task_id << "claimant_id:" << claimant_id;
 
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
     QList<QSharedPointer<User> > subscribedUsers = TaskDao::getSubscribedUsers(db, task_id);
     if (subscribedUsers.length() > 0) {
-        OrgTaskRevokedGenerator = new OrgTaskRevokedGenerator();
         foreach (QSharedPointer<User> user, subscribedUsers) {
-            OrgTaskRevokedGenerator->run(task_id, user->id(), claimant_id);
+            OrgTaskRevokedGenerator::run(task_id, user->id(), claimant_id);
         }
     } else {
-        qDebug() << "TaskRevokedNotification: No users subscribed to task";
+        qDebug() << "TaskRevokedNotificationHandler: No users subscribed to task";
     }
-    UserTaskRevokedGenerator = new UserTaskRevokedGenerator();
-    UserTaskRevokedGenerator->run(task_id, claimant_id);
+    UserTaskRevokedGenerator::run(task_id, claimant_id);
 }

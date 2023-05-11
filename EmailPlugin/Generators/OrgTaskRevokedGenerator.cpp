@@ -1,13 +1,8 @@
 #include "OrgTaskRevokedGenerator.h"
 
-OrgTaskRevokedGenerator::OrgTaskRevokedGenerator()
+static void OrgTaskRevokedGenerator::run(int task_id, int user_id, int claimant_id)
 {
-    // Default Constructor
-}
-
-void OrgTaskRevokedGenerator::run(int task_id, int user_id, int claimant_id)
-{
-    qDebug() << "Email Generator - Generating OrgTaskRevokedEmail";
+    qDebug() << "OrgTaskRevokedGenerator task_id:" << task_id << "user_id:" << user_id << "claimant_id:" << claimant_id;
 
     ConfigParser settings;
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
