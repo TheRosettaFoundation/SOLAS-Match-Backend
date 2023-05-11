@@ -1,14 +1,10 @@
 #ifndef ORGCREATED_ORGEMAIL_H
 #define ORGCREATED_ORGEMAIL_H
 
-#include "../IEmailGenerator.h"
-
-class OrgCreated_OrgEmail : public IEmailGenerator
+class OrgCreated_OrgEmail
 {
 public:
-    OrgCreated_OrgEmail();
-    void run();
-
+    void run(int org_id, int admin_id);
 };
 
 #endif // ORGCREATED_ORGEMAIL_H

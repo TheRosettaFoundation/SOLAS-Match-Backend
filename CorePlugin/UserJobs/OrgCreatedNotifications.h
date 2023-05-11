@@ -2,22 +2,13 @@
 #define ORGCREATEDNOTIFICATIONS_H
 
 #include <QObject>
-#include <AMQPcpp.h>
 
-#include "PluginHandler/JobInterface.h"
-
-class OrgCreatedNotifications : public JobInterface
+class OrgCreatedNotifications
 {
-    Q_INTERFACES(JobInterface)
-
 public:
-    OrgCreatedNotifications();
-    void run();
-    void setAMQPMessage(AMQPMessage *message);
+    static void run(int org_id);
 
 private:
-    AMQPMessage *message;
-
 };
 
 #endif // ORGCREATEDNOTIFICATIONS_H

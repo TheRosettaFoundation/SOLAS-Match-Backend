@@ -2,29 +2,20 @@
 #include "Common/protobufs/emails/OrgCreatedSiteAdmin.pb.h"
 using namespace  SolasMatch::Common::Protobufs::Emails;
 
-OrgCreate_SiteAdmin::OrgCreate_SiteAdmin()
+static void OrgCreate_SiteAdmin::run(int org_id, int admin_id)
 {
-    // Default Constructor
-}
-
-void OrgCreate_SiteAdmin::run()
-{
-    qDebug() << "IEmailGenerator: Generating OrgCreated_SiteAdmin email";
-
-    OrgCreatedSiteAdmin emailMessage;
-    emailMessage.ParseFromString(this->protoBody);
+    qDebug() << "OrgCreate_SiteAdmin org_id:" << org_id << "admin_id:" << admin_id;
 
     ConfigParser settings;
     QString error = "";
-    QSharedPointer<Email> email = QSharedPointer<Email>(new Email());
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
-    QSharedPointer<Organisation> org = OrganisationDao::getOrg(db, emailMessage.org_id());
-    QSharedPointer<User> admin = UserDao::getUser(db, emailMessage.site_admin_id());
+    QSharedPointer<Organisation> org = OrganisationDao::getOrg(db, org_id);
+    QSharedPointer<User> admin = UserDao::getUser(db, admin_id);
 
     if (admin.isNull() || org.isNull()) {
         error = "OrgCreate_SiteAdmin: Failed to generate org created email. Could not find ";
-        error += "relevent data in the DB, searched for user " + QString::number(emailMessage.site_admin_id());
-        error += " and org id " + QString::number(emailMessage.org_id());
+        error += "relevent data in the DB, searched for user " + QString::number(admin_id);
+        error += " and org id " + QString::number(org_id);
     }
 
     if (error == "") {
@@ -39,14 +30,9 @@ void OrgCreate_SiteAdmin::run()
         QString templateLocation = QString(TEMPLATE_DIRECTORY) + "emails/org-created.site-admin.tpl";
         ctemplate::ExpandTemplate(templateLocation.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
-        email->setSender(settings.get("site.system_email_address"));
-        email->addRecipient(QString::fromStdString(admin->email()));
-        email->setSubject(settings.get("site.name") + ": Organisation Created");
-        email->setBody(QString::fromUtf8(email_body.c_str()));
-        UserDao::log_email_sent(db, emailMessage.site_admin_id(), 0, 0, emailMessage.org_id(), 0, 0, 0, "org_created_to_site_admin");
+        UserDao::queue_email(db, admin_id, QString::fromStdString(admin->email()), settings.get("site.name") + ": Organisation Created", QString::fromUtf8(email_body.c_str()));
+        UserDao::log_email_sent(db, admin_id, 0, 0, org_id, 0, 0, 0, "org_created_to_site_admin");
     } else {
-        email = this->generateErrorEmail(error);
+        this->generateErrorEmail(error);
     }
-
-    this->emailQueue->insert(email, currentMessage);
 }

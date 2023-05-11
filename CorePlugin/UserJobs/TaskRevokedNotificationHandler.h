@@ -2,14 +2,11 @@
 #define TASKREVOKEDNOTIFICATIONHANDLER_H
 
 #include <QObject>
-#include <AMQPcpp.h>
 
 #include "PluginHandler/JobInterface.h"
 
-class TaskRevokedNotificationHandler : public JobInterface
+class TaskRevokedNotificationHandler
 {
-    Q_INTERFACES(JobInterface)
-
 public:
     static void run(int task_id, int claimant_id);
 

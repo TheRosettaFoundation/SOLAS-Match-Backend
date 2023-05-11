@@ -43,6 +43,9 @@ void UserQueueHandler::consumeFromQueue()
                         // db->call("statsUpdateAll", "");
                     break;
 
+                    case 3?:
+                        OrgCreatedNotifications::run(queue_request["org_id"]);
+                    break;
 
                 }
                 TaskDao::remove_queue_request(db, queue_request["id"]);
@@ -52,7 +55,5 @@ void UserQueueHandler::consumeFromQueue()
     } else qDebug() << "UserQueueHandler: Skipping consumeFromQueue() invocation";
 }
 //    OrgCreatedNotificationRequest orgCreated = OrgCreatedNotificationRequest();
-//    qRegisterMetaType<OrgCreatedNotifications>(QString::fromStdString(orgCreated.class_name()).toLatin1());
 
 //    UserTaskStreamNotificationRequest streamReq = UserTaskStreamNotificationRequest();
-//    qRegisterMetaType<TaskStreamNotificationHandler>(QString::fromStdString(streamReq.class_name()).toLatin1());

@@ -4,85 +4,41 @@
 #include <QDebug>
 
 #include "Common/MySQLHandler.h"
-#include "Common/MessagingClient.h"
 
 #include "Common/DataAccessObjects/OrganisationDao.h"
 #include "Common/DataAccessObjects/AdminDao.h"
 
 #include "Common/protobufs/models/Organisation.pb.h"
-#include "Common/protobufs/emails/OrgCreatedOrgAdmin.pb.h"
-#include "Common/protobufs/emails/OrgCreatedSiteAdmin.pb.h"
-#include "Common/protobufs/requests/OrgCreatedNotificationRequest.pb.h"
 
-#include "Common/protobufs/emails/JSON.h"
-
-using namespace SolasMatch::Common::Protobufs::Emails;
-using namespace SolasMatch::Common::Protobufs::Requests;
 using namespace SolasMatch::Common::Protobufs::Models;
 
-OrgCreatedNotifications::OrgCreatedNotifications()
+static void OrgCreatedNotifications::run(int org_id)
 {
-    // Default Constructor
-}
+    qDebug() << "OrgCreatedNotifications org_id: " << org_id;
 
-void OrgCreatedNotifications::run()
-{
-    qDebug() << "Starting new thread to send org created notifications";
-    QString exchange = "SOLAS_MATCH";
-    QString topic = "email";
-    uint32_t length = 0;
-    char *body = this->message->getMessage(&length);
+    QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
+    QSharedPointer<Organisation> org = OrganisationDao::getOrg(db, org_id);
+    QList<QSharedPointer<User> > orgAdmins = AdminDao::getAdmins(db, org_id);
+    QList<QSharedPointer<User> > siteAdmins = AdminDao::getAdmins(db);
 
-    if (length > 0) {
-        JSON request;
-        request.ParseFromString(std::string(body, length));
-
-        QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
-        QSharedPointer<Organisation> org = OrganisationDao::getOrg(db, request.org_id());
-        QList<QSharedPointer<User> > orgAdmins = AdminDao::getAdmins(db, request.org_id());
-        QList<QSharedPointer<User> > siteAdmins = AdminDao::getAdmins(db);
-
-        if (!org.isNull()) {
-            MessagingClient publisher;
-            if (publisher.init()) {
-                if (orgAdmins.size() > 0) {
-                    foreach (QSharedPointer<User> admin, orgAdmins) {
-                        std::string body = "";
-                        OrgCreatedOrgAdmin email;
-                        email.set_org_admin_id(admin->id());
-                        email.set_org_id(request.org_id());
-                        email.set_email_type(email.email_type());
-                        body = email.SerializeAsString();
-                        publisher.publish(exchange, topic, body);
-                    }
-                } else {
-                    qWarning() << "OrgCreatedNotifications: No org admins found";
-                }
-
-                if (siteAdmins.size() > 0) {
-                    foreach (QSharedPointer<User> admin, siteAdmins) {
-                        std::string body = "";
-                        OrgCreatedSiteAdmin email;
-                        email.set_org_id(request.org_id());
-                        email.set_email_type(email.email_type());
-                        email.set_site_admin_id(admin->id());
-                        body = email.SerializeAsString();
-                        publisher.publish(exchange, topic, body);
-                    }
-                } else {
-                    qWarning() << "OrgCreatedNotifications: No site admins found";
-                }
-            } else {
-                qWarning() << "OrgCreatedNotifications: Unable connect to RabbitMQ";
+    if (!org.isNull()) {
+        if (orgAdmins.size() > 0) {
+            foreach (QSharedPointer<User> admin, orgAdmins) {
+                OrgCreated_OrgEmail::run(org_id, admin->id());
             }
         } else {
-            qDebug() << "OrgCreatedNotifications: Unable to find relevant data in the DB, "
-                     << "Searched for org ID " << QString::number(request.org_id());
+            qDebug() << "OrgCreatedNotifications: No org admins found";
         }
-    }
-}
 
-void OrgCreatedNotifications::setAMQPMessage(AMQPMessage *message)
-{
-    this->message = message;
+        if (siteAdmins.size() > 0) {
+            foreach (QSharedPointer<User> admin, siteAdmins) {
+                OrgCreate_SiteAdmin::run(org_id, admin->id());
+            }
+        } else {
+            qDebug() << "OrgCreatedNotifications: No site admins found";
+        }
+    } else {
+        qDebug() << "OrgCreatedNotifications: Unable to find relevant data in the DB, "
+                 << "Searched for org ID " << QString::number(org_id);
+    }
 }
