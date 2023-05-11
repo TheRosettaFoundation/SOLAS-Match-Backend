@@ -11,15 +11,9 @@ class TaskRevokedNotificationHandler : public JobInterface
     Q_INTERFACES(JobInterface)
 
 public:
-    TaskRevokedNotificationHandler();
-    TaskRevokedNotificationHandler(AMQPMessage *);
-    ~TaskRevokedNotificationHandler();
-    void run();
-    void setAMQPMessage(AMQPMessage *message);
+    static void run(int task_id, int claimant_id);
 
 private:
-    AMQPMessage *message;
-
 };
 
 #endif // TASKREVOKEDNOTIFICATIONHANDLER_H

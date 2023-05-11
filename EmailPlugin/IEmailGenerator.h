@@ -2,7 +2,6 @@
 #define EMAILGENERATOR_H
 
 #include <QString>
-#include <QRunnable>
 #include <QQueue>
 #include <QSharedPointer>
 #include <QDebug>
@@ -26,24 +25,13 @@
 #include "Common/protobufs/models/ArchivedTask.pb.h"
 #include "Common/protobufs/models/Organisation.pb.h"
 
-class IEmailGenerator : public QRunnable
+class IEmailGenerator
 {
 public:
     IEmailGenerator();
-    virtual void run() = 0;
-    void setProtoBody(std::string proto);
-    void setAMQPMessage(AMQPMessage *mess);
-    void setEmailQueue(QSharedPointer<EmailQueue> emailQueue);
     QSharedPointer<Email> generateErrorEmail(QString error);
 
-signals:
-    void emailSent(bool success);
-
 protected:
-    std::string protoBody;
-    QSharedPointer<EmailQueue> emailQueue;
-    AMQPMessage *currentMessage;
-
 };
 
 #endif // EMAILGENERATOR_H

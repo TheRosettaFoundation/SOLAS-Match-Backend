@@ -10,7 +10,7 @@
 
 using namespace SolasMatch::Common::Protobufs::Models;
 
-static void TaskRevokedNotificationHandler::run(task_id, claimant_id)
+static void TaskRevokedNotificationHandler::run(int task_id, int claimant_id)
 {
     qDebug() << "TaskRevokedNotificationHandler task_id:" << task_id << "claimant_id:" << claimant_id;
 

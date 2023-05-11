@@ -2,14 +2,11 @@
 #define USERTASKREVOKEDGENERATOR_H
 
 #include "../IEmailGenerator.h"
-#include "Common/protobufs/emails/UserTaskRevokedEmail.pb.h"
 
 class UserTaskRevokedGenerator : public IEmailGenerator
 {
 public:
-    UserTaskRevokedGenerator();
-    void run();
-
+    void run(int task_id, int claimant_id);
 };
 
 #endif // USERTASKREVOKEDGENERATOR_H
