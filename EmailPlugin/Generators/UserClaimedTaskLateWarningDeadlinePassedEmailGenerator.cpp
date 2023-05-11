@@ -4,41 +4,31 @@
 
 using namespace  SolasMatch::Common::Protobufs::Emails;
 
-UserClaimedTaskLateWarningDeadlinePassedEmailGenerator::UserClaimedTaskLateWarningDeadlinePassedEmailGenerator()
-{
-    //Default Constructor
-}
-
-void UserClaimedTaskLateWarningDeadlinePassedEmailGenerator::run()
+static void UserClaimedTaskLateWarningDeadlinePassedEmailGenerator::run(int task_id, int translator_id)
 {
     // qDebug() << "EmailGenerator: Generating UserClaimedTaskLateWarningDeadlinePassed email";
 
-    UserClaimedTaskLateWarningDeadlinePassed email_message;
-    email_message.ParseFromString(this->protoBody);
-
     ConfigParser settings;
     QString error = "";
-    QSharedPointer<Email> email = QSharedPointer<Email>(new Email);
     QSharedPointer<User> user = QSharedPointer<User>();
     QSharedPointer<Task> task = QSharedPointer<Task>();
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
     QList<QMap<QString, QVariant>> task_type_details = TaskDao::get_task_type_details(db);
     bool sendMessage = true;
 
-
-    user = UserDao::getUser(db, email_message.translator_id());
-    task = TaskDao::getTask(db, email_message.task_id());
+    user = UserDao::getUser(db, translator_id);
+    task = TaskDao::getTask(db, task_id);
 
     if(!user || !task) {
         error = "Failed to generate UserClaimedTaskLateWarningDeadlinePassed email: Unable to find relevant ";
         error += "data in the Database. Searched for User ID ";
-        error += QString::number(email_message.translator_id()) + " and Task ID ";
-        error += QString::number(email_message.task_id()) + ".";
-        qDebug() << "EmailGenerator: Generating UserClaimedTaskLateWarningDeadlinePassed email FAILED, translator_id: " << QString::number(email_message.translator_id()) << ", task_id: "  << QString::number(email_message.task_id());
+        error += QString::number(translator_id) + " and Task ID ";
+        error += QString::number(task_id) + ".";
+        qDebug() << "EmailGenerator: Generating UserClaimedTaskLateWarningDeadlinePassed email FAILED, translator_id: " << QString::number(translator_id) << ", task_id: "  << QString::number(task_id);
     }
 
     if(error.compare("") == 0) {
-        qDebug() << "EmailGenerator: Generating UserClaimedTaskLateWarningDeadlinePassed email, translator_id: " << QString::number(email_message.translator_id()) << " " << QString::fromStdString(user->email()) << ", task_id: "  << QString::number(email_message.task_id());
+        qDebug() << "EmailGenerator: Generating UserClaimedTaskLateWarningDeadlinePassed email, translator_id: " << QString::number(translator_id) << " " << QString::fromStdString(user->email()) << ", task_id: "  << QString::number(task_id);
         ctemplate::TemplateDictionary dict("user_claimed_task_late_warning_deadline_passed");
         if(user->display_name() != "") {
             dict.ShowSection("USER_HAS_NAME");
@@ -115,14 +105,11 @@ void UserClaimedTaskLateWarningDeadlinePassedEmailGenerator::run()
       }
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
-        email->setSender(settings.get("site.system_email_address"));;
-        email->addRecipient(QString::fromStdString(user->email()));
-        email->setSubject(settings.get("site.name") + ": Task Overdue");
-        email->setBody(QString::fromUtf8(email_body.c_str()));
-        if (sendMessage) UserDao::log_email_sent(db, email_message.translator_id(), email_message.task_id(), task->projectid(), 0, 0, 0, 0, "deadline_reminder_late_to_volunteer");
+        if (sendMessage) {
+            UserDao::queue_email(db, translator_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Task Overdue", QString::fromUtf8(email_body.c_str()));
+            UserDao::log_email_sent(db, translator_id, task_id, task->projectid(), 0, 0, 0, 0, "deadline_reminder_late_to_volunteer");
+        }
     } else {
-        email = this->generateErrorEmail(error);
+        this->generateErrorEmail(error);
     }
-
-    if (sendMessage) this->emailQueue->insert(email, currentMessage);
 }

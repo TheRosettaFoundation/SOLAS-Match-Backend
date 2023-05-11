@@ -24,14 +24,7 @@ static void DeadlineChecker::run()
 
             QList<QSharedPointer<User> > users = TaskDao::getSubscribedUsers(db, task->id());
             foreach(QSharedPointer<User> user, users) {
-
-                QSharedPointer<Project> project = ProjectDao::getProject(db, task->projectid());
-
-                int translator_id = 0;
-                if(!translator.isNull()) {
-                    translator_id = translator->id();
-                }
-                OrgDeadlinePassedMailGenerator::run(user->id(), project->organisationid(), task->id(), translator_id);
+                OrgDeadlinePassedMailGenerator::run(user->id(), task->id());
             }
 
             if(!translator.isNull()) {
@@ -71,12 +64,3 @@ static void DeadlineChecker::run()
             UserRecordWarningDeadlinePassedEmailGenerator::run(user->id());
         }
 }
-
-OrgDeadlinePassedMailGenerator::run(int user_id, int org_id, int task_id, int translator_id);
-
-UserTaskDeadlineEmailGenerator::run(int task_id, int translator_id);
-
-UserClaimedTaskEarlyWarningDeadlinePassedEmailGenerator::run(int task_id, int translator_id);
-UserClaimedTaskLateWarningDeadlinePassedEmailGenerator::run(int task_id, int translator_id);
-
-UserRecordWarningDeadlinePassedEmailGenerator::run(int user_id);

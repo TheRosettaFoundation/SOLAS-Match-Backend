@@ -4,30 +4,20 @@
 
 using namespace  SolasMatch::Common::Protobufs::Emails;
 
-UserRecordWarningDeadlinePassedEmailGenerator::UserRecordWarningDeadlinePassedEmailGenerator()
-{
-    //Default Constructor
-}
-
-void UserRecordWarningDeadlinePassedEmailGenerator::run()
+static void UserRecordWarningDeadlinePassedEmailGenerator::run(int user_id)
 {
     qDebug() << "EmailGenerator: Generating UserRecordWarningDeadlinePassed email";
 
-    UserRecordWarningDeadlinePassed email_message;
-    email_message.ParseFromString(this->protoBody);
-
     ConfigParser settings;
     QString error = "";
-    QSharedPointer<Email> email = QSharedPointer<Email>(new Email);
     QSharedPointer<User> user = QSharedPointer<User>();
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
     bool sendMessage = true;
 
-
-    user = UserDao::getUser(db, email_message.user_id());
+    user = UserDao::getUser(db, user_id);
     if (!user) {
         error = "Failed to generate UserRecordWarningDeadlinePassed email: Unable to find User for user_id: ";
-        error += QString::number(email_message.user_id());
+        error += QString::number(user_id);
     }
 
     if (error.compare("") == 0) {
@@ -47,17 +37,13 @@ void UserRecordWarningDeadlinePassedEmailGenerator::run()
         template_location = QString(TEMPLATE_DIRECTORY) + "emails/user-record-warning-deadline-passed.tpl";
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
-        email->setSender(settings.get("site.system_email_address"));;
-        email->addRecipient(QString::fromStdString(user->email()));
-        email->setSubject(settings.get("site.name") + ": Complete your registration");
-        email->setBody(QString::fromUtf8(email_body.c_str()));
+        UserDao::insertWillBeDeletedUser(db, user_id);
 
-        UserDao::insertWillBeDeletedUser(db, email_message.user_id());
-
-       if (sendMessage) UserDao::log_email_sent(db, email_message.user_id(), 0, 0, 0, 0, 0, 0, "profile_reminder_to_volunteer");
+        if (sendMessage) {
+            UserDao::queue_email(db, user_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Complete your registration", QString::fromUtf8(email_body.c_str()));
+            UserDao::log_email_sent(db, user_id, 0, 0, 0, 0, 0, 0, "profile_reminder_to_volunteer");
+        }
     } else {
-        email = this->generateErrorEmail(error);
+        this->generateErrorEmail(error);
     }
-
-    if (sendMessage) this->emailQueue->insert(email, currentMessage);
 }

@@ -2,14 +2,11 @@
 #define USERRECORDWARNINGDEADLINEPASSEDEMAILGENERATOR_H
 
 #include "../IEmailGenerator.h"
-#include "Common/protobufs/emails/UserRecordWarningDeadlinePassed.pb.h"
 
 class UserRecordWarningDeadlinePassedEmailGenerator : IEmailGenerator
 {
 public:
-    UserRecordWarningDeadlinePassedEmailGenerator();
-    void run();
-
+    static void run(int user_id);
 };
 
 #endif // USERRECORDWARNINGDEADLINEPASSEDEMAILGENERATOR_H

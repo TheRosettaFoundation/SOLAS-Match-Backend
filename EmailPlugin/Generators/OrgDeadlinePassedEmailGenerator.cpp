@@ -1,32 +1,23 @@
 #include "OrgDeadlinePassedEmailGenerator.h"
 using namespace  SolasMatch::Common::Protobufs::Emails;
 
-OrgDeadlinePassedMailGenerator::OrgDeadlinePassedMailGenerator()
-{
-    //Default Constructor
-}
-
-void OrgDeadlinePassedMailGenerator::run()
+static void OrgDeadlinePassedMailGenerator::run(int user_id, int task_id)
 {
     qDebug() << "EmailGenerator - Generating OrgTaskDeadlinePassed";
 
-    OrgTaskDeadlinePassed email_message;
-    email_message.ParseFromString(this->protoBody);
-
     ConfigParser settings;
     QString error = "";
-    QSharedPointer<Email> email = QSharedPointer<Email>(new Email());
     QSharedPointer<User> user = QSharedPointer<User>();
     QSharedPointer<Task> task = QSharedPointer<Task>();
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
 
-    task = TaskDao::getTask(db, email_message.task_id());
-    user = UserDao::getUser(db, email_message.user_id());
+    task = TaskDao::getTask(db, task_id);
+    user = UserDao::getUser(db, user_id);
 
     if (user.isNull() || task.isNull()) {
         error = "OrgTaskDeadlinePassed generation failed. Data missing from the DB.";
-        error += " Searched for user ID " + QString::number(email_message.user_id());
-        error += " and task ID " + QString::number(email_message.task_id());
+        error += " Searched for user ID " + QString::number(user_id);
+        error += " and task ID " + QString::number(task_id);
     }
 
     if(error.compare("") == 0) {
@@ -56,14 +47,9 @@ void OrgDeadlinePassedMailGenerator::run()
         QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/org-task-deadline-passed.tpl";
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
-        email->setSender(settings.get("site.system_email_address"));
-        email->addRecipient(QString::fromStdString(user->email()));
-        email->setSubject(settings.get("site.name") + ": Task Update");
-        email->setBody(QString::fromUtf8(email_body.c_str()));
-        UserDao::log_email_sent(db, email_message.user_id(), email_message.task_id(), 0, 0, 0, 0, 0, "deadline_passed_to_subscribed_admin");
+        UserDao::queue_email(db, user_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Task Update", QString::fromUtf8(email_body.c_str()));
+        UserDao::log_email_sent(db, user_id, task_id, 0, 0, 0, 0, 0, "deadline_passed_to_subscribed_admin");
     } else {
-        email = this->generateErrorEmail(error);
+        this->generateErrorEmail(error);
     }
-
-    this->emailQueue->insert(email, currentMessage);
 }

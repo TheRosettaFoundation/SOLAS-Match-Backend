@@ -2,14 +2,11 @@
 #define ORGDEADLINEPASSEDEMAILGENERATOR_H
 
 #include "../IEmailGenerator.h"
-#include "Common/protobufs/emails/OrgTaskDeadlinePassed.pb.h"
 
 class OrgDeadlinePassedMailGenerator : public IEmailGenerator
 {
 public:
-    OrgDeadlinePassedMailGenerator();
-    void run();
-
+    static void run(int user_id, int task_id);
 };
 
 #endif // ORGDEADLINEPASSEDEMAILGENERATOR_H

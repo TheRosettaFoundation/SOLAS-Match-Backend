@@ -2,14 +2,11 @@
 #define USERCLAIMEDTASKEARLYWARNINGDEADLINEPASSEDEMAILGENERATOR_H
 
 #include "../IEmailGenerator.h"
-#include "Common/protobufs/emails/UserClaimedTaskEarlyWarningDeadlinePassed.pb.h"
 
 class UserClaimedTaskEarlyWarningDeadlinePassedEmailGenerator : IEmailGenerator
 {
 public:
-    UserClaimedTaskEarlyWarningDeadlinePassedEmailGenerator();
-    void run();
-
+    static void run(int task_id, int translator_id);
 };
 
 #endif // USERCLAIMEDTASKEARLYWARNINGDEADLINEPASSEDEMAILGENERATOR_H
