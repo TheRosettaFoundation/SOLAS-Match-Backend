@@ -31,7 +31,7 @@ void UserQueueHandler::consumeFromQueue()
     if (mutex.tryLock()) {
         if (!QFileInfo::exists("/repo/SOLAS-Match-Backend/STOP_consumeFromQueue")) {
             QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
-            QMap<QString, QVariant> queue_request = TaskDao::get_queue_request(db, 1);
+            QMap<QString, QVariant> queue_request = TaskDao::get_queue_request(db, 1); // UserQueueHandler: 1
             if (!queue_request.isNull()) {
                 qDebug() << "UserQueueHandler type:" << queue_request["type"];
                 switch (queue_request["type"]) {
@@ -47,6 +47,10 @@ void UserQueueHandler::consumeFromQueue()
                         OrgCreatedNotifications::run(queue_request["org_id"]);
                     break;
 
+                    case 3?:
+TaskStreamNotificationHandler::run();
+                    break;
+
                 }
                 TaskDao::remove_queue_request(db, queue_request["id"]);
             }
@@ -54,6 +58,17 @@ void UserQueueHandler::consumeFromQueue()
         mutex.unlock();
     } else qDebug() << "UserQueueHandler: Skipping consumeFromQueue() invocation";
 }
-//    OrgCreatedNotificationRequest orgCreated = OrgCreatedNotificationRequest();
-
 //    UserTaskStreamNotificationRequest streamReq = UserTaskStreamNotificationRequest();
+
+        <message exchange="SOLAS_MATCH" topic="tasks.deadline.check">
+            DeadlineCheckRequest
+        </message>
+
+
+        <message exchange="SOLAS_MATCH" topic="users.statistics.update">
+            StatisticsUpdateRequest
+        </message>
+
+        <message exchange="SOLAS_MATCH" topic="users.stream.notify">
+            UserTaskStreamNotificationRequest
+        </message>

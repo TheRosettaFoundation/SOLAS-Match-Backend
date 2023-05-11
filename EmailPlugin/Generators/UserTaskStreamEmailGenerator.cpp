@@ -4,24 +4,13 @@
 
 #include "Common/Definitions.h"
 #include "Common/protobufs/models/Language.pb.h"
-#include "Common/protobufs/models/UserTaskStreamNotification.pb.h"
 #include "Common/DataAccessObjects/LanguageDao.h"
 #include "Common/DataAccessObjects/TagDao.h"
 
 using namespace  SolasMatch::Common::Protobufs::Emails;
 
-UserTaskStreamEmailGenerator::UserTaskStreamEmailGenerator()
+static void UserTaskStreamEmailGenerator::run(int user_id)
 {
-    //Default Constructor
-}
-
-void UserTaskStreamEmailGenerator::run()
-{
-    //qDebug() << "EmailGenerator: Generating UserTaskStreamEmailGenerator";
-
-    UserTaskStreamEmail emailRequest;
-    emailRequest.ParseFromString(this->protoBody);
-
     bool sendEmail = true;
     QString error = "";
     QSharedPointer<Email> email;
@@ -29,31 +18,31 @@ void UserTaskStreamEmailGenerator::run()
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
     QList<QMap<QString, QVariant>> task_type_details = TaskDao::get_task_type_details(db);
 
-  if (emailRequest.user_id() >= 0) {
-    QSharedPointer<User> user = UserDao::getUser(db, emailRequest.user_id());
+  if (user_id >= 0) {
+    QSharedPointer<User> user = UserDao::getUser(db, user_id);
     QSharedPointer<UserTaskStreamNotification> notifData = UserDao::getUserTaskStreamNotification(db,
-                                                             emailRequest.user_id());
+                                                             user_id);
 
     if (user.isNull() || notifData.isNull() ) {
         sendEmail = false;
         error = "Failed to generate UserTaskStream email: Unable to find relevant ";
         error += "data in the Database. Searched for User with ID ";
-        error += QString::number(emailRequest.user_id()) + " and their notification data";
+        error += QString::number(user_id) + " and their notification data";
     } else {
         if (notifData->strict()) {
-            userTasks = UserDao::getUserTopTasks(db, emailRequest.user_id(), true, 25);
+            userTasks = UserDao::getUserTopTasks(db, user_id, true, 25);
         } else {
-            userTasks = UserDao::getUserTopTasks(db, emailRequest.user_id(), false, 25);
+            userTasks = UserDao::getUserTopTasks(db, user_id, false, 25);
         }
 
         if (userTasks.count() < 1) {
             sendEmail = false;
             if (notifData->strict()) {
                 //qDebug() << "Failed to generate task stream email: No strict tasks found for user "
-                //         << QString::number(emailRequest.user_id());
+                //         << QString::number(user_id);
             } else {
                 //qDebug() << "Failed to generate task stream email: No tasks found for user "
-                //         << QString::number(emailRequest.user_id());
+                //         << QString::number(user_id);
             }
         }
     }
@@ -180,40 +169,34 @@ void UserTaskStreamEmailGenerator::run()
             QString templateLocation = QString(TEMPLATE_DIRECTORY) + "emails/user-task-stream.tpl";
             ctemplate::ExpandTemplate(templateLocation.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
-            email->setSender(settings.get("site.system_email_address"));;
-            email->addRecipient(QString::fromStdString(user->email()));
-            email->setSubject(settings.get("site.name") + ": Task Stream");
-            email->setBody(QString::fromUtf8(email_body.c_str()));
-            UserDao::log_email_sent(db, emailRequest.user_id(), 0, 0, 0, 0, 0, 0, "task_stream_to_volunteer");
-
-            this->emailQueue->insert(email, this->currentMessage);
+            UserDao::queue_email(db, user_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Task Stream", QString::fromUtf8(email_body.c_str()));
+            UserDao::log_email_sent(db, user_id, 0, 0, 0, 0, 0, 0, "task_stream_to_volunteer");
         } else {
-            //qDebug() << "UserTaskStreamEmailGenerator: No tasks within cutoff for user " << QString::number(emailRequest.user_id());
+            //qDebug() << "UserTaskStreamEmailGenerator: No tasks within cutoff for user " << QString::number(user_id);
         }
     } else {
         if (error != "") {
-            email = this->generateErrorEmail(error);
-            this->emailQueue->insert(email, this->currentMessage);
+            this->generateErrorEmail(error);
         }
     }
 
     QString sentDateTime = QDateTime::currentDateTime().toString("yyyy-MM-dd HH:59:59");
-    if (UserDao::taskStreamNotificationSent(db, emailRequest.user_id(), sentDateTime)) {
+    if (UserDao::taskStreamNotificationSent(db, user_id, sentDateTime)) {
         //qDebug() << "UserTaskStreamEmailGenerator: Sending notification request for user " <<
-        //            QString::number(emailRequest.user_id());
+        //            QString::number(user_id);
     } else {
         qDebug() << "UserTaskStreamEmailGenerator: Failed to update last sent date for user id "
-                    << emailRequest.user_id();
+                    << user_id;
     }
   } else {
-    QSharedPointer<User> user = UserDao::getUser(db, -emailRequest.user_id());
+    QSharedPointer<User> user = UserDao::getUser(db, -user_id);
     if (user.isNull()) {
         sendEmail = false;
         error = "Failed to generate UserTaskStream email: Unable to find relevant ";
         error += "data in the Database. Searched for User with -ID ";
-        error += QString::number(emailRequest.user_id());
+        error += QString::number(user_id);
     } else {
-        userTasks = UserDao::get_user_earthquake_tasks(db, -emailRequest.user_id());
+        userTasks = UserDao::get_user_earthquake_tasks(db, -user_id);
         if (userTasks.count() < 1) {
             sendEmail = false;
         }
@@ -334,17 +317,11 @@ void UserTaskStreamEmailGenerator::run()
             QString templateLocation = QString(TEMPLATE_DIRECTORY) + "emails/emergency_response.tpl";
             ctemplate::ExpandTemplate(templateLocation.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
-            email->setSender(settings.get("site.system_email_address"));;
-            email->addRecipient(QString::fromStdString(user->email()));
-            email->setSubject(settings.get("site.name") + ": T" + QString::fromLatin1("ü") + "rkiye/Syria Emergency Response - Available Tasks");
-            email->setBody(QString::fromUtf8(email_body.c_str()));
-            UserDao::log_email_sent(db, -emailRequest.user_id(), 0, 0, 0, 0, 0, 0, "emergency_response_to_volunteer");
-
-            this->emailQueue->insert(email, this->currentMessage);
+            UserDao::queue_email(db, -user_id, QString::fromStdString(user->email()), settings.get("site.name") + ": T" + QString::fromLatin1("ü") + "rkiye/Syria Emergency Response - Available Tasks", QString::fromUtf8(email_body.c_str()));
+            UserDao::log_email_sent(db, -user_id, 0, 0, 0, 0, 0, 0, "emergency_response_to_volunteer");
     } else {
         if (error != "") {
-            email = this->generateErrorEmail(error);
-            this->emailQueue->insert(email, this->currentMessage);
+            this->generateErrorEmail(error);
         }
     }
   }

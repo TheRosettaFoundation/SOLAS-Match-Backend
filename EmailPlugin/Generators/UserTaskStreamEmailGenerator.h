@@ -2,14 +2,11 @@
 #define USERTASKSTREAMEMAILGENERATOR_H
 
 #include "../IEmailGenerator.h"
-#include "Common/protobufs/emails/UserTaskStreamEmail.pb.h"
 
 class UserTaskStreamEmailGenerator : public IEmailGenerator
 {
 public:
-    UserTaskStreamEmailGenerator();
-    void run();
-
+    void run(int user_id);
 };
 
 #endif // USERTASKSTREAMEMAILGENERATOR_H

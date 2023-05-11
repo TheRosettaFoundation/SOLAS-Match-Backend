@@ -4,10 +4,8 @@
 #include <QThread>
 
 #include "Common/MySQLHandler.h"
-#include "Common/MessagingClient.h"
 #include "Common/ConfigParser.h"
 #include "Common/DataAccessObjects/UserDao.h"
-#include "Common/protobufs/emails/UserTaskStreamEmail.pb.h"
 #include "Common/Definitions.h"
 #include "Common/protobufs/models/UserTaskStreamNotification.pb.h"
 
@@ -16,29 +14,11 @@
 
 using namespace SolasMatch::Common::Protobufs::Emails;
 
-TaskStreamNotificationHandler::TaskStreamNotificationHandler()
+static void TaskStreamNotificationHandler::run()
 {
-    message = NULL;
-}
-
-TaskStreamNotificationHandler::TaskStreamNotificationHandler(AMQPMessage *mess)
-{
-    message = mess;
-}
-
-TaskStreamNotificationHandler::~TaskStreamNotificationHandler()
-{
-}
-
-void TaskStreamNotificationHandler::run()
-{
-    qDebug() << "Starting new thread to send task stream notifications";
+    qDebug() << "TaskStreamNotificationHandler";
     ConfigParser settings;
-    QString exchange = settings.get("messaging.exchange");
-    QString topic = "email.user.task.stream";
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
-    MessagingClient client;
-    if(client.init()) {
         QString sentDateTime = QDateTime::currentDateTime().toString("yyyy-MM-dd HH:59:58");
         QList<int> full_list_user_ids = UserDao::getUserIdsPendingTaskStreamNotification(db);
         QList<int> userIds = QList<int>(); // This will contain the cut down list of user_id(s) which will actually be sent emails
@@ -55,7 +35,6 @@ void TaskStreamNotificationHandler::run()
                 }
                 if (userTasks.count() < 1) {
                     sendEmail = false;
-                    // qDebug() << "TaskStreamNotificationHandler: Failed to generate task stream email: No tasks found for user " << QString::number(user_id);
                 }
             } else {
                 sendEmail = false;
@@ -72,7 +51,6 @@ void TaskStreamNotificationHandler::run()
                 if (tasks_within_cutoff > 0) {
                     userIds.append(user_id); // Really send an email to this user_id
                 } else {
-                    // qDebug() << "TaskStreamNotificationHandler: No tasks within cutoff for user " << QString::number(user_id);
                     sendEmail = false;
                 }
             }
@@ -94,11 +72,7 @@ void TaskStreamNotificationHandler::run()
             int i = 0;
             foreach (int id, userIds) {
                 if (((i >= random) && (i < random + max_allowed)) || ((i >= (random - count)) && (i < random + max_allowed - count))) {
-                    QSharedPointer<UserTaskStreamEmail> request = QSharedPointer<UserTaskStreamEmail>(new UserTaskStreamEmail());
-                    request->set_user_id(id);
-                    request->set_email_type(EmailMessage::UserTaskStreamEmail);
-                    std::string body = request->SerializeAsString();
-                    client.publish(exchange, topic, body);
+                    UserTaskStreamEmailGenerator::run(id);
                 } else {
                     if (UserDao::taskStreamNotificationSent(db, id, sentDateTime)) {
                         // qDebug() << "TaskStreamNotificationHandler: Updated last sent date for user id " << QString::number(id);
@@ -123,23 +97,11 @@ void TaskStreamNotificationHandler::run()
             int i = 0;
             foreach (int id, users_list_for_earthquake) {
                 if (((i >= random) && (i < random + max_allowed)) || ((i >= (random - count)) && (i < random + max_allowed - count))) {
-                    QSharedPointer<UserTaskStreamEmail> request = QSharedPointer<UserTaskStreamEmail>(new UserTaskStreamEmail());
-                    request->set_user_id(-id); // Negative means Earthquake
-                    request->set_email_type(EmailMessage::UserTaskStreamEmail);
-                    std::string body = request->SerializeAsString();
-                    client.publish(exchange, topic, body);
+                    UserTaskStreamEmailGenerator::run(-id); // Negative means Earthquake
                 } else {
                     qDebug() << "TaskStreamNotificationHandler: Discarded user id Earthquake " << QString::number(id);
                 }
                 i++;
             }
         }
-    } else {
-        qDebug() << "Unable to connect to RabbitMQ. Check conf.ini for settings.";
-    }
-}
-
-void TaskStreamNotificationHandler::setAMQPMessage(AMQPMessage *message)
-{
-    this->message = message;
 }

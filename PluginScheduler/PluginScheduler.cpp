@@ -8,15 +8,8 @@
 #include <QDebug>
 
 #include "TimedTask.h"
-#include "RequestGenerator.h"
-
-#include "Common/protobufs/requests/UserTaskScoreRequest.pb.h"
-#include "Common/protobufs/requests/DeadlineCheckRequest.pb.h"
-#include "Common/protobufs/requests/StatisticsUpdateRequest.pb.h"
-#include "Common/protobufs/requests/UserTaskStreamNotificationRequest.pb.h"
 
 #include "Common/ConfigParser.h"
-#include "Common/MessagingClient.h"
 
 //QT4.8 (see Q_PLUGIN_METADATA for QT5) Q_EXPORT_PLUGIN2(PluginScheduler, PluginScheduler)
 
@@ -125,28 +118,12 @@ void PluginScheduler::run()
 
 void PluginScheduler::processTask(QPointer<TimedTask> task)
 {
-    qDebug() << "PluginScheduler::Processing task";
-    RequestGenerator generator = RequestGenerator();
-    QSharedPointer< ::google::protobuf::Message> request = QSharedPointer< ::google::protobuf::Message>();
-    if(task->getMessage() == "UserTaskScoreRequest") {
-        request = generator.GenerateTask(QSharedPointer<UserTaskScoreRequest>(new UserTaskScoreRequest));
-    } else if(task->getMessage() == "DeadlineCheckRequest") {
-        request = generator.GenerateTask(QSharedPointer<DeadlineCheckRequest>(new DeadlineCheckRequest));
-    } else if (task->getMessage() == "StatisticsUpdateRequest") {
-        request = generator.GenerateTask(QSharedPointer<StatisticsUpdateRequest>(new StatisticsUpdateRequest()));
-    } else if (task->getMessage() == "UserTaskStreamNotificationRequest") {
-        request = generator.GenerateTask(QSharedPointer<UserTaskStreamNotificationRequest>
-                                         (new UserTaskStreamNotificationRequest));
-    }
+    qDebug() << "PluginScheduler::processTask:" << task->getMessage();
+    QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
 
-    if(request) {
-        MessagingClient client;
-        client.init();
-        client.publish(task->getExchange(), task->getTopic(),
-                       request->SerializeAsString());
-    } else {
-        qDebug() << "PluginScheduler: Invalid request type";
-    }
+    if      (task->getMessage() == "UserTaskStreamNotificationRequest") TaskDao::insert_queue_request(db, 1...); // UserQueueHandler: 1
+    else if (task->getMessage() == "DeadlineCheckRequest")              TaskDao::insert_queue_request(db,99...); // ???UserQueueHandler: 99??
+    else if (task->getMessage() == "StatisticsUpdateRequest")           TaskDao::insert_queue_request(db, 1...); // UserQueueHandler: 1
 }
 
 void PluginScheduler::setThreadPool(QThreadPool *tp)
