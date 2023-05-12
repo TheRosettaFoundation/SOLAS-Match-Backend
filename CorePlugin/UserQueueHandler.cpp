@@ -6,7 +6,6 @@
 #include "Common/ConfigParser.h"
 
 #include "UserJobs/TaskStreamNotificationHandler.h"
-#include "UserJobs/StatisticsUpdate.h"
 #include "UserJobs/OrgCreatedNotifications.h"
 #include "UserJobs/TaskRevokedNotificationHandler.h"
 
@@ -62,17 +61,3 @@ DeadlineChecker::run()
         mutex.unlock();
     } else qDebug() << "UserQueueHandler: Skipping consumeFromQueue() invocation";
 }
-//    UserTaskStreamNotificationRequest streamReq = UserTaskStreamNotificationRequest();
-
-        <message exchange="SOLAS_MATCH" topic="tasks.deadline.check">
-            DeadlineCheckRequest
-        </message>
-
-
-        <message exchange="SOLAS_MATCH" topic="users.statistics.update">
-            StatisticsUpdateRequest
-        </message>
-
-        <message exchange="SOLAS_MATCH" topic="users.stream.notify">
-            UserTaskStreamNotificationRequest
-        </message>

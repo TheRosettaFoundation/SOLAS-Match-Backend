@@ -15,7 +15,7 @@ QT       -= gui
 TARGET = Common
 
 LIBS += -lprotobuf \
-        -L/usr/local/lib -lamqpcpp -lrabbitmq
+        -L/usr/local/lib
 
 DEFINES += COMMON_LIBRARY
 
@@ -54,7 +54,6 @@ SOURCES += \
     protobufs/models/Project.pb.cc \
     DataAccessObjects/ProjectDao.cpp \
     protobufs/models/Statistic.pb.cc \
-    protobufs/requests/StatisticsUpdateRequest.pb.cc \
     protobufs/emails/UserTaskStreamEmail.pb.cc \
     protobufs/models/Language.pb.cc \
     DataAccessObjects/LanguageDao.cpp \
@@ -127,7 +126,6 @@ HEADERS +=\
     protobufs/models/Project.pb.h \
     DataAccessObjects/ProjectDao.h \
     protobufs/models/Statistic.pb.h \
-    protobufs/requests/StatisticsUpdateRequest.pb.h \
     protobufs/emails/UserTaskStreamEmail.pb.h \
     DataAccessObjects/LanguageDao.h \
     protobufs/models/Language.pb.h \

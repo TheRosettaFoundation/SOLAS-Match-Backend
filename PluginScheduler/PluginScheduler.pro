@@ -12,7 +12,7 @@ CONFIG += plugin
 DESTDIR = ../plugins
 
 LIBS += -L../Common -lCommon \
-    -L/usr/local/lib -lamqpcpp -lrabbitmq \
+    -L/usr/local/lib \
     -lprotobuf
 
 DEFINES += PLUGINSCHEDULER_LIBRARY

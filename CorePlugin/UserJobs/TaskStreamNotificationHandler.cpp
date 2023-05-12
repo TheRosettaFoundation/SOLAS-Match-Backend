@@ -7,7 +7,6 @@
 #include "Common/ConfigParser.h"
 #include "Common/DataAccessObjects/UserDao.h"
 #include "Common/Definitions.h"
-#include "Common/protobufs/models/UserTaskStreamNotification.pb.h"
 
 #include <QDateTime>
 #include <QRandomGenerator>

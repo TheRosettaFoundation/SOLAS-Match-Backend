@@ -17,7 +17,7 @@ CONFIG += plugin
 DESTDIR = ../plugins
 
 LIBS += -L../Common -lCommon \
-    -L/usr/local/lib -lamqpcpp -lrabbitmq -lctemplate
+    -L/usr/local/lib -lctemplate
 
 DEFINES += COREPLUGIN_LIBRARY
 
@@ -27,7 +27,6 @@ SOURCES += CorePlugin.cpp \
     TaskJobs/DeadlineChecker.cpp \
     UserQueueHandler.cpp \
     UserJobs/TaskStreamNotificationHandler.cpp \
-    UserJobs/StatisticsUpdate.cpp \
     TaskJobs/SendTaskUploadNotifications.cpp \
     ProjectQueueHandler.cpp \
     ProjectJobs/CalculateProjectDeadlines.cpp \
@@ -40,7 +39,6 @@ HEADERS += CorePlugin.h \
     TaskJobs/DeadlineChecker.h \
     UserQueueHandler.h \
     UserJobs/TaskStreamNotificationHandler.h \
-    UserJobs/StatisticsUpdate.h \
     TaskJobs/SendTaskUploadNotifications.h \
     ProjectQueueHandler.h \
     ProjectJobs/CalculateProjectDeadlines.h \
