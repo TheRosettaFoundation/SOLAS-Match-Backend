@@ -6,9 +6,6 @@
 #include <QThreadPool>
 
 #include "PluginHandler/WorkerInterface.h"
-#include "Common/MessagingClient.h"
-
-#include "AMQPcpp.h"
 
 class TaskQueueHandler : public WorkerInterface
 {
@@ -22,15 +19,9 @@ public:
 
 public slots:
     void run();
-    void messageReceived(AMQPMessage *);
-    void handleAMQPError(QString error);
-    void calculateAllTasksScore();
 
 private:
-    void registerRequestTypes();
     QThreadPool *mThreadPool;
-    MessagingClient *client;
-
 };
 
 #endif // TASKQUEUEHANDLER_H

@@ -2,14 +2,12 @@
 #define JOBINTERFACE_H
 
 #include <QRunnable>
-#include <AMQPcpp.h>
 
 class JobInterface : public QRunnable
 {
 public:
     virtual ~JobInterface() {}
     virtual void run() = 0;
-    virtual void setAMQPMessage(AMQPMessage *message) = 0;
 };
 
 #define JobInterface_iid "solas.match.job.interface/0.1"

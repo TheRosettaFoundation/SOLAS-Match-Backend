@@ -3,8 +3,6 @@
 
 #include <QObject>
 
-#include "PluginHandler/JobInterface.h"
-
 class TaskRevokedNotificationHandler
 {
 public:
