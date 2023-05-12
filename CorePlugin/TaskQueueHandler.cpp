@@ -53,17 +53,12 @@ NOT HERETaskStreamNotificationHandler::run();
                     break;
 
                     case 3?:
-OR IN USER QUEUE DeadlineChecker::run()
+OR IN USER QUEUE (DUP) DeadlineChecker::run();
                     break;
 
-ADD...
-    TaskUploadNotificationRequest uploadRequest = TaskUploadNotificationRequest();
-    qRegisterMetaType<SendTaskUploadNotifications>(QString::fromStdString(uploadRequest.class_name()).toLatin1());
-[[
-C:\gitrosetta\backend\CorePlugin\TaskJobs\SendTaskUploadNotifications.cpp(162): qDebug() << "SendTaskUploadNotifications: AMQPMessage body is empty";
-C:\gitrosetta\backend\CorePlugin\TaskJobs\SendTaskUploadNotifications.h(4): #include <AMQPcpp.h>
-]]
-
+                    case 3?:
+SendTaskuploadNotifications::run(queue_request["task_id"]);
+                    break;
                 }
                 TaskDao::remove_queue_request(db, queue_request["id"]);
             }

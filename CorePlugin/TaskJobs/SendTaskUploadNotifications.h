@@ -1,25 +1,16 @@
 #ifndef SENDTASKUPLOADNOTIFICATIONS_H
 #define SENDTASKUPLOADNOTIFICATIONS_H
 
-#include <AMQPcpp.h>
 #include <QList>
 #include <QSharedPointer>
 
-#include "PluginHandler/JobInterface.h"
 #include "Common/MySQLHandler.h"
 
-class SendTaskUploadNotifications : public JobInterface
+class SendTaskUploadNotifications
 {
-    Q_INTERFACES(JobInterface)
-
 public:
-    SendTaskUploadNotifications();
-    void run();
-    void setAMQPMessage(AMQPMessage *message);
-
+    static void run();
 private:
-    AMQPMessage *message;
-
 };
 
 #endif // SENDTASKUPLOADNOTIFICATIONS_H
