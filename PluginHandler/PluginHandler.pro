@@ -25,4 +25,3 @@ SOURCES += main.cpp \
 HEADERS += \
     WorkerInterface.h \
     PluginLoader.h
-
