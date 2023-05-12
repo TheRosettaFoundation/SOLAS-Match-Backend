@@ -24,5 +24,5 @@ SOURCES += main.cpp \
 
 HEADERS += \
     WorkerInterface.h \
-    PluginLoader.h \
-    JobInterface.h
+    PluginLoader.h
+
