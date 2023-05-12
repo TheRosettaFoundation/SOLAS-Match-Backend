@@ -1,9 +1,0 @@
-import "EmailMessage.proto";
-
-message TaskClaimed
-{
-    required EmailMessage.Type email_type = 1 [default = TaskClaimed];
-    required int32 user_id = 2;
-    required int32 translator_id = 3;
-    required int32 task_id = 4;
-}

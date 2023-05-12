@@ -2,7 +2,6 @@
 #define PLUGINSCHEDULER_H
 
 #include <QObject>
-#include <AMQPcpp.h>
 #include <QtPlugin>
 #include <QThreadPool>
 #include <QPointer>

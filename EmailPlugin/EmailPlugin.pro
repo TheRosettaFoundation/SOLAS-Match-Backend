@@ -39,7 +39,6 @@ SOURCES += emailplugin.cpp \
     IEmailGenerator.cpp \
     Generators/OrgMembershipAcceptedGenerator.cpp \
     Generators/OrgMembershipRefusedEmailGenerator.cpp \
-    Generators/TaskScoreEmailGenerator.cpp \
     Generators/PasswordResetEmailGenerator.cpp \
     Generators/TaskArchivedEmailGenerator.cpp \
     Generators/TaskClaimedEmailGenerator.cpp \
@@ -80,7 +79,6 @@ HEADERS += emailplugin.h \
     qxtmailmessage.h \
     qxtmailattachment.h \
     qxthmac.h \
-    Generators/TaskScoreEmailGenerator.h \
     IEmailGenerator.h \
     Generators/OrgMembershipAcceptedGenerator.h \
     Generators/OrgMembershipRefusedEmailGenerator.h \

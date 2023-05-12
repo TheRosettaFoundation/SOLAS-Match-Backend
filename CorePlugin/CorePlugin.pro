@@ -23,24 +23,20 @@ DEFINES += COREPLUGIN_LIBRARY
 
 SOURCES += CorePlugin.cpp \
     TaskQueueHandler.cpp \
-    TaskJobs/CalculateTaskScore.cpp \
     TaskJobs/DeadlineChecker.cpp \
     UserQueueHandler.cpp \
     UserJobs/TaskStreamNotificationHandler.cpp \
     TaskJobs/SendTaskUploadNotifications.cpp \
     ProjectQueueHandler.cpp \
-    ProjectJobs/CalculateProjectDeadlines.cpp \
     UserJobs/OrgCreatedNotifications.cpp \
     UserJobs/TaskRevokedNotificationHandler.cpp
 
 HEADERS += CorePlugin.h \
     TaskQueueHandler.h \
-    TaskJobs/CalculateTaskScore.h \
     TaskJobs/DeadlineChecker.h \
     UserQueueHandler.h \
     UserJobs/TaskStreamNotificationHandler.h \
     TaskJobs/SendTaskUploadNotifications.h \
     ProjectQueueHandler.h \
-    ProjectJobs/CalculateProjectDeadlines.h \
     UserJobs/OrgCreatedNotifications.h \
     UserJobs/TaskRevokedNotificationHandler.h

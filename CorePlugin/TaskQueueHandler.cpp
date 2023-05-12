@@ -5,16 +5,9 @@
 #include <QDebug>
 
 #include "Common/ConfigParser.h"
-#include "Common/protobufs/requests/RequestMessage.pb.h"
-#include "Common/protobufs/requests/DeadlineCheckRequest.pb.h"
-#include "Common/protobufs/requests/UserTaskScoreRequest.pb.h"
-#include "Common/protobufs/requests/TaskUploadNotificationRequest.pb.h"
 
-#include "TaskJobs/CalculateTaskScore.h"
 #include "TaskJobs/DeadlineChecker.h"
 #include "TaskJobs/SendTaskUploadNotifications.h"
-
-#include "Common/protobufs/emails/JSON.h"
 
 using namespace SolasMatch::Common::Protobufs::Requests;
 
@@ -26,27 +19,52 @@ TaskQueueHandler::TaskQueueHandler()
 void TaskQueueHandler::run()
 {
     qDebug() << "Running TaskQueueHandler on thread " << this->thread()->currentThreadId();
-    this->registerRequestTypes();
     ConfigParser settings;
-    QString exchange = settings.get("messaging.exchange");
-    QString queue = "CoreTaskQueue";
-    QString topic = "tasks.#";
-
-    client = new MessagingClient();
-    client->init();
-    connect(client, SIGNAL(AMQPMessageReceived(AMQPMessage*)), this, SLOT(messageReceived(AMQPMessage*)));
-    connect(client, SIGNAL(AMQPError(QString)), this, SLOT(handleAMQPError(QString)));
-
-    qDebug() << "Connecting to exchange " << exchange;
-    client->declareQueue(exchange, topic, queue);
 
     QTimer *message_queue_read_timer = new QTimer();
     connect(message_queue_read_timer, SIGNAL(timeout()), client, SLOT(consumeFromQueue()));
     message_queue_read_timer->start(settings.get("messaging.poll_rate").toInt());
-
-    // QTimer::singleShot(1000, this, SLOT(calculateAllTasksScore()));   //Run on startup
 }
 
+[[[
+void UserQueueHandler::consumeFromQueue()
+{
+    static QMutex mutex;
+    if (mutex.tryLock()) {
+        if (!QFileInfo::exists("/repo/SOLAS-Match-Backend/STOP_consumeFromQueue")) {
+            QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
+            QMap<QString, QVariant> queue_request = TaskDao::get_queue_request(db, 1); // UserQueueHandler: 1
+            if (!queue_request.isNull()) {
+                qDebug() << "UserQueueHandler type:" << queue_request["type"];
+                switch (queue_request["type"]) {
+                    case 3?:
+                        TaskRevokedNotificationHandler::run(queue_request["task_id"], queue_request["claimant_id"]);
+                    break;
+                    case 4?:
+                        TaskDao::update_statistics(db);
+                        // db->call("statsUpdateAll", "");
+                    break;
+
+                    case 3?:
+                        OrgCreatedNotifications::run(queue_request["org_id"]);
+                    break;
+
+                    case 3?:
+TaskStreamNotificationHandler::run();
+                    break;
+
+                    case 3?:
+DeadlineChecker::run()
+                    break;
+
+                }
+                TaskDao::remove_queue_request(db, queue_request["id"]);
+            }
+        }
+        mutex.unlock();
+    } else qDebug() << "UserQueueHandler: Skipping consumeFromQueue() invocation";
+}
+]]]
 void TaskQueueHandler::messageReceived(AMQPMessage *message)
 {
     qDebug() << "TaskQueueHandler: Received Message";
@@ -85,36 +103,4 @@ void TaskQueueHandler::messageReceived(AMQPMessage *message)
         this->mThreadPool->start(runnable);
     }
   }
-}
-
-void TaskQueueHandler::handleAMQPError(QString error)
-{
-    qDebug() << "TaskQueueHandler: AMQPError: " << error;
-}
-
-void TaskQueueHandler::registerRequestTypes()
-{
-    UserTaskScoreRequest scoreReq = UserTaskScoreRequest();
-    qRegisterMetaType<CalculateTaskScore>(QString::fromStdString(scoreReq.class_name()).toLatin1());
-    DeadlineCheckRequest deadlineReq = DeadlineCheckRequest();
-    qRegisterMetaType<DeadlineChecker>(QString::fromStdString(deadlineReq.class_name()).toLatin1());
-    TaskUploadNotificationRequest uploadRequest = TaskUploadNotificationRequest();
-    qRegisterMetaType<SendTaskUploadNotifications>(QString::fromStdString(uploadRequest.class_name()).toLatin1());
-}
-
-void TaskQueueHandler::calculateAllTasksScore()
-{
-    qDebug() << "Calculating user task scores";
-    QRunnable *job = new CalculateTaskScore();
-    this->mThreadPool->start(job);
-}
-
-void TaskQueueHandler::setThreadPool(QThreadPool *tp)
-{
-    this->mThreadPool = tp;
-}
-
-bool TaskQueueHandler::isEnabled()
-{
-    return true;
 }
