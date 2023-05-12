@@ -24,8 +24,6 @@ static void SendTaskUploadNotifications::run(int task_id)
         QList<QSharedPointer<User> > users = TaskDao::getSubscribedUsers(db, task->id());
         QSharedPointer<User> translator = TaskDao::getUserClaimedTask(db, task->id());
 
-        std::string body = "";
-        MessagingClient publisher;
         QMap<QString, QVariant> memsource_task = TaskDao::get_memsource_task(db, task->id());
         if (!memsource_task.isEmpty()) {
             if (!translator.isNull()) {
@@ -37,34 +35,18 @@ static void SendTaskUploadNotifications::run(int task_id)
 //qDebug() << "SendTaskUploadNotifications Matching Revision Task IS TRANSLATED:" << QString::number(revision_task->id());//(**)
                         QSharedPointer<User> revisionClaimer = TaskDao::getUserClaimedTask(db, revision_task->id());
                         if (!revisionClaimer.isNull()) {
-                            TrackedTaskUploaded trackedUpload;
-                            trackedUpload.set_email_type(trackedUpload.email_type());
-                            trackedUpload.set_task_id(task->id());
-                            trackedUpload.set_translator_id(translator->id());
-                            trackedUpload.set_user_id(revisionClaimer->id());
-                            body = trackedUpload.SerializeAsString();
-                            publisher.publish(exchange, topic, body);
+                            TrackedTaskUploadedEmailGenerator::run(revisionClaimer->id(), task->id(), translator->id());
 //qDebug() << "SendTaskUploadNotifications SENT TO revisionClaimer->id():" << QString::number(revisionClaimer->id());//(**)
                         }
                     }
                 }
 
                 foreach (QSharedPointer<User> user, users) {
-                    TrackedTaskUploaded trackedUpload;
-                    trackedUpload.set_email_type(trackedUpload.email_type());
-                    trackedUpload.set_task_id(task->id());
-                    trackedUpload.set_translator_id(translator->id());
-                    trackedUpload.set_user_id(user->id());
-                    body = trackedUpload.SerializeAsString();
-                    publisher.publish(exchange, topic, body);
+                    TrackedTaskUploadedEmailGenerator::run(user->id(), task->id(), translator->id());
 //qDebug() << "SendTaskUploadNotifications SENT TO tracker/admin user->id():" << QString::number(user->id());//(**)
                 }
 
-                ClaimedTaskUploaded claimedUpload;
-                claimedUpload.set_email_type(claimedUpload.email_type());
-                claimedUpload.set_task_id(task->id());
-                claimedUpload.set_user_id(translator->id());
-                body = claimedUpload.SerializeAsString();
+                ClaimedTaskUploadedGenerator::run(task->id(), translator->id());
                 publisher.publish(exchange, topic, body);
             }
         }

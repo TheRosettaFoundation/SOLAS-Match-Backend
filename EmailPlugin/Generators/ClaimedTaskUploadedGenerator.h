@@ -6,9 +6,7 @@
 class ClaimedTaskUploadedGenerator : public IEmailGenerator
 {
 public:
-    ClaimedTaskUploadedGenerator();
-    void run();
-
+    static void run(int task_id, int translator_id);
 };
 
 #endif // CLAIMEDTASKUPLOADEDGENERATOR_H

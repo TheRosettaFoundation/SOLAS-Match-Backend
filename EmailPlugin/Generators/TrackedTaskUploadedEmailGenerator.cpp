@@ -1,36 +1,28 @@
 #include "TrackedTaskUploadedEmailGenerator.h"
 using namespace  SolasMatch::Common::Protobufs::Emails;
 
-TrackedTaskUploadedEmailGenerator::TrackedTaskUploadedEmailGenerator()
+void TrackedTaskUploadedEmailGenerator::run(int user_id, int task_id, int translator_id)
 {
-    //Default Constructor
-}
-
-void TrackedTaskUploadedEmailGenerator::run()
-{
-    qDebug() << "EmailGenerator - Generating TrackedTaskUploaded email";
-
-    TrackedTaskUploaded email_message;
-    email_message.ParseFromString(this->protoBody);
+    qDebug() << "TrackedTaskUploadedEmailGenerator user_id:" << user_id << "task_id:" << task_id << "translator_id:" << translator_id;
 
     ConfigParser settings;
     QString error = "";
     QSharedPointer<Email> email = QSharedPointer<Email>(new Email());
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
     QList<QMap<QString, QVariant>> task_type_details = TaskDao::get_task_type_details(db);
-    QSharedPointer<User> user = UserDao::getUser(db, email_message.user_id());
-    QSharedPointer<User> translator = UserDao::getUser(db, email_message.translator_id());
-    QSharedPointer<Task> task = TaskDao::getTask(db, email_message.task_id());
+    QSharedPointer<User> user = UserDao::getUser(db, user_id);
+    QSharedPointer<User> translator = UserDao::getUser(db, translator_id);
+    QSharedPointer<Task> task = TaskDao::getTask(db, task_id);
     QSharedPointer<Project> project = QSharedPointer<Project>();
     QSharedPointer<Organisation> org = QSharedPointer<Organisation>();
 
     if(user.isNull() || translator.isNull() || task.isNull()) {
         error = "Failed to generate task translation uploaded email. Unable ";
         error += "to find relevant inforamtion in the Database. Searched for ";
-        error += "User ID " + QString::number(email_message.user_id()) + ", ";
-        error += "Translator ID " + QString::number(email_message.translator_id());
+        error += "User ID " + QString::number(user_id) + ", ";
+        error += "Translator ID " + QString::number(translator_id);
         error += " and task and project identified by task ID ";
-        error += QString::number(email_message.task_id()) + ".";
+        error += QString::number(task_id) + ".";
     } else {
         project = ProjectDao::getProject(db, task->projectid());
 
@@ -136,18 +128,14 @@ void TrackedTaskUploadedEmailGenerator::run()
         }
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
-        email->setSender(settings.get("site.system_email_address"));;
-        email->addRecipient(QString::fromStdString(user->email()));
-        email->setSubject(settings.get("site.name") + ": Task Completed Notification");
-        email->setBody(QString::fromUtf8(email_body.c_str()));
         if (is_revisor_for_split_memsource_task) {
-            UserDao::log_email_sent(db, email_message.user_id(), email_message.task_id(), task->projectid(), project->organisationid(), email_message.translator_id(), 0, 0, "task_completed_to_revising_volunteer");
+            UserDao::queue_email(db, user_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Task Completed Notification", QString::fromUtf8(email_body.c_str()));
+            UserDao::log_email_sent(db, user_id, task_id, task->projectid(), project->organisationid(), translator_id, 0, 0, "task_completed_to_revising_volunteer");
         } else {
-            UserDao::log_email_sent(db, email_message.user_id(), email_message.task_id(), task->projectid(), project->organisationid(), email_message.translator_id(), 0, 0, "task_completed_to_subscribed_admin");
+            UserDao::queue_email(db, user_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Task Completed Notification", QString::fromUtf8(email_body.c_str()));
+            UserDao::log_email_sent(db, user_id, task_id, task->projectid(), project->organisationid(), translator_id, 0, 0, "task_completed_to_subscribed_admin");
         }
     } else {
         email = this->generateErrorEmail(error);
     }
-
-    this->emailQueue->insert(email, currentMessage);
 }

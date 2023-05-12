@@ -1,33 +1,24 @@
 #include "ClaimedTaskUploadedGenerator.h"
-#include "Common/protobufs/emails/ClaimedTaskUploaded.pb.h"
+
 using namespace  SolasMatch::Common::Protobufs::Emails;
 
-ClaimedTaskUploadedGenerator::ClaimedTaskUploadedGenerator()
+static void ClaimedTaskUploadedGenerator::run(int task_id, int translator_id)
 {
-    // Default Constructor
-}
-
-void ClaimedTaskUploadedGenerator::run()
-{
-    qDebug() << "EmailGenerator: Starting new thread for claimed task uploaded email";
-
-    ClaimedTaskUploaded emailMessage;
-    emailMessage.ParseFromString(this->protoBody);
+    qDebug() << "ClaimedTaskUploadedGenerator task_id:" << task_id << "translator_id:"  << translator_id;
 
     ConfigParser settings;
     QString error = "";
-    QSharedPointer<Email> email = QSharedPointer<Email>(new Email());
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
     QList<QMap<QString, QVariant>> task_type_details = TaskDao::get_task_type_details(db);
-    QSharedPointer<User> user = UserDao::getUser(db, emailMessage.user_id());
-    QSharedPointer<Task> task = TaskDao::getTask(db, emailMessage.task_id());
+    QSharedPointer<User> user = UserDao::getUser(db, translator_id);
+    QSharedPointer<Task> task = TaskDao::getTask(db, task_id);
     QSharedPointer<Project> project = QSharedPointer<Project>();
     QSharedPointer<Organisation> org = QSharedPointer<Organisation>();
 
     if (user.isNull() || task.isNull()) {
         error = "Unable to generate claimed task uploaded email. Unable to find relevant data ";
-        error += "in the DB, searched for user id " + QString::number(emailMessage.user_id());
-        error += " and task id " + QString::number(emailMessage.task_id());
+        error += "in the DB, searched for user id " + QString::number(translator_id);
+        error += " and task id " + QString::number(task_id);
     } else {
         project = ProjectDao::getProject(db, task->projectid());
 
@@ -93,14 +84,9 @@ void ClaimedTaskUploadedGenerator::run()
         QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/claimed-task-uploaded.tpl";
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
-        email->setSender(settings.get("site.system_email_address"));;
-        email->addRecipient(QString::fromStdString(user->email()));
-        email->setSubject(settings.get("site.name") + ": Task Successfully Completed");
-        email->setBody(QString::fromUtf8(email_body.c_str()));
-        UserDao::log_email_sent(db, emailMessage.user_id(), emailMessage.task_id(), task->projectid(), project->organisationid(), 0, 0, 0, "task_completed_to_volunteer");
+        UserDao::queue_email(db, translator_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Task Successfully Completed", QString::fromUtf8(email_body.c_str()));
+        UserDao::log_email_sent(db, translator_id, task_id, task->projectid(), project->organisationid(), 0, 0, 0, "task_completed_to_volunteer");
     } else {
-        email = this->generateErrorEmail(error);
+        this->generateErrorEmail(error);
     }
-
-    this->emailQueue->insert(email, currentMessage);
 }
