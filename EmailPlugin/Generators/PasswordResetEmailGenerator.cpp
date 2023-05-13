@@ -1,37 +1,26 @@
 #include "PasswordResetEmailGenerator.h"
 
-#include "Common/protobufs/emails/JSON.h"
-
 using namespace  SolasMatch::Common::Protobufs::Emails;
 
-PasswordResetEmailGenerator::PasswordResetEmailGenerator()
+void PasswordResetEmailGenerator::run(int user_id)
 {
-    //Default Constructor
-}
-
-void PasswordResetEmailGenerator::run()
-{
-    qDebug() << "EmailGenerator - Generating PasswordResetEmail";
-
-    JSON email_message;
-    email_message.ParseFromString(this->protoBody);
+    qDebug() << "PasswordResetEmailGenerator user_id" << user_id;
 
     ConfigParser settings;
-    QSharedPointer<Email> email = QSharedPointer<Email>(new Email());
     QString uuid = "";
     QString error = "";
     QSharedPointer<User> user = QSharedPointer<User>();
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
 
-    user = UserDao::getUser(db, email_message.user_id());
+    user = UserDao::getUser(db, user_id);
 
     if(user.isNull()) {
         error = "Password Reset email generation failed. Unable to find ";
-        error += "data in the DB. Looking for user id " + QString::number(email_message.user_id());
+        error += "data in the DB. Looking for user id " + QString::number(user_id);
     } else {
-        uuid = UserDao::get_password_reset_request_uuid(db, email_message.user_id());
+        uuid = UserDao::get_password_reset_request_uuid(db, user_id);
         if (uuid.compare("") == 0) {
-            error = "Password Reset email generation failed. Unable to find uuid in the db, searched by user_id " + QString::number(email_message.user_id());
+            error = "Password Reset email generation failed. Unable to find uuid in the db, searched by user_id " + QString::number(user_id);
         }
     }
 
@@ -53,14 +42,9 @@ void PasswordResetEmailGenerator::run()
         QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/password-reset.tpl";
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
-        email->setSender(settings.get("site.system_email_address"));
-        email->addRecipient(QString::fromStdString(user->email()));
-        email->setSubject(settings.get("site.name") + ": Password Reset");
-        email->setBody(QString::fromUtf8(email_body.c_str()));
-        UserDao::log_email_sent(db, email_message.user_id(), 0, 0, 0, 0, 0, 0, "password_reset_to_volunteer");
+        UserDao::queue_email(db, user_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Password Reset", QString::fromUtf8(email_body.c_str()));
+        UserDao::log_email_sent(db, user_id, 0, 0, 0, 0, 0, 0, "password_reset_to_volunteer");
     } else {
-        email = this->generateErrorEmail(error);
+        this->generateErrorEmail(error);
     }
-
-    this->emailQueue->insert(email, currentMessage);
 }

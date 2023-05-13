@@ -3,20 +3,12 @@
 #include <QDateTime>
 
 #include "Common/Definitions.h"
-#include "Common/protobufs/models/BannedUser.pb.h"
-
-#include "Common/protobufs/emails/JSON.h"
 
 using namespace  SolasMatch::Common::Protobufs::Emails;
 
-BannedLoginGenerator::BannedLoginGenerator()
+static void BannedLoginGenerator::run(int user_id)
 {
-    // Default Constructor
-}
-
-void BannedLoginGenerator::run()
-{
-    qDebug() << "IEmailGenerator: Generating BannedLogin email";
+    qDebug() << "BannedLoginGenerator user_id:" << user_id;
 
     JSON emailMessage;
     emailMessage.ParseFromString(this->protoBody);
@@ -28,12 +20,12 @@ void BannedLoginGenerator::run()
     QSharedPointer<Email> email = QSharedPointer<Email>(new Email());
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
 
-    user = UserDao::getUser(db, emailMessage.user_id());
-    banData = UserDao::getBanData(db, emailMessage.user_id());
+    user = UserDao::getUser(db, user_id);
+    banData = UserDao::getBanData(db, user_id);
 
     if (user.isNull() || banData.isNull()) {
         error = "BannedLoginGenerator: Failed to generate banned login email. Could not find ";
-        error += "relevent data in the DB, searched for user " + QString::number(emailMessage.user_id());
+        error += "relevent data in the DB, searched for user " + QString::number(user_id);
         error += " and ban data.";
     }
 
@@ -67,14 +59,9 @@ void BannedLoginGenerator::run()
         QString templateLocation = QString(TEMPLATE_DIRECTORY) + "emails/banned-login.tpl";
         ctemplate::ExpandTemplate(templateLocation.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
-        email->setSender(settings.get("site.system_email_address"));;
-        email->addRecipient(QString::fromStdString(user->email()));
-        email->setSubject(settings.get("site.name") + ": Banned Notification");
-        email->setBody(QString::fromUtf8(email_body.c_str()));
-        UserDao::log_email_sent(db, emailMessage.user_id(), 0, 0, 0, 0, 0, 0, "user_banned_to_volunteer");
+        UserDao::queue_email(db, user_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Banned Notification", QString::fromUtf8(email_body.c_str()));
+        UserDao::log_email_sent(db, user_id, 0, 0, 0, 0, 0, 0, "user_banned_to_volunteer");
     } else {
-        email = this->generateErrorEmail(error);
+        this->generateErrorEmail(error);
     }
-
-    this->emailQueue->insert(email, currentMessage);
 }

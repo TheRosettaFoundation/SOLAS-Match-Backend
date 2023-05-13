@@ -1,34 +1,23 @@
 #include "EmailVerificationGenerator.h"
 
-#include "Common/protobufs/emails/JSON.h"
-
 using namespace  SolasMatch::Common::Protobufs::Emails;
 
-EmailVerificationGenerator::EmailVerificationGenerator()
+static void EmailVerificationGenerator::run(int user_id)
 {
-    // Default Constructor
-}
-
-void EmailVerificationGenerator::run()
-{
-    qDebug() << "EmailGenerator::Generating Email Verification email";
-
-    JSON emailMessage;
-    emailMessage.ParseFromString(this->protoBody);
+    qDebug() << "EmailVerificationGenerator user_id:" << user_id;
 
     ConfigParser settings;
     QString error = "";
     QString uniqueId = "";
     QSharedPointer<User> user = QSharedPointer<User>();
-    QSharedPointer<Email> email = QSharedPointer<Email>(new Email);
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
 
-    uniqueId = UserDao::getRegistrationId(db, emailMessage.user_id());
-    user = UserDao::getUser(db, emailMessage.user_id());
+    uniqueId = UserDao::getRegistrationId(db, user_id);
+    user = UserDao::getUser(db, user_id);
 
     if (uniqueId == "" || user.isNull()) {
         error = "EmailVerificationGenerator - Unable to find user data for user "
-                + QString::number(emailMessage.user_id());
+                + QString::number(user_id);
     }
 
     if (error == "") {
@@ -42,14 +31,9 @@ void EmailVerificationGenerator::run()
         QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/registration-email.tpl";
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
-        email->setSender(settings.get("site.system_email_address"));;
-        email->addRecipient(QString::fromStdString(user->email()));
-        email->setSubject(settings.get("site.name") + ": Your email verification");
-        email->setBody(QString::fromUtf8(email_body.c_str()));
-        UserDao::log_email_sent(db, emailMessage.user_id(), 0, 0, 0, 0, 0, 0, "email_verification_to_volunteer");
+        UserDao::queue_email(db, user_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Your email verification", QString::fromUtf8(email_body.c_str()));
+        UserDao::log_email_sent(db, user_id, 0, 0, 0, 0, 0, 0, "email_verification_to_volunteer");
     } else {
-        email = this->generateErrorEmail(error);
+        this->generateErrorEmail(error);
     }
-
-    this->emailQueue->insert(email, currentMessage);
 }

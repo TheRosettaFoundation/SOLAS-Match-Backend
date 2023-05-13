@@ -1,34 +1,23 @@
 #include "UserBadgeAwardedGenerator.h"
-#include "Common/protobufs/emails/UserBadgeAwardedEmail.pb.h"
 #include "Common/DataAccessObjects/BadgeDao.h"
-
-#include "Common/protobufs/emails/JSON.h"
 
 using namespace  SolasMatch::Common::Protobufs::Emails;
 
-UserBadgeAwardedGenerator::UserBadgeAwardedGenerator()
+void UserBadgeAwardedGenerator::run(int user_id, int badge_id)
 {
-    // Default Constructor
-}
-
-void UserBadgeAwardedGenerator::run()
-{
-    qDebug() << "EmailGenerator: generating user badge awarded email";
-    JSON emailMessage;
-    emailMessage.ParseFromString(this->protoBody);
+    qDebug() << "UserBadgeAwardedGenerator user_id:" << user_id << "badge_id:" << badge_id;
 
     ConfigParser settings;
     QString error = "";
-    QSharedPointer<Email> email = QSharedPointer<Email>(new Email());
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
-    QSharedPointer<User> user = UserDao::getUser(db, emailMessage.user_id());
-    QSharedPointer<Badge> badge = BadgeDao::getBadge(db, emailMessage.badge_id());
+    QSharedPointer<User> user = UserDao::getUser(db, user_id);
+    QSharedPointer<Badge> badge = BadgeDao::getBadge(db, badge_id);
     QSharedPointer<Organisation> org = QSharedPointer<Organisation>();
 
     if (user.isNull() || badge.isNull()) {
         error = "Failed to generate user awarded badge email, unable to find relevant data in the ";
-        error += "DB. Searched for user id " + QString::number(emailMessage.user_id()) + " and ";
-        error += "badge id " + QString::number(emailMessage.badge_id());
+        error += "DB. Searched for user id " + QString::number(user_id) + " and ";
+        error += "badge id " + QString::number(badge_id);
     }
 
     if (error.length() == 0) {
@@ -103,19 +92,14 @@ void UserBadgeAwardedGenerator::run()
 
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
-        email->setSender(settings.get("site.system_email_address"));;
-        email->addRecipient(QString::fromStdString(user->email()));
-        email->setSubject(settings.get("site.name") + ": Achievement Awarded");
         if (badge_title == "Registered") {
-            email->setSubject(settings.get("site.name") + ": Thank you for completing your profile");
-            UserDao::log_email_sent(db, emailMessage.user_id(), 0, 0, 0, 0, 0, emailMessage.badge_id(), "profile_completed_to_volunteer");
+            UserDao::queue_email(db, user_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Thank you for completing your profile", QString::fromUtf8(email_body.c_str()));
+            UserDao::log_email_sent(db, user_id, 0, 0, 0, 0, 0, badge_id, "profile_completed_to_volunteer");
         } else {
-            UserDao::log_email_sent(db, emailMessage.user_id(), 0, 0, badge->owner_id(), 0, 0, emailMessage.badge_id(), "achievement_awarded_to_volunteer");
+            UserDao::queue_email(db, user_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Achievement Awarded", QString::fromUtf8(email_body.c_str()));
+            UserDao::log_email_sent(db, user_id, 0, 0, badge->owner_id(), 0, 0, badge_id, "achievement_awarded_to_volunteer");
         }
-        email->setBody(QString::fromUtf8(email_body.c_str()));
     } else {
-        email = this->generateErrorEmail(error);
+        this->generateErrorEmail(error);
     }
-
-    this->emailQueue->insert(email, currentMessage);
 }

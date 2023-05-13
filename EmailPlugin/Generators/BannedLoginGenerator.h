@@ -2,13 +2,11 @@
 #define BANNEDLOGINGENERATOR_H
 
 #include "../IEmailGenerator.h"
-#include "Common/protobufs/emails/BannedLogin.pb.h"
 
 class BannedLoginGenerator : public IEmailGenerator
 {
 public:
-    BannedLoginGenerator();
-    void run();
+    static void run(int user_id);
 
 };
 

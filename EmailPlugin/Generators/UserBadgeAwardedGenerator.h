@@ -6,9 +6,7 @@
 class UserBadgeAwardedGenerator : public IEmailGenerator
 {
 public:
-    UserBadgeAwardedGenerator();
-    void run();
-
+    static void run(int user_id, int badge_id);
 };
 
 #endif // USERBADGEAWARDEDGENERATOR_H
