@@ -1,31 +1,22 @@
 #include "ProjectImageDisapprovedEmailGenerator.h"
 
-#include "Common/protobufs/emails/JSON.h"
-
 using namespace  SolasMatch::Common::Protobufs::Emails;
 
-ProjectImageDisapprovedEmailGenerator::ProjectImageDisapprovedEmailGenerator()
+static void ProjectImageDisapprovedEmailGenerator::run(int user_id, int project_id)
 {
-}
-
-void ProjectImageDisapprovedEmailGenerator::run()
-{
-    qDebug() << "EmailGenerator: Generating Project Image Disapproved Email";
-    JSON email_message;
-    email_message.ParseFromString(this->protoBody);
+    qDebug() << "ProjectImageDisapprovedEmailGenerator user_id:" << user_id << "project_id:" << project_id;
 
     ConfigParser settings;
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
-    QSharedPointer<Email> email = QSharedPointer<Email>(new Email());
-    QSharedPointer<Project> project = ProjectDao::getProject(db, email_message.project_id());
+    QSharedPointer<Project> project = ProjectDao::getProject(db, project_id);
     QSharedPointer<User> user = QSharedPointer<User>();
-    user = UserDao::getUser(db, email_message.user_id());
+    user = UserDao::getUser(db, user_id);
     QSharedPointer<Organisation> org = QSharedPointer<Organisation>();
     QString error = "";
 
     if (project.isNull()) {
-        error = "Project image disapproved email generation failed. Unable to find  project with id " +
-                QString::number(email_message.project_id());
+        error = "Project image disapproved email generation failed. Unable to find project with id " +
+                QString::number(project_id);
     } else {
         org = OrganisationDao::getOrg(db, project->organisationid());
 
@@ -43,7 +34,7 @@ void ProjectImageDisapprovedEmailGenerator::run()
     if (user.isNull()) {
         error = "Project image disapproved email generation failed.: Unable to find relevant ";
         error += "data in the Database. Searched for User ID (org admin)";
-        error += QString::number(email_message.user_id()) + ".";
+        error += QString::number(user_id) + ".";
     }
 
     if (error.compare("") == 0) {
@@ -67,15 +58,10 @@ void ProjectImageDisapprovedEmailGenerator::run()
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
         QString projectTitle = QString::fromLatin1(project->title().c_str());
 
-        email->setSender(settings.get("site.system_email_address"));;
-        email->addRecipient(QString::fromStdString(user->email()));
-        email->setSubject(settings.get("site.name") + ": Project image has been disapproved [Project - " + projectTitle + "]");
-        email->setBody(QString::fromUtf8(email_body.c_str()));
-        UserDao::log_email_sent(db, email_message.user_id(), 0, email_message.project_id(), project->organisationid(), 0, 0, 0, "image_disapproved_to_org_admin");
+        UserDao::queue_email(db, user_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Project image has been disapproved [Project - " + projectTitle + "]", QString::fromUtf8(email_body.c_str()));
+        UserDao::log_email_sent(db, user_id, 0, project_id, project->organisationid(), 0, 0, 0, "image_disapproved_to_org_admin");
     }	else {
-        email = this->generateErrorEmail(error);
+        this->generateErrorEmail(error);
     }
-
-    this->emailQueue->insert(email, currentMessage);
 }
 

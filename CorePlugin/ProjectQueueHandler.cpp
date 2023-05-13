@@ -108,7 +108,6 @@ void ProjectQueueHandler::consumeFromQueue()
                     case UserTaskClaim:
                         UserTaskClaimEmailGenerator::run(queue_request["user_id"], queue_request["task_id"]);
                         break;
-
                     case TaskClaimed:
                         TaskClaimedEmailGenerator::run(queue_request["user_id"], queue_request["task_id"]);
                         break;
@@ -124,6 +123,12 @@ void ProjectQueueHandler::consumeFromQueue()
                     case UserTaskCancelled:
                         UserTaskCancelledEmailGenerator::run(queue_request["user_id"], queue_request["task_id"]);
                         break;
+
+
+        UserDao::queue_email(db, user_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Your email verification", QString::fromUtf8(email_body.c_str()));
+
+
+
                 }
                 TaskDao::mark_queue_request_sent(db, queue_request["id"]);
             }

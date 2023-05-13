@@ -2,37 +2,25 @@
 
 #include <QDateTime>
 
-#include "Common/protobufs/emails/UserReferenceEmail.pb.h"
 #include "Common/protobufs/models/ArchivedProject.pb.h"
-
-#include "Common/protobufs/emails/JSON.h"
-
 #include "Common/DataAccessObjects/LanguageDao.h"
 
 using namespace  SolasMatch::Common::Protobufs::Emails;
 
-UserReferenceEmailGenerator::UserReferenceEmailGenerator()
+static void UserReferenceEmailGenerator::run(int user_id)
 {
-    //Default Constructor
-}
-
-void UserReferenceEmailGenerator::run()
-{
-    qDebug() << "EmailGenerator: generating user reference email";
-    JSON emailMessage;
-    emailMessage.ParseFromString(this->protoBody);
+    qDebug() << "UserReferenceEmailGenerator user_id:" << user_id;
 
     ConfigParser settings;
     QString error;
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
     QList<QMap<QString, QVariant>> task_type_details = TaskDao::get_task_type_details(db);
-    QSharedPointer<User> user = UserDao::getUser(db, emailMessage.user_id());
-    QSharedPointer<Email> email = QSharedPointer<Email>(new Email());
+    QSharedPointer<User> user = UserDao::getUser(db, user_id);
 
     if (user.isNull()) {
         error += "Failed to generate User Reference email: Unable to find relevant ";
         error += "data in the Database. Searched for User ID ";
-        error += QString::number(emailMessage.user_id());
+        error += QString::number(user_id);
     }
 
     if (error == "") {
@@ -194,14 +182,9 @@ if (user->id() == 3297) { // test code (3297 is id for Alan Barrett)
         QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/user-reference.tpl";
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
-        email->setSender(settings.get("site.system_email_address"));;
-        email->addRecipient(QString::fromStdString(user->email()));
-        email->setSubject(settings.get("site.name") + ": User Reference");
-        email->setBody(QString::fromUtf8(email_body.c_str()));
-        UserDao::log_email_sent(db, emailMessage.user_id(), 0, 0, 0, 0, 0, 0, "reference_to_volunteer");
+        UserDao::queue_email(db, user_id, QString::fromStdString(user->email()), settings.get("site.name") + ": User Reference", QString::fromUtf8(email_body.c_str()));
+        UserDao::log_email_sent(db, user_id, 0, 0, 0, 0, 0, 0, "reference_to_volunteer");
     } else {
-        email = this->generateErrorEmail(error);
+        generateErrorEmail(error);
     }
-
-    this->emailQueue->insert(email, currentMessage);
 }

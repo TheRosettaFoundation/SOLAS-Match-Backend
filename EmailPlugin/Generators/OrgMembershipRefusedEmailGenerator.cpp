@@ -1,35 +1,26 @@
 #include "OrgMembershipRefusedEmailGenerator.h"
 
-#include "Common/protobufs/emails/JSON.h"
-
 using namespace  SolasMatch::Common::Protobufs::Emails;
 
-OrgMembershipRefusedEmailGenerator::OrgMembershipRefusedEmailGenerator()
-{
-    //default constructor
-}
 
-void OrgMembershipRefusedEmailGenerator::run()
+static void OrgMembershipRefusedEmailGenerator::run(int user_id, int org_id)
 {
-    qDebug() << "EmailGenerator - Generating OrgMembershipRefused";
-    JSON email_message;
-    email_message.ParseFromString(this->protoBody);
+    qDebug() << "OrgMembershipRefusedEmailGenerator user_id:" << user_id << "org_id:" << org_id;
 
     ConfigParser settings;
-    QSharedPointer<Email> email = QSharedPointer<Email>(new Email());
     QSharedPointer<User> user = QSharedPointer<User>();
     QSharedPointer<Organisation> org = QSharedPointer<Organisation>();
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
     QString error = "";
 
-    user = UserDao::getUser(db, email_message.user_id());
-    org = OrganisationDao::getOrg(db, email_message.org_id());
+    user = UserDao::getUser(db, user_id);
+    org = OrganisationDao::getOrg(db, org_id);
 
     if(user.isNull() || org.isNull())
     {
         error = "Unable to generate OrgMembershipRefused email. Unable to find objects ";
-        error += "in the DB. Searched for user ID " + QString::number(email_message.user_id());
-        error += " and org ID " + QString::number(email_message.org_id()) + ".";
+        error += "in the DB. Searched for user ID " + QString::number(user_id);
+        error += " and org ID " + QString::number(org_id) + ".";
     }
 
     if(error.compare("") == 0)
@@ -47,13 +38,9 @@ void OrgMembershipRefusedEmailGenerator::run()
         QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/org-membership-refused.tpl";
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
-        email->setSender(settings.get("site.system_email_address"));
-        email->addRecipient(QString::fromStdString(user->email()));
-        email->setSubject(settings.get("site.name") + ": Organisation Membership Update");
-        email->setBody(QString::fromUtf8(email_body.c_str()));
+        UserDao::queue_email(db, user_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Organisation Membership Update", QString::fromUtf8(email_body.c_str()));
+        UserDao::log_email_sent(db, user_id, 0, 0, org_id, 0, 0, 0, "org_membership_refused_to_volunteer");
     } else {
-        email = this->generateErrorEmail(error);
+        this->generateErrorEmail(error);
     }
-
-    this->emailQueue->insert(email, currentMessage);
 }

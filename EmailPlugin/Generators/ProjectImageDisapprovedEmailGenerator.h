@@ -2,13 +2,11 @@
 #define PROJECTIMAGEDISAPPROVEDEMAILGENERATOR_H
 
 #include "../IEmailGenerator.h"
-#include "Common/protobufs/emails/ProjectImageDisapprovedEmail.pb.h"
 
 class ProjectImageDisapprovedEmailGenerator  : public IEmailGenerator
 {
 public:
-    ProjectImageDisapprovedEmailGenerator();
-    void run();
+    static void run(int user_id, int project_id);
 };
 
 #endif // PROJECTIMAGEDISAPPROVEDEMAILGENERATOR_H

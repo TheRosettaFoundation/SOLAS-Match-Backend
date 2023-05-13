@@ -2,13 +2,10 @@
 #define NEWIMAGEUPLOADEDEMAILGENERATOR_H
 
 #include "../IEmailGenerator.h"
-#include "Common/protobufs/emails/ProjectImageUploadedEmail.pb.h"
 
 class NewImageUploadedEmailGenerator: public IEmailGenerator
 {
 public:
-    NewImageUploadedEmailGenerator();
-    void run();
-
+    void run(int project_id);
 };
 #endif // NEWIMAGEUPLOADEDEMAILGENERATOR_H

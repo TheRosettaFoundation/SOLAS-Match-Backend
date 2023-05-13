@@ -1,31 +1,20 @@
 #include "NewImageUploadedEmailGenerator.h"
 
-#include "Common/protobufs/emails/JSON.h"
-
 using namespace  SolasMatch::Common::Protobufs::Emails;
 
-NewImageUploadedEmailGenerator::NewImageUploadedEmailGenerator()
+static void NewImageUploadedEmailGenerator::run(int project_id)
 {
-    // Default ctor
-}
-
-void NewImageUploadedEmailGenerator::run()
-{
-    qDebug() << "EmailGenerator: Generating Project Image Uploaded Email";
-    JSON email_message;
-    email_message.ParseFromString(this->protoBody);
-
+    qDebug() << "NewImageUploadedEmailGenerator project_id: " << project_id;
 
     ConfigParser settings;
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
-    QSharedPointer<Email> email = QSharedPointer<Email>(new Email());
-    QSharedPointer<Project> project = ProjectDao::getProject(db, email_message.project_id());
+    QSharedPointer<Project> project = ProjectDao::getProject(db, project_id);
     QSharedPointer<Organisation> org = QSharedPointer<Organisation>();
     QString error = "";
 
     if (project.isNull()) {
         error = "New image uploaded email generation failed. Unable to find  project with id " +
-                QString::number(email_message.project_id());
+                QString::number(project_id);
     } else {
         org = OrganisationDao::getOrg(db, project->organisationid());
 
@@ -57,17 +46,11 @@ void NewImageUploadedEmailGenerator::run()
         QString projectTitle = QString::fromLatin1(project->title().c_str());
         QStringList admins = settings.get("mail.admin_emails").split(",");
         foreach(QString admin, admins) {
-            email->addRecipient(admin.trimmed());
+            UserDao::queue_email(db, 0, admin.trimmed(), settings.get("site.name") + ": Project Image Uploaded [Project - " + projectTitle + "]", QString::fromUtf8(email_body.c_str()));
         }
-
-        email->setSender(settings.get("site.system_email_address"));
-        email->setSubject(settings.get("site.name") + ": Project Image Uploaded [Project - " + projectTitle + "]");
-        email->setBody(QString::fromUtf8(email_body.c_str()));
-        UserDao::log_email_sent(db, 0, 0, email_message.project_id(), project->organisationid(), 0, 0, 0, "image_uploaded_to_admin_emails_list");
+        UserDao::log_email_sent(db, 0, 0, project_id, project->organisationid(), 0, 0, 0, "image_uploaded_to_admin_emails_list");
     }	else {
-        email = this->generateErrorEmail(error);
+        this->generateErrorEmail(error);
     }
-
-    this->emailQueue->insert(email, currentMessage);
 }
 
