@@ -33,7 +33,6 @@
 #include "Generators/ProjectCreatedGenerator.h"
 #include "Generators/NewImageUploadedEmailGenerator.h"
 #include "Generators/ProjectImageRemovedEmailGenerator.h"
-#include "Generators/NewImageUploadedEmailGenerator.h"
 #include "Generators/ProjectImageApprovedEmailGenerator.h"
 #include "Generators/ProjectImageDisapprovedEmailGenerator.h"
 
@@ -64,103 +63,27 @@ void ProjectQueueHandler::consumeFromQueue()
             if (!queue_request.isNull()) {
                 qDebug() << "ProjectQueueHandler type:" << queue_request["type"];
                 switch (queue_request["type"]) {
-
-
-
-
-                    case BannedLogin:
                     case EmailVerification:
-                    case OrgFeedback:
-                    case OrgMembershipAccepted:
-                    case OrgMembershipRefused:
+                        EmailVerificationGenerator::run(queue_request["user_id"]);
+                        break;
                     case PasswordResetEmail:
-                    case ProjectImageApprovedEmail:
-                    case ProjectImageDisapprovedEmail:
-                    case ProjectImageRemovedEmail:
-                    case ProjectImageUploadedEmail:
-                    case TaskArchived:
-                    case TaskClaimed:
-                    case TaskScoreEmail:
+                        PasswordResetEmailGenerator::run(queue_request["user_id"]);
+                        break;
                     case UserBadgeAwardedEmail:
-                    case UserFeedback:
+                        UserBadgeAwardedGenerator::run(queue_request["user_id"], queue_request["badge_id"]);
+                        break;
+                    case BannedLogin:
+                        BannedLoginGenerator::run(queue_request["user_id"]);
+                        break;
                     case UserReferenceEmail:
-                    case UserTaskCancelled:
-                    case UserTaskClaim:
-
-
-
-
-
-
-
-
-
-
-                    case 3?:
-NOT HERE                        TaskRevokedNotificationHandler::run(queue_request["task_id"], queue_request["claimant_id"]);
-                    break;
-
-                    case 3?:
-NOT HERE                        OrgCreatedNotifications::run(queue_request["org_id"]);
-                    break;
-
-
-
-                    case 3?:
-SendTaskuploadNotifications::run(queue_request["task_id"]);
-                    break;
-
-
-
-
-
-                    case 3?:
-                        TaskRevokedNotificationHandler::run(queue_request["task_id"], queue_request["claimant_id"]);
-                    break;
-
-                    case 3?:
+                        UserReferenceEmailGenerator::run(queue_request["user_id"]);
+                        break;
+                    case sendOrgCreatedNotifications:
                         OrgCreatedNotifications::run(queue_request["org_id"]);
-                    break;
-
-
-
-    public static function sendBannedLoginEmail($userId)
-            $proto->setUserId($userId);
-            $message = $messagingClient->createMessageFromProto($proto);
-            $messagingClient->sendTopicMessage(
-    public static function sendEmailVerification($userId)
-            $messageProto->setUserId($userId);
-            $message = $messagingClient->createMessageFromProto($messageProto);
-            $messagingClient->sendTopicMessage(
-    public static function sendOrgFeedback($feedback)
-            $message = $messagingClient->createMessageFromProto($feedback);
-            $messagingClient->sendTopicMessage(
-    public static function sendOrgCreatedNotifications($orgId)
-            $proto->setOrgId($orgId);
-            $message = $client->createMessageFromProto($proto);
-            $client->sendTopicMessage(
-    public static function sendUserAssignedBadgeEmail($userId, $badgeId)
-            $proto->setUserId($userId);
-            $proto->setBadgeId($badgeId);
-            $message = $client->createMessageFromProto($proto);
-            $client->sendTopicMessage(
-    public static function sendUserFeedback($feedback)
-            $message = $messagingClient->createMessageFromProto($feedback);
-            $messagingClient->sendTopicMessage(
-    public static function notifyUserClaimedTask($userId, $taskId)
-            $message_type->setUserId($userId);
-            $message_type->setTaskId($taskId);
-            $message = $messagingClient->createMessageFromProto($message_type);
-            $messagingClient->sendTopicMessage(
-    public static function notifyUserTaskCancelled($userId, $taskId)
-            $message_type->setUserId($userId);
-            $message_type->setTaskId($taskId);
-            $message = $messagingClient->createMessageFromProto($message_type);
-            $messagingClient->sendTopicMessage(
-    public static function sendPasswordResetEmail($user_id)
-            $message_type->setUserId($user_id);
-            $message = $messagingClient->createMessageFromProto($message_type);
-            $messagingClient->sendTopicMessage(
+                        break;
+                    case OrgMembershipAccepted:
+OrgMembershipAcceptedGenerator
+??????????????
     public static function notifyUserOrgMembershipRequest($userId, $orgId, $accepted)
                 $message_type->setUserId($userId);
                 $message_type->setOrgId($orgId);
@@ -170,68 +93,69 @@ SendTaskuploadNotifications::run(queue_request["task_id"]);
                 $message_type->setOrgId($orgId);
                 $message = $messagingClient->createMessageFromProto($message_type);
                 $messagingClient->sendTopicMessage(
-    public static function notifyOrgClaimedTask($userId, $taskId)
-                $message_type->setTaskId($taskId);
-                $message_type->setTranslatorId($userId);
-                    $message_type->setUserId($user->getId());
-                    $message = $messagingClient->createMessageFromProto($message_type);
-                    $messagingClient->sendTopicMessage(
-    public static function sendTaskUploadNotifications($taskId, $version)
-            $messageProto->setTaskId($taskId);
-            $messageProto->setFileVersion($version);
-            $message = $messagingClient->createMessageFromProto($messageProto);
-            $messagingClient->sendTopicMessage(
+
+
+
+                        break;
+                    case OrgMembershipRefused:
+OrgMembershipRefusedEmailGenerator
+                        break;
+                    case ProjectImageUploadedEmail:
+                        NewImageUploadedEmailGenerator::run(queue_request["project_id"]);
+                        break;
+                    case ProjectImageApprovedEmail:
+                        ProjectImageApprovedEmailGenerator::run(queue_request["project_id"], queue_request["user_id"]);
+                        break;
+                    case ProjectImageDisapprovedEmail:
+                        ProjectImageDisapprovedEmailGenerator::run(queue_request["project_id"], queue_request["user_id"]);
+                        break;
+                    case ProjectImageRemovedEmail:
+                        ProjectImageRemovedEmailGenerator::run(queue_request["project_id"]);
+                        break;
+                    case TaskArchived:
+                        TaskArchivedEmailGenerator::run(queue_request["task_id"], queue_request["user_id"]);
     public static function sendTaskArchivedNotifications($taskId, $subscribedUsers)
                 $message_type->setTaskId($taskId);
                     $message_type->setUserId($user->getId());
                     $message = $messagingClient->createMessageFromProto($message_type);
                     $messagingClient->sendTopicMessage(
-    public static function sendTaskRevokedNotifications($taskId, $claimantId)
-            $messageProto->setTaskId($taskId);
-            $messageProto->setClaimantId($claimantId);
-            $message = $client->createMessageFromProto($messageProto);
-            $client->sendTopicMessage(
-    public static function sendProjectImageUploaded($projectId)
-            $proto->setProjectId($projectId);
-            $message = $messagingClient->createMessageFromProto($proto);
+
+
+                        break;
+
+                    case OrgFeedback:
+OrgFeedbackGenerator::run(queue_request["?????????"], queue_request["feedback"]);
+    public static function sendOrgFeedback($feedback)
+            $message = $messagingClient->createMessageFromProto($feedback);
             $messagingClient->sendTopicMessage(
-    public static function sendProjectImageRemoved($projectId)
-            $proto->setProjectId($projectId);
-            $message = $messagingClient->createMessageFromProto($proto);
+
+
+                        break;
+
+
+                    case UserTaskClaim:
+                        UserTaskClaimEmailGenerator::run(queue_request["user_id"], queue_request["task_id"]);
+                        break;
+
+                    case TaskClaimed:
+                        TaskClaimedEmailGenerator::run(queue_request["user_id"], queue_request["task_id"]);
+                        break;
+                    case SendTaskuploadNotifications:
+                        SendTaskuploadNotifications::run(queue_request["task_id"]);
+                        break;
+                    case sendTaskRevokedNotifications:
+                        TaskRevokedNotificationHandler::run(queue_request["task_id"], queue_request["claimant_id"]);
+                        break;
+                    case UserFeedback:
+UserFeedbackGenerator::run(queue_request["?????????"], queue_request["feedback"]);
+    public static function sendUserFeedback($feedback)
+            $message = $messagingClient->createMessageFromProto($feedback);
             $messagingClient->sendTopicMessage(
-    public static function sendProjectImageApprovedEmail($projectId)
-                $message_type->setProjectId($projectId);
-                    $message_type->setUserId($user->getId());
-                    $message = $messagingClient->createMessageFromProto($message_type);
-                    $messagingClient->sendTopicMessage(
-    public static function sendProjectImageDisapprovedEmail($projectId)
-                $message_type->setProjectId($projectId);
-                    $message_type->setUserId($user->getId());
-                    $message = $messagingClient->createMessageFromProto($message_type);
-                    $messagingClient->sendTopicMessage(
 
-
-PHP Do to DB...
-    public static function requestReference($userId)
-    {
-        $messagingClient = new Lib\MessagingClient();
-        if ($messagingClient->init()) {
-            $request = new Common\Protobufs\Emails\UserReferenceEmail();
-            $request->setUserId($userId);
-            $message = $messagingClient->createMessageFromProto($request);
-            $messagingClient->sendTopicMessage(
-                $message,
-                $messagingClient->MainExchange,
-                $messagingClient->UserReferenceRequestTopic
-            );
-        }
-    }
-
-
-
-
-
-
+                        break;
+                    case UserTaskCancelled:
+                        UserTaskCancelledEmailGenerator::run(queue_request["user_id"], queue_request["task_id"]);
+                        break;
                 }
                 TaskDao::mark_queue_request_sent(db, queue_request["id"]);
             }
