@@ -82,7 +82,7 @@ void ProjectQueueHandler::consumeFromQueue()
                         OrgCreatedNotifications::run(queue_request["org_id"]);
                         break;
                     case OrgMembershipAccepted:
-OrgMembershipAcceptedGenerator
+OrgMembershipAcceptedGenerator::run(queue_request["user_id"], queue_request["task_id"]);
 ??????????????
     public static function notifyUserOrgMembershipRequest($userId, $orgId, $accepted)
                 $message_type->setUserId($userId);
