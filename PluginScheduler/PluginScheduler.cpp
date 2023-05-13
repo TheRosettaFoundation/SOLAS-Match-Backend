@@ -121,9 +121,9 @@ void PluginScheduler::processTask(QPointer<TimedTask> task)
     qDebug() << "PluginScheduler::processTask:" << task->getMessage();
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
 
-    if      (task->getMessage() == "UserTaskStreamNotificationRequest") TaskDao::insert_queue_request(db, 1...); // UserQueueHandler: 1
-    else if (task->getMessage() == "DeadlineCheckRequest")              TaskDao::insert_queue_request(db,99...); // ???UserQueueHandler: 99??
-    else if (task->getMessage() == "StatisticsUpdateRequest")           TaskDao::insert_queue_request(db, 1...); // UserQueueHandler: 1
+    if      (task->getMessage() == "UserTaskStreamNotificationRequest") TaskDao::insert_queue_request(db, 1...USERQUEUE);
+    else if (task->getMessage() == "DeadlineCheckRequest")              TaskDao::insert_queue_request(db,99...TASKQUEUE);
+    else if (task->getMessage() == "StatisticsUpdateRequest")           TaskDao::insert_queue_request(db, 1...TASKQUEUE);
 }
 
 void PluginScheduler::setThreadPool(QThreadPool *tp)

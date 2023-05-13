@@ -7,7 +7,12 @@
 #include "Common/ConfigParser.h"
 
 #include "TaskJobs/DeadlineChecker.h"
-#include "TaskJobs/SendTaskUploadNotifications.h"
+
+#include "Generators/OrgDeadlinePassedEmailGenerator.h"
+#include "Generators/UserTaskDeadlineEmailGenerator.h"
+#include "Generators/UserClaimedTaskEarlyWarningDeadlinePassedEmailGenerator.h"
+#include "Generators/UserClaimedTaskLateWarningDeadlinePassedEmailGenerator.h"
+#include "Generators/UserRecordWarningDeadlinePassedEmailGenerator.h"
 
 using namespace SolasMatch::Common::Protobufs::Requests;
 
@@ -34,33 +39,16 @@ void TaskQueueHandler::consumeFromQueue()
             QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
             QMap<QString, QVariant> queue_request = TaskDao::get_queue_request(db, TASKQUEUE);
             if (!queue_request.isNull()) {
-                qDebug() << "UserQueueHandler type:" << queue_request["type"];
+                qDebug() << "TaskQueueHandler type:" << queue_request["type"];
                 switch (queue_request["type"]) {
-                    case 3?:
-NOT HERE                        TaskRevokedNotificationHandler::run(queue_request["task_id"], queue_request["claimant_id"]);
-                    break;
-                    case 4?:
-NOT HERE                        TaskDao::update_statistics(db);
-                        // db->call("statsUpdateAll", "");
-                    break;
-
-                    case 3?:
-NOT HERE                        OrgCreatedNotifications::run(queue_request["org_id"]);
-                    break;
-
-                    case 3?:
-NOT HERETaskStreamNotificationHandler::run();
-                    break;
-
-                    case 3?:
-OR IN USER QUEUE (DUP) DeadlineChecker::run();
-                    break;
-
-                    case 3?:
-SendTaskuploadNotifications::run(queue_request["task_id"]);
-                    break;
+                    case DEADLINECHECK:
+                        DeadlineChecker::run()
+                        break;
+                    case STATISTICSUPDATE:
+                        TaskDao::update_statistics(db);
+                        break;
                 }
-                TaskDao::remove_queue_request(db, queue_request["id"]);
+                TaskDao::mark_queue_request_sent(db, queue_request["id"]);
             }
         }
         mutex.unlock();

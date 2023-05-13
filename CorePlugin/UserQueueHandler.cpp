@@ -6,8 +6,8 @@
 #include "Common/ConfigParser.h"
 
 #include "UserJobs/TaskStreamNotificationHandler.h"
-#include "UserJobs/OrgCreatedNotifications.h"
-#include "UserJobs/TaskRevokedNotificationHandler.h"
+
+#include "Generators/UserTaskStreamEmailGenerator.h"
 
 UserQueueHandler::UserQueueHandler()
 {
@@ -34,28 +34,11 @@ void UserQueueHandler::consumeFromQueue()
             if (!queue_request.isNull()) {
                 qDebug() << "UserQueueHandler type:" << queue_request["type"];
                 switch (queue_request["type"]) {
-                    case 3?:
-                        TaskRevokedNotificationHandler::run(queue_request["task_id"], queue_request["claimant_id"]);
+                    case TASKSTREAM:
+                        TaskStreamNotificationHandler::run();
                     break;
-                    case 4?:
-                        TaskDao::update_statistics(db);
-                        // db->call("statsUpdateAll", "");
-                    break;
-
-                    case 3?:
-                        OrgCreatedNotifications::run(queue_request["org_id"]);
-                    break;
-
-                    case 3?:
-TaskStreamNotificationHandler::run();
-                    break;
-
-                    case 3?:
-DeadlineChecker::run()
-                    break;
-
                 }
-                TaskDao::remove_queue_request(db, queue_request["id"]);
+                TaskDao::mark_queue_request_sent(db, queue_request["id"]);
             }
         }
         mutex.unlock();
