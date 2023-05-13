@@ -32,7 +32,7 @@ void TaskQueueHandler::consumeFromQueue()
     if (mutex.tryLock()) {
         if (!QFileInfo::exists("/repo/SOLAS-Match-Backend/STOP_consumeFromQueue")) {
             QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
-???            QMap<QString, QVariant> queue_request = TaskDao::get_queue_request(db, 1); // UserQueueHandler: 1
+            QMap<QString, QVariant> queue_request = TaskDao::get_queue_request(db, TASKQUEUE);
             if (!queue_request.isNull()) {
                 qDebug() << "UserQueueHandler type:" << queue_request["type"];
                 switch (queue_request["type"]) {

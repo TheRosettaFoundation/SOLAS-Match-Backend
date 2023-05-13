@@ -22,66 +22,50 @@ ProjectQueueHandler::ProjectQueueHandler()
 void ProjectQueueHandler::run()
 {
     qDebug() << "Running ProjectQueueHandler on thread " << this->thread()->currentThreadId();
-    this->registerRequestTypes();
     ConfigParser settings;
-    QString exchange = "SOLAS_MATCH";
-    QString queue = "CoreProjectQueue";
-    QString topic = "projects.#";
-
-    client = new MessagingClient();
-    client->init();
-    connect(client, SIGNAL(AMQPMessageReceived(AMQPMessage*)), this, SLOT(messageReceived(AMQPMessage*)));
-    connect(client, SIGNAL(AMQPError(QString)), this, SLOT(handleAMQPError(QString)));
-    client->declareQueue(exchange, topic, queue);
 
     QTimer *message_queue_read_timer = new QTimer();
-    connect(message_queue_read_timer, SIGNAL(timeout()), client, SLOT(consumeFromQueue()));
+    connect(message_queue_read_timer, SIGNAL(timeout()), this, SLOT(consumeFromQueue()));
     message_queue_read_timer->start(settings.get("messaging.poll_rate").toInt());
 }
 
-void ProjectQueueHandler::messageReceived(AMQPMessage *message)
+void ProjectQueueHandler::consumeFromQueue()
 {
-    qDebug() << "ProjectQueueHandler: Received Message";
+    static QMutex mutex;
+    if (mutex.tryLock()) {
+        if (!QFileInfo::exists("/repo/SOLAS-Match-Backend/STOP_consumeFromQueue")) {
+            QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
+            QMap<QString, QVariant> queue_request = TaskDao::get_queue_request(db, PROJECTQUEUE);
+            if (!queue_request.isNull()) {
+                qDebug() << "UserQueueHandler type:" << queue_request["type"];
+                switch (queue_request["type"]) {
+                    case 3?:
+NOT HERE                        TaskRevokedNotificationHandler::run(queue_request["task_id"], queue_request["claimant_id"]);
+                    break;
+                    case 4?:
+NOT HERE                        TaskDao::update_statistics(db);
+                        // db->call("statsUpdateAll", "");
+                    break;
 
-    AMQPQueue *messageQueue = message->getQueue();
-    if(messageQueue != NULL)
-    {
-        messageQueue->Ack(message->getDeliveryTag());
-    }
+                    case 3?:
+NOT HERE                        OrgCreatedNotifications::run(queue_request["org_id"]);
+                    break;
 
-    uint32_t length = 0;
-    char *body = message->getMessage(&length);
+                    case 3?:
+NOT HERETaskStreamNotificationHandler::run();
+                    break;
 
-    SolasMatch::Common::Protobufs::Emails::JSON requestMessage;
-    requestMessage.ParseFromString(std::string(body, length));
+                    case 3?:
+OR IN USER QUEUE (DUP) DeadlineChecker::run();
+                    break;
 
-    int classId = QMetaType::type(QString::fromStdString(requestMessage.class_name()).toLatin1());
-    if (classId == 0) {
-        qDebug() << "ProjectQueueHandler: Invalid proto type: " << QString::fromStdString(requestMessage.class_name());
-    } else {
-        JobInterface *runnable = static_cast<JobInterface *>(QMetaType::create(classId));
-        runnable->setAMQPMessage(message);
-        this->mThreadPool->start(runnable);
-    }
-}
-
-void ProjectQueueHandler::handleAMQPError(QString error)
-{
-    qDebug() << "ProjectQueueHandler: AMQPError: " << error;
-}
-
-void ProjectQueueHandler::registerRequestTypes()
-{
-    CalculateProjectDeadlinesRequest projDeadlines = CalculateProjectDeadlinesRequest();
-    qRegisterMetaType<CalculateProjectDeadlines>(QString::fromStdString(projDeadlines.class_name()).toLatin1());
-}
-
-void ProjectQueueHandler::setThreadPool(QThreadPool *tp)
-{
-    this->mThreadPool = tp;
-}
-
-bool ProjectQueueHandler::isEnabled()
-{
-    return true;
+                    case 3?:
+SendTaskuploadNotifications::run(queue_request["task_id"]);
+                    break;
+                }
+                TaskDao::remove_queue_request(db, queue_request["id"]);
+            }
+        }
+        mutex.unlock();
+    } else qDebug() << "ProjectQueueHandler: Skipping consumeFromQueue() invocation";
 }

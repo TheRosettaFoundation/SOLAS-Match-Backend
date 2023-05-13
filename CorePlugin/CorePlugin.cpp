@@ -31,6 +31,13 @@ void CorePlugin::run()
     userListener->connect(thread, SIGNAL(started()), SLOT(run()));
     userListener->moveToThread(thread);
     thread->start();
+
+    ProjectQueueHandler *projectListener = new ProjectQueueHandler();
+    projectListener->setThreadPool(this->mThreadPool);
+    thread = new QThread();
+    projectListener->connect(thread, SIGNAL(started()), SLOT(run()));
+    projectListener->moveToThread(thread);
+    thread->start();
 }
 
 void CorePlugin::setThreadPool(QThreadPool *tp)

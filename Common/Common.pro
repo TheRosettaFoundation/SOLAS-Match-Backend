@@ -40,9 +40,6 @@ SOURCES += \
     DataAccessObjects/LanguageDao.cpp \
     protobufs/models/Locale.pb.cc \
     protobufs/models/BannedUser.pb.cc \
-    protobufs/models/WorkflowGraph.pb.cc \
-    protobufs/models/WorkflowNode.pb.cc \
-    GraphBuilder.cpp \
     DataAccessObjects/AdminDao.cpp \
     protobufs/models/UserTaskStreamNotification.pb.cc \
     protobufs/models/Badge.pb.cc \

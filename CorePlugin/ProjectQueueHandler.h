@@ -6,9 +6,6 @@
 #include <QThreadPool>
 
 #include "PluginHandler/WorkerInterface.h"
-#include "Common/MessagingClient.h"
-
-#include "AMQPcpp.h"
 
 class ProjectQueueHandler : public WorkerInterface
 {
@@ -22,14 +19,9 @@ public:
 
 public slots:
     void run();
-    void messageReceived(AMQPMessage *message);
-    void handleAMQPError(QString error);
 
 private:
-    void registerRequestTypes();
     QThreadPool *mThreadPool;
-    MessagingClient *client;
-
 };
 
 #endif // PROJECTQUEUEHANDLER_H
