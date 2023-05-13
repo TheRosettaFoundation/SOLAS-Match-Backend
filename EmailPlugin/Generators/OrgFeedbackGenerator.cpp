@@ -1,40 +1,27 @@
 #include "OrgFeedbackGenerator.h"
 #include <QDebug>
-#include "Common/protobufs/emails/OrgFeedback.pb.h"
-
-#include "Common/protobufs/emails/JSON.h"
 
 using namespace  SolasMatch::Common::Protobufs::Emails;
 
-OrgFeedbackGenerator::OrgFeedbackGenerator()
+static void OrgFeedbackGenerator::run(int claimant_id, int task_id, int user_id, QString feedback)
 {
-    // Default Constructor
-}
-
-void OrgFeedbackGenerator::run()
-{
-    qDebug() << "EmailGenerator: Generating org feedback email";
-
-    JSON email_message;
-    email_message.ParseFromString(this->protoBody);
+    qDebug() << "OrgFeedbackGenerator claimant_id:" << claimant_id << "task_id:" << task_id << "user_id (admin or owner):" << user_id;
 
     ConfigParser settings;
     QString error = "";
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
-    QSharedPointer<Email> email = QSharedPointer<Email>(new Email);
-    QSharedPointer<User> sender = UserDao::getUser(db, email_message.user_id());
-    QSharedPointer<User> claimant = UserDao::getUser(db, email_message.claimant_id());
-    QSharedPointer<Task> task = TaskDao::getTask(db, email_message.task_id());
+    QSharedPointer<User> sender = UserDao::getUser(db, user_id);
+    QSharedPointer<User> claimant = UserDao::getUser(db, claimant_id);
+    QSharedPointer<Task> task = TaskDao::getTask(db, task_id);
     QSharedPointer<Project> project = QSharedPointer<Project>();
     QSharedPointer<Organisation> org = QSharedPointer<Organisation>();
-    QString feedback = email_message.feedback().data();
 
     if (sender.isNull() || task.isNull() || claimant.isNull()) {
         error = "Failed to generate OrgFeedback email: Unable to find relevant ";
         error += "data in the Database. Searched for claimant ID ";
-        error += QString::number(email_message.claimant_id()) + ", Task ID ";
-        error += QString::number(email_message.task_id()) + " and user ID ";
-        error += QString::number(email_message.user_id());
+        error += QString::number(claimant_id) + ", Task ID ";
+        error += QString::number(task_id) + " and user ID (admin or owner) ";
+        error += QString::number(user_id);
     } else {
         project = ProjectDao::getProject(db, task->projectid());
 
@@ -78,14 +65,9 @@ void OrgFeedbackGenerator::run()
         QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/org-feedback.tpl";
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
-        email->setSender(settings.get("site.system_email_address"));;
-        email->addRecipient(QString::fromStdString(claimant->email()));
-        email->setSubject(settings.get("site.name") + ": Organisation Feedback");
-        email->setBody(QString::fromUtf8(email_body.c_str()));
-        UserDao::log_email_sent(db, email_message.claimant_id(), email_message.task_id(), task->projectid(), project->organisationid(), 0, email_message.user_id(), 0, "admin_feedback_to_volunteer");
+        UserDao::queue_email(db, claimant_id, QString::fromStdString(claimant->email()), settings.get("site.name") + ": Organisation Feedback", QString::fromUtf8(email_body.c_str()));
+        UserDao::log_email_sent(db, claimant_id, task_id, task->projectid(), project->organisationid(), 0, user_id, 0, "admin_feedback_to_volunteer");
     } else {
-        email = this->generateErrorEmail(error);
+        this->generateErrorEmail(error);
     }
-
-    this->emailQueue->insert(email, currentMessage);
 }

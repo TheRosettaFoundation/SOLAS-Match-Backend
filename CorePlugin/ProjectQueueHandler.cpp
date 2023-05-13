@@ -103,7 +103,7 @@ void ProjectQueueHandler::consumeFromQueue()
                         TaskArchivedEmailGenerator::run(queue_request["user_id"], queue_request["task_id"]);
                         break;
                     case OrgFeedback:
-                        OrgFeedbackGenerator::run(queue_request["task_id"], queue_request["feedback"]);
+                        OrgFeedbackGenerator::run(queue_request["claimant_id"], queue_request["task_id"], queue_request["user_id"], queue_request["feedback"]);  // user_id is admin or owner
                         break;
                     case UserTaskClaim:
                         UserTaskClaimEmailGenerator::run(queue_request["user_id"], queue_request["task_id"]);
@@ -115,7 +115,7 @@ void ProjectQueueHandler::consumeFromQueue()
                         SendTaskuploadNotifications::run(queue_request["task_id"]);
                         break;
                     case sendTaskRevokedNotifications:
-                        TaskRevokedNotificationHandler::run(queue_request["claimant_id"], queue_request["task_id"], queue_request["feedback"]);
+                        TaskRevokedNotificationHandler::run(queue_request["claimant_id"], queue_request["task_id"]);
                         break;
                     case UserFeedback:
                         UserFeedbackGenerator::run(queue_request["claimant_id"], queue_request["task_id"], queue_request["feedback"]);
@@ -123,12 +123,6 @@ void ProjectQueueHandler::consumeFromQueue()
                     case UserTaskCancelled:
                         UserTaskCancelledEmailGenerator::run(queue_request["user_id"], queue_request["task_id"]);
                         break;
-
-
-        UserDao::queue_email(db, user_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Your email verification", QString::fromUtf8(email_body.c_str()));
-
-
-
                 }
                 TaskDao::mark_queue_request_sent(db, queue_request["id"]);
             }
