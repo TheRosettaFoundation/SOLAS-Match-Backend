@@ -1,37 +1,26 @@
 #include "UserTaskCancelledEmailGenerator.h"
 
-#include "Common/protobufs/emails/JSON.h"
-
 using namespace  SolasMatch::Common::Protobufs::Emails;
 
-UserTaskCancelledEmailGenerator::UserTaskCancelledEmailGenerator()
+static void UserTaskCancelledEmailGenerator::run(int user_id, int task_id)
 {
-    //Default Constructor
-}
-
-void UserTaskCancelledEmailGenerator::run()
-{
-    qDebug() << "EmailGenerator - Generating UserTaskCancelled";
-
-    JSON email_message;
-    email_message.ParseFromString(this->protoBody);
+    qDebug() << "UserTaskCancelledEmailGenerator user_id:" << user_id << "task_id:" << task_id;
 
     ConfigParser settings;
     QString error = "";
-    QSharedPointer<Email> email = QSharedPointer<Email>(new Email());
     QSharedPointer<User> user = QSharedPointer<User>();
     QSharedPointer<Task> task = QSharedPointer<Task>();
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
     QList<QMap<QString, QVariant>> task_type_details = TaskDao::get_task_type_details(db);
 
-    user = UserDao::getUser(db, email_message.user_id());
-    task = TaskDao::getTask(db, email_message.task_id());
+    user = UserDao::getUser(db, user_id);
+    task = TaskDao::getTask(db, task_id);
 
     if(user.isNull() || task.isNull()) {
         error = "Failed to generate UserTaskCancelled email: Unable to find relevant ";
         error += "information in the database. Searched for user ID ";
-        error += QString::number(email_message.user_id()) + " and task ID ";
-        error += QString::number(email_message.task_id()) + ".";
+        error += QString::number(user_id) + " and task ID ";
+        error += QString::number(task_id) + ".";
     }
 
     if(error.compare("") == 0) {
@@ -76,14 +65,9 @@ void UserTaskCancelledEmailGenerator::run()
         QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/user-task-cancelled.tpl";
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
-        email->setSender(settings.get("site.system_email_address"));;
-        email->addRecipient(QString::fromStdString(user->email()));
-        email->setSubject(settings.get("site.name") + ": Your task was cancelled - we are sorry for the inconvenience!");
-        email->setBody(QString::fromUtf8(email_body.c_str()));
-        UserDao::log_email_sent(db, email_message.user_id(), email_message.task_id(), 0, 0, 0, 0, 0, "task_cancelled_to_volunteer");
+        UserDao::queue_email(db, user_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Your task was cancelled - we are sorry for the inconvenience!", QString::fromUtf8(email_body.c_str()));
+        UserDao::log_email_sent(db, user_id, task_id, 0, 0, 0, 0, 0, "task_cancelled_to_volunteer");
     } else {
-        email = this->generateErrorEmail(error);
+        this->generateErrorEmail(error);
     }
-
-    this->emailQueue->insert(email, currentMessage);
 }

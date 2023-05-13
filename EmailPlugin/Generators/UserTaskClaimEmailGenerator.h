@@ -2,14 +2,11 @@
 #define USERTASKCLAIMEMAILGENERATOR_H
 
 #include "../IEmailGenerator.h"
-#include "Common/protobufs/emails/UserTaskClaim.pb.h"
 
 class UserTaskClaimEmailGenerator : public IEmailGenerator
 {
 public:
-    UserTaskClaimEmailGenerator();
-    void run();
-
+    static void run(int user_id, int task_id);
 };
 
 #endif // USERTASKCLAIMEMAILGENERATOR_H

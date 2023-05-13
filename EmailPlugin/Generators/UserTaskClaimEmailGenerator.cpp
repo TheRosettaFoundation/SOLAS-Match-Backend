@@ -1,37 +1,26 @@
 #include "UserTaskClaimEmailGenerator.h"
 
-#include "Common/protobufs/emails/JSON.h"
-
 using namespace  SolasMatch::Common::Protobufs::Emails;
 
-UserTaskClaimEmailGenerator::UserTaskClaimEmailGenerator()
+static void UserTaskClaimEmailGenerator::run(int user_id, int task_id)
 {
-    //Default Constructor
-}
-
-void UserTaskClaimEmailGenerator::run()
-{
-    qDebug() << "EmailGenerator - Generating UserTaskClaim";
-
-    JSON email_message;
-    email_message.ParseFromString(this->protoBody);
+    qDebug() << "UserTaskClaimEmailGenerator user_id:" << user_id << "task_id:" << task_id;
 
     ConfigParser settings;
     QString error = "";
-    QSharedPointer<Email> email = QSharedPointer<Email>(new Email());
     QSharedPointer<User> user = QSharedPointer<User>();
     QSharedPointer<Task> task = QSharedPointer<Task>();
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
     QList<QMap<QString, QVariant>> task_type_details = TaskDao::get_task_type_details(db);
 
-    user = UserDao::getUser(db, email_message.user_id());
-    task = TaskDao::getTask(db, email_message.task_id());
+    user = UserDao::getUser(db, user_id);
+    task = TaskDao::getTask(db, task_id);
 
     if(user.isNull() || task.isNull()) {
         error = "Failed to generate UserTaskClaim email: Unable to find relevant ";
         error += "data in the Database. Searched for User ID ";
-        error += QString::number(email_message.user_id()) + " and Task ID ";
-        error += QString::number(email_message.task_id()) + ".";
+        error += QString::number(user_id) + " and Task ID ";
+        error += QString::number(task_id) + ".";
     }
 
     if(error.compare("") == 0) {
@@ -115,19 +104,13 @@ void UserTaskClaimEmailGenerator::run()
         }
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
-        email->setSender(settings.get("site.system_email_address"));;
-        email->addRecipient(QString::fromStdString(user->email()));
-
         if (task->title().length() == 8 && task->title().find("Test") == 0) { // Verification Task
-            email->setSubject(settings.get("site.name") + ": Test to become a Verified Translator");
+            UserDao::queue_email(db, user_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Test to become a Verified Translator", QString::fromUtf8(email_body.c_str()));
         } else {
-        email->setSubject(settings.get("site.name") + ": Task Claim Notification");
+            UserDao::queue_email(db, user_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Task Claim Notification", QString::fromUtf8(email_body.c_str()));
         }
-        email->setBody(QString::fromUtf8(email_body.c_str()));
-        UserDao::log_email_sent(db, email_message.user_id(), email_message.task_id(), 0, 0, 0, 0, 0, "task_claimed_to_volunteer");
+        UserDao::log_email_sent(db, user_id, task_id, 0, 0, 0, 0, 0, "task_claimed_to_volunteer");
     } else {
-        email = this->generateErrorEmail(error);
+        this->generateErrorEmail(error);
     }
-
-    this->emailQueue->insert(email, currentMessage);
 }

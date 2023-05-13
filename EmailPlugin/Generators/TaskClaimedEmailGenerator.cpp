@@ -1,40 +1,29 @@
 #include "TaskClaimedEmailGenerator.h"
 
-#include "Common/protobufs/emails/JSON.h"
-
 using namespace  SolasMatch::Common::Protobufs::Emails;
 
-TaskClaimedEmailGenerator::TaskClaimedEmailGenerator()
+static void TaskClaimedEmailGenerator::run(int user_id, int task_id, int claimant_id)
 {
-    //Default Constructor
-}
-
-void TaskClaimedEmailGenerator::run()
-{
-    qDebug() << "EmailGenerator - Generating TaskClaimed";
-
-    JSON email_message;
-    email_message.ParseFromString(this->protoBody);
+    qDebug() << "TaskClaimedEmailGenerator user_id:" << user_id << "task_id:" << task_id << "claimant_id:" << claimant_id;
 
     ConfigParser settings;
     QString error = "";
-    QSharedPointer<Email> email = QSharedPointer<Email>(new Email());
     QSharedPointer<User> user = QSharedPointer<User>();
     QSharedPointer<User> translator = QSharedPointer<User>();
     QSharedPointer<Task> task = QSharedPointer<Task>();
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
     QList<QMap<QString, QVariant>> task_type_details = TaskDao::get_task_type_details(db);
 
-    user = UserDao::getUser(db, email_message.user_id());
-    translator = UserDao::getUser(db, email_message.translator_id());
-    task = TaskDao::getTask(db, email_message.task_id());
+    user = UserDao::getUser(db, user_id);
+    translator = UserDao::getUser(db, claimant_id);
+    task = TaskDao::getTask(db, task_id);
 
     if(user.isNull() || translator.isNull() || task.isNull()) {
         error = "Failed to generate task claimed email: Unable to find relevant ";
         error += "information in the database. Searched for user ID ";
-        error += QString::number(email_message.user_id()) + ", translator ID ";
-        error += QString::number(email_message.translator_id()) + " and task ID ";
-        error += QString::number(email_message.task_id()) + ".";
+        error += QString::number(user_id) + ", translator ID ";
+        error += QString::number(claimant_id) + " and task ID ";
+        error += QString::number(task_id) + ".";
     }
 
     if(error.compare("") == 0) {
@@ -79,14 +68,9 @@ void TaskClaimedEmailGenerator::run()
         QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/task-claimed.tpl";
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
-        email->setSender(settings.get("site.system_email_address"));;
-        email->addRecipient(QString::fromStdString(user->email()));
-        email->setSubject(settings.get("site.name") + ": Task Claim Notification");
-        email->setBody(QString::fromUtf8(email_body.c_str()));
-        UserDao::log_email_sent(db, email_message.user_id(), email_message.task_id(), 0, 0, email_message.translator_id(), 0, 0, "task_claimed_to_subscribed_admin");
+        UserDao::queue_email(db, user_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Task Claim Notification", QString::fromUtf8(email_body.c_str()));
+        UserDao::log_email_sent(db, user_id, task_id, 0, 0, claimant_id, 0, 0, "task_claimed_to_subscribed_admin");
     } else {
-        email = this->generateErrorEmail(error);
+        this->generateErrorEmail(error);
     }
-
-    this->emailQueue->insert(email, currentMessage);
 }

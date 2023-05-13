@@ -2,14 +2,11 @@
 #define TASKARCHIVEDEMAILGENERATOR_H
 
 #include "../IEmailGenerator.h"
-#include "Common/protobufs/emails/TaskArchived.pb.h"
 
 class TaskArchivedEmailGenerator : public IEmailGenerator
 {
 public:
-    TaskArchivedEmailGenerator();
-    void run();
-
+    static void run(int user_id, int task_id);
 };
 
 #endif // TASKARCHIVEDEMAILGENERATOR_H

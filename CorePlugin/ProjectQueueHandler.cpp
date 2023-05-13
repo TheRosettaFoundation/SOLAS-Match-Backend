@@ -109,7 +109,7 @@ void ProjectQueueHandler::consumeFromQueue()
                         UserTaskClaimEmailGenerator::run(queue_request["user_id"], queue_request["task_id"]);
                         break;
                     case TaskClaimed:
-                        TaskClaimedEmailGenerator::run(queue_request["user_id"], queue_request["task_id"]);
+                        TaskClaimedEmailGenerator::run(queue_request["user_id"], queue_request["task_id"], queue_request["claimant_id"]);
                         break;
                     case SendTaskuploadNotifications:
                         SendTaskuploadNotifications::run(queue_request["task_id"]);

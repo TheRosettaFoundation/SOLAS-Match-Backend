@@ -2,14 +2,11 @@
 #define USERTASKCANCELLEDEMAILGENERATOR_H
 
 #include "../IEmailGenerator.h"
-#include "Common/protobufs/emails/UserTaskCancelled.pb.h"
 
 class UserTaskCancelledEmailGenerator : public IEmailGenerator
 {
 public:
-    UserTaskCancelledEmailGenerator();
-    void run();
-
+    static void run(int user_id, int task_id);
 };
 
 #endif // USERTASKCANCELLEDEMAILGENERATOR_H

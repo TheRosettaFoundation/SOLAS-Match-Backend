@@ -1,32 +1,21 @@
 #include "TaskArchivedEmailGenerator.h"
 
-#include "Common/protobufs/emails/JSON.h"
-
 using namespace  SolasMatch::Common::Protobufs::Emails;
 
-TaskArchivedEmailGenerator::TaskArchivedEmailGenerator()
+static void TaskArchivedEmailGenerator::run(int user_id, int task_id)
 {
-    //Default Constructor
-}
-
-void TaskArchivedEmailGenerator::run()
-{
-    qDebug() << "EmailGenerator - Generating TaskArchived";
-
-    JSON email_message;
-    email_message.ParseFromString(this->protoBody);
+    qDebug() << "TaskArchivedEmailGenerator user_id:" << user_id << "task_id:" << task_id;
 
     ConfigParser settings;
     QString error = "";
-    QSharedPointer<Email> email = QSharedPointer<Email>(new Email());
     QSharedPointer<User> user = QSharedPointer<User>();
     QSharedPointer<Organisation> org = QSharedPointer<Organisation>();
     QSharedPointer<ArchivedTask> task = QSharedPointer<ArchivedTask>();
     QSharedPointer<Project> project = QSharedPointer<Project>();
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
 
-    user = UserDao::getUser(db, email_message.user_id());
-    task = TaskDao::getArchivedTask(db, email_message.task_id());
+    user = UserDao::getUser(db, user_id);
+    task = TaskDao::getArchivedTask(db, task_id);
 
     if(!user.isNull() && !task.isNull()) {
         project = ProjectDao::getProject(db, task->projectid());
@@ -44,8 +33,8 @@ void TaskArchivedEmailGenerator::run()
         }
     } else {
         error = "Failed to Generate task archived email. Unable to find relevent information ";
-        error += "in the Database. Searched for user ID " + QString::number(email_message.user_id());
-        error += ", task ID " + QString::number(email_message.task_id()) + ".";
+        error += "in the Database. Searched for user ID " + QString::number(user_id);
+        error += ", task ID " + QString::number(task_id) + ".";
     }
 
     if(error.compare("") == 0) {
@@ -74,14 +63,9 @@ void TaskArchivedEmailGenerator::run()
         QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/task-archived.tpl";
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
-        email->setSender(settings.get("site.system_email_address"));
-        email->addRecipient(QString::fromStdString(user->email()));
-        email->setSubject(settings.get("site.name") + ": Task Updated");
-        email->setBody(QString::fromUtf8(email_body.c_str()));
-        UserDao::log_email_sent(db, email_message.user_id(), email_message.task_id(), task->projectid(), project->organisationid(), 0, 0, 0, "task_archived_to_subscribed_admin");
+        UserDao::queue_email(db, user_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Task Updated", QString::fromUtf8(email_body.c_str()));
+        UserDao::log_email_sent(db, user_id, task_id, task->projectid(), project->organisationid(), 0, 0, 0, "task_archived_to_subscribed_admin");
     } else {
-        email = this->generateErrorEmail(error);
+        this->generateErrorEmail(error);
     }
-
-    this->emailQueue->insert(email, currentMessage);
 }
