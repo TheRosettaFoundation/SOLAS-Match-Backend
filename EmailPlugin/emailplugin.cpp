@@ -7,12 +7,7 @@
 #include "qxtsmtp.h"
 
 #include "Smtp.h"
-#include "IEmailGenerator.h"
 #include "Common/ConfigParser.h"
-
-#include "Common/MessagingClient.h"
-
-#include "Common/protobufs/emails/JSON.h"
 
 using namespace SolasMatch::Common::Protobufs::Emails;
 
@@ -28,140 +23,30 @@ void EmailPlugin::run()
 {
     qDebug() << "EmailPlugin::Starting new Thread " << this->thread()->currentThreadId();
     ConfigParser settings;
-    QString exchange = settings.get("messaging.exchange");
-    QString topic = "email.#";
-    QString queue = "email_queue";
-    MessagingClient *client;
-
-    this->registerEmailTypes();
 
     smtp = new Smtp();
 
-    client = new MessagingClient();
-    client->init();
-    connect(client, SIGNAL(AMQPMessageReceived(AMQPMessage*)), this, SLOT(messageReveived(AMQPMessage*)));
-
-    qDebug() << "EmailPlugin::Now consuming from " << exchange << " exchange";
-    client->declareQueue(exchange, topic, queue);
-
     QTimer *message_queue_read_timer = new QTimer();
-    connect(message_queue_read_timer, SIGNAL(timeout()), client, SLOT(consumeFromQueue()));
+    connect(message_queue_read_timer, SIGNAL(timeout()), this, SLOT(consumeFromQueue()));
     message_queue_read_timer->start(settings.get("messaging.poll_rate").toInt());
 }
 
-void EmailPlugin::messageReveived(AMQPMessage *message)
+void EmailPlugin::consumeFromQueue()
 {
-    //qDebug() << "EmailPlugin::Received Message";
+    static QMutex mutex;
+    if (mutex.tryLock()) {
+        if (!QFileInfo::exists("/repo/SOLAS-Match-Backend/STOP_consumeFromQueue")) {
+            QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
+            QMap<QString, QVariant> queue_request = TaskDao::get_queue_request(db, PROJECTQUEUE);
+            if (!queue_request.isNull()) {
 
-    AMQPQueue *messageQueue = message->getQueue();
-    if(messageQueue != NULL)
-    {
-        messageQueue->Ack(message->getDeliveryTag());
-    }
 
-    uint32_t length = 0;
-    char *body = message->getMessage(&length);
 
-  if (JSON::isJSON(std::string(body, length))) {
-    JSON email_message;
-    email_message.ParseFromString(std::string(body, length));
-
-    QString type = "EmailGenerator_" + QString::number(email_message.email_type());
-    int classId = QMetaType::type(type.toLatin1());
-    if (classId == 0) {
-        qDebug() << "EmailGenerator JSON: Invalid proto type: " << QString::number(email_message.email_type());
-    } else {
-        IEmailGenerator *emailGen = static_cast<IEmailGenerator *>(QMetaType::create(classId));
-        emailGen->setEmailQueue(smtp->getEmailQueue());
-        emailGen->setProtoBody(std::string(body, length));
-        emailGen->setAMQPMessage(message);
-        this->mThreadPool->start(emailGen);
-    }
-  } else {
-    EmailMessage email_message;
-    email_message.ParseFromString(std::string(body, length));
-
-    QString type = "EmailGenerator_" + QString::number(email_message.email_type());
-    int classId = QMetaType::type(type.toLatin1());
-    if (classId == 0) {
-        qDebug() << "EmailGenerator: Invalid proto type: " << QString::number(email_message.email_type());
-    } else {
-        IEmailGenerator *emailGen = static_cast<IEmailGenerator *>(QMetaType::create(classId));
-        emailGen->setEmailQueue(smtp->getEmailQueue());
-        emailGen->setProtoBody(std::string(body, length));
-        emailGen->setAMQPMessage(message);
-        this->mThreadPool->start(emailGen);
-    }
-  }
-}
-
-void EmailPlugin::registerEmailTypes()
-{
-    QString name = "";
-    name = "EmailGenerator_" + QString::number(EmailMessage::TaskScoreEmail);
-    qRegisterMetaType<TaskScoreEmailGenerator>(name.toLatin1());
-    name = "EmailGenerator_" + QString::number(EmailMessage::OrgMembershipAccepted);
-    qRegisterMetaType<OrgMembershipAcceptedGenerator>(name.toLatin1());
-    name = "EmailGenerator_" + QString::number(EmailMessage::OrgMembershipRefused);
-    qRegisterMetaType<OrgMembershipRefusedEmailGenerator>(name.toLatin1());
-    name = "EmailGenerator_" + QString::number(EmailMessage::PasswordResetEmail);
-    qRegisterMetaType<PasswordResetEmailGenerator>(name.toLatin1());
-    name = "EmailGenerator_" + QString::number(EmailMessage::TaskArchived);
-    qRegisterMetaType<TaskArchivedEmailGenerator>(name.toLatin1());
-    name = "EmailGenerator_" + QString::number(EmailMessage::TrackedTaskUploaded);
-    qRegisterMetaType<TrackedTaskUploadedEmailGenerator>(name.toLatin1());
-    name = "EmailGenerator_" + QString::number(EmailMessage::TaskClaimed);
-    qRegisterMetaType<TaskClaimedEmailGenerator>(name.toLatin1());
-    name = "EmailGenerator_" + QString::number(EmailMessage::UserTaskCancelled);
-    qRegisterMetaType<UserTaskCancelledEmailGenerator>(name.toLatin1());
-    name = "EmailGenerator_" + QString::number(EmailMessage::UserTaskClaim);
-    qRegisterMetaType<UserTaskClaimEmailGenerator>(name.toLatin1());
-    name = "EmailGenerator_" + QString::number(EmailMessage::OrgTaskDeadlinePassed);
-    qRegisterMetaType<OrgDeadlinePassedMailGenerator>(name.toLatin1());
-    name = "EmailGenerator_" + QString::number(EmailMessage::UserClaimedTaskDeadlinePassed);
-    qRegisterMetaType<UserTaskDeadlineEmailGenerator>(name.toLatin1());
-    name = "EmailGenerator_" + QString::number(EmailMessage::UserClaimedTaskEarlyWarningDeadlinePassed);
-    qRegisterMetaType<UserClaimedTaskEarlyWarningDeadlinePassedEmailGenerator>(name.toLatin1());
-    name = "EmailGenerator_" + QString::number(EmailMessage::UserClaimedTaskLateWarningDeadlinePassed);
-    qRegisterMetaType<UserClaimedTaskLateWarningDeadlinePassedEmailGenerator>(name.toLatin1());
-    name = "EmailGenerator_" + QString::number(EmailMessage::UserRecordWarningDeadlinePassed);
-    qRegisterMetaType<UserRecordWarningDeadlinePassedEmailGenerator>(name.toLatin1());
-    name = "EmailGenerator_" + QString::number(EmailMessage::UserTaskStreamEmail);
-    qRegisterMetaType<UserTaskStreamEmailGenerator>(name.toLatin1());
-    name = "EmailGenerator_" + QString::number(EmailMessage::EmailVerification);
-    qRegisterMetaType<EmailVerificationGenerator>(name.toLatin1());
-    name = "EmailGenerator_" + QString::number(EmailMessage::BannedLogin);
-    qRegisterMetaType<BannedLoginGenerator>(name.toLatin1());
-    name = "EmailGenerator_" + QString::number(EmailMessage::ClaimedTaskSourceUpdated);
-    qRegisterMetaType<ClaimedTaskSourceUpdatedGenerator>(name.toLatin1());
-    name = "EmailGenerator_" + QString::number(EmailMessage::ClaimedTaskUploaded);
-    qRegisterMetaType<ClaimedTaskUploadedGenerator>(name.toLatin1());
-    name = "EmailGenerator_" + QString::number(EmailMessage::OrgFeedback);
-    qRegisterMetaType<OrgFeedbackGenerator>(name.toLatin1());
-    name = "EmailGenerator_" + QString::number(EmailMessage::UserFeedback);
-    qRegisterMetaType<UserFeedbackGenerator>(name.toLatin1());
-    name = "EmailGenerator_" + QString::number(EmailMessage::OrgCreatedSiteAdmin);
-    qRegisterMetaType<OrgCreate_SiteAdmin>(name.toLatin1());
-    name = "EmailGenerator_" + QString::number(EmailMessage::OrgCreatedOrgAdmin);
-    qRegisterMetaType<OrgCreated_OrgEmail>(name.toLatin1());
-    name = "EmailGenerator_" + QString::number(EmailMessage::UserReferenceEmail);
-    qRegisterMetaType<UserReferenceEmailGenerator>(name.toLatin1());
-    name = "EmailGenerator_" + QString::number(EmailMessage::UserBadgeAwardedEmail);
-    qRegisterMetaType<UserBadgeAwardedGenerator>(name.toLatin1());
-    name = "EmailGenerator_" + QString::number(EmailMessage::UserTaskRevokedEmail);
-    qRegisterMetaType<UserTaskRevokedGenerator>(name.toLatin1());
-    name = "EmailGenerator_" + QString::number(EmailMessage::OrgTaskRevokedEmail);
-    qRegisterMetaType<OrgTaskRevokedGenerator>(name.toLatin1());
-    name = "EmailGenerator_" + QString::number(EmailMessage::ProjectCreated);
-    qRegisterMetaType<ProjectCreatedGenerator>(name.toLatin1());
-    name = "EmailGenerator_" + QString::number(EmailMessage::ProjectImageUploadedEmail);
-    qRegisterMetaType<NewImageUploadedEmailGenerator>(name.toLatin1());
-    name = "EmailGenerator_" + QString::number(EmailMessage::ProjectImageRemovedEmail);
-    qRegisterMetaType<ProjectImageRemovedEmailGenerator>(name.toLatin1());
-    name = "EmailGenerator_" + QString::number(EmailMessage::ProjectImageApprovedEmail);
-    qRegisterMetaType<ProjectImageApprovedEmailGenerator>(name.toLatin1());
-    name = "EmailGenerator_" + QString::number(EmailMessage::ProjectImageDisapprovedEmail);
-    qRegisterMetaType<ProjectImageDisapprovedEmailGenerator>(name.toLatin1());
+                TaskDao::mark_queue_request_sent(db, queue_request["id"]);
+            }
+        }
+        mutex.unlock();
+    } else qDebug() << "EmailPlugin: Skipping consumeFromQueue() invocation";
 }
 
 void EmailPlugin::setThreadPool(QThreadPool *tp)
