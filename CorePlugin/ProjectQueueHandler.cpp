@@ -82,57 +82,29 @@ void ProjectQueueHandler::consumeFromQueue()
                         OrgCreatedNotifications::run(queue_request["org_id"]);
                         break;
                     case OrgMembershipAccepted:
-OrgMembershipAcceptedGenerator::run(queue_request["user_id"], queue_request["task_id"]);
-??????????????
-    public static function notifyUserOrgMembershipRequest($userId, $orgId, $accepted)
-                $message_type->setUserId($userId);
-                $message_type->setOrgId($orgId);
-                $message = $messagingClient->createMessageFromProto($message_type);
-                $messagingClient->sendTopicMessage(
-                $message_type->setUserId($userId);
-                $message_type->setOrgId($orgId);
-                $message = $messagingClient->createMessageFromProto($message_type);
-                $messagingClient->sendTopicMessage(
-
-
-
+                        OrgMembershipAcceptedGenerator::run(queue_request["user_id"], queue_request["org_id"]);
                         break;
                     case OrgMembershipRefused:
-OrgMembershipRefusedEmailGenerator
+                        OrgMembershipRefusedEmailGenerator::run(queue_request["user_id"], queue_request["org_id"]);
                         break;
                     case ProjectImageUploadedEmail:
                         NewImageUploadedEmailGenerator::run(queue_request["project_id"]);
                         break;
                     case ProjectImageApprovedEmail:
-                        ProjectImageApprovedEmailGenerator::run(queue_request["project_id"], queue_request["user_id"]);
+                        ProjectImageApprovedEmailGenerator::run(queue_request["user_id"], queue_request["project_id"]);
                         break;
                     case ProjectImageDisapprovedEmail:
-                        ProjectImageDisapprovedEmailGenerator::run(queue_request["project_id"], queue_request["user_id"]);
+                        ProjectImageDisapprovedEmailGenerator::run(queue_request["user_id"], queue_request["project_id"]);
                         break;
                     case ProjectImageRemovedEmail:
                         ProjectImageRemovedEmailGenerator::run(queue_request["project_id"]);
                         break;
                     case TaskArchived:
-                        TaskArchivedEmailGenerator::run(queue_request["task_id"], queue_request["user_id"]);
-    public static function sendTaskArchivedNotifications($taskId, $subscribedUsers)
-                $message_type->setTaskId($taskId);
-                    $message_type->setUserId($user->getId());
-                    $message = $messagingClient->createMessageFromProto($message_type);
-                    $messagingClient->sendTopicMessage(
-
-
+                        TaskArchivedEmailGenerator::run(queue_request["user_id"], queue_request["task_id"]);
                         break;
-
                     case OrgFeedback:
-OrgFeedbackGenerator::run(queue_request["?????????"], queue_request["feedback"]);
-    public static function sendOrgFeedback($feedback)
-            $message = $messagingClient->createMessageFromProto($feedback);
-            $messagingClient->sendTopicMessage(
-
-
+                        OrgFeedbackGenerator::run(queue_request["task_id"], queue_request["feedback"]);
                         break;
-
-
                     case UserTaskClaim:
                         UserTaskClaimEmailGenerator::run(queue_request["user_id"], queue_request["task_id"]);
                         break;
@@ -144,14 +116,10 @@ OrgFeedbackGenerator::run(queue_request["?????????"], queue_request["feedback"])
                         SendTaskuploadNotifications::run(queue_request["task_id"]);
                         break;
                     case sendTaskRevokedNotifications:
-                        TaskRevokedNotificationHandler::run(queue_request["task_id"], queue_request["claimant_id"]);
+                        TaskRevokedNotificationHandler::run(queue_request["claimant_id"], queue_request["task_id"], queue_request["feedback"]);
                         break;
                     case UserFeedback:
-UserFeedbackGenerator::run(queue_request["?????????"], queue_request["feedback"]);
-    public static function sendUserFeedback($feedback)
-            $message = $messagingClient->createMessageFromProto($feedback);
-            $messagingClient->sendTopicMessage(
-
+                        UserFeedbackGenerator::run(queue_request["claimant_id"], queue_request["task_id"], queue_request["feedback"]);
                         break;
                     case UserTaskCancelled:
                         UserTaskCancelledEmailGenerator::run(queue_request["user_id"], queue_request["task_id"]);
