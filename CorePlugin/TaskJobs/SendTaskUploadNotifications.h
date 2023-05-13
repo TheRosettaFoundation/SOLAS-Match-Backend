@@ -9,7 +9,7 @@
 class SendTaskUploadNotifications
 {
 public:
-    static void run();
+    static void run(int task_id);
 private:
 };
 
