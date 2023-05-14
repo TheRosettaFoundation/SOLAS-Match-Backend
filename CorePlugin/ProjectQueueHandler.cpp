@@ -78,7 +78,7 @@ void ProjectQueueHandler::consumeFromQueue()
                     case UserReferenceEmail:
                         UserReferenceEmailGenerator::run(queue_request["user_id"]);
                         break;
-                    case sendOrgCreatedNotifications:
+                    case OrgCreatedNotificationRequest:
                         OrgCreatedNotifications::run(queue_request["org_id"]);
                         break;
                     case OrgMembershipAccepted:
@@ -111,10 +111,10 @@ void ProjectQueueHandler::consumeFromQueue()
                     case TaskClaimed:
                         TaskClaimedEmailGenerator::run(queue_request["user_id"], queue_request["task_id"], queue_request["claimant_id"]);
                         break;
-                    case SendTaskuploadNotifications:
+                    case TaskUploadNotificationRequest:
                         SendTaskuploadNotifications::run(queue_request["task_id"]);
                         break;
-                    case sendTaskRevokedNotifications:
+                    case TaskRevokedNotification:
                         TaskRevokedNotificationHandler::run(queue_request["claimant_id"], queue_request["task_id"]);
                         break;
                     case UserFeedback:
