@@ -80,40 +80,34 @@ void Smtp::checkEmailQueue()
     static QMutex mutex;
     if (mutex.tryLock()) {
         QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
-            QMap<QString, QVariant> email_request = TaskDao::get_email_request(db);
-            if (!email_request.isNull()) {
+        QMap<QString, QVariant> email_request = TaskDao::get_email_request(db);
+        if (!email_request.isNull()) {
+            if (!busy) {
+                QString email_for_hash = "";
+                email_for_hash += email_request["recipient"];
+                email_for_hash += email_request["subject"];
+                email_for_hash += email->email_request["subject"];
+                email_for_hash += email_request["body"];
+                QByteArray hash = QCryptographicHash::hash(email_for_hash.toUtf8(), QCryptographicHash::Md5);
+                if (email->getSubject().indexOf("Password Reset") != -1 || mail_text_hashes->indexOf(hash) == -1) { // Only send if identical mail not already sent
+                    mail_text_hashes->append(hash);
+                    qDebug() << "===============================";
+                    qDebug() << "Recipient: " << email_request["recipient"]);
+                    qDebug() << "Subject: " << email_request["subject"]);
+                    qDebug() << email_request["body"];
+                    qDebug() << "================================";
 
-    if (!busy) {
-
-
-          QString email_for_hash = "";
-          email_for_hash += email_request["recipient"];
-          email_for_hash += email_request["subject"];
-          email_for_hash += email->email_request["subject"];
-          email_for_hash += email_request["body"];
-          QByteArray hash = QCryptographicHash::hash(email_for_hash.toUtf8(), QCryptographicHash::Md5);
-
-          if (email->getSubject().indexOf("Password Reset") != -1 || mail_text_hashes->indexOf(hash) == -1) { // Only send if identical mail not already sent
-            mail_text_hashes->append(hash);
-
-            qDebug() << "===============================";
-            qDebug() << "Recipient: " << email_request["recipient"]);
-            qDebug() << "Subject: " << email_request["subject"]);
-            qDebug() << email_request["body"];
-            qDebug() << "================================";
-
-            this->send(email_request);
-          }
-          else qDebug() << "SMTP::checkEmailQueue Skipped: " << email_request["subject"] << email_request["recipient"];
-
-    }
-
-
+                    this->send(email_request);
+                }
+                else qDebug() << "SMTP::checkEmailQueue Skipped: " << email_request["subject"] << email_request["recipient"];
 
                 TaskDao::mark_email_request_sent(db, email_request["id"]);
+            } else {
+                if ((count_checkEmailQueue++)%3000 == 0) { // 5 minutes (100ms 3000 times)
+                    qDebug() << "SMTP::checkEmailQueue busy";
+                }
             }
-
-
+        }
         mutex.unlock();
     } else qDebug() << "checkEmailQueue: Skipping invocation";
 }
