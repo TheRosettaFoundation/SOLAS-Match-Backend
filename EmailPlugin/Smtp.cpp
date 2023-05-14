@@ -146,7 +146,14 @@ qDebug() << "SMTP::checkEmailQueue emailQueue->clear() queue_count_new:" << queu
 
           if (email->getSubject().indexOf("Password Reset") != -1 || mail_text_hashes->indexOf(hash) == -1) { // Only send if identical mail not already sent
             mail_text_hashes->append(hash);
-            email->printEmail();
+[[
+    qDebug() << "===============================";
+    qDebug() << "Recipients: " << this->recipient;
+    qDebug() << "Sender: " << this->sender;
+    qDebug() << "Subject: " << this->subject;
+    qDebug() << this->body;
+    qDebug() << "================================";
+]]
             this->send(email);
           }
           else qDebug() << "SMTP::checkEmailQueue Skipped: " << email->getSubject() << recipients;

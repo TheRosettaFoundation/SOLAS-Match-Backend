@@ -7,25 +7,8 @@
 class Email
 {
 public:
-    Email(QString to = "", QString from = "", QString subject = "", QString body = "");
-    QStringList getRecipients();
-    QString getSender();
-    QString getSubject();
-    QString getBody();
-    void addRecipient(QString to);
-    void setSender(QString from);
-    void setSubject(QString sub);
-    void setBody(QString body);
     static std::string htmlspecialchars(const std::string& in);
     static std::string uiCleanseHTMLNewlineAndTabs(const std::string& in);
-    void printEmail();
-
-private:
-    QStringList recipient;
-    QString sender;
-    QString subject;
-    QString body;
-
 };
 
 #endif // EMAIL_H
