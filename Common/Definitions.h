@@ -57,4 +57,42 @@ struct CidMatch {
 
 };
 
+// Queues for insert_queue_request...
+#define TASKQUEUE    1
+#define USERQUEUE    2
+#define PROJECTQUEUE 3
+
+// From PluginScheduler::processTask...
+#define RUNTASKSTREAM                 200
+#define RUNDEADLINECHECK              201
+#define RUNSTATISTICSUPDATE           202
+
+// From PHP (currently all to PROJECTQUEUE)...
+#define EmailVerification              13
+#define PasswordResetEmail              5
+#define UserBadgeAwardedEmail          22
+#define BannedLogin                    14
+#define UserReferenceEmail             21
+#define OrgCreatedNotificationRequest 100
+#define OrgMembershipAccepted           3
+#define OrgMembershipRefused            4
+#define ProjectImageUploadedEmail      29
+#define ProjectImageApprovedEmail      31
+#define ProjectImageDisapprovedEmail   32
+#define ProjectImageRemovedEmail       30
+#define TaskArchived                    6
+#define OrgFeedback                    18
+#define UserTaskClaim                   2
+#define TaskClaimed                     7
+#define TaskUploadNotificationRequest 101
+#define TaskRevokedNotification       102
+#define UserFeedback                   11
+#define UserTaskCancelled              36
+
+// email send priorities
+#define HIGH    3
+#define MEDIUM  2
+#define LOW     1
+#define SENT    0
+
 #endif // DEFINITIONS_H

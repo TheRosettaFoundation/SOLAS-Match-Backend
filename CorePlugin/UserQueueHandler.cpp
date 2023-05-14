@@ -34,7 +34,7 @@ void UserQueueHandler::consumeFromQueue()
             if (!queue_request.isNull()) {
                 qDebug() << "UserQueueHandler type:" << queue_request["type"];
                 switch (queue_request["type"]) {
-                    case TASKSTREAM:
+                    case RUNTASKSTREAM:
                         TaskStreamNotificationHandler::run();
                     break;
                 }

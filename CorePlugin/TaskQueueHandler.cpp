@@ -41,10 +41,10 @@ void TaskQueueHandler::consumeFromQueue()
             if (!queue_request.isNull()) {
                 qDebug() << "TaskQueueHandler type:" << queue_request["type"];
                 switch (queue_request["type"]) {
-                    case DEADLINECHECK:
+                    case RUNDEADLINECHECK:
                         DeadlineChecker::run()
                         break;
-                    case STATISTICSUPDATE:
+                    case RUNSTATISTICSUPDATE:
                         TaskDao::update_statistics(db);
                         break;
                 }

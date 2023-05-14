@@ -47,7 +47,7 @@ static void OrgDeadlinePassedMailGenerator::run(int user_id, int task_id)
         QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/org-task-deadline-passed.tpl";
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
-        UserDao::queue_email(db, user_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Task Update", QString::fromUtf8(email_body.c_str()));
+        UserDao::queue_email(db, user_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Task Update", QString::fromUtf8(email_body.c_str()), LOW);
         UserDao::log_email_sent(db, user_id, task_id, 0, 0, 0, 0, 0, "deadline_passed_to_subscribed_admin");
     } else {
         this->generateErrorEmail(error);

@@ -40,7 +40,7 @@ static void UserRecordWarningDeadlinePassedEmailGenerator::run(int user_id)
         UserDao::insertWillBeDeletedUser(db, user_id);
 
         if (sendMessage) {
-            UserDao::queue_email(db, user_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Complete your registration", QString::fromUtf8(email_body.c_str()));
+            UserDao::queue_email(db, user_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Complete your registration", QString::fromUtf8(email_body.c_str()), LOW);
             UserDao::log_email_sent(db, user_id, 0, 0, 0, 0, 0, 0, "profile_reminder_to_volunteer");
         }
     } else {

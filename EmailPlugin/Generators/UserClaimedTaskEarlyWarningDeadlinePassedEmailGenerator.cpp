@@ -106,7 +106,7 @@ static void UserClaimedTaskEarlyWarningDeadlinePassedEmailGenerator::run(int tas
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
         if (sendMessage) {
-            UserDao::queue_email(db, translator_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Task Deadline Reminder", QString::fromUtf8(email_body.c_str()));
+            UserDao::queue_email(db, translator_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Task Deadline Reminder", QString::fromUtf8(email_body.c_str()), LOW);
             UserDao::log_email_sent(db, translator_id, task_id, task->projectid(), 0, 0, 0, 0, "deadline_reminder_early_to_volunteer");
        }
     } else {

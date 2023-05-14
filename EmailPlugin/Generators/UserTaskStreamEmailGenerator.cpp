@@ -169,7 +169,7 @@ static void UserTaskStreamEmailGenerator::run(int user_id)
             QString templateLocation = QString(TEMPLATE_DIRECTORY) + "emails/user-task-stream.tpl";
             ctemplate::ExpandTemplate(templateLocation.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
-            UserDao::queue_email(db, user_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Task Stream", QString::fromUtf8(email_body.c_str()));
+            UserDao::queue_email(db, user_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Task Stream", QString::fromUtf8(email_body.c_str()), LOW);
             UserDao::log_email_sent(db, user_id, 0, 0, 0, 0, 0, 0, "task_stream_to_volunteer");
         } else {
             //qDebug() << "UserTaskStreamEmailGenerator: No tasks within cutoff for user " << QString::number(user_id);
@@ -317,7 +317,7 @@ static void UserTaskStreamEmailGenerator::run(int user_id)
             QString templateLocation = QString(TEMPLATE_DIRECTORY) + "emails/emergency_response.tpl";
             ctemplate::ExpandTemplate(templateLocation.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
-            UserDao::queue_email(db, -user_id, QString::fromStdString(user->email()), settings.get("site.name") + ": T" + QString::fromLatin1("ü") + "rkiye/Syria Emergency Response - Available Tasks", QString::fromUtf8(email_body.c_str()));
+            UserDao::queue_email(db, -user_id, QString::fromStdString(user->email()), settings.get("site.name") + ": T" + QString::fromLatin1("ü") + "rkiye/Syria Emergency Response - Available Tasks", QString::fromUtf8(email_body.c_str()), LOW);
             UserDao::log_email_sent(db, -user_id, 0, 0, 0, 0, 0, 0, "emergency_response_to_volunteer");
     } else {
         if (error != "") {
