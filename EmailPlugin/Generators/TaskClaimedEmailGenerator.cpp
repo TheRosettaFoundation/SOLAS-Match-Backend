@@ -4,7 +4,7 @@ using namespace  SolasMatch::Common::Protobufs::Emails;
 
 static void TaskClaimedEmailGenerator::run(int user_id, int task_id, int claimant_id)
 {
-    qDebug() << "TaskClaimedEmailGenerator user_id:" << user_id << "task_id:" << task_id << "claimant_id:" << claimant_id;
+    qDebug() << "TaskClaimedEmailGenerator user_id:" << user_id << "task_id:" << QString::number(task_id) << "claimant_id:" << QString::number(claimant_id);
 
     ConfigParser settings;
     QString error = "";

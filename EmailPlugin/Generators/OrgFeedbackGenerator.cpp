@@ -5,7 +5,7 @@ using namespace  SolasMatch::Common::Protobufs::Emails;
 
 static void OrgFeedbackGenerator::run(int claimant_id, int task_id, int user_id, QString feedback)
 {
-    qDebug() << "OrgFeedbackGenerator claimant_id:" << claimant_id << "task_id:" << task_id << "user_id (admin or owner):" << user_id;
+    qDebug() << "OrgFeedbackGenerator claimant_id:" << QString::number(claimant_id) << "task_id:" << QString::number(task_id) << "user_id (admin or owner):" << QString::number(user_id);
 
     ConfigParser settings;
     QString error = "";

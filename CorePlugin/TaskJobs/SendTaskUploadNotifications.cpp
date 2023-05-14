@@ -15,7 +15,7 @@ using namespace SolasMatch::Common::Protobufs::Models;
 
 static void SendTaskUploadNotifications::run(int task_id)
 {
-    qDebug() << "SendTaskUploadNotifications task_id:" << task_id;
+    qDebug() << "SendTaskUploadNotifications task_id:" << QString::number(task_id);
 
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
     QSharedPointer<Task> task = TaskDao::getTask(db, task_id);

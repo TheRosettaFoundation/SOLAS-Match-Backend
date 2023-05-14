@@ -2,7 +2,7 @@
 
 static void UserTaskRevokedGenerator::run(int task_id, int claimant_id)
 {
-    qDebug() << "UserTaskRevokedGenerator task_id:" << task_id << "claimant_id:" << claimant_id;
+    qDebug() << "UserTaskRevokedGenerator task_id:" << QString::number(task_id) << "claimant_id:" << QString::number(claimant_id);
 
     ConfigParser settings;
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();

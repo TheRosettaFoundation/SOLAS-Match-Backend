@@ -4,7 +4,7 @@ using namespace  SolasMatch::Common::Protobufs::Emails;
 
 static void UserTaskCancelledEmailGenerator::run(int user_id, int task_id)
 {
-    qDebug() << "UserTaskCancelledEmailGenerator user_id:" << user_id << "task_id:" << task_id;
+    qDebug() << "UserTaskCancelledEmailGenerator user_id:" << QString::number(user_id) << "task_id:" << QString::number(task_id);
 
     ConfigParser settings;
     QString error = "";

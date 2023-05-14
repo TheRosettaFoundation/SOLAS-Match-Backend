@@ -3,7 +3,7 @@ using namespace  SolasMatch::Common::Protobufs::Emails;
 
 void TrackedTaskUploadedEmailGenerator::run(int user_id, int task_id, int translator_id)
 {
-    qDebug() << "TrackedTaskUploadedEmailGenerator user_id:" << user_id << "task_id:" << task_id << "translator_id:" << translator_id;
+    qDebug() << "TrackedTaskUploadedEmailGenerator user_id:" << QString::number(user_id) << "task_id:" << QString::number(task_id) << "translator_id:" << QString::number(translator_id);
 
     ConfigParser settings;
     QString error = "";
