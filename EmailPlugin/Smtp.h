@@ -22,7 +22,6 @@ public:
     Smtp();
     ~Smtp();
     void init();
-    QSharedPointer<EmailQueue> getEmailQueue();
 
 signals:
     void complete();
@@ -42,10 +41,8 @@ private slots:
     void checkEmailQueue();
 
 private:
-    void send(QSharedPointer<Email> email);
+    void send(QMap<QString, QVariant>);
     QxtSmtp *smtp;
-    QSharedPointer<EmailQueue> emailQueue;
-    AMQPMessage *currentMessage;
     QString host;
     int port;
     bool isConnected;
