@@ -1,7 +1,6 @@
 #ifndef EMAILPLUGIN_H
 #define EMAILPLUGIN_H
 
-#include <AMQPcpp.h>
 #include <QtPlugin>
 
 #include "Smtp.h"
@@ -19,15 +18,12 @@ public:
     bool isEnabled();
 
 public slots:
-    void messageReveived(AMQPMessage *message);
     void run();
 
 private:
-    void registerEmailTypes();
     QThreadPool *mThreadPool;
     bool enabled;
     Smtp *smtp;
-
 };
 
 #endif // EMAILPLUGIN_H
