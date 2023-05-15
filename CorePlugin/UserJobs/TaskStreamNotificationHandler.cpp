@@ -11,7 +11,7 @@
 #include <QDateTime>
 #include <QRandomGenerator>
 
-static void TaskStreamNotificationHandler::run()
+void TaskStreamNotificationHandler::run()
 {
     qDebug() << "TaskStreamNotificationHandler";
     ConfigParser settings;
