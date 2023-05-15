@@ -452,6 +452,7 @@ QMap<QString, QVariant> UserDao::get_queue_request(QSharedPointer<MySQLHandler> 
     if(mQuery->first()) {
         QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
         row["id"]              = MySQLHandler::getValueFromQuery(fieldMap.value("id"), mQuery);
+        row["queue"]           = MySQLHandler::getValueFromQuery(fieldMap.value("queue"), mQuery);
         row["type"]            = MySQLHandler::getValueFromQuery(fieldMap.value("type"), mQuery);
         row["user_id"]         = MySQLHandler::getValueFromQuery(fieldMap.value("user_id"), mQuery);
         row["badge_id"]        = MySQLHandler::getValueFromQuery(fieldMap.value("badge_id"), mQuery);
