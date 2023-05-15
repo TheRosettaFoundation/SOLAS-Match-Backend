@@ -428,3 +428,8 @@ void UserDao::mark_email_request_sent(QSharedPointer<MySQLHandler> db, int id)
 {
     db->call("mark_email_request_sent", QString::number(id));
 }
+
+void UserDao::update_statistics(QSharedPointer<MySQLHandler> db)
+{
+    db->call("statsUpdateAll", "");
+}
