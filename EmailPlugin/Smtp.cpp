@@ -14,7 +14,6 @@ Smtp::Smtp()
     isConnected = false;
     busy = false;
     reconnect_count = 0;
-    currentMessage = NULL;
     mail_text_hashes = new QList<QByteArray>();
 
     QTimer *emailQueueReadTimer  = new QTimer();
@@ -55,18 +54,18 @@ void Smtp::init()
 void Smtp::send(QMap<QString, QVariant> email_request)
 {
     QxtMailMessage mail_message;
-    mail_message.setSender(email_request["sender"]);
-    if (!test) mail_message.addRecipient(email_request["recipient"]);
+    mail_message.setSender(email_request["sender"].toString());
+    if (!test) mail_message.addRecipient(email_request["recipient"].toString());
     if ( test) mail_message.addRecipient("alanabarrett0@gmail.com"); // TEST CODE
 
-    if (!test || (QString::compare(only_send, email_request["subject"]) == 0)) {
-        QString recipientString = "%20" + email_request["recipient"];
+    if (!test || (QString::compare(only_send, email_request["subject"].toString()) == 0)) {
+        QString recipientString = "%20" + email_request["recipient"].toString();
         recipientString.replace("@", "%40");
         mail_message.setExtraHeader("List-Unsubscribe", "<mailto:info@kato.translatorswb.org?subject=Unsubscribe%20from%20TWB%3A" + recipientString  + ">");
-        mail_message.setSubject(email_request["subject"]);
+        mail_message.setSubject(email_request["subject"].toString());
         mail_message.setExtraHeader("Content-Type", "text/html; charset=\"UTF-8\"");
         mail_message.setExtraHeader("Content-Transfer-Encoding", "quoted-printable");
-        mail_message.setBody(email_request["body"]);
+        mail_message.setBody(email_request["body"].toString());
 
         if (!isConnected) {
             this->init();
@@ -85,23 +84,23 @@ void Smtp::checkEmailQueue()
         if (!email_request.isNull()) {
             if (!busy) {
                 QString email_for_hash = "";
-                email_for_hash += email_request["recipient"];
-                email_for_hash += email_request["subject"];
-                email_for_hash += email_request["body"];
+                email_for_hash += email_request["recipient"].toString();
+                email_for_hash += email_request["subject"].toString();
+                email_for_hash += email_request["body"].toString();
                 QByteArray hash = QCryptographicHash::hash(email_for_hash.toUtf8(), QCryptographicHash::Md5);
                 if (email->getSubject().indexOf("Password Reset") != -1 || mail_text_hashes->indexOf(hash) == -1) { // Only send if identical mail not already sent
                     mail_text_hashes->append(hash);
                     qDebug() << "===============================";
-                    qDebug() << "Recipient: " << email_request["recipient"]);
-                    qDebug() << "Subject: " << email_request["subject"]);
-                    qDebug() << email_request["body"];
+                    qDebug() << "Recipient: " << email_request["recipient"].toString());
+                    qDebug() << "Subject: " << email_request["subject"].toString());
+                    qDebug() << email_request["body"].toString();
                     qDebug() << "================================";
 
                     this->send(email_request);
                 }
-                else qDebug() << "SMTP::checkEmailQueue Skipped: " << email_request["subject"] << email_request["recipient"];
+                else qDebug() << "SMTP::checkEmailQueue Skipped: " << email_request["subject"].toString() << email_request["recipient"].toString();
 
-                UserDao::mark_email_request_sent(db, email_request["id"]);
+                UserDao::mark_email_request_sent(db, email_request["id"].toInt());
             } else {
                 if ((count_checkEmailQueue++)%3000 == 0) { // 5 minutes (100ms 3000 times)
                     qDebug() << "SMTP::checkEmailQueue busy";
