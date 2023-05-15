@@ -392,3 +392,15 @@ void UserDao::log_email_sent(QSharedPointer<MySQLHandler> db, int recipient_id, 
         MySQLHandler::wrapString(topic);
     db->call("log_email_sent", args);
 }
+
+void UserDao::queue_email(QSharedPointer<MySQLHandler> db, int recipient_id, QString recipient, QString subject, QString body, int priority = 3)
+{
+    QString args =
+        QString::number(recipient_id) + ", " +
+        MySQLHandler::wrapString(settings.get("site.system_email_address")) + ", " +
+        MySQLHandler::wrapString(recipient) + ", " +
+        MySQLHandler::wrapString(subject) + ", " +
+        MySQLHandler::wrapString(body) + ", " +
+        MySQLHandler::wrapString(priority);
+    db->call("queue_email", args);
+}

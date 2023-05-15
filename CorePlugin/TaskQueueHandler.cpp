@@ -37,7 +37,7 @@ void TaskQueueHandler::consumeFromQueue()
     if (mutex.tryLock()) {
         if (!QFileInfo::exists("/repo/SOLAS-Match-Backend/STOP_consumeFromQueue")) {
             QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
-            QMap<QString, QVariant> queue_request = TaskDao::get_queue_request(db, TASKQUEUE);
+            QMap<QString, QVariant> queue_request = UserDao::get_queue_request(db, TASKQUEUE);
             if (!queue_request.isNull()) {
                 qDebug() << "TaskQueueHandler type:" << queue_request["type"];
                 switch (queue_request["type"]) {
@@ -45,10 +45,10 @@ void TaskQueueHandler::consumeFromQueue()
                         DeadlineChecker::run()
                         break;
                     case RUNSTATISTICSUPDATE:
-                        TaskDao::update_statistics(db);
+                        UserDao::update_statistics(db);
                         break;
                 }
-                TaskDao::mark_queue_request_sent(db, queue_request["id"]);
+                UserDao::mark_queue_request_handled(db, queue_request["id"]);
             }
         }
         mutex.unlock();

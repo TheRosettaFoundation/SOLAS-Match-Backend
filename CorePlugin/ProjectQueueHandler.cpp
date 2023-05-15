@@ -59,7 +59,7 @@ void ProjectQueueHandler::consumeFromQueue()
     if (mutex.tryLock()) {
         if (!QFileInfo::exists("/repo/SOLAS-Match-Backend/STOP_consumeFromQueue")) {
             QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
-            QMap<QString, QVariant> queue_request = TaskDao::get_queue_request(db, PROJECTQUEUE);
+            QMap<QString, QVariant> queue_request = UserDao::get_queue_request(db, PROJECTQUEUE);
             if (!queue_request.isNull()) {
                 qDebug() << "ProjectQueueHandler type:" << queue_request["type"];
                 switch (queue_request["type"]) {
@@ -124,7 +124,7 @@ void ProjectQueueHandler::consumeFromQueue()
                         UserTaskCancelledEmailGenerator::run(queue_request["user_id"], queue_request["task_id"]);
                         break;
                 }
-                TaskDao::mark_queue_request_sent(db, queue_request["id"]);
+                UserDao::mark_queue_request_handled(db, queue_request["id"]);
             }
         }
         mutex.unlock();
