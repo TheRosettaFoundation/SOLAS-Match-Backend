@@ -9,8 +9,6 @@
 #include "Smtp.h"
 #include "Common/ConfigParser.h"
 
-using namespace SolasMatch::Common::Protobufs::Emails;
-
 //QT4.8 (see Q_PLUGIN_METADATA for QT5) Q_EXPORT_PLUGIN2(EmailPlugin, EmailPlugin)
 
 EmailPlugin::EmailPlugin()
