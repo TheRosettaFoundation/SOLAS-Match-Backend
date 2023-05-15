@@ -11,6 +11,8 @@
 #include <QDateTime>
 #include <QRandomGenerator>
 
+#include "../EmailPlugin/Generators/UserTaskStreamEmailGenerator.h"
+
 void TaskStreamNotificationHandler::run()
 {
     qDebug() << "TaskStreamNotificationHandler";
