@@ -404,3 +404,22 @@ void UserDao::queue_email(QSharedPointer<MySQLHandler> db, int recipient_id, QSt
         MySQLHandler::wrapString(priority);
     db->call("queue_email", args);
 }
+
+QMap<QString, QVariant> UserDao::get_email_request(QSharedPointer<MySQLHandler> db)
+{
+    QMap<QString, QVariant> row = QMap<QString, QVariant>();
+
+    QSharedPointer<QSqlQuery> mQuery = db->call("get_email_request");
+    if(mQuery->first()) {
+        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
+        row["id"]           = MySQLHandler::getValueFromQuery(fieldMap.value("id"), mQuery);
+        row["recipient_id"] = MySQLHandler::getValueFromQuery(fieldMap.value("recipient_id"), mQuery);
+        row["sender"]       = MySQLHandler::getValueFromQuery(fieldMap.value("sender"), mQuery);
+        row["recipient"]    = MySQLHandler::getValueFromQuery(fieldMap.value("recipient"), mQuery);
+        row["subject"]      = MySQLHandler::getValueFromQuery(fieldMap.value("subject"), mQuery);
+        row["body"]         = MySQLHandler::getValueFromQuery(fieldMap.value("body"), mQuery);
+        row["priority"]     = MySQLHandler::getValueFromQuery(fieldMap.value("priority"), mQuery);
+        row["logged_time"]  = MySQLHandler::getValueFromQuery(fieldMap.value("logged_time"), mQuery);
+    }
+    return row;
+}
