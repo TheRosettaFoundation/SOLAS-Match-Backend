@@ -14,7 +14,7 @@
 
 using namespace SolasMatch::Common::Protobufs::Models;
 
-static void SendTaskUploadNotifications::run(int task_id)
+void SendTaskUploadNotifications::run(int task_id)
 {
     qDebug() << "SendTaskUploadNotifications task_id:" << QString::number(task_id);
 
@@ -48,7 +48,6 @@ static void SendTaskUploadNotifications::run(int task_id)
                 }
 
                 ClaimedTaskUploadedGenerator::run(task->id(), translator->id());
-                publisher.publish(exchange, topic, body);
             }
         }
     } else {
