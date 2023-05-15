@@ -10,7 +10,13 @@
 #include "Common/protobufs/models/Task.pb.h"
 #include "Common/protobufs/models/Project.pb.h"
 
-static void DeadlineChecker::run()
+#include "../EmailPlugin/Generators/OrgDeadlinePassedEmailGenerator.h"
+#include "../EmailPlugin/Generators/UserTaskDeadlineEmailGenerator.h"
+#include "../EmailPlugin/Generators/UserClaimedTaskEarlyWarningDeadlinePassedEmailGenerator.h"
+#include "../EmailPlugin/Generators/UserClaimedTaskLateWarningDeadlinePassedEmailGenerator.h"
+#include "../EmailPlugin/Generators/UserRecordWarningDeadlinePassedEmailGenerator.h"
+
+void DeadlineChecker::run()
 {
     qDebug() << "DeadlineChecker";
     ConfigParser settings;

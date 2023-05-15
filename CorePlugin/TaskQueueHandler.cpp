@@ -9,12 +9,6 @@
 
 #include "TaskJobs/DeadlineChecker.h"
 
-#include "../EmailPlugin/Generators/OrgDeadlinePassedEmailGenerator.h"
-#include "../EmailPlugin/Generators/UserTaskDeadlineEmailGenerator.h"
-#include "../EmailPlugin/Generators/UserClaimedTaskEarlyWarningDeadlinePassedEmailGenerator.h"
-#include "../EmailPlugin/Generators/UserClaimedTaskLateWarningDeadlinePassedEmailGenerator.h"
-#include "../EmailPlugin/Generators/UserRecordWarningDeadlinePassedEmailGenerator.h"
-
 TaskQueueHandler::TaskQueueHandler()
 {
     // Default Constructor
