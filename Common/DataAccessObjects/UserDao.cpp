@@ -409,7 +409,7 @@ QMap<QString, QVariant> UserDao::get_email_request(QSharedPointer<MySQLHandler> 
 {
     QMap<QString, QVariant> row = QMap<QString, QVariant>();
 
-    QSharedPointer<QSqlQuery> mQuery = db->call("get_email_request");
+    QSharedPointer<QSqlQuery> mQuery = db->call("get_email_request", "");
     if(mQuery->first()) {
         QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
         row["id"]           = MySQLHandler::getValueFromQuery(fieldMap.value("id"), mQuery);
@@ -427,6 +427,48 @@ QMap<QString, QVariant> UserDao::get_email_request(QSharedPointer<MySQLHandler> 
 void UserDao::mark_email_request_sent(QSharedPointer<MySQLHandler> db, int id)
 {
     db->call("mark_email_request_sent", QString::number(id));
+}
+
+void UserDao::insert_queue_request(QSharedPointer<MySQLHandler> db, int queue, int type)
+{
+    QString args =
+        QString::number(queue) + ", " +
+        QString::number(type) + ", " +
+        "0, " +
+        "0, " +
+        "0, " +
+        "0, " +
+        "0, " +
+        "0, " +
+        MySQLHandler::wrapString("");
+    db->call("insert_queue_request", args);
+}
+
+QMap<QString, QVariant> UserDao::get_queue_request(QSharedPointer<MySQLHandler> db, int queue)
+{
+    QMap<QString, QVariant> row = QMap<QString, QVariant>();
+
+    QSharedPointer<QSqlQuery> mQuery = db->call("get_queue_request", QString::number(queue));
+    if(mQuery->first()) {
+        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
+        row["id"]              = MySQLHandler::getValueFromQuery(fieldMap.value("id"), mQuery);
+        row["type"]            = MySQLHandler::getValueFromQuery(fieldMap.value("type"), mQuery);
+        row["user_id"]         = MySQLHandler::getValueFromQuery(fieldMap.value("user_id"), mQuery);
+        row["badge_id"]        = MySQLHandler::getValueFromQuery(fieldMap.value("badge_id"), mQuery);
+        row["org_id"]          = MySQLHandler::getValueFromQuery(fieldMap.value("org_id"), mQuery);
+        row["project_id"]      = MySQLHandler::getValueFromQuery(fieldMap.value("project_id"), mQuery);
+        row["task_id"]         = MySQLHandler::getValueFromQuery(fieldMap.value("task_id"), mQuery);
+        row["claimant_id"]     = MySQLHandler::getValueFromQuery(fieldMap.value("claimant_id"), mQuery);
+        row["feedback"]        = MySQLHandler::getValueFromQuery(fieldMap.value("feedback"), mQuery);
+        row["request_handled"] = MySQLHandler::getValueFromQuery(fieldMap.value("request_handled"), mQuery);
+        row["logged_time"]     = MySQLHandler::getValueFromQuery(fieldMap.value("logged_time"), mQuery);
+    }
+    return row;
+}
+
+void UserDao::mark_queue_request_handled(QSharedPointer<MySQLHandler> db, int id)
+{
+    db->call("mark_queue_request_handled", QString::number(id));
 }
 
 void UserDao::update_statistics(QSharedPointer<MySQLHandler> db)
