@@ -49,7 +49,6 @@ SOURCES += CorePlugin.cpp \
     ../EmailPlugin/Generators/BannedLoginGenerator.cpp \
     ../EmailPlugin/Generators/TrackedTaskUploadedEmailGenerator.cpp \
     ../EmailPlugin/Generators/ClaimedTaskUploadedGenerator.cpp \
-    ../EmailPlugin/Generators/ClaimedTaskSourceUpdatedGenerator.cpp \
     ../EmailPlugin/Generators/OrgFeedbackGenerator.cpp \
     ../EmailPlugin/Generators/UserFeedbackGenerator.cpp \
     ../EmailPlugin/Generators/OrgCreated_OrgEmail.cpp \
@@ -58,7 +57,6 @@ SOURCES += CorePlugin.cpp \
     ../EmailPlugin/Generators/UserBadgeAwardedGenerator.cpp \
     ../EmailPlugin/Generators/UserTaskRevokedGenerator.cpp \
     ../EmailPlugin/Generators/OrgTaskRevokedGenerator.cpp \
-    ../EmailPlugin/Generators/ProjectCreatedGenerator.cpp \
     ../EmailPlugin/Generators/NewImageUploadedEmailGenerator.cpp \
     ../EmailPlugin/Generators/ProjectImageRemovedEmailGenerator.cpp \
     ../EmailPlugin/Generators/ProjectImageApprovedEmailGenerator.cpp \
@@ -91,7 +89,6 @@ HEADERS += CorePlugin.h \
     ../EmailPlugin/Generators/BannedLoginGenerator.h \
     ../EmailPlugin/Generators/TrackedTaskUploadedEmailGenerator.h \
     ../EmailPlugin/Generators/ClaimedTaskUploadedGenerator.h \
-    ../EmailPlugin/Generators/ClaimedTaskSourceUpdatedGenerator.h \
     ../EmailPlugin/EmailDefinitions.h \
     ../EmailPlugin/Generators/OrgFeedbackGenerator.h \
     ../EmailPlugin/Generators/UserFeedbackGenerator.h \
@@ -101,7 +98,6 @@ HEADERS += CorePlugin.h \
     ../EmailPlugin/Generators/UserBadgeAwardedGenerator.h \
     ../EmailPlugin/Generators/UserTaskRevokedGenerator.h \
     ../EmailPlugin/Generators/OrgTaskRevokedGenerator.h \
-    ../EmailPlugin/Generators/ProjectCreatedGenerator.h \
     ../EmailPlugin/Generators/NewImageUploadedEmailGenerator.h \
     ../EmailPlugin/Generators/ProjectImageRemovedEmailGenerator.h \
     ../EmailPlugin/Generators/ProjectImageApprovedEmailGenerator.h \
