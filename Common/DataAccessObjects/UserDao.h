@@ -64,6 +64,7 @@ public:
     static void log_email_sent(QSharedPointer<MySQLHandler> db, int recipient_id, int task_id, int project_id, int org_id, int translator_id, int admin_id, int badge_id, QString topic);
     static void queue_email(QSharedPointer<MySQLHandler> db, int recipient_id, QString recipient, QString subject, QString body, int priority = 3)
     static QMap<QString, QVariant> get_email_request(QSharedPointer<MySQLHandler> db)
+    static void mark_email_request_sent(QSharedPointer<MySQLHandler> db, int id)
     static QList<int> get_users_list_for_earthquake(QSharedPointer<MySQLHandler> db);
     static QList<QSharedPointer<Task> > get_user_earthquake_tasks(QSharedPointer<MySQLHandler> db, int userId);
 };

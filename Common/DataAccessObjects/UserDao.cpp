@@ -423,3 +423,8 @@ QMap<QString, QVariant> UserDao::get_email_request(QSharedPointer<MySQLHandler> 
     }
     return row;
 }
+
+void UserDao::mark_email_request_sent(QSharedPointer<MySQLHandler> db, int id)
+{
+    db->call("mark_email_request_sent", QString::number(id));
+}
