@@ -2,6 +2,7 @@
 
 #include <QThread>
 #include <QTimer>
+#include <QFileInfo>
 #include <QDebug>
 
 #include "Common/ConfigParser.h"
@@ -40,7 +41,7 @@ void TaskQueueHandler::consumeFromQueue()
                 qDebug() << "TaskQueueHandler type:" << queue_request["type"].toInt();
                 switch (queue_request["type"].toInt()) {
                     case RUNDEADLINECHECK:
-                        DeadlineChecker::run()
+                        DeadlineChecker::run();
                         break;
                     case RUNSTATISTICSUPDATE:
                         UserDao::update_statistics(db);

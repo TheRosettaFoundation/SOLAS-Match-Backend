@@ -1,6 +1,7 @@
 #include "UserQueueHandler.h"
 
 #include <QTimer>
+#include <QFileInfo>
 #include <QDebug>
 
 #include "Common/ConfigParser.h"

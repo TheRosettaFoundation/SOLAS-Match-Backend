@@ -2,6 +2,7 @@
 
 #include <QThread>
 #include <QTimer>
+#include <QFileInfo>
 #include <QDebug>
 
 #include "Common/ConfigParser.h"
