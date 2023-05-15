@@ -2,6 +2,7 @@
 
 #include <QDebug>
 #include "../ModelGenerator.h"
+#include "../ConfigParser.h"
 
 QList<QSharedPointer<User> > UserDao::getUsers(QSharedPointer<MySQLHandler> db, int id, QString name, QString email, QString pass,
                             QString bio, QString non, QString date, int lang_id, int reg_id)
