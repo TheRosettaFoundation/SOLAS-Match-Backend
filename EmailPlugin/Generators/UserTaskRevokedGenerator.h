@@ -6,7 +6,7 @@
 class UserTaskRevokedGenerator : public IEmailGenerator
 {
 public:
-    void run(int task_id, int claimant_id);
+    static void run(int task_id, int claimant_id);
 };
 
 #endif // USERTASKREVOKEDGENERATOR_H

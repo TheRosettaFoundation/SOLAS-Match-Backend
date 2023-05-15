@@ -1,6 +1,6 @@
 #include "OrgTaskRevokedGenerator.h"
 
-static void OrgTaskRevokedGenerator::run(int task_id, int user_id, int claimant_id)
+void OrgTaskRevokedGenerator::run(int task_id, int user_id, int claimant_id)
 {
     qDebug() << "OrgTaskRevokedGenerator task_id:" << QString::number(task_id) << "user_id:" << QString::number(user_id) << "claimant_id:" << QString::number(claimant_id);
 

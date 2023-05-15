@@ -8,6 +8,9 @@
 #include "Common/DataAccessObjects/TaskDao.h"
 #include "Common/protobufs/models/User.pb.h"
 
+#include "../EmailPlugin/Generators/OrgTaskRevokedGenerator.h"
+#include "../EmailPlugin/Generators/UserTaskRevokedGenerator.h"
+
 using namespace SolasMatch::Common::Protobufs::Models;
 
 void TaskRevokedNotificationHandler::run(int task_id, int claimant_id)
