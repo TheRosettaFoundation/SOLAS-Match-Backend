@@ -81,18 +81,18 @@ void Smtp::checkEmailQueue()
     if (mutex.tryLock()) {
         QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
         QMap<QString, QVariant> email_request = UserDao::get_email_request(db);
-        if (!email_request.isNull()) {
+        if (!email_request.isEmpty()) {
             if (!busy) {
                 QString email_for_hash = "";
                 email_for_hash += email_request["recipient"].toString();
                 email_for_hash += email_request["subject"].toString();
                 email_for_hash += email_request["body"].toString();
                 QByteArray hash = QCryptographicHash::hash(email_for_hash.toUtf8(), QCryptographicHash::Md5);
-                if (email->getSubject().indexOf("Password Reset") != -1 || mail_text_hashes->indexOf(hash) == -1) { // Only send if identical mail not already sent
+                if (email_request["subject"].toString().indexOf("Password Reset") != -1 || mail_text_hashes->indexOf(hash) == -1) { // Only send if identical mail not already sent
                     mail_text_hashes->append(hash);
                     qDebug() << "===============================";
-                    qDebug() << "Recipient: " << email_request["recipient"].toString());
-                    qDebug() << "Subject: " << email_request["subject"].toString());
+                    qDebug() << "Recipient: " << email_request["recipient"].toString();
+                    qDebug() << "Subject: " << email_request["subject"].toString();
                     qDebug() << email_request["body"].toString();
                     qDebug() << "================================";
 

@@ -31,14 +31,14 @@ void UserQueueHandler::consumeFromQueue()
         if (!QFileInfo::exists("/repo/SOLAS-Match-Backend/STOP_consumeFromQueue")) {
             QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
             QMap<QString, QVariant> queue_request = UserDao::get_queue_request(db, USERQUEUE);
-            if (!queue_request.isNull()) {
-                qDebug() << "UserQueueHandler type:" << queue_request["type"];
-                switch (queue_request["type"]) {
+            if (!queue_request.isEmpty()) {
+                qDebug() << "UserQueueHandler type:" << queue_request["type"].toInt();
+                switch (queue_request["type"].toInt()) {
                     case RUNTASKSTREAM:
                         TaskStreamNotificationHandler::run();
                     break;
                 }
-                UserDao::mark_queue_request_handled(db, queue_request["id"]);
+                UserDao::mark_queue_request_handled(db, queue_request["id"].toInt());
             }
         }
         mutex.unlock();
