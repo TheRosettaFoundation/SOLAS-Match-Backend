@@ -107,7 +107,7 @@ void ProjectQueueHandler::consumeFromQueue()
                         TaskClaimedEmailGenerator::run(queue_request["user_id"].toInt(), queue_request["task_id"].toInt(), queue_request["claimant_id"].toInt());
                         break;
                     case TaskUploadNotificationRequest:
-                        SendTaskuploadNotifications::run(queue_request["task_id"].toInt());
+                        XSendTaskuploadNotifications::run(queue_request["task_id"].toInt());
                         break;
                     case TaskRevokedNotification:
                         TaskRevokedNotificationHandler::run(queue_request["claimant_id"].toInt(), queue_request["task_id"].toInt());
