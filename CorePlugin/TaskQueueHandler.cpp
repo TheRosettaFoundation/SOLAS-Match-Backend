@@ -9,6 +9,8 @@
 
 #include "TaskJobs/DeadlineChecker.h"
 
+#include "../EmailPlugin/IEmailGenerator.h"
+
 TaskQueueHandler::TaskQueueHandler()
 {
     // Default Constructor
