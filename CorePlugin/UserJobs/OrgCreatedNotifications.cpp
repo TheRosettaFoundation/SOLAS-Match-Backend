@@ -11,7 +11,7 @@
 #include "Common/protobufs/models/Organisation.pb.h"
 
 #include "../EmailPlugin/Generators/OrgCreated_OrgEmail.h"
-#include "../EmailPlugin/Generators/OrgCreate_SiteAdmin.h"
+#include "../EmailPlugin/Generators/OrgCreated_SiteAdmin.h"
 
 using namespace SolasMatch::Common::Protobufs::Models;
 
