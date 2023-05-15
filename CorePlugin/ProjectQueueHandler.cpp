@@ -28,7 +28,6 @@
 #include "../EmailPlugin/Generators/UserBadgeAwardedGenerator.h"
 #include "../EmailPlugin/Generators/UserTaskRevokedGenerator.h"
 #include "../EmailPlugin/Generators/OrgTaskRevokedGenerator.h"
-#include "../EmailPlugin/Generators/ProjectCreatedGenerator.h"
 #include "../EmailPlugin/Generators/NewImageUploadedEmailGenerator.h"
 #include "../EmailPlugin/Generators/ProjectImageRemovedEmailGenerator.h"
 #include "../EmailPlugin/Generators/ProjectImageApprovedEmailGenerator.h"
