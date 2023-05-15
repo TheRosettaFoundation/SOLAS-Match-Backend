@@ -2,7 +2,7 @@
 #include "Common/MySQLHandler.h"
 using namespace  SolasMatch::Common::Protobufs::Emails;
 
-static void OrgCreated_OrgEmail::run(int org_id, int admin_id)
+void OrgCreated_OrgEmail::run(int org_id, int admin_id)
 {
     qDebug() << "OrgCreated_OrgEmail org_id:" << org_id << "admin_id:" << admin_id;
 
