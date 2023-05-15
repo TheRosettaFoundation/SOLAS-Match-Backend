@@ -6,6 +6,6 @@
 class NewImageUploadedEmailGenerator: public IEmailGenerator
 {
 public:
-    void run(int project_id);
+    static void run(int project_id);
 };
 #endif // NEWIMAGEUPLOADEDEMAILGENERATOR_H

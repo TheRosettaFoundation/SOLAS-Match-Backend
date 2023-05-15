@@ -6,7 +6,7 @@
 class UserReferenceEmailGenerator : public IEmailGenerator
 {
 public:
-    void run(int user_id);
+    static void run(int user_id);
 };
 
 #endif // USERREFERENCEEMAILGENERATOR_H
