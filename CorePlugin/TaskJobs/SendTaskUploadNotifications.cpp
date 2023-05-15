@@ -9,6 +9,9 @@
 
 #include "Common/MySQLHandler.h"
 
+#include "../EmailPlugin/Generators/TrackedTaskUploadedEmailGenerator.h"
+#include "../EmailPlugin/Generators/ClaimedTaskUploadedGenerator.h"
+
 using namespace SolasMatch::Common::Protobufs::Models;
 
 static void SendTaskUploadNotifications::run(int task_id)
