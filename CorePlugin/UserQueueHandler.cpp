@@ -7,7 +7,7 @@
 
 #include "UserJobs/TaskStreamNotificationHandler.h"
 
-#include "Generators/UserTaskStreamEmailGenerator.h"
+#include "../EmailPlugin/Generators/UserTaskStreamEmailGenerator.h"
 
 UserQueueHandler::UserQueueHandler()
 {

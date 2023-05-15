@@ -8,11 +8,11 @@
 
 #include "TaskJobs/DeadlineChecker.h"
 
-#include "Generators/OrgDeadlinePassedEmailGenerator.h"
-#include "Generators/UserTaskDeadlineEmailGenerator.h"
-#include "Generators/UserClaimedTaskEarlyWarningDeadlinePassedEmailGenerator.h"
-#include "Generators/UserClaimedTaskLateWarningDeadlinePassedEmailGenerator.h"
-#include "Generators/UserRecordWarningDeadlinePassedEmailGenerator.h"
+#include "../EmailPlugin/Generators/OrgDeadlinePassedEmailGenerator.h"
+#include "../EmailPlugin/Generators/UserTaskDeadlineEmailGenerator.h"
+#include "../EmailPlugin/Generators/UserClaimedTaskEarlyWarningDeadlinePassedEmailGenerator.h"
+#include "../EmailPlugin/Generators/UserClaimedTaskLateWarningDeadlinePassedEmailGenerator.h"
+#include "../EmailPlugin/Generators/UserRecordWarningDeadlinePassedEmailGenerator.h"
 
 using namespace SolasMatch::Common::Protobufs::Requests;
 
