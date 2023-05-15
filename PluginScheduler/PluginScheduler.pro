@@ -19,8 +19,8 @@ DEFINES += PLUGINSCHEDULER_LIBRARY
 
 HEADERS += \
     PluginScheduler.h \
-    TimedTask.h \
+    TimedTask.h
 
 SOURCES += \
     PluginScheduler.cpp \
-    TimedTask.cpp \
+    TimedTask.cpp

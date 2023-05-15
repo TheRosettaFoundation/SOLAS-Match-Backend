@@ -5,6 +5,7 @@
 #include <QTimer>
 
 #include "../Common/ConfigParser.h"
+#include "IEmailGenerator.h"
 
 Smtp::Smtp()
 {

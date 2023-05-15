@@ -10,6 +10,7 @@
 #include "TimedTask.h"
 
 #include "Common/ConfigParser.h"
+#include "EmailPlugin/IEmailGenerator.h"
 
 //QT4.8 (see Q_PLUGIN_METADATA for QT5) Q_EXPORT_PLUGIN2(PluginScheduler, PluginScheduler)
 
