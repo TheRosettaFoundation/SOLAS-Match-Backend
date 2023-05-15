@@ -4,7 +4,7 @@
 class OrgCreate_SiteAdmin
 {
 public:
-    void run(int org_id, int admin_id);
+    static void run(int org_id, int admin_id);
 };
 
 #endif // ORGCREATED_SITEADMIN_H

@@ -2,7 +2,7 @@
 #include "Common/protobufs/emails/OrgCreatedSiteAdmin.pb.h"
 using namespace  SolasMatch::Common::Protobufs::Emails;
 
-static void OrgCreate_SiteAdmin::run(int org_id, int admin_id)
+void OrgCreate_SiteAdmin::run(int org_id, int admin_id)
 {
     qDebug() << "OrgCreate_SiteAdmin org_id:" << org_id << "admin_id:" << admin_id;
 
