@@ -9,8 +9,6 @@
 
 #include "Common/MySQLHandler.h"
 
-using namespace SolasMatch::Common::Protobufs::Requests;
-using namespace SolasMatch::Common::Protobufs::Emails;
 using namespace SolasMatch::Common::Protobufs::Models;
 
 static void SendTaskUploadNotifications::run(int task_id)

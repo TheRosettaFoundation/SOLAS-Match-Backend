@@ -10,8 +10,6 @@
 #include "Common/protobufs/models/Task.pb.h"
 #include "Common/protobufs/models/Project.pb.h"
 
-using namespace SolasMatch::Common::Protobufs::Emails;
-
 static void DeadlineChecker::run()
 {
     qDebug() << "DeadlineChecker";

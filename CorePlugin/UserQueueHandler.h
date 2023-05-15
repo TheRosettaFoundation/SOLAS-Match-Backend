@@ -19,6 +19,7 @@ public:
 
 public slots:
     void run();
+    void consumeFromQueue();
 
 private:
     QThreadPool *mThreadPool;

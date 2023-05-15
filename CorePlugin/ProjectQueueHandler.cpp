@@ -36,8 +36,6 @@
 #include "../EmailPlugin/Generators/ProjectImageApprovedEmailGenerator.h"
 #include "../EmailPlugin/Generators/ProjectImageDisapprovedEmailGenerator.h"
 
-using namespace SolasMatch::Common::Protobufs::Requests;
-
 ProjectQueueHandler::ProjectQueueHandler()
 {
     // Default Constructor

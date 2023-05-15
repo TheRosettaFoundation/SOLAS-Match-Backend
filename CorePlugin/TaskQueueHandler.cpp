@@ -14,8 +14,6 @@
 #include "../EmailPlugin/Generators/UserClaimedTaskLateWarningDeadlinePassedEmailGenerator.h"
 #include "../EmailPlugin/Generators/UserRecordWarningDeadlinePassedEmailGenerator.h"
 
-using namespace SolasMatch::Common::Protobufs::Requests;
-
 TaskQueueHandler::TaskQueueHandler()
 {
     // Default Constructor

@@ -11,8 +11,6 @@
 #include <QDateTime>
 #include <QRandomGenerator>
 
-using namespace SolasMatch::Common::Protobufs::Emails;
-
 static void TaskStreamNotificationHandler::run()
 {
     qDebug() << "TaskStreamNotificationHandler";
