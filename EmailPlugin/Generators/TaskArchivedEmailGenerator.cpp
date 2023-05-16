@@ -1,6 +1,6 @@
 #include "TaskArchivedEmailGenerator.h"
 
-static void TaskArchivedEmailGenerator::run(int user_id, int task_id)
+void TaskArchivedEmailGenerator::run(int user_id, int task_id)
 {
     qDebug() << "TaskArchivedEmailGenerator user_id:" << QString::number(user_id) << "task_id:" << QString::number(task_id);
 
