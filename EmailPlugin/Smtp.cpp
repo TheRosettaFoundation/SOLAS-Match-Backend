@@ -1,11 +1,14 @@
 
 #include "Smtp.h"
 
-#include <QDebug>
+#include <QString>
+#include <QSharedPointer>
 #include <QTimer>
+#include <QDebug>
 
 #include "../Common/ConfigParser.h"
-#include "IEmailGenerator.h"
+#include "../Common/MySQLHandler.h"
+#include "../Common/DataAccessObjects/UserDao.h"
 
 Smtp::Smtp()
 {
