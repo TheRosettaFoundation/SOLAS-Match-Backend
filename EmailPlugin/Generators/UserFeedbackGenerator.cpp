@@ -40,7 +40,6 @@ void UserFeedbackGenerator::run(int claimant_id, int task_id, QString feedback)
         QList<QSharedPointer<User> > users = TaskDao::getSubscribedUsers(db, task->id());
 
         foreach (QSharedPointer<User> user, users) {
-            email = QSharedPointer<Email>(new Email);
             ctemplate::TemplateDictionary dict("userFeedback");
             dict.SetValue("USERNAME", Email::htmlspecialchars(user->display_name()));
             dict.SetValue("FEEDBACK", Email::htmlspecialchars(feedback.toStdString()));

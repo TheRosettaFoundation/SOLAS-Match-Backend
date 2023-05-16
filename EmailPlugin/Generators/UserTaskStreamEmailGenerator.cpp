@@ -11,7 +11,6 @@ void UserTaskStreamEmailGenerator::run(int user_id)
 {
     bool sendEmail = true;
     QString error = "";
-    QSharedPointer<Email> email;
     QList<QSharedPointer<Task> > userTasks;
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
     QList<QMap<QString, QVariant>> task_type_details = TaskDao::get_task_type_details(db);
@@ -49,7 +48,6 @@ void UserTaskStreamEmailGenerator::run(int user_id)
         QList<QMap<QString, QVariant>> selections = LanguageDao::get_selections(db);
 
         ConfigParser settings;
-        email = QSharedPointer<Email>(new Email);
 
         ctemplate::TemplateDictionary dict("userTaskStreamDict");
         dict.SetValue("SITE_NAME", std::string(settings.get("site.name").toLatin1().constData(), settings.get("site.name").toLatin1().length()));
@@ -203,7 +201,6 @@ void UserTaskStreamEmailGenerator::run(int user_id)
         QList<QMap<QString, QVariant>> selections = LanguageDao::get_selections(db);
 
         ConfigParser settings;
-        email = QSharedPointer<Email>(new Email);
 
         ctemplate::TemplateDictionary dict("userTaskStreamDict");
         dict.SetValue("SITE_NAME", std::string(settings.get("site.name").toLatin1().constData(), settings.get("site.name").toLatin1().length()));
