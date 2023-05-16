@@ -1,5 +1,4 @@
 #include "OrgCreated_SiteAdmin.h"
-#include "Common/protobufs/emails/OrgCreatedSiteAdmin.pb.h"
 
 void OrgCreate_SiteAdmin::run(int org_id, int admin_id)
 {
