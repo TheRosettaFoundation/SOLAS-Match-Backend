@@ -1,6 +1,5 @@
 #include "OrgCreated_OrgEmail.h"
 #include "Common/MySQLHandler.h"
-using namespace  SolasMatch::Common::Protobufs::Emails;
 
 void OrgCreated_OrgEmail::run(int org_id, int admin_id)
 {
@@ -45,6 +44,6 @@ void OrgCreated_OrgEmail::run(int org_id, int admin_id)
         UserDao::queue_email(db, admin_id, QString::fromStdString(admin->email()), settings.get("site.name") + ": Organisation Created", QString::fromUtf8(email_body.c_str()));
         UserDao::log_email_sent(db, admin_id, 0, 0, org_id, 0, 0, 0, "org_created_to_org_admin");
     } else {
-        this->generateErrorEmail(error);
+        IEmailGenerator::generateErrorEmail(error);
     }
 }

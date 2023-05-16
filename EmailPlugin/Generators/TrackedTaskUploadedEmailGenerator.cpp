@@ -1,5 +1,4 @@
 #include "TrackedTaskUploadedEmailGenerator.h"
-using namespace  SolasMatch::Common::Protobufs::Emails;
 
 void TrackedTaskUploadedEmailGenerator::run(int user_id, int task_id, int translator_id)
 {
@@ -136,6 +135,6 @@ void TrackedTaskUploadedEmailGenerator::run(int user_id, int task_id, int transl
             UserDao::log_email_sent(db, user_id, task_id, task->projectid(), project->organisationid(), translator_id, 0, 0, "task_completed_to_subscribed_admin");
         }
     } else {
-        email = this->generateErrorEmail(error);
+        IEmailGenerator::generateErrorEmail(error);
     }
 }

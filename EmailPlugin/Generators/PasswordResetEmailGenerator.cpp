@@ -1,7 +1,5 @@
 #include "PasswordResetEmailGenerator.h"
 
-using namespace  SolasMatch::Common::Protobufs::Emails;
-
 void PasswordResetEmailGenerator::run(int user_id)
 {
     qDebug() << "PasswordResetEmailGenerator user_id" << user_id;
@@ -45,6 +43,6 @@ void PasswordResetEmailGenerator::run(int user_id)
         UserDao::queue_email(db, user_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Password Reset", QString::fromUtf8(email_body.c_str()));
         UserDao::log_email_sent(db, user_id, 0, 0, 0, 0, 0, 0, "password_reset_to_volunteer");
     } else {
-        this->generateErrorEmail(error);
+        IEmailGenerator::generateErrorEmail(error);
     }
 }

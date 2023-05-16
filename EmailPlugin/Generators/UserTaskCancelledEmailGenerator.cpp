@@ -1,7 +1,5 @@
 #include "UserTaskCancelledEmailGenerator.h"
 
-using namespace  SolasMatch::Common::Protobufs::Emails;
-
 static void UserTaskCancelledEmailGenerator::run(int user_id, int task_id)
 {
     qDebug() << "UserTaskCancelledEmailGenerator user_id:" << QString::number(user_id) << "task_id:" << QString::number(task_id);
@@ -68,6 +66,6 @@ static void UserTaskCancelledEmailGenerator::run(int user_id, int task_id)
         UserDao::queue_email(db, user_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Your task was cancelled - we are sorry for the inconvenience!", QString::fromUtf8(email_body.c_str()));
         UserDao::log_email_sent(db, user_id, task_id, 0, 0, 0, 0, 0, "task_cancelled_to_volunteer");
     } else {
-        this->generateErrorEmail(error);
+        IEmailGenerator::generateErrorEmail(error);
     }
 }

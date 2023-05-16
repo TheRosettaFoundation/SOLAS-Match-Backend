@@ -3,7 +3,7 @@
 
 #include "../IEmailGenerator.h"
 
-class OrgDeadlinePassedMailGenerator : public IEmailGenerator
+class OrgDeadlinePassedMailGenerator
 {
 public:
     static void run(int user_id, int task_id);

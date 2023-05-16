@@ -1,8 +1,6 @@
 #include "UserBadgeAwardedGenerator.h"
 #include "Common/DataAccessObjects/BadgeDao.h"
 
-using namespace  SolasMatch::Common::Protobufs::Emails;
-
 void UserBadgeAwardedGenerator::run(int user_id, int badge_id)
 {
     qDebug() << "UserBadgeAwardedGenerator user_id:" << user_id << "badge_id:" << badge_id;
@@ -100,6 +98,6 @@ void UserBadgeAwardedGenerator::run(int user_id, int badge_id)
             UserDao::log_email_sent(db, user_id, 0, 0, badge->owner_id(), 0, 0, badge_id, "achievement_awarded_to_volunteer");
         }
     } else {
-        this->generateErrorEmail(error);
+        IEmailGenerator::generateErrorEmail(error);
     }
 }

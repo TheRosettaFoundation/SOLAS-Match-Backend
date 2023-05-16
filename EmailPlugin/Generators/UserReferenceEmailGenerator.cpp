@@ -5,8 +5,6 @@
 #include "Common/protobufs/models/ArchivedProject.pb.h"
 #include "Common/DataAccessObjects/LanguageDao.h"
 
-using namespace  SolasMatch::Common::Protobufs::Emails;
-
 static void UserReferenceEmailGenerator::run(int user_id)
 {
     qDebug() << "UserReferenceEmailGenerator user_id:" << user_id;
@@ -185,6 +183,6 @@ if (user->id() == 3297) { // test code (3297 is id for Alan Barrett)
         UserDao::queue_email(db, user_id, QString::fromStdString(user->email()), settings.get("site.name") + ": User Reference", QString::fromUtf8(email_body.c_str()));
         UserDao::log_email_sent(db, user_id, 0, 0, 0, 0, 0, 0, "reference_to_volunteer");
     } else {
-        generateErrorEmail(error);
+        IEmailGenerator::generateErrorEmail(error);
     }
 }

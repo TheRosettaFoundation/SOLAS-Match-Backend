@@ -4,8 +4,6 @@
 
 #include "Common/Definitions.h"
 
-using namespace  SolasMatch::Common::Protobufs::Emails;
-
 static void BannedLoginGenerator::run(int user_id)
 {
     qDebug() << "BannedLoginGenerator user_id:" << user_id;
@@ -62,6 +60,6 @@ static void BannedLoginGenerator::run(int user_id)
         UserDao::queue_email(db, user_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Banned Notification", QString::fromUtf8(email_body.c_str()));
         UserDao::log_email_sent(db, user_id, 0, 0, 0, 0, 0, 0, "user_banned_to_volunteer");
     } else {
-        this->generateErrorEmail(error);
+        IEmailGenerator::generateErrorEmail(error);
     }
 }

@@ -3,7 +3,7 @@
 
 #include "../IEmailGenerator.h"
 
-class ProjectImageDisapprovedEmailGenerator  : public IEmailGenerator
+class ProjectImageDisapprovedEmailGenerator
 {
 public:
     static void run(int user_id, int project_id);

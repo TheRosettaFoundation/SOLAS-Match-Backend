@@ -3,7 +3,7 @@
 
 #include "../IEmailGenerator.h"
 
-class PasswordResetEmailGenerator : public IEmailGenerator
+class PasswordResetEmailGenerator
 {
 public:
     static void run(int user_id);

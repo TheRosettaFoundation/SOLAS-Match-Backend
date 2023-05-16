@@ -1,7 +1,5 @@
 #include "EmailVerificationGenerator.h"
 
-using namespace  SolasMatch::Common::Protobufs::Emails;
-
 static void EmailVerificationGenerator::run(int user_id)
 {
     qDebug() << "EmailVerificationGenerator user_id:" << user_id;
@@ -34,6 +32,6 @@ static void EmailVerificationGenerator::run(int user_id)
         UserDao::queue_email(db, user_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Your email verification", QString::fromUtf8(email_body.c_str()));
         UserDao::log_email_sent(db, user_id, 0, 0, 0, 0, 0, 0, "email_verification_to_volunteer");
     } else {
-        this->generateErrorEmail(error);
+        IEmailGenerator::generateErrorEmail(error);
     }
 }

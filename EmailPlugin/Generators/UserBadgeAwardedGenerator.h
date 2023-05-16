@@ -3,7 +3,7 @@
 
 #include "../IEmailGenerator.h"
 
-class UserBadgeAwardedGenerator : public IEmailGenerator
+class UserBadgeAwardedGenerator
 {
 public:
     static void run(int user_id, int badge_id);

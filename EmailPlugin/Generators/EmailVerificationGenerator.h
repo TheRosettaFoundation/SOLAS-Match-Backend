@@ -3,7 +3,7 @@
 
 #include "../IEmailGenerator.h"
 
-class EmailVerificationGenerator : public IEmailGenerator
+class EmailVerificationGenerator
 {
 public:
     static void run(int user_id);

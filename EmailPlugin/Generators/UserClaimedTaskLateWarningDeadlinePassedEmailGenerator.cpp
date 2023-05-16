@@ -2,8 +2,6 @@
 
 #include <QDateTime>
 
-using namespace  SolasMatch::Common::Protobufs::Emails;
-
 static void UserClaimedTaskLateWarningDeadlinePassedEmailGenerator::run(int task_id, int translator_id)
 {
     // qDebug() << "EmailGenerator: Generating UserClaimedTaskLateWarningDeadlinePassed email";
@@ -110,6 +108,6 @@ static void UserClaimedTaskLateWarningDeadlinePassedEmailGenerator::run(int task
             UserDao::log_email_sent(db, translator_id, task_id, task->projectid(), 0, 0, 0, 0, "deadline_reminder_late_to_volunteer");
         }
     } else {
-        this->generateErrorEmail(error);
+        IEmailGenerator::generateErrorEmail(error);
     }
 }

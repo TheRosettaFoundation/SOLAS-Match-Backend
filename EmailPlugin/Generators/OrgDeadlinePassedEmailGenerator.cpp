@@ -1,5 +1,4 @@
 #include "OrgDeadlinePassedEmailGenerator.h"
-using namespace  SolasMatch::Common::Protobufs::Emails;
 
 static void OrgDeadlinePassedMailGenerator::run(int user_id, int task_id)
 {
@@ -50,6 +49,6 @@ static void OrgDeadlinePassedMailGenerator::run(int user_id, int task_id)
         UserDao::queue_email(db, user_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Task Update", QString::fromUtf8(email_body.c_str()), LOW);
         UserDao::log_email_sent(db, user_id, task_id, 0, 0, 0, 0, 0, "deadline_passed_to_subscribed_admin");
     } else {
-        this->generateErrorEmail(error);
+        IEmailGenerator::generateErrorEmail(error);
     }
 }

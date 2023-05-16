@@ -3,7 +3,7 @@
 
 #include "../IEmailGenerator.h"
 
-class OrgTaskRevokedGenerator : public IEmailGenerator
+class OrgTaskRevokedGenerator
 {
 public:
     static void run(int task_id, int user_id, int claimant_id);

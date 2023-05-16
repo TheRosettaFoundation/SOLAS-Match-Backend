@@ -1,7 +1,5 @@
 #include "ProjectImageDisapprovedEmailGenerator.h"
 
-using namespace  SolasMatch::Common::Protobufs::Emails;
-
 static void ProjectImageDisapprovedEmailGenerator::run(int user_id, int project_id)
 {
     qDebug() << "ProjectImageDisapprovedEmailGenerator user_id:" << user_id << "project_id:" << project_id;
@@ -61,7 +59,7 @@ static void ProjectImageDisapprovedEmailGenerator::run(int user_id, int project_
         UserDao::queue_email(db, user_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Project image has been disapproved [Project - " + projectTitle + "]", QString::fromUtf8(email_body.c_str()));
         UserDao::log_email_sent(db, user_id, 0, project_id, project->organisationid(), 0, 0, 0, "image_disapproved_to_org_admin");
     }	else {
-        this->generateErrorEmail(error);
+        IEmailGenerator::generateErrorEmail(error);
     }
 }
 

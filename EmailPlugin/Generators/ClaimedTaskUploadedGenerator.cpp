@@ -1,7 +1,5 @@
 #include "ClaimedTaskUploadedGenerator.h"
 
-using namespace  SolasMatch::Common::Protobufs::Emails;
-
 static void ClaimedTaskUploadedGenerator::run(int task_id, int translator_id)
 {
     qDebug() << "ClaimedTaskUploadedGenerator task_id:" << QString::number(task_id) << "translator_id:"  << QString::number(translator_id);
@@ -87,6 +85,6 @@ static void ClaimedTaskUploadedGenerator::run(int task_id, int translator_id)
         UserDao::queue_email(db, translator_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Task Successfully Completed", QString::fromUtf8(email_body.c_str()));
         UserDao::log_email_sent(db, translator_id, task_id, task->projectid(), project->organisationid(), 0, 0, 0, "task_completed_to_volunteer");
     } else {
-        this->generateErrorEmail(error);
+        IEmailGenerator::generateErrorEmail(error);
     }
 }

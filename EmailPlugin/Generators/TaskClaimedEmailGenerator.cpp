@@ -1,7 +1,5 @@
 #include "TaskClaimedEmailGenerator.h"
 
-using namespace  SolasMatch::Common::Protobufs::Emails;
-
 static void TaskClaimedEmailGenerator::run(int user_id, int task_id, int claimant_id)
 {
     qDebug() << "TaskClaimedEmailGenerator user_id:" << user_id << "task_id:" << QString::number(task_id) << "claimant_id:" << QString::number(claimant_id);
@@ -71,6 +69,6 @@ static void TaskClaimedEmailGenerator::run(int user_id, int task_id, int claiman
         UserDao::queue_email(db, user_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Task Claim Notification", QString::fromUtf8(email_body.c_str()));
         UserDao::log_email_sent(db, user_id, task_id, 0, 0, claimant_id, 0, 0, "task_claimed_to_subscribed_admin");
     } else {
-        this->generateErrorEmail(error);
+        IEmailGenerator::generateErrorEmail(error);
     }
 }

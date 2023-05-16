@@ -1,7 +1,5 @@
 #include "TaskArchivedEmailGenerator.h"
 
-using namespace  SolasMatch::Common::Protobufs::Emails;
-
 static void TaskArchivedEmailGenerator::run(int user_id, int task_id)
 {
     qDebug() << "TaskArchivedEmailGenerator user_id:" << QString::number(user_id) << "task_id:" << QString::number(task_id);
@@ -66,6 +64,6 @@ static void TaskArchivedEmailGenerator::run(int user_id, int task_id)
         UserDao::queue_email(db, user_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Task Updated", QString::fromUtf8(email_body.c_str()));
         UserDao::log_email_sent(db, user_id, task_id, task->projectid(), project->organisationid(), 0, 0, 0, "task_archived_to_subscribed_admin");
     } else {
-        this->generateErrorEmail(error);
+        IEmailGenerator::generateErrorEmail(error);
     }
 }

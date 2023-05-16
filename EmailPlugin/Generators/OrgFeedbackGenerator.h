@@ -3,7 +3,7 @@
 
 #include "../IEmailGenerator.h"
 
-class OrgFeedbackGenerator : public IEmailGenerator
+class OrgFeedbackGenerator
 {
 public:
     static void run(int claimant_id, int task_id, int user_id, QString feedback);

@@ -3,7 +3,7 @@
 
 #include "../IEmailGenerator.h"
 
-class BannedLoginGenerator : public IEmailGenerator
+class BannedLoginGenerator
 {
 public:
     static void run(int user_id);

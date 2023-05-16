@@ -28,8 +28,7 @@
 class IEmailGenerator
 {
 public:
-    IEmailGenerator();
-    QSharedPointer<Email> generateErrorEmail(QString error);
+    static void generateErrorEmail(QString error);
 
 protected:
 };

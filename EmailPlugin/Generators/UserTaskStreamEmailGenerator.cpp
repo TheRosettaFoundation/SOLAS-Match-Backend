@@ -7,8 +7,6 @@
 #include "Common/DataAccessObjects/LanguageDao.h"
 #include "Common/DataAccessObjects/TagDao.h"
 
-using namespace  SolasMatch::Common::Protobufs::Emails;
-
 static void UserTaskStreamEmailGenerator::run(int user_id)
 {
     bool sendEmail = true;
@@ -321,7 +319,7 @@ static void UserTaskStreamEmailGenerator::run(int user_id)
             UserDao::log_email_sent(db, -user_id, 0, 0, 0, 0, 0, 0, "emergency_response_to_volunteer");
     } else {
         if (error != "") {
-            this->generateErrorEmail(error);
+            IEmailGenerator::generateErrorEmail(error);
         }
     }
   }

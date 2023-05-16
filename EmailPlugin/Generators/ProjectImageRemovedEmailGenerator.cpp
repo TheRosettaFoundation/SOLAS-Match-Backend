@@ -1,7 +1,5 @@
 #include "ProjectImageRemovedEmailGenerator.h"
 
-using namespace  SolasMatch::Common::Protobufs::Emails;
-
 static void ProjectImageRemovedEmailGenerator::run(project_id)
 {
     qDebug() << "ProjectImageRemovedEmailGenerator project_id:" << project_id;
@@ -50,6 +48,6 @@ static void ProjectImageRemovedEmailGenerator::run(project_id)
         }
         UserDao::log_email_sent(db, 0, 0, project_id, project->organisationid(), 0, 0, 0, "image_removed_to_admin_emails_list");
     }	else {
-        this->generateErrorEmail(error);
+        IEmailGenerator::generateErrorEmail(error);
     }
 }

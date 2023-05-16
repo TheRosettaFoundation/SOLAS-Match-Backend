@@ -3,7 +3,7 @@
 
 #include "../IEmailGenerator.h"
 
-class UserTaskCancelledEmailGenerator : public IEmailGenerator
+class UserTaskCancelledEmailGenerator
 {
 public:
     static void run(int user_id, int task_id);

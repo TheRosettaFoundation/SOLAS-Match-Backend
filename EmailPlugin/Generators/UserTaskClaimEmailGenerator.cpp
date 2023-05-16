@@ -1,7 +1,5 @@
 #include "UserTaskClaimEmailGenerator.h"
 
-using namespace  SolasMatch::Common::Protobufs::Emails;
-
 static void UserTaskClaimEmailGenerator::run(int user_id, int task_id)
 {
     qDebug() << "UserTaskClaimEmailGenerator user_id:" << user_id << "task_id:" << QString::number(task_id);
@@ -111,6 +109,6 @@ static void UserTaskClaimEmailGenerator::run(int user_id, int task_id)
         }
         UserDao::log_email_sent(db, user_id, task_id, 0, 0, 0, 0, 0, "task_claimed_to_volunteer");
     } else {
-        this->generateErrorEmail(error);
+        IEmailGenerator::generateErrorEmail(error);
     }
 }

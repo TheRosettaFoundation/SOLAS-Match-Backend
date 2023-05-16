@@ -18,8 +18,6 @@
 #include "Common/protobufs/models/ArchivedTask.pb.h"
 #include "Common/protobufs/models/Organisation.pb.h"
 
-using namespace  SolasMatch::Common::Protobufs::Emails;
-
 void OrgMembershipAcceptedGenerator::run(int user_id, int org_id)
 {
     qDebug() << "OrgMembershipAcceptedGenerator user_id:" << user_id << "org_id:" << org_id;
@@ -67,6 +65,6 @@ void OrgMembershipAcceptedGenerator::run(int user_id, int org_id)
         UserDao::queue_email(db, user_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Organisation Membership Update", QString::fromUtf8(email_body.c_str()));
         UserDao::log_email_sent(db, user_id, 0, 0, org_id, 0, 0, 0, "org_membership_accepted_to_volunteer");
     } else {
-        this->generateErrorEmail(error);
+        IEmailGenerator::generateErrorEmail(error);
     }
 }

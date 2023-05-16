@@ -1,8 +1,6 @@
 #include "OrgFeedbackGenerator.h"
 #include <QDebug>
 
-using namespace  SolasMatch::Common::Protobufs::Emails;
-
 static void OrgFeedbackGenerator::run(int claimant_id, int task_id, int user_id, QString feedback)
 {
     qDebug() << "OrgFeedbackGenerator claimant_id:" << QString::number(claimant_id) << "task_id:" << QString::number(task_id) << "user_id (admin or owner):" << QString::number(user_id);
@@ -68,6 +66,6 @@ static void OrgFeedbackGenerator::run(int claimant_id, int task_id, int user_id,
         UserDao::queue_email(db, claimant_id, QString::fromStdString(claimant->email()), settings.get("site.name") + ": Organisation Feedback", QString::fromUtf8(email_body.c_str()));
         UserDao::log_email_sent(db, claimant_id, task_id, task->projectid(), project->organisationid(), 0, user_id, 0, "admin_feedback_to_volunteer");
     } else {
-        this->generateErrorEmail(error);
+        IEmailGenerator::generateErrorEmail(error);
     }
 }

@@ -9,12 +9,7 @@
 
 #include "Common/DataAccessObjects/UserDao.h"
 
-IEmailGenerator::IEmailGenerator()
-{
-    //Default Constructor
-}
-
-QSharedPointer<Email> IEmailGenerator::generateErrorEmail(QString error)
+void IEmailGenerator::generateErrorEmail(QString error)
 {
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
     ConfigParser settings;

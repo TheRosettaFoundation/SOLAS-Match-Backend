@@ -1,7 +1,5 @@
 #include "NewImageUploadedEmailGenerator.h"
 
-using namespace  SolasMatch::Common::Protobufs::Emails;
-
 static void NewImageUploadedEmailGenerator::run(int project_id)
 {
     qDebug() << "NewImageUploadedEmailGenerator project_id: " << project_id;
@@ -50,7 +48,6 @@ static void NewImageUploadedEmailGenerator::run(int project_id)
         }
         UserDao::log_email_sent(db, 0, 0, project_id, project->organisationid(), 0, 0, 0, "image_uploaded_to_admin_emails_list");
     }	else {
-        this->generateErrorEmail(error);
+        IEmailGenerator::generateErrorEmail(error);
     }
 }
-

@@ -1,8 +1,6 @@
 #include "UserFeedbackGenerator.h"
 #include <QDebug>
 
-using namespace  SolasMatch::Common::Protobufs::Emails;
-
 void UserFeedbackGenerator::run(int claimant_id, int task_id, QString feedback)
 {
     qDebug() << "UserFeedbackGenerator claimant_id:" << QString::number(claimant_id) << "task_id:" << QString::number(task_id);
@@ -71,6 +69,6 @@ void UserFeedbackGenerator::run(int claimant_id, int task_id, QString feedback)
             UserDao::log_email_sent(db, user->id(), task_id, task->projectid(), project->organisationid(), claimant_id, 0, 0, "volunteer_feedback_to_subscribed_admin");
         }
     } else {
-        this->generateErrorEmail(error);
+        IEmailGenerator::generateErrorEmail(error);
     }
 }
