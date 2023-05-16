@@ -2,7 +2,7 @@
 
 #include <QDateTime>
 
-static void UserRecordWarningDeadlinePassedEmailGenerator::run(int user_id)
+void UserRecordWarningDeadlinePassedEmailGenerator::run(int user_id)
 {
     qDebug() << "EmailGenerator: Generating UserRecordWarningDeadlinePassed email";
 

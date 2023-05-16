@@ -4,7 +4,7 @@
 
 #include "Common/Definitions.h"
 
-static void BannedLoginGenerator::run(int user_id)
+void BannedLoginGenerator::run(int user_id)
 {
     qDebug() << "BannedLoginGenerator user_id:" << user_id;
 

@@ -1,6 +1,6 @@
 #include "ProjectImageDisapprovedEmailGenerator.h"
 
-static void ProjectImageDisapprovedEmailGenerator::run(int user_id, int project_id)
+void ProjectImageDisapprovedEmailGenerator::run(int user_id, int project_id)
 {
     qDebug() << "ProjectImageDisapprovedEmailGenerator user_id:" << user_id << "project_id:" << project_id;
 

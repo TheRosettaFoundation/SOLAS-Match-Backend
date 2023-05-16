@@ -2,7 +2,7 @@
 
 #include <QDateTime>
 
-static void UserTaskDeadlineEmailGenerator::run(int task_id, int translator_id)
+void UserTaskDeadlineEmailGenerator::run(int task_id, int translator_id)
 {
     // qDebug() << "EmailGenerator: Generating UserClaimedTaskDeadlinePassed email";
 

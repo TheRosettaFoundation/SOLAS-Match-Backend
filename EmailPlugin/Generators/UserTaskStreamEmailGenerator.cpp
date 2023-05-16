@@ -7,7 +7,7 @@
 #include "Common/DataAccessObjects/LanguageDao.h"
 #include "Common/DataAccessObjects/TagDao.h"
 
-static void UserTaskStreamEmailGenerator::run(int user_id)
+void UserTaskStreamEmailGenerator::run(int user_id)
 {
     bool sendEmail = true;
     QString error = "";

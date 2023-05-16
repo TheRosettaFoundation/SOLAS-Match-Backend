@@ -5,7 +5,7 @@
 #include "Common/protobufs/models/ArchivedProject.pb.h"
 #include "Common/DataAccessObjects/LanguageDao.h"
 
-static void UserReferenceEmailGenerator::run(int user_id)
+void UserReferenceEmailGenerator::run(int user_id)
 {
     qDebug() << "UserReferenceEmailGenerator user_id:" << user_id;
 

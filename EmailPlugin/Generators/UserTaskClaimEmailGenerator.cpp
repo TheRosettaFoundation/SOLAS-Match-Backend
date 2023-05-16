@@ -1,6 +1,6 @@
 #include "UserTaskClaimEmailGenerator.h"
 
-static void UserTaskClaimEmailGenerator::run(int user_id, int task_id)
+void UserTaskClaimEmailGenerator::run(int user_id, int task_id)
 {
     qDebug() << "UserTaskClaimEmailGenerator user_id:" << user_id << "task_id:" << QString::number(task_id);
 

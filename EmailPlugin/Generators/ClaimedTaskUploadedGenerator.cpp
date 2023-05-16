@@ -1,6 +1,6 @@
 #include "ClaimedTaskUploadedGenerator.h"
 
-static void ClaimedTaskUploadedGenerator::run(int task_id, int translator_id)
+void ClaimedTaskUploadedGenerator::run(int task_id, int translator_id)
 {
     qDebug() << "ClaimedTaskUploadedGenerator task_id:" << QString::number(task_id) << "translator_id:"  << QString::number(translator_id);
 

@@ -1,6 +1,6 @@
 #include "OrgDeadlinePassedEmailGenerator.h"
 
-static void OrgDeadlinePassedMailGenerator::run(int user_id, int task_id)
+void OrgDeadlinePassedMailGenerator::run(int user_id, int task_id)
 {
     qDebug() << "EmailGenerator - Generating OrgTaskDeadlinePassed";
 

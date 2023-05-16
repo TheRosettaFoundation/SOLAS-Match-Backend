@@ -2,7 +2,7 @@
 
 #include <QDateTime>
 
-static void UserClaimedTaskLateWarningDeadlinePassedEmailGenerator::run(int task_id, int translator_id)
+void UserClaimedTaskLateWarningDeadlinePassedEmailGenerator::run(int task_id, int translator_id)
 {
     // qDebug() << "EmailGenerator: Generating UserClaimedTaskLateWarningDeadlinePassed email";
 

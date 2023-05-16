@@ -1,6 +1,6 @@
 #include "EmailVerificationGenerator.h"
 
-static void EmailVerificationGenerator::run(int user_id)
+void EmailVerificationGenerator::run(int user_id)
 {
     qDebug() << "EmailVerificationGenerator user_id:" << user_id;
 
