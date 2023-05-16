@@ -8,14 +8,10 @@ void BannedLoginGenerator::run(int user_id)
 {
     qDebug() << "BannedLoginGenerator user_id:" << user_id;
 
-    JSON emailMessage;
-    emailMessage.ParseFromString(this->protoBody);
-
     ConfigParser settings;
     QString error = "";
     QSharedPointer<User> user = QSharedPointer<User>();
     QSharedPointer<BannedUser> banData = QSharedPointer<BannedUser>();
-    QSharedPointer<Email> email = QSharedPointer<Email>(new Email());
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
 
     user = UserDao::getUser(db, user_id);
