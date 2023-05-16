@@ -12,6 +12,8 @@ QT       -= gui
 
 TARGET = CorePlugin
 
+TEMPLATE = lib
+
 CONFIG += plugin
 
 DESTDIR = ../plugins
