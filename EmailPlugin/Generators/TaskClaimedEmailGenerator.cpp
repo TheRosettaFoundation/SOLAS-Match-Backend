@@ -1,6 +1,6 @@
 #include "TaskClaimedEmailGenerator.h"
 
-static void TaskClaimedEmailGenerator::run(int user_id, int task_id, int claimant_id)
+void TaskClaimedEmailGenerator::run(int user_id, int task_id, int claimant_id)
 {
     qDebug() << "TaskClaimedEmailGenerator user_id:" << user_id << "task_id:" << QString::number(task_id) << "claimant_id:" << QString::number(claimant_id);
 
