@@ -1,6 +1,8 @@
 #ifndef ORGCREATED_ORGEMAIL_H
 #define ORGCREATED_ORGEMAIL_H
 
+#include "../IEmailGenerator.h"
+
 class OrgCreated_OrgEmail
 {
 public:
