@@ -4,13 +4,15 @@
 #include <QTimer>
 #include <QList>
 #include <QFile>
+#include <QString>
+#include <QSharedPointer>
 
 #include <QDebug>
 
 #include "TimedTask.h"
 
-#include "Common/ConfigParser.h"
-#include "EmailPlugin/IEmailGenerator.h"
+#include "../Common/ConfigParser.h"
+#include "../Common/DataAccessObjects/UserDao.h"
 
 //QT4.8 (see Q_PLUGIN_METADATA for QT5) Q_EXPORT_PLUGIN2(PluginScheduler, PluginScheduler)
 
