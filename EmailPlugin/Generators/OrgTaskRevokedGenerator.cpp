@@ -59,6 +59,6 @@ void OrgTaskRevokedGenerator::run(int task_id, int user_id, int claimant_id)
         UserDao::queue_email(db, user_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Task Revoked", QString::fromUtf8(email_body.c_str()));
         UserDao::log_email_sent(db, user_id, task_id, 0, 0, claimant_id, 0, 0, "task_revoked_to_subscribed_admin");
     } else {
-        this->generateErrorEmail(error);
+        IEmailGenerator::generateErrorEmail(error);
     }
 }

@@ -174,7 +174,7 @@ void UserTaskStreamEmailGenerator::run(int user_id)
         }
     } else {
         if (error != "") {
-            this->generateErrorEmail(error);
+            IEmailGenerator::generateErrorEmail(error);
         }
     }
 
