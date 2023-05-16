@@ -1,6 +1,6 @@
 #include "OrgMembershipRefusedEmailGenerator.h"
 
-static void OrgMembershipRefusedEmailGenerator::run(int user_id, int org_id)
+void OrgMembershipRefusedEmailGenerator::run(int user_id, int org_id)
 {
     qDebug() << "OrgMembershipRefusedEmailGenerator user_id:" << user_id << "org_id:" << org_id;
 
