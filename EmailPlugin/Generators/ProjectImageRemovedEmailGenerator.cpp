@@ -1,6 +1,6 @@
 #include "ProjectImageRemovedEmailGenerator.h"
 
-void ProjectImageRemovedEmailGenerator::run(project_id)
+void ProjectImageRemovedEmailGenerator::run(int project_id)
 {
     qDebug() << "ProjectImageRemovedEmailGenerator project_id:" << project_id;
 
