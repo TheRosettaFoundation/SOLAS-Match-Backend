@@ -19,6 +19,7 @@ CorePlugin::CorePlugin()
 void CorePlugin::run()
 {
     qDebug() << "CorePlugin::Starting new Thread " << this->thread()->currentThreadId();
+/*
     TaskQueueHandler *taskListener = new TaskQueueHandler();
     taskListener->setThreadPool(this->mThreadPool);
     QThread *thread = new QThread();
@@ -39,6 +40,7 @@ void CorePlugin::run()
     projectListener->connect(thread, SIGNAL(started()), SLOT(run()));
     projectListener->moveToThread(thread);
     thread->start();
+*/
 }
 
 void CorePlugin::setThreadPool(QThreadPool *tp)

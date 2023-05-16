@@ -1,11 +1,9 @@
 #ifndef COREPLUGIN_H
 #define COREPLUGIN_H
 
-#include <QObject>
 #include <QtPlugin>
-#include <QThreadPool>
 
-#include "PluginHandler/WorkerInterface.h"
+#include "../PluginHandler/WorkerInterface.h"
 
 class CorePlugin : public WorkerInterface
 {
