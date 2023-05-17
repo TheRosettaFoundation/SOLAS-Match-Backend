@@ -1,13 +1,13 @@
 #ifndef USERQUEUEHANDLER_H
 #define USERQUEUEHANDLER_H
 
-//#include <QObject>
+#include <QObject>
 //#include <QtPlugin>
 //#include <QThreadPool>
 
 //#include "../PluginHandler/WorkerInterface.h"
 
-class UserQueueHandler  : public QObject//: public WorkerInterface
+class UserQueueHandler : public QObject //: public WorkerInterface
 {
     Q_OBJECT
 //    Q_INTERFACES(WorkerInterface)
