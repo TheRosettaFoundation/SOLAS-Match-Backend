@@ -15,9 +15,9 @@
 #include "../EmailPlugin/Generators/UserTaskStreamEmailGenerator.h"
 */
 
+/*
 void TaskStreamNotificationHandler::run()
 {
-/*
     qDebug() << "TaskStreamNotificationHandler";
     ConfigParser settings;
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
@@ -106,5 +106,5 @@ void TaskStreamNotificationHandler::run()
                 i++;
             }
         }
-*/
 }
+*/

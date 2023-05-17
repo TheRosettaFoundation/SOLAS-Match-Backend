@@ -1,6 +1,7 @@
 #ifndef USERSTREAMNOTIFICATIONHANDLER_H
 #define USERSTREAMNOTIFICATIONHANDLER_H
 
+/*
 #include <QObject>
 
 class TaskStreamNotificationHandler
@@ -10,5 +11,6 @@ public:
 
 private:
 };
+*/
 
 #endif // USERSTREAMNOTIFICATIONHANDLER_H
