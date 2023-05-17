@@ -3,7 +3,7 @@
 
 #include <QObject>
 //#include <QtPlugin>
-//#include <QThreadPool>
+#include <QThreadPool>
 
 //#include "../PluginHandler/WorkerInterface.h"
 
@@ -14,7 +14,7 @@ class UserQueueHandler : public QObject //: public WorkerInterface
 
 public:
     UserQueueHandler();
-    //void setThreadPool(QThreadPool *);
+    void setThreadPool(QThreadPool *);
     bool isEnabled();
 
 public slots:
@@ -22,7 +22,7 @@ public slots:
     void consumeFromQueue();
 
 private:
-    //QThreadPool *mThreadPool;
+    QThreadPool *mThreadPool;
 };
 
 #endif // USERQUEUEHANDLER_H
