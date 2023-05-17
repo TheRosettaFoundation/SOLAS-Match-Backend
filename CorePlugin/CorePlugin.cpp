@@ -3,9 +3,9 @@
 #include <QThread>
 #include <QDebug>
 
-#include "TaskQueueHandler.h"
-#include "UserQueueHandler.h"
-#include "ProjectQueueHandler.h"
+//#include "TaskQueueHandler.h"
+//#include "UserQueueHandler.h"
+//#include "ProjectQueueHandler.h"
 #include "Common/ConfigParser.h"
 
 //QT4.8 (see Q_PLUGIN_METADATA for QT5) Q_EXPORT_PLUGIN2(CorePlugin, CorePlugin)
