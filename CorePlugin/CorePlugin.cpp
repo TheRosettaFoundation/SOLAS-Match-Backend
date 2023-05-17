@@ -4,7 +4,7 @@
 #include <QDebug>
 
 //#include "TaskQueueHandler.h"
-//#include "UserQueueHandler.h"
+#include "UserQueueHandler.h"
 //#include "ProjectQueueHandler.h"
 #include "Common/ConfigParser.h"
 
