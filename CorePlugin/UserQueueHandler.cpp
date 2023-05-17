@@ -1,4 +1,3 @@
-/*
 #include "UserQueueHandler.h"
 
 #include <QTimer>
@@ -21,19 +20,14 @@ void UserQueueHandler::run()
     qDebug() << "Running UserQueueHandler on thread " << this->thread()->currentThreadId();
     ConfigParser settings;
 
-*/
-/*
     QTimer *message_queue_read_timer = new QTimer();
     connect(message_queue_read_timer, SIGNAL(timeout()), this, SLOT(consumeFromQueue()));
     message_queue_read_timer->start(settings.get("messaging.poll_rate").toInt());
-*/
-/*
 }
 
 void UserQueueHandler::consumeFromQueue()
 {
-*/
-/*
+qDebug() << "UserQueueHandler::consumeFromQueue()";
     static QMutex mutex;
     if (mutex.tryLock()) {
         if (!QFileInfo::exists("/repo/SOLAS-Match-Backend/STOP_consumeFromQueue")) {
@@ -43,7 +37,7 @@ void UserQueueHandler::consumeFromQueue()
                 qDebug() << "UserQueueHandler type:" << queue_request["type"].toInt();
                 switch (queue_request["type"].toInt()) {
                     case RUNTASKSTREAM:
-                        TaskStreamNotificationHandler::run();
+//                        TaskStreamNotificationHandler::run();
                     break;
                 }
                 UserDao::mark_queue_request_handled(db, queue_request["id"].toInt());
@@ -51,7 +45,4 @@ void UserQueueHandler::consumeFromQueue()
         }
         mutex.unlock();
     } else qDebug() << "UserQueueHandler: Skipping consumeFromQueue() invocation";
-*/
-/*
 }
-*/
