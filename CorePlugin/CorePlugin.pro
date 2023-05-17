@@ -26,10 +26,8 @@ DEFINES += COREPLUGIN_LIBRARY
 
 SOURCES += CorePlugin.cpp \
     UserQueueHandler.cpp \
-    UserJobs/TaskStreamNotificationHandler.cpp \
-    ../EmailPlugin/Generators/UserTaskStreamEmailGenerator.cpp
+    UserJobs/TaskStreamNotificationHandler.cpp
 
 HEADERS += CorePlugin.h \
     UserQueueHandler.h \
     UserJobs/TaskStreamNotificationHandler.h
-    ../EmailPlugin/Generators/UserTaskStreamEmailGenerator.h
