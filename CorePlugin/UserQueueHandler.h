@@ -7,7 +7,7 @@
 
 //#include "../PluginHandler/WorkerInterface.h"
 
-class UserQueueHandler //: public WorkerInterface
+class UserQueueHandler  : public QObject//: public WorkerInterface
 {
     Q_OBJECT
 //    Q_INTERFACES(WorkerInterface)
