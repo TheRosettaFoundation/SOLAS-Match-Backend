@@ -25,9 +25,7 @@ LIBS += -L../Common -lCommon \
 DEFINES += COREPLUGIN_LIBRARY
 
 SOURCES += CorePlugin.cpp \
-    UserQueueHandler.cpp \
-    UserJobs/TaskStreamNotificationHandler.cpp
+    UserQueueHandler.cpp
 
 HEADERS += CorePlugin.h \
-    UserQueueHandler.h \
-    UserJobs/TaskStreamNotificationHandler.h
+    UserQueueHandler.h
