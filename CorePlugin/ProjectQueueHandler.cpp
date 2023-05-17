@@ -1,6 +1,5 @@
 #include "ProjectQueueHandler.h"
 
-#include <QThread>
 #include <QTimer>
 #include <QFileInfo>
 #include <QDebug>
@@ -122,4 +121,14 @@ void ProjectQueueHandler::consumeFromQueue()
         }
         mutex.unlock();
     } else qDebug() << "ProjectQueueHandler: Skipping consumeFromQueue() invocation";
+}
+
+void UserQueueHandler::setThreadPool(QThreadPool *tp)
+{
+    this->mThreadPool = tp;
+}
+
+bool UserQueueHandler::isEnabled()
+{
+    return true;
 }

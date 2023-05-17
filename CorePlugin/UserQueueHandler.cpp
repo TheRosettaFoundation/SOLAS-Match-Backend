@@ -27,7 +27,6 @@ void UserQueueHandler::run()
 
 void UserQueueHandler::consumeFromQueue()
 {
-qDebug() << "UserQueueHandler::consumeFromQueue()";
     static QMutex mutex;
     if (mutex.tryLock()) {
         if (!QFileInfo::exists("/repo/SOLAS-Match-Backend/STOP_consumeFromQueue")) {
@@ -37,7 +36,7 @@ qDebug() << "UserQueueHandler::consumeFromQueue()";
                 qDebug() << "UserQueueHandler type:" << queue_request["type"].toInt();
                 switch (queue_request["type"].toInt()) {
                     case RUNTASKSTREAM:
-//                        TaskStreamNotificationHandler::run();
+                        TaskStreamNotificationHandler::run();
                     break;
                 }
                 UserDao::mark_queue_request_handled(db, queue_request["id"].toInt());

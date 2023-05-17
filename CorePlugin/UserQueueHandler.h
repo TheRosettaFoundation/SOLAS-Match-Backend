@@ -2,8 +2,6 @@
 #define USERQUEUEHANDLER_H
 
 #include <QObject>
-//#include <QtPlugin>
-#include <QThreadPool>
 
 #include "../PluginHandler/WorkerInterface.h"
 

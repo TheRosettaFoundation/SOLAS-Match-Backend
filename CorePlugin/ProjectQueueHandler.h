@@ -2,10 +2,8 @@
 #define PROJECTQUEUEHANDLER_H
 
 #include <QObject>
-#include <QtPlugin>
-#include <QThreadPool>
 
-#include "PluginHandler/WorkerInterface.h"
+#include "../PluginHandler/WorkerInterface.h"
 
 class ProjectQueueHandler : public WorkerInterface
 {

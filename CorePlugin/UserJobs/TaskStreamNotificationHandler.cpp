@@ -1,6 +1,5 @@
-//#include "TaskStreamNotificationHandler.h"
+#include "TaskStreamNotificationHandler.h"
 
-/*
 #include <QDebug>
 #include <QThread>
 
@@ -13,9 +12,7 @@
 #include <QRandomGenerator>
 
 #include "../EmailPlugin/Generators/UserTaskStreamEmailGenerator.h"
-*/
 
-/*
 void TaskStreamNotificationHandler::run()
 {
     qDebug() << "TaskStreamNotificationHandler";
@@ -107,4 +104,3 @@ void TaskStreamNotificationHandler::run()
             }
         }
 }
-*/

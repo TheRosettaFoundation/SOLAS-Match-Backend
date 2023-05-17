@@ -3,9 +3,9 @@
 #include <QThread>
 #include <QDebug>
 
-//#include "TaskQueueHandler.h"
+#include "TaskQueueHandler.h"
 #include "UserQueueHandler.h"
-//#include "ProjectQueueHandler.h"
+#include "ProjectQueueHandler.h"
 #include "Common/ConfigParser.h"
 
 //QT4.8 (see Q_PLUGIN_METADATA for QT5) Q_EXPORT_PLUGIN2(CorePlugin, CorePlugin)
@@ -20,14 +20,12 @@ void CorePlugin::run()
 {
     qDebug() << "CorePlugin::Starting new Thread " << this->thread()->currentThreadId();
     QThread *thread;
-/*
     TaskQueueHandler *taskListener = new TaskQueueHandler();
     taskListener->setThreadPool(this->mThreadPool);
     thread = new QThread();
     taskListener->connect(thread, SIGNAL(started()), SLOT(run()));
     taskListener->moveToThread(thread);
     thread->start();
-*/
 
     UserQueueHandler *userListener = new UserQueueHandler();
     userListener->setThreadPool(this->mThreadPool);
@@ -36,14 +34,12 @@ void CorePlugin::run()
     userListener->moveToThread(thread);
     thread->start();
 
-/*
     ProjectQueueHandler *projectListener = new ProjectQueueHandler();
     projectListener->setThreadPool(this->mThreadPool);
     thread = new QThread();
     projectListener->connect(thread, SIGNAL(started()), SLOT(run()));
     projectListener->moveToThread(thread);
     thread->start();
-*/
 }
 
 void CorePlugin::setThreadPool(QThreadPool *tp)

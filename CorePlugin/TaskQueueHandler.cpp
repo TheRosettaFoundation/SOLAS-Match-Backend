@@ -1,6 +1,5 @@
 #include "TaskQueueHandler.h"
 
-#include <QThread>
 #include <QTimer>
 #include <QFileInfo>
 #include <QDebug>
@@ -48,4 +47,14 @@ void TaskQueueHandler::consumeFromQueue()
         }
         mutex.unlock();
     } else qDebug() << "UserQueueHandler: Skipping consumeFromQueue() invocation";
+}
+
+void UserQueueHandler::setThreadPool(QThreadPool *tp)
+{
+    this->mThreadPool = tp;
+}
+
+bool UserQueueHandler::isEnabled()
+{
+    return true;
 }
