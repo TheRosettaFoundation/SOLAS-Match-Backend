@@ -1,7 +1,6 @@
 #include "UserQueueHandler.h"
 
 #include <QTimer>
-#include <QMutex>
 #include <QFileInfo>
 #include <QDebug>
 
