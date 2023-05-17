@@ -9,7 +9,7 @@
 
 class UserQueueHandler //: public WorkerInterface
 {
-//    Q_OBJECT
+    Q_OBJECT
 //    Q_INTERFACES(WorkerInterface)
 
 public:
