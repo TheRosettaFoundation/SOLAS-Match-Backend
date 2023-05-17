@@ -46,3 +46,13 @@ qDebug() << "UserQueueHandler::consumeFromQueue()";
         mutex.unlock();
     } else qDebug() << "UserQueueHandler: Skipping consumeFromQueue() invocation";
 }
+
+void UserQueueHandler::setThreadPool(QThreadPool *tp)
+{
+    this->mThreadPool = tp;
+}
+
+bool UserQueueHandler::isEnabled()
+{
+    return true;
+}

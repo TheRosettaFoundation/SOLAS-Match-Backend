@@ -5,12 +5,12 @@
 //#include <QtPlugin>
 #include <QThreadPool>
 
-//#include "../PluginHandler/WorkerInterface.h"
+#include "../PluginHandler/WorkerInterface.h"
 
-class UserQueueHandler : public QObject //: public WorkerInterface
+class UserQueueHandler : public WorkerInterface
 {
     Q_OBJECT
-//    Q_INTERFACES(WorkerInterface)
+    Q_INTERFACES(WorkerInterface)
 
 public:
     UserQueueHandler();
