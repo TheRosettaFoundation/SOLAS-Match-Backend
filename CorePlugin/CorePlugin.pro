@@ -24,8 +24,6 @@ LIBS += -L../Common -lCommon \
 
 DEFINES += COREPLUGIN_LIBRARY
 
-SOURCES += CorePlugin.cpp \
-    UserQueueHandler.cpp
+SOURCES += CorePlugin.cpp
 
-HEADERS += CorePlugin.h \
-    UserQueueHandler.h
+HEADERS += CorePlugin.h
