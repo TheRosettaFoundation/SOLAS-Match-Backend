@@ -46,15 +46,15 @@ void TaskQueueHandler::consumeFromQueue()
             }
         }
         mutex.unlock();
-    } else qDebug() << "UserQueueHandler: Skipping consumeFromQueue() invocation";
+    } else qDebug() << "TaskQueueHandler: Skipping consumeFromQueue() invocation";
 }
 
-void UserQueueHandler::setThreadPool(QThreadPool *tp)
+void TaskQueueHandler::setThreadPool(QThreadPool *tp)
 {
     this->mThreadPool = tp;
 }
 
-bool UserQueueHandler::isEnabled()
+bool TaskQueueHandler::isEnabled()
 {
     return true;
 }

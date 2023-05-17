@@ -123,12 +123,12 @@ void ProjectQueueHandler::consumeFromQueue()
     } else qDebug() << "ProjectQueueHandler: Skipping consumeFromQueue() invocation";
 }
 
-void UserQueueHandler::setThreadPool(QThreadPool *tp)
+void ProjectQueueHandler::setThreadPool(QThreadPool *tp)
 {
     this->mThreadPool = tp;
 }
 
-bool UserQueueHandler::isEnabled()
+bool ProjectQueueHandler::isEnabled()
 {
     return true;
 }
