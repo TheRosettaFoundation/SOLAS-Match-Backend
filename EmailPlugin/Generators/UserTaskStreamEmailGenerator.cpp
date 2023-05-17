@@ -9,6 +9,7 @@
 
 void UserTaskStreamEmailGenerator::run(int user_id)
 {
+/*
     bool sendEmail = true;
     QString error = "";
     QList<QSharedPointer<Task> > userTasks;
@@ -320,4 +321,5 @@ void UserTaskStreamEmailGenerator::run(int user_id)
         }
     }
   }
+*/
 }
