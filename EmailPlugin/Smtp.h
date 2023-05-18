@@ -11,9 +11,6 @@
 #include "qxtsmtp.h"
 #include "qxtmailmessage.h"
 
-#include "Email.h"
-#include "EmailDefinitions.h"
-
 class Smtp : public QObject
 {
     Q_OBJECT

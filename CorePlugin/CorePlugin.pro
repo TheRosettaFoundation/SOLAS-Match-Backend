@@ -34,6 +34,7 @@ SOURCES += CorePlugin.cpp \
     UserJobs/OrgCreatedNotifications.cpp \
     UserJobs/TaskRevokedNotificationHandler.cpp \
     ../EmailPlugin/IEmailGenerator.cpp \
+    ../EmailPlugin/Email.cpp \
     ../EmailPlugin/Generators/OrgMembershipAcceptedGenerator.cpp \
     ../EmailPlugin/Generators/OrgMembershipRefusedEmailGenerator.cpp \
     ../EmailPlugin/Generators/PasswordResetEmailGenerator.cpp \
@@ -65,6 +66,9 @@ SOURCES += CorePlugin.cpp \
     ../EmailPlugin/Generators/ProjectImageDisapprovedEmailGenerator.cpp
 
 HEADERS += CorePlugin.h \
+    ../EmailPlugin/IEmailGenerator.h \
+    ../EmailPlugin/EmailDefinitions.h \
+    ../EmailPlugin/Email.h \
     TaskQueueHandler.h \
     TaskJobs/DeadlineChecker.h \
     UserQueueHandler.h \
@@ -73,7 +77,6 @@ HEADERS += CorePlugin.h \
     ProjectQueueHandler.h \
     UserJobs/OrgCreatedNotifications.h \
     UserJobs/TaskRevokedNotificationHandler.h \
-    ../EmailPlugin/IEmailGenerator.h \
     ../EmailPlugin/Generators/OrgMembershipAcceptedGenerator.h \
     ../EmailPlugin/Generators/OrgMembershipRefusedEmailGenerator.h \
     ../EmailPlugin/Generators/PasswordResetEmailGenerator.h \
@@ -91,7 +94,6 @@ HEADERS += CorePlugin.h \
     ../EmailPlugin/Generators/BannedLoginGenerator.h \
     ../EmailPlugin/Generators/TrackedTaskUploadedEmailGenerator.h \
     ../EmailPlugin/Generators/ClaimedTaskUploadedGenerator.h \
-    ../EmailPlugin/EmailDefinitions.h \
     ../EmailPlugin/Generators/OrgFeedbackGenerator.h \
     ../EmailPlugin/Generators/UserFeedbackGenerator.h \
     ../EmailPlugin/Generators/OrgCreated_OrgEmail.h \

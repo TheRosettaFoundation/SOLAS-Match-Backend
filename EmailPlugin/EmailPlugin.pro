@@ -29,7 +29,6 @@ DEFINES += EMAILPLUGIN_LIBRARY
 
 SOURCES += emailplugin.cpp \
     Smtp.cpp \
-    Email.cpp \
     qxtglobal.cpp \
     qxtsmtp.cpp \
     qxtmailmessage.cpp \
@@ -38,7 +37,6 @@ SOURCES += emailplugin.cpp \
 
 HEADERS += emailplugin.h \
     Smtp.h \
-    Email.h \
     qxtglobal.h \
     qxtsmtp.h \
     qxtsmtp_p.h \
