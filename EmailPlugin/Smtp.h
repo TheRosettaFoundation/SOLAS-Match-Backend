@@ -41,7 +41,7 @@ private slots:
     void checkEmailQueue();
 
 private:
-    void send(QMap<QString, QVariant>);
+    int send(QMap<QString, QVariant>);
     QxtSmtp *smtp;
     QString host;
     int port;

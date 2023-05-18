@@ -478,3 +478,21 @@ void UserDao::update_statistics(QSharedPointer<MySQLHandler> db)
 {
     db->call("statsUpdateAll", "");
 }
+
+void UserDao::insert_qxt_smtp_email(QSharedPointer<MySQLHandler> db, int email_request_id, int qxt_smtp_mail_id)
+{
+    ConfigParser settings;
+    QString args =
+        QString::number(email_request_id) + ", " +
+        QString::number(qxt_smtp_mail_id);
+    db->call("insert_qxt_smtp_email", args);
+}
+
+void UserDao::update_qxt_smtp_email(QSharedPointer<MySQLHandler> db, int qxt_smtp_mail_id, int success, int error_code)
+{
+    QString args =
+        QString::number(qxt_smtp_mail_id) + ", " +
+        QString::number(success) + ", " +
+        QString::number(error_code);
+    db->call("update_qxt_smtp_email", args);
+}

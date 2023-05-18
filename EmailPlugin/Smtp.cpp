@@ -54,7 +54,7 @@ void Smtp::init()
     this->smtp->connectToHost(host, port);
 }
 
-void Smtp::send(QMap<QString, QVariant> email_request)
+int Smtp::send(QMap<QString, QVariant> email_request)
 {
     QxtMailMessage mail_message;
     mail_message.setSender(email_request["sender"].toString());
@@ -74,8 +74,9 @@ void Smtp::send(QMap<QString, QVariant> email_request)
             this->init();
         }
         busy = true;
-        smtp->send(mail_message);
+        return smtp->send(mail_message);
     }
+    return 0;
 }
 
 void Smtp::checkEmailQueue()
@@ -99,7 +100,8 @@ void Smtp::checkEmailQueue()
                     qDebug() << email_request["body"].toString();
                     qDebug() << "================================";
 
-                    this->send(email_request);
+                    int qxt_smtp_mail_id = this->send(email_request);
+                    if (qxt_smtp_mail_id) UserDao::insert_qxt_smtp_email(db, email_request["id"].toInt(), qxt_smtp_mail_id);
                 }
                 else qDebug() << "SMTP::checkEmailQueue Skipped: " << email_request["subject"].toString() << email_request["recipient"].toString();
 
@@ -159,11 +161,15 @@ void Smtp::finished()
 
 void Smtp::mailFailed(int mailID, int errorCode)
 {
+    QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
+    UserDao::update_qxt_smtp_email(db, mailID, 0, errorCode);
     qDebug() << "SMTP::Mail (" << mailID << ") failed with error code " << errorCode;
 }
 
 void Smtp::mailSent(int mailID)
 {
+    QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
+    UserDao::update_qxt_smtp_email(db, mailID, 1, 0);
     qDebug() << "Mail (" << mailID << ") sent successfully";
 }
 
