@@ -107,7 +107,7 @@ void ProjectQueueHandler::consumeFromQueue()
                         SendTaskUploadNotifications::run(queue_request["task_id"].toInt());
                         break;
                     case TaskRevokedNotification:
-                        TaskRevokedNotificationHandler::run(queue_request["claimant_id"].toInt(), queue_request["task_id"].toInt());
+                        TaskRevokedNotificationHandler::run(queue_request["task_id"].toInt(), queue_request["claimant_id"].toInt());
                         break;
                     case UserFeedback:
                         UserFeedbackGenerator::run(queue_request["claimant_id"].toInt(), queue_request["task_id"].toInt(), queue_request["feedback"].toString());
