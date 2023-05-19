@@ -49,6 +49,7 @@ private:
     QString only_send;
     QList<QByteArray> *mail_text_hashes;
     unsigned int count_checkEmailQueue;
+    unsigned long long email_request_id;
 };
 
 #endif // SMTP_H

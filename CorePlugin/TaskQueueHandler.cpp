@@ -42,7 +42,7 @@ void TaskQueueHandler::consumeFromQueue()
                         UserDao::update_statistics(db);
                         break;
                 }
-                UserDao::mark_queue_request_handled(db, queue_request["id"].toInt());
+                UserDao::mark_queue_request_handled(db, queue_request["id"].toUlongLong());
             }
         }
         mutex.unlock();

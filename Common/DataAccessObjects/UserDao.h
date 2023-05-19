@@ -64,13 +64,13 @@ public:
     static void log_email_sent(QSharedPointer<MySQLHandler> db, int recipient_id, int task_id, int project_id, int org_id, int translator_id, int admin_id, int badge_id, QString topic);
     static void queue_email(QSharedPointer<MySQLHandler> db, int recipient_id, QString recipient, QString subject, QString body, int priority = 3);
     static QMap<QString, QVariant> get_email_request(QSharedPointer<MySQLHandler> db);
-    static void mark_email_request_sent(QSharedPointer<MySQLHandler> db, int id);
+    static void mark_email_request_sent(QSharedPointer<MySQLHandler> db, unsigned long long id);
     static void insert_queue_request(QSharedPointer<MySQLHandler> db, int queue, int type);
     static QMap<QString, QVariant> get_queue_request(QSharedPointer<MySQLHandler> db, int queue);
-    static void mark_queue_request_handled(QSharedPointer<MySQLHandler> db, int id);
+    static void mark_queue_request_handled(QSharedPointer<MySQLHandler> db, unsigned long long id);
     static void update_statistics(QSharedPointer<MySQLHandler> db);
-    static void insert_qxt_smtp_email(QSharedPointer<MySQLHandler> db, int email_request_id, int qxt_smtp_mail_id);
-    static void update_qxt_smtp_email(QSharedPointer<MySQLHandler> db, int qxt_smtp_mail_id, int success, int error_code);
+    static void insert_qxt_smtp_email(QSharedPointer<MySQLHandler> db, unsigned long long email_request_id, int qxt_smtp_mail_id);
+    static void update_qxt_smtp_email(QSharedPointer<MySQLHandler> db, unsigned long long email_request_id, int qxt_smtp_mail_id, int success, int error_code);
     static QList<int> get_users_list_for_earthquake(QSharedPointer<MySQLHandler> db);
     static QList<QSharedPointer<Task> > get_user_earthquake_tasks(QSharedPointer<MySQLHandler> db, int userId);
 };

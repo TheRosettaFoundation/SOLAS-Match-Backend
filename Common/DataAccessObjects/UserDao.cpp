@@ -426,7 +426,7 @@ QMap<QString, QVariant> UserDao::get_email_request(QSharedPointer<MySQLHandler> 
     return row;
 }
 
-void UserDao::mark_email_request_sent(QSharedPointer<MySQLHandler> db, int id)
+void UserDao::mark_email_request_sent(QSharedPointer<MySQLHandler> db, unsigned long long id)
 {
     db->call("mark_email_request_sent", QString::number(id));
 }
@@ -469,7 +469,7 @@ QMap<QString, QVariant> UserDao::get_queue_request(QSharedPointer<MySQLHandler> 
     return row;
 }
 
-void UserDao::mark_queue_request_handled(QSharedPointer<MySQLHandler> db, int id)
+void UserDao::mark_queue_request_handled(QSharedPointer<MySQLHandler> db, unsigned long long id)
 {
     db->call("mark_queue_request_handled", QString::number(id));
 }
@@ -479,7 +479,7 @@ void UserDao::update_statistics(QSharedPointer<MySQLHandler> db)
     db->call("statsUpdateAll", "");
 }
 
-void UserDao::insert_qxt_smtp_email(QSharedPointer<MySQLHandler> db, int email_request_id, int qxt_smtp_mail_id)
+void UserDao::insert_qxt_smtp_email(QSharedPointer<MySQLHandler> db, unsigned long long email_request_id, int qxt_smtp_mail_id)
 {
     ConfigParser settings;
     QString args =
@@ -488,7 +488,7 @@ void UserDao::insert_qxt_smtp_email(QSharedPointer<MySQLHandler> db, int email_r
     db->call("insert_qxt_smtp_email", args);
 }
 
-void UserDao::update_qxt_smtp_email(QSharedPointer<MySQLHandler> db, int qxt_smtp_mail_id, int success, int error_code)
+void UserDao::update_qxt_smtp_email(QSharedPointer<MySQLHandler> db, unsigned long long email_request_id, int qxt_smtp_mail_id, int success, int error_code)
 {
     QString args =
         QString::number(qxt_smtp_mail_id) + ", " +

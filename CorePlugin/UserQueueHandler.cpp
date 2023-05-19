@@ -39,7 +39,7 @@ void UserQueueHandler::consumeFromQueue()
                         TaskStreamNotificationHandler::run();
                     break;
                 }
-                UserDao::mark_queue_request_handled(db, queue_request["id"].toInt());
+                UserDao::mark_queue_request_handled(db, queue_request["id"].toUlongLong());
             }
         }
         mutex.unlock();
