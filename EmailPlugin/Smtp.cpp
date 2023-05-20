@@ -163,14 +163,14 @@ void Smtp::finished()
 void Smtp::mailFailed(int mailID, int errorCode)
 {
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
-    UserDao::update_qxt_smtp_email(db, email_request_id!!!, mailID, 0, errorCode);
+    UserDao::update_qxt_smtp_email(db, email_request_id, mailID, 0, errorCode);
     qDebug() << "SMTP::Mail (" << mailID << ") failed with error code " << errorCode;
 }
 
 void Smtp::mailSent(int mailID)
 {
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
-    UserDao::update_qxt_smtp_email(db, email_request_id!!!, mailID, 1, 0);
+    UserDao::update_qxt_smtp_email(db, email_request_id, mailID, 1, 0);
     qDebug() << "Mail (" << mailID << ") sent successfully";
 }
 
