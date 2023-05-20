@@ -488,7 +488,7 @@ void UserDao::insert_qxt_smtp_email(QSharedPointer<MySQLHandler> db, unsigned lo
     db->call("insert_qxt_smtp_email", args);
 }
 
-void UserDao::update_qxt_smtp_email(QSharedPointer<MySQLHandler> db, unsigned long long email_request_id, int qxt_smtp_mail_id, int success, int error_code)
+void UserDao::update_qxt_smtp_email(QSharedPointer<MySQLHandler> db, int qxt_smtp_mail_id, int success, int error_code)
 {
     QString args =
         QString::number(qxt_smtp_mail_id) + ", " +
