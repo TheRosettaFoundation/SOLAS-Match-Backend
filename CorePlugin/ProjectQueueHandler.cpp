@@ -116,7 +116,7 @@ void ProjectQueueHandler::consumeFromQueue()
                         UserTaskCancelledEmailGenerator::run(queue_request["user_id"].toInt(), queue_request["task_id"].toInt());
                         break;
                 }
-                UserDao::mark_queue_request_handled(db, queue_request["id"].toUlongLong());
+                UserDao::mark_queue_request_handled(db, queue_request["id"].toULongLong());
             }
         }
         mutex.unlock();
