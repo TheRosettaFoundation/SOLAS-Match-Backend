@@ -21,7 +21,7 @@ void ProjectImageRemovedEmailGenerator::run(int project_id)
                     QString::number(project->organisationid());
         }
 
-        if (!project->imageuploaded()) {
+        if (project->imageuploaded()) {
             error = "Project image removed email generation failed. Invalid project image upload status :" +
                     QString::number(project->imageuploaded());
         }
