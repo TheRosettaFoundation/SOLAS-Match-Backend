@@ -4,7 +4,7 @@
 
 void UserRecordWarningDeadlinePassedEmailGenerator::run(int user_id)
 {
-    qDebug() << "EmailGenerator: Generating UserRecordWarningDeadlinePassed email";
+    // qDebug() << "EmailGenerator: Generating UserRecordWarningDeadlinePassed email";
 
     ConfigParser settings;
     QString error = "";
