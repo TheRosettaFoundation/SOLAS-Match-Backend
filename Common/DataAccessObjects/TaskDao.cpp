@@ -534,7 +534,7 @@ std::string TaskDao::get_matecat_url(QSharedPointer<MySQLHandler> db, QSharedPoi
 std::string TaskDao::get_task_url(QSharedPointer<MySQLHandler> db, int task_id)
 {
     QString url("");
-    mQuery = db->call("get_task_url", QString::number(task_id));
+    QSharedPointer<QSqlQuery> mQuery = db->call("get_task_url", QString::number(task_id));
     if (mQuery->first()) {
         QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
         url = MySQLHandler::getValueFromQuery(fieldMap.value("url"), mQuery).toString();
