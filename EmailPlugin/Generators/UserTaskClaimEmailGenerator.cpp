@@ -46,6 +46,7 @@ void UserTaskClaimEmailGenerator::run(int user_id, int task_id)
                 task_type = task_type_detail["type_text"].toString().toStdString();
               if (task_type_detail["shell_task"].toInt()) {
                     shell_task = true;
+                  if (TaskDao::get_task_url(db, task->id()) != "")
                     dict.ShowSection(task_type_detail["show_section"].toString().toStdString());
               } else {
                 if (TaskDao::is_task_translated_in_memsource(db, task)) {
