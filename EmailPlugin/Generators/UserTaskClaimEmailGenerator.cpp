@@ -38,16 +38,22 @@ void UserTaskClaimEmailGenerator::run(int user_id, int task_id)
 
         QMap<QString, QVariant> memsource_task = TaskDao::get_memsource_task(db, task->id());
 
+        bool shell_task = false;
         std::string task_type = "Invalid Type";
         for (int i = 0; i < task_type_details.size(); i++) {
             QMap<QString, QVariant> task_type_detail = task_type_details[i];
             if (task->tasktype() == task_type_detail["type_enum"].toInt()) {
                 task_type = task_type_detail["type_text"].toString().toStdString();
+              if (task_type_detail["shell_task"].toInt()) {
+                    shell_task = true;
+                    dict.ShowSection(task_type_detail["show_section"].toString().toStdString());
+              } else {
                 if (TaskDao::is_task_translated_in_memsource(db, task)) {
                     dict.ShowSection(task_type_detail["show_section"].toString().toStdString());
                 } else {
                     dict.ShowSection(task_type_detail["show_section"].toString().toStdString() + "_WAIT");
                 }
+              }
             }
         }
         dict.SetValue("TASK_TYPE", task_type);
@@ -57,7 +63,11 @@ void UserTaskClaimEmailGenerator::run(int user_id, int task_id)
         dict.SetValue("SOURCE_LANGUAGE",taskSourceLocale.languagename());
         dict.SetValue("TARGET_LANGUAGE",taskTargetLocale.languagename());
 
+        if (shell_task) {
+            dict.SetValue("MATECAT", TaskDao::get_task_url(db, task->id()));
+        } else {
         dict.SetValue("MATECAT", TaskDao::get_matecat_url(db, task, memsource_task));
+        }
 
         QString notificationPhrase = "";
         if (TaskDao::is_chunked_task(db, task->id())) {

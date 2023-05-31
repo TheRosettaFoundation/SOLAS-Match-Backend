@@ -55,6 +55,12 @@
     <strong>You will receive an email notification when the task is ready for you to proofread.</strong> The email will include a link to the proofreading and approval task in Phrase TMS, our CAT tool.
 </p>
 {{/APPROVAL_WAIT}}
+{{#SHELLTASK}}
+<p>
+    Please use this URL to work on the task:<br />
+    <a href="{{MATECAT}}">Work URL</a><br />
+</p>
+{{/SHELLTASK}}
 <p>
     If you have any questions about this task, please leave a comment in the TWB Community discussion thread associated with your project:<br />
     <a href="{{COMMUNITY}}">{{COMMUNITY}}</a>
