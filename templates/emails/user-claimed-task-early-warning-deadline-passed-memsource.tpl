@@ -61,7 +61,7 @@
 </p>
 {{/SHELLTASK}}
 <p>
-    If you have questions about the deadline or any other questions, please leave a comment in the TWB Community discussion thread associated with your project:<br />
+    If you have questions about the deadline or any other questions, please leave a comment in the TWB Community forum thread associated with this project:<br />
     <a href="{{COMMUNITY}}">{{COMMUNITY}}</a>
 </p>
 
