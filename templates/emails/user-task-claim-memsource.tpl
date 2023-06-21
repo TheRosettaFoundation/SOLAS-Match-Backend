@@ -6,10 +6,10 @@
         Hello,
     {{/NO_USER_NAME}}
 </p>
+{{#TRANSLATION}}
 <p>
     You claimed a {{TASK_TYPE}} task for "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} with Translators without Borders.
 </p>
-{{#TRANSLATION}}
 <p>
     Please translate this task in Phrase TMS, our CAT tool:<br />
     <a href="{{MATECAT}}">Translation URL</a><br />
@@ -20,6 +20,9 @@
 {{/TRANSLATION}}
 {{#TRANSLATION_WAIT}}
 <p>
+    You claimed a {{TASK_TYPE}} task for "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} with Translators without Borders.
+</p>
+<p>
     Please translate this task in Phrase TMS, our CAT tool:<br />
     <a href="{{MATECAT}}">Translation URL</a><br />
 </p>
@@ -28,6 +31,9 @@
 </p>
 {{/TRANSLATION_WAIT}}
 {{#REVISING}}
+<p>
+    You claimed a {{TASK_TYPE}} task for "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} with Translators without Borders.
+</p>
 <p>
     Please revise this task in Phrase TMS, our CAT tool:<br />
     <a href="{{MATECAT}}">Revision URL</a><br />
@@ -38,10 +44,16 @@
 {{/REVISING}}
 {{#REVISING_WAIT}}
 <p>
+    You claimed a {{TASK_TYPE}} task for "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} with Translators without Borders.
+</p>
+<p>
     <strong>You will receive an email notification when the task is ready for you to revise.</strong> The email will include a link to the revision task in Phrase TMS, our CAT tool.
 </p>
 {{/REVISING_WAIT}}
 {{#APPROVAL}}
+<p>
+    You claimed a {{TASK_TYPE}} task for "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} with Translators without Borders.
+</p>
 <p>
     Please proofread this task in Phrase TMS, our CAT tool:<br />
     <a href="{{MATECAT}}">Proofreading and Approval URL</a><br />
@@ -52,17 +64,23 @@
 {{/APPROVAL}}
 {{#APPROVAL_WAIT}}
 <p>
+    You claimed a {{TASK_TYPE}} task for "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} with Translators without Borders.
+</p>
+<p>
     <strong>You will receive an email notification when the task is ready for you to proofread.</strong> The email will include a link to the proofreading and approval task in Phrase TMS, our CAT tool.
 </p>
 {{/APPROVAL_WAIT}}
 {{#SHELLTASK}}
+<p>
+You have been assigned a {{TASK_TYPE}} task for "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} with Translators without Borders.
+</p>
 <p>
     Please use this URL to work on the task:<br />
     <a href="{{MATECAT}}">Work URL</a><br />
 </p>
 {{/SHELLTASK}}
 <p>
-    If you have any questions about this task, please leave a comment in the TWB Community discussion thread associated with your project:<br />
+    If you have any questions about this task, please leave a comment in the TWB Community forum thread associated with this project:<br />
     <a href="{{COMMUNITY}}">{{COMMUNITY}}</a>
 </p>
 <p>
