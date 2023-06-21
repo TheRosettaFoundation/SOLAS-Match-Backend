@@ -11,7 +11,7 @@ If you have any questions about this task, please leave a comment in the TWB Com
 {{/CLAIMED}}
 {{#IN_PROGRESS}}
 <p>
-You will be able to find this task in your claimed tasks section, if you select Any Task Status. All the words you already completed for this task will count towards your donated words or hours. If you have any questions about this task, please leave a comment in the TWB Community forum thread associated with this project: <a href="{{COMMUNITY}}">{{COMMUNITY}}</a>
+You will be able to find this task in your claimed tasks section, if you select Any Task Status. All the work you already completed for this task will count towards your donated words or hours. If you have any questions about this task, please leave a comment in the TWB Community forum thread associated with this project: <a href="{{COMMUNITY}}">{{COMMUNITY}}</a>
 </p>
 {{/IN_PROGRESS}}
 <p>
