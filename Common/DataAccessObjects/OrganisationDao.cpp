@@ -17,19 +17,3 @@ QSharedPointer<Organisation> OrganisationDao::getOrg(QSharedPointer<MySQLHandler
 
     return org;
 }
-
-QList<QSharedPointer<User> > OrganisationDao::getOrgAdmins(QSharedPointer<MySQLHandler> db, int orgId)
-{
-    QList<QSharedPointer<User> > users = QList<QSharedPointer<User> >();
-    QString args = QString::number(orgId);
-    QSharedPointer<QSqlQuery> result = db->call("getAdmins", args);
-    if (result->first()) {
-        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(result);
-        do {
-            QSharedPointer<User> user = QSharedPointer<User>(new User());
-            ModelGenerator::Generate(result, user, fieldMap);
-            users.append(user);
-        } while (result->next());
-    }
-    return users;
-}

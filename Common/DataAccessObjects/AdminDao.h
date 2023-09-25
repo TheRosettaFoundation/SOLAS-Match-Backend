@@ -13,7 +13,6 @@ class AdminDao
 {
 public:
     static QList<QSharedPointer<User> > getAdmins(QSharedPointer<MySQLHandler> db, int orgId = -1);
-    static QList<QSharedPointer<User> > getAdminsForOrg(QSharedPointer<MySQLHandler> db, int orgId = -1);
 };
 
 #endif // ADMINDAO_H

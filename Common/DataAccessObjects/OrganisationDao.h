@@ -16,8 +16,6 @@ class OrganisationDao
 {
 public:
     static QSharedPointer<Organisation> getOrg(QSharedPointer<MySQLHandler> db, int org_id);
-    static QList<QSharedPointer<User> > getOrgAdmins(QSharedPointer<MySQLHandler> db, int orgId);
-
 };
 
 #endif // ORGANISATIONDAO_H
