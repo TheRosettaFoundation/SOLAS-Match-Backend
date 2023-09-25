@@ -10,8 +10,6 @@
 #include "UserJobs/TaskRevokedNotificationHandler.h"
 #include "TaskJobs/SendTaskUploadNotifications.h"
 
-#include "../EmailPlugin/Generators/OrgMembershipAcceptedGenerator.h"
-#include "../EmailPlugin/Generators/OrgMembershipRefusedEmailGenerator.h"
 #include "../EmailPlugin/Generators/PasswordResetEmailGenerator.h"
 #include "../EmailPlugin/Generators/TaskArchivedEmailGenerator.h"
 #include "../EmailPlugin/Generators/TaskClaimedEmailGenerator.h"
@@ -27,8 +25,6 @@
 #include "../EmailPlugin/Generators/UserBadgeAwardedGenerator.h"
 #include "../EmailPlugin/Generators/NewImageUploadedEmailGenerator.h"
 #include "../EmailPlugin/Generators/ProjectImageRemovedEmailGenerator.h"
-#include "../EmailPlugin/Generators/ProjectImageApprovedEmailGenerator.h"
-#include "../EmailPlugin/Generators/ProjectImageDisapprovedEmailGenerator.h"
 
 ProjectQueueHandler::ProjectQueueHandler()
 {
@@ -73,20 +69,8 @@ void ProjectQueueHandler::consumeFromQueue()
                     case OrgCreatedNotificationRequest:
                         OrgCreatedNotifications::run(queue_request["org_id"].toInt());
                         break;
-                    case OrgMembershipAccepted:
-                        OrgMembershipAcceptedGenerator::run(queue_request["user_id"].toInt(), queue_request["org_id"].toInt());
-                        break;
-                    case OrgMembershipRefused:
-                        OrgMembershipRefusedEmailGenerator::run(queue_request["user_id"].toInt(), queue_request["org_id"].toInt());
-                        break;
                     case ProjectImageUploadedEmail:
                         NewImageUploadedEmailGenerator::run(queue_request["project_id"].toInt());
-                        break;
-                    case ProjectImageApprovedEmail:
-                        ProjectImageApprovedEmailGenerator::run(queue_request["user_id"].toInt(), queue_request["project_id"].toInt());
-                        break;
-                    case ProjectImageDisapprovedEmail:
-                        ProjectImageDisapprovedEmailGenerator::run(queue_request["user_id"].toInt(), queue_request["project_id"].toInt());
                         break;
                     case ProjectImageRemovedEmail:
                         ProjectImageRemovedEmailGenerator::run(queue_request["project_id"].toInt());
