@@ -10,11 +10,11 @@ QList<QSharedPointer<User> > AdminDao::getAdmins(QSharedPointer<MySQLHandler> db
     if (orgId > 0) {
         args += QString::number(orgId);
         args += ",";
-        uint64_t NGO_LINGUIST = ????????????;
+        uint64_t NGO_LINGUIST = 2;
         args += QString::number(NGO_LINGUIST); // Exclude
     } else {
         args += "0,";
-        uint64_t LINGUIST = ????????????;
+        uint64_t LINGUIST = 1;
         args += QString::number(LINGUIST); // Exclude
     }
 
