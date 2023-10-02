@@ -12,7 +12,7 @@ void invite::run(int special_registration_id)
     if (special_registration.isEmpty()) error = "invite: Failed to generate invite email. Could not find special_registration record in the DB, searched for special_registration_id: " + QString::number(special_registration_id);
 
     if (error == "") {
-        ULongLong roles = special_registration["roles"].toULongLong();
+        unsigned long long int roles = special_registration["roles"].toULongLong();
         QString email   = special_registration["email"].toString();
         int org_id      = special_registration["org_id"].toInt();
         int admin_id    = special_registration["admin_id"].toInt();
