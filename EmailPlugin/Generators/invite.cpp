@@ -13,13 +13,14 @@ void invite::run(int special_registration_id)
 
     if (error == "") {
         ULongLong roles = special_registration["roles"].toULongLong();
-        QString email = special_registration["email"].toString();
-        int org_id = special_registration["org_id"].toInt();
+        QString email   = special_registration["email"].toString();
+        int org_id      = special_registration["org_id"].toInt();
+        int admin_id    = special_registration["admin_id"].toInt();
         if (org_id == 0) {
 
 
 
-
+// invite_site.tpl
 
 
 
@@ -42,11 +43,11 @@ void invite::run(int special_registration_id)
             footer_dict -> SetFilename(footer_location.toStdString());
 
             std::string email_body;
-            QString templateLocation = QString(TEMPLATE_DIRECTORY) + "emails/org-created.org-admin.tpl";
+            QString templateLocation = QString(TEMPLATE_DIRECTORY) + "emails/invite_org.tpl";
             ctemplate::ExpandTemplate(templateLocation.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
-            UserDao::queue_email(db, admin_id, QString::fromStdString(admin->email()), settings.get("site.name") + ": Organisation Created", QString::fromUtf8(email_body.c_str()));
-            UserDao::log_email_sent(db, admin_id, 0, 0, org_id, 0, 0, 0, "org_created_to_org_admin");
+            UserDao::queue_email(db, 0, email, settings.get("site.name") + ": Invitation to Join Organisation", QString::fromUtf8(email_body.c_str()));
+            UserDao::log_email_sent(db, 0, 0, 0, org_id, 0, admin_id, 0, "invite_to_org");
         }
     } else {
         IEmailGenerator::generateErrorEmail(error);
