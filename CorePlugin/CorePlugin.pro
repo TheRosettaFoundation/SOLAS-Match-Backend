@@ -60,6 +60,7 @@ SOURCES += CorePlugin.cpp \
     ../EmailPlugin/Generators/OrgTaskRevokedGenerator.cpp \
     ../EmailPlugin/Generators/NewImageUploadedEmailGenerator.cpp \
     ../EmailPlugin/Generators/ProjectImageRemovedEmailGenerator.cpp \
+    ../EmailPlugin/Generators/invite.cpp \
 
 HEADERS += CorePlugin.h \
     ../EmailPlugin/IEmailGenerator.h \
@@ -98,3 +99,4 @@ HEADERS += CorePlugin.h \
     ../EmailPlugin/Generators/OrgTaskRevokedGenerator.h \
     ../EmailPlugin/Generators/NewImageUploadedEmailGenerator.h \
     ../EmailPlugin/Generators/ProjectImageRemovedEmailGenerator.h \
+    ../EmailPlugin/Generators/invite.h \

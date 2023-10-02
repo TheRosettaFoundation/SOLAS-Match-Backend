@@ -88,6 +88,7 @@ struct CidMatch {
 #define TaskRevokedNotification       102
 #define UserFeedback                   11
 #define UserTaskCancelled              36
+#define OrgInvite                      37
 
 // email send priorities
 #define HIGH    3

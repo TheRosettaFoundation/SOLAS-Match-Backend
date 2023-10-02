@@ -496,3 +496,24 @@ void UserDao::update_qxt_smtp_email(QSharedPointer<MySQLHandler> db, int qxt_smt
         QString::number(error_code);
     db->call("update_qxt_smtp_email", args);
 }
+
+QMap<QString, QVariant> UserDao::get_special_registration_record(QSharedPointer<MySQLHandler> db, int special_registration_id)
+{
+    QMap<QString, QVariant> row = QMap<QString, QVariant>();
+
+    QSharedPointer<QSqlQuery> mQuery = db->call("get_special_registration_record", QString::number(special_registration_id));
+    if(mQuery->first()) {
+        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
+        row["id"]           = MySQLHandler::getValueFromQuery(fieldMap.value("id"), mQuery);
+        row["roles"]        = MySQLHandler::getValueFromQuery(fieldMap.value("roles"), mQuery);
+        row["email"]        = MySQLHandler::getValueFromQuery(fieldMap.value("email"), mQuery);
+        row["used"]         = MySQLHandler::getValueFromQuery(fieldMap.value("used"), mQuery);
+        row["org_id"]       = MySQLHandler::getValueFromQuery(fieldMap.value("org_id"), mQuery);
+        row["admin_id"]     = MySQLHandler::getValueFromQuery(fieldMap.value("admin_id"), mQuery);
+        row["user_id"]      = MySQLHandler::getValueFromQuery(fieldMap.value("user_id"), mQuery);
+        row["date_created"] = MySQLHandler::getValueFromQuery(fieldMap.value("date_created"), mQuery);
+        row["date_expires"] = MySQLHandler::getValueFromQuery(fieldMap.value("date_expires"), mQuery);
+        row["date_used"]    = MySQLHandler::getValueFromQuery(fieldMap.value("date_used"), mQuery);
+    }
+    return row;
+}

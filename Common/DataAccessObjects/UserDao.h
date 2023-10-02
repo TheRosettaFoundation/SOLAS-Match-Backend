@@ -73,6 +73,7 @@ public:
     static void update_qxt_smtp_email(QSharedPointer<MySQLHandler> db, int qxt_smtp_mail_id, int success, int error_code);
     static QList<int> get_users_list_for_earthquake(QSharedPointer<MySQLHandler> db);
     static QList<QSharedPointer<Task> > get_user_earthquake_tasks(QSharedPointer<MySQLHandler> db, int userId);
+    static QMap<QString, QVariant> get_special_registration_record(QSharedPointer<MySQLHandler> db, int special_registration_id);
 };
 
 #endif  //USERDAO_H
