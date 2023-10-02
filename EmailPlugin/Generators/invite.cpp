@@ -8,7 +8,7 @@ void invite::run(int special_registration_id)
     ConfigParser settings;
     QString error = "";
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
-    QMap<QString, QVariant> special_registration = UserDao::get_special_registration_record(db, special_registration_id)
+    QMap<QString, QVariant> special_registration = UserDao::get_special_registration_record(db, special_registration_id, settings.get("site.reg_key"))
     if (special_registration.isEmpty()) error = "invite: Failed to generate invite email. Could not find special_registration record in the DB, searched for special_registration_id: " + QString::number(special_registration_id);
 
     if (error == "") {
@@ -16,11 +16,16 @@ void invite::run(int special_registration_id)
         QString email   = special_registration["email"].toString();
         int org_id      = special_registration["org_id"].toInt();
         int admin_id    = special_registration["admin_id"].toInt();
-        if (org_id == 0) {
-            QString invite_link = settings.get("site.url") + "org/" + QString::number(org->id()) + "/profile";
-            dict.SetValue("INVITE_LINK", invite_link.toStdString());
+        QString url     = special_registration["url"].toString();
 
-            std::string email_body;
+        std::string email_body;
+
+        ctemplate::TemplateDictionary dict("invite_org");
+
+        QString invite_link = settings.get("site.url") + url;
+        dict.SetValue("INVITE_LINK", invite_link.toStdString());
+
+        if (org_id == 0) {
             QString templateLocation = QString(TEMPLATE_DIRECTORY) + "emails/invite_site.tpl";
             ctemplate::ExpandTemplate(templateLocation.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
@@ -28,13 +33,8 @@ void invite::run(int special_registration_id)
             UserDao::log_email_sent(db, 0, 0, 0, 0, 0, admin_id, 0, "invite_to_site");
         } else {
             QSharedPointer<Organisation> org = OrganisationDao::getOrg(db, org_id);
-            ctemplate::TemplateDictionary dict("invite_org");
             dict.SetValue("ORG_NAME", org->name());
 
-            QString invite_link = settings.get("site.url") + "org/" + QString::number(org->id()) + "/profile";
-            dict.SetValue("INVITE_LINK", invite_link.toStdString());
-
-            std::string email_body;
             QString templateLocation = QString(TEMPLATE_DIRECTORY) + "emails/invite_org.tpl";
             ctemplate::ExpandTemplate(templateLocation.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
