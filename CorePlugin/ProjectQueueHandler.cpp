@@ -25,6 +25,7 @@
 #include "../EmailPlugin/Generators/UserBadgeAwardedGenerator.h"
 #include "../EmailPlugin/Generators/NewImageUploadedEmailGenerator.h"
 #include "../EmailPlugin/Generators/ProjectImageRemovedEmailGenerator.h"
+#include "../EmailPlugin/Generators/invite.h"
 
 ProjectQueueHandler::ProjectQueueHandler()
 {
