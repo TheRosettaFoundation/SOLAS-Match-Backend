@@ -1,5 +1,6 @@
 #include "invite.h"
 #include "Common/MySQLHandler.h"
+#include "Common/Definitions.h"
 
 void invite::run(int special_registration_id)
 {
@@ -18,28 +19,61 @@ void invite::run(int special_registration_id)
         int admin_id    = special_registration["admin_id"].toInt();
         QString url     = special_registration["url"].toString();
 
+        QSharedPointer<User> admin = UserDao::getUser(db, admin_id);
+        QMap<QString, QVariant> personal = UserDao::getUserPersonalInfo(db, admin_id);
+
         std::string email_body;
 
         ctemplate::TemplateDictionary dict("invite_org");
 
         QString invite_link = settings.get("site.url") + url;
         dict.SetValue("INVITE_LINK", invite_link.toStdString());
+        dict.SetValue("SENDER_NAME", Email::htmlspecialchars((personal["firstName"].toString() + ' ' + personal["lastName"].toString()).toStdString()));
+        dict.SetValue("SENDER_EMAIL", user->email());
 
         if (org_id == 0) {
-            QString templateLocation = QString(TEMPLATE_DIRECTORY) + "emails/invite_site.tpl";
-            ctemplate::ExpandTemplate(templateLocation.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
+            if (roles&SITE_ADMIN) {
+                QString templateLocation = QString(TEMPLATE_DIRECTORY) + "emails/invite_SITE_ADMIN.tpl";
+                ctemplate::ExpandTemplate(templateLocation.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
-            UserDao::queue_email(db, 0, email, settings.get("site.name") + ": Invitation to Join TWB Platform as Admin", QString::fromUtf8(email_body.c_str()));
-            UserDao::log_email_sent(db, 0, 0, 0, 0, 0, admin_id, 0, "invite_to_site");
+                UserDao::queue_email(db, 0, email, "Invitation to join the TWB platform as an admin", QString::fromUtf8(email_body.c_str()));
+                UserDao::log_email_sent(db, 0, 0, 0, 0, 0, admin_id, 0, "invite_to_SITE_ADMIN");
+            else if (roles&PROJECT_OFFICER) {
+                QString templateLocation = QString(TEMPLATE_DIRECTORY) + "emails/invite_PROJECT_OFFICER.tpl";
+                ctemplate::ExpandTemplate(templateLocation.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
+
+                UserDao::queue_email(db, 0, email, "Invitation to join the TWB platform as a project officer", QString::fromUtf8(email_body.c_str()));
+                UserDao::log_email_sent(db, 0, 0, 0, 0, 0, admin_id, 0, "invite_to_PROJECT_OFFICER");
+            else if (roles&COMMUNITY_OFFICER) {
+                QString templateLocation = QString(TEMPLATE_DIRECTORY) + "emails/invite_COMMUNITY_OFFICER.tpl";
+                ctemplate::ExpandTemplate(templateLocation.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
+
+                UserDao::queue_email(db, 0, email, "Invitation to join the TWB platform as a community officer", QString::fromUtf8(email_body.c_str()));
+                UserDao::log_email_sent(db, 0, 0, 0, 0, 0, admin_id, 0, "invite_to_COMMUNITY_OFFICER");
+            }
         } else {
             QSharedPointer<Organisation> org = OrganisationDao::getOrg(db, org_id);
             dict.SetValue("ORG_NAME", org->name());
 
-            QString templateLocation = QString(TEMPLATE_DIRECTORY) + "emails/invite_org.tpl";
-            ctemplate::ExpandTemplate(templateLocation.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
+            if (roles&NGO_ADMIN) {
+                QString templateLocation = QString(TEMPLATE_DIRECTORY) + "emails/invite_NGO_ADMIN.tpl";
+                ctemplate::ExpandTemplate(templateLocation.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
-            UserDao::queue_email(db, 0, email, settings.get("site.name") + ": Invitation to Join Organization", QString::fromUtf8(email_body.c_str()));
-            UserDao::log_email_sent(db, 0, 0, 0, org_id, 0, admin_id, 0, "invite_to_org");
+                UserDao::queue_email(db, 0, email, "Invitation to join the TWB platform as an organization admin", QString::fromUtf8(email_body.c_str()));
+                UserDao::log_email_sent(db, 0, 0, 0, org_id, 0, admin_id, 0, "invite_to_NGO_ADMIN");
+            else if (roles&NGO_PROJECT_OFFICER) {
+                QString templateLocation = QString(TEMPLATE_DIRECTORY) + "emails/invite_NGO_PROJECT_OFFICER.tpl";
+                ctemplate::ExpandTemplate(templateLocation.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
+
+                UserDao::queue_email(db, 0, email, "Invitation to join the TWB platform as an organization project officer", QString::fromUtf8(email_body.c_str()));
+                UserDao::log_email_sent(db, 0, 0, 0, org_id, 0, admin_id, 0, "invite_to_NGO_PROJECT_OFFICER");
+            else if (roles&NGO_LINGUIST) {
+                QString templateLocation = QString(TEMPLATE_DIRECTORY) + "emails/invite_NGO_LINGUIST.tpl";
+                ctemplate::ExpandTemplate(templateLocation.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
+
+                UserDao::queue_email(db, 0, email, "Invitation to join the TWB platform as an organization linguist", QString::fromUtf8(email_body.c_str()));
+                UserDao::log_email_sent(db, 0, 0, 0, org_id, 0, admin_id, 0, "invite_to_NGO_LINGUIST");
+            }
         }
     } else {
         IEmailGenerator::generateErrorEmail(error);

@@ -96,4 +96,13 @@ struct CidMatch {
 #define LOW     1
 #define SENT    0
 
+#define SITE_ADMIN         64
+#define PROJECT_OFFICER    32
+#define COMMUNITY_OFFICER  16
+#define NGO_ADMIN           8
+#define NGO_PROJECT_OFFICER 4
+#define NGO_LINGUIST        2
+#define LINGUIST            1
+
+
 #endif // DEFINITIONS_H
