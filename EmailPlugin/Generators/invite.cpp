@@ -29,7 +29,8 @@ void invite::run(int special_registration_id)
         QString invite_link = settings.get("site.url") + url;
         dict.SetValue("INVITE_LINK", invite_link.toStdString());
         dict.SetValue("SENDER_NAME", Email::htmlspecialchars((personal["firstName"].toString() + ' ' + personal["lastName"].toString()).toStdString()));
-        dict.SetValue("SENDER_EMAIL", user->email());
+        dict.SetValue("SENDER_EMAIL", admin->email());
+        dict.SetValue("RECIPIENT_EMAIL", email);
 
         if (org_id == 0) {
             if (roles&SITE_ADMIN) {
