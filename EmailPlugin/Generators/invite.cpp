@@ -68,7 +68,7 @@ void invite::run(int special_registration_id)
 
                 UserDao::queue_email(db, 0, email, "Invitation to join the TWB platform as an organization project officer", QString::fromUtf8(email_body.c_str()));
                 UserDao::log_email_sent(db, 0, 0, 0, org_id, 0, admin_id, 0, "invite_to_NGO_PROJECT_OFFICER");
-            }else if (roles&NGO_LINGUIST) {
+            } else if (roles&NGO_LINGUIST) {
                 QString templateLocation = QString(TEMPLATE_DIRECTORY) + "emails/invite_NGO_LINGUIST.tpl";
                 ctemplate::ExpandTemplate(templateLocation.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
