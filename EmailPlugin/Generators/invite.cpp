@@ -37,19 +37,19 @@ void invite::run(int special_registration_id)
                 QString templateLocation = QString(TEMPLATE_DIRECTORY) + "emails/invite_SITE_ADMIN.tpl";
                 ctemplate::ExpandTemplate(templateLocation.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
-                UserDao::queue_email(db, 0, email, "Invitation to join the TWB platform as an admin", QString::fromUtf8(email_body.c_str()));
+                UserDao::queue_email(db, 0, email, "Invitation to join the TWB platform as an admin (expires in 30 days)", QString::fromUtf8(email_body.c_str()));
                 UserDao::log_email_sent(db, 0, 0, 0, 0, 0, admin_id, 0, "invite_to_SITE_ADMIN");
             } else if (roles&PROJECT_OFFICER) {
                 QString templateLocation = QString(TEMPLATE_DIRECTORY) + "emails/invite_PROJECT_OFFICER.tpl";
                 ctemplate::ExpandTemplate(templateLocation.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
-                UserDao::queue_email(db, 0, email, "Invitation to join the TWB platform as a project officer", QString::fromUtf8(email_body.c_str()));
+                UserDao::queue_email(db, 0, email, "Invitation to join the TWB platform as a project officer (expires in 30 days)", QString::fromUtf8(email_body.c_str()));
                 UserDao::log_email_sent(db, 0, 0, 0, 0, 0, admin_id, 0, "invite_to_PROJECT_OFFICER");
             } else if (roles&COMMUNITY_OFFICER) {
                 QString templateLocation = QString(TEMPLATE_DIRECTORY) + "emails/invite_COMMUNITY_OFFICER.tpl";
                 ctemplate::ExpandTemplate(templateLocation.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
-                UserDao::queue_email(db, 0, email, "Invitation to join the TWB platform as a community officer", QString::fromUtf8(email_body.c_str()));
+                UserDao::queue_email(db, 0, email, "Invitation to join the TWB platform as a community officer (expires in 30 days)", QString::fromUtf8(email_body.c_str()));
                 UserDao::log_email_sent(db, 0, 0, 0, 0, 0, admin_id, 0, "invite_to_COMMUNITY_OFFICER");
             }
         } else {
@@ -60,19 +60,19 @@ void invite::run(int special_registration_id)
                 QString templateLocation = QString(TEMPLATE_DIRECTORY) + "emails/invite_NGO_ADMIN.tpl";
                 ctemplate::ExpandTemplate(templateLocation.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
-                UserDao::queue_email(db, 0, email, "Invitation to join the TWB platform as an organization admin", QString::fromUtf8(email_body.c_str()));
+                UserDao::queue_email(db, 0, email, "Invitation to join the TWB platform as an organization admin (expires in 30 days)", QString::fromUtf8(email_body.c_str()));
                 UserDao::log_email_sent(db, 0, 0, 0, org_id, 0, admin_id, 0, "invite_to_NGO_ADMIN");
             } else if (roles&NGO_PROJECT_OFFICER) {
                 QString templateLocation = QString(TEMPLATE_DIRECTORY) + "emails/invite_NGO_PROJECT_OFFICER.tpl";
                 ctemplate::ExpandTemplate(templateLocation.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
-                UserDao::queue_email(db, 0, email, "Invitation to join the TWB platform as an organization project officer", QString::fromUtf8(email_body.c_str()));
+                UserDao::queue_email(db, 0, email, "Invitation to join the TWB platform as an organization project officer (expires in 30 days)", QString::fromUtf8(email_body.c_str()));
                 UserDao::log_email_sent(db, 0, 0, 0, org_id, 0, admin_id, 0, "invite_to_NGO_PROJECT_OFFICER");
             } else if (roles&NGO_LINGUIST) {
                 QString templateLocation = QString(TEMPLATE_DIRECTORY) + "emails/invite_NGO_LINGUIST.tpl";
                 ctemplate::ExpandTemplate(templateLocation.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
-                UserDao::queue_email(db, 0, email, "Invitation to join the TWB platform as an organization linguist", QString::fromUtf8(email_body.c_str()));
+                UserDao::queue_email(db, 0, email, "Invitation to join the TWB platform as an organization linguist (expires in 30 days)", QString::fromUtf8(email_body.c_str()));
                 UserDao::log_email_sent(db, 0, 0, 0, org_id, 0, admin_id, 0, "invite_to_NGO_LINGUIST");
             }
         }
