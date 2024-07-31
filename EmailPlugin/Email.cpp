@@ -72,35 +72,64 @@ std::string Email::clean_project_description(const std::string& in)
 {
     std::string out;
     out.reserve(in.length() + 5000);
+    std::string no_bra_ket;
+    no_bra_ket.reserve(in.length() + 5000);
 
-    for (std::string::size_type i = 0; i < in.length(); i++) {
-        switch(in[i]) {
+    // Remove PREFIX_FOR_BRA and POSTFIX_FOR_KET to stop injection
+    out = std::regex_replace( in, std::regex(R"(PREFIX_FOR_BRA)"),  "");
+    out = std::regex_replace(out, std::regex(R"(POSTFIX_FOR_KET)"), "");
+
+    // <p...> etc.
+    out = std::regex_replace(out, std::regex(R"(<p[^<>]*>)"),      "PREFIX_FOR_BRA$&POSTFIX_FOR_KET");
+    out = std::regex_replace(out, std::regex(R"(<span[^<>]*>)"),   "PREFIX_FOR_BRA$&POSTFIX_FOR_KET");
+    out = std::regex_replace(out, std::regex(R"(<strong[^<>]*>)"), "PREFIX_FOR_BRA$&POSTFIX_FOR_KET");
+    out = std::regex_replace(out, std::regex(R"(<em[^<>]*>)"),     "PREFIX_FOR_BRA$&POSTFIX_FOR_KET");
+    out = std::regex_replace(out, std::regex(R"(<u[^<>]*>)"),      "PREFIX_FOR_BRA$&POSTFIX_FOR_KET");
+    out = std::regex_replace(out, std::regex(R"(<a[^<>]*>)"),      "PREFIX_FOR_BRA$&POSTFIX_FOR_KET");
+    out = std::regex_replace(out, std::regex(R"(<ol[^<>]*>)"),     "PREFIX_FOR_BRA$&POSTFIX_FOR_KET");
+    out = std::regex_replace(out, std::regex(R"(<li[^<>]*>)"),     "PREFIX_FOR_BRA$&POSTFIX_FOR_KET");
+    out = std::regex_replace(out, std::regex(R"(<br[^<>]*>)"),     "PREFIX_FOR_BRA$&POSTFIX_FOR_KET");
+
+    // </p> etc.
+    out = std::regex_replace(out, std::regex(R"(</p>)"),      "PREFIX_FOR_BRA$&POSTFIX_FOR_KET");
+    out = std::regex_replace(out, std::regex(R"(</span>)"),   "PREFIX_FOR_BRA$&POSTFIX_FOR_KET");
+    out = std::regex_replace(out, std::regex(R"(</strong>)"), "PREFIX_FOR_BRA$&POSTFIX_FOR_KET");
+    out = std::regex_replace(out, std::regex(R"(</em>)"),     "PREFIX_FOR_BRA$&POSTFIX_FOR_KET");
+    out = std::regex_replace(out, std::regex(R"(</u>)"),      "PREFIX_FOR_BRA$&POSTFIX_FOR_KET");
+    out = std::regex_replace(out, std::regex(R"(</a>)"),      "PREFIX_FOR_BRA$&POSTFIX_FOR_KET");
+    out = std::regex_replace(out, std::regex(R"(</ol>)"),     "PREFIX_FOR_BRA$&POSTFIX_FOR_KET");
+    out = std::regex_replace(out, std::regex(R"(</li>)"),     "PREFIX_FOR_BRA$&POSTFIX_FOR_KET");
+
+    // Remove < and >
+    out = std::regex_replace(out, std::regex(R"(PREFIX_FOR_BRA<)"),  "PREFIX_FOR_BRA");
+    out = std::regex_replace(out, std::regex(R"(POSTFIX_FOR_KET<)"), "POSTFIX_FOR_KET");
+
+    for (std::string::size_type i = 0; i < out.length(); i++) {
+        switch(out[i]) {
             case '<':
-                out.append("&lt;");
+                no_bra_ket.append("&lt;");
                 break;
             case '>':
-                out.append("&gt;");
+                no_bra_ket.append("&gt;");
                 break;
             default:
-                out.append(&in[i], 1);
+                no_bra_ket.append(&out[i], 1);
                 break;
         }
     }
 
-    out = std::regex_replace(out, std::regex(R"(\\r\\n)"), "<br/>");
-    out = std::regex_replace(out, std::regex(R"(\\n)"),    "<br/>");
-    out = std::regex_replace(out, std::regex(R"(\\r)"),    "<br/>");
-    out = std::regex_replace(out, std::regex(R"(\\t)"),    "&nbsp;&nbsp;&nbsp;&nbsp;");
+    no_bra_ket = std::regex_replace(no_bra_ket, std::regex(R"(\\r\\n)"), "<br/>");
+    no_bra_ket = std::regex_replace(no_bra_ket, std::regex(R"(\\n)"),    "<br/>");
+    no_bra_ket = std::regex_replace(no_bra_ket, std::regex(R"(\\r)"),    "<br/>");
+    no_bra_ket = std::regex_replace(no_bra_ket, std::regex(R"(\\t)"),    "&nbsp;&nbsp;&nbsp;&nbsp;");
 
-    return out;
+    // Replace < and >
+    no_bra_ket = std::regex_replace(no_bra_ket, std::regex(R"(PREFIX_FOR_BRA)"),  "<");
+    no_bra_ket = std::regex_replace(no_bra_ket, std::regex(R"(POSTFIX_FOR_KET)"), ">");
+
+    return no_bra_ket;
 }
-first remove PREFIX_FOR_BRA AND POSTFIX_FOR_KET so noone can inject
-out = std::regex_replace(out, std::regex(R"(<p[^<>]*>)"), "PREFIX_FOR_BRA$&POSTFIX_FOR_KET");
-tehn replace PREFIX_FOR_BRA< with PREFIX_FOR_BRA
-
-
-
-
+/*
 <p...>
 </p>
 
@@ -116,7 +145,6 @@ tehn replace PREFIX_FOR_BRA< with PREFIX_FOR_BRA
 <u...>
 </u>
 
-
 <a...>
 </a>
 
@@ -127,4 +155,4 @@ tehn replace PREFIX_FOR_BRA< with PREFIX_FOR_BRA
 </li>
 
 <br...>
-
+*/
