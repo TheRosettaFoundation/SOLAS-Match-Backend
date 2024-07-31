@@ -9,6 +9,7 @@ class Email
 public:
     static std::string htmlspecialchars(const std::string& in);
     static std::string uiCleanseHTMLNewlineAndTabs(const std::string& in);
+    static std::string clean_project_description(const std::string& in);
 };
 
 #endif // EMAIL_H

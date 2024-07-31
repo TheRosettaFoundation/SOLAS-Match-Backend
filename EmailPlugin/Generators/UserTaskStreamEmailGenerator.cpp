@@ -108,7 +108,7 @@ void UserTaskStreamEmailGenerator::run(int user_id)
                 if (!project.isNull()) {
                     if (task->projectid() != project_id) { // Display first time only
                         taskSect->ShowSection("DESCRIPTION_SECT");
-                        taskSect->SetValue("PROJECT_DESCRIPTION", Email::uiCleanseHTMLNewlineAndTabs(project->description()));
+                        taskSect->SetValue("PROJECT_DESCRIPTION", Email::clean_project_description(project->description()));
                         taskSect->SetValue("PROJECT_IMPACT", Email::uiCleanseHTMLNewlineAndTabs(project->impact()));
                     }
 
@@ -258,7 +258,7 @@ void UserTaskStreamEmailGenerator::run(int user_id)
                 if (!project.isNull()) {
                     if (task->projectid() != project_id) { // Display first time only
                         taskSect->ShowSection("DESCRIPTION_SECT");
-                        taskSect->SetValue("PROJECT_DESCRIPTION", Email::uiCleanseHTMLNewlineAndTabs(project->description()));
+                        taskSect->SetValue("PROJECT_DESCRIPTION", Email::clean_project_description(project->description()));
                         taskSect->SetValue("PROJECT_IMPACT", Email::uiCleanseHTMLNewlineAndTabs(project->impact()));
                     }
 

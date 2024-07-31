@@ -67,3 +67,64 @@ std::string Email::uiCleanseHTMLNewlineAndTabs(const std::string& in)
 
     return out;
 }
+
+std::string Email::clean_project_description(const std::string& in)
+{
+    std::string out;
+    out.reserve(in.length() + 5000);
+
+    for (std::string::size_type i = 0; i < in.length(); i++) {
+        switch(in[i]) {
+            case '<':
+                out.append("&lt;");
+                break;
+            case '>':
+                out.append("&gt;");
+                break;
+            default:
+                out.append(&in[i], 1);
+                break;
+        }
+    }
+
+    out = std::regex_replace(out, std::regex(R"(\\r\\n)"), "<br/>");
+    out = std::regex_replace(out, std::regex(R"(\\n)"),    "<br/>");
+    out = std::regex_replace(out, std::regex(R"(\\r)"),    "<br/>");
+    out = std::regex_replace(out, std::regex(R"(\\t)"),    "&nbsp;&nbsp;&nbsp;&nbsp;");
+
+    return out;
+}
+first remove PREFIX_FOR_BRA AND POSTFIX_FOR_KET so noone can inject
+out = std::regex_replace(out, std::regex(R"(<p[^<>]*>)"), "PREFIX_FOR_BRA$&POSTFIX_FOR_KET");
+tehn replace PREFIX_FOR_BRA< with PREFIX_FOR_BRA
+
+
+
+
+<p...>
+</p>
+
+<span...>
+</span>
+
+<strong...>
+</strong>
+
+<em...>
+</em>
+
+<u...>
+</u>
+
+
+<a...>
+</a>
+
+<ol...>
+</ol>
+
+<li...>
+</li>
+
+<br...>
+

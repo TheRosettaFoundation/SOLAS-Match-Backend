@@ -36,7 +36,7 @@ Please note that TWB works with volunteers and that these projects are pro-bono.
     <p>Added: <strong>{{CREATED_TIME}} UTC</strong></p>
     <p>Due by: <strong>{{DEADLINE_TIME}} UTC</strong></p>
     {{#DESCRIPTION_SECT}}
-    <p><strong>Project Description</strong>: <i>{{PROJECT_DESCRIPTION}}</i></p>
+    <p><strong>Project Description</strong>: {{PROJECT_DESCRIPTION}}</p>
     <p><strong>Project Impact</strong>: <i>{{PROJECT_IMPACT}}</i></p>
     {{/DESCRIPTION_SECT}}
     {{#TAGS_SECT}}
