@@ -45,14 +45,11 @@ if (user->id() == 3297) { // test code (3297 is id for Alan Barrett)
             if (tasks.length() > 0) {
                 foreach (QSharedPointer<Task> task, tasks) {
                     ctemplate::TemplateDictionary *taskSect = dict.AddSectionDictionary("TASKS");
-//TESTCODE                    taskSect->SetValue("TASK_TITLE", Email::htmlspecialchars(task->title()));
+                    taskSect->SetValue("TASK_TITLE", Email::htmlspecialchars(task->title()));
 
                     QString orgName;
                     QSharedPointer<Project> project = ProjectDao::getProject(db, task->projectid());
                     if (!project.isNull()) {
-//TESTCODE
-taskSect->SetValue("TASK_TITLE", Email::clean_project_description(project->description()));
-//TESTCODE
                         QSharedPointer<Organisation> org = OrganisationDao::getOrg(db, project->organisationid());
                         if (!org.isNull()) {
                             orgName = QString::fromStdString(org->name());
