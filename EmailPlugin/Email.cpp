@@ -102,7 +102,7 @@ std::string Email::clean_project_description(const std::string& in)
 
     // Remove < and >
     out = std::regex_replace(out, std::regex(R"(PREFIX_FOR_BRA<)"),  "PREFIX_FOR_BRA");
-    out = std::regex_replace(out, std::regex(R"(POSTFIX_FOR_KET<)"), "POSTFIX_FOR_KET");
+    out = std::regex_replace(out, std::regex(R"(>POSTFIX_FOR_KET)"), "POSTFIX_FOR_KET");
 
     for (std::string::size_type i = 0; i < out.length(); i++) {
         switch(out[i]) {
