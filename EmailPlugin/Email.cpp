@@ -89,6 +89,10 @@ std::string Email::clean_project_description(const std::string& in)
     out = std::regex_replace(out, std::regex(R"(<ol[^<>]*>)"),     "PREFIX_FOR_BRA$&POSTFIX_FOR_KET");
     out = std::regex_replace(out, std::regex(R"(<li[^<>]*>)"),     "PREFIX_FOR_BRA$&POSTFIX_FOR_KET");
     out = std::regex_replace(out, std::regex(R"(<br[^<>]*>)"),     "PREFIX_FOR_BRA$&POSTFIX_FOR_KET");
+    out = std::regex_replace(out, std::regex(R"(<table[^<>]*>)"),  "PREFIX_FOR_BRA$&POSTFIX_FOR_KET");
+    out = std::regex_replace(out, std::regex(R"(<tbody[^<>]*>)"),  "PREFIX_FOR_BRA$&POSTFIX_FOR_KET");
+    out = std::regex_replace(out, std::regex(R"(<tr[^<>]*>)"),     "PREFIX_FOR_BRA$&POSTFIX_FOR_KET");
+    out = std::regex_replace(out, std::regex(R"(<td[^<>]*>)"),     "PREFIX_FOR_BRA$&POSTFIX_FOR_KET");
 
     // </p> etc.
     out = std::regex_replace(out, std::regex(R"(</p>)"),      "PREFIX_FOR_BRA$&POSTFIX_FOR_KET");
@@ -99,6 +103,10 @@ std::string Email::clean_project_description(const std::string& in)
     out = std::regex_replace(out, std::regex(R"(</a>)"),      "PREFIX_FOR_BRA$&POSTFIX_FOR_KET");
     out = std::regex_replace(out, std::regex(R"(</ol>)"),     "PREFIX_FOR_BRA$&POSTFIX_FOR_KET");
     out = std::regex_replace(out, std::regex(R"(</li>)"),     "PREFIX_FOR_BRA$&POSTFIX_FOR_KET");
+    out = std::regex_replace(out, std::regex(R"(</table>)"),  "PREFIX_FOR_BRA$&POSTFIX_FOR_KET");
+    out = std::regex_replace(out, std::regex(R"(</tbody>)"),  "PREFIX_FOR_BRA$&POSTFIX_FOR_KET");
+    out = std::regex_replace(out, std::regex(R"(</tr>)"),     "PREFIX_FOR_BRA$&POSTFIX_FOR_KET");
+    out = std::regex_replace(out, std::regex(R"(</td>)"),     "PREFIX_FOR_BRA$&POSTFIX_FOR_KET");
 
     // Remove < and >
     out = std::regex_replace(out, std::regex(R"(PREFIX_FOR_BRA<)"),  "PREFIX_FOR_BRA");
