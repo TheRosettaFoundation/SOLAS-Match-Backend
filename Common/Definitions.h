@@ -89,6 +89,7 @@ struct CidMatch {
 #define UserFeedback                   11
 #define UserTaskCancelled              36
 #define OrgInvite                      37
+#define draft_invoice                  38
 
 // email send priorities
 #define HIGH    3

@@ -26,6 +26,7 @@
 #include "../EmailPlugin/Generators/NewImageUploadedEmailGenerator.h"
 #include "../EmailPlugin/Generators/ProjectImageRemovedEmailGenerator.h"
 #include "../EmailPlugin/Generators/invite.h"
+#include "../EmailPlugin/Generators/invoice.h"
 
 ProjectQueueHandler::ProjectQueueHandler()
 {
@@ -102,6 +103,9 @@ void ProjectQueueHandler::consumeFromQueue()
                         break;
                     case OrgInvite:
                         invite::run(queue_request["badge_id"].toInt());
+                        break;
+                    case draft_invoice:
+                        invoice::run(queue_request["user_id"].toInt(), queue_request["badge_id"].toInt());
                         break;
                 }
                 UserDao::mark_queue_request_handled(db, queue_request["id"].toULongLong());
