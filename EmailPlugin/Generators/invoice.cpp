@@ -19,7 +19,7 @@ void invoice::run(int user_id, int badge_id)
         ctemplate::TemplateDictionary dict("invoice");
         dict.SetValue("USERNAME", Email::htmlspecialchars(user->display_name()));
 
-        QString invoice_link = settings.get("site.url") + "https://twbplatform.org/invoice/" + QString::number(badge_id) + "/";
+        QString invoice_link = settings.get("site.url") + "invoice/" + QString::number(badge_id) + "/";
         dict.SetValue("INVOICE_LINK", invoice_link.toStdString());
 
 
