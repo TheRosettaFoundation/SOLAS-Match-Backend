@@ -11,7 +11,7 @@ The work is outlined in the invoice: <a href="{{INVOICE_LINK}}">{{INVOICE_LINK}}
 You will need to login to TWB Platform to access this invoice.
 </p>
 <p>
-Please review this invoice and download it and then email it to <a href="mailto:linguists.payments@clearglobal.org">linguists.payments@clearglobal.org</a> so that the payment can be processed.
+Please review this invoice and download it and then email it to <a href="mailto:linguistspayments@translatorswithoutborders.org">linguistspayments@translatorswithoutborders.org</a> so that the payment can be processed.
 </p>
 <p>
 Best Regards
