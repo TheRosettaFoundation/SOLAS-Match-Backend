@@ -104,6 +104,8 @@ void UserTaskStreamEmailGenerator::run(int user_id)
                         "yyyy-MM-ddTHH:mm:ss.zzz").toString("d MMMM yyyy - hh:mm");
                 taskSect->SetValue("DEADLINE_TIME", deadline.toStdString());
 
+                taskSect->SetValue("PREVIOUS_DEADLINE_TIME", TaskDao::max_translation_deadline(db, task));
+
                 QSharedPointer<Project> project = ProjectDao::getProject(db, task->projectid());
                 if (!project.isNull()) {
                     if (task->projectid() != project_id) { // Display first time only

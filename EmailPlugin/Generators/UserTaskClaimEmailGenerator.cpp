@@ -83,6 +83,8 @@ void UserTaskClaimEmailGenerator::run(int user_id, int task_id)
         }
         dict.SetValue("NOTIFICATION_PHRASE", notificationPhrase.toStdString());
 
+        dict.SetValue("PREVIOUS_DEADLINE_TIME", TaskDao::max_translation_deadline(db, task));
+
         QSharedPointer<Project> project = ProjectDao::getProject(db, task->projectid());
         dict.SetValue("COMMUNITY", ProjectDao::discourse_parameterize(project->title(), task->projectid()));
 

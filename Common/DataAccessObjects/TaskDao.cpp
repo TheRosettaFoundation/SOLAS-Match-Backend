@@ -733,6 +733,7 @@ std::string TaskDao::max_translation_deadline(QSharedPointer<MySQLHandler> db, Q
             else                                max_translation_deadline = "Previous " + $prereq + " step due by: <strong>" + (QDateTime::fromString(QString::fromStdString(max_translation_deadline), "yyyy-MM-ddTHH:mm:ss.zzz").toString("d MMMM yyyy - hh:mm")).toStdString() + " UTC</strong>";
         }
     }
+    if (max_translation_deadline == "0000-00-00 00:00:00") max_translation_deadline = "";
     return max_translation_deadline;
 }
 
