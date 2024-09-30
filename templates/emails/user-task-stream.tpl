@@ -35,6 +35,7 @@ Please note that TWB works with volunteers and that these projects are pro-bono.
     <p>Word Count: <strong>{{WORD_COUNT}}</strong></p>
     <p>Added: <strong>{{CREATED_TIME}} UTC</strong></p>
     <p>Due by: <strong>{{DEADLINE_TIME}} UTC</strong></p>
+    <p>{{PREVIOUS_DEADLINE_TIME}}</p>
     {{#DESCRIPTION_SECT}}
     <p><strong>Project Description</strong>: {{PROJECT_DESCRIPTION}}</p>
     <p><strong>Project Impact</strong>: <i>{{PROJECT_IMPACT}}</i></p>

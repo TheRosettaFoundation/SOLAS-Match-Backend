@@ -49,6 +49,7 @@
 <p>
     <strong>You will receive an email notification when the task is ready for you to revise.</strong> The email will include a link to the revision task in Phrase TMS, our CAT tool.
 </p>
+<p>{{PREVIOUS_DEADLINE_TIME}}</p>
 {{/REVISING_WAIT}}
 {{#APPROVAL}}
 <p>
@@ -69,6 +70,7 @@
 <p>
     <strong>You will receive an email notification when the task is ready for you to proofread.</strong> The email will include a link to the proofreading and approval task in Phrase TMS, our CAT tool.
 </p>
+<p>{{PREVIOUS_DEADLINE_TIME}}</p>
 {{/APPROVAL_WAIT}}
 {{#SHELLTASK}}
 <p>
