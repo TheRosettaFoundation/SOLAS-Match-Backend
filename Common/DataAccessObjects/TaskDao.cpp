@@ -705,6 +705,86 @@ bool TaskDao::is_task_translated_in_memsource(QSharedPointer<MySQLHandler> db, Q
     }
     return translated;
 }
+[[[
+task->deadline()
+
+std::string TaskDao::max_translation_deadline(QSharedPointer<MySQLHandler> db, QSharedPointer<Task> task)
+{
+    std::string max_translation_deadline = NULL;
+    bool translations_not_all_complete = false;
+    if (task->tasktype() == PROOFREADING || task->tasktype() == APPROVAL) {
+        QMap<QString, QVariant> memsource_task = get_memsource_task(db, task->id());
+        if (!memsource_task.isEmpty()) {
+            int top_level = get_top_level(memsource_task["internalId"].toString());
+            $project_tasks = $this->get_tasks_for_project($task->getProjectId());
+            foreach ($project_tasks as $project_task) {
+                if ($top_level == $this->get_top_level($project_task['internalId'])) {
+                    if ($memsource_task['workflowLevel'] > $project_task['workflowLevel']) { // Dependent on
+                        if (($memsource_task['beginIndex'] <= $project_task['endIndex']) && ($project_task['beginIndex'] <= $memsource_task['endIndex'])) { // Overlap
+                            $max_translation_deadline = max($project_task['deadline'], $max_translation_deadline);
+                            if ($project_task['task-status_id'] != Common\Enums\TaskStatusEnum::COMPLETE) $translations_not_all_complete = 1;
+                        }
+                    }
+                }
+            }
+        }
+        if ($max_translation_deadline) {
+            $prereq = [0, 0, 0, 'translation', 0, 0, 'revision'][$task->getTaskType()];
+            if (!$translations_not_all_complete) $max_translation_deadline = "Previous $prereq step: Completed";
+            else                                 $max_translation_deadline = "Previous $prereq step due by: $max_translation_deadline";
+        }
+    }
+    return $max_translation_deadline;
+}
+
+
+
+
+
+    QList<QMap<QString, QVariant>> project_tasks = get_tasks_for_project(db, task->projectid());
+    bool translated = true;
+
+    for (int i = 0; i < project_tasks.size(); i++) {
+        QMap<QString, QVariant> project_task = project_tasks[i];
+        if (top_level == get_top_level(project_task["internalId"].toString())) {
+           if (memsource_task["workflowLevel"].toInt() > project_task["workflowLevel"].toInt()) { // Dependent on
+                if ((memsource_task["beginIndex"].toInt() <= project_task["endIndex"].toInt()) && (project_task["beginIndex"].toInt() <= memsource_task["endIndex"].toInt())) { // Overlap
+                    if (project_task["task-status_id"].toInt() != COMPLETE) translated = false;
+                }
+            }
+        }
+    }
+    return translated;
+}
+
+    public function max_translation_deadline($task)
+    {
+        $max_translation_deadline = 0;
+        $translations_not_all_complete = 0;
+        if ($task->getTaskType() == Common\Enums\TaskTypeEnum::PROOFREADING || $task->getTaskType() == Common\Enums\TaskTypeEnum::APPROVAL) {
+            if ($memsource_task = $this->get_memsource_task($task->getId())) {
+                $top_level = $this->get_top_level($memsource_task['internalId']);
+                $project_tasks = $this->get_tasks_for_project($task->getProjectId());
+                foreach ($project_tasks as $project_task) {
+                    if ($top_level == $this->get_top_level($project_task['internalId'])) {
+                        if ($memsource_task['workflowLevel'] > $project_task['workflowLevel']) { // Dependent on
+                            if (($memsource_task['beginIndex'] <= $project_task['endIndex']) && ($project_task['beginIndex'] <= $memsource_task['endIndex'])) { // Overlap
+                                $max_translation_deadline = max($project_task['deadline'], $max_translation_deadline);
+                                if ($project_task['task-status_id'] != Common\Enums\TaskStatusEnum::COMPLETE) $translations_not_all_complete = 1;
+                            }
+                        }
+                    }
+                }
+            }
+            if ($max_translation_deadline) {
+                $prereq = [0, 0, 0, 'translation', 0, 0, 'revision'][$task->getTaskType()];
+                if (!$translations_not_all_complete) $max_translation_deadline = "Previous $prereq step: Completed";
+                else                                 $max_translation_deadline = "Previous $prereq step due by: $max_translation_deadline";
+            }
+        }
+        return $max_translation_deadline;
+    }
+]]]
 
 int TaskDao::get_top_level(QString internal_id)
 {
