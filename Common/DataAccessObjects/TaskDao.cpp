@@ -720,15 +720,15 @@ std::string TaskDao::max_translation_deadline(QSharedPointer<MySQLHandler> db, Q
                 if (top_level == get_top_level(project_task["internalId"].toString())) {
                     if (memsource_task["workflowLevel"].toInt() > project_task["workflowLevel"].toInt()) { // Dependent on
                         if ((memsource_task["beginIndex"].toInt() <= project_task["endIndex"].toInt()) && (project_task["beginIndex"].toInt() <= memsource_task["endIndex"].toInt())) { // Overlap
-                            max_translation_deadline = std::max(project_task["deadline"], max_translation_deadline);
-                            if (project_task["task-status_id"].toInt() != COMPLETE) $translations_not_all_complete = true;
+                            max_translation_deadline = std::max(project_task["deadline"].toString().toStdString(), max_translation_deadline);
+                            if (project_task["task-status_id"].toInt() != COMPLETE) translations_not_all_complete = true;
                         }
                     }
                 }
             }
         }
         if (max_translation_deadline != "0000-00-00 00:00:00") {
-            std:string prereq = (const std:string[]){"", "", "", "translation", "", "", "revision"}[task->tasktype()];
+            std::string prereq = (const std::string[]){"", "", "", "translation", "", "", "revision"}[task->tasktype()];
             if (!translations_not_all_complete) max_translation_deadline = "Previous " + $prereq + " step: <strong>Completed</strong>";
             else                                max_translation_deadline = "Previous " + $prereq + " step due by: <strong>" + (QDateTime::fromString(QString::fromStdString(max_translation_deadline), "yyyy-MM-ddTHH:mm:ss.zzz").toString("d MMMM yyyy - hh:mm")).toStdString() + " UTC</strong>";
         }
