@@ -708,7 +708,7 @@ bool TaskDao::is_task_translated_in_memsource(QSharedPointer<MySQLHandler> db, Q
 
 std::string TaskDao::max_translation_deadline(QSharedPointer<MySQLHandler> db, QSharedPointer<Task> task)
 {
-    std::string max_translation_deadline = NULL;
+    std::string max_translation_deadline = "0000-00-00 00:00:00";
     bool translations_not_all_complete = false;
     if (task->tasktype() == PROOFREADING || task->tasktype() == APPROVAL) {
         QMap<QString, QVariant> memsource_task = get_memsource_task(db, task->id());
@@ -720,20 +720,20 @@ std::string TaskDao::max_translation_deadline(QSharedPointer<MySQLHandler> db, Q
                 if (top_level == get_top_level(project_task["internalId"].toString())) {
                     if (memsource_task["workflowLevel"].toInt() > project_task["workflowLevel"].toInt()) { // Dependent on
                         if ((memsource_task["beginIndex"].toInt() <= project_task["endIndex"].toInt()) && (project_task["beginIndex"].toInt() <= memsource_task["endIndex"].toInt())) { // Overlap
-                            $max_translation_deadline = max(project_task["deadline"], $max_translation_deadline);
+                            max_translation_deadline = std::max(project_task["deadline"], max_translation_deadline);
                             if (project_task["task-status_id"].toInt() != COMPLETE) $translations_not_all_complete = true;
                         }
                     }
                 }
             }
         }
-        if ($max_translation_deadline) {
-            $prereq = [0, 0, 0, 'translation', 0, 0, 'revision'][$task->getTaskType()];
-            if (!translations_not_all_complete) $max_translation_deadline = "Previous $prereq step: Completed";
-            else                                $max_translation_deadline = "Previous $prereq step due by: $max_translation_deadline";
+        if (max_translation_deadline != "0000-00-00 00:00:00") {
+            std:string prereq = (const std:string[]){"", "", "", "translation", "", "", "revision"}[task->tasktype()];
+            if (!translations_not_all_complete) max_translation_deadline = "Previous " + $prereq + " step: Completed";
+            else                                max_translation_deadline = "Previous " + $prereq + " step due by: " + max_translation_deadline;
         }
     }
-    return $max_translation_deadline;
+    return max_translation_deadline;
 }
 
 int TaskDao::get_top_level(QString internal_id)
