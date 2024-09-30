@@ -15,30 +15,24 @@ void UserTaskStreamEmailGenerator::run(int user_id)
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
     QList<QMap<QString, QVariant>> task_type_details = TaskDao::get_task_type_details(db);
 
-qDebug() << "UserTaskStreamEmailGenerator: 111";
   if (user_id >= 0) {
-qDebug() << "UserTaskStreamEmailGenerator: 222";
     QSharedPointer<User> user = UserDao::getUser(db, user_id);
     QSharedPointer<UserTaskStreamNotification> notifData = UserDao::getUserTaskStreamNotification(db,
                                                              user_id);
 
-qDebug() << "UserTaskStreamEmailGenerator: 333";
     if (user.isNull() || notifData.isNull() ) {
         sendEmail = false;
         error = "Failed to generate UserTaskStream email: Unable to find relevant ";
         error += "data in the Database. Searched for User with ID ";
         error += QString::number(user_id) + " and their notification data";
     } else {
-qDebug() << "UserTaskStreamEmailGenerator: 444";
         if (notifData->strict()) {
             userTasks = UserDao::getUserTopTasks(db, user_id, true, 25);
         } else {
             userTasks = UserDao::getUserTopTasks(db, user_id, false, 25);
         }
 
-qDebug() << "UserTaskStreamEmailGenerator: 555";
         if (userTasks.count() < 1) {
-qDebug() << "UserTaskStreamEmailGenerator: 666 bad";
             sendEmail = false;
             if (notifData->strict()) {
                 //qDebug() << "Failed to generate task stream email: No strict tasks found for user "
@@ -51,7 +45,6 @@ qDebug() << "UserTaskStreamEmailGenerator: 666 bad";
     }
 
     if (sendEmail) {
-qDebug() << "UserTaskStreamEmailGenerator: 777";
         QList<QMap<QString, QVariant>> selections = LanguageDao::get_selections(db);
 
         ConfigParser settings;
