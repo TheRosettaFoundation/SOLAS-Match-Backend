@@ -1,5 +1,7 @@
 #include "TaskDao.h"
 
+#include <QDateTime>
+
 #include "../ModelGenerator.h"
 #include "UserDao.h"
 
