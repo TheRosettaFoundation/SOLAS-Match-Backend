@@ -813,3 +813,30 @@ QList<QMap<QString, QVariant> > TaskDao::get_task_type_details(QSharedPointer<My
     }
     return task_type_details;
 }
+
+std::string TaskDao::task_instructions(QSharedPointer<MySQLHandler> db, QSharedPointer<Task> task)
+{
+    QList<QMap<QString, QVariant>> task_type_details = TaskDao::get_task_type_details(db);
+    for (int i = 0; i < task_type_details.size(); i++) {
+        QMap<QString, QVariant> task_type_detail = task_type_details[i];
+        if (task->tasktype() == task_type_detail["type_enum"].toInt()) {
+            std::string type_text         = task_type_detail["type_text"].toString().toStdString();
+            std::string bookstack_url_1   = task_type_detail["bookstack_url_1"].toString().toStdString();
+            std::string bookstack_url_2   = task_type_detail["bookstack_url_2"].toString().toStdString();
+            std::string bookstack_words_1 = task_type_detail["bookstack_words_1"].toString().toStdString();
+            std::string bookstack_words_2 = task_type_detail["bookstack_words_2"].toString().toStdString();
+            if (task->taskstatus() >= IN_PROGRESS) {
+                if (bookstack_url_1 != "") {
+                    if (bookstack_url_2 == "") {
+                        return "<a href=\"" + bookstack_url_1 + "\" target=\"_blank\">Check the standard instructions for " + type_text + " here</a>";
+                    } else {
+                        return
+                               "<a href=\"" + bookstack_url_1 + "\" target=\"_blank\">Check the standard instructions for " + bookstack_words_1 + " here</a>" +
+                               "<a href=\"" + bookstack_url_2 + "\" target=\"_blank\">Check the standard instructions for " + bookstack_words_2 + " here</a>";
+                    }
+                }
+            }
+        }
+    }
+    return "";
+}
