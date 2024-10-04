@@ -36,6 +36,7 @@
     When all segments are proofread, click "Complete".
 </p>
 {{/APPROVAL}}
+<p>{{TASK_INSTRUCTIONS}}</p>
 <p>
     Please complete the task as soon as possible. If you need a deadline extension or are unable to deliver this work,
     please leave a comment in the TWB Community forum thread associated with this project:<br />

@@ -60,6 +60,7 @@
     You have 6 days left to complete the task. Please make sure you complete it before the deadline.
 </p>
 {{/SHELLTASK}}
+<p>{{TASK_INSTRUCTIONS}}</p>
 <p>
     If you have questions about the deadline or any other questions, please leave a comment in the TWB Community forum thread associated with this project:<br />
     <a href="{{COMMUNITY}}">{{COMMUNITY}}</a>

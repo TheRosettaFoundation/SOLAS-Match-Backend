@@ -81,6 +81,7 @@ You have been assigned a {{TASK_TYPE}} task for "{{TASK_TITLE}}" from {{SOURCE_L
     <a href="{{MATECAT}}">Work URL</a><br />
 </p>
 {{/SHELLTASK}}
+<p>{{TASK_INSTRUCTIONS}}</p>
 <p>
     If you have any questions about this task, please leave a comment in the TWB Community forum thread associated with this project:<br />
     <a href="{{COMMUNITY}}">{{COMMUNITY}}</a>
