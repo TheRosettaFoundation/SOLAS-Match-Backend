@@ -88,6 +88,8 @@ void UserTaskClaimEmailGenerator::run(int user_id, int task_id)
         QSharedPointer<Project> project = ProjectDao::getProject(db, task->projectid());
         dict.SetValue("COMMUNITY", ProjectDao::discourse_parameterize(project->title(), task->projectid()));
 
+        dict->SetValue("TASK_INSTRUCTIONS", TaskDao::task_instructions(db, task));
+
         bool footer_enabled=(QString::compare("y", settings.get("email-footer.enabled")) == 0);
         if (footer_enabled)
         {
