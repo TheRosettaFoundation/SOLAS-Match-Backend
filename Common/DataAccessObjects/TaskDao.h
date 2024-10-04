@@ -52,6 +52,7 @@ public:
     static int get_top_level(QString internal_id);
     static QList<QSharedPointer<Task> > get_matching_revision_memsource_tasks(QSharedPointer<MySQLHandler> db, QSharedPointer<Task> task);
     static QList<QMap<QString, QVariant> > get_task_type_details(QSharedPointer<MySQLHandler> db);
+    static std::string task_instructions(QSharedPointer<MySQLHandler> db, QSharedPointer<Task> task);
 };
 
 #endif // TASKDAO_H
