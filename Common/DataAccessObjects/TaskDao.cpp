@@ -805,9 +805,18 @@ QList<QMap<QString, QVariant> > TaskDao::get_task_type_details(QSharedPointer<My
             row["unit_count_text"] =                   MySQLHandler::getValueFromQuery(fieldMap.value("unit_count_text"), mQuery);
             row["unit_count_text_short"] =             MySQLHandler::getValueFromQuery(fieldMap.value("unit_count_text_short"), mQuery);
             row["pricing_and_recognition_unit_text"] = MySQLHandler::getValueFromQuery(fieldMap.value("pricing_and_recognition_unit_text"), mQuery);
+            row["pricing_and_recognition_unit_text_hours"] = MySQLHandler::getValueFromQuery(fieldMap.value("pricing_and_recognition_unit_text_hours"), mQuery);
             row["source_unit_for_later_stats"] =       MySQLHandler::getValueFromQuery(fieldMap.value("source_unit_for_later_stats"), mQuery);
             row["unit_rate"] =                         MySQLHandler::getValueFromQuery(fieldMap.value("unit_rate"), mQuery);
+            row["unit_rate_pricing_default"] = MySQLHandler::getValueFromQuery(fieldMap.value("unit_rate_pricing_default"), mQuery);
             row["rate_for_recognition"] =              MySQLHandler::getValueFromQuery(fieldMap.value("rate_for_recognition"), mQuery);
+            row["convert_to_words"] = MySQLHandler::getValueFromQuery(fieldMap.value("convert_to_words"), mQuery);
+            row["convert_to_hours"] = MySQLHandler::getValueFromQuery(fieldMap.value("convert_to_hours"), mQuery);
+            row["convert_to_hours_for_cert"] = MySQLHandler::getValueFromQuery(fieldMap.value("convert_to_hours_for_cert"), mQuery);
+            row["bookstack_url_1"] = MySQLHandler::getValueFromQuery(fieldMap.value("bookstack_url_1"), mQuery);
+            row["bookstack_url_2"] = MySQLHandler::getValueFromQuery(fieldMap.value("bookstack_url_2"), mQuery);
+            row["bookstack_words_1"] = MySQLHandler::getValueFromQuery(fieldMap.value("bookstack_words_1"), mQuery);
+            row["bookstack_words_2"] = MySQLHandler::getValueFromQuery(fieldMap.value("bookstack_words_2"), mQuery);
             task_type_details.append(row);
         } while (mQuery->next());
     }
