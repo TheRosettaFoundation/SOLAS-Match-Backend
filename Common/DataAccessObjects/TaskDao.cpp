@@ -837,11 +837,11 @@ std::string TaskDao::task_instructions(QSharedPointer<MySQLHandler> db, QSharedP
             if (task->taskstatus() >= IN_PROGRESS) {
                 if (bookstack_url_1 != "") {
                     if (bookstack_url_2 == "") {
-                        return "<a href=\"" + bookstack_url_1 + "\" target=\"_blank\">Check the standard instructions for " + type_text + " here</a>";
+                        return "<a href=\"" + bookstack_url_1 + "\" target=\"_blank\">Click here for \"" + type_text + "\" instructions</a>";
                     } else {
                         return
-                               "<a href=\"" + bookstack_url_1 + "\" target=\"_blank\">Check the standard instructions for " + bookstack_words_1 + " here</a>" +
-                               "<a href=\"" + bookstack_url_2 + "\" target=\"_blank\">Check the standard instructions for " + bookstack_words_2 + " here</a>";
+                               "<a href=\"" + bookstack_url_1 + "\" target=\"_blank\">Click here for \"" + bookstack_words_1 + "\" instructions</a>" +
+                               "<a href=\"" + bookstack_url_2 + "\" target=\"_blank\">Click here for \"" + bookstack_words_2 + "\" instructions</a>";
                     }
                 }
             }
