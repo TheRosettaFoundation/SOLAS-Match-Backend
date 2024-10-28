@@ -107,6 +107,9 @@ void ProjectQueueHandler::consumeFromQueue()
                     case draft_invoice:
                         invoice::run(queue_request["user_id"].toInt(), queue_request["badge_id"].toInt());
                         break;
+                    case need_linguist_t_code:
+                        need_linguist_t_code::run(queue_request["task_id"].toInt(), queue_request["claimant_id"].toInt());
+                        break;
                 }
                 UserDao::mark_queue_request_handled(db, queue_request["id"].toULongLong());
             }
