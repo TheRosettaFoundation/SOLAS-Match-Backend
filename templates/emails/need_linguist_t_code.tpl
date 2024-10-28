@@ -1,5 +1,5 @@
 <p>
-{{USERNAME}},
+{{ADMIN_NAME}},
 </p>
 <p>
 {{LINGUIST_NAME}} has been assigned a first paid task.

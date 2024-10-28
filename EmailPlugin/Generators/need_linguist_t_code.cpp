@@ -2,51 +2,42 @@
 #include "Common/MySQLHandler.h"
 #include "Common/Definitions.h"
 
-void invoice::run(int task_id, int claimant_id)
+void need_linguist_t_code::run(int task_id, int claimant_id)
 {
-    qDebug() << "need_linguist_t_code user_id:" << user_id << "badge_id:" << badge_id;
+    qDebug() << "need_linguist_t_code task_id:" << task_id << "claimant_id:" << claimant_id;
 
     ConfigParser settings;
     QString error = "";
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
 
-    QSharedPointer<User> user = UserDao::getUser(db, user_id);
-    if (user.isNull()) error = "Failed to generate invoice email, unable to find relevant data in the database for user_id: " + QString::number(user_id);
+    QSharedPointer<User> claimant = UserDao::getUser(db, claimant_id);
+    if (claimant.isNull()) error = "Failed to generate need_linguist_t_code email, unable to find relevant data in the database for claimant_id: " + QString::number(claimant_id);
 
     if (error == "") {
-        std::string email_body;
+        QList<int> admin_ids;
+        admin_ids.append(237869); // Rachel
+        admin_ids.append(237873); // Virginie
+        admin_ids.append(24985);  // Ambra
 
-        ctemplate::TemplateDictionary dict("invoice");
-        dict.SetValue("USERNAME", Email::htmlspecialchars(user->display_name()));
+        foreach (int admin_id, admin_ids) {
+            QSharedPointer<User> admin = UserDao::getUser(db, admin_id);
 
-        QString invoice_link = settings.get("site.url") + "invoice/" + QString::number(badge_id) + "/";
-        dict.SetValue("INVOICE_LINK", invoice_link.toStdString());
+            std::string email_body;
 
+            ctemplate::TemplateDictionary dict("need_linguist_t_code");
+            dict.SetValue("ADMIN_NAME",    Email::htmlspecialchars(admin->display_name()));
+            dict.SetValue("LINGUIST_NAME", Email::htmlspecialchars(claimant->display_name()));
 
-        QString templateLocation = QString(TEMPLATE_DIRECTORY) + "emails/invoice.tpl";
-        ctemplate::ExpandTemplate(templateLocation.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
+            QString linguist_link = settings.get("site.url") + QString::number(claimant->id()) + "/profile/";
+            dict.SetValue("LINGUIST_LINK", linguist_link.toStdString());
 
-        UserDao::queue_email(db, user_id, QString::fromStdString(user->email()), "Invoice from Clear Global", QString::fromUtf8(email_body.c_str()), LOW);
-        UserDao::log_email_sent(db, user_id, 0, 0, 0, 0, 0, 0, "invoice_to_volunteer");
+            QString templateLocation = QString(TEMPLATE_DIRECTORY) + "emails/need_linguist_t_code.tpl";
+            ctemplate::ExpandTemplate(templateLocation.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
+
+            UserDao::queue_email(db, user_id, QString::fromStdString(user->email()), "Need Sun Linguist T-Code", QString::fromUtf8(email_body.c_str()), LOW);
+            UserDao::log_email_sent(db, user_id, task_id, 0, 0, claimant_id, user_id, 0, "need_linguist_t_code_to_admin");
+        }
     } else {
         IEmailGenerator::generateErrorEmail(error);
     }
 }
-<p>
-{{USERNAME}},
-</p>
-<p>
-{{LINGUIST_NAME}} has been assigned a first paid task.
-</p>
-<p>
-Their profile must be edited to add Linguist Payment Information: <a href="{{LINGUIST_LINK}}">{{LINGUIST_LINK}}</a>
-</p>
-<p>
-Data required: Sun Linguist T-Code, Billing Country, Official Name (if different) and Google Drive Folder Link
-</p>
-<p>
-Best Regards
-</p>
-<p>
-The TWB Team
-</p>
