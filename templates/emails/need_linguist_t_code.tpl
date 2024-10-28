@@ -2,16 +2,13 @@
 {{USERNAME}},
 </p>
 <p>
-You have a new draft invoice from Clear Global for the work you recently did.
+{{LINGUIST_NAME}} has been assigned a first paid task.
 </p>
 <p>
-The work is outlined in the invoice: <a href="{{INVOICE_LINK}}">{{INVOICE_LINK}}</a>
+Their profile must be edited to add Linguist Payment Information: <a href="{{LINGUIST_LINK}}">{{LINGUIST_LINK}}</a>
 </p>
 <p>
-You will need to login to TWB Platform to access this invoice.
-</p>
-<p>
-Please review this invoice and download it and then email it to <a href="mailto:linguistspayments@translatorswithoutborders.org">linguistspayments@translatorswithoutborders.org</a> so that the payment can be processed.
+Data required: Sun Linguist T-Code, Billing Country, Official Name (if different) and Google Drive Folder Link
 </p>
 <p>
 Best Regards
