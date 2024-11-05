@@ -27,6 +27,7 @@
 #include "../EmailPlugin/Generators/ProjectImageRemovedEmailGenerator.h"
 #include "../EmailPlugin/Generators/invite.h"
 #include "../EmailPlugin/Generators/invoice.h"
+#include "../EmailPlugin/Generators/need_linguist_t_code.h"
 
 ProjectQueueHandler::ProjectQueueHandler()
 {
