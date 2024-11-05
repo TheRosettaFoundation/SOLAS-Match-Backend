@@ -34,8 +34,8 @@ void need_linguist_t_code::run(int task_id, int claimant_id)
             QString templateLocation = QString(TEMPLATE_DIRECTORY) + "emails/need_linguist_t_code.tpl";
             ctemplate::ExpandTemplate(templateLocation.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
-            UserDao::queue_email(db, user_id, QString::fromStdString(user->email()), "Need Sun Linguist T-Code", QString::fromUtf8(email_body.c_str()), LOW);
-            UserDao::log_email_sent(db, user_id, task_id, 0, 0, claimant_id, user_id, 0, "need_linguist_t_code_to_admin");
+            UserDao::queue_email(db, admin_id, QString::fromStdString(admin->email()), "Need Sun Linguist T-Code", QString::fromUtf8(email_body.c_str()), LOW);
+            UserDao::log_email_sent(db, admin_id, task_id, 0, 0, claimant_id, admin_id, 0, "need_linguist_t_code_to_admin");
         }
     } else {
         IEmailGenerator::generateErrorEmail(error);
