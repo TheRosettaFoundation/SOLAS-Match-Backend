@@ -21,21 +21,23 @@ void need_linguist_t_code::run(int task_id, int claimant_id)
 
         foreach (int admin_id, admin_ids) {
             QSharedPointer<User> admin = UserDao::getUser(db, admin_id);
+            if (!admin.isNull()) {
 
-            std::string email_body;
+                std::string email_body;
 
-            ctemplate::TemplateDictionary dict("need_linguist_t_code");
-            dict.SetValue("ADMIN_NAME",    Email::htmlspecialchars(admin->display_name()));
-            dict.SetValue("LINGUIST_NAME", Email::htmlspecialchars(claimant->display_name()));
+                ctemplate::TemplateDictionary dict("need_linguist_t_code");
+                dict.SetValue("ADMIN_NAME",    Email::htmlspecialchars(admin->display_name()));
+                dict.SetValue("LINGUIST_NAME", Email::htmlspecialchars(claimant->display_name()));
 
-            QString linguist_link = settings.get("site.url") + QString::number(claimant->id()) + "/profile/";
-            dict.SetValue("LINGUIST_LINK", linguist_link.toStdString());
+                QString linguist_link = settings.get("site.url") + QString::number(claimant->id()) + "/profile/";
+                dict.SetValue("LINGUIST_LINK", linguist_link.toStdString());
 
-            QString templateLocation = QString(TEMPLATE_DIRECTORY) + "emails/need_linguist_t_code.tpl";
-            ctemplate::ExpandTemplate(templateLocation.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
+                QString templateLocation = QString(TEMPLATE_DIRECTORY) + "emails/need_linguist_t_code.tpl";
+                ctemplate::ExpandTemplate(templateLocation.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
-            UserDao::queue_email(db, admin_id, QString::fromStdString(admin->email()), "Need Sun Linguist T-Code", QString::fromUtf8(email_body.c_str()), LOW);
-            UserDao::log_email_sent(db, admin_id, task_id, 0, 0, claimant_id, admin_id, 0, "need_linguist_t_code_to_admin");
+                UserDao::queue_email(db, admin_id, QString::fromStdString(admin->email()), "Need Sun Linguist T-Code", QString::fromUtf8(email_body.c_str()), LOW);
+                UserDao::log_email_sent(db, admin_id, task_id, 0, 0, claimant_id, admin_id, 0, "need_linguist_t_code_to_admin");
+            }
         }
     } else {
         IEmailGenerator::generateErrorEmail(error);
