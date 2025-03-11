@@ -313,7 +313,6 @@ QByteArray qxt_fold_mime_header(const QString& key, const QString& value, QTextC
 //qDebug() << "rv: " << rv << ", line: " << line;
     }
 //qDebug() << "rv: " << rv << ", line: " << line;
-qDebug() << "rv: " << rv << ", line: " << line;
     return rv + line + "\r\n";
 }
 
