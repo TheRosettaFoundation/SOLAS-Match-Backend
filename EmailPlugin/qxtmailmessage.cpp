@@ -272,7 +272,8 @@ qDebug() << "qxt_fold_mime_header: " << key << ", " << value << "(" << value.len
 
 qDebug() << "utf8.length(): " << utf8.length();
             // Put it back in a proper QString with valid characters (not each byte broken out from UTF-8)
-            QString qcharacters = QString::fromUtf8(utf8);
+//////NO            QString qcharacters = QString::fromUtf8(utf8);
+            QString qcharacters = QString::fromLatin1(utf8);
 qDebug() << "qcharacters.length(): " << qcharacters.length();
 qDebug() << "QString::fromLatin1(utf8).length(): " << QString::fromLatin1(utf8).length();
             int count = qcharacters.length();
