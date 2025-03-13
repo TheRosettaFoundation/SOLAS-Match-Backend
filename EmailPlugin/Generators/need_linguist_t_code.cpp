@@ -50,6 +50,14 @@ admin_ids.append(3297);    // Temporary Test Alan
                 QString templateLocation = QString(TEMPLATE_DIRECTORY) + "emails/need_linguist_t_code.tpl";
                 ctemplate::ExpandTemplate(templateLocation.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
+//DEL
+qDebug() << "TCODE...";
+qDebug() << "claimant->display_name().length(): " << claimant->display_name().length();
+qDebug() << "QString::fromUtf8(claimant->display_name().c_str()): " << QString::fromUtf8(claimant->display_name().c_str());
+qDebug() << "QString::fromUtf8(claimant->display_name().c_str()).length(): " << QString::fromUtf8(claimant->display_name().c_str()).length();
+qDebug() << "QString::fromLatin1(claimant->display_name().c_str()): " << QString::fromLatin1(claimant->display_name().c_str());
+qDebug() << "QString::fromLatin1(claimant->display_name().c_str()).length(): " << QString::fromLatin1(claimant->display_name().c_str()).length();
+//DEL
                 UserDao::queue_email(db, admin_id, QString::fromStdString(admin->email()), "Need Sun Linguist T-Code for " + QString::fromLatin1(claimant->display_name().c_str()), QString::fromUtf8(email_body.c_str()), LOW);
                 UserDao::log_email_sent(db, admin_id, task_id, 0, 0, claimant_id, admin_id, 0, "need_linguist_t_code_to_admin");
             }
