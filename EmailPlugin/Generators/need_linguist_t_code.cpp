@@ -13,7 +13,7 @@ void need_linguist_t_code::run(int task_id, int claimant_id)
     QSharedPointer<User> claimant = UserDao::getUser(db, claimant_id);
     if (claimant.isNull()) error = "Failed to generate need_linguist_t_code email, unable to find relevant data in the database for claimant_id: " + QString::number(claimant_id);
 
-    QMap<QString, QVariant> linguist_payment_information = UserDao::get_linguist_payment_information(db, user_id);
+    QMap<QString, QVariant> linguist_payment_information = UserDao::get_linguist_payment_information(db, claimant_id);
 
     if (error == "") {
         QList<int> admin_ids;
