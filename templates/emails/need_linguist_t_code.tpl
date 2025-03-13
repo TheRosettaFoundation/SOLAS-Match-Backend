@@ -11,6 +11,9 @@ Their profile must be edited to add Linguist Payment Information: <a href="{{LIN
 Data required: Sun Linguist T-Code, Billing Country, Official Name (if different) and Google Drive Folder Link
 </p>
 <p>
+{{NAME_INFO}}
+</p>
+<p>
 Best Regards
 </p>
 <p>

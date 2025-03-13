@@ -541,3 +541,22 @@ QMap<QString, QVariant> UserDao::getUserPersonalInfo(QSharedPointer<MySQLHandler
     }
     return row;
 }
+
+QMap<QString, QVariant> UserDao::get_linguist_payment_information(QSharedPointer<MySQLHandler> db, int user_id)
+{
+    QMap<QString, QVariant> row = QMap<QString, QVariant>();
+
+    QSharedPointer<QSqlQuery> mQuery = db->call("get_linguist_payment_information", QString::number(user_id));
+    if(mQuery->first()) {
+        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
+        row["user_id"]           = MySQLHandler::getValueFromQuery(fieldMap.value("user_id"), mQuery);
+        row["admin_id"]          = MySQLHandler::getValueFromQuery(fieldMap.value("admin_id"), mQuery);
+        row["country_id"]        = MySQLHandler::getValueFromQuery(fieldMap.value("country_id"), mQuery);
+        row["google_drive_link"] = MySQLHandler::getValueFromQuery(fieldMap.value("google_drive_link"), mQuery);
+        row["linguist_name"]     = MySQLHandler::getValueFromQuery(fieldMap.value("linguist_name"), mQuery);
+        row["linguist_t_code"]   = MySQLHandler::getValueFromQuery(fieldMap.value("linguist_t_code"), mQuery);
+        row["country"]           = MySQLHandler::getValueFromQuery(fieldMap.value("country"), mQuery);
+        row["admin_name"]        = MySQLHandler::getValueFromQuery(fieldMap.value("admin_name"), mQuery);
+    }
+    return row;
+}

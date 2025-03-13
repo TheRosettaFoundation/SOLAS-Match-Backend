@@ -75,6 +75,7 @@ public:
     static QList<QSharedPointer<Task> > get_user_earthquake_tasks(QSharedPointer<MySQLHandler> db, int userId);
     static QMap<QString, QVariant> get_special_registration_record(QSharedPointer<MySQLHandler> db, int special_registration_id, QString reg_key);
     static QMap<QString, QVariant> getUserPersonalInfo(QSharedPointer<MySQLHandler> db, int user_id);
+    static QMap<QString, QVariant> get_linguist_payment_information(QSharedPointer<MySQLHandler> db, int user_id);
 };
 
 #endif  //USERDAO_H
