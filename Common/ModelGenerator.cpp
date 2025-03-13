@@ -18,7 +18,6 @@ void ModelGenerator::Generate(QSharedPointer<QSqlQuery> q, QSharedPointer<User> 
     user->set_biography(MySQLHandler::getStringFromQuery(fieldMap.value("biography"), q));
     user->set_created_time(MySQLHandler::getStringFromQuery(fieldMap.value("created_time"), q));
     user->set_display_name(MySQLHandler::getStringFromQuery(fieldMap.value("display_name"), q));
-qDebug() << "display_name: " << QString::fromUtf8(MySQLHandler::getStringFromQuery(fieldMap.value("display_name"), q).c_str()) << ", length(): " << MySQLHandler::getStringFromQuery(fieldMap.value("display_name"), q).length();
     user->set_email(MySQLHandler::getStringFromQuery(fieldMap.value("email"), q));
     user->set_nonce(MySQLHandler::getStringFromQuery(fieldMap.value("nonce"), q));
     user->set_password(MySQLHandler::getStringFromQuery(fieldMap.value("password"), q));
