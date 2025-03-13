@@ -21,7 +21,7 @@ void need_linguist_t_code::run(int task_id, int claimant_id)
         //admin_ids.append(237873); // Virginie
         //admin_ids.append(24985);  // Ambra
         admin_ids.append(246046);  // twblinguistcode@clearglobal.org
-        //admin_ids.append(3297);    // Temporary Test Alan
+        admin_ids.append(3297);    // Temporary Test Alan
 
         std::string name_info = "";
         if (!(linguist_payment_information.isEmpty())) {
