@@ -286,8 +286,8 @@ QByteArray qxt_fold_mime_header(const QString& key, const QString& value, QTextC
                     ((i + 1) < count) &&
                     qcharacters[i    ] >= QChar(0xD800) && qcharacters[i    ] <= QChar(0xDBFF) &&
                     qcharacters[i + 1] >= QChar(0xDC00) && qcharacters[i + 1] <= QChar(0xDFFF);
-if (utf16_to_utf8_escape) qDebug() << "utf16_to_utf8_escape i: " << i;
 
+//if (utf16_to_utf8_escape) qDebug() << "utf16_to_utf8_escape i: " << i;
 //if (byte_escape) qDebug() << "byte_escape";
 //if (utf8_escape) qDebug() << "utf8_escape";
                 // Byte escape uses =HH and, if at end of line, after that comes ?=
@@ -308,7 +308,7 @@ if (utf16_to_utf8_escape) qDebug() << "utf16_to_utf8_escape i: " << i;
                 }
                 else if (utf16_to_utf8_escape) {
                     QByteArray utf8character = qcharacters.mid(i, 2).toUtf8();
-for (int j = 0; j < utf8character.length(); j++) qDebug() << "i, j, HEX: " << i << j << utf8character.mid(j, 1).toHex().toUpper();
+                    //for (int j = 0; j < utf8character.length(); j++) qDebug() << "i, j, HEX: " << i << j << utf8character.mid(j, 1).toHex().toUpper();
                     for (int j = 0; j < utf8character.length(); j++) line += "=" + utf8character.mid(j, 1).toHex().toUpper();
                     i++;
                 }
