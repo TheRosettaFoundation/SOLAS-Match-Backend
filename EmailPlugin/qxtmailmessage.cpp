@@ -308,7 +308,7 @@ if (utf16_to_utf8_escape) qDebug() << "utf16_to_utf8_escape i: " << i;
                 }
                 else if (utf16_to_utf8_escape) {
                     QByteArray utf8character = qcharacters.mid(i, 2).toUtf8();
-for (int j = 0; j < utf8character.length(); j++) qdebug() << "i, j, HEX: " << i << j << utf8character.mid(j, 1).toHex().toUpper();
+for (int j = 0; j < utf8character.length(); j++) qDebug() << "i, j, HEX: " << i << j << utf8character.mid(j, 1).toHex().toUpper();
                     for (int j = 0; j < utf8character.length(); j++) line += "=" + utf8character.mid(j, 1).toHex().toUpper();
                     i++;
                 }
