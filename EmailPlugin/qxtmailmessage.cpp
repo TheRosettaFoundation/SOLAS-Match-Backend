@@ -278,6 +278,16 @@ QByteArray qxt_fold_mime_header(const QString& key, const QString& value, QTextC
 //qDebug() << "qxt_fold_mime_heade i: " << i << ", qcharacters[i]: " << qcharacters[i] << ",length_outside_encoded_word: " << length_outside_encoded_word << ",line.length(): " << line.length();
                 bool byte_escape = qcharacters[i] <= QChar(32) || qcharacters[i] == QChar(127) || qcharacters[i] == '=' || qcharacters[i] == '?' || qcharacters[i] == '_';
                 bool utf8_escape = qcharacters[i] >= QChar(128);
+
+                // For UTF-16, a "surrogate pair" is required to represent a single supplementary character.
+                // The first (high) surrogate is a 16-bit code value in the range U+D800 to U+DBFF
+                // The second (low) surrogate is a 16-bit code value in the range U+DC00 to U+DFFF
+                bool utf16_to_utf8_escape =
+                    ((i + 1) < count) &&
+                    qcharacters[i    ] >= QChar(0xD800) && qcharacters[i    ] <= QChar(0xDBFF) &&
+                    qcharacters[i + 1] >= QChar(0xDC00) && qcharacters[i + 1] <= QChar(0xDFFF);
+if (utf16_to_utf8_escape) qdebug() << "utf16_to_utf8_escape i: " << i;
+
 //if (byte_escape) qDebug() << "byte_escape";
 //if (utf8_escape) qDebug() << "utf8_escape";
                 // Byte escape uses =HH and, if at end of line, after that comes ?=
@@ -295,6 +305,12 @@ QByteArray qxt_fold_mime_header(const QString& key, const QString& value, QTextC
 
                 if      (byte_escape) {
                     line += "=" + qcharacters.mid(i, 1).toLatin1().toHex().toUpper();
+                }
+                else if (utf16_to_utf8_escape) {
+                    QByteArray utf8character = qcharacters.mid(i, 2).toUtf8();
+for (int j = 0; j < utf8character.length(); j++) qdebug() << "i, j, HEX: " << i << j << utf8character.mid(j, 1).toHex().toUpper();
+                    for (int j = 0; j < utf8character.length(); j++) line += "=" + utf8character.mid(j, 1).toHex().toUpper();
+                    i++;
                 }
                 else if (utf8_escape) {
                     QByteArray utf8character = qcharacters.mid(i, 1).toUtf8();
