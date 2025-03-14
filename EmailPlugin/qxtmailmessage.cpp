@@ -286,7 +286,7 @@ QByteArray qxt_fold_mime_header(const QString& key, const QString& value, QTextC
                     ((i + 1) < count) &&
                     qcharacters[i    ] >= QChar(0xD800) && qcharacters[i    ] <= QChar(0xDBFF) &&
                     qcharacters[i + 1] >= QChar(0xDC00) && qcharacters[i + 1] <= QChar(0xDFFF);
-if (utf16_to_utf8_escape) qdebug() << "utf16_to_utf8_escape i: " << i;
+if (utf16_to_utf8_escape) qDebug() << "utf16_to_utf8_escape i: " << i;
 
 //if (byte_escape) qDebug() << "byte_escape";
 //if (utf8_escape) qDebug() << "utf8_escape";
