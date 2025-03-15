@@ -16,6 +16,7 @@ void need_linguist_t_code::run(int task_id, int claimant_id)
     QMap<QString, QVariant> linguist_payment_information = UserDao::get_linguist_payment_information(db, claimant_id);
 
     if (error == "") {
+      if (UserDao::get_email_sent_for_linguist_payment_information(db, claimant_id).isEmpty()) {
         QList<int> admin_ids;
         //admin_ids.append(237869); // Rachel
         //admin_ids.append(237873); // Virginie
@@ -54,6 +55,7 @@ void need_linguist_t_code::run(int task_id, int claimant_id)
                 UserDao::log_email_sent(db, admin_id, task_id, 0, 0, claimant_id, admin_id, 0, "need_linguist_t_code_to_admin");
             }
         }
+      } else qDebug() << "need_linguist_t_code email already sent task_id:" << task_id << "claimant_id:" << claimant_id;
     } else {
         IEmailGenerator::generateErrorEmail(error);
     }
