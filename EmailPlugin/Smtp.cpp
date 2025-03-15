@@ -61,7 +61,7 @@ int Smtp::send(QMap<QString, QVariant> email_request)
     if (!test) mail_message.addRecipient(email_request["recipient"].toString());
     if ( test) mail_message.addRecipient("alanabarrett0@gmail.com"); // TEST CODE
 
-    if (!test || (QString::compare(only_send, email_request["subject"].toString()) == 0) || (QString::compare("Need Sun", email_request["subject"].toString().left(8)) == 0)) {
+    if (!test || (QString::compare(only_send, email_request["subject"].toString()) == 0)) {
         QString recipientString = "%20" + email_request["recipient"].toString();
         recipientString.replace("@", "%40");
         mail_message.setExtraHeader("List-Unsubscribe", "<mailto:info@kato.translatorswb.org?subject=Unsubscribe%20from%20TWB%3A" + recipientString  + ">");
