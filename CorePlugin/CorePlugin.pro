@@ -63,6 +63,7 @@ SOURCES += CorePlugin.cpp \
     ../EmailPlugin/Generators/invite.cpp \
     ../EmailPlugin/Generators/invoice.cpp \
     ../EmailPlugin/Generators/need_linguist_t_code.cpp \
+    ../EmailPlugin/Generators/test_email.cpp \
 
 HEADERS += CorePlugin.h \
     ../EmailPlugin/IEmailGenerator.h \
@@ -104,3 +105,4 @@ HEADERS += CorePlugin.h \
     ../EmailPlugin/Generators/invite.h \
     ../EmailPlugin/Generators/invoice.h \
     ../EmailPlugin/Generators/need_linguist_t_code.h \
+    ../EmailPlugin/Generators/test_email.h \

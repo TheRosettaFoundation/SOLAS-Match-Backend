@@ -91,6 +91,7 @@ struct CidMatch {
 #define OrgInvite                      37
 #define draft_invoice                  38
 #define request_linguist_t_code        39
+#define request_test_email             90
 
 // email send priorities
 #define HIGH    3

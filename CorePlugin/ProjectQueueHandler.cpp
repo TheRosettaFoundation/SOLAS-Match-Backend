@@ -28,6 +28,7 @@
 #include "../EmailPlugin/Generators/invite.h"
 #include "../EmailPlugin/Generators/invoice.h"
 #include "../EmailPlugin/Generators/need_linguist_t_code.h"
+#include "../EmailPlugin/Generators/test_email.h"
 
 ProjectQueueHandler::ProjectQueueHandler()
 {
@@ -110,6 +111,9 @@ void ProjectQueueHandler::consumeFromQueue()
                         break;
                     case request_linguist_t_code:
                         need_linguist_t_code::run(queue_request["task_id"].toInt(), queue_request["claimant_id"].toInt());
+                        break;
+                    case request_test_email:
+                        test_email::run(queue_request["task_id"].toInt(), queue_request["claimant_id"].toInt());
                         break;
                 }
                 UserDao::mark_queue_request_handled(db, queue_request["id"].toULongLong());
