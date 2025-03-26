@@ -26,7 +26,7 @@ This will help fellow volunteers improve.
 Please submit your feedback at this link: <a href="{{TASK_REVIEW}}">{{TASK_REVIEW}}</a>.
 </p>
 <p>
-You can find our guidelines on leaving https://github.com/TheRosettaFoundation/SOLAS-Match-Backend.gitconstructive feedback here:<br />
+You can find our guidelines on leaving constructive feedback here:<br />
 <a href="https://community.translatorswb.org/t/what-is-translation-quality-for-translators-without-borders/10295">What is Translation Quality for TWB</a><br />
 <a href="https://community.translatorswb.org/t/what-is-the-harmonized-dqf-mqm-error-typology/10827">The error typology you can follow</a><br />
 <a href="https://community.translatorswb.org/t/giving-constructive-and-respectful-feedback/10825">Giving constructive and respectful feedback</a>

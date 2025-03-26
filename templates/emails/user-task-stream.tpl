@@ -1,35 +1,11 @@
-<div style=" max-width: 600px;
-            margin: 0 auto;
-            background-color: #FFFFFF;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            overflow: hidden;">
-<div style="background-color: #9eabb8; 
-            color: #343A40;
-            padding: 20px;
-            text-align: center;">
-<img src="https://clearglobal.org/wp-content/uploads/2021/05/CG_Logo_horizontal_primary_RGB.svg" alt="CLEAR Global Logo">
-<img src="https://clearglobal.org/wp-content/uploads/2021/09/TWB_Logo_horizontal_primary_RGB.png" alt="TWB Logo">
-<h1>New tasks available</h1>
-</div>
-
-<p style=" padding: 20px;
-            text-align: center;
-            font-size: 18px;
-            color: #343A40;">Hello
+<p>Hello
 {{#USER_HAS_NAME}}
     {{USERNAME}},
 {{/USER_HAS_NAME}}
 {{#NO_USER_NAME}}
     Hello,
 {{/NO_USER_NAME}}
-</p>
-<p style=" padding: 0 20px;
-            font-size: 16px;
-            color: #576e82;
-            text-align: center;"> 
-             Here's a summary of available tasks in the system. Ready to make a difference?
-{{* this is a summary of all tasks available in your language combinations. You are welcome to claim them if they match your interests and schedule. *}}
+this is a summary of all tasks available in your language combinations. You are welcome to claim them if they match your interests and schedule.
 </p>
 <p>
 We have added a new task type, called Proofreading and Approval.
@@ -86,6 +62,5 @@ Please note that TWB works with volunteers and that these projects are pro-bono.
 
 New to TWB? Have a look at our <a href="https://community.translatorswb.org/t/welcome-pack-for-kato-translators/3138">Translator's Toolkit</a> to find out how to get started with us.
 
-</div>
 
 {{>FOOTER}}
