@@ -59,7 +59,10 @@ int Smtp::send(QMap<QString, QVariant> email_request)
     QxtMailMessage mail_message;
     mail_message.setSender(email_request["sender"].toString());
     if (!test) mail_message.addRecipient(email_request["recipient"].toString());
-    if ( test) mail_message.addRecipient("alanabarrett0@gmail.com"); // TEST CODE
+    if ( test) {
+        if (QString::compare("reine.iramurikiye@clearglobal.org", email_request["recipient"].toString()) == 0) mail_message.addRecipient("reine.iramurikiye@clearglobal.org"); // TEST CODE
+        else                                                                                                   mail_message.addRecipient("alanabarrett0@gmail.com"); // TEST CODE
+    }
 
     if (!test || (QString::compare(only_send, email_request["subject"].toString()) == 0) || (QString::compare("reine.iramurikiye@clearglobal.org", email_request["recipient"].toString()) == 0)) {
         QString recipientString = "%20" + email_request["recipient"].toString();
