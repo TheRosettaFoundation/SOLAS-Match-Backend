@@ -1,4 +1,6 @@
-<div style=" max-width: 600px;
+
+<div>Test </div>
+<div style="max-width: 600px;
             margin: 0 auto;
             background-color: #FFFFFF;
             border-radius: 10px;
