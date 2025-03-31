@@ -136,6 +136,7 @@ void test_email::run(int task_id, int claimant_id)
                 }
 
                 project_id = task->projectid();
+qDebug() << "project_id:" << project_id << "tasks_within_cutoff:" << tasks_within_cutoff;
                 tasks_within_cutoff++;
         }
 
@@ -153,6 +154,7 @@ void test_email::run(int task_id, int claimant_id)
             std::string email_body;
             QString templateLocation = QString(TEMPLATE_DIRECTORY) + "emails/user-task-stream.tpl";
             ctemplate::ExpandTemplate(templateLocation.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
+qDebug() << "body:" << QString::fromUtf8(email_body.c_str());
 
             UserDao::queue_email(db, claimant_id, QString::fromStdString(user->email()), "TWB dev: Task Stream", QString::fromUtf8(email_body.c_str()), LOW);
         } else {
