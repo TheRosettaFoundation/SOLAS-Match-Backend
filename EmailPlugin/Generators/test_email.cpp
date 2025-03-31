@@ -39,7 +39,7 @@ void test_email::run(int task_id, int claimant_id)
 
         ConfigParser settings;
 
-        ctemplate::TemplateDictionary dict("userTaskStreamDict");
+        ctemplate::TemplateDictionary dict("userTaskStreamDictDebug");
         dict.SetValue("SITE_NAME", std::string(settings.get("site.name").toLatin1().constData(), settings.get("site.name").toLatin1().length()));
         if (user->display_name() != "") {
             dict.ShowSection("USER_HAS_NAME");
@@ -136,7 +136,7 @@ void test_email::run(int task_id, int claimant_id)
                 }
 
                 project_id = task->projectid();
-qDebug() << "project_id:" << project_id << "tasks_within_cutoff:" << tasks_within_cutoff;
+qDebug() << "project_id:" << project_id << "tasks_within_cutoff:" << tasks_within_cutoff; //(**)
                 tasks_within_cutoff++;
         }
 
@@ -154,7 +154,7 @@ qDebug() << "project_id:" << project_id << "tasks_within_cutoff:" << tasks_withi
             std::string email_body;
             QString templateLocation = QString(TEMPLATE_DIRECTORY) + "emails/user-task-stream.tpl";
             ctemplate::ExpandTemplate(templateLocation.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
-qDebug() << "body:" << QString::fromUtf8(email_body.c_str());
+qDebug() << "body:" << QString::fromUtf8(email_body.c_str());//(**)
 
             UserDao::queue_email(db, claimant_id, QString::fromStdString(user->email()), "TWB dev: Task Stream", QString::fromUtf8(email_body.c_str()), LOW);
         } else {
