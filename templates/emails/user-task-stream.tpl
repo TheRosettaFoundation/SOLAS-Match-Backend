@@ -40,7 +40,17 @@ Please note that TWB works with volunteers and that these projects are pro-bono.
 <hr />
 
 {{#TASK_SECT}}
-    <h2>
+     <div style="background-color: #f8f9fa; /* Light grey background */
+            border: 2px solid #e8991c; /* Frame color */
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }">
+     <h2>
         <a href="{{TASK_VIEW}}">{{TASK_TITLE}}</a>
     </h2>
     <p>Type: {{TASK_TYPE}}</p>
@@ -72,6 +82,8 @@ Please note that TWB works with volunteers and that these projects are pro-bono.
         <img src="{{PROJECT_IMAGE}}" width="300" />
     {{/IMAGE_SECT}}
     <p style="margin-bottom:40px;"/>
+     </div>
+    
 {{/TASK_SECT}}
 
 New to TWB? Have a look at our <a href="https://community.translatorswb.org/t/welcome-pack-for-kato-translators/3138">Translator's Toolkit</a> to find out how to get started with us.
