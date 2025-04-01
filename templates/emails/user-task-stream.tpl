@@ -6,15 +6,31 @@
 <div style="background-color: #9eabb8;color: #343A40;
             padding: 20px;
             text-align: center;">
-<img  style="margin: 10px;
+
+<img style="margin: 10px;
             vertical-align: middle;width:120px;" src="https://clearglobal.org/wp-content/uploads/2021/05/CG_Logo_horizontal_primary_RGB.svg" alt="CLEAR Global Logo">
 <img style="margin: 10px;
             vertical-align: middle;width:120px;" src="https://clearglobal.org/wp-content/uploads/2021/09/TWB_Logo_horizontal_primary_RGB.png" alt="TWB Logo">
-</div>
 <h1>New tasks available</h1>
+</div>
+
+<div style="padding: 20px;
+            text-align: center;
+            font-size: 18px;
+            color: #343A40;">
+Hello {{USERNAME}},
+</div>
+
+<div style="padding: 0 20px;
+            font-size: 16px;
+            color: #576e82;
+            text-align: center;">
+            Here's a summary of available tasks in the system. Ready to make a difference?
+        </div>
+
 
 <p>
-{{#USER_HAS_NAME}}
+{{* {{#USER_HAS_NAME}}
 {{USERNAME}},
 {{/USER_HAS_NAME}}
 {{#NO_USER_NAME}}
@@ -22,9 +38,9 @@ Hello,
 {{/NO_USER_NAME}}
 this is a summary of all tasks available in your language combinations. You are welcome to claim them if they match your interests and schedule.
 Testing.........................
-</p>
+</p> *}}
 
-<p>
+{{* <p>
 We have added a new task type, called Proofreading and Approval.
 You will see it in this task stream notification if there are tasks available matching your languages.
 If you want to learn more about this task type, check <a href="https://community.translatorswb.org/t/new-proofreading-and-approval-task-type/53469">here</a>.
@@ -43,7 +59,7 @@ Please note that TWB works with volunteers and that these projects are pro-bono.
 </p>
 
 <br />
-<hr />
+<hr /> *}}
 
 {{#TASK_SECT}}
 <div style="background-color: #f8f9fa; /* Light grey background */
@@ -55,9 +71,45 @@ margin-bottom: 20px;
 position: relative;
 overflow: hidden;
 transition: transform 0.3s ease, box-shadow 0.3s ease">
+
+<h3>{{TASK_TYPE}} - {{TASK_TITLE}}</h3>
+<p>{{WORD_COUNT}} words - {{SOURCE_LANGUAGE}} -> {{TARGET_LANGUAGE}}</p>
+<p>Due By: {{DEADLINE_TIME}} UTC</p>
+                <p>{{PROJECT_NAME}}</p>
+                <a href={{{{TASK_VIEW}}}} style="display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #143878, #0056b3); 
+            color: #FFFFFF;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: bold;
+            transition: background 0.3s ease;
+            width: 100%;
+            box-sizing: border-box;
+            text-align: center; 
+        }">View Task</a>
+        <a href="#" style="display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #e8991c, #a74116); /* Translators without Borders Yellow Gradient */
+            color: #FFFFFF;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: bold;
+            transition: background 0.3s ease;
+            width: 100%;
+            box-sizing: border-box;
+            text-align: center; /* Center the text */">View More Tasks</a>  
+
+{{* ###OLD 
+
 <h2>
 <a href="{{TASK_VIEW}}">{{TASK_TITLE}}</a>
 </h2>
+
 <p>Type: {{TASK_TYPE}}</p>
 <p>From: <strong>{{SOURCE_LANGUAGE}}</strong></p>
 <p>To: <strong>{{TARGET_LANGUAGE}}</strong></p>
@@ -84,13 +136,83 @@ for <a href="{{ORG_VIEW}}">{{ORG_NAME}}</a>
 </p>
 {{/PARTOF_SECT}}
 {{#IMAGE_SECT}}
-<img src="{{PROJECT_IMAGE}}" width="300" />
+<img src="{{PROJECT_IMAGE}}" width="300" /> 
 {{/IMAGE_SECT}}
 <p style="margin-bottom:40px;"></p>
+#### *}}
 </div>
 {{/TASK_SECT}}
 
-New to TWB? Have a look at our <a href="https://community.translatorswb.org/t/welcome-pack-for-kato-translators/3138">Translator's Toolkit</a> to find out how to get started with us.
+<div style="padding: 20px;
+            background-color: #f8f9fa; /* Light grey background */
+            border: 2px solid #e8991c; /* Frame color */
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;">
+<h3 style="text-align: center;
+            margin-bottom: 10px;">Important Information</h3>
+<ul style=" list-style: disc;
+            padding-left: 20px;
+            margin: 0;
+            text-align: left;">
+    <li style="margin-bottom: 10px;
+            font-size: 16px;
+            color: #343A40;"><strong>How to Claim a Task?</strong> <a href="#" style=" color: #e8991c;
+            text-decoration: underline;">[Link to the tutorial Video]</a></li>
+    <li style="margin-bottom: 10px;
+            font-size: 16px;
+            color: #343A40;"><strong>Quality Assurance:</strong> Ensure your work meets our high standards by following the guidelines and running Phrase QA checks. More details here. <a href="#" style="color: #e8991c;
+            text-decoration: underline;">[Link to Guidelines]</a></li>
+</ul>
+</div>
+<div style="padding: 20px;
+background-color: #f8f9fa; /* Light grey background */
+border: 2px solid #e8991c; /* Frame color */
+border-radius: 15px;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+margin-bottom: 20px;
+position: relative;
+overflow: hidden;
+transition: transform 0.3s ease, box-shadow 0.3s ease;">
+            <h3 style="text-align: center;
+            margin-bottom: 10px;">Additional Resources</h3>
+            <ul style=" list-style: disc;
+            padding-left: 20px;
+            margin: 0;
+            text-align: left;">
+                <li style="margin-bottom: 10px;
+                font-size: 16px;
+                color: #343A40;"><strong>New to TWB?</strong> Click here <a style=" color: #e8991c;
+                text-decoration: underline;" href="#">[Link to the Translator's Toolkit]</a></li>
+                <li style="margin-bottom: 10px;
+                font-size: 16px;
+                color: #343A40;"><strong>Have questions?</strong> Check the task thread on our community forum <a href="#" style=" color: #e8991c;
+                text-decoration: underline;">[Link to the task thread on the TWB Community Forum]</a>.</li>
+                <li style="margin-bottom: 10px;
+                font-size: 16px;
+                color: #343A40;"><strong>Want to expand your knowledge?</strong> Check out our TWB Learning Center <a href="#" style=" color: #e8991c;
+                text-decoration: underline;">[Link to the TWB LC]</a>.</li>
+                <li style="margin-bottom: 10px;
+                font-size: 16px;
+                color: #343A40;"><strong>Unsubscribe?</strong> Visit your Profile Page <a href="#" style=" color: #e8991c;
+                text-decoration: underline;">[Link to the linguist's profile page]</a> and update your settings.</li>
+            </ul>
+        </div>
+        <div style=" background-color: #143878; /* Core Blue */
+            color: #FFFFFF;
+            padding: 20px;
+            text-align: center;">
+            <p>Thank you for your invaluable contribution to our mission!</p>
+            <p>The TWB Team</p>
+            <p>Follow Us: <a href="https://twitter.com/CLEARGlobalOrg">X</a> | <a href="https://www.linkedin.com/company/clear-global/">LinkedIn</a></p>
+            <p>Visit Our Website: <a href="https://www.twb.org">TWB</a> | <a href="https://www.clearglobal.org">CLEAR Global</a></p>
+        </div>
 
-{{>FOOTER}}
+
+{{* New to TWB? Have a look at our <a href="https://community.translatorswb.org/t/welcome-pack-for-kato-translators/3138">Translator's Toolkit</a> to find out how to get started with us.
+
+{{>FOOTER}} *}}
 </div>
