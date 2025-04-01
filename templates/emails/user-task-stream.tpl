@@ -1,6 +1,16 @@
-<div style="width: 100%; max-width: 60%; margin: 0 auto; padding: 20px;">
-<img src="https://clearglobal.org/wp-content/uploads/2021/05/CG_Logo_horizontal_primary_RGB.svg" alt="CLEAR Global Logo">
-<img src="https://clearglobal.org/wp-content/uploads/2021/09/TWB_Logo_horizontal_primary_RGB.png" alt="TWB Logo">
+<div style="width: 100%; max-width: 600px; margin: 0 auto; padding: 20px;
+ background-color: #FFFFFF;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;">
+<div style="background-color: #9eabb8;color: #343A40;
+            padding: 20px;
+            text-align: center;">
+<img  style="margin: 10px;
+            vertical-align: middle;width:120px;" src="https://clearglobal.org/wp-content/uploads/2021/05/CG_Logo_horizontal_primary_RGB.svg" alt="CLEAR Global Logo">
+<img style="margin: 10px;
+            vertical-align: middle;width:120px;" src="https://clearglobal.org/wp-content/uploads/2021/09/TWB_Logo_horizontal_primary_RGB.png" alt="TWB Logo">
+</div>
 <h1>New tasks available</h1>
 
 <p>
