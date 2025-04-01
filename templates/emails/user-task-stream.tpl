@@ -59,7 +59,7 @@ transition: transform 0.3s ease, box-shadow 0.3s ease">
             width: 100%;
             box-sizing: border-box;
             text-align: center; 
-        }">View Task</a>
+        ">View Task</a>
         <a href="#" style="display: block;
             margin: 20px auto;
             padding: 10px 20px;
