@@ -1,4 +1,4 @@
-<p>Testing ..</p>
+<div style="width: 100%; max-width: 60%; margin: 0 auto; padding: 20px;">
 <img src="https://clearglobal.org/wp-content/uploads/2021/05/CG_Logo_horizontal_primary_RGB.svg" alt="CLEAR Global Logo">
 <img src="https://clearglobal.org/wp-content/uploads/2021/09/TWB_Logo_horizontal_primary_RGB.png" alt="TWB Logo">
 <h1>New tasks available</h1>
@@ -83,3 +83,4 @@ for <a href="{{ORG_VIEW}}">{{ORG_NAME}}</a>
 New to TWB? Have a look at our <a href="https://community.translatorswb.org/t/welcome-pack-for-kato-translators/3138">Translator's Toolkit</a> to find out how to get started with us.
 
 {{>FOOTER}}
+</div>
