@@ -46,7 +46,7 @@ transition: transform 0.3s ease, box-shadow 0.3s ease">
 <p>{{WORD_COUNT}} words - {{SOURCE_LANGUAGE}} -> {{TARGET_LANGUAGE}}</p>
 <p>Due By: {{DEADLINE_TIME}} UTC</p>
                 <p>{{PROJECT_NAME}}</p>
-                <a href={{{{TASK_VIEW}}}} style="display: block;
+                <a href={{TASK_VIEW}} style="display: block;
             margin: 20px auto;
             padding: 10px 20px;
             background: linear-gradient(135deg, #143878, #0056b3); 
