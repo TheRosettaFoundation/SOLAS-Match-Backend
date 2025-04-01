@@ -146,8 +146,4 @@ transition: transform 0.3s ease, box-shadow 0.3s ease;">
             <p>Visit Our Website: <a href="https://www.twb.org">TWB</a> | <a href="https://www.clearglobal.org">CLEAR Global</a></p>
         </div>
 
-
-{{* New to TWB? Have a look at our <a href="https://community.translatorswb.org/t/welcome-pack-for-kato-translators/3138">Translator's Toolkit</a> to find out how to get started with us.
-
-{{>FOOTER}} *}}
 </div>
