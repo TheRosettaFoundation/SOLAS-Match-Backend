@@ -2,3 +2,4 @@ Makefile
 conf.ini
 plugins
 *.user*
+before.tpl
