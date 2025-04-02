@@ -1,7 +1,7 @@
 
 <div style="font-family: 'Halcom', 'Helvetica Neue', Arial, sans-serif;
             background-color: #e7eaed;
-            margin: 0;
+            margin-top: 20px;
             padding: 0;">
 <div style="width: 100%; max-width: 900px; margin: 0 auto; padding: 20px; 
  background-color: #FFFFFF;
@@ -149,19 +149,20 @@ transition: transform 0.3s ease, box-shadow 0.3s ease;">
             </ul>
         </div>
 </div>
-        <div style=" background-color: #143878; /* Core Blue */
-            color: #FFFFFF;
-            padding: 20px;
-            text-align: center;">
-            <p>Thank you for your invaluable contribution to our mission!</p>
-            <p>The TWB Team</p>
-            <p>Follow Us: <a style=" color: #e8991c;
-                text-decoration: underline;" href="https://twitter.com/CLEARGlobalOrg">X</a> | <a style=" color: #e8991c;
-                text-decoration: underline;"href="https://www.linkedin.com/company/clear-global/">LinkedIn</a></p>
-            <p>Visit Our Website: <a style=" color: #e8991c;
-                text-decoration: underline;" href="https://www.twb.org">TWB</a> | <a href="https://www.clearglobal.org" style=" color: #e8991c;
-                text-decoration: underline;">CLEAR Global</a></p>
-        </div>
+       
 
+</div>
+<div style=" background-color: #143878; /* Core Blue */
+color: #FFFFFF;
+padding: 20px;
+text-align: center;">
+<p>Thank you for your invaluable contribution to our mission!</p>
+<p>The TWB Team</p>
+<p>Follow Us: <a style=" color: #e8991c;
+    text-decoration: underline;" href="https://twitter.com/CLEARGlobalOrg">X</a> | <a style=" color: #e8991c;
+    text-decoration: underline;"href="https://www.linkedin.com/company/clear-global/">LinkedIn</a></p>
+<p>Visit Our Website: <a style=" color: #e8991c;
+    text-decoration: underline;" href="https://www.twb.org">TWB</a> | <a href="https://www.clearglobal.org" style=" color: #e8991c;
+    text-decoration: underline;">CLEAR Global</a></p>
 </div>
 </div>
