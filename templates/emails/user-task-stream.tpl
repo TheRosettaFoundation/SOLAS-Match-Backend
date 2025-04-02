@@ -2,7 +2,7 @@
 <div style="font-family: 'Halcom', 'Helvetica Neue', Arial, sans-serif;
             background-color: #e7eaed;
             margin-top: 20px;
-            padding: 0;">
+            padding: 20px;">
 <div style="width: 100%; max-width: 900px; margin: 0 auto; padding: 20px; 
  background-color: #FFFFFF;
             border-radius: 10px;
