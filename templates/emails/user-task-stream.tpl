@@ -27,6 +27,7 @@
 
 <img style="margin: 10px;
             vertical-align: middle;width:120px;" src="https://clearglobal.org/wp-content/uploads/2021/05/CG_Logo_horizontal_primary_RGB.svg" alt="CLEAR Global Logo">
+
 <img style="margin: 10px;
             vertical-align: middle;width:120px;" src="https://clearglobal.org/wp-content/uploads/2021/09/TWB_Logo_horizontal_primary_RGB.png" alt="TWB Logo">
 <h1>New tasks available</h1>
@@ -122,6 +123,24 @@ transition: transform 0.3s ease, box-shadow 0.3s ease" class="task-card">
             color: #343A40;"><strong>Quality Assurance:</strong> Ensure your work meets our high standards by following the guidelines and running Phrase QA checks. More details here. <a href="#" style="color: #e8991c;
             text-decoration: underline;">[Link to Guidelines]</a></li>
 </ul>
+<div style="position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background-color: #6e6edc; /* Clear Tech Purple */
+            border-radius: 50%;
+            opacity: 0.2;
+            z-index: -1;"></div>
+  <div style="position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background-color: #e8991c; /* Translators without Borders Yellow */
+            border-radius: 50%;
+            opacity: 0.2;
+            z-index: -1;"></div>          
 </div>
 <div style="padding: 20px;
 background-color: #f8f9fa; /* Light grey background */
@@ -163,8 +182,12 @@ transition: transform 0.3s ease, box-shadow 0.3s ease;">
             text-align: center;">
             <p>Thank you for your invaluable contribution to our mission!</p>
             <p>The TWB Team</p>
-            <p>Follow Us: <a href="https://twitter.com/CLEARGlobalOrg">X</a> | <a href="https://www.linkedin.com/company/clear-global/">LinkedIn</a></p>
-            <p>Visit Our Website: <a href="https://www.twb.org">TWB</a> | <a href="https://www.clearglobal.org">CLEAR Global</a></p>
+            <p>Follow Us: <a style=" color: #e8991c;
+                text-decoration: underline;" href="https://twitter.com/CLEARGlobalOrg">X</a> | <a style=" color: #e8991c;
+                text-decoration: underline;"href="https://www.linkedin.com/company/clear-global/">LinkedIn</a></p>
+            <p>Visit Our Website: <a style=" color: #e8991c;
+                text-decoration: underline;" href="https://www.twb.org">TWB</a> | <a href="https://www.clearglobal.org" style=" color: #e8991c;
+                text-decoration: underline;">CLEAR Global</a></p>
         </div>
 
 </div>
