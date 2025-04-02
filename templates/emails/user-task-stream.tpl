@@ -35,7 +35,7 @@ Hello {{USERNAME}},
             Here's a summary of available tasks in the system. Ready to make a difference?
         </div>
 
-
+        <p>These are pro-bono tasks. Please only claim a task you are sure you can deliver. Remember to check the target language, topic, instructions, and deadline!</p>
 
 <p>
 
@@ -53,9 +53,9 @@ transition: transform 0.3s ease, box-shadow 0.3s ease" class="task-card">
 <h3 style="font-size: 18px;
             color: #343A40;
             text-align: center;" >{{TASK_TYPE}} - {{TASK_TITLE}}</h3>
-<p>{{WORD_COUNT}} words - {{SOURCE_LANGUAGE}} -> {{TARGET_LANGUAGE}}</p>
+<p>Number of words:{{WORD_COUNT}} words - Language Pair: {{SOURCE_LANGUAGE}} -> {{TARGET_LANGUAGE}}</p>
 <p>Due By: {{DEADLINE_TIME}} UTC</p>
-                <p>{{PROJECT_NAME}}</p>
+                <p>Project Name: {{PROJECT_NAME}}</p>
                 <a href={{TASK_VIEW}}  style="display: block;
             margin: 20px auto;
             padding: 10px 20px;
