@@ -1,28 +1,14 @@
 
-<head>
 
-
-<style>
-
-.claim-task:hover {
-            background: linear-gradient(135deg, #0056b3, #143878);
-        }
-        .task-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
-
-</style>
-</head>
-<body>
-
+<div style=" font-family: 'Halcom', 'Helvetica Neue', Arial, sans-serif;
+            background-color: #e7eaed;">
 <div style="width: 100%; max-width: 600px; margin: 0 auto; padding: 20px; 
  background-color: #FFFFFF;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             overflow: hidden;">
 <div style="background-color: #9eabb8;color: #343A40;
-           +
+            padding: 20px;
             text-align: center;">
 
 <img style="margin: 10px;
@@ -81,13 +67,7 @@ transition: transform 0.3s ease, box-shadow 0.3s ease" class="task-card">
             box-sizing: border-box;
             text-align: center; 
         " class="claim-task">View Task</a>
-          
-
-
-</div>
-{{/TASK_SECT}}
-
-<a href="#" style="display: block;
+        <a href="#" style="display: block;
             position:relative;
             margin: 20px auto;
             padding: 10px 20px;
@@ -102,7 +82,11 @@ transition: transform 0.3s ease, box-shadow 0.3s ease" class="task-card">
             box-sizing: border-box;
             text-align: center; /* Center the text */">View More Tasks</a>  
         
-        </div>  
+        </div>    
+
+
+</div>
+{{/TASK_SECT}}
 
 <div style="padding: 20px;
             background-color: #f8f9fa; /* Light grey background */
@@ -180,4 +164,4 @@ transition: transform 0.3s ease, box-shadow 0.3s ease;">
         </div>
 
 </div>
-</body>
+</div>
