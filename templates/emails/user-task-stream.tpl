@@ -16,7 +16,7 @@
 </head>
 <body>
 
-<div style="width: 100%; max-width: 900px; margin: 0 auto; padding: 20px;
+<div style="width: 100%; max-width: 900px; margin: 0 auto; padding: 20px; 
  background-color: #FFFFFF;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -32,7 +32,7 @@
 <h1>New tasks available</h1>
 </div>
 
-<div style="width: 100%; max-width: 600px; margin: 0 auto; padding: 20px;">
+<div style="width: 100%; max-width: 600px; margin: 0 auto; padding: 20px; color:#272b2e">
 
 <div style="padding: 20px;
             text-align: center;
