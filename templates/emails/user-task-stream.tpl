@@ -16,7 +16,7 @@
 </head>
 <body>
 
-<div style="width: 100%; max-width: 600px; margin: 0 auto; padding: 20px;
+<div style="width: 100%; max-width: 900px; margin: 0 auto; padding: 20px;
  background-color: #FFFFFF;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -31,6 +31,8 @@
             vertical-align: middle;width:120px;" src="https://clearglobal.org/wp-content/uploads/2021/09/TWB_Logo_horizontal_primary_RGB.png" alt="TWB Logo">
 <h1>New tasks available</h1>
 </div>
+
+<div style="width: 100%; max-width: 600px; margin: 0 auto; padding: 20px;">
 
 <div style="padding: 20px;
             text-align: center;
@@ -154,6 +156,7 @@ transition: transform 0.3s ease, box-shadow 0.3s ease;">
                 text-decoration: underline;">[Link to the linguist's profile page]</a> and update your settings.</li>
             </ul>
         </div>
+</div>
         <div style=" background-color: #143878; /* Core Blue */
             color: #FFFFFF;
             padding: 20px;
