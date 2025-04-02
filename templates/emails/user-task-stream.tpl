@@ -155,6 +155,7 @@ transition: transform 0.3s ease, box-shadow 0.3s ease;">
 </div>
 <div style=" background-color: #143878; /* Core Blue */
 color: #FFFFFF;
+margin-top: 20px;
 padding: 20px;
 text-align: center;">
 <p>Thank you for your invaluable contribution to our mission!</p>
