@@ -49,7 +49,9 @@ position: relative;
 overflow: hidden;
 transition: transform 0.3s ease, box-shadow 0.3s ease" class="task-card">
 
-<h3>{{TASK_TYPE}} - {{TASK_TITLE}}</h3>
+<h3 style="font-size: 18px;
+            color: #343A40;
+            text-align: center;" >{{TASK_TYPE}} - {{TASK_TITLE}}</h3>
 <p>{{WORD_COUNT}} words - {{SOURCE_LANGUAGE}} -> {{TARGET_LANGUAGE}}</p>
 <p>Due By: {{DEADLINE_TIME}} UTC</p>
                 <p>{{PROJECT_NAME}}</p>
