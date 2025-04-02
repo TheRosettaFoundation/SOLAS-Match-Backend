@@ -35,6 +35,7 @@ Hello {{USERNAME}},
             Here's a summary of available tasks in the system. Ready to make a difference?
         </div>
 
+        <div>These are pro-bono tasks. Please only claim a task you are sure you can deliver. Remember to check the target language, topic, instructions, and deadline!</div>
 
 <p>
 
