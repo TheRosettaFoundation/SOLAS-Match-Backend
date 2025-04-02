@@ -82,6 +82,7 @@ transition: transform 0.3s ease, box-shadow 0.3s ease" class="task-card">
             text-align: center; 
         " class="claim-task">View Task</a>
         <a href="#" style="display: block;
+            position:relative;
             margin: 20px auto;
             padding: 10px 20px;
             background: linear-gradient(135deg, #e8991c, #a74116); /* Translators without Borders Yellow Gradient */
@@ -96,14 +97,14 @@ transition: transform 0.3s ease, box-shadow 0.3s ease" class="task-card">
             text-align: center; /* Center the text */">View More Tasks</a>  
         <div style="position: absolute;
             
-        bottom: -100px;
+        bottom: -50px;
         right: -50px;
         width: 200px;
         height: 200px;
         background-color: #6e6edc; /* Clear Tech Purple */
         border-radius: 50%;
         opacity: 0.2;
-        z-index: -1;
+        z-index: -100;
         
         ">
         </div>    
