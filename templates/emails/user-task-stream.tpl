@@ -16,7 +16,7 @@
 </head>
 <body>
 
-<div style="width: 100%; max-width: 900px; margin: 0 auto; padding: 20px; 
+<div style="width: 100%; max-width: 600px; margin: 0 auto; padding: 20px; 
  background-color: #FFFFFF;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -96,7 +96,7 @@ transition: transform 0.3s ease, box-shadow 0.3s ease" class="task-card">
             text-align: center; /* Center the text */">View More Tasks</a>  
         <div style="position: absolute;
             
-        bottom: -50px;
+        bottom: -100px;
         right: -50px;
         width: 200px;
         height: 200px;
@@ -104,7 +104,7 @@ transition: transform 0.3s ease, box-shadow 0.3s ease" class="task-card">
         border-radius: 50%;
         opacity: 0.2;
         z-index: -1;
-        content:''
+        
         ">
         </div>    
 
