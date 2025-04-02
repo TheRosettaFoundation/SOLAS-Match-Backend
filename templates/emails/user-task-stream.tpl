@@ -81,7 +81,13 @@ transition: transform 0.3s ease, box-shadow 0.3s ease" class="task-card">
             box-sizing: border-box;
             text-align: center; 
         " class="claim-task">View Task</a>
-        <a href="#" style="display: block;
+          
+
+
+</div>
+{{/TASK_SECT}}
+
+<a href="#" style="display: block;
             position:relative;
             margin: 20px auto;
             padding: 10px 20px;
@@ -96,11 +102,7 @@ transition: transform 0.3s ease, box-shadow 0.3s ease" class="task-card">
             box-sizing: border-box;
             text-align: center; /* Center the text */">View More Tasks</a>  
         
-        </div>    
-
-
-</div>
-{{/TASK_SECT}}
+        </div>  
 
 <div style="padding: 20px;
             background-color: #f8f9fa; /* Light grey background */
