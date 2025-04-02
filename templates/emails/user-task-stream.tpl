@@ -1,8 +1,22 @@
 
+<head>
 
-<div style=" font-family: 'Halcom', 'Helvetica Neue', Arial, sans-serif;
-            background-color: #e7eaed;">
-<div style="width: 100%; max-width: 600px; margin: 0 auto; padding: 20px; 
+
+<style>
+
+.claim-task:hover {
+            background: linear-gradient(135deg, #0056b3, #143878);
+        }
+        .task-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+</style>
+</head>
+<body>
+
+<div style="width: 100%; max-width: 900px; margin: 0 auto; padding: 20px; 
  background-color: #FFFFFF;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -68,7 +82,6 @@ transition: transform 0.3s ease, box-shadow 0.3s ease" class="task-card">
             text-align: center; 
         " class="claim-task">View Task</a>
         <a href="#" style="display: block;
-            position:relative;
             margin: 20px auto;
             padding: 10px 20px;
             background: linear-gradient(135deg, #e8991c, #a74116); /* Translators without Borders Yellow Gradient */
@@ -81,7 +94,18 @@ transition: transform 0.3s ease, box-shadow 0.3s ease" class="task-card">
             width: 100%;
             box-sizing: border-box;
             text-align: center; /* Center the text */">View More Tasks</a>  
-        
+        <div style="position: absolute;
+            
+        bottom: -50px;
+        right: -50px;
+        width: 200px;
+        height: 200px;
+        background-color: #6e6edc; /* Clear Tech Purple */
+        border-radius: 50%;
+        opacity: 0.2;
+        z-index: -1;
+        content:''
+        ">
         </div>    
 
 
@@ -164,4 +188,4 @@ transition: transform 0.3s ease, box-shadow 0.3s ease;">
         </div>
 
 </div>
-</div>
+</body>
