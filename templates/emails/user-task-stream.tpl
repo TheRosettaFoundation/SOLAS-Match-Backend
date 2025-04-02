@@ -148,10 +148,13 @@ transition: transform 0.3s ease, box-shadow 0.3s ease;">
                 text-decoration: underline;">[Link to the linguist's profile page]</a> and update your settings.</li>
             </ul>
         </div>
-        <div style=" background-color: #143878; /* Core Blue */
-color: #FFFFFF;
+</div>
+       
 
-margin: 0 auto;
+</div>
+<div style=" background-color: #143878; /* Core Blue */
+color: #FFFFFF;
+margin-top: 20px;
 padding: 20px;
 text-align: center;">
 <p>Thank you for your invaluable contribution to our mission!</p>
@@ -163,9 +166,4 @@ text-align: center;">
     text-decoration: underline;" href="https://www.twb.org">TWB</a> | <a href="https://www.clearglobal.org" style=" color: #e8991c;
     text-decoration: underline;">CLEAR Global</a></p>
 </div>
-</div>
-       
-
-</div>
-
 </div>
