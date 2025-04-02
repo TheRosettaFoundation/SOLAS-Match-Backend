@@ -43,7 +43,6 @@ Hello {{USERNAME}},
 <div style="background-color: #f8f9fa; /* Light grey background */
 border: 2px solid #e8991c; /* Frame color */
 border-radius: 15px;
-olor: #343A40;
 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 padding: 20px;
 margin-bottom: 20px;
@@ -56,7 +55,7 @@ transition: transform 0.3s ease, box-shadow 0.3s ease" class="task-card">
             text-align: center;" >{{TASK_TYPE}} - {{TASK_TITLE}}</h3>
 <p>Number of words:{{WORD_COUNT}} words - Language Pair: {{SOURCE_LANGUAGE}} -> {{TARGET_LANGUAGE}}</p>
 <p>Due By: {{DEADLINE_TIME}} UTC</p>
-                <p> {{PROJECT_TITLE}} </p>
+                <p>{{PROJECT_NAME}}</p>
                 <a href={{TASK_VIEW}}  style="display: block;
             margin: 20px auto;
             padding: 10px 20px;
