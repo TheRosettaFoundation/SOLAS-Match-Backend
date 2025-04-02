@@ -76,7 +76,8 @@ transition: transform 0.3s ease, box-shadow 0.3s ease" class="task-card">
 {{/TASK_SECT}}
 
 <a href="#" style="display: block;
-         padding: 20px;
+            padding: 20px;
+            margin: 20px auto;
             background: linear-gradient(135deg, #e8991c, #a74116); /* Translators without Borders Yellow Gradient */
             color: #FFFFFF;
             text-decoration: none;
