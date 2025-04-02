@@ -22,7 +22,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             overflow: hidden;">
 <div style="background-color: #9eabb8;color: #343A40;
-            padding: 20px;
+           +
             text-align: center;">
 
 <img style="margin: 10px;
@@ -95,18 +95,7 @@ transition: transform 0.3s ease, box-shadow 0.3s ease" class="task-card">
             width: 100%;
             box-sizing: border-box;
             text-align: center; /* Center the text */">View More Tasks</a>  
-        <div style="position: absolute;
-            
-        bottom: -50px;
-        right: -50px;
-        width: 200px;
-        height: 200px;
-        background-color: #6e6edc; /* Clear Tech Purple */
-        border-radius: 50%;
-        opacity: 0.2;
-        z-index: -100;
         
-        ">
         </div>    
 
 
