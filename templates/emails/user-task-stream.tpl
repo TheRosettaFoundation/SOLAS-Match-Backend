@@ -26,7 +26,7 @@
             text-align: center;">
 
 <img style="margin: 10px;
-            vertical-align: middle;width:120px;" src="https://clearglobal.org/wp-content/uploads/2021/05/CG_Logo_horizontal_primary_RGB.svg" alt="CLEAR Global Logo">
+            vertical-align: middle;max-width:100%; overflow:visible" src="https://clearglobal.org/wp-content/uploads/2021/05/CG_Logo_horizontal_primary_RGB.svg" alt="CLEAR Global Logo">
 
 <img style="margin: 10px;
             vertical-align: middle;width:120px;" src="https://clearglobal.org/wp-content/uploads/2021/09/TWB_Logo_horizontal_primary_RGB.png" alt="TWB Logo">
@@ -94,6 +94,19 @@ transition: transform 0.3s ease, box-shadow 0.3s ease" class="task-card">
             width: 100%;
             box-sizing: border-box;
             text-align: center; /* Center the text */">View More Tasks</a>  
+        <div style="position: absolute;
+            
+        bottom: -50px;
+        right: -50px;
+        width: 200px;
+        height: 200px;
+        background-color: #6e6edc; /* Clear Tech Purple */
+        border-radius: 50%;
+        opacity: 0.2;
+        z-index: -1;
+        content:''
+        ">
+        </div>    
 
 
 </div>
@@ -123,24 +136,8 @@ transition: transform 0.3s ease, box-shadow 0.3s ease" class="task-card">
             color: #343A40;"><strong>Quality Assurance:</strong> Ensure your work meets our high standards by following the guidelines and running Phrase QA checks. More details here. <a href="#" style="color: #e8991c;
             text-decoration: underline;">[Link to Guidelines]</a></li>
 </ul>
-<div style="position: absolute;
-            bottom: -50px;
-            right: -50px;
-            width: 200px;
-            height: 200px;
-            background-color: #6e6edc; /* Clear Tech Purple */
-            border-radius: 50%;
-            opacity: 0.2;
-            z-index: -1;"></div>
-  <div style="position: absolute;
-            top: -50px;
-            left: -50px;
-            width: 200px;
-            height: 200px;
-            background-color: #e8991c; /* Translators without Borders Yellow */
-            border-radius: 50%;
-            opacity: 0.2;
-            z-index: -1;"></div>          
+
+            
 </div>
 <div style="padding: 20px;
 background-color: #f8f9fa; /* Light grey background */
