@@ -1,3 +1,21 @@
+
+<head>
+
+
+<style>
+
+.claim-task:hover {
+            background: linear-gradient(135deg, #0056b3, #143878);
+        }
+        .task-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+</style>
+</head>
+<body>
+
 <div style="width: 100%; max-width: 600px; margin: 0 auto; padding: 20px;
  background-color: #FFFFFF;
             border-radius: 10px;
@@ -40,13 +58,13 @@ padding: 20px;
 margin-bottom: 20px;
 position: relative;
 overflow: hidden;
-transition: transform 0.3s ease, box-shadow 0.3s ease">
+transition: transform 0.3s ease, box-shadow 0.3s ease" class="task-card">
 
 <h3>{{TASK_TYPE}} - {{TASK_TITLE}}</h3>
 <p>{{WORD_COUNT}} words - {{SOURCE_LANGUAGE}} -> {{TARGET_LANGUAGE}}</p>
 <p>Due By: {{DEADLINE_TIME}} UTC</p>
                 <p>{{PROJECT_NAME}}</p>
-                <a href={{TASK_VIEW}} style="display: block;
+                <a href={{TASK_VIEW}}  style="display: block;
             margin: 20px auto;
             padding: 10px 20px;
             background: linear-gradient(135deg, #143878, #0056b3); 
@@ -59,7 +77,7 @@ transition: transform 0.3s ease, box-shadow 0.3s ease">
             width: 100%;
             box-sizing: border-box;
             text-align: center; 
-        ">View Task</a>
+        " class="claim-task">View Task</a>
         <a href="#" style="display: block;
             margin: 20px auto;
             padding: 10px 20px;
@@ -86,7 +104,7 @@ transition: transform 0.3s ease, box-shadow 0.3s ease">
             margin-bottom: 20px;
             position: relative;
             overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;">
+            transition: transform 0.3s ease, box-shadow 0.3s ease;" >
 <h3 style="text-align: center;
             margin-bottom: 10px;">Important Information</h3>
 <ul style=" list-style: disc;
@@ -147,3 +165,4 @@ transition: transform 0.3s ease, box-shadow 0.3s ease;">
         </div>
 
 </div>
+</body>
