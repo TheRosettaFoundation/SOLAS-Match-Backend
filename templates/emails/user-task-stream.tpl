@@ -49,10 +49,7 @@ position: relative;
 overflow: hidden;
 transition: transform 0.3s ease, box-shadow 0.3s ease" class="task-card">
 
-<h3 style="margin: 0;
-            font-size: 18px;
-            color: #343A40;
-            text-align: center;">{{TASK_TYPE}} - {{TASK_TITLE}}</h3>
+<h3>{{TASK_TYPE}} - {{TASK_TITLE}}</h3>
 <p>{{WORD_COUNT}} words - {{SOURCE_LANGUAGE}} -> {{TARGET_LANGUAGE}}</p>
 <p>Due By: {{DEADLINE_TIME}} UTC</p>
                 <p>{{PROJECT_NAME}}</p>
@@ -152,21 +149,7 @@ transition: transform 0.3s ease, box-shadow 0.3s ease;">
             </ul>
         </div>
 
-        <div style=" background-color: #143878; /* Core Blue */
-color: #FFFFFF;
-
-margin: 0 auto;
-padding: 20px;
-text-align: center;">
-<p>Thank you for your invaluable contribution to our mission!</p>
-<p>The TWB Team</p>
-<p>Follow Us: <a style=" color: #e8991c;
-    text-decoration: underline;" href="https://twitter.com/CLEARGlobalOrg">X</a> | <a style=" color: #e8991c;
-    text-decoration: underline;"href="https://www.linkedin.com/company/clear-global/">LinkedIn</a></p>
-<p>Visit Our Website: <a style=" color: #e8991c;
-    text-decoration: underline;" href="https://www.twb.org">TWB</a> | <a href="https://www.clearglobal.org" style=" color: #e8991c;
-    text-decoration: underline;">CLEAR Global</a></p>
-</div>
+        
 </div>
        
 
