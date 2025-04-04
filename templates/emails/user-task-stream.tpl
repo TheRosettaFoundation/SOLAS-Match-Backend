@@ -12,7 +12,7 @@
             padding: 20px;
             text-align: center;">
 
-<img style="display:block; margin:10px auto; width:300px; height:auto;" src="https://drive.google.com/drive/folders/1vzMaipRFCRMWaPIqHsE2fjmkr0T7WQ2Q" alt="CLEAR Global Logo">
+<img style="display:block; margin:10px auto; width:300px; height:auto;" src="https://drive.google.com/drive/folders/1mWQUnBMTlAdDsrmdFegqW1F0mEygQ5k_" alt="CLEAR Global Logo">
 
 <img style="margin: 10px;
             vertical-align: middle;width:120px;" src="https://clearglobal.org/wp-content/uploads/2021/09/TWB_Logo_horizontal_primary_RGB.png" alt="TWB Logo">
