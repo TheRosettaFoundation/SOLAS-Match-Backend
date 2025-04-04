@@ -62,6 +62,8 @@ void test_email::run(int task_id, int claimant_id)
                     if (task->tasktype() == task_type_detail["type_enum"].toInt()) task_type = task_type_detail["type_text"].toString().toStdString();
                 }
                 taskSect->SetValue("TASK_TYPE", task_type);
+                taskSect->SetValue('CLAIMANT_ID', claimant_id); 
+                taskSect->SetValue('TEST_ID', "TEST"); 
 
                 std::string source_languagename = task->sourcelocale().languagename();
                 std::string source_countryname  = task->sourcelocale().countryname();
@@ -84,7 +86,7 @@ void test_email::run(int task_id, int claimant_id)
                 if (target_countryname == "ANY") taskSect->SetValue("TARGET_LANGUAGE", target_languagename);
                 else                             taskSect->SetValue("TARGET_LANGUAGE", target_languagename + " (" + target_countryname + ")");
 
-                taskSect->SetValue('CLAIMANT_ID', QString::number(claimant_id).toStdString()); // for logging purposes
+                
                 taskSect->SetValue("WORD_COUNT", QString::number(task->wordcount()).toStdString());
                 QString createdTime = QDateTime::fromString(QString::fromStdString(task->createdtime()),
                            "yyyy-MM-ddTHH:mm:ss.zzz").toString("d MMMM yyyy - hh:mm");

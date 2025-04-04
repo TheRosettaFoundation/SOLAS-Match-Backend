@@ -38,6 +38,7 @@ Hello {{USERNAME}},
         <p style="margin-top:20px; margin-bottom:20px;">These are pro-bono tasks. Please only claim a task you are sure you can deliver. Remember to check the target language, topic, instructions, and deadline!</p>
 
 <p>
+TEST : {{TEST_ID}}
 
 {{#TASK_SECT}}
 <div style="background-color: #f8f9fa; /* Light grey background */
