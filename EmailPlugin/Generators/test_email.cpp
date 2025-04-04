@@ -41,6 +41,7 @@ void test_email::run(int task_id, int claimant_id)
 
         ctemplate::TemplateDictionary dict("userTaskStreamDictDebug");
         dict.SetValue("SITE_NAME", std::string(settings.get("site.name").toLatin1().constData(), settings.get("site.name").toLatin1().length()));
+        dict.SetValue("CLAIMANT_ID", std::to_string(claimant_id));
         if (user->display_name() != "") {
             dict.ShowSection("USER_HAS_NAME");
             dict.SetValue("USERNAME", Email::htmlspecialchars(user->display_name()));
@@ -62,7 +63,7 @@ void test_email::run(int task_id, int claimant_id)
                     if (task->tasktype() == task_type_detail["type_enum"].toInt()) task_type = task_type_detail["type_text"].toString().toStdString();
                 }
                 taskSect->SetValue("TASK_TYPE", task_type);
-                taskSect->SetValue("CLAIMANT_ID", std::to_string(claimant_id)); 
+              
              
 
                 std::string source_languagename = task->sourcelocale().languagename();
