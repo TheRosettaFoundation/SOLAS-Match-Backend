@@ -12,7 +12,7 @@
             padding: 20px;
             text-align: center;">
 
-<img style="display:block; margin:10px auto; width:300px; height:auto;" src="https://drive.google.com/drive/folders/1mWQUnBMTlAdDsrmdFegqW1F0mEygQ5k_" alt="CLEAR Global Logo">
+<img style="display:block; margin:10px auto; width:300px; height:auto;" src="https://elearn.translatorswb.org/pluginfile.php/1/core_admin/logo/0x200/1733915613/merged-logos-main.png" alt="CLEAR Global Logo">
 
 <img style="margin: 10px;
             vertical-align: middle;width:120px;" src="https://clearglobal.org/wp-content/uploads/2021/09/TWB_Logo_horizontal_primary_RGB.png" alt="TWB Logo">
@@ -144,15 +144,15 @@ transition: transform 0.3s ease, box-shadow 0.3s ease;">
                 <li style="margin-bottom: 10px;
                 font-size: 16px;
                 color: #343A40;"><strong>New to TWB?</strong> Click here <a style=" color: #e8991c;
-                text-decoration: underline;" href="#">[Link to the Translator's Toolkit]</a></li>
+                text-decoration: underline;" href="https://community.translatorswb.org/t/welcome-pack-for-kato-translators/3138">[Link to the Translator's Toolkit]</a></li>
                 <li style="margin-bottom: 10px;
                 font-size: 16px;
-                color: #343A40;"><strong>Have questions?</strong> Check the task thread on our community forum <a href="#" style=" color: #e8991c;
-                text-decoration: underline;">[Link to the task thread on the TWB Community Forum]</a>.</li>
+                color: #343A40;"><strong>Have questions?</strong> <a href="https://community.translatorswb.org/latest" style=" color: #e8991c;
+                text-decoration: underline;">Check the task thread on our community forum </a>.</li>
                 <li style="margin-bottom: 10px;
                 font-size: 16px;
-                color: #343A40;"><strong>Want to expand your knowledge?</strong> Check out our TWB Learning Center <a href="#" style=" color: #e8991c;
-                text-decoration: underline;">[Link to the TWB LC]</a>.</li>
+                color: #343A40;"><strong>Want to expand your knowledge?</strong>  <a href="https://elearn.translatorswb.org/auth/saml2/login.php?wants&idp=bd3eb3e6241260ee537b9a55145d852d&passive=off" style=" color: #e8991c;
+                text-decoration: underline;">Check out our TWB Learning Center</a>.</li>
                 <li style="margin-bottom: 10px;
                 font-size: 16px;
                 color: #343A40;"><strong>Unsubscribe?</strong> Visit your Profile Page <a href="#" style=" color: #e8991c;
