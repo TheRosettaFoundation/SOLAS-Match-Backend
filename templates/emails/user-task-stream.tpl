@@ -156,7 +156,7 @@ transition: transform 0.3s ease, box-shadow 0.3s ease;">
                 <li style="margin-bottom: 10px;
                 font-size: 16px;
                 color: #343A40;"><strong>Unsubscribe?</strong> Visit your Profile Page <a href="#" style=" color: #e8991c;
-                text-decoration: underline;">[Link to the linguist's profile page]</a> and update your settings.</li>
+                text-decoration: underline;">[Link to the linguist's profile page] {{CLAIMANT_ID}}</a> and update your settings.</li>
             </ul>
         </div>
 
