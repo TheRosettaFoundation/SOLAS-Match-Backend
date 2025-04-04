@@ -8,11 +8,12 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             overflow: hidden;">
+ <img style="display:block; margin:10px auto; width:300px; height:auto;" src="https://elearn.translatorswb.org/pluginfile.php/1/core_admin/logo/0x200/1733915613/merged-logos-main.png" alt="CLEAR Global Logo">
+
+           
 <div style="background-color: #9eabb8;color: #343A40;
             padding: 20px;
             text-align: center;">
-
-<img style="display:block; margin:10px auto; width:300px; height:auto;" src="https://elearn.translatorswb.org/pluginfile.php/1/core_admin/logo/0x200/1733915613/merged-logos-main.png" alt="CLEAR Global Logo">
 
 
 <h1>New tasks available</h1>
