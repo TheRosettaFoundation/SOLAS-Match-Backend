@@ -16,22 +16,22 @@
             text-align: center;">
 
 
-<h1>New tasks available</h1>
+<h1 style="color: #576e82;">New tasks available</h1>
 <hr style="
     border: 0;
     height: 1px;
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0));
     box-shadow: 0 1px 1px rgba(255, 255, 255, 0.3);
-    margin: 2em 0;
+    margin: 1em 0;
 ">
 </div>
 
-<div style="width: 100%; max-width: 600px; margin: 0 auto; padding: 20px; color:#272b2e">
+<div style="width: 100%; max-width: 600px; margin: 0 auto; padding: 10px; color:#272b2e">
 
 <div style="padding: 20px;
             text-align: center;
             font-size: 18px;
-            color: #343A40;">
+            color:  color: #576e82;">
 Hello {{USERNAME}},
 </div>
 
@@ -42,7 +42,7 @@ Hello {{USERNAME}},
             Here's a summary of available tasks in the system. Ready to make a difference?
         </div>
 
-        <p style="margin-top:20px; margin-bottom:20px;">These are pro-bono tasks. Please only claim a task you are sure you can deliver. Remember to check the target language, topic, instructions, and deadline!</p>
+        <p style="margin-top:20px; margin-bottom:20px; color: #576e82;">These are pro-bono tasks. Please only claim a task you are sure you can deliver. Remember to check the target language, topic, instructions, and deadline!</p>
 
 <p>
 
