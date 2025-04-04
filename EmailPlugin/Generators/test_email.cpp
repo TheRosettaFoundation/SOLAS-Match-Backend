@@ -62,8 +62,8 @@ void test_email::run(int task_id, int claimant_id)
                     if (task->tasktype() == task_type_detail["type_enum"].toInt()) task_type = task_type_detail["type_text"].toString().toStdString();
                 }
                 taskSect->SetValue("TASK_TYPE", task_type);
-                taskSect->SetValue('CLAIMANT_ID', claimant_id); 
-                taskSect->SetValue('TEST_ID', "TEST"); 
+                taskSect->SetValue("CLAIMANT_ID", std::to_string(claimant_id)); 
+             
 
                 std::string source_languagename = task->sourcelocale().languagename();
                 std::string source_countryname  = task->sourcelocale().countryname();
