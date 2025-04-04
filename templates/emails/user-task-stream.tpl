@@ -26,12 +26,12 @@
 ">
 </div>
 
-<div style="width: 100%; max-width: 600px; margin: 0 auto; padding: 10px; color:#272b2e">
+<div style="width: 100%; max-width: 600px; margin: 0 auto; padding: 10px; color:#344b5e;">
 
 <div style="padding: 20px;
             text-align: center;
             font-size: 18px;
-            color:  color: #576e82;">
+            color: #576e82;">
 Hello {{USERNAME}},
 </div>
 
