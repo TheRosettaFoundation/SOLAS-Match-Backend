@@ -84,6 +84,7 @@ void test_email::run(int task_id, int claimant_id)
                 if (target_countryname == "ANY") taskSect->SetValue("TARGET_LANGUAGE", target_languagename);
                 else                             taskSect->SetValue("TARGET_LANGUAGE", target_languagename + " (" + target_countryname + ")");
 
+                taskSect->SetValue('CLAIMANT_ID', QString::number(claimant_id).toStdString()); // for logging purposes
                 taskSect->SetValue("WORD_COUNT", QString::number(task->wordcount()).toStdString());
                 QString createdTime = QDateTime::fromString(QString::fromStdString(task->createdtime()),
                            "yyyy-MM-ddTHH:mm:ss.zzz").toString("d MMMM yyyy - hh:mm");
