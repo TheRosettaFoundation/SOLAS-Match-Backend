@@ -116,7 +116,7 @@ transition: transform 0.3s ease, box-shadow 0.3s ease" class="task-card">
             text-align: left;">
     <li style="margin-bottom: 10px;
             font-size: 16px;
-            color: #343A40;"><strong>How to Claim a Task?</strong> <a href="#" style=" color: #e8991c;
+            color: #343A40;"><strong>How to Claim a Task?</strong> <a href="https://drive.google.com/file/d/1E7t4BiFDkTi5r4orgteVzJy4QAiehiB3/view" style=" color: #e8991c;
             text-decoration: underline;">[Link to the tutorial Video]</a></li>
     <li style="margin-bottom: 10px;
             font-size: 16px;
