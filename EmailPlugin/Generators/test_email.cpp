@@ -41,7 +41,8 @@ void test_email::run(int task_id, int claimant_id)
 
         ctemplate::TemplateDictionary dict("userTaskStreamDictDebug");
         dict.SetValue("SITE_NAME", std::string(settings.get("site.name").toLatin1().constData(), settings.get("site.name").toLatin1().length()));
-        dict.SetValue("CLAIMANT_ID", std::to_string(claimant_id));
+        QString linguist_link = settings.get("site.url") + QString::number(claimant_id) + "/profile/";
+        dict.SetValue("CLAIMANT_ID", linguist_link.toStdString());
         if (user->display_name() != "") {
             dict.ShowSection("USER_HAS_NAME");
             dict.SetValue("USERNAME", Email::htmlspecialchars(user->display_name()));
