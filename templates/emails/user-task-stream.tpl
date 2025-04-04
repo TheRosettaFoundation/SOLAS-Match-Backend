@@ -53,13 +53,14 @@ transition: transform 0.3s ease, box-shadow 0.3s ease" class="task-card">
 <h3 style="font-size: 18px;
             color: #343A40;
             text-align: center;" >{{TASK_TYPE}} - {{TASK_TITLE}}</h3>
-<p>Number of words:{{WORD_COUNT}} words - Language Pair: {{SOURCE_LANGUAGE}} -> {{TARGET_LANGUAGE}}</p>
-<p>Due By: {{DEADLINE_TIME}} UTC</p>
+<p>Number of words:<span style="color:#e8991c;font-weight:bold;">{{WORD_COUNT}} words </span></p>
+<p>Language Pair: <span style="color:#e8991c;font-weight:bold;">{{SOURCE_LANGUAGE}}</span> -> <span style="color:#e8991c;font-weight:bold;">{{TARGET_LANGUAGE}}</span></p>
+<p>Due By: <span style="color:#e8991c;font-weight:bold;">{{DEADLINE_TIME}} UTC</span></p>
 
 {{#PARTOF_SECT}}
 <p>
-    Part of: <a href="{{PROJECT_VIEW}}">{{PROJECT_TITLE}}</a>
-    for <a href="{{ORG_VIEW}}">{{ORG_NAME}}</a>
+    Project Name:  {{PROJECT_TITLE}}
+    
 </p>
 {{/PARTOF_SECT}}
 
