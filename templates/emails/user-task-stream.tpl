@@ -85,7 +85,7 @@ transition: transform 0.3s ease, box-shadow 0.3s ease" class="task-card">
 </div>
 {{/TASK_SECT}}
 
-<a href="#" style="display: block;
+<a href="https://twbplatform.org/" target="_blank" style="display: block;
             padding: 20px;
             margin: 20px auto;
             background: linear-gradient(135deg, #e8991c, #a74116); /* Translators without Borders Yellow Gradient */
