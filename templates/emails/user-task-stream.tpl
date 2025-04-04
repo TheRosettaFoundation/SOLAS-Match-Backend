@@ -56,7 +56,12 @@ transition: transform 0.3s ease, box-shadow 0.3s ease" class="task-card">
 <p>Number of words:{{WORD_COUNT}} words - Language Pair: {{SOURCE_LANGUAGE}} -> {{TARGET_LANGUAGE}}</p>
 <p>Due By: {{DEADLINE_TIME}} UTC</p>
 
-                <p>Project Name: {{PROJECT_TITLE}}</p>
+{{#PARTOF_SECT}}
+<p>
+    Part of: <a href="{{PROJECT_VIEW}}">{{PROJECT_TITLE}}</a>
+    for <a href="{{ORG_VIEW}}">{{ORG_NAME}}</a>
+</p>
+{{/PARTOF_SECT}}
 
                 <a href={{TASK_VIEW}}  style="display: block;
             margin: 20px auto;
