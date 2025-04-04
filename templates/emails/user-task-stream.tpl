@@ -56,7 +56,7 @@ transition: transform 0.3s ease, box-shadow 0.3s ease" class="task-card">
 <p>Number of words:<span style="color:#143878;font-weight:bold;">{{WORD_COUNT}} words </span></p>
 <p>Language Pair: <span style="color:#143878;font-weight:bold;">{{SOURCE_LANGUAGE}}</span> -> <span style="color:#143878;font-weight:bold;">{{TARGET_LANGUAGE}}</span></p>
 <p>Due By: <span style="color:#143878;font-weight:bold;">{{DEADLINE_TIME}} UTC</span></p>
-<p>Claimant ID : {{CLAIMANT_ID}}</p>
+
 
 {{#PARTOF_SECT}}
 <p>
@@ -156,7 +156,7 @@ transition: transform 0.3s ease, box-shadow 0.3s ease;">
                 text-decoration: underline;">Check out our TWB Learning Center</a>.</li>
                 <li style="margin-bottom: 10px;
                 font-size: 16px;
-                color: #343A40;"><strong>Unsubscribe?</strong> Visit your Profile Page <a href="#" style=" color: #e8991c;
+                color: #343A40;"><strong>Unsubscribe?</strong> Visit your Profile Page <a href={{CLAIMANT_ID}} style=" color: #e8991c;
                 text-decoration: underline;">[Link to the linguist's profile page] </a> and update your settings.</li>
             </ul>
         </div>
