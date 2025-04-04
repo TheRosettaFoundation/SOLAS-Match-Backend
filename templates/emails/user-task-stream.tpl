@@ -17,6 +17,13 @@
 
 
 <h1>New tasks available</h1>
+<hr style="
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0));
+    box-shadow: 0 1px 1px rgba(255, 255, 255, 0.3);
+    margin: 2em 0;
+">
 </div>
 
 <div style="width: 100%; max-width: 600px; margin: 0 auto; padding: 20px; color:#272b2e">
