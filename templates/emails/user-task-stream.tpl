@@ -14,8 +14,7 @@
 
 <img style="display:block; margin:10px auto; width:300px; height:auto;" src="https://elearn.translatorswb.org/pluginfile.php/1/core_admin/logo/0x200/1733915613/merged-logos-main.png" alt="CLEAR Global Logo">
 
-<img style="margin: 10px;
-            vertical-align: middle;width:120px;" src="https://clearglobal.org/wp-content/uploads/2021/09/TWB_Logo_horizontal_primary_RGB.png" alt="TWB Logo">
+
 <h1>New tasks available</h1>
 </div>
 
