@@ -3,7 +3,7 @@
             background-color: #e7eaed;
             margin-top: 20px;
             padding: 20px;">
-<div style="width: 100%; max-width: 900px; margin: 0 auto; padding: 40px; 
+<div style="width: 100%; max-width: 900px; margin: 0 auto; padding: 30px; 
  background-color: #FFFFFF;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
