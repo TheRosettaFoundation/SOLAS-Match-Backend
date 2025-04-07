@@ -181,7 +181,7 @@ transition: transform 0.3s ease, box-shadow 0.3s ease;">
             text-decoration: underline;" href="https://twitter.com/CLEARGlobalOrg">X</a> | <a style=" color: #e8991c;
             text-decoration: underline;"href="https://www.linkedin.com/company/clear-global/">LinkedIn</a></p>
         <p>Visit Our Website: <a style=" color: #e8991c;
-            text-decoration: underline;" href="https://www.twb.org">TWB</a> | <a href="https://www.clearglobal.org" style=" color: #e8991c;
+            text-decoration: underline;" href="https://translatorswithoutborders.org/">TWB</a> | <a href="https://www.clearglobal.org" style=" color: #e8991c;
             text-decoration: underline;">CLEAR Global</a></p>
         </div>
 </div>
