@@ -126,7 +126,8 @@ transition: transform 0.3s ease, box-shadow 0.3s ease" class="task-card">
     <li style="margin-bottom: 10px;
             font-size: 16px;
             color: #343A40;"><strong>How to Claim a Task?</strong> <a href="https://drive.google.com/file/d/1E7t4BiFDkTi5r4orgteVzJy4QAiehiB3/view" style=" color: #e8991c;
-            text-decoration: underline;"><a href="https://drive.google.com/file/d/1E7t4BiFDkTi5r4orgteVzJy4QAiehiB3/view" target="_blank">[Link to the tutorial Video]</a></li>
+            text-decoration: underline;"><a style="color: #e8991c;
+            text-decoration: underline;" href="https://drive.google.com/file/d/1E7t4BiFDkTi5r4orgteVzJy4QAiehiB3/view" target="_blank">[Link to the tutorial Video]</a></li>
     <li style="margin-bottom: 10px;
             font-size: 16px;
             color: #343A40;"><strong>Quality Assurance:</strong> Ensure your work meets our high standards by following the guidelines and running Phrase QA checks. More details here. <a href="https://community.translatorswb.org/t/post-editing-machine-translation-tips-and-best-practice/60046" target="_blank" style="color: #e8991c;
