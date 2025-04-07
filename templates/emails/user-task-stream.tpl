@@ -26,7 +26,7 @@
 ">
 </div>
 
-<div style="width: 100%; max-width: 600px; margin: 0 auto; padding: 10px; color:#344b5e;">
+<div style="width: 100%; max-width: 600px; margin: 0 auto;  color:#344b5e;">
 
 <div style="padding: 20px;
             text-align: center;
