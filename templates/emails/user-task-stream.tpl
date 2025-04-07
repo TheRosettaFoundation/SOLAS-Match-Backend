@@ -126,10 +126,10 @@ transition: transform 0.3s ease, box-shadow 0.3s ease" class="task-card">
     <li style="margin-bottom: 10px;
             font-size: 16px;
             color: #343A40;"><strong>How to Claim a Task?</strong> <a href="https://drive.google.com/file/d/1E7t4BiFDkTi5r4orgteVzJy4QAiehiB3/view" style=" color: #e8991c;
-            text-decoration: underline;">[Link to the tutorial Video]</a></li>
+            text-decoration: underline;"><a href="https://drive.google.com/file/d/1E7t4BiFDkTi5r4orgteVzJy4QAiehiB3/view" target="_blank">[Link to the tutorial Video]</a></li>
     <li style="margin-bottom: 10px;
             font-size: 16px;
-            color: #343A40;"><strong>Quality Assurance:</strong> Ensure your work meets our high standards by following the guidelines and running Phrase QA checks. More details here. <a href="#" style="color: #e8991c;
+            color: #343A40;"><strong>Quality Assurance:</strong> Ensure your work meets our high standards by following the guidelines and running Phrase QA checks. More details here. <a href="https://community.translatorswb.org/t/post-editing-machine-translation-tips-and-best-practice/60046" target="_blank" style="color: #e8991c;
             text-decoration: underline;">[Link to Guidelines]</a></li>
 </ul>
 
@@ -156,8 +156,8 @@ transition: transform 0.3s ease, box-shadow 0.3s ease;">
                 text-decoration: underline;" href="https://community.translatorswb.org/t/welcome-pack-for-kato-translators/3138">[Link to the Translator's Toolkit]</a></li>
                 <li style="margin-bottom: 10px;
                 font-size: 16px;
-                color: #343A40;"><strong>Have questions?</strong> <a href="https://community.translatorswb.org/latest" style=" color: #e8991c;
-                text-decoration: underline;">Check the task thread on our community forum </a>.</li>
+                color: #343A40;"><strong>Have questions?</strong> Check the task thread on our community forum <a href="https://community.translatorswb.org/latest" style=" color: #e8991c;
+                text-decoration: underline;"> [Link to the task thread on the TWB Community Forum]</a>.</li>
                 <li style="margin-bottom: 10px;
                 font-size: 16px;
                 color: #343A40;"><strong>Want to expand your knowledge?</strong>  <a href="https://elearn.translatorswb.org/auth/saml2/login.php?wants&idp=bd3eb3e6241260ee537b9a55145d852d&passive=off" style=" color: #e8991c;
