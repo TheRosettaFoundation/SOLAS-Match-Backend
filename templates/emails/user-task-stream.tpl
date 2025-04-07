@@ -1,4 +1,3 @@
-
 <div style="font-family: 'Halcom', 'Helvetica Neue', Arial, sans-serif;
             background-color: #e7eaed;
             margin-top: 20px;
@@ -44,7 +43,6 @@ Hello {{USERNAME}},
 
         <p style="margin-top:20px; margin-bottom:20px; color: #576e82; font-size:14px">These are pro-bono tasks. Please only claim a task you are sure you can deliver. Remember to check the target language, topic, instructions, and deadline!</p>
 
-<p>
 
 
 {{#TASK_SECT}}
@@ -73,7 +71,7 @@ transition: transform 0.3s ease, box-shadow 0.3s ease" class="task-card">
 </p>
 {{/PARTOF_SECT}}
 
-                <a href={{TASK_VIEW}}  style="display: block;
+                <a href="{{TASK_VIEW}}" style="display: block;
             margin: 20px auto;
             padding: 10px 20px;
             background: linear-gradient(135deg, #143878, #0056b3); 
@@ -125,13 +123,10 @@ transition: transform 0.3s ease, box-shadow 0.3s ease" class="task-card">
             text-align: left;">
     <li style="margin-bottom: 10px;
             font-size: 16px;
-            color: #343A40;"><strong>How to Claim a Task?</strong> <a href="https://drive.google.com/file/d/1E7t4BiFDkTi5r4orgteVzJy4QAiehiB3/view" style=" color: #e8991c;
-            text-decoration: underline;"><a style="color: #e8991c;
-            text-decoration: underline;" href="https://drive.google.com/file/d/1E7t4BiFDkTi5r4orgteVzJy4QAiehiB3/view" target="_blank">[Link to the tutorial Video]</a></li>
+            color: #343A40;"><strong>How to Claim a Task?</strong> <a href="https://drive.google.com/file/d/1E7t4BiFDkTi5r4orgteVzJy4QAiehiB3/view" style="color: #e8991c; text-decoration: underline;" target="_blank">[Link to the tutorial Video]</a></li>
     <li style="margin-bottom: 10px;
             font-size: 16px;
-            color: #343A40;"><strong>Quality Assurance:</strong> Ensure your work meets our high standards by following the guidelines and running Phrase QA checks. More details here. <a href="https://community.translatorswb.org/t/post-editing-machine-translation-tips-and-best-practice/60046" target="_blank" style="color: #e8991c;
-            text-decoration: underline;">[Link to Guidelines]</a></li>
+            color: #343A40;"><strong>Quality Assurance:</strong> Ensure your work meets our high standards by following the guidelines and running Phrase QA checks. More details here. <a href="https://community.translatorswb.org/t/post-editing-machine-translation-tips-and-best-practice/60046" target="_blank" style="color: #e8991c; text-decoration: underline;">[Link to Guidelines]</a></li>
 </ul>
 
             
@@ -153,20 +148,16 @@ transition: transform 0.3s ease, box-shadow 0.3s ease;">
             text-align: left;">
                 <li style="margin-bottom: 10px;
                 font-size: 16px;
-                color: #343A40;"><strong>New to TWB?</strong> Click here <a style=" color: #e8991c;
-                text-decoration: underline;" href="https://community.translatorswb.org/t/welcome-pack-for-kato-translators/3138">[Link to the Translator's Toolkit]</a></li>
+                color: #343A40;"><strong>New to TWB?</strong> Click here <a style="color: #e8991c; text-decoration: underline;" href="https://community.translatorswb.org/t/welcome-pack-for-kato-translators/3138" target="_blank">[Link to the Translator's Toolkit]</a></li>
                 <li style="margin-bottom: 10px;
                 font-size: 16px;
-                color: #343A40;"><strong>Have questions?</strong> Check the task thread on our community forum <a href="https://community.translatorswb.org/latest" style=" color: #e8991c;
-                text-decoration: underline;"> [Link to the task thread on the TWB Community Forum]</a>.</li>
+                color: #343A40;"><strong>Have questions?</strong> Check the task thread on our community forum <a href="https://community.translatorswb.org/latest" style="color: #e8991c; text-decoration: underline;" target="_blank">[Link to the task thread on the TWB Community Forum]</a></li>
                 <li style="margin-bottom: 10px;
                 font-size: 16px;
-                color: #343A40;"><strong>Want to expand your knowledge?</strong> Check out our TWB Learning Center <a href="https://elearn.translatorswb.org/auth/saml2/login.php?wants&idp=bd3eb3e6241260ee537b9a55145d852d&passive=off" style=" color: #e8991c;
-                text-decoration: underline;"> [Link to the TWB LC]</a>.</li>
+                color: #343A40;"><strong>Want to expand your knowledge?</strong> Check out our TWB Learning Center <a href="https://elearn.translatorswb.org/auth/saml2/login.php?wants&idp=bd3eb3e6241260ee537b9a55145d852d&passive=off" style="color: #e8991c; text-decoration: underline;" target="_blank">[Link to the TWB LC]</a></li>
                 <li style="margin-bottom: 10px;
                 font-size: 16px;
-                color: #343A40;"><strong>Unsubscribe?</strong> Visit your Profile Page <a href={{CLAIMANT_ID}} style=" color: #e8991c;
-                text-decoration: underline;">[Link to the linguist's profile page] </a> and update your settings.</li>
+                color: #343A40;"><strong>Unsubscribe?</strong> Visit your Profile Page <a href="{{CLAIMANT_ID}}" style="color: #e8991c; text-decoration: underline;" target="_blank">[Link to the linguist's profile page]</a> and update your settings.</li>
             </ul>
         </div>
 
@@ -177,12 +168,8 @@ transition: transform 0.3s ease, box-shadow 0.3s ease;">
         text-align: center;">
         <p>Thank you for your invaluable contribution to our mission!</p>
         <p>The TWB Team</p>
-        <p>Follow Us: <a style=" color: #e8991c;
-            text-decoration: underline;" href="https://twitter.com/CLEARGlobalOrg">X</a> | <a style=" color: #e8991c;
-            text-decoration: underline;"href="https://www.linkedin.com/company/clear-global/">LinkedIn</a></p>
-        <p>Visit Our Website: <a style=" color: #e8991c;
-            text-decoration: underline;" href="https://translatorswithoutborders.org/">TWB</a> | <a href="https://www.clearglobal.org" style=" color: #e8991c;
-            text-decoration: underline;">CLEAR Global</a></p>
+        <p>Follow Us: <a style="color: #e8991c; text-decoration: underline;" href="https://twitter.com/CLEARGlobalOrg" target="_blank">X</a> | <a style="color: #e8991c; text-decoration: underline;" href="https://www.linkedin.com/company/clear-global/" target="_blank">LinkedIn</a></p>
+        <p>Visit Our Website: <a style="color: #e8991c; text-decoration: underline;" href="https://translatorswithoutborders.org/" target="_blank">TWB</a> | <a style="color: #e8991c; text-decoration: underline;" href="https://www.clearglobal.org" target="_blank">CLEAR Global</a></p>
         </div>
 </div>
        
