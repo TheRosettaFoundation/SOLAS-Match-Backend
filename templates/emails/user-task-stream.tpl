@@ -16,7 +16,7 @@
             text-align: center;">
 
 
-<h1 style="color: #576e82;">New tasks available</h1>
+<h1 style="color: #343A40">New tasks available</h1>
 <hr style="
     border: 0;
     height: 1px;
@@ -160,8 +160,8 @@ transition: transform 0.3s ease, box-shadow 0.3s ease;">
                 text-decoration: underline;"> [Link to the task thread on the TWB Community Forum]</a>.</li>
                 <li style="margin-bottom: 10px;
                 font-size: 16px;
-                color: #343A40;"><strong>Want to expand your knowledge?</strong>  <a href="https://elearn.translatorswb.org/auth/saml2/login.php?wants&idp=bd3eb3e6241260ee537b9a55145d852d&passive=off" style=" color: #e8991c;
-                text-decoration: underline;">Check out our TWB Learning Center</a>.</li>
+                color: #343A40;"><strong>Want to expand your knowledge?</strong> Check out our TWB Learning Center <a href="https://elearn.translatorswb.org/auth/saml2/login.php?wants&idp=bd3eb3e6241260ee537b9a55145d852d&passive=off" style=" color: #e8991c;
+                text-decoration: underline;"> [Link to the TWB LC]</a>.</li>
                 <li style="margin-bottom: 10px;
                 font-size: 16px;
                 color: #343A40;"><strong>Unsubscribe?</strong> Visit your Profile Page <a href={{CLAIMANT_ID}} style=" color: #e8991c;
