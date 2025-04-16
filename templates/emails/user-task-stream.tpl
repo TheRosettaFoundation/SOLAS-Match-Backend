@@ -25,8 +25,20 @@
         </div>
         
         <p style="margin: 15px 0; color: #576e82; font-size:14px; ">
-          These are pro-bono tasks. Please only claim a task you are sure you can deliver. Remember to check the target language, topic, instructions, and deadline!
+        These are volunteer tasks. Only claim them if you’re sure you can complete them. Please read all the task details first.
         </p>
+         <!-- Important Information Section -->
+         <div style="padding: 15px; background-color: #f8f9fa; border: 2px solid #e8991c; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); margin-bottom: 20px; position: relative; overflow: hidden;">
+         <h3 style="text-align: center; margin: 0 0 10px 0; font-size: 18px;">Important Information</h3>
+         <ul style="list-style: disc; padding-left: 20px; margin: 0; text-align: left;">
+           <li style="margin-bottom: 10px; font-size: 14px; color: #343A40;">
+             <strong><a href="https://drive.google.com/file/d/1E7t4BiFDkTi5r4orgteVzJy4QAiehiB3/view" style="color: #e8991c; text-decoration: none;" target="_blank">How to Claim a Task?</a></strong>
+           </li>
+           <li style="margin-bottom: 10px; font-size: 14px; color: #343A40;">
+             <strong>Quality Assurance:</strong> Ensure your work meets our high standards by following the guidelines and running Phrase QA checks. <a href="https://community.translatorswb.org/t/post-editing-machine-translation-tips-and-best-practice/60046" target="_blank" style="color: #e8991c; text-decoration: underline;">More details here</a>
+           </li>
+         </ul>
+       </div>
         
         <!-- Task Section (repeated for each task) -->
         {{#TASK_SECT}}
@@ -41,12 +53,12 @@
           </p>
           
           <p style="margin: 8px 0; font-size: 14px;">
-            Due By: <span style="color:#143878; font-weight:bold;">{{DEADLINE_TIME}} UTC</span>
+          <span style="color:#143878; font-weight:bold;">Due By: </span> {{DEADLINE_TIME}} UTC
           </p>
           
           {{#PARTOF_SECT}}
           <p style="margin: 8px 0; font-size: 14px;">
-            Project: {{PROJECT_TITLE}}
+          <span style="color:#143878; font-weight:bold;"> Project:</span> {{PROJECT_TITLE}}
           </p>
           {{/PARTOF_SECT}}
           
@@ -57,18 +69,7 @@
         <!-- View More Tasks Button -->
         <a href="https://twbplatform.org/" target="_blank" style="display: block; padding: 15px; margin: 20px auto; background: linear-gradient(135deg, #e8991c, #a74116); color: #FFFFFF; text-decoration: none; border-radius: 25px; font-size: 16px; font-weight: bold; width: 100%; box-sizing: border-box; text-align: center;">View More Tasks</a>
         
-        <!-- Important Information Section -->
-        <div style="padding: 15px; background-color: #f8f9fa; border: 2px solid #e8991c; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); margin-bottom: 20px; position: relative; overflow: hidden;">
-          <h3 style="text-align: center; margin: 0 0 10px 0; font-size: 18px;">Important Information</h3>
-          <ul style="list-style: disc; padding-left: 20px; margin: 0; text-align: left;">
-            <li style="margin-bottom: 10px; font-size: 14px; color: #343A40;">
-              <strong><a href="https://drive.google.com/file/d/1E7t4BiFDkTi5r4orgteVzJy4QAiehiB3/view" style="color: #e8991c; text-decoration: underline;" target="_blank">How to Claim a Task?</a></strong>
-            </li>
-            <li style="margin-bottom: 10px; font-size: 14px; color: #343A40;">
-              <strong>Quality Assurance:</strong> Ensure your work meets our high standards by following the guidelines and running Phrase QA checks. <a href="https://community.translatorswb.org/t/post-editing-machine-translation-tips-and-best-practice/60046" target="_blank" style="color: #e8991c; text-decoration: underline;">More details here</a>
-            </li>
-          </ul>
-        </div>
+       
         
         <!-- Additional Resources Section -->
         <div style="padding: 15px; background-color: #f8f9fa; border: 2px solid #e8991c; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); margin-bottom: 20px; position: relative; overflow: hidden;">
