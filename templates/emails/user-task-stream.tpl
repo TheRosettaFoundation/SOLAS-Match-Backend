@@ -58,7 +58,7 @@
           <p style="margin: 8px 0; font-size: 14px;">
           <span style="color:#143878; font-weight:bold;">Due By: </span> {{DEADLINE_TIME}} UTC
           </p>
-          <p style="margin: 8px 0; font-size: 14px;"> <span> Deliver by {{DESIRED_DEADLINE}} or earlier .You'll receive an email once you can start working on the task.</span></p>
+          <p style="margin: 8px 0; font-size: 14px;"> <span> Deliver by {{DESIRED_DEADLINE}} or earlier. You'll receive an email once you can start working on the task.</span></p>
          
           {{#PARTOF_SECT}}
           <p style="margin: 8px 0; font-size: 14px;">
