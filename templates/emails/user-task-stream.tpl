@@ -58,8 +58,8 @@
           <p style="margin: 8px 0; font-size: 14px;">
           <span style="color:#143878; font-weight:bold;">Due By: </span> {{DEADLINE_TIME}} UTC
           </p>
-          <p></p>
-          
+          <p> <span> Deliver by {{PREVIOUS_DEADLINE_TIME}} or earlier .You'll receive an email once you can start working on the task.</span></p>
+          <p> Desired deadline : {{DESIRED_DEADLINE}} UTC</p>
           {{#PARTOF_SECT}}
           <p style="margin: 8px 0; font-size: 14px;">
           <span style="color:#143878; font-weight:bold;"> Project:</span> {{PROJECT_TITLE}}
@@ -83,10 +83,10 @@
               <strong>New to TWB?</strong> <a style="color: #e8991c; text-decoration: underline;" href="https://community.translatorswb.org/t/welcome-pack-for-kato-translators/3138" target="_blank">Click here</a>
             </li>
             <li style="margin-bottom: 10px; font-size: 14px; color: #343A40;">
-              <strong>Have questions?</strong> <a href="https://community.translatorswb.org/latest" style="color: #e8991c; text-decoration: underline;" target="_blank">Check the task thread on our community forum</a>
+              <strong>Have questions?</strong> <a href="https://community.translatorswb.org/latest" style="color: #e8991c; text-decoration: underline;" target="_blank">his is how you can ask questions about the task you claimed! </a>
             </li>
             <li style="margin-bottom: 10px; font-size: 14px; color: #343A40;">
-              <strong>Want to expand your knowledge?</strong> <a href="https://elearn.translatorswb.org/auth/saml2/login.php?wants&idp=bd3eb3e6241260ee537b9a55145d852d&passive=off" style="color: #e8991c; text-decoration: underline;" target="_blank">Check out our TWB Learning Center</a>
+              <strong>Want to expand your knowledge?</strong> <a href="https://elearn.translatorswb.org/auth/saml2/login.php?wants&idp=bd3eb3e6241260ee537b9a55145d852d&passive=off" style="color: #e8991c; text-decoration: underline;" target="_blank">Check our TWB Learning Center</a>
             </li>
             <li style="margin-bottom: 10px; font-size: 14px; color: #343A40;">
               <strong>Unsubscribe?</strong> <a href="{{CLAIMANT_ID}}" style="color: #e8991c; text-decoration: underline;" target="_blank">Visit your Profile Page</a>
