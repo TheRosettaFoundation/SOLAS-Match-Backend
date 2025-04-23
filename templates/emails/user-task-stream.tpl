@@ -3,7 +3,7 @@
     <div style="background-color: #FFFFFF; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden; padding: 20px;">
       
       <!-- Logo -->
-      <div style="text-align: center; margin-bottom: 20px;">
+      <div style="text-align: center; margin-bottom: 20px; margin-top:20px;">
         <img style="max-width: 250px; width: 80%; height: auto;" src="https://elearn.translatorswb.org/pluginfile.php/1/core_admin/logo/0x200/1733915613/merged-logos-main.png" alt="CLEAR Global Logo">
       </div>
       
@@ -24,7 +24,7 @@
           Here's a summary of available tasks in the system. Ready to make a difference?
         </div>
         
-        <p style="margin: 15px 0; color: #576e82; font-size:14px; ">
+        <p style="margin: 15px 0; color: #576e82; font-size:16px; ">
         These are volunteer tasks. Only claim them if you’re sure you can complete them. Please read all the task details first.
         </p>
          <!-- Important Information Section -->
