@@ -90,6 +90,8 @@
             </li>
             <li style="margin-bottom: 10px; font-size: 14px; color: #343A40;">
               <strong>Unsubscribe?</strong> <a href="{{CLAIMANT_ID}}" style="color: #e8991c; text-decoration: underline;" target="_blank">Visit your Profile Page</a>
+              and update your settings.
+
             </li>
           </ul>
         </div>
