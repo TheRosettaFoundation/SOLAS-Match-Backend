@@ -83,7 +83,7 @@
               <strong>New to TWB?</strong> <a style="color: #e8991c; text-decoration: underline;" href="https://community.translatorswb.org/t/welcome-pack-for-kato-translators/3138" target="_blank">Click here</a>
             </li>
             <li style="margin-bottom: 10px; font-size: 14px; color: #343A40;">
-              <strong>Have questions?</strong> <a href="https://community.translatorswb.org/latest" style="color: #e8991c; text-decoration: underline;" target="_blank">his is how you can ask questions about the task you claimed! </a>
+              <strong>Have questions?</strong> <a href="https://community.translatorswb.org/latest" style="color: #e8991c; text-decoration: underline;" target="_blank">This is how you can ask questions about the task you claimed! </a>
             </li>
             <li style="margin-bottom: 10px; font-size: 14px; color: #343A40;">
               <strong>Want to expand your knowledge?</strong> <a href="https://elearn.translatorswb.org/auth/saml2/login.php?wants&idp=bd3eb3e6241260ee537b9a55145d852d&passive=off" style="color: #e8991c; text-decoration: underline;" target="_blank">Check our TWB Learning Center</a>
