@@ -59,12 +59,13 @@
           <span style="color:#143878; font-weight:bold;">Due By: </span> {{DEADLINE}} or earlier, if possible
           </p>
             
+          
+         
+          {{#PARTOF_SECT}}
           <p style="margin: 8px 0; font-size: 14px;">
           <span style="color:#143878; font-weight:bold;">Organisation: </span>{{ORG_NAME}}
           </p>
         
-         
-          {{#PARTOF_SECT}}
           <p style="margin: 8px 0; font-size: 14px;">
          
           <span style="color:#143878; font-weight:bold;"> Project:</span> <a href={{PROJECT_VIEW}} target="_blank"  style="color: #e8991c; text-decoration: underline;"> {{PROJECT_TITLE}}</a>
