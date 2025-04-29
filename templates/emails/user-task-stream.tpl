@@ -62,7 +62,8 @@
          
           {{#PARTOF_SECT}}
           <p style="margin: 8px 0; font-size: 14px;">
-          <span style="color:#143878; font-weight:bold;"> Project:</span> {{PROJECT_TITLE}}
+          <a href={{PROJECT_VIEW}} target="_blank">
+          <span style="color:#143878; font-weight:bold;"> Project:</span> {{PROJECT_TITLE}}</a>
           </p>
           {{/PARTOF_SECT}}
           

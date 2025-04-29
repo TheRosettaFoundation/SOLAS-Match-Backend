@@ -101,12 +101,6 @@ void test_email::run(int task_id, int claimant_id)
                         "yyyy-MM-ddTHH:mm:ss.zzz").toString("d MMMM yyyy");
                 taskSect->SetValue("DEADLINE", deadline.toStdString());
 
-                                    // Create the desired deadline (one day before)
-                    QDateTime desiredDeadlineDateTime = deadlineDateTime.addDays(-3);
-                    QString desiredDeadline = desiredDeadlineDateTime.toString("d MMMM yyyy");
-                  
-                    taskSect->SetValue("DESIRED_DEADLINE", desiredDeadline.toStdString());
-
                 taskSect->SetValue("PREVIOUS_DEADLINE_TIME", TaskDao::max_translation_deadline(db, task));
 
                 QSharedPointer<Project> project = ProjectDao::getProject(db, task->projectid());
