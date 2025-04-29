@@ -16,7 +16,7 @@
       <!-- Main Content -->
       <div style="padding: 0 15px; color:#344b5e;">
         
-        <div style=" font-size: 18px; color: #576e82; margin-bottom: 15px;">
+        <div style=" font-size: 16px; color: #576e82; margin-bottom: 15px;">
           Hello {{USERNAME}},
         </div>
         
@@ -25,7 +25,7 @@
         </div>
         
         <p style="margin: 15px 0; color: #576e82; font-size:16px; ">
-        These are volunteer tasks. Only claim them if you’re sure you can complete them. Please read all the task details first.
+        These are volunteer tasks. Only claim them if you’re sure you can complete them. Please, read all the task details first.
         </p>
          <!-- Important Information Section -->
          <div style="padding: 15px; background-color: #f8f9fa; border: 2px solid #e8991c; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); margin-bottom: 20px; position: relative; overflow: hidden;">
@@ -50,15 +50,15 @@
           <h3 style="font-size: 18px; color: #343A40; text-align: center; margin-top: 0;">{{TASK_TYPE}} - {{TASK_TITLE}}</h3>
           
           <p style="margin: 8px 0; font-size: 14px;">
-            <span style="color:#143878; font-weight:bold;">{{WORD_COUNT}} words</span> - in 
+            <span style="color:#143878; font-weight:bold;">{{WORD_COUNT}} words</span> in 
             <span style="color:#143878; font-weight:bold;">{{SOURCE_LANGUAGE}}</span> → 
             <span style="color:#143878; font-weight:bold;">{{TARGET_LANGUAGE}}</span>
           </p>
           
           <p style="margin: 8px 0; font-size: 14px;">
-          <span style="color:#143878; font-weight:bold;">Due By: </span> {{DEADLINE_TIME}} UTC
+          <span style="color:#143878; font-weight:bold;">Due By: </span> {{DEADLINE_TIME}}  or earlier, if possible
           </p>
-          <p style="margin: 8px 0; font-size: 14px;"> <span> Deliver by {{DESIRED_DEADLINE}} or earlier. You'll receive an email once you can start working on the task.</span></p>
+        
          
           {{#PARTOF_SECT}}
           <p style="margin: 8px 0; font-size: 14px;">
