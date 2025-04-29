@@ -98,8 +98,8 @@ void test_email::run(int task_id, int claimant_id)
 
                 taskSect->SetValue("CREATED_TIME", createdTime.toStdString());
                 QString deadline = QDateTime::fromString(QString::fromStdString(task->deadline()),
-                        "yyyy-MM-ddTHH:mm:ss.zzz").toString("d MMMM yyyy - hh:mm");
-                taskSect->SetValue("DEADLINE_TIME", deadline.toStdString());
+                        "yyyy-MM-ddTHH:mm:ss.zzz").toString("d MMMM yyyy");
+                taskSect->SetValue("DEADLINE", deadline.toStdString());
 
                                     // Create the desired deadline (one day before)
                     QDateTime desiredDeadlineDateTime = deadlineDateTime.addDays(-3);

@@ -56,7 +56,7 @@
           </p>
           
           <p style="margin: 8px 0; font-size: 14px;">
-          <span style="color:#143878; font-weight:bold;">Due By: </span> {{DESIRED_DEADLINE}} {{DEADLINE_TIME}}  or earlier, if possible
+          <span style="color:#143878; font-weight:bold;">Due By: </span> {{DEADLINE}} or earlier, if possible
           </p>
         
          
