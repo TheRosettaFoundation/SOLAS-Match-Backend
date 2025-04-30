@@ -45,7 +45,7 @@
         
         <!-- Task Section (repeated for each task) -->
         {{#TASK_SECT}}
-        <div style="background-color: #f8f9fa; border: 2px solid #e8991c; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); padding: 15px; margin-bottom: 20px; position: relative; overflow: hidden;">
+        <div style="background-color: #f8f9fa; border: 2px solid #e8991c; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); padding: 15px; margin-bottom: 20px; position: relative; overflow: hidden; color:#344b5e">
           
           <h3 style="font-size: 18px; color: #343A40; text-align: center; margin-top: 0;">{{TASK_TYPE}} - {{TASK_TITLE}}</h3>
           
@@ -66,7 +66,7 @@
         
           <p style="margin: 8px 0; font-size: 14px;">
          
-          <a href={{PROJECT_VIEW}} target="_blank"  style="color: #e8991c; text-decoration: underline;"> {{PROJECT_TITLE}}</a> <span style="color: #344b5e;"> for </span> <a href={{ORG_VIEW}} target="_blank"  style="color: #e8991c; text-decoration: underline;"> {{ORG_NAME}}</a>
+          <a href={{PROJECT_VIEW}} target="_blank"  style="color: #e8991c; text-decoration: underline;"> {{PROJECT_TITLE}}</a> <span style="color: #344b5e"> for </span> <a href={{ORG_VIEW}} target="_blank"  style="color: #e8991c; text-decoration: underline;"> {{ORG_NAME}}</a>
           </p>
           {{/PARTOF_SECT}}
           
