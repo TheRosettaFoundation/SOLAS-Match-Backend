@@ -47,7 +47,7 @@
           
           <!-- Task Section (repeated for each task) -->
           {{#TASK_SECT}}
-          <div style="background-color: #f8f9fa; border: 2px solid #e8991c; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); padding: 15px; margin-bottom: 20px; position: relative; overflow: hidden; color:#344b5e">
+          <div style="background-color: #f8f9fa; border: 2px solid #e8991c; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); padding: 15px; margin: 0 auto 20px auto; position: relative; overflow: hidden; color:#344b5e; width: 100%; max-width: 600px;">
             
             <h3 style="font-size: 18px; color: #343A40; text-align: center; margin-top: 0;">{{TASK_TYPE}} - {{TASK_TITLE}}</h3>
             
@@ -69,7 +69,7 @@
             </p>
             {{/PARTOF_SECT}}
             
-            <a href="{{TASK_VIEW}}" style="display: block; margin: 15px auto; padding: 10px; background: linear-gradient(135deg, #143878, #0056b3); color: #FFFFFF; text-decoration: none; border-radius: 25px; font-size: 16px; font-weight: bold; width: 100%; max-width: 300px; box-sizing: border-box; text-align: center;">View Task</a>
+            <a href="{{TASK_VIEW}}" style="display: block; margin: 15px 0 0 0; padding: 10px; background: linear-gradient(135deg, #143878, #0056b3); color: #FFFFFF; text-decoration: none; border-radius: 25px; font-size: 16px; font-weight: bold; width: 100%; box-sizing: border-box; text-align: center;">View Task</a>
           </div>
           {{/TASK_SECT}}
           
