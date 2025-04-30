@@ -123,8 +123,7 @@ void test_email::run(int task_id, int claimant_id)
                             }
                         }
                     }
-
-                    if (task->projectid() != project_id) { // Display first time only
+// Display first time only
                         taskSect->ShowSection("PARTOF_SECT");
                         QString projectView = settings.get("site.url") + "project/" + QString::number(task->projectid()) + "/view/?utm_source=email&utm_medium=stream&utm_campaign=project";
                         taskSect->SetValue("PROJECT_VIEW", projectView.toStdString());
@@ -141,7 +140,7 @@ void test_email::run(int task_id, int claimant_id)
                             QString projectImage = settings.get("site.url") + "project/" + QString::number(task->projectid()) + "/image";
                             taskSect->SetValue("PROJECT_IMAGE", projectImage.toStdString());
                         }
-                    }
+                    
                 }
 
                 project_id = task->projectid();
