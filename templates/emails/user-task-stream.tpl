@@ -1,5 +1,5 @@
 <div style="margin-top: 20px; padding: 20px ; font-family: 'Halcom', 'Helvetica Neue', Arial, sans-serif; background-color: #e7eaed;">
-  <div style="width: 100%; max-width: 600px; margin: 20px auto; padding: 0;">
+  <div style="width: 100%;  margin: 20px auto; padding: 0;">
     <div style="background-color: #FFFFFF; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden; padding: 20px;">
       
       <!-- Logo -->
