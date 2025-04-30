@@ -1,5 +1,5 @@
 <div style="margin-top: 20px; padding: 20px ; font-family: 'Halcom', 'Helvetica Neue', Arial, sans-serif; background-color: #e7eaed;">
-  <div style="width: 100%;  margin: 20px auto; padding: 0;">
+  <div style="width: 100%; max-width: 1200px; margin: 20px auto; padding: 0;">
     <div style="background-color: #FFFFFF; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden; padding: 20px;">
       
       <!-- Logo -->
@@ -45,7 +45,7 @@
         
         <!-- Task Section (repeated for each task) -->
         {{#TASK_SECT}}
-        <div style="background-color: #f8f9fa; border: 2px solid #e8991c; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); padding: 15px; margin-bottom: 20px; position: relative; overflow: hidden; color:#344b5e">
+        <div style="max-width:600px; background-color: #f8f9fa; border: 2px solid #e8991c; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); padding: 15px; margin-bottom: 20px; position: relative; overflow: hidden; color:#344b5e">
           
           <h3 style="font-size: 18px; color: #343A40; text-align: center; margin-top: 0;">{{TASK_TYPE}} - {{TASK_TITLE}}</h3>
           
