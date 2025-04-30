@@ -14,7 +14,7 @@
       </div>
       
       <!-- Main Content -->
-      <div style="padding: 0 15px; color:#344b5e;">
+      <div style="padding: 0 15px; color:#344b5e; max-width:800px;">
         
         <div style=" font-size: 16px; color: #576e82; margin-bottom: 15px;">
           Hello {{USERNAME}},
