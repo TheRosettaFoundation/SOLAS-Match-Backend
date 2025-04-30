@@ -66,7 +66,7 @@
         
           <p style="margin: 8px 0; font-size: 14px;">
          
-          <a href={{PROJECT_VIEW}} target="_blank"  style="color: #e8991c; text-decoration: underline;"> {{PROJECT_TITLE}}</a> <span style="color: #343A40;"> for </span> <a href={{ORG_VIEW}} target="_blank"  style="color: #e8991c; text-decoration: underline;"> {{ORG_NAME}}</a>
+          <a href={{PROJECT_VIEW}} target="_blank"  style="color: #e8991c; text-decoration: underline;"> {{PROJECT_TITLE}}</a> <span style="color: #344b5e;"> for </span> <a href={{ORG_VIEW}} target="_blank"  style="color: #e8991c; text-decoration: underline;"> {{ORG_NAME}}</a>
           </p>
           {{/PARTOF_SECT}}
           
