@@ -141,7 +141,7 @@ void test_email::run(int task_id, int claimant_id)
                             taskSect->SetValue("PROJECT_IMAGE", projectImage.toStdString());
                         }
                     
-                }
+                
 
                 project_id = task->projectid();
 qDebug() << "project_id:" << project_id << "tasks_within_cutoff:" << tasks_within_cutoff; //(**)

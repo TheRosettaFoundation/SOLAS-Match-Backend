@@ -62,13 +62,11 @@
           
          
           {{#PARTOF_SECT}}
-          <p style="margin: 8px 0; font-size: 14px;">
-          <span style="color:#143878; font-weight:bold;">Organisation: </span>{{ORG_NAME}}
-          </p>
+      
         
           <p style="margin: 8px 0; font-size: 14px;">
          
-          <span style="color:#143878; font-weight:bold;"> Project:</span> <a href={{PROJECT_VIEW}} target="_blank"  style="color: #e8991c; text-decoration: underline;"> {{PROJECT_TITLE}}</a>
+          <a href={{PROJECT_VIEW}} target="_blank"  style="color: #e8991c; text-decoration: underline;"> {{PROJECT_TITLE}}</a> <span style="color:#143878; font-weight:bold;"> for </span> <a href={{ORG_VIEW}} target="_blank"  style="color: #e8991c; text-decoration: underline;"> {{ORG_NAME}}</a>
           </p>
           {{/PARTOF_SECT}}
           
