@@ -12,7 +12,7 @@
         <h1 style="color: #343A40; font-size: 24px; margin: 0;">New tasks available</h1>
         <hr style="border: 0; height: 1px; background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0)); margin: 15px 0;">
       </div>
-      
+      <div style= "width: 100%; max-width: 1200px; margin: 0 auto;">
       <!-- Main Content -->
       <div style="padding: 0 15px; color:#344b5e; max-width:800px;">
         
@@ -95,7 +95,7 @@
             </li>
             <li style="margin-bottom: 10px; font-size: 14px; color: #343A40;">
               <strong>Unsubscribe?</strong> <a href="{{CLAIMANT_ID}}" style="color: #e8991c; text-decoration: underline;" target="_blank">Visit your Profile Page</a>
-              and update your settings.
+              and update your settings.max-width: 600px;
 
             </li>
           </ul>
@@ -117,6 +117,7 @@
           </p>
         </div>
         
+      </div>
       </div>
     </div>
   </div>
