@@ -61,11 +61,10 @@
               <span style="color:#143878; font-weight:bold;">Due By: </span> {{DEADLINE}} or earlier, if possible
             </p>
               
-    {{PREVIOUS_DEADLINE_TIME}}      
+
 <p style="margin: 8px 0; font-size: 16px;">
 The task will become available on <span style="color:#143878; font-weight:bold;">{{PREVIOUS_DEADLINE_TIME}}</span> or sooner. You can claim now and you will receive an email once you can start working!
   
-  </p>{{/PREVIOUS_DEADLINE_TIME}}
 
  
 

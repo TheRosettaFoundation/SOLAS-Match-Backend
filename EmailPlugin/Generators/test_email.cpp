@@ -102,23 +102,28 @@ void test_email::run(int task_id, int claimant_id)
             // taskSect->SetValue("PREVIOUS_DEADLINE_TIME", TaskDao::max_translation_deadline(db, task));
             // Original string looks like: "Previous step due: 1 August 2021 - 23:00 UTC"
             std::string deadlineStr = TaskDao::max_translation_deadline(db, task);
-            QString deadlineTimeTest = QDateTime::fromString(QString::fromStdString(deadlineStr), 
-                "yyyy-MM-ddTHH:mm:ss.zzz").toString("d MMMM yyyy - hh:mm");
+            
+            / Format the deadline time string
+            std::string deadlineTime = "The task will become available on " + dateOnly + " or sooner. You can claim now and you will receive an email once you can start working!";
+            
+            // Store the formatted string
+            taskSect->SetValue("DEADLINE_TIME", deadlineTime);
+            
+            // Extract just the date portion from the deadline string
+            size_t colonPos = deadlineStr.find(": ");
+            size_t dashPos = deadlineStr.find(" - ");
+            
+            std::string dateOnly;
+            if (colonPos != std::string::npos && dashPos != std::string::npos && colonPos < dashPos) {
+                dateOnly = deadlineStr.substr(colonPos + 2, dashPos - (colonPos + 2));
+            } else {
+                // Fallback to original string if format doesn't match
+                dateOnly = deadlineStr;
+            }
+            
+            // Store the extracted date portion
+            taskSect->SetValue("PREVIOUS_DEADLINE_TIME", dateOnly);
 
-// Extract just the date portion ("1 August 2021")
-size_t colonPos = deadlineStr.find(": ");
-size_t dashPos = deadlineStr.find(" - ");
-
-std::string dateOnly;
-if (colonPos != std::string::npos && dashPos != std::string::npos && colonPos < dashPos) {
-    dateOnly = deadlineStr.substr(colonPos + 2, dashPos - (colonPos + 2));
-} else {
-    // Fallback to original string if format doesn't match
-    dateOnly = deadlineStr;
-}
-
-taskSect->SetValue("PREVIOUS_DEADLINE_TIME", dateOnly);
-taskSect->SetValue("PREVIOUS_DEADLINE_TIME_UTC", deadlineTimeTest.toStdString());
 
 
             QSharedPointer<Project> project = ProjectDao::getProject(db, task->projectid());
