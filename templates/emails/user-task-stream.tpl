@@ -63,8 +63,7 @@
               
             {{#PREVIOUS_DEADLINE_TIME}}
 <p style="margin: 8px 0; font-size: 16px;">
-  The task will become available on {{PREVIOUS_DEADLINE_TIME.split(': ')[1].split(' - ')[0]}} or sooner. You can claim now and you will receive an email once you can start working!
-</p>
+  {{PREVIOUS_DEADLINE_TIME}}
 {{/PREVIOUS_DEADLINE_TIME}}
             
             {{#PARTOF_SECT}}
