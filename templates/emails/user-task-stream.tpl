@@ -62,7 +62,9 @@
             </p>
               
 
-<p style="margin: 8px 0; font-size: 16px;">{{PREVIOUS_DEADLINE_TIME}}</p>
+            {{#HAS_DEADLINE}}
+            <p style="margin: 8px 0; font-size: 16px;">{{PREVIOUS_DEADLINE_TIME}}</p>
+            {{/HAS_DEADLINE}}
 
 
 
