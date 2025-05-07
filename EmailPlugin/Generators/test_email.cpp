@@ -110,20 +110,22 @@ void test_email::run(int task_id, int claimant_id)
             taskSect->SetValue("DEADLINE_TIME", deadlineTime);
             
             // Extract just the date portion from the deadline string
-            size_t colonPos = deadlineStr.find(": ");
-            size_t dashPos = deadlineStr.find(" - ");
-            
-            std::string dateOnly;
-            if (colonPos != std::string::npos && dashPos != std::string::npos && colonPos < dashPos) {
-                dateOnly = deadlineStr.substr(colonPos + 2, dashPos - (colonPos + 2));
-            } else {
-                // Fallback to original string if format doesn't match
-                dateOnly = deadlineStr;
-            }
-            
-            // Store the extracted date portion
-            taskSect->SetValue("PREVIOUS_DEADLINE_TIME", dateOnly);
+size_t colonPos = deadlineStr.find(": ");
+size_t dashPos = deadlineStr.find(" - ");
 
+std::string dateOnly;
+if (colonPos != std::string::npos && dashPos != std::string::npos && colonPos < dashPos) {
+    dateOnly = deadlineStr.substr(colonPos + 2, dashPos - (colonPos + 2));
+} else {
+    // Fallback to original string if format doesn't match
+    dateOnly = deadlineStr;
+}
+
+// Format the message with the extracted date
+std::string formattedMessage = "The task will become available on " + dateOnly + " or sooner. You can claim now and you will receive an email once you can start working!";
+
+// Store the formatted message
+taskSect->SetValue("PREVIOUS_DEADLINE_TIME", formattedMessage);
 
 
             QSharedPointer<Project> project = ProjectDao::getProject(db, task->projectid());
