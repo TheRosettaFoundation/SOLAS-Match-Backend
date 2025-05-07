@@ -103,7 +103,7 @@ void test_email::run(int task_id, int claimant_id)
             // Original string looks like: "Previous step due: 1 August 2021 - 23:00 UTC"
             std::string deadlineStr = TaskDao::max_translation_deadline(db, task);
             
-         // Extract just the date portion from the deadline string
+           // Extract just the date portion from the deadline string
 size_t colonPos = deadlineStr.find(": ");
 size_t dashPos = deadlineStr.find(" - ");
 
@@ -127,7 +127,6 @@ if (!deadlineStr.empty()) {
     // No deadline available
     taskSect->SetValue("HAS_DEADLINE", "false");
 }
-
 
             QSharedPointer<Project> project = ProjectDao::getProject(db, task->projectid());
             if (!project.isNull()) {
