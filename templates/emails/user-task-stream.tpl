@@ -81,8 +81,8 @@ The task will become available on <span style="color:#143878; font-weight:bold;"
           {{/TASK_SECT}}
           
           <!-- View More Tasks Button -->
-          <div style="text-align: center;  width:100%; max-width: 600px;">
-            <a href="https://twbplatform.org/" target="_blank" style="display: inline-block; padding: 15px 30px; background: linear-gradient(135deg, #e8991c, #a74116); color: #FFFFFF; text-decoration: none; border-radius: 25px; font-size: 16px; font-weight: bold; box-sizing: border-box; text-align: center;">View More Tasks</a>
+          <div style="text-align: center; margin: 30px 0; width:100%; max-width: 600px;">
+            <a href="https://twbplatform.org/" target="_blank" style="display: inline-block; padding: 15px 30px; width:600px;background: linear-gradient(135deg, #e8991c, #a74116); color: #FFFFFF; text-decoration: none; border-radius: 25px; font-size: 16px; font-weight: bold; box-sizing: border-box; text-align: center;">View More Tasks</a>
           </div>
           
           <!-- Additional Resources Section -->
