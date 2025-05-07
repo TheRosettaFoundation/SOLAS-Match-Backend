@@ -120,7 +120,7 @@ std::string formattedMessage = "The task will become available on " + dateOnly +
 
 // Store the formatted message
 taskSect->SetValue("PREVIOUS_DEADLINE_TIME", formattedMessage);
-taskSect->SetValue("PREVIOUS_DEADLINE_TIME_UTC", deadlineTimeTest.toStdString());
+
 
 
             QSharedPointer<Project> project = ProjectDao::getProject(db, task->projectid());
