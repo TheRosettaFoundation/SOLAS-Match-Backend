@@ -32,14 +32,14 @@
           <!-- Important Information Section -->
           <div style="padding: 15px; background-color: #f8f9fa; border: 2px solid #e8991c; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); margin: 0 auto 20px auto; position: relative; overflow: hidden; width: 100%; max-width: 600px;">
             <h3 style="text-align: center; margin: 0 0 10px 0; font-size: 18px;">Important Information</h3>
-            <ul style="list-style: disc; padding-left: 20px; margin: 0; text-align: left;">
-              <li style="margin-bottom: 10px; font-size: 16px; color: #343A40;">
+            <ul style="list-style: disc; padding-left: 20px; margin: 0; text-align: left; color:#344b5e; ">
+              <li style="margin-bottom: 10px; font-size: 16px; ">
                 <strong><a href="https://drive.google.com/file/d/1E7t4BiFDkTi5r4orgteVzJy4QAiehiB3/view" style="color: #e8991c; text-decoration: none;" target="_blank">How to Claim a Task?</a></strong>
               </li>
-              <li style="margin-bottom: 10px; font-size: 16px; color: #343A40;">
+              <li style="margin-bottom: 10px; font-size: 16px; ">
                 Quality Assurance: Ensure your work meets our high standards by following the guidelines and running Phrase QA checks. <a href="https://community.translatorswb.org/t/post-editing-machine-translation-tips-and-best-practice/60046" target="_blank" style="color: #e8991c; text-decoration: underline;">More details here</a>
               </li>
-              <li style="margin-bottom: 10px; font-size: 16px; color: #343A40;">
+              <li style="margin-bottom: 10px; font-size: 16px; ">
                 Tasks can be claimed quickly, so they might no longer be available when you check them.
               </li>
             </ul>
