@@ -101,7 +101,9 @@ void test_email::run(int task_id, int claimant_id)
 
             // taskSect->SetValue("PREVIOUS_DEADLINE_TIME", TaskDao::max_translation_deadline(db, task));
             // Original string looks like: "Previous step due: 1 August 2021 - 23:00 UTC"
-std::string deadlineStr = TaskDao::max_translation_deadline(db, task);
+            std::string deadlineStr = TaskDao::max_translation_deadline(db, task);
+            QString deadlineTimeTest = QDateTime::fromString(QString::fromStdString(deadlineStr), 
+                "yyyy-MM-ddTHH:mm:ss.zzz").toString("d MMMM yyyy - hh:mm");
 
 // Extract just the date portion ("1 August 2021")
 size_t colonPos = deadlineStr.find(": ");
@@ -116,6 +118,7 @@ if (colonPos != std::string::npos && dashPos != std::string::npos && colonPos < 
 }
 
 taskSect->SetValue("PREVIOUS_DEADLINE_TIME", dateOnly);
+taskSect->SetValue("PREVIOUS_DEADLINE_TIME_UTC", deadlineTimeTest.toStdString());
 
 
             QSharedPointer<Project> project = ProjectDao::getProject(db, task->projectid());
