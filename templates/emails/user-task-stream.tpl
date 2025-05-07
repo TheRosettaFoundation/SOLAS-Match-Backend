@@ -61,10 +61,12 @@
               <span style="color:#143878; font-weight:bold;">Due By: </span> {{DEADLINE}} or earlier, if possible
             </p>
               
-            {{#PREVIOUS_DEADLINE_TIME}}
+          
 <p style="margin: 8px 0; font-size: 16px;">
   {{PREVIOUS_DEADLINE_TIME}}
-{{/PREVIOUS_DEADLINE_TIME}}
+  </p>
+
+
             
             {{#PARTOF_SECT}}
             <p style="margin: 8px 0; font-size: 16px;">
