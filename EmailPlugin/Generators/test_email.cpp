@@ -103,7 +103,7 @@ void test_email::run(int task_id, int claimant_id)
             // Original string looks like: "Previous step due: 1 August 2021 - 23:00 UTC"
             std::string deadlineStr = TaskDao::max_translation_deadline(db, task);
             
-           // Extract just the date portion from the deadline string
+ // Extract just the date portion from the deadline string
 size_t colonPos = deadlineStr.find(": ");
 size_t dashPos = deadlineStr.find(" - ");
 
@@ -117,16 +117,41 @@ if (!deadlineStr.empty()) {
         dateOnly = deadlineStr;
     }
 
-    // Format the message with the extracted date
-    std::string formattedMessage = "The task will become available on " + dateOnly + " or sooner. You can claim now and you will receive an email once you can start working!";
+    // Remove any potential HTML tags from dateOnly
+    auto stripHtml = [](const std::string& input) {
+        std::string result = "";
+        bool insideTag = false;
+        
+        for (char c : input) {
+            if (c == '<') {
+                insideTag = true;
+                continue;
+            }
+            if (c == '>') {
+                insideTag = false;
+                continue;
+            }
+            if (!insideTag) {
+                result += c;
+            }
+        }
+        return result;
+    };
+    
+    // Clean the date string of any HTML
+    std::string cleanDateOnly = stripHtml(dateOnly);
+    
+    // Format the message with the extracted plain text date
+    std::string formattedMessage = "The task will become available on " + cleanDateOnly + " or sooner. You can claim now and you will receive an email once you can start working!";
 
-    // Store the formatted message
+    // Store the formatted message and make sure it's wrapped in a span to control styling
     taskSect->SetValue("PREVIOUS_DEADLINE_TIME", formattedMessage);
     taskSect->SetValue("HAS_DEADLINE", "true");  // Flag to indicate deadline exists
 } else {
     // No deadline available
     taskSect->SetValue("HAS_DEADLINE", "false");
 }
+
 
             QSharedPointer<Project> project = ProjectDao::getProject(db, task->projectid());
             if (!project.isNull()) {
