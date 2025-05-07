@@ -84,7 +84,7 @@
           </div>
           
           <!-- Additional Resources Section -->
-          <div style="padding: 15px; background-color: #f8f9fa; border: 2px solid #e8991c; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); margin: 0 auto 20px auto; position: relative; overflow: hidden; width: 100%; max-width: 600px;">
+          <div style="padding: 15px; background-color: #f8f9fa; border: 2px solid #e8991c; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); margin:  20px auto; margin-top:20px; position: relative; overflow: hidden; width: 100%; max-width: 600px;">
             <h3 style="text-align: center; margin: 0 0 10px 0; font-size: 18px;">Additional Resources</h3>
             <ul style="list-style: disc; padding-left: 20px; margin: 0; text-align: left;">
               <li style="margin-bottom: 10px; font-size: 16px; color: #343A40;">
