@@ -51,7 +51,7 @@ void UserTaskStreamEmailGenerator::run(int user_id)
 
         ctemplate::TemplateDictionary dict("userTaskStreamDict");
         dict.SetValue("SITE_NAME", std::string(settings.get("site.name").toLatin1().constData(), settings.get("site.name").toLatin1().length()));
-        QString linguist_link = settings.get("site.url") + QString::number(claimant_id) + "/profile/";
+        QString linguist_link = settings.get("site.url") + QString::number(user_id) + "/profile/";
         dict.SetValue("CLAIMANT_ID", linguist_link.toStdString());
         if (user->display_name() != "") {
             dict.ShowSection("USER_HAS_NAME");
@@ -107,7 +107,8 @@ void UserTaskStreamEmailGenerator::run(int user_id)
 
                 taskSect->SetValue("CREATED_TIME", createdTime.toStdString());
                 QString deadline = QDateTime::fromString(QString::fromStdString(task->deadline()),
-                        "yyyy-MM-ddTHH:mm:ss.zzz").toString("d MMMM yyyy - hh:mm");
+                        "yyyy-MM-ddTHH:mm:ss.zzz").toString("d MMMM yyyy");
+NO                        "yyyy-MM-ddTHH:mm:ss.zzz").toString("d MMMM yyyy - hh:mm");
 WAS             taskSect->SetValue("DEADLINE_TIME", deadline.toStdString());
                 taskSect->SetValue("DEADLINE", deadline.toStdString());
 
