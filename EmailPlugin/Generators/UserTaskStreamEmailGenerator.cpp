@@ -99,38 +99,28 @@ void UserTaskStreamEmailGenerator::run(int user_id)
                 else                             taskSect->SetValue("TARGET_LANGUAGE", target_languagename + " (" + target_countryname + ")");
 
                 taskSect->SetValue("WORD_COUNT", QString::number(task->wordcount()).toStdString());
+
                 QString createdTime = QDateTime::fromString(QString::fromStdString(task->createdtime()),
                            "yyyy-MM-ddTHH:mm:ss.zzz").toString("d MMMM yyyy - hh:mm");
-            // Parse the original deadline
-            QDateTime deadlineDateTime = QDateTime::fromString(QString::fromStdString(task->deadline()),
-                "yyyy-MM-ddTHH:mm:ss.zzz");
-
                 taskSect->SetValue("CREATED_TIME", createdTime.toStdString());
+
                 QString deadline = QDateTime::fromString(QString::fromStdString(task->deadline()),
                         "yyyy-MM-ddTHH:mm:ss.zzz").toString("d MMMM yyyy");
-NO                        "yyyy-MM-ddTHH:mm:ss.zzz").toString("d MMMM yyyy - hh:mm");
-WAS             taskSect->SetValue("DEADLINE_TIME", deadline.toStdString());
                 taskSect->SetValue("DEADLINE", deadline.toStdString());
 
-REMOVED                taskSect->SetValue("PREVIOUS_DEADLINE_TIME", TaskDao::max_translation_deadline(db, task));
-[[ADDED
-            // taskSect->SetValue("PREVIOUS_DEADLINE_TIME", TaskDao::max_translation_deadline(db, task));
-            // Original string looks like: "Previous step due: 1 August 2021 - 23:00 UTC"
-            std::string deadlineStr = TaskDao::max_translation_deadline(db, task);
-
- // Extract just the date portion from the deadline string
-size_t colonPos = deadlineStr.find(": ");
-size_t dashPos = deadlineStr.find(" - ");
-
-// Check if the deadline string is not empty
-if (!deadlineStr.empty()) {
-    std::string dateOnly;
-    if (colonPos != std::string::npos && dashPos != std::string::npos && colonPos < dashPos) {
-        dateOnly = deadlineStr.substr(colonPos + 2, dashPos - (colonPos + 2));
-    } else {
-        // Fallback to original string if format doesn't match
-        dateOnly = deadlineStr;
-    }
+                std::string deadlineStr = TaskDao::max_translation_deadline(db, task);
+                // Extract just the date portion from the maximum previous deadline string
+                // Original string looks like: "Previous step due: 1 August 2021 - 23:00 UTC"
+                size_t colonPos = deadlineStr.find(": ");
+                size_t dashPos = deadlineStr.find(" - ");
+                if (!deadlineStr.empty()) {
+                    std::string dateOnly;
+                    if (colonPos != std::string::npos && dashPos != std::string::npos && colonPos < dashPos) {
+                        dateOnly = deadlineStr.substr(colonPos + 2, dashPos - (colonPos + 2));
+                    } else {
+                        // Fallback to original string if format doesn't match
+                        dateOnly = deadlineStr;
+                    }
 
     // Remove any potential HTML tags from dateOnly
     auto stripHtml = [](const std::string& input) {
@@ -153,20 +143,19 @@ if (!deadlineStr.empty()) {
         return result;
     };
 
-    // Clean the date string of any HTML
-    std::string cleanDateOnly = stripHtml(dateOnly);
+                    // Clean the date string of any HTML
+                    std::string cleanDateOnly = stripHtml(dateOnly);
 
-    // Format the message with the extracted plain text date
-    std::string formattedMessage = "The task will become available on " + cleanDateOnly + " or sooner. You can claim now and you will receive an email once you can start working!";
+                    // Format the message with the extracted plain text date
+                    std::string formattedMessage = "The task will become available on " + cleanDateOnly + " or sooner. You can claim now and you will receive an email once you can start working!";
 
-    // Store the formatted message and make sure it's wrapped in a span to control styling
-    taskSect->SetValue("PREVIOUS_DEADLINE_TIME", formattedMessage);
-    taskSect->SetValue("HAS_DEADLINE", "true");  // Flag to indicate deadline exists
-} else {
-    // No deadline available
-    taskSect->SetValue("HAS_DEADLINE", "false");
-}
-]]
+                    // Store the formatted message and make sure it's wrapped in a span to control styling
+                    taskSect->SetValue("PREVIOUS_DEADLINE_TIME", formattedMessage);
+                    taskSect->SetValue("HAS_DEADLINE", "true");  // Flag to indicate deadline exists
+                } else {
+                    // No deadline available
+                    taskSect->SetValue("HAS_DEADLINE", "false");
+                }
 
                 QSharedPointer<Project> project = ProjectDao::getProject(db, task->projectid());
                 if (!project.isNull()) {
