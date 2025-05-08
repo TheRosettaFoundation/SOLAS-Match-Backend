@@ -189,24 +189,22 @@ if (!deadlineStr.empty()) {
                         }
                     }
 
-                    REMOVE IF if (task->projectid() != project_id) { // Display first time only
-                        taskSect->ShowSection("PARTOF_SECT");
-                        QString projectView = settings.get("site.url") + "project/" + QString::number(task->projectid()) + "/view/?utm_source=email&utm_medium=stream&utm_campaign=project";
-                        taskSect->SetValue("PROJECT_VIEW", projectView.toStdString());
-                        taskSect->SetValue("PROJECT_TITLE", Email::htmlspecialchars(project->title()));
-                        QSharedPointer<Organisation> org = OrganisationDao::getOrg(db, project->organisationid());
-                        if (!org.isNull()) {
-                            QString orgView = settings.get("site.url") + "org/" + QString::number(project->organisationid()) + "/profile/?utm_source=email&utm_medium=stream&utm_campaign=org";
-                            taskSect->SetValue("ORG_VIEW", orgView.toStdString());
-                            taskSect->SetValue("ORG_NAME", org->name());
-                        }
+                    taskSect->ShowSection("PARTOF_SECT");
+                    QString projectView = settings.get("site.url") + "project/" + QString::number(task->projectid()) + "/view/?utm_source=email&utm_medium=stream&utm_campaign=project";
+                    taskSect->SetValue("PROJECT_VIEW", projectView.toStdString());
+                    taskSect->SetValue("PROJECT_TITLE", Email::htmlspecialchars(project->title()));
+                    QSharedPointer<Organisation> org = OrganisationDao::getOrg(db, project->organisationid());
+                    if (!org.isNull()) {
+                        QString orgView = settings.get("site.url") + "org/" + QString::number(project->organisationid()) + "/profile/?utm_source=email&utm_medium=stream&utm_campaign=org";
+                        taskSect->SetValue("ORG_VIEW", orgView.toStdString());
+                        taskSect->SetValue("ORG_NAME", org->name());
+                    }
 
-                        if (project->imageuploaded() && project->imageapproved()) {
-                            taskSect->ShowSection("IMAGE_SECT");
-                            QString projectImage = settings.get("site.url") + "project/" + QString::number(task->projectid()) + "/image";
-                            taskSect->SetValue("PROJECT_IMAGE", projectImage.toStdString());
-                        }
-REMOEVbRACE}
+                    if (project->imageuploaded() && project->imageapproved()) {
+                        taskSect->ShowSection("IMAGE_SECT");
+                        QString projectImage = settings.get("site.url") + "project/" + QString::number(task->projectid()) + "/image";
+                        taskSect->SetValue("PROJECT_IMAGE", projectImage.toStdString());
+                    }
                 }
 
                 project_id = task->projectid();
