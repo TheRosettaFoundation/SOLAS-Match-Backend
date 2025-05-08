@@ -51,6 +51,8 @@ void UserTaskStreamEmailGenerator::run(int user_id)
 
         ctemplate::TemplateDictionary dict("userTaskStreamDict");
         dict.SetValue("SITE_NAME", std::string(settings.get("site.name").toLatin1().constData(), settings.get("site.name").toLatin1().length()));
+        QString linguist_link = settings.get("site.url") + QString::number(claimant_id) + "/profile/";
+        dict.SetValue("CLAIMANT_ID", linguist_link.toStdString());
         if (user->display_name() != "") {
             dict.ShowSection("USER_HAS_NAME");
             dict.SetValue("USERNAME", Email::htmlspecialchars(user->display_name()));
@@ -99,12 +101,71 @@ void UserTaskStreamEmailGenerator::run(int user_id)
                 taskSect->SetValue("WORD_COUNT", QString::number(task->wordcount()).toStdString());
                 QString createdTime = QDateTime::fromString(QString::fromStdString(task->createdtime()),
                            "yyyy-MM-ddTHH:mm:ss.zzz").toString("d MMMM yyyy - hh:mm");
+            // Parse the original deadline
+            QDateTime deadlineDateTime = QDateTime::fromString(QString::fromStdString(task->deadline()),
+                "yyyy-MM-ddTHH:mm:ss.zzz");
+
                 taskSect->SetValue("CREATED_TIME", createdTime.toStdString());
                 QString deadline = QDateTime::fromString(QString::fromStdString(task->deadline()),
                         "yyyy-MM-ddTHH:mm:ss.zzz").toString("d MMMM yyyy - hh:mm");
-                taskSect->SetValue("DEADLINE_TIME", deadline.toStdString());
+WAS             taskSect->SetValue("DEADLINE_TIME", deadline.toStdString());
+                taskSect->SetValue("DEADLINE", deadline.toStdString());
 
-                taskSect->SetValue("PREVIOUS_DEADLINE_TIME", TaskDao::max_translation_deadline(db, task));
+REMOVED                taskSect->SetValue("PREVIOUS_DEADLINE_TIME", TaskDao::max_translation_deadline(db, task));
+[[ADDED
+            // taskSect->SetValue("PREVIOUS_DEADLINE_TIME", TaskDao::max_translation_deadline(db, task));
+            // Original string looks like: "Previous step due: 1 August 2021 - 23:00 UTC"
+            std::string deadlineStr = TaskDao::max_translation_deadline(db, task);
+
+ // Extract just the date portion from the deadline string
+size_t colonPos = deadlineStr.find(": ");
+size_t dashPos = deadlineStr.find(" - ");
+
+// Check if the deadline string is not empty
+if (!deadlineStr.empty()) {
+    std::string dateOnly;
+    if (colonPos != std::string::npos && dashPos != std::string::npos && colonPos < dashPos) {
+        dateOnly = deadlineStr.substr(colonPos + 2, dashPos - (colonPos + 2));
+    } else {
+        // Fallback to original string if format doesn't match
+        dateOnly = deadlineStr;
+    }
+
+    // Remove any potential HTML tags from dateOnly
+    auto stripHtml = [](const std::string& input) {
+        std::string result = "";
+        bool insideTag = false;
+
+        for (char c : input) {
+            if (c == '<') {
+                insideTag = true;
+                continue;
+            }
+            if (c == '>') {
+                insideTag = false;
+                continue;
+            }
+            if (!insideTag) {
+                result += c;
+            }
+        }
+        return result;
+    };
+
+    // Clean the date string of any HTML
+    std::string cleanDateOnly = stripHtml(dateOnly);
+
+    // Format the message with the extracted plain text date
+    std::string formattedMessage = "The task will become available on " + cleanDateOnly + " or sooner. You can claim now and you will receive an email once you can start working!";
+
+    // Store the formatted message and make sure it's wrapped in a span to control styling
+    taskSect->SetValue("PREVIOUS_DEADLINE_TIME", formattedMessage);
+    taskSect->SetValue("HAS_DEADLINE", "true");  // Flag to indicate deadline exists
+} else {
+    // No deadline available
+    taskSect->SetValue("HAS_DEADLINE", "false");
+}
+]]
 
                 QSharedPointer<Project> project = ProjectDao::getProject(db, task->projectid());
                 if (!project.isNull()) {
@@ -127,7 +188,7 @@ void UserTaskStreamEmailGenerator::run(int user_id)
                         }
                     }
 
-                    if (task->projectid() != project_id) { // Display first time only
+                    REMOVE IF if (task->projectid() != project_id) { // Display first time only
                         taskSect->ShowSection("PARTOF_SECT");
                         QString projectView = settings.get("site.url") + "project/" + QString::number(task->projectid()) + "/view/?utm_source=email&utm_medium=stream&utm_campaign=project";
                         taskSect->SetValue("PROJECT_VIEW", projectView.toStdString());
@@ -144,7 +205,7 @@ void UserTaskStreamEmailGenerator::run(int user_id)
                             QString projectImage = settings.get("site.url") + "project/" + QString::number(task->projectid()) + "/image";
                             taskSect->SetValue("PROJECT_IMAGE", projectImage.toStdString());
                         }
-                    }
+REMOEVbRACE}
                 }
 
                 project_id = task->projectid();
