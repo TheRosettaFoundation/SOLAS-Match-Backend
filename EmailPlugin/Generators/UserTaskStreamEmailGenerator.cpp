@@ -255,6 +255,8 @@ void UserTaskStreamEmailGenerator::run(int user_id)
 
         ctemplate::TemplateDictionary dict("userTaskStreamDict");
         dict.SetValue("SITE_NAME", std::string(settings.get("site.name").toLatin1().constData(), settings.get("site.name").toLatin1().length()));
+        QString linguist_link = settings.get("site.url") + QString::number(user_id) + "/profile/";
+        dict.SetValue("CLAIMANT_ID", linguist_link.toStdString());
         if (user->display_name() != "") {
             dict.ShowSection("USER_HAS_NAME");
             dict.SetValue("USERNAME", Email::htmlspecialchars(user->display_name()));
@@ -298,12 +300,42 @@ void UserTaskStreamEmailGenerator::run(int user_id)
                 else                             taskSect->SetValue("TARGET_LANGUAGE", target_languagename + " (" + target_countryname + ")");
 
                 taskSect->SetValue("WORD_COUNT", QString::number(task->wordcount()).toStdString());
+
                 QString createdTime = QDateTime::fromString(QString::fromStdString(task->createdtime()),
                            "yyyy-MM-ddTHH:mm:ss.zzz").toString("d MMMM yyyy - hh:mm");
                 taskSect->SetValue("CREATED_TIME", createdTime.toStdString());
+
                 QString deadline = QDateTime::fromString(QString::fromStdString(task->deadline()),
-                        "yyyy-MM-ddTHH:mm:ss.zzz").toString("d MMMM yyyy - hh:mm");
-                taskSect->SetValue("DEADLINE_TIME", deadline.toStdString());
+                        "yyyy-MM-ddTHH:mm:ss.zzz").toString("d MMMM yyyy");
+                taskSect->SetValue("DEADLINE", deadline.toStdString());
+
+                std::string deadlineStr = TaskDao::max_translation_deadline(db, task);
+                // Extract just the date portion from the maximum previous deadline string
+                // Original string looks like: "Previous step due: 1 August 2021 - 23:00 UTC"
+                size_t colonPos = deadlineStr.find(": ");
+                size_t dashPos = deadlineStr.find(" - ");
+                if (!deadlineStr.empty()) {
+                    std::string dateOnly;
+                    if (colonPos != std::string::npos && dashPos != std::string::npos && colonPos < dashPos) {
+                        dateOnly = deadlineStr.substr(colonPos + 2, dashPos - (colonPos + 2));
+                    } else {
+                        // Fallback to original string if format doesn't match
+                        dateOnly = deadlineStr;
+                    }
+
+                    // Clean the date string of any HTML
+                    std::string cleanDateOnly = stripHtml(dateOnly);
+
+                    // Format the message with the extracted plain text date
+                    std::string formattedMessage = "The task will become available on " + cleanDateOnly + " or sooner. You can claim now and you will receive an email once you can start working!";
+
+                    // Store the formatted message and make sure it's wrapped in a span to control styling
+                    taskSect->SetValue("PREVIOUS_DEADLINE_TIME", formattedMessage);
+                    taskSect->SetValue("HAS_DEADLINE", "true");  // Flag to indicate deadline exists
+                } else {
+                    // No deadline available
+                    taskSect->SetValue("HAS_DEADLINE", "false");
+                }
 
                 QSharedPointer<Project> project = ProjectDao::getProject(db, task->projectid());
                 if (!project.isNull()) {
@@ -326,28 +358,26 @@ void UserTaskStreamEmailGenerator::run(int user_id)
                         }
                     }
 
-                    if (task->projectid() != project_id) { // Display first time only
-                        taskSect->ShowSection("PARTOF_SECT");
-                        QString projectView = settings.get("site.url") + "project/" + QString::number(task->projectid()) + "/view/?utm_source=email&utm_medium=emresptag&utm_campaign=project";
-                        taskSect->SetValue("PROJECT_VIEW", projectView.toStdString());
-                        taskSect->SetValue("PROJECT_TITLE", Email::htmlspecialchars(project->title()));
-                        QSharedPointer<Organisation> org = OrganisationDao::getOrg(db, project->organisationid());
-                        if (!org.isNull()) {
-                            QString orgView = settings.get("site.url") + "org/" + QString::number(project->organisationid()) + "/profile/?utm_source=email&utm_medium=emresptag&utm_campaign=org";
-                            taskSect->SetValue("ORG_VIEW", orgView.toStdString());
-                            taskSect->SetValue("ORG_NAME", org->name());
-                        }
+                    taskSect->ShowSection("PARTOF_SECT");
+                    QString projectView = settings.get("site.url") + "project/" + QString::number(task->projectid()) + "/view/?utm_source=email&utm_medium=stream&utm_campaign=project";
+                    taskSect->SetValue("PROJECT_VIEW", projectView.toStdString());
+                    taskSect->SetValue("PROJECT_TITLE", Email::htmlspecialchars(project->title()));
+                    QSharedPointer<Organisation> org = OrganisationDao::getOrg(db, project->organisationid());
+                    if (!org.isNull()) {
+                        QString orgView = settings.get("site.url") + "org/" + QString::number(project->organisationid()) + "/profile/?utm_source=email&utm_medium=stream&utm_campaign=org";
+                        taskSect->SetValue("ORG_VIEW", orgView.toStdString());
+                        taskSect->SetValue("ORG_NAME", org->name());
+                    }
 
-                        if (project->imageuploaded() && project->imageapproved()) {
-                            taskSect->ShowSection("IMAGE_SECT");
-                            QString projectImage = settings.get("site.url") + "project/" + QString::number(task->projectid()) + "/image";
-                            taskSect->SetValue("PROJECT_IMAGE", projectImage.toStdString());
-                        }
+                    if (project->imageuploaded() && project->imageapproved()) {
+                        taskSect->ShowSection("IMAGE_SECT");
+                        QString projectImage = settings.get("site.url") + "project/" + QString::number(task->projectid()) + "/image";
+                        taskSect->SetValue("PROJECT_IMAGE", projectImage.toStdString());
                     }
                 }
 
                 project_id = task->projectid();
-        }
+            }
 
             bool footer_enabled=(QString::compare("y", settings.get("email-footer.enabled")) == 0);
             if (footer_enabled)
