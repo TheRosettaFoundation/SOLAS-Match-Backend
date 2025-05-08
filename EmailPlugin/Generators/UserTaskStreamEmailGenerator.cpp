@@ -9,6 +9,27 @@
 
 void UserTaskStreamEmailGenerator::run(int user_id)
 {
+    // Remove any potential HTML tags
+    auto stripHtml = [](const std::string& input) {
+        std::string result = "";
+        bool insideTag = false;
+
+        for (char c : input) {
+            if (c == '<') {
+                insideTag = true;
+                continue;
+            }
+            if (c == '>') {
+                insideTag = false;
+                continue;
+            }
+            if (!insideTag) {
+                result += c;
+            }
+        }
+        return result;
+    };
+
     bool sendEmail = true;
     QString error = "";
     QList<QSharedPointer<Task> > userTasks;
@@ -121,27 +142,6 @@ void UserTaskStreamEmailGenerator::run(int user_id)
                         // Fallback to original string if format doesn't match
                         dateOnly = deadlineStr;
                     }
-
-    // Remove any potential HTML tags from dateOnly
-    auto stripHtml = [](const std::string& input) {
-        std::string result = "";
-        bool insideTag = false;
-
-        for (char c : input) {
-            if (c == '<') {
-                insideTag = true;
-                continue;
-            }
-            if (c == '>') {
-                insideTag = false;
-                continue;
-            }
-            if (!insideTag) {
-                result += c;
-            }
-        }
-        return result;
-    };
 
                     // Clean the date string of any HTML
                     std::string cleanDateOnly = stripHtml(dateOnly);
