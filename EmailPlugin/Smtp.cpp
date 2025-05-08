@@ -64,7 +64,7 @@ int Smtp::send(QMap<QString, QVariant> email_request)
         else                                                                                                   mail_message.addRecipient("alanabarrett0@gmail.com"); // TEST CODE
     }
 
-    if (!test || (QString::compare(only_send, email_request["subject"].toString()) == 0) || (QString::compare("reine.iramurikiye@clearglobal.org", email_request["recipient"].toString()) == 0)) {
+    if (!test || (QString::compare(only_send, email_request["subject"].toString()) == 0) || (QString::compare("alanabarrett0@gmail.com", email_request["recipient"].toString()) == 0) || (QString::compare("reine.iramurikiye@clearglobal.org", email_request["recipient"].toString()) == 0) || (QString::compare("rts@rts.rts", email_request["recipient"].toString()) == 0)) {
         QString recipientString = "%20" + email_request["recipient"].toString();
         recipientString.replace("@", "%40");
         mail_message.setExtraHeader("List-Unsubscribe", "<mailto:info@kato.translatorswb.org?subject=Unsubscribe%20from%20TWB%3A" + recipientString  + ">");
@@ -95,7 +95,7 @@ void Smtp::checkEmailQueue()
                 email_for_hash += email_request["subject"].toString();
                 email_for_hash += email_request["body"].toString();
                 QByteArray hash = QCryptographicHash::hash(email_for_hash.toUtf8(), QCryptographicHash::Md5);
-//(**)                if (email_request["subject"].toString().indexOf("Password Reset") != -1 || mail_text_hashes->indexOf(hash) == -1) { // Only send if identical mail not already sent
+                if (email_request["subject"].toString().indexOf("Password Reset") != -1 || mail_text_hashes->indexOf(hash) == -1 || (QString::compare("alanabarrett0@gmail.com", email_request["recipient"].toString()) == 0) || (QString::compare("reine.iramurikiye@clearglobal.org", email_request["recipient"].toString()) == 0) || (QString::compare("rts@rts.rts", email_request["recipient"].toString()) == 0)) { // Only send if identical mail not already sent
                     mail_text_hashes->append(hash);
                     qDebug() << "===============================";
                     qDebug() << "Recipient: " << email_request["recipient"].toString();
@@ -105,8 +105,8 @@ void Smtp::checkEmailQueue()
 
                     int qxt_smtp_mail_id = this->send(email_request);
                     if (qxt_smtp_mail_id) UserDao::insert_qxt_smtp_email(db, email_request["id"].toULongLong(), qxt_smtp_mail_id);
-//(**)                }
-//(**)                else qDebug() << "SMTP::checkEmailQueue Skipped: " << email_request["subject"].toString() << email_request["recipient"].toString();
+                }
+                else qDebug() << "SMTP::checkEmailQueue Skipped: " << email_request["subject"].toString() << email_request["recipient"].toString();
 
                 UserDao::mark_email_request_sent(db, email_request["id"].toULongLong());
             } else {
