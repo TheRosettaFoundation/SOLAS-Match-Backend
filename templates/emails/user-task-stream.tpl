@@ -4,7 +4,7 @@
       
       <!-- Logo -->
       <div style="text-align: center; padding: 30px 20px 20px 20px;">
-        <img style="max-width: 250px; width: 80%; height: auto;" src="https://elearn.translatorswb.org/pluginfile.php/1/core_admin/logo/0x200/1733915613/merged-logos-main.png" alt="CLEAR Global Logo">
+        <img style="max-width: 250px; width: 80%; height: auto;" src="https://twbplatform.org/ui/img/merged-logos-main.png" alt="CLEAR Global Logo">
       </div>
       
       <!-- Header -->
