@@ -64,7 +64,7 @@ void test_email::run(int task_id, int claimant_id)
                 if (task->tasktype() == task_type_detail["type_enum"].toInt()) task_type = task_type_detail["type_text"].toString().toStdString();
             }
             taskSect->SetValue("TASK_TYPE", task_type);
-          
+
             std::string source_languagename = task->sourcelocale().languagename();
             std::string source_countryname  = task->sourcelocale().countryname();
             std::string target_languagename = task->targetlocale().languagename();
@@ -86,12 +86,12 @@ void test_email::run(int task_id, int claimant_id)
             if (target_countryname == "ANY") taskSect->SetValue("TARGET_LANGUAGE", target_languagename);
             else                             taskSect->SetValue("TARGET_LANGUAGE", target_languagename + " (" + target_countryname + ")");
 
-            
+
             taskSect->SetValue("WORD_COUNT", QString::number(task->wordcount()).toStdString());
             QString createdTime = QDateTime::fromString(QString::fromStdString(task->createdtime()),
                        "yyyy-MM-ddTHH:mm:ss.zzz").toString("d MMMM yyyy - hh:mm");
             // Parse the original deadline
-            QDateTime deadlineDateTime = QDateTime::fromString(QString::fromStdString(task->deadline()), 
+            QDateTime deadlineDateTime = QDateTime::fromString(QString::fromStdString(task->deadline()),
                 "yyyy-MM-ddTHH:mm:ss.zzz");
 
             taskSect->SetValue("CREATED_TIME", createdTime.toStdString());
@@ -102,13 +102,13 @@ void test_email::run(int task_id, int claimant_id)
             // taskSect->SetValue("PREVIOUS_DEADLINE_TIME", TaskDao::max_translation_deadline(db, task));
             // Original string looks like: "Previous step due: 1 August 2021 - 23:00 UTC"
             std::string deadlineStr = TaskDao::max_translation_deadline(db, task);
-            
- // Extract just the date portion from the deadline string
+
+// Extract just the date portion from the deadline string
 size_t colonPos = deadlineStr.find(": ");
 size_t dashPos = deadlineStr.find(" - ");
 
 // Check if the deadline string is not empty
-if (!deadlineStr.empty()) {
+if (!deadlineStr.empty() && deadlineStr != "Previous step: <strong>Completed</strong>") {
     std::string dateOnly;
     if (colonPos != std::string::npos && dashPos != std::string::npos && colonPos < dashPos) {
         dateOnly = deadlineStr.substr(colonPos + 2, dashPos - (colonPos + 2));
@@ -121,7 +121,7 @@ if (!deadlineStr.empty()) {
     auto stripHtml = [](const std::string& input) {
         std::string result = "";
         bool insideTag = false;
-        
+
         for (char c : input) {
             if (c == '<') {
                 insideTag = true;
@@ -137,10 +137,10 @@ if (!deadlineStr.empty()) {
         }
         return result;
     };
-    
+
     // Clean the date string of any HTML
     std::string cleanDateOnly = stripHtml(dateOnly);
-    
+
     // Format the message with the extracted plain text date
     std::string formattedMessage = "The task will become available on " + cleanDateOnly + " or sooner. You can claim now and you will receive an email once you can start working!";
 

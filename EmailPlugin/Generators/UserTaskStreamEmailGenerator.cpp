@@ -134,7 +134,7 @@ void UserTaskStreamEmailGenerator::run(int user_id)
                 // Original string looks like: "Previous step due: 1 August 2021 - 23:00 UTC"
                 size_t colonPos = deadlineStr.find(": ");
                 size_t dashPos = deadlineStr.find(" - ");
-                if (!deadlineStr.empty()) {
+                if (!deadlineStr.empty() && deadlineStr != "Previous step: <strong>Completed</strong>") {
                     std::string dateOnly;
                     if (colonPos != std::string::npos && dashPos != std::string::npos && colonPos < dashPos) {
                         dateOnly = deadlineStr.substr(colonPos + 2, dashPos - (colonPos + 2));
@@ -314,7 +314,7 @@ void UserTaskStreamEmailGenerator::run(int user_id)
                 // Original string looks like: "Previous step due: 1 August 2021 - 23:00 UTC"
                 size_t colonPos = deadlineStr.find(": ");
                 size_t dashPos = deadlineStr.find(" - ");
-                if (!deadlineStr.empty()) {
+                if (!deadlineStr.empty() && deadlineStr != "Previous step: <strong>Completed</strong>") {
                     std::string dateOnly;
                     if (colonPos != std::string::npos && dashPos != std::string::npos && colonPos < dashPos) {
                         dateOnly = deadlineStr.substr(colonPos + 2, dashPos - (colonPos + 2));
