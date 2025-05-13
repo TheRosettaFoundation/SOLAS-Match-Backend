@@ -42,7 +42,7 @@
                 Quality Assurance: Ensure your work meets our high standards by following the guidelines and running Phrase QA checks. <a href="https://community.translatorswb.org/t/post-editing-machine-translation-tips-and-best-practice/60046" target="_blank" style="color: #e8991c; text-decoration: underline;">More details here</a>
               </li>
               <li style="margin-bottom: 10px; font-size: 16px; ">
-                Tasks can be claimed quickly, so they might no longer be available when you check them.
+                Tasks can be claimed quickly, so they might no longer be available when you check them.Please, read all the task details first.
               </li>
             </ul>
           </div>
