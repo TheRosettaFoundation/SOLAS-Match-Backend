@@ -24,11 +24,11 @@
           <div style="font-size: 16px; color: #576e82; margin-bottom: 20px;">
           This is a summary of all tasks available for the Türkiye/Syria earthquake response in your language combinations.
           Your support in translating these important resources will be highly welcome.
-          Please be mindful that these tasks are time sensitive, we ask you to claim them only if you are sure you will be able to deliver on time.
+          
           </div>
           
           <p style="margin: 15px 0; color: #576e82; font-size:16px;">
-            These are volunteer tasks. Only claim them if you're sure you can complete them. Please, read all the task details first.
+          Please be mindful that these tasks are time sensitive, we ask you to claim them only if you are sure you will be able to deliver on time.
           </p>
           
           <!-- Important Information Section -->
