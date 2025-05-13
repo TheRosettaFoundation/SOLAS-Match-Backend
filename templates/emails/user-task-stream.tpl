@@ -18,8 +18,7 @@
         <div style="max-width: 600px; margin: 0 auto; padding: 0 15px; color:#344b5e;">
        
       
-          <hr />
-          
+    
       
           
           <div style="font-size: 16px; color: #576e82; margin-bottom: 15px;">
