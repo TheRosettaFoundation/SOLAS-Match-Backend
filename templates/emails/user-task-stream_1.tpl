@@ -17,12 +17,12 @@
       <div style="width: 100%; padding: 0 20px; box-sizing: border-box;">
         <div style="max-width: 600px; margin: 0 auto; padding: 0 15px; color:#344b5e;">
         <p>Hello
-        {{#USER_HAS_NAME}}
+        {{* {{#USER_HAS_NAME}}
             {{USERNAME}},
         {{/USER_HAS_NAME}}
         {{#NO_USER_NAME}}
             Hello,
-        {{/NO_USER_NAME}}
+        {{/NO_USER_NAME}} *}}
         This is a summary of all tasks available for the Türkiye/Syria earthquake response in your language combinations.
         Your support in translating these important resources will be highly welcome.
         Please be mindful that these tasks are time sensitive, we ask you to claim them only if you are sure you will be able to deliver on time.
