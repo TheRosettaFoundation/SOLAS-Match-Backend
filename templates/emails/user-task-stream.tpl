@@ -60,14 +60,9 @@
             <p style="margin: 8px 0; font-size: 16px;">
               <span style="color:#143878; font-weight:bold;">Due By: </span> {{DEADLINE}} or earlier, if possible
             </p>
-              
 
             <p style="margin: 8px 0; font-size: 16px;">{{PREVIOUS_DEADLINE_TIME}}</p>
-           
 
-
-
-            
             {{#PARTOF_SECT}}
             <p style="margin: 8px 0; font-size: 16px;">
               <a href={{PROJECT_VIEW}} target="_blank" style="color: #e8991c; text-decoration: underline;"> {{PROJECT_TITLE}}</a> <span style="color: #344b5e"> for </span> <span style="color:#143878; font-weight:bold;"> {{ORG_NAME}} </span>
