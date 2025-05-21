@@ -35,7 +35,7 @@
             <h3 style="text-align: center; margin: 0 0 10px 0; font-size: 18px;">Important Information</h3>
             <ul style="list-style: disc; padding-left: 20px; margin: 0; text-align: left; color:#344b5e; ">
               <li style="margin-bottom: 10px; font-size: 16px; ">
-                <strong><a href="https://drive.google.com/file/d/1E7t4BiFDkTi5r4orgteVzJy4QAiehiB3/view" style="color: #e8991c; text-decoration: none;" target="_blank">How to Claim a Task?</a></strong>
+                <strong><a href="https://drive.google.com/file/d/1HTXGNIOW5FeWAaJTdQl0NSRflC7iLUSj/view" style="color: #e8991c; text-decoration: none;" target="_blank">How to Claim a Task?</a></strong>
               </li>
               <li style="margin-bottom: 10px; font-size: 16px; ">
                 Quality Assurance: Ensure your work meets our high standards by following the guidelines and running Phrase QA checks. <a href="https://community.translatorswb.org/t/post-editing-machine-translation-tips-and-best-practice/60046" target="_blank" style="color: #e8991c; text-decoration: underline;">More details here</a>
@@ -87,7 +87,7 @@
                 <strong>New to TWB?</strong> <a style="color: #e8991c; text-decoration: underline;" href="https://community.translatorswb.org/t/welcome-pack-for-kato-translators/3138" target="_blank">Click here</a>
               </li>
               <li style="margin-bottom: 10px; font-size: 16px; color: #343A40;">
-                <strong>Have questions?</strong> <a href="https://community.translatorswb.org/latest" style="color: #e8991c; text-decoration: underline;" target="_blank">This is how you can ask questions about the task you claimed! </a>
+                <strong>Have questions?</strong> <a href="https://drive.google.com/file/d/1g-uMoBJsWW-8WDExloAEHLkGFPfYhZSi/view?usp=drive_link" style="color: #e8991c; text-decoration: underline;" target="_blank">This is how you can ask questions about the task you claimed! </a>
               </li>
               <li style="margin-bottom: 10px; font-size: 16px; color: #343A40;">
                 <strong>Want to expand your knowledge?</strong> <a href="https://elearn.translatorswb.org/auth/saml2/login.php?wants&idp=bd3eb3e6241260ee537b9a55145d852d&passive=off" style="color: #e8991c; text-decoration: underline;" target="_blank">Check our TWB Learning Center</a>
