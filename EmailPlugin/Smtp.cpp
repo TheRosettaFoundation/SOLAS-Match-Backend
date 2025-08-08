@@ -71,6 +71,8 @@ int Smtp::send(QMap<QString, QVariant> email_request)
         mail_message.setSubject(email_request["subject"].toString());
         mail_message.setExtraHeader("Content-Type", "text/html; charset=\"UTF-8\"");
         mail_message.setExtraHeader("Content-Transfer-Encoding", "quoted-printable");
+        mail_message.setExtraHeader("Date", QDateTime::currentDateTimeUtc().toString(Qt::RFC2822Date));
+qDebug() << "Date: " << QDateTime::currentDateTimeUtc().toString(Qt::RFC2822Date);
         mail_message.setBody(email_request["body"].toString());
 
         if (!isConnected) {
