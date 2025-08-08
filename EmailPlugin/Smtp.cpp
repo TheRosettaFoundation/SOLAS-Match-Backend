@@ -4,6 +4,7 @@
 #include <QString>
 #include <QSharedPointer>
 #include <QTimer>
+#include <QDateTime>
 #include <QDebug>
 
 #include "../Common/ConfigParser.h"
