@@ -9,6 +9,8 @@
 {{#TRANSLATION}}
 <p>
     You claimed a {{TASK_TYPE}} task for "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} with Translators without Borders.
+    You can review the task instructions here:<br />
+    <a href="{{TASK_PAGE}}">Task View URL</a>
 </p>
 <p>
     Please translate this task in Phrase TMS, our CAT tool:<br />
@@ -21,6 +23,8 @@
 {{#TRANSLATION_WAIT}}
 <p>
     You claimed a {{TASK_TYPE}} task for "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} with Translators without Borders.
+    You can review the task instructions here:<br />
+    <a href="{{TASK_PAGE}}">Task View URL</a>
 </p>
 <p>
     Please translate this task in Phrase TMS, our CAT tool:<br />
@@ -33,6 +37,8 @@
 {{#REVISING}}
 <p>
     You claimed a {{TASK_TYPE}} task for "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} with Translators without Borders.
+    You can review the task instructions here:<br />
+    <a href="{{TASK_PAGE}}">Task View URL</a>
 </p>
 <p>
     Please revise this task in Phrase TMS, our CAT tool:<br />
@@ -45,6 +51,8 @@
 {{#REVISING_WAIT}}
 <p>
     You claimed a {{TASK_TYPE}} task for "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} with Translators without Borders.
+    You can review the task instructions here:<br />
+    <a href="{{TASK_PAGE}}">Task View URL</a>
 </p>
 <p>
     <strong>You will receive an email notification when the task is ready for you to revise.</strong> The email will include a link to the revision task in Phrase TMS, our CAT tool.
@@ -54,6 +62,8 @@
 {{#APPROVAL}}
 <p>
     You claimed a {{TASK_TYPE}} task for "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} with Translators without Borders.
+    You can review the task instructions here:<br />
+    <a href="{{TASK_PAGE}}">Task View URL</a>
 </p>
 <p>
     Please proofread this task in Phrase TMS, our CAT tool:<br />
@@ -66,6 +76,8 @@
 {{#APPROVAL_WAIT}}
 <p>
     You claimed a {{TASK_TYPE}} task for "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} with Translators without Borders.
+    You can review the task instructions here:<br />
+    <a href="{{TASK_PAGE}}">Task View URL</a>
 </p>
 <p>
     <strong>You will receive an email notification when the task is ready for you to proofread.</strong> The email will include a link to the proofreading and approval task in Phrase TMS, our CAT tool.
@@ -75,6 +87,8 @@
 {{#SHELLTASK}}
 <p>
 You have been assigned a {{TASK_TYPE}} task for "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} with Translators without Borders.
+    You can review the task instructions here:<br />
+    <a href="{{TASK_PAGE}}">Task View URL</a>
 </p>
 <p>
     Please use this URL to work on the task:<br />
