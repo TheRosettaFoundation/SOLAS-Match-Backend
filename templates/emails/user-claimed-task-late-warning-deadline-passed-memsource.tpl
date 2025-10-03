@@ -37,6 +37,24 @@
     When all segments are proofread, click "Complete".
 </p>
 {{/APPROVAL}}
+{{#SPOT_QUALITY_INSPECTION}}
+<p>
+    Please inspect the quality of this task in Phrase TMS, our CAT tool:<br />
+    <a href="{{MATECAT}}">Quality Inspection URL</a><br />
+</p>
+<p>
+   When all segments are reviewed, click "Complete". And then go to My Tasks in TWB Platform to complete and submit your review.
+</p>
+{{/SPOT_QUALITY_INSPECTION}}
+{{#QUALITY_EVALUATION}}
+<p>
+    Please inspect the quality of this task in Phrase TMS, our CAT tool:<br />
+    <a href="{{MATECAT}}">Quality Evaluation URL</a><br />
+</p>
+<p>
+   When all segments are reviewed, click "Complete". And then go to My Tasks in TWB Platform to complete and submit your review.
+</p>
+{{/QUALITY_EVALUATION}}
 <p>{{TASK_INSTRUCTIONS}}</p>
 <p>
     Please complete the task as soon as possible. If you need a deadline extension or are unable to deliver this work,

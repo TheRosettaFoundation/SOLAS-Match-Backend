@@ -52,6 +52,36 @@
     When all segments are proofread, click "Complete".
 </p>
 {{/APPROVAL}}
+{{#SPOT_QUALITY_INSPECTION}}
+<p>
+    Thank you for claiming a task on TWB Platform!
+    The deadline for the {{TASK_TYPE}} task for
+    "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} is {{DEADLINE_TIME}} UTC.
+    You have 6 days left to complete the task. Please make sure you complete it before the deadline.
+</p>
+<p>
+    Please inspect the quality of this task in Phrase TMS, our CAT tool:<br />
+    <a href="{{MATECAT}}">Quality Inspection URL</a><br />
+</p>
+<p>
+   When all segments are reviewed, click "Complete". And then go to My Tasks in TWB Platform to complete and submit your review.
+</p>
+{{/SPOT_QUALITY_INSPECTION}}
+{{#QUALITY_EVALUATION}}
+<p>
+    Thank you for claiming a task on TWB Platform!
+    The deadline for the {{TASK_TYPE}} task for
+    "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} is {{DEADLINE_TIME}} UTC.
+    You have 6 days left to complete the task. Please make sure you complete it before the deadline.
+</p>
+<p>
+    Please inspect the quality of this task in Phrase TMS, our CAT tool:<br />
+    <a href="{{MATECAT}}">Quality Evaluation URL</a><br />
+</p>
+<p>
+   When all segments are reviewed, click "Complete". And then go to My Tasks in TWB Platform to complete and submit your review.
+</p>
+{{/QUALITY_EVALUATION}}
 {{#SHELLTASK}}
 <p>
     Thank you for claiming a task on TWB Platform!

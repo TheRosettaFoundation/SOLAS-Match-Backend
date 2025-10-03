@@ -82,8 +82,10 @@ void ClaimedTaskUploadedGenerator::run(int task_id, int translator_id)
         QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/claimed-task-uploaded.tpl";
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
+        if (task->tasktype() != SPOT_QUALITY_INSPECTION && task->tasktype() != QUALITY_EVALUATION) {
         UserDao::queue_email(db, translator_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Task Successfully Completed", QString::fromUtf8(email_body.c_str()));
         UserDao::log_email_sent(db, translator_id, task_id, task->projectid(), project->organisationid(), 0, 0, 0, "task_completed_to_volunteer");
+        }
     } else {
         IEmailGenerator::generateErrorEmail(error);
     }
