@@ -91,11 +91,11 @@
     <a href="{{TASK_PAGE}}">Task View URL</a>
 </p>
 <p>
-    Please proofread this task in Phrase TMS, our CAT tool:<br />
-    <a href="{{MATECAT}}">Proofreading and Approval URL</a><br />
+    Please inspect the quality of this task in Phrase TMS, our CAT tool:<br />
+    <a href="{{MATECAT}}">Quality Inspection URL</a><br />
 </p>
 <p>
-   When all segments are proofread, click "Complete".
+   When all segments are reviewed, click "Complete". And then go to My Tasks in TWB Platform to complete and submit your review.
 </p>
 {{/SPOT_QUALITY_INSPECTION}}
 {{#SPOT_QUALITY_INSPECTION_WAIT}}
@@ -105,11 +105,11 @@
     <a href="{{TASK_PAGE}}">Task View URL</a>
 </p>
 <p>
-    Please proofread this task in Phrase TMS, our CAT tool:<br />
-    <a href="{{MATECAT}}">Proofreading and Approval URL</a><br />
+    Please inspect the quality of this task in Phrase TMS, our CAT tool:<br />
+    <a href="{{MATECAT}}">Quality Inspection URL</a><br />
 </p>
 <p>
-   When all segments are proofread, click "Complete".
+   When all segments are reviewed, click "Complete". And then go to My Tasks in TWB Platform to complete and submit your review.
 </p>
 {{/SPOT_QUALITY_INSPECTION_WAIT}}
 {{#QUALITY_EVALUATION}}
@@ -119,11 +119,11 @@
     <a href="{{TASK_PAGE}}">Task View URL</a>
 </p>
 <p>
-    Please proofread this task in Phrase TMS, our CAT tool:<br />
-    <a href="{{MATECAT}}">Proofreading and Approval URL</a><br />
+    Please inspect the quality of this task in Phrase TMS, our CAT tool:<br />
+    <a href="{{MATECAT}}">Quality Evaluation URL</a><br />
 </p>
 <p>
-   When all segments are proofread, click "Complete".
+   When all segments are reviewed, click "Complete". And then go to My Tasks in TWB Platform to complete and submit your review.
 </p>
 {{/QUALITY_EVALUATION}}
 {{#QUALITY_EVALUATION_WAIT}}
@@ -133,11 +133,11 @@
     <a href="{{TASK_PAGE}}">Task View URL</a>
 </p>
 <p>
-    Please proofread this task in Phrase TMS, our CAT tool:<br />
-    <a href="{{MATECAT}}">Proofreading and Approval URL</a><br />
+    Please inspect the quality of this task in Phrase TMS, our CAT tool:<br />
+    <a href="{{MATECAT}}">Quality Evaluation URL</a><br />
 </p>
 <p>
-   When all segments are proofread, click "Complete".
+   When all segments are reviewed, click "Complete". And then go to My Tasks in TWB Platform to complete and submit your review.
 </p>
 {{/QUALITY_EVALUATION_WAIT}}
 {{#SHELLTASK}}
