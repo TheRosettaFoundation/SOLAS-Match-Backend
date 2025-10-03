@@ -117,6 +117,8 @@ void TrackedTaskUploadedEmailGenerator::run(int user_id, int task_id, int transl
         if (is_revisor_for_split_memsource_task) {
             if (task->tasktype() == TRANSLATION)  dict.ShowSection("REVISING"); // Dependent type
             if (task->tasktype() == PROOFREADING) dict.ShowSection("APPROVAL"); // Dependent type
+            if (task->tasktype() == SPOT_QUALITY_INSPECTION)  dict.ShowSection("SPOT_QUALITY_INSPECTION"); // Dependent type
+            if (task->tasktype() == QUALITY_EVALUATION)       dict.ShowSection("QUALITY_EVALUATION"); // Dependent type
             template_location = QString(TEMPLATE_DIRECTORY) + "emails/tracked-task-uploaded-notify-revisor-memsource.tpl";
         } else {
         if (TaskDao::is_chunked_task(db, task->id())) {

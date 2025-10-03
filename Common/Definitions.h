@@ -10,7 +10,9 @@ enum TaskTypes {
     PROOFREADING = 3,
     POSTEDITING  = 4,
     QUALITY      = 5,
-    APPROVAL     = 6
+    APPROVAL     = 6,
+    SPOT_QUALITY_INSPECTION = 38,
+    QUALITY_EVALUATION      = 39
 };
 
 enum TaskStatus {
