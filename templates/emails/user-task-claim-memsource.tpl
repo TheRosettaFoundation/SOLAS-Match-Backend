@@ -84,6 +84,62 @@
 </p>
 <p>{{PREVIOUS_DEADLINE_TIME}}</p>
 {{/APPROVAL_WAIT}}
+{{#SPOT_QUALITY_INSPECTION}}
+<p>
+    You claimed a {{TASK_TYPE}} task for "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} with Translators without Borders.
+    You can review the task instructions here:<br />
+    <a href="{{TASK_PAGE}}">Task View URL</a>
+</p>
+<p>
+    Please proofread this task in Phrase TMS, our CAT tool:<br />
+    <a href="{{MATECAT}}">Proofreading and Approval URL</a><br />
+</p>
+<p>
+   When all segments are proofread, click "Complete".
+</p>
+{{/SPOT_QUALITY_INSPECTION}}
+{{#SPOT_QUALITY_INSPECTION_WAIT}}
+<p>
+    You claimed a {{TASK_TYPE}} task for "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} with Translators without Borders.
+    You can review the task instructions here:<br />
+    <a href="{{TASK_PAGE}}">Task View URL</a>
+</p>
+<p>
+    Please proofread this task in Phrase TMS, our CAT tool:<br />
+    <a href="{{MATECAT}}">Proofreading and Approval URL</a><br />
+</p>
+<p>
+   When all segments are proofread, click "Complete".
+</p>
+{{/SPOT_QUALITY_INSPECTION_WAIT}}
+{{#QUALITY_EVALUATION}}
+<p>
+    You claimed a {{TASK_TYPE}} task for "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} with Translators without Borders.
+    You can review the task instructions here:<br />
+    <a href="{{TASK_PAGE}}">Task View URL</a>
+</p>
+<p>
+    Please proofread this task in Phrase TMS, our CAT tool:<br />
+    <a href="{{MATECAT}}">Proofreading and Approval URL</a><br />
+</p>
+<p>
+   When all segments are proofread, click "Complete".
+</p>
+{{/QUALITY_EVALUATION}}
+{{#QUALITY_EVALUATION_WAIT}}
+<p>
+    You claimed a {{TASK_TYPE}} task for "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} with Translators without Borders.
+    You can review the task instructions here:<br />
+    <a href="{{TASK_PAGE}}">Task View URL</a>
+</p>
+<p>
+    Please proofread this task in Phrase TMS, our CAT tool:<br />
+    <a href="{{MATECAT}}">Proofreading and Approval URL</a><br />
+</p>
+<p>
+   When all segments are proofread, click "Complete".
+</p>
+{{/QUALITY_EVALUATION_WAIT}}
 {{#SHELLTASK}}
 <p>
 You have been assigned a {{TASK_TYPE}} task for "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} with Translators without Borders.
