@@ -98,6 +98,7 @@ void TrackedTaskUploadedEmailGenerator::run(int user_id, int task_id, int transl
         QString template_location;
 
         bool is_revisor_for_split_memsource_task = false;
+        int revision_task_type = 0;
         if (!memsource_task.isEmpty()) {
                 // These are any tasks with a higher workflow...
                 QList<QSharedPointer<Task> > revision_tasks = TaskDao::get_matching_revision_memsource_tasks(db, task);
@@ -109,16 +110,22 @@ void TrackedTaskUploadedEmailGenerator::run(int user_id, int task_id, int transl
 //qDebug() << "TrackedTaskUploadedEmailGenerator tracked-task-uploaded-notify-revisor-memsource for revisionClaimer->id():" << QString::number(revisionClaimer->id());//(**)
                             is_revisor_for_split_memsource_task = true;
                             dict.SetValue("MATECAT_REVISION", TaskDao::get_matecat_url(db, revision_task, TaskDao::get_memsource_task(db, revision_task->id())));
+                            revision_task_type = revision_task->tasktype();
                         }
                     }
                 }
         }
 
         if (is_revisor_for_split_memsource_task) {
-            if (task->tasktype() == TRANSLATION)  dict.ShowSection("REVISING"); // Dependent type
-            if (task->tasktype() == PROOFREADING) dict.ShowSection("APPROVAL"); // Dependent type
-            if (task->tasktype() == SPOT_QUALITY_INSPECTION)  dict.ShowSection("SPOT_QUALITY_INSPECTION"); // Dependent type
-            if (task->tasktype() == QUALITY_EVALUATION)       dict.ShowSection("QUALITY_EVALUATION"); // Dependent type
+//            if (task->tasktype() == TRANSLATION)  dict.ShowSection("REVISING"); // Dependent type
+//            if (task->tasktype() == PROOFREADING) dict.ShowSection("APPROVAL"); // Dependent type
+//            if (task->tasktype() == SPOT_QUALITY_INSPECTION)  dict.ShowSection("SPOT_QUALITY_INSPECTION"); // Dependent type
+//            if (task->tasktype() == QUALITY_EVALUATION)       dict.ShowSection("QUALITY_EVALUATION"); // Dependent type
+            qDebug() << "TrackedTaskUploadedEmailGenerator revision_task_type:" << revision_task_type;
+            if (revision_task_type == PROOFREADING)            dict.ShowSection("REVISING"); // Dependent type
+            if (revision_task_type == APPROVAL)                dict.ShowSection("APPROVAL"); // Dependent type
+            if (revision_task_type == SPOT_QUALITY_INSPECTION) dict.ShowSection("SPOT_QUALITY_INSPECTION"); // Dependent type
+            if (revision_task_type == QUALITY_EVALUATION)      dict.ShowSection("QUALITY_EVALUATION"); // Dependent type
             template_location = QString(TEMPLATE_DIRECTORY) + "emails/tracked-task-uploaded-notify-revisor-memsource.tpl";
         } else {
         if (TaskDao::is_chunked_task(db, task->id())) {
