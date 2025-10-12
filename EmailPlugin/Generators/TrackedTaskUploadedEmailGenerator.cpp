@@ -1,8 +1,8 @@
 #include "TrackedTaskUploadedEmailGenerator.h"
 
-void TrackedTaskUploadedEmailGenerator::run(int user_id, int task_id, int translator_id)
+void TrackedTaskUploadedEmailGenerator::run(int user_id, int task_id, int translator_id, int revision_task_id)
 {
-    qDebug() << "TrackedTaskUploadedEmailGenerator user_id:" << QString::number(user_id) << "task_id:" << QString::number(task_id) << "translator_id:" << QString::number(translator_id);
+    qDebug() << "TrackedTaskUploadedEmailGenerator user_id:" << QString::number(user_id) << "task_id:" << QString::number(task_id) << "translator_id:" << QString::number(translator_id) << "revision_task_id:" << QString::number(revision_task_id);
 
     ConfigParser settings;
     QString error = "";
@@ -97,31 +97,17 @@ void TrackedTaskUploadedEmailGenerator::run(int user_id, int task_id, int transl
         std::string email_body;
         QString template_location;
 
-        bool is_revisor_for_split_memsource_task = false;
         int revision_task_type = 0;
         if (!memsource_task.isEmpty()) {
-                // These are any tasks with a higher workflow...
-                QList<QSharedPointer<Task> > revision_tasks = TaskDao::get_matching_revision_memsource_tasks(db, task);
-                foreach (QSharedPointer<Task> revision_task, revision_tasks) {
-//qDebug() << "TrackedTaskUploadedEmailGenerator Matching Revision Task:" << QString::number(revision_task->id());//(**)
-                    QSharedPointer<User> revisionClaimer = TaskDao::getUserClaimedTask(db, revision_task->id());
-                    if (!revisionClaimer.isNull()) {
-                        if (user->id() == revisionClaimer->id()) {
-//qDebug() << "TrackedTaskUploadedEmailGenerator tracked-task-uploaded-notify-revisor-memsource for revisionClaimer->id():" << QString::number(revisionClaimer->id());//(**)
-                            is_revisor_for_split_memsource_task = true;
-                            dict.SetValue("MATECAT_REVISION", TaskDao::get_matecat_url(db, revision_task, TaskDao::get_memsource_task(db, revision_task->id())));
-                            revision_task_type = revision_task->tasktype();
-                        }
-                    }
-                }
+            if (revision_task_id) {
+                QSharedPointer<Task> revision_task = TaskDao::getTask(db, revision_task_id);
+                dict.SetValue("MATECAT_REVISION", TaskDao::get_matecat_url(db, revision_task, TaskDao::get_memsource_task(db, revision_task->id())));
+                revision_task_type = revision_task->tasktype();
+                qDebug() << "TrackedTaskUploadedEmailGenerator revision_task_id :" << QString::number(revision_task_id) << "revision_task_type:" << QString::number(revision_task_type);
+            }
         }
 
-        if (is_revisor_for_split_memsource_task) {
-//            if (task->tasktype() == TRANSLATION)  dict.ShowSection("REVISING"); // Dependent type
-//            if (task->tasktype() == PROOFREADING) dict.ShowSection("APPROVAL"); // Dependent type
-//            if (task->tasktype() == SPOT_QUALITY_INSPECTION)  dict.ShowSection("SPOT_QUALITY_INSPECTION"); // Dependent type
-//            if (task->tasktype() == QUALITY_EVALUATION)       dict.ShowSection("QUALITY_EVALUATION"); // Dependent type
-            qDebug() << "TrackedTaskUploadedEmailGenerator revision_task_type:" << revision_task_type;
+        if (revision_task_type) {
             if (revision_task_type == PROOFREADING)            dict.ShowSection("REVISING"); // Dependent type
             if (revision_task_type == APPROVAL)                dict.ShowSection("APPROVAL"); // Dependent type
             if (revision_task_type == SPOT_QUALITY_INSPECTION) dict.ShowSection("SPOT_QUALITY_INSPECTION"); // Dependent type
@@ -136,7 +122,7 @@ void TrackedTaskUploadedEmailGenerator::run(int user_id, int task_id, int transl
         }
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
-        if (is_revisor_for_split_memsource_task) {
+        if (revision_task_type) {
             UserDao::queue_email(db, user_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Task Completed Notification", QString::fromUtf8(email_body.c_str()));
             UserDao::log_email_sent(db, user_id, task_id, task->projectid(), project->organisationid(), translator_id, 0, 0, "task_completed_to_revising_volunteer");
         } else {

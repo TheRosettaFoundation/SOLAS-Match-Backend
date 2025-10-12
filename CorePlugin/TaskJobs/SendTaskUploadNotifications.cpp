@@ -36,14 +36,14 @@ void SendTaskUploadNotifications::run(int task_id)
 //qDebug() << "SendTaskUploadNotifications Matching Revision Task IS TRANSLATED:" << QString::number(revision_task->id());//(**)
                         QSharedPointer<User> revisionClaimer = TaskDao::getUserClaimedTask(db, revision_task->id());
                         if (!revisionClaimer.isNull()) {
-                            TrackedTaskUploadedEmailGenerator::run(revisionClaimer->id(), task->id(), translator->id());
+                            TrackedTaskUploadedEmailGenerator::run(revisionClaimer->id(), task->id(), translator->id(), revision_task->id());
 //qDebug() << "SendTaskUploadNotifications SENT TO revisionClaimer->id():" << QString::number(revisionClaimer->id());//(**)
                         }
                     }
                 }
 
                 foreach (QSharedPointer<User> user, users) {
-                    TrackedTaskUploadedEmailGenerator::run(user->id(), task->id(), translator->id());
+                    TrackedTaskUploadedEmailGenerator::run(user->id(), task->id(), translator->id(), 0);
 //qDebug() << "SendTaskUploadNotifications SENT TO tracker/admin user->id():" << QString::number(user->id());//(**)
                 }
 

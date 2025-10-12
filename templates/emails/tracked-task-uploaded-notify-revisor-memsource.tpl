@@ -34,7 +34,7 @@
 </p>
 <p>
     Please inspect the quality of this task in Phrase TMS, our CAT tool:<br />
-    <a href="{{MATECAT}}">Quality Inspection URL</a><br />
+    <a href="{{MATECAT_REVISION}}">Quality Inspection URL</a><br />
 </p>
 <p>
    When all segments are reviewed, click "Complete". And then go to My Tasks in TWB Platform to complete and submit your review.
@@ -47,7 +47,7 @@
 </p>
 <p>
     Please inspect the quality of this task in Phrase TMS, our CAT tool:<br />
-    <a href="{{MATECAT}}">Quality Evaluation URL</a><br />
+    <a href="{{MATECAT_REVISION}}">Quality Evaluation URL</a><br />
 </p>
 <p>
    When all segments are reviewed, click "Complete". And then go to My Tasks in TWB Platform to complete and submit your review.

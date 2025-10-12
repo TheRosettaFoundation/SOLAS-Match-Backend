@@ -6,7 +6,7 @@
 class TrackedTaskUploadedEmailGenerator
 {
 public:
-    static void run(int user_id, int task_id, int translator_id);
+    static void run(int user_id, int task_id, int translator_id, int revision_task_id);
 };
 
 #endif // TASKTRANSLATIONUPLOADEDEMAILGENERATOR_H
