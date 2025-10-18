@@ -278,6 +278,12 @@ bool UserDao::taskStreamNotificationSent(QSharedPointer<MySQLHandler> db, int us
     return ret;
 }
 
+void UserDao::defer_task_stream(QSharedPointer<MySQLHandler> db, int userId)
+{
+    QString args = QString::number(userId);
+    QSharedPointer<QSqlQuery> mQuery = db->call("defer_task_stream", args);
+}
+
 QList<QSharedPointer<Locale> > UserDao::getUserSecondaryLanguages(QSharedPointer<MySQLHandler> db, int userId)
 {
     QList<QSharedPointer<Locale> > userSecondaryLocales;

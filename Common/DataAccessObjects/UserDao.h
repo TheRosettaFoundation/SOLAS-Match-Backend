@@ -53,6 +53,7 @@ public:
     static QSharedPointer<UserTaskStreamNotification> getUserTaskStreamNotification(QSharedPointer<MySQLHandler> db,
                                                         int userId);
     static bool taskStreamNotificationSent(QSharedPointer<MySQLHandler> db, int userId, QString sentDate);
+    static void defer_task_stream(QSharedPointer<MySQLHandler> db, int userId);
 
     static QList<QSharedPointer<Locale> > getUserSecondaryLanguages(QSharedPointer<MySQLHandler> db, int userId);
     static QMultiMap<int, LCCode> getUserLCCodes(QSharedPointer<MySQLHandler> db, int limit = RETURN_ALL, int offset = RETURN_ALL);

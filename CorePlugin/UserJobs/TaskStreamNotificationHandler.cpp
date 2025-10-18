@@ -47,6 +47,7 @@ void TaskStreamNotificationHandler::run()
                         tasks_within_cutoff++;
                     }
                 }
+tasks_within_cutoff = 1;//(**)
                 if (tasks_within_cutoff > 0) {
                     userIds.append(user_id); // Really send an email to this user_id
                 } else {
@@ -68,10 +69,29 @@ void TaskStreamNotificationHandler::run()
         if (max_allowed > 0) {
             int random = QRandomGenerator::global()->bounded(max_allowed); // Pick max_allowed elements starting at a random element (circulating back to start, if necessary)
             qDebug() << "count, max_allowed, random: " << QString::number(count) << ", " << QString::number(max_allowed) << ", " << QString::number(random);
+            int max_microsoft_per_hour = settings.get("mail.max_microsoft_per_hour").toInt();
+            int count_microsoft_per_hour = 0;
+            SharedPointer<User> user;
             int i = 0;
             foreach (int id, userIds) {
                 if (((i >= random) && (i < random + max_allowed)) || ((i >= (random - count)) && (i < random + max_allowed - count))) {
+                  user = UserDao::getUser(db, id);
+                  QString email = QString::fromStdString(user->email());
+
+                  if (email.endsWith('@hotmail.com',   Qt::CaseInsensitive) ||
+                      email.endsWith('@outlook.com',   Qt::CaseInsensitive) ||
+                      email.endsWith('@msn.com',       Qt::CaseInsensitive) ||
+                      email.endsWith('@live.com',      Qt::CaseInsensitive) ||
+                      email.endsWith('@hotmail.co.uk', Qt::CaseInsensitive))
+                  {
+                      if (count_microsoft_per_hour++ < max_microsoft_per_hour) UserTaskStreamEmailGenerator::run(id);
+                      else {
+                          UserDao::defer_task_stream(db, id);
+                          qDebug() << "Microsoft email deferred: " << email;
+                     }
+                  } else {
                     UserTaskStreamEmailGenerator::run(id);
+                  }
                 } else {
                     if (UserDao::taskStreamNotificationSent(db, id, sentDateTime)) {
                         // qDebug() << "TaskStreamNotificationHandler: Updated last sent date for user id " << QString::number(id);
