@@ -71,18 +71,18 @@ tasks_within_cutoff = 1;//(**)
             qDebug() << "count, max_allowed, random: " << QString::number(count) << ", " << QString::number(max_allowed) << ", " << QString::number(random);
             int max_microsoft_per_hour = settings.get("mail.max_microsoft_per_hour").toInt();
             int count_microsoft_per_hour = 0;
-            SharedPointer<User> user;
+            QSharedPointer<User> user;
             int i = 0;
             foreach (int id, userIds) {
                 if (((i >= random) && (i < random + max_allowed)) || ((i >= (random - count)) && (i < random + max_allowed - count))) {
                   user = UserDao::getUser(db, id);
                   QString email = QString::fromStdString(user->email());
 
-                  if (email.endsWith('@hotmail.com',   Qt::CaseInsensitive) ||
-                      email.endsWith('@outlook.com',   Qt::CaseInsensitive) ||
-                      email.endsWith('@msn.com',       Qt::CaseInsensitive) ||
-                      email.endsWith('@live.com',      Qt::CaseInsensitive) ||
-                      email.endsWith('@hotmail.co.uk', Qt::CaseInsensitive))
+                  if (email.endsWith("@hotmail.com",   Qt::CaseInsensitive) ||
+                      email.endsWith("@outlook.com",   Qt::CaseInsensitive) ||
+                      email.endsWith("@msn.com",       Qt::CaseInsensitive) ||
+                      email.endsWith("@live.com",      Qt::CaseInsensitive) ||
+                      email.endsWith("@hotmail.co.uk", Qt::CaseInsensitive))
                   {
                       if (count_microsoft_per_hour++ < max_microsoft_per_hour) UserTaskStreamEmailGenerator::run(id);
                       else {
