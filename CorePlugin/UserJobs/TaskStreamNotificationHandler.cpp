@@ -70,6 +70,7 @@ tasks_within_cutoff = 1;//(**)
             int random = QRandomGenerator::global()->bounded(max_allowed); // Pick max_allowed elements starting at a random element (circulating back to start, if necessary)
             qDebug() << "count, max_allowed, random: " << QString::number(count) << ", " << QString::number(max_allowed) << ", " << QString::number(random);
             int max_microsoft_per_hour = settings.get("mail.max_microsoft_per_hour").toInt();
+qDebug() << "max_microsoft_per_hour: " << max_microsoft_per_hour;//(**)
             int count_microsoft_per_hour = 0;
             QSharedPointer<User> user;
             int i = 0;
@@ -84,7 +85,11 @@ tasks_within_cutoff = 1;//(**)
                       email.endsWith("@live.com",      Qt::CaseInsensitive) ||
                       email.endsWith("@hotmail.co.uk", Qt::CaseInsensitive))
                   {
-                      if (count_microsoft_per_hour++ < max_microsoft_per_hour) UserTaskStreamEmailGenerator::run(id);
+qDebug() << "count_microsoft_per_hour: " << count_microsoft_per_hour;//(**)
+                      if (count_microsoft_per_hour++ < max_microsoft_per_hour) {
+                          UserTaskStreamEmailGenerator::run(id);
+qDebug() << "count_microsoft_per_hour, id: " << count_microsoft_per_hour << id;//(**)
+                     }
                       else {
                           UserDao::defer_task_stream(db, id);
                           qDebug() << "Microsoft email deferred: " << email;
