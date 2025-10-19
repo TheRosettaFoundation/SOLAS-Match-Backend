@@ -47,7 +47,6 @@ void TaskStreamNotificationHandler::run()
                         tasks_within_cutoff++;
                     }
                 }
-tasks_within_cutoff = 1;//(**)
                 if (tasks_within_cutoff > 0) {
                     userIds.append(user_id); // Really send an email to this user_id
                 } else {
