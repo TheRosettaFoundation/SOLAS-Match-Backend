@@ -81,6 +81,11 @@ void TaskStreamNotificationHandler::run()
                       email.endsWith("@outlook.com",   Qt::CaseInsensitive) ||
                       email.endsWith("@msn.com",       Qt::CaseInsensitive) ||
                       email.endsWith("@live.com",      Qt::CaseInsensitive) ||
+                      email.endsWith("@hotmail.fr",    Qt::CaseInsensitive) ||
+                      email.endsWith("@hotmail.es",    Qt::CaseInsensitive) ||
+                      email.endsWith("@live.com.pt",   Qt::CaseInsensitive) ||
+                      email.endsWith("@live.fr",       Qt::CaseInsensitive) ||
+                      email.endsWith("@live.be",       Qt::CaseInsensitive) ||
                       email.endsWith("@hotmail.co.uk", Qt::CaseInsensitive))
                   {
                       if (count_microsoft_per_hour++ < max_microsoft_per_hour) UserTaskStreamEmailGenerator::run(id);
