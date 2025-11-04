@@ -39,7 +39,7 @@
 {{/APPROVAL}}
 {{#COURSE}}
 <p>
-    The deadline for "{{TASK_TITLE}}" has passed more than a week ago.
+    The deadline for "{{TASK_TITLE}}" on TWB Learning Center has passed more than a week ago.
     If there is no visible progress in the next 6 days, you will be automatically unenrolled from the course and your corresponding task will be deleted automatically, along with all the parts completed so far.
     This policy helps ensure our records reflect current participation.
 </p>
