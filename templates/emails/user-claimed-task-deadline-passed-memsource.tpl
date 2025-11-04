@@ -36,6 +36,15 @@
     When all segments are proofread, click "Complete".
 </p>
 {{/APPROVAL}}
+{{#COURSE}}
+<p>
+    The deadline for "{{TASK_TITLE}}" has now passed.
+</p>
+<p>
+    If you continue working on the course, your deadline will be automatically extended for 2 more weeks.
+    When the course is completed in TWB Learning Center, your TWB Platform task will be completed automatically.
+</p>
+{{/COURSE}}
 {{#SPOT_QUALITY_INSPECTION}}
 <p>
     Please inspect the quality of this task in Phrase TMS, our CAT tool:<br />

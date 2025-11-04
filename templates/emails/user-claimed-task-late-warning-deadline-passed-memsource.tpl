@@ -37,6 +37,17 @@
     When all segments are proofread, click "Complete".
 </p>
 {{/APPROVAL}}
+{{#COURSE}}
+<p>
+    The deadline for "{{TASK_TITLE}}" has passed more than a week ago.
+    If there is no visible progress in the next 6 days, you will be automatically unenrolled from the course and your corresponding task will be deleted automatically, along with all the parts completed so far.
+    This policy helps ensure our records reflect current participation.
+</p>
+<p>
+    Any new progress on "{{TASK_TITLE}}" will extend your deadline by 2 weeks.
+    When the course is completed in TWB Learning Center, your TWB Platform task will be completed automatically.
+</p>
+{{/COURSE}}
 {{#SPOT_QUALITY_INSPECTION}}
 <p>
     Please inspect the quality of this task in Phrase TMS, our CAT tool:<br />

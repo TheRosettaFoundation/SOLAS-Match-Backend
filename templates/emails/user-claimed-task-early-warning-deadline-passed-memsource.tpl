@@ -52,6 +52,17 @@
     When all segments are proofread, click "Complete".
 </p>
 {{/APPROVAL}}
+{{#COURSE}}
+<p>
+    Thank you for enrolling on "{{TASK_TITLE}}" on TWB Learning Center! A matching task has been created for you on the TWB Platform.
+    The deadline to complete the course is {{DEADLINE_TIME}} UTC. That’s in 6 days.
+    We ask everyone to complete their courses within 3 months to help us keep the learning space active and make sure you maximize what you learn.
+    Please complete the task before the deadline so your progress is saved and you get credited for the time spent on this activity.
+</p>
+<p>
+   When the course is completed in TWB Learning Center, your TWB Platform task will be completed automatically.
+</p>
+{{/COURSE}}
 {{#SPOT_QUALITY_INSPECTION}}
 <p>
     Thank you for claiming a task on TWB Platform!
