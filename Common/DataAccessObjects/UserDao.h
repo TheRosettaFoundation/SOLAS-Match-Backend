@@ -78,6 +78,7 @@ public:
     static QMap<QString, QVariant> getUserPersonalInfo(QSharedPointer<MySQLHandler> db, int user_id);
     static QMap<QString, QVariant> get_linguist_payment_information(QSharedPointer<MySQLHandler> db, int user_id);
     static QMap<QString, QVariant> get_email_sent_for_linguist_payment_information(QSharedPointer<MySQLHandler> db, int user_id);
+    static void mark_final_reminder(QSharedPointer<MySQLHandler> db, int task_id);
 };
 
 #endif  //USERDAO_H
