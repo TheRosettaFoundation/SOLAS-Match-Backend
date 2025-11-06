@@ -23,7 +23,6 @@ void DeadlineChecker::run()
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
         QList<QSharedPointer<Task> > tasks = TaskDao::getOverdueTasks(db);
         foreach(QSharedPointer<Task> task, tasks) {
-if (task->tasktype() == 29) continue; // Course(**)
             qDebug() << "Task " << task->id() << " is pass its deadline of " << QString::fromStdString(task->deadline());
             QSharedPointer<User> translator = TaskDao::getUserClaimedTask(db, task->id());
 
@@ -39,7 +38,6 @@ if (task->tasktype() == 29) continue; // Course(**)
 
         tasks = TaskDao::getEarlyWarningTasks(db);
         foreach(QSharedPointer<Task> task, tasks) {
-if (task->tasktype() == 29) continue; // Course(**)
             qDebug() << "Task " << task->id() << " is within a week of its deadline of " << QString::fromStdString(task->deadline());
             QSharedPointer<User> translator = TaskDao::getUserClaimedTask(db, task->id());
 
@@ -53,7 +51,6 @@ if (task->tasktype() == 29) continue; // Course(**)
 
         tasks = TaskDao::getLateWarningTasks(db);
         foreach(QSharedPointer<Task> task, tasks) {
-if (task->tasktype() == 29) continue; // Course(**)
             qDebug() << "Task " << task->id() << " is a week late on its deadline of " << QString::fromStdString(task->deadline());
             QSharedPointer<User> translator = TaskDao::getUserClaimedTask(db, task->id());
 
