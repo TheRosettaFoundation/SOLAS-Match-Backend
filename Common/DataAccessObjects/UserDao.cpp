@@ -587,8 +587,8 @@ QMap<QString, QVariant> UserDao::get_email_sent_for_linguist_payment_information
     return row;
 }
 
-void UserDao::mark_final_reminder(QSharedPointer<MySQLHandler> db, int task_id)
+void UserDao::mark_final_reminder(QSharedPointer<MySQLHandler> db, int task_id, int final_reminder)
 {
-    QString args = QString::number(task_id);
+    QString args = QString::number(task_id) + "," + QString::number(final_reminder);
     db->call("mark_final_reminder", args);
 }
