@@ -21,6 +21,11 @@
 <p>
     When all segments are translated, click "Complete".
 </p>
+<p>{{TASK_INSTRUCTIONS}}</p>
+<p>
+    If you have questions about the deadline or any other questions, please leave a comment in the TWB Community forum thread associated with this project:<br />
+    <a href="{{COMMUNITY}}">{{COMMUNITY}}</a>
+</p>
 {{/TRANSLATION}}
 {{#REVISING}}
 <p>
@@ -36,6 +41,11 @@
 <p>
     When all segments are revised, click "Complete".
 </p>
+<p>{{TASK_INSTRUCTIONS}}</p>
+<p>
+    If you have questions about the deadline or any other questions, please leave a comment in the TWB Community forum thread associated with this project:<br />
+    <a href="{{COMMUNITY}}">{{COMMUNITY}}</a>
+</p>
 {{/REVISING}}
 {{#APPROVAL}}
 <p>
@@ -50,6 +60,11 @@
 </p>
 <p>
     When all segments are proofread, click "Complete".
+</p>
+<p>{{TASK_INSTRUCTIONS}}</p>
+<p>
+    If you have questions about the deadline or any other questions, please leave a comment in the TWB Community forum thread associated with this project:<br />
+    <a href="{{COMMUNITY}}">{{COMMUNITY}}</a>
 </p>
 {{/APPROVAL}}
 {{#COURSE}}
@@ -77,6 +92,11 @@
 <p>
    When all segments are reviewed, click "Complete". And then go to My Tasks in TWB Platform to complete and submit your review.
 </p>
+<p>{{TASK_INSTRUCTIONS}}</p>
+<p>
+    If you have questions about the deadline or any other questions, please leave a comment in the TWB Community forum thread associated with this project:<br />
+    <a href="{{COMMUNITY}}">{{COMMUNITY}}</a>
+</p>
 {{/SPOT_QUALITY_INSPECTION}}
 {{#QUALITY_EVALUATION}}
 <p>
@@ -92,6 +112,11 @@
 <p>
    When all segments are reviewed, click "Complete". And then go to My Tasks in TWB Platform to complete and submit your review.
 </p>
+<p>{{TASK_INSTRUCTIONS}}</p>
+<p>
+    If you have questions about the deadline or any other questions, please leave a comment in the TWB Community forum thread associated with this project:<br />
+    <a href="{{COMMUNITY}}">{{COMMUNITY}}</a>
+</p>
 {{/QUALITY_EVALUATION}}
 {{#SHELLTASK}}
 <p>
@@ -100,12 +125,11 @@
     "{{TASK_TITLE}}" from {{SOURCE_LANGUAGE}} into {{TARGET_LANGUAGE}} is {{DEADLINE_TIME}} UTC.
     You have 6 days left to complete the task. Please make sure you complete it before the deadline.
 </p>
-{{/SHELLTASK}}
 <p>{{TASK_INSTRUCTIONS}}</p>
 <p>
     If you have questions about the deadline or any other questions, please leave a comment in the TWB Community forum thread associated with this project:<br />
     <a href="{{COMMUNITY}}">{{COMMUNITY}}</a>
 </p>
-
+{{/SHELLTASK}}
 
 {{>FOOTER}}

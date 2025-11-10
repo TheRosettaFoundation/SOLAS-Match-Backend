@@ -17,6 +17,14 @@
 <p>
     When all segments are translated, click "Complete".
 </p>
+<p>{{TASK_INSTRUCTIONS}}</p>
+<p>
+    Please complete the task as soon as possible. If you need a deadline extension or are unable to deliver this work,
+    please leave a comment in the TWB Community forum thread associated with this project:<br />
+    <a href="{{COMMUNITY}}">{{COMMUNITY}}</a><br />
+    Please note that in some cases we are unable to extend task deadlines and would have to reassign the task to another translator.
+    For more details please see <a href="https://community.translatorswb.org/t/deadlines-on-kato-platform/248">Deadlines on TWB Platform</a>
+</p>
 {{/TRANSLATION}}
 {{#REVISING}}
 <p>
@@ -26,6 +34,14 @@
 <p>
     When all segments are revised, click "Complete".
 </p>
+<p>{{TASK_INSTRUCTIONS}}</p>
+<p>
+    Please complete the task as soon as possible. If you need a deadline extension or are unable to deliver this work,
+    please leave a comment in the TWB Community forum thread associated with this project:<br />
+    <a href="{{COMMUNITY}}">{{COMMUNITY}}</a><br />
+    Please note that in some cases we are unable to extend task deadlines and would have to reassign the task to another translator.
+    For more details please see <a href="https://community.translatorswb.org/t/deadlines-on-kato-platform/248">Deadlines on TWB Platform</a>
+</p>
 {{/REVISING}}
 {{#APPROVAL}}
 <p>
@@ -34,6 +50,14 @@
 </p>
 <p>
     When all segments are proofread, click "Complete".
+</p>
+<p>{{TASK_INSTRUCTIONS}}</p>
+<p>
+    Please complete the task as soon as possible. If you need a deadline extension or are unable to deliver this work,
+    please leave a comment in the TWB Community forum thread associated with this project:<br />
+    <a href="{{COMMUNITY}}">{{COMMUNITY}}</a><br />
+    Please note that in some cases we are unable to extend task deadlines and would have to reassign the task to another translator.
+    For more details please see <a href="https://community.translatorswb.org/t/deadlines-on-kato-platform/248">Deadlines on TWB Platform</a>
 </p>
 {{/APPROVAL}}
 {{#COURSE}}
@@ -53,6 +77,14 @@
 <p>
    When all segments are reviewed, click "Complete". And then go to My Tasks in TWB Platform to complete and submit your review.
 </p>
+<p>{{TASK_INSTRUCTIONS}}</p>
+<p>
+    Please complete the task as soon as possible. If you need a deadline extension or are unable to deliver this work,
+    please leave a comment in the TWB Community forum thread associated with this project:<br />
+    <a href="{{COMMUNITY}}">{{COMMUNITY}}</a><br />
+    Please note that in some cases we are unable to extend task deadlines and would have to reassign the task to another translator.
+    For more details please see <a href="https://community.translatorswb.org/t/deadlines-on-kato-platform/248">Deadlines on TWB Platform</a>
+</p>
 {{/SPOT_QUALITY_INSPECTION}}
 {{#QUALITY_EVALUATION}}
 <p>
@@ -62,7 +94,6 @@
 <p>
    When all segments are reviewed, click "Complete". And then go to My Tasks in TWB Platform to complete and submit your review.
 </p>
-{{/QUALITY_EVALUATION}}
 <p>{{TASK_INSTRUCTIONS}}</p>
 <p>
     Please complete the task as soon as possible. If you need a deadline extension or are unable to deliver this work,
@@ -71,6 +102,6 @@
     Please note that in some cases we are unable to extend task deadlines and would have to reassign the task to another translator.
     For more details please see <a href="https://community.translatorswb.org/t/deadlines-on-kato-platform/248">Deadlines on TWB Platform</a>
 </p>
-
+{{/QUALITY_EVALUATION}}
 
 {{>FOOTER}}
