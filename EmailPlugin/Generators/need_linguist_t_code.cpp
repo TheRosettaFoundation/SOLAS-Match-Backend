@@ -10,6 +10,41 @@ void need_linguist_t_code::run(int task_id, int claimant_id)
     QString error = "";
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
 
+    if (claimant_id == -1) {
+        QMap<QString, QVariant> sun_po_error = UserDao::get_sun_po_errors(db);
+        if (sun_po_error.isEmpty()) return;
+
+        int task_id_from_error = sun_po_error["task_id"].toInt();
+        std::string message = sun_po_error["message"].toString().toStdString();
+        qDebug() << "need_linguist_t_code (sun_po_error) task_id:" << task_id << "message:" << message;
+
+        QList<int> admin_ids;
+        //admin_ids.append(237869); // Rachel
+        //admin_ids.append(237873); // Virginie
+        //admin_ids.append(24985);  // Ambra
+        admin_ids.append(246046);  // twblinguistcode@clearglobal.org
+        //admin_ids.append(3297);    // Temporary Test Alan
+
+        foreach (int admin_id, admin_ids) {
+            QSharedPointer<User> admin = UserDao::getUser(db, admin_id);
+            if (!admin.isNull()) {
+                std::string email_body2;
+                ctemplate::TemplateDictionary dict("sun_po_error");
+                dict.SetValue("ADMIN_NAME", Email::htmlspecialchars(admin->display_name()));
+                dict.SetValue("MESSAGE", message);
+                QString task_view = settings.get("site.url") + "task/" + QString::number(task_id_from_error) + "/view";
+                dict.SetValue("TASK_VIEW", task_view.toStdString());
+
+                QString templateLocation = QString(TEMPLATE_DIRECTORY) + "emails/sun_po_error.tpl";
+                ctemplate::ExpandTemplate(templateLocation.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body2);
+
+                UserDao::queue_email(db, admin_id, QString::fromStdString(admin->email()), "Sun Purchase Order Error for task_id " + QString::number(task_id_from_error), QString::fromUtf8(email_body2.c_str()), LOW);
+                UserDao::log_email_sent(db, admin_id, task_id, 0, 0, 0, admin_id, 0, "sun_po_error_to_admin");
+            }
+        }
+        return;
+    }
+
     QSharedPointer<User> claimant = UserDao::getUser(db, claimant_id);
     if (claimant.isNull()) error = "Failed to generate need_linguist_t_code email, unable to find relevant data in the database for claimant_id: " + QString::number(claimant_id);
 

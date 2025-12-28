@@ -592,3 +592,16 @@ void UserDao::mark_final_reminder(QSharedPointer<MySQLHandler> db, int task_id, 
     QString args = QString::number(task_id) + "," + QString::number(final_reminder);
     db->call("mark_final_reminder", args);
 }
+
+QMap<QString, QVariant> UserDao::get_sun_po_errors(QSharedPointer<MySQLHandler> db)
+{
+    QMap<QString, QVariant> row = QMap<QString, QVariant>();
+
+    QSharedPointer<QSqlQuery> mQuery = db->call("get_sun_po_errors", "");
+    if(mQuery->first()) {
+        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
+        row["task_id"] = MySQLHandler::getValueFromQuery(fieldMap.value("task_id"), mQuery);
+        row["message"] = MySQLHandler::getValueFromQuery(fieldMap.value("message"), mQuery);
+    }
+    return row;
+}
