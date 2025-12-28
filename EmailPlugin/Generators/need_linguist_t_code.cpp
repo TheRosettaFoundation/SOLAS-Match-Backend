@@ -22,7 +22,10 @@ void need_linguist_t_code::run(int task_id, int claimant_id)
         //admin_ids.append(237869); // Rachel
         //admin_ids.append(237873); // Virginie
         //admin_ids.append(24985);  // Ambra
+/* (**)DEL
         admin_ids.append(246046);  // twblinguistcode@clearglobal.org
+(**)DEL */
+admin_ids.append(3297);    //(**)DEL
         //admin_ids.append(3297);    // Temporary Test Alan
 
         foreach (int admin_id, admin_ids) {
