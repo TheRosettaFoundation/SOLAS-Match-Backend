@@ -10,7 +10,7 @@ void need_linguist_t_code::run(int task_id, int claimant_id)
     QString error = "";
     QSharedPointer<MySQLHandler> db = MySQLHandler::getInstance();
 
-    if (claimant_id == -1) {
+    if (claimant_id == 0) {
         QMap<QString, QVariant> sun_po_error = UserDao::get_sun_po_errors(db);
         if (sun_po_error.isEmpty()) return;
 
