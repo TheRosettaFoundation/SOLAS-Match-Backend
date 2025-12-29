@@ -16,7 +16,7 @@ void need_linguist_t_code::run(int task_id, int claimant_id)
 
         int task_id_from_error = sun_po_error["task_id"].toInt();
         std::string message = sun_po_error["message"].toString().toStdString();
-        qDebug() << "need_linguist_t_code (sun_po_error) task_id:" << task_id << QString("message:") << QString(message);
+        qDebug() << "need_linguist_t_code (sun_po_error) task_id:" << task_id << QString("message:") << message;
 
         QList<int> admin_ids;
         //admin_ids.append(237869); // Rachel
