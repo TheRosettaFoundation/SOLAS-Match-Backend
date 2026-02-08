@@ -146,10 +146,7 @@ You have been assigned a {{TASK_TYPE}} task for "{{TASK_TITLE}}" from {{SOURCE_L
     You can review the task instructions here:<br />
     <a href="{{TASK_PAGE}}">Task View URL</a>
 </p>
-<p>
-    Please use this URL to work on the task:<br />
-    <a href="{{MATECAT}}">Work URL</a><br />
-</p>
+{{MATECAT}}
 {{/SHELLTASK}}
 <p>{{TASK_INSTRUCTIONS}}</p>
 <p>

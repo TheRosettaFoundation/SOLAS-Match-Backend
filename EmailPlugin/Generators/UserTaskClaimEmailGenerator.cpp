@@ -46,7 +46,6 @@ void UserTaskClaimEmailGenerator::run(int user_id, int task_id)
                 task_type = task_type_detail["type_text"].toString().toStdString();
               if (task_type_detail["shell_task"].toInt()) {
                     shell_task = true;
-                  if (TaskDao::get_task_url(db, task->id()) != "")
                     dict.ShowSection(task_type_detail["show_section"].toString().toStdString());
               } else {
                 if (TaskDao::is_task_translated_in_memsource(db, task)) {
@@ -65,7 +64,11 @@ void UserTaskClaimEmailGenerator::run(int user_id, int task_id)
         dict.SetValue("TARGET_LANGUAGE",taskTargetLocale.languagename());
 
         if (shell_task) {
-            dict.SetValue("MATECAT", TaskDao::get_task_url(db, task->id()));
+            if (TaskDao::get_task_url(db, task->id()) != "") {
+                dict.SetValue("MATECAT", "<p>Please use this URL to work on the task:<br /><a href=" + TaskDao::get_task_url(db, task->id()) + ">Work URL</a><br /></p>");
+            } else {
+                dict.SetValue("MATECAT", "");
+            }
         } else {
         dict.SetValue("MATECAT", TaskDao::get_matecat_url(db, task, memsource_task));
         }
