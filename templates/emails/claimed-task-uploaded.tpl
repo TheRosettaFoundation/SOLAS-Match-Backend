@@ -36,7 +36,7 @@ You can find our guidelines on leaving constructive feedback here:<br />
     After your submission is reviewed, you may receive feedback from the TWB team or the partner organization.
 </p>
 <p>
-You have been credited the corresponding number of words. If you don’t see an increase on your wordcount after 24 hours, please contact us. If you have any questions about this task, please leave a comment in the TWB Community forum thread associated with this project:<br />
+Thank you for collaborating with this task! If you have any questions, please leave a comment in the TWB Community forum thread associated with this project:<br />
     <a href="{{COMMUNITY}}">{{COMMUNITY}}</a>
 </p>
 
