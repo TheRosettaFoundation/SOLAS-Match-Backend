@@ -29,6 +29,9 @@ void OrgDeadlinePassedMailGenerator::run(int user_id, int task_id)
         }
         dict.SetValue("TASK_TITLE", Email::htmlspecialchars(task->title()));
         QString taskView = settings.get("site.url") + "task/" + QString::number(task->id()) + "/view";
+        if (!UserDao::get_ngo_on_tarjimly(db, user_id).isEmpty()) {
+            taskView = "https://app.clearglobal.org/task/" + QString::number(task->id());
+        }
         dict.SetValue("TASK_VIEW", taskView.toStdString());
         dict.SetValue("SITE_NAME", std::string(settings.get("site.name").toLatin1().constData(), settings.get("site.name").toLatin1().length()));
 

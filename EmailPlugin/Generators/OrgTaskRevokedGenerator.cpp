@@ -24,6 +24,9 @@ void OrgTaskRevokedGenerator::run(int task_id, int user_id, int claimant_id)
         dict.SetValue("USERNAME", Email::htmlspecialchars(user->display_name()));
         dict.SetValue("TASK_TITLE", Email::htmlspecialchars(task->title()));
         QString taskView = settings.get("site.url") + "task/" + QString::number(task->id()) + "/view";
+        if (!UserDao::get_ngo_on_tarjimly(db, user_id).isEmpty()) {
+            taskView = "https://app.clearglobal.org/task/" + QString::number(task->id());
+        }
         dict.SetValue("TASK_VIEW", taskView.toStdString());
         QString userProfile = settings.get("site.url") + QString::number(claimant->id()) + "/profile";
         dict.SetValue("USER_PROFILE", userProfile.toStdString());
@@ -54,6 +57,9 @@ void OrgTaskRevokedGenerator::run(int task_id, int user_id, int claimant_id)
 
         std::string email_body;
         QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/org-task-revoked.tpl";
+        if (!UserDao::get_ngo_on_tarjimly(db, user_id).isEmpty()) {
+            template_location = QString(TEMPLATE_DIRECTORY) + "emails/org-task-revoked_t.tpl";
+        }
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
         UserDao::queue_email(db, user_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Task Revoked", QString::fromUtf8(email_body.c_str()));
