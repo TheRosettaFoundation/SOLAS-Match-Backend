@@ -126,6 +126,16 @@ void TrackedTaskUploadedEmailGenerator::run(int user_id, int task_id, int transl
             UserDao::queue_email(db, user_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Task Completed Notification", QString::fromUtf8(email_body.c_str()));
             UserDao::log_email_sent(db, user_id, task_id, task->projectid(), project->organisationid(), translator_id, 0, 0, "task_completed_to_revising_volunteer");
         } else {
+            if (!UserDao::get_ngo_on_tarjimly(db, user_id).isEmpty()) {
+                dash_url = "https://app.clearglobal.org/org/" + QString::number(org->id()) + "/home";
+                dict.SetValue("DASHBOARD_URL", dash_url.toStdString());
+                taskView = "https://app.clearglobal.org/task/" + QString::number(task_id);
+                dict.SetValue("TASK_VIEW", taskView.toStdString());
+                projectView = "https://app.clearglobal.org/project/" + QString::number(task->projectid());
+                dict.SetValue("PROJECT_VIEW", projectView.toStdString());
+                template_location = QString(TEMPLATE_DIRECTORY) + "emails/tracked-task-uploaded_t.tpl";
+                ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
+            }
             UserDao::queue_email(db, user_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Task Completed Notification", QString::fromUtf8(email_body.c_str()));
             UserDao::log_email_sent(db, user_id, task_id, task->projectid(), project->organisationid(), translator_id, 0, 0, "task_completed_to_subscribed_admin");
         }
