@@ -605,3 +605,16 @@ QMap<QString, QVariant> UserDao::get_sun_po_errors(QSharedPointer<MySQLHandler> 
     }
     return row;
 }
+
+QMap<QString, QVariant> UserDao::get_ngo_on_tarjimly(QSharedPointer<MySQLHandler> db, int user_id)
+{
+    QMap<QString, QVariant> row = QMap<QString, QVariant>();
+
+    QSharedPointer<QSqlQuery> mQuery = db->call("get_ngo_on_tarjimly", QString::number(user_id));
+    if(mQuery->first()) {
+        QMap<QString, int> fieldMap = MySQLHandler::getFieldMap(mQuery);
+        row["organisation_id"]  = MySQLHandler::getValueFromQuery(fieldMap.value("organisation_id"), mQuery);
+        row["roles"]  = MySQLHandler::getValueFromQuery(fieldMap.value("roles"), mQuery);
+    }
+    return row;
+}
