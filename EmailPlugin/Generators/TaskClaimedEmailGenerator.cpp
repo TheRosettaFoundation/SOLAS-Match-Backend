@@ -63,7 +63,11 @@ void TaskClaimedEmailGenerator::run(int user_id, int task_id, int claimant_id)
         }
 
         std::string email_body;
-        QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/task-claimed.tpl";
+        if (UserDao::get_ngo_on_tarjimly(db, user_id).isEmpty()) {
+            QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/task-claimed.tpl";
+        } else {
+            QString template_location = QString(TEMPLATE_DIRECTORY) + "emails/task-claimed_t.tpl";
+        }
         ctemplate::ExpandTemplate(template_location.toStdString(), ctemplate::DO_NOT_STRIP, &dict, &email_body);
 
         UserDao::queue_email(db, user_id, QString::fromStdString(user->email()), settings.get("site.name") + ": Task Claim Notification", QString::fromUtf8(email_body.c_str()));
